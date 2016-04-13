@@ -25,7 +25,7 @@
     application.statusBarHidden = NO;
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil]];
     [application registerForRemoteNotifications];
-    [NSURLProtocol registerClass:[CachingURLProtocol class]];
+    // [NSURLProtocol registerClass:[CachingURLProtocol class]];
     [WXApi registerApp:@"wx6f70675b8950f10e" withDescription:nil];
     return YES;
 }
