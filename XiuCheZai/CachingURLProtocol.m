@@ -23,8 +23,8 @@ static NSString *const kCachingURLHeader = @"CachingURLHeader";
 @implementation CachingURLProtocol
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request {
+    // NSLog(@"request URL : %@", request.URL);
     if (![request valueForHTTPHeaderField:kCachingURLHeader]) {
-        // NSArray *cachingPathExtension = @[@"png", @"jpg", @"JPG", @"woff", @"ttf", @"svg", @"css", @"js"];
         NSArray *cachingPathExtension = @[@"png", @"jpg", @"JPG", @"woff", @"css"];
         if ([cachingPathExtension containsObject:request.URL.pathExtension]) {
             // NSLog(@"cached URL : %@", request.URL);
@@ -43,7 +43,6 @@ static NSString *const kCachingURLHeader = @"CachingURLHeader";
     NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
     SHA1DataEncryptor *encryptor = [[SHA1DataEncryptor alloc] init];
     NSString *fileName = [encryptor encryptString:request.URL.absoluteString];
-    // NSLog(@"cachePath : %@", [cachePath stringByAppendingPathComponent:fileName]);
     return [cachePath stringByAppendingPathComponent:fileName];
 }
 
