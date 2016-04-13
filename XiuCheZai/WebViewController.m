@@ -112,8 +112,23 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     NSLog(@"error : %@", error);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    if (error.code != -999) {
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
+        UIButton *backBarButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 12.0, 17.0, 17.0)];
+        [backBarButton setBackgroundImage:[UIImage imageNamed:@"common_back.png"] forState:UIControlStateNormal];
+        [backBarButton addTarget:self action:@selector(goHome) forControlEvents:UIControlEventTouchUpInside];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBarButton];
+        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+        self.navigationItem.title = @"网络连接失败";
+        [self.navigationController setNavigationBarHidden:NO animated:NO];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120, 120)];
+        imageView.image = [UIImage imageNamed:@"common_error.png"];
+        imageView.center = self.view.center;
+        [self.view addSubview:imageView];
+    }
 }
 
 - (void)goBack {
