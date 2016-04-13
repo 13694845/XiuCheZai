@@ -11,6 +11,9 @@
 
 @interface TabViewController ()
 
+@property (nonatomic) UIButton *backButton;
+@property (nonatomic) int backOffset;
+
 @end
 
 @implementation TabViewController
@@ -58,6 +61,12 @@
         return NO;
     }
     
+    if ([request.URL.host isEqualToString:@"mcashier.95516.com"]) {
+        if (!self.backButton) [self addBackButton];
+        self.backOffset++;
+        return YES;
+    }
+    
     if ([request.URL.description containsString:self.url.description]) {
         self.tabBarController.tabBar.hidden = NO;
         CGRect rect = [UIScreen mainScreen].bounds;
@@ -91,6 +100,24 @@
 - (void)goMine {
     if (self.webView.isLoading) [self.webView stopLoading];
     self.tabBarController.selectedIndex = TabIndexMine;
+}
+
+- (void)addBackButton {
+    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 12.0, 20.0, 20.0)];
+    [self.backButton setBackgroundImage:[UIImage imageNamed:@"common_back.png"] forState:UIControlStateNormal];
+    [self.backButton addTarget:self action:@selector(tapBackButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.webView addSubview:self.backButton];
+}
+
+- (void)tapBackButton:(id)sender {
+    [self.backButton removeFromSuperview];
+    self.backButton = nil;
+    [self executeJavascript:[NSString stringWithFormat:@"history.go(%d)", -self.backOffset]];
+    self.backOffset = 0;
+}
+
+- (void)executeJavascript:(NSString *)javascript  {
+    [self.webView stringByEvaluatingJavaScriptFromString:javascript];
 }
 
 - (void)didReceiveMemoryWarning {
