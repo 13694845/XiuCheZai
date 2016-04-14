@@ -19,6 +19,7 @@ typedef NS_ENUM(int, TabIndex) {
 };
 
 + (NSString *)baseURL;
++ (NSString *)apiBaseURL;
 + (NSString *)version;
 + (NSArray *)banners;
 

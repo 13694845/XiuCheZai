@@ -14,18 +14,21 @@
 
 @implementation Config
 
-static NSString *baseURL;
-static NSString *version;
+static NSString *const kBaseURL = @"http://m.8673h.com";
+static NSString *const kApiBaseURL = @"http://my.8673h.com";
+static NSString *const kVersion = @"1.4.0";
 static NSArray *banners;
 
 + (NSString *)baseURL {
-    if (!baseURL) baseURL = @"http://m.8673h.com";
-    return baseURL;
+    return kBaseURL;
+}
+
++ (NSString *)apiBaseURL {
+    return kApiBaseURL;
 }
 
 + (NSString *)version {
-    if (!version) version = @"1.4.0";
-    return version;
+    return kVersion;
 }
 
 + (NSArray *)banners {
