@@ -10,14 +10,6 @@
 
 @interface Config : NSObject
 
-typedef NS_ENUM(int, TabIndex) {
-    TabIndexHome = 0,
-    TabIndexStore,
-    TabIndexAccessory,
-    TabIndexCart,
-    TabIndexMine
-};
-
 + (NSString *)baseURL;
 + (NSString *)apiBaseURL;
 + (NSString *)version;
