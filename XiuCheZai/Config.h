@@ -10,7 +10,10 @@
 
 @interface Config : NSObject
 
-+ (NSString *)baseURL;
 + (NSString *)version;
++ (NSString *)baseURL;
++ (NSString *)webBaseURL;
++ (NSString *)apiBaseURL;
++ (NSString *)imgBaseURL;
 
 @end

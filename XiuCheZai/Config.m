@@ -14,15 +14,29 @@
 
 @implementation Config
 
-static NSString *const kBaseURL = @"http://m.8673h.com";
 static NSString *const kVersion = @"1.4.0";
-
-+ (NSString *)baseURL {
-    return kBaseURL;
-}
+static NSString *const kWebBaseURL = @"http://m.8673h.com";
+static NSString *const kApiBaseURL = @"http://m.8673h.com";
+static NSString *const kImgBaseURL = @"http://img.8673h.com";
 
 + (NSString *)version {
     return kVersion;
+}
+
++ (NSString *)baseURL {
+    return kWebBaseURL;
+}
+
++ (NSString *)webBaseURL {
+    return kWebBaseURL;
+}
+
++ (NSString *)apiBaseURL {
+    return kApiBaseURL;
+}
+
++ (NSString *)imgBaseURL {
+    return kImgBaseURL;
 }
 
 @end
