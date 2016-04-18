@@ -11,8 +11,6 @@
 @interface Config : NSObject
 
 + (NSString *)baseURL;
-+ (NSString *)apiBaseURL;
 + (NSString *)version;
-+ (NSArray *)banners;
 
 @end
