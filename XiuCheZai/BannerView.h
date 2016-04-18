@@ -10,6 +10,9 @@
 
 @class BannerView;
 
+static NSString *const kBannerImageKey = @"img_src";
+static NSString *const kBannerURLKey = @"link";
+
 @protocol BannerDelegate <NSObject>
 
 - (void)bannerView:(BannerView *)bannerView didSelectBanner:(NSDictionary *)bannerInfo;

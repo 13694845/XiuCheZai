@@ -139,11 +139,6 @@
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html"]];
 }
 
-- (void)bannerView:(BannerView *)bannerView didSelectBanner:(NSDictionary *)bannerInfo {
-    if ([[bannerInfo objectForKey:@"url"] length])
-        [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], [bannerInfo objectForKey:@"url"]]];
-}
-
 - (IBAction)toQuickLaunch:(id)sender {
     self.tabBarController.selectedIndex = TabIndexAccessory;
 }
@@ -228,6 +223,11 @@
 
 - (IBAction)toMoreActivity:(id)sender {
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/ad/activity/index.html"]];
+}
+
+- (void)bannerView:(BannerView *)bannerView didSelectBanner:(NSDictionary *)bannerInfo {
+    if ([bannerInfo objectForKey:kBannerURLKey])
+        [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], [bannerInfo objectForKey:kBannerURLKey]]];
 }
 
 - (void)didReceiveMemoryWarning {
