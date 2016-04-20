@@ -20,29 +20,12 @@
 @property (nonatomic) UIPageControl *pageControl;
 @property (nonatomic) NSTimer *timer;
 
-@property (nonatomic) NSArray *banners;
+@property (nonatomic, copy) NSArray *banners;
 @property (nonatomic) int index;
 
 @end
 
 @implementation BannerView
-
-- (NSArray *)banners {
-    if (!_banners) _banners = @[@{kBannerImageKey:@"img/438f03803070a5ff855f8d361aa86c21.jpg", kBannerURLKey:@"/service/detail/index.html?uid=6716"},
-                                @{kBannerImageKey:@"img/bfa756c4f82b4e00c75114f689f9fc67.jpg", kBannerURLKey:@"/ad/free_share/index.html"}];
-    return _banners;
-}
-
-- (void)awakeFromNib {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSString *userAgent = [NSString stringWithFormat:@"%@ %@/%@", [manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]];
-    [manager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LunBoAction.do"];
-    NSDictionary *parameters = @{@"page_id":@"1", @"ad_id":@"1"};
-    [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        self.banners = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
-}
 
 - (void)layoutSubviews {
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
@@ -71,7 +54,13 @@
     self.pageControl.currentPage = self.index;
     [self addSubview:self.pageControl];
     
+    [self reloadData];
+}
+
+- (void)reloadData {
+    self.banners = [self.dataSource bannersForBannerView:self];
     [self resetImages];
+    [self stopAutoPlay];
     [self startAutoPlay];
 }
 

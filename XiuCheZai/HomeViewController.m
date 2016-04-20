@@ -8,26 +8,40 @@
 
 #import "HomeViewController.h"
 #import "BannerView.h"
+#import "ReminderView.h"
 #import "MenuViewController.h"
 #import "WebViewController.h"
 #import "Config.h"
 #import "AFNetworking.h"
 
-@interface HomeViewController () <UIScrollViewDelegate, BannerDelegate>
+@interface HomeViewController () <UIScrollViewDelegate, BannerViewDataSource, BannerViewDelegate, ReminderViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIButton *myCarButton;
 @property (weak, nonatomic) IBOutlet BannerView *bannerView;
+@property (weak, nonatomic) IBOutlet ReminderView *reminderView;
 
 @property (weak, nonatomic) IBOutlet UIView *buttonPageA;
 @property (weak, nonatomic) IBOutlet UIView *buttonPageB;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
-@property (weak, nonatomic) IBOutlet UIView *floatView;
+@property (nonatomic, copy) NSArray *banners;
+@property (nonatomic, copy) NSString *reminderText;
 
 @end
 
 @implementation HomeViewController
+
+- (NSArray *)banners {
+    if (!_banners) _banners = @[@{kBannerImageKey:@"img/438f03803070a5ff855f8d361aa86c21.jpg", kBannerURLKey:@"/service/detail/index.html?uid=6716"},
+                                @{kBannerImageKey:@"img/bfa756c4f82b4e00c75114f689f9fc67.jpg", kBannerURLKey:@"/ad/free_share/index.html"}];
+    return _banners;
+}
+
+- (NSString *)reminderText {
+    if (!_reminderText) _reminderText = @"浙J88888在2017-07/5011km需要更换机油及机滤，更换驾驶位雨刷片，更换乘客位雨刷片";
+    return _reminderText;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,11 +49,20 @@
     self.tabBarController.tabBar.tintColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
     
     self.topView.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:0.0];
-    self.bannerView.delegate = self;
     for (UIView *view in self.bannerView.subviews) {
         [view removeFromSuperview];
     }
-    [self.floatView removeFromSuperview];
+    for (UIView *view in self.reminderView.subviews) {
+        [view removeFromSuperview];
+    }
+    self.bannerView.dataSource = self;
+    self.bannerView.delegate = self;
+    self.reminderView.dataSource = self;
+    
+    [self loadData];
+}
+
+- (void)loadData {
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -139,10 +162,6 @@
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html"]];
 }
 
-- (IBAction)toQuickLaunch:(id)sender {
-    self.tabBarController.selectedIndex = TabIndexAccessory;
-}
-
 - (void)launchWebViewWithURLString:(NSString *)urlString {
     WebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WebViewController"];
     webViewController.url = [NSURL URLWithString:urlString];
@@ -203,6 +222,7 @@
 }
 
 - (IBAction)toMaintainRecord:(id)sender {
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/MaintainFiles/FirstFile/index.html"]];
 }
 
 - (IBAction)toActivity01:(id)sender {
@@ -225,9 +245,17 @@
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/ad/activity/index.html"]];
 }
 
+- (NSArray *)bannersForBannerView:(BannerView *)bannerView {
+    return self.banners;
+}
+
 - (void)bannerView:(BannerView *)bannerView didSelectBanner:(NSDictionary *)bannerInfo {
     if ([bannerInfo objectForKey:kBannerURLKey])
         [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], [bannerInfo objectForKey:kBannerURLKey]]];
+}
+
+- (NSString *)textForReminderView:(ReminderView *)reminderView {
+    return self.reminderText;
 }
 
 - (void)didReceiveMemoryWarning {

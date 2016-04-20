@@ -13,7 +13,13 @@
 static NSString *const kBannerImageKey = @"img_src";
 static NSString *const kBannerURLKey = @"link";
 
-@protocol BannerDelegate <NSObject>
+@protocol BannerViewDataSource <NSObject>
+
+- (NSArray *)bannersForBannerView:(BannerView *)bannerView;
+
+@end
+
+@protocol BannerViewDelegate <NSObject>
 
 - (void)bannerView:(BannerView *)bannerView didSelectBanner:(NSDictionary *)bannerInfo;
 
@@ -21,6 +27,9 @@ static NSString *const kBannerURLKey = @"link";
 
 @interface BannerView : UIView
 
-@property (weak, nonatomic) id <BannerDelegate> delegate;
+@property (weak, nonatomic) id <BannerViewDelegate> delegate;
+@property (weak, nonatomic) id <BannerViewDataSource> dataSource;
+
+- (void)reloadData;
 
 @end
