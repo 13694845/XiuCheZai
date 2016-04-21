@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6C05EDFD1C33C58400BF8C39 /* home_activity03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C05EDFC1C33C58400BF8C39 /* home_activity03.png */; };
 		6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1365A61C23D83E00B217DD /* HomeViewController.m */; };
-		6C1365AC1C24E2B800B217DD /* banner01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365AB1C24E2B800B217DD /* banner01.jpg */; };
 		6C1365B91C24F6C300B217DD /* home_icon01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B11C24F6C300B217DD /* home_icon01.png */; };
 		6C1365BA1C24F6C300B217DD /* home_icon02.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B21C24F6C300B217DD /* home_icon02.png */; };
 		6C1365BB1C24F6C300B217DD /* home_icon03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B31C24F6C300B217DD /* home_icon03.png */; };
@@ -22,8 +21,6 @@
 		6C1365CC1C25022C00B217DD /* home_activity04.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365C81C25022C00B217DD /* home_activity04.png */; };
 		6C1365CE1C252C0F00B217DD /* home_activity05.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365CD1C252C0F00B217DD /* home_activity05.png */; };
 		6C1608841C93E4CD00A9E16F /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1608831C93E4CD00A9E16F /* TabViewController.m */; };
-		6C17FAD91CB3A43C00F95FF4 /* CachingURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FAD81CB3A43C00F95FF4 /* CachingURLProtocol.m */; };
-		6C17FADC1CB3AB0A00F95FF4 /* URLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FADB1CB3AB0A00F95FF4 /* URLCache.m */; };
 		6C17FADF1CB497F000F95FF4 /* SHA1DataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FADE1CB497F000F95FF4 /* SHA1DataEncryptor.m */; };
 		6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FAE11CB885D600F95FF4 /* MD5DataEncryptor.m */; };
 		6C19A97C1C1E406C002451F6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */; };
@@ -80,6 +77,10 @@
 		6C8B105A1CC4D087003CF8F5 /* menu_icon13.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B104C1CC4D087003CF8F5 /* menu_icon13.jpg */; };
 		6C8B105B1CC4D087003CF8F5 /* menu_icon14.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B104D1CC4D087003CF8F5 /* menu_icon14.jpg */; };
 		6C8B105E1CC6084F003CF8F5 /* ReminderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B105D1CC6084F003CF8F5 /* ReminderView.m */; };
+		6C8B10851CC859D6003CF8F5 /* banner01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B10831CC859D6003CF8F5 /* banner01.jpg */; };
+		6C8B10861CC859D6003CF8F5 /* banner02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B10841CC859D6003CF8F5 /* banner02.jpg */; };
+		6C8B108C1CC85A73003CF8F5 /* CachingURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B10891CC85A73003CF8F5 /* CachingURLProtocol.m */; };
+		6C8B108D1CC85A73003CF8F5 /* URLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B108B1CC85A73003CF8F5 /* URLCache.m */; };
 		6C8EC2541C1E546E00BCABB5 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8EC2481C1E546E00BCABB5 /* AFHTTPSessionManager.m */; };
 		6C8EC2551C1E546E00BCABB5 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8EC24B1C1E546E00BCABB5 /* AFNetworkReachabilityManager.m */; };
 		6C8EC2561C1E546E00BCABB5 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8EC24D1C1E546E00BCABB5 /* AFSecurityPolicy.m */; };
@@ -145,7 +146,6 @@
 		6CE400681C322B7C007F6D03 /* menu_icon19.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6CE400551C322B7C007F6D03 /* menu_icon19.jpg */; };
 		6CE4FFFD1C2D0B63007F6D03 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4FFFC1C2D0B63007F6D03 /* MBProgressHUD.m */; };
 		6CEB5A891C48D1E000717CBA /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB5A881C48D1E000717CBA /* BannerView.m */; };
-		6CEB5A8B1C49C50300717CBA /* banner02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6CEB5A8A1C49C50300717CBA /* banner02.jpg */; };
 		6CF1DAB71C5067A80077B468 /* tab_icon30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1DAB61C5067A80077B468 /* tab_icon30@2x.png */; };
 		6CF1DAB91C506FAE0077B468 /* tab_icon10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1DAB81C506FAE0077B468 /* tab_icon10@2x.png */; };
 		6CF1DABB1C50700F0077B468 /* tab_icon20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1DABA1C50700F0077B468 /* tab_icon20@2x.png */; };
@@ -159,7 +159,6 @@
 		6C05EDFC1C33C58400BF8C39 /* home_activity03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_activity03.png; sourceTree = "<group>"; };
 		6C1365A51C23D83E00B217DD /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6C1365A61C23D83E00B217DD /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		6C1365AB1C24E2B800B217DD /* banner01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = banner01.jpg; path = Images/banner01.jpg; sourceTree = "<group>"; };
 		6C1365B11C24F6C300B217DD /* home_icon01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon01.png; sourceTree = "<group>"; };
 		6C1365B21C24F6C300B217DD /* home_icon02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon02.png; sourceTree = "<group>"; };
 		6C1365B31C24F6C300B217DD /* home_icon03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon03.png; sourceTree = "<group>"; };
@@ -173,10 +172,6 @@
 		6C1365CD1C252C0F00B217DD /* home_activity05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_activity05.png; sourceTree = "<group>"; };
 		6C1608821C93E4CD00A9E16F /* TabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabViewController.h; sourceTree = "<group>"; };
 		6C1608831C93E4CD00A9E16F /* TabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
-		6C17FAD71CB3A43C00F95FF4 /* CachingURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CachingURLProtocol.h; sourceTree = "<group>"; };
-		6C17FAD81CB3A43C00F95FF4 /* CachingURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CachingURLProtocol.m; sourceTree = "<group>"; };
-		6C17FADA1CB3AB0A00F95FF4 /* URLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLCache.h; sourceTree = "<group>"; };
-		6C17FADB1CB3AB0A00F95FF4 /* URLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLCache.m; sourceTree = "<group>"; };
 		6C17FADD1CB497F000F95FF4 /* SHA1DataEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA1DataEncryptor.h; sourceTree = "<group>"; };
 		6C17FADE1CB497F000F95FF4 /* SHA1DataEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHA1DataEncryptor.m; sourceTree = "<group>"; };
 		6C17FAE01CB885D600F95FF4 /* MD5DataEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5DataEncryptor.h; sourceTree = "<group>"; };
@@ -257,6 +252,12 @@
 		6C8B104D1CC4D087003CF8F5 /* menu_icon14.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = menu_icon14.jpg; sourceTree = "<group>"; };
 		6C8B105C1CC6084F003CF8F5 /* ReminderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderView.h; sourceTree = "<group>"; };
 		6C8B105D1CC6084F003CF8F5 /* ReminderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderView.m; sourceTree = "<group>"; };
+		6C8B10831CC859D6003CF8F5 /* banner01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner01.jpg; sourceTree = "<group>"; };
+		6C8B10841CC859D6003CF8F5 /* banner02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner02.jpg; sourceTree = "<group>"; };
+		6C8B10881CC85A73003CF8F5 /* CachingURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CachingURLProtocol.h; sourceTree = "<group>"; };
+		6C8B10891CC85A73003CF8F5 /* CachingURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CachingURLProtocol.m; sourceTree = "<group>"; };
+		6C8B108A1CC85A73003CF8F5 /* URLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLCache.h; sourceTree = "<group>"; };
+		6C8B108B1CC85A73003CF8F5 /* URLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLCache.m; sourceTree = "<group>"; };
 		6C8EC2471C1E546E00BCABB5 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		6C8EC2481C1E546E00BCABB5 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		6C8EC2491C1E546E00BCABB5 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -437,7 +438,6 @@
 		6CE4FFFC1C2D0B63007F6D03 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		6CEB5A871C48D1E000717CBA /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
 		6CEB5A881C48D1E000717CBA /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
-		6CEB5A8A1C49C50300717CBA /* banner02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = banner02.jpg; path = Images/banner02.jpg; sourceTree = "<group>"; };
 		6CF1DAB61C5067A80077B468 /* tab_icon30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon30@2x.png"; sourceTree = "<group>"; };
 		6CF1DAB81C506FAE0077B468 /* tab_icon10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon10@2x.png"; sourceTree = "<group>"; };
 		6CF1DABA1C50700F0077B468 /* tab_icon20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon20@2x.png"; sourceTree = "<group>"; };
@@ -513,6 +513,26 @@
 				6C4D0C3C1C28E998003E96E8 /* UIView+WebCacheOperation.m */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		6C8B10821CC858F2003CF8F5 /* Wxpay */ = {
+			isa = PBXGroup;
+			children = (
+				6C8EC27E1C1E910700BCABB5 /* WXApi.h */,
+				6C8EC27F1C1E910700BCABB5 /* WXApiObject.h */,
+			);
+			name = Wxpay;
+			sourceTree = "<group>";
+		};
+		6C8B10871CC85A73003CF8F5 /* CachingURLProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				6C8B10881CC85A73003CF8F5 /* CachingURLProtocol.h */,
+				6C8B10891CC85A73003CF8F5 /* CachingURLProtocol.m */,
+				6C8B108A1CC85A73003CF8F5 /* URLCache.h */,
+				6C8B108B1CC85A73003CF8F5 /* URLCache.m */,
+			);
+			path = CachingURLProtocol;
 			sourceTree = "<group>";
 		};
 		6C8EC2461C1E546E00BCABB5 /* AFNetworking */ = {
@@ -628,16 +648,6 @@
 				6CE400551C322B7C007F6D03 /* menu_icon19.jpg */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		6C8F05F21C17FA9600D7EFD5 /* Wxpay */ = {
-			isa = PBXGroup;
-			children = (
-				6C8EC27E1C1E910700BCABB5 /* WXApi.h */,
-				6C8EC27F1C1E910700BCABB5 /* WXApiObject.h */,
-			);
-			name = Wxpay;
-			path = SDKExport;
 			sourceTree = "<group>";
 		};
 		6C91C2F81C9A84C6004C0CB4 /* openssl */ = {
@@ -780,8 +790,9 @@
 				6C8EC2801C1E917300BCABB5 /* Images */,
 				6C8EC25A1C1E548000BCABB5 /* UIKit+AFNetworking */,
 				6C8EC2461C1E546E00BCABB5 /* AFNetworking */,
+				6C8B10871CC85A73003CF8F5 /* CachingURLProtocol */,
 				6CB2AB161C1506610025260A /* Alipay */,
-				6C8F05F21C17FA9600D7EFD5 /* Wxpay */,
+				6C8B10821CC858F2003CF8F5 /* Wxpay */,
 				6CABF70D1C0E978B00DF3EFF /* AppDelegate.h */,
 				6CABF70E1C0E978B00DF3EFF /* AppDelegate.m */,
 				6C91C35E1C9A86FE004C0CB4 /* LoginViewController.h */,
@@ -810,10 +821,6 @@
 				6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */,
 				6C8EC2781C1E8A7800BCABB5 /* Config.h */,
 				6C8EC2791C1E8A7800BCABB5 /* Config.m */,
-				6C17FAD71CB3A43C00F95FF4 /* CachingURLProtocol.h */,
-				6C17FAD81CB3A43C00F95FF4 /* CachingURLProtocol.m */,
-				6C17FADA1CB3AB0A00F95FF4 /* URLCache.h */,
-				6C17FADB1CB3AB0A00F95FF4 /* URLCache.m */,
 				6CABF7131C0E978B00DF3EFF /* Main.storyboard */,
 				6CABF7161C0E978B00DF3EFF /* Assets.xcassets */,
 				6CABF7181C0E978B00DF3EFF /* LaunchScreen.storyboard */,
@@ -874,13 +881,14 @@
 		6CF1DAC51C51B1ED0077B468 /* Banner */ = {
 			isa = PBXGroup;
 			children = (
-				6C1365AB1C24E2B800B217DD /* banner01.jpg */,
-				6CEB5A8A1C49C50300717CBA /* banner02.jpg */,
+				6C8B10831CC859D6003CF8F5 /* banner01.jpg */,
+				6C8B10841CC859D6003CF8F5 /* banner02.jpg */,
 				6CF1DAC61C51B21D0077B468 /* banner03.jpg */,
 				6C24460D1C9FD69300F4F3C0 /* banner04.jpg */,
 				6CCDA6EE1CA8CC510008EB40 /* banner05.jpg */,
 			);
 			name = Banner;
+			path = banner;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -944,6 +952,7 @@
 				6C91C2CE1C9A3337004C0CB4 /* tab_icon51@2x.png in Resources */,
 				6C8B10531CC4D087003CF8F5 /* menu_icon06.jpg in Resources */,
 				6C8B10571CC4D087003CF8F5 /* menu_icon10.jpg in Resources */,
+				6C8B10861CC859D6003CF8F5 /* banner02.jpg in Resources */,
 				6C7D47861CBDE4E800D9794F /* common_error.png in Resources */,
 				6C05EDFD1C33C58400BF8C39 /* home_activity03.png in Resources */,
 				6C8B10511CC4D087003CF8F5 /* menu_icon04.jpg in Resources */,
@@ -987,6 +996,7 @@
 				6CE400661C322B7C007F6D03 /* menu_icon17.jpg in Resources */,
 				6CF1DAB91C506FAE0077B468 /* tab_icon10@2x.png in Resources */,
 				6CCDA6EF1CA8CC510008EB40 /* banner05.jpg in Resources */,
+				6C8B10851CC859D6003CF8F5 /* banner01.jpg in Resources */,
 				6C3E4E081C96664300268B81 /* home_floatcar.png in Resources */,
 				6CF1DABD1C50704B0077B468 /* tab_icon40@2x.png in Resources */,
 				6C1365BB1C24F6C300B217DD /* home_icon03.png in Resources */,
@@ -1004,12 +1014,10 @@
 				6CF1DAB71C5067A80077B468 /* tab_icon30@2x.png in Resources */,
 				6C8B105B1CC4D087003CF8F5 /* menu_icon14.jpg in Resources */,
 				6CF1DABB1C50700F0077B468 /* tab_icon20@2x.png in Resources */,
-				6CEB5A8B1C49C50300717CBA /* banner02.jpg in Resources */,
 				6CF784411C477397004C9CA1 /* home_icon09.png in Resources */,
 				6C1365C01C24F6C300B217DD /* home_icon08.png in Resources */,
 				6C91C2CA1C9A3324004C0CB4 /* tab_icon41@2x.png in Resources */,
 				6CE400421C32276C007F6D03 /* menu_xcz.png in Resources */,
-				6C1365AC1C24E2B800B217DD /* banner01.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1024,6 +1032,7 @@
 				6C91C3561C9A84D2004C0CB4 /* base64.m in Sources */,
 				6C91C3571C9A84D2004C0CB4 /* DataSigner.m in Sources */,
 				6C4D0C411C28E998003E96E8 /* SDWebImageDecoder.m in Sources */,
+				6C8B108D1CC85A73003CF8F5 /* URLCache.m in Sources */,
 				6C4D0C441C28E998003E96E8 /* SDWebImageManager.m in Sources */,
 				6C8EC2711C1E548000BCABB5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */,
@@ -1038,6 +1047,7 @@
 				6C8EC2551C1E546E00BCABB5 /* AFNetworkReachabilityManager.m in Sources */,
 				6C8EC27A1C1E8A7800BCABB5 /* Config.m in Sources */,
 				6CABF70F1C0E978B00DF3EFF /* AppDelegate.m in Sources */,
+				6C8B108C1CC85A73003CF8F5 /* CachingURLProtocol.m in Sources */,
 				6C4D0C481C28E998003E96E8 /* UIImage+MultiFormat.m in Sources */,
 				6C4D0C4A1C28E998003E96E8 /* UIImageView+HighlightedWebCache.m in Sources */,
 				6C8EC2741C1E548000BCABB5 /* UIImageView+AFNetworking.m in Sources */,
@@ -1052,7 +1062,6 @@
 				6C8EC2581C1E546E00BCABB5 /* AFURLResponseSerialization.m in Sources */,
 				6C8EC2731C1E548000BCABB5 /* UIButton+AFNetworking.m in Sources */,
 				6C8EC2571C1E546E00BCABB5 /* AFURLRequestSerialization.m in Sources */,
-				6C17FADC1CB3AB0A00F95FF4 /* URLCache.m in Sources */,
 				6C8EC26F1C1E548000BCABB5 /* AFAutoPurgingImageCache.m in Sources */,
 				6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */,
 				6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */,
@@ -1076,7 +1085,6 @@
 				6C4C67651C4A29BF00DF8D31 /* CartViewController.m in Sources */,
 				6C9D851A1C9B8B3C008BD470 /* RSADataEncryptor.m in Sources */,
 				6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */,
-				6C17FAD91CB3A43C00F95FF4 /* CachingURLProtocol.m in Sources */,
 				6CABF70C1C0E978B00DF3EFF /* main.m in Sources */,
 				6C4D0C461C28E998003E96E8 /* UIButton+WebCache.m in Sources */,
 				6C4D0C421C28E998003E96E8 /* SDWebImageDownloader.m in Sources */,
