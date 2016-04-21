@@ -63,6 +63,14 @@
 }
 
 - (void)loadData {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSString *userAgent = [NSString stringWithFormat:@"%@ %@/%@", [manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]];
+    [manager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LunBoAction.do"];
+    NSDictionary *parameters = @{@"page_id":@"4", @"ad_id":@"1"};
+    [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        // self.banners = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
