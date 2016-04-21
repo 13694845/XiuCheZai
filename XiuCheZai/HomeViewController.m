@@ -14,12 +14,15 @@
 #import "Config.h"
 #import "AFNetworking.h"
 
-@interface HomeViewController () <UIScrollViewDelegate, BannerViewDataSource, BannerViewDelegate, ReminderViewDataSource>
+@interface HomeViewController () <UIScrollViewDelegate, BannerViewDataSource, BannerViewDelegate, ReminderViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIButton *myCarButton;
 @property (weak, nonatomic) IBOutlet BannerView *bannerView;
 @property (weak, nonatomic) IBOutlet ReminderView *reminderView;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *recommenderCollectionView;
+
 
 @property (weak, nonatomic) IBOutlet UIView *buttonPageA;
 @property (weak, nonatomic) IBOutlet UIView *buttonPageB;
@@ -31,6 +34,29 @@
 @end
 
 @implementation HomeViewController
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    /*
+    cell.backgroundColor = [UIColor whiteColor];
+    
+    
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(2, 2, 20, 20)];
+    v.backgroundColor = [UIColor redColor];
+    [cell.contentView addSubview:v];
+    
+    [cell addSubview:v];
+    */
+    
+    return cell;
+}
+
+
 
 - (NSArray *)banners {
     if (!_banners) _banners = @[@{kBannerImageKey:@"img/438f03803070a5ff855f8d361aa86c21.jpg", kBannerURLKey:@"/service/detail/index.html?uid=6716"},
@@ -58,6 +84,8 @@
     self.bannerView.dataSource = self;
     self.bannerView.delegate = self;
     self.reminderView.dataSource = self;
+    self.recommenderCollectionView.dataSource = self;
+    self.recommenderCollectionView.delegate = self;
     
     [self loadData];
 }

@@ -81,6 +81,8 @@
 		6C8B10861CC859D6003CF8F5 /* banner02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B10841CC859D6003CF8F5 /* banner02.jpg */; };
 		6C8B108C1CC85A73003CF8F5 /* CachingURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B10891CC85A73003CF8F5 /* CachingURLProtocol.m */; };
 		6C8B108D1CC85A73003CF8F5 /* URLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B108B1CC85A73003CF8F5 /* URLCache.m */; };
+		6C8B11031CC8B840003CF8F5 /* RecommenderCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B11021CC8B840003CF8F5 /* RecommenderCollectionViewCell.m */; };
+		6C8B11071CC8BA73003CF8F5 /* recommender.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B11061CC8BA73003CF8F5 /* recommender.jpg */; };
 		6C8EC2541C1E546E00BCABB5 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8EC2481C1E546E00BCABB5 /* AFHTTPSessionManager.m */; };
 		6C8EC2551C1E546E00BCABB5 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8EC24B1C1E546E00BCABB5 /* AFNetworkReachabilityManager.m */; };
 		6C8EC2561C1E546E00BCABB5 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8EC24D1C1E546E00BCABB5 /* AFSecurityPolicy.m */; };
@@ -258,6 +260,9 @@
 		6C8B10891CC85A73003CF8F5 /* CachingURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CachingURLProtocol.m; sourceTree = "<group>"; };
 		6C8B108A1CC85A73003CF8F5 /* URLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLCache.h; sourceTree = "<group>"; };
 		6C8B108B1CC85A73003CF8F5 /* URLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLCache.m; sourceTree = "<group>"; };
+		6C8B11011CC8B840003CF8F5 /* RecommenderCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommenderCollectionViewCell.h; sourceTree = "<group>"; };
+		6C8B11021CC8B840003CF8F5 /* RecommenderCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommenderCollectionViewCell.m; sourceTree = "<group>"; };
+		6C8B11061CC8BA73003CF8F5 /* recommender.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = recommender.jpg; sourceTree = "<group>"; };
 		6C8EC2471C1E546E00BCABB5 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		6C8EC2481C1E546E00BCABB5 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		6C8EC2491C1E546E00BCABB5 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -803,6 +808,8 @@
 				6CEB5A881C48D1E000717CBA /* BannerView.m */,
 				6C8B105C1CC6084F003CF8F5 /* ReminderView.h */,
 				6C8B105D1CC6084F003CF8F5 /* ReminderView.m */,
+				6C8B11011CC8B840003CF8F5 /* RecommenderCollectionViewCell.h */,
+				6C8B11021CC8B840003CF8F5 /* RecommenderCollectionViewCell.m */,
 				6CE4003A1C320C62007F6D03 /* MenuViewController.h */,
 				6CE4003B1C320C62007F6D03 /* MenuViewController.m */,
 				6CD2F9F91C4629BC0033437D /* WebViewController.h */,
@@ -881,6 +888,7 @@
 		6CF1DAC51C51B1ED0077B468 /* Banner */ = {
 			isa = PBXGroup;
 			children = (
+				6C8B11061CC8BA73003CF8F5 /* recommender.jpg */,
 				6C8B10831CC859D6003CF8F5 /* banner01.jpg */,
 				6C8B10841CC859D6003CF8F5 /* banner02.jpg */,
 				6CF1DAC61C51B21D0077B468 /* banner03.jpg */,
@@ -962,6 +970,7 @@
 				6C53DD141CA1275700168230 /* common_blank.png in Resources */,
 				6C5C5F011C86DA66008CDD3C /* home_icon13.png in Resources */,
 				6C1365BD1C24F6C300B217DD /* home_icon05.png in Resources */,
+				6C8B11071CC8BA73003CF8F5 /* recommender.jpg in Resources */,
 				6C51EBDD1C44D5F8006DF544 /* common_back.png in Resources */,
 				6C1365CE1C252C0F00B217DD /* home_activity05.png in Resources */,
 				6C8B10551CC4D087003CF8F5 /* menu_icon08.jpg in Resources */,
@@ -1087,6 +1096,7 @@
 				6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */,
 				6CABF70C1C0E978B00DF3EFF /* main.m in Sources */,
 				6C4D0C461C28E998003E96E8 /* UIButton+WebCache.m in Sources */,
+				6C8B11031CC8B840003CF8F5 /* RecommenderCollectionViewCell.m in Sources */,
 				6C4D0C421C28E998003E96E8 /* SDWebImageDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
