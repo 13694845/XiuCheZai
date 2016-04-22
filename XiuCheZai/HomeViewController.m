@@ -113,6 +113,14 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
+- (void)viewWillLayoutSubviews {
+    CGSize size = self.contentView.bounds.size;
+    if (size.width == 320.0) size.height += 30.0;
+    if (size.width == 375.0) size.height += 0;
+    if (size.width == 414.0) size.height -= 25.0;
+    self.scrollView.contentSize = size;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (self.buttonPageA.frame.origin.x == self.buttonPageB.frame.origin.x) {
@@ -130,11 +138,6 @@
         swipeGestureRecognizerB.direction = UISwipeGestureRecognizerDirectionRight;
         [self.buttonPageB addGestureRecognizer:swipeGestureRecognizerB];
     }
-    CGSize size = self.contentView.bounds.size;
-    if (size.width == 320.0) size.height += 30.0;
-    if (size.width == 375.0) size.height += 0;
-    if (size.width == 414.0) size.height -= 25.0;
-    self.scrollView.contentSize = size;
 }
 
 - (void)swipeButtonPage:(UISwipeGestureRecognizer *)recognizer {
