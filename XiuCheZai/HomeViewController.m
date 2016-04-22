@@ -32,6 +32,7 @@
 
 @property (nonatomic, copy) NSArray *banners;
 @property (nonatomic, copy) NSString *reminderText;
+@property (nonatomic, copy) NSArray *recommenders;
 
 @end
 
@@ -73,10 +74,10 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSString *userAgent = [NSString stringWithFormat:@"%@ %@/%@", [manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]];
     [manager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LunBoAction.do"];
-    NSDictionary *parameters = @{@"page_id":@"4", @"ad_id":@"1"};
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/MobileIndexAction.do"];
+    NSDictionary *parameters = @{@"site":@"2", @"code":@"1", @"position":@"1"};
     [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        // self.banners = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
+        self.recommenders = [[responseObject objectForKey:@"data"] objectForKey:@"goods"];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
@@ -150,10 +151,12 @@
 #define BANNER_HEIGHT 170.0
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGPoint offset = scrollView.contentOffset;
-    self.topView.alpha = 1.0 + offset.y / 10.0;
-    if (offset.y >= 0 && offset.y <= BANNER_HEIGHT) {
-        self.topView.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0 / BANNER_HEIGHT * offset.y];
+    if (scrollView == self.scrollView) {
+        CGPoint offset = scrollView.contentOffset;
+        self.topView.alpha = 1.0 + offset.y / 10.0;
+        if (offset.y >= 0 && offset.y <= BANNER_HEIGHT) {
+            self.topView.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0 / BANNER_HEIGHT * offset.y];
+        }
     }
 }
 
