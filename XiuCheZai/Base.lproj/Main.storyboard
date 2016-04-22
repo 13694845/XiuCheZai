@@ -1152,10 +1152,12 @@
                         <outlet property="bannerView" destination="yNJ-9g-S1F" id="I3M-Vu-q3b"/>
                         <outlet property="buttonPageA" destination="3D5-gg-Z49" id="ltY-9P-475"/>
                         <outlet property="buttonPageB" destination="U9v-e3-jug" id="h1M-Qt-qgB"/>
+                        <outlet property="contentView" destination="QuM-6b-Xrv" id="EbY-fW-1C0"/>
                         <outlet property="myCarButton" destination="qsQ-Ts-6t1" id="y0U-Wx-Rcu"/>
                         <outlet property="pageControl" destination="JUz-Ys-dnF" id="J4e-5F-xMf"/>
                         <outlet property="recommenderCollectionView" destination="qdy-4B-p7l" id="peH-Xi-H9p"/>
                         <outlet property="reminderView" destination="wB2-wa-ntf" id="mUW-o2-GYp"/>
+                        <outlet property="scrollView" destination="ps6-Ri-PUg" id="ftN-Gj-Ltb"/>
                         <outlet property="topView" destination="K95-5q-ZXx" id="KwP-Or-y9n"/>
                         <segue destination="jfJ-ee-7gg" kind="show" identifier="Segue" id="442-4N-TIT"/>
                     </connections>

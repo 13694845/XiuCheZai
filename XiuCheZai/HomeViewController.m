@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "BannerView.h"
 #import "ReminderView.h"
+#import "RecommenderCollectionViewCell.h"
 #import "MenuViewController.h"
 #import "WebViewController.h"
 #import "Config.h"
@@ -16,17 +17,18 @@
 
 @interface HomeViewController () <UIScrollViewDelegate, BannerViewDataSource, BannerViewDelegate, ReminderViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *topView;
-@property (weak, nonatomic) IBOutlet UIButton *myCarButton;
-@property (weak, nonatomic) IBOutlet BannerView *bannerView;
-@property (weak, nonatomic) IBOutlet ReminderView *reminderView;
-
-@property (weak, nonatomic) IBOutlet UICollectionView *recommenderCollectionView;
-
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @property (weak, nonatomic) IBOutlet UIView *buttonPageA;
 @property (weak, nonatomic) IBOutlet UIView *buttonPageB;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
+
+@property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UIButton *myCarButton;
+@property (weak, nonatomic) IBOutlet BannerView *bannerView;
+@property (weak, nonatomic) IBOutlet ReminderView *reminderView;
+@property (weak, nonatomic) IBOutlet UICollectionView *recommenderCollectionView;
 
 @property (nonatomic, copy) NSArray *banners;
 @property (nonatomic, copy) NSString *reminderText;
@@ -34,29 +36,6 @@
 @end
 
 @implementation HomeViewController
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    /*
-    cell.backgroundColor = [UIColor whiteColor];
-    
-    
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(2, 2, 20, 20)];
-    v.backgroundColor = [UIColor redColor];
-    [cell.contentView addSubview:v];
-    
-    [cell addSubview:v];
-    */
-    
-    return cell;
-}
-
-
 
 - (NSArray *)banners {
     if (!_banners) _banners = @[@{kBannerImageKey:@"img/438f03803070a5ff855f8d361aa86c21.jpg", kBannerURLKey:@"/service/detail/index.html?uid=6716"},
@@ -143,13 +122,11 @@
         swipeGestureRecognizerB.direction = UISwipeGestureRecognizerDirectionRight;
         [self.buttonPageB addGestureRecognizer:swipeGestureRecognizerB];
     }
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSString *urlString = @"https://itunes.apple.com/lookup?id=1064830136";
-    NSDictionary *parameters = nil;
-    [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        if (((NSNumber *)[responseObject objectForKey:@"resultCount"]).intValue) {}
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+    CGSize size = self.contentView.bounds.size;
+    if (size.width == 320.0) size.height += 30.0;
+    if (size.width == 375.0) size.height += 0;
+    if (size.width == 414.0) size.height -= 25.0;
+    self.scrollView.contentSize = size;
 }
 
 - (void)swipeButtonPage:(UISwipeGestureRecognizer *)recognizer {
@@ -292,6 +269,15 @@
 
 - (NSString *)textForReminderView:(ReminderView *)reminderView {
     return self.reminderText;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning {
