@@ -80,25 +80,10 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSString *userAgent = [NSString stringWithFormat:@"%@ %@/%@", [manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]];
     [manager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/MobileIndexAction.do"];
-    NSDictionary *parameters = @{@"site":@"2", @"code":@"1", @"position":@"1"};
-    [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        self.recommenders = [[responseObject objectForKey:@"data"] objectForKey:@"goods"];
-        [self.recommenderCollectionView reloadData];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    self.tabBarController.tabBar.hidden = NO;
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSString *userAgent = [NSString stringWithFormat:@"%@ %@/%@", [manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]];
-    [manager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
     NSDictionary *parameters = nil;
-    [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
             [self.myCarButton setTitle:nil forState:UIControlStateNormal];
             [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar.png"] forState:UIControlStateNormal];
@@ -111,6 +96,19 @@
             [self.myCarButton addTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+    
+    URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/MobileIndexAction.do"];
+    parameters = @{@"site":@"2", @"code":@"1", @"position":@"1"};
+    [manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        self.recommenders = [[responseObject objectForKey:@"data"] objectForKey:@"goods"];
+        [self.recommenderCollectionView reloadData];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)viewWillLayoutSubviews {
