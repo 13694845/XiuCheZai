@@ -158,14 +158,14 @@
     }];
 }
 
-#define BANNER_HEIGHT 170.0
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat const kBannerHeight = 170.0;
+    
     if (scrollView == self.scrollView) {
         CGPoint offset = scrollView.contentOffset;
         self.topView.alpha = 1.0 + offset.y / 10.0;
-        if (offset.y >= 0 && offset.y <= BANNER_HEIGHT) {
-            self.topView.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0 / BANNER_HEIGHT * offset.y];
+        if (offset.y >= 0 && offset.y <= kBannerHeight) {
+            self.topView.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0 / kBannerHeight * offset.y];
         }
     }
 }

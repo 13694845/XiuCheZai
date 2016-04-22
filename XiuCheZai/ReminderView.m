@@ -43,13 +43,13 @@
     if (self.timer.valid) [self.timer invalidate];
 }
 
-#define LINE_HEIGHT 15.0
-
 - (void)autoPlay {
-    if (self.textView.contentOffset.y + LINE_HEIGHT * 2 > self.textView.contentSize.height) {
+    CGFloat const kRowHeight = 15.0;
+    
+    if (self.textView.contentOffset.y + kRowHeight * 2 > self.textView.contentSize.height) {
         self.textView.text = [NSString stringWithFormat:@"%@\n%@", self.text, self.text];
         [UIView animateWithDuration:0.5 animations:^{
-            self.textView.contentOffset = CGPointMake(0, self.textView.contentOffset.y + LINE_HEIGHT);
+            self.textView.contentOffset = CGPointMake(0, self.textView.contentOffset.y + kRowHeight);
         } completion:^(BOOL finished) {
             self.textView.text = self.text;
             self.textView.contentOffset = CGPointZero;
@@ -57,7 +57,7 @@
         return;
     }
     [UIView animateWithDuration:0.5 animations:^{
-        self.textView.contentOffset = CGPointMake(0, self.textView.contentOffset.y + LINE_HEIGHT);
+        self.textView.contentOffset = CGPointMake(0, self.textView.contentOffset.y + kRowHeight);
     }];
 }
 
