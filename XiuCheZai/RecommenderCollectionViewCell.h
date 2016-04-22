@@ -10,4 +10,8 @@
 
 @interface RecommenderCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *goodsImageView;
+@property (weak, nonatomic) IBOutlet UILabel *goodsPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *goodsPriceStrikethroughLabel;
+
 @end

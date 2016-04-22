@@ -14,6 +14,7 @@
 #import "WebViewController.h"
 #import "Config.h"
 #import "AFNetworking.h"
+#import "UIImageView+WebCache.h"
 
 @interface HomeViewController () <UIScrollViewDelegate, BannerViewDataSource, BannerViewDelegate, ReminderViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -49,6 +50,11 @@
     return _reminderText;
 }
 
+- (NSArray *)recommenders {
+    if (!_recommenders) _recommenders = [NSArray array];
+    return _recommenders;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -78,6 +84,7 @@
     NSDictionary *parameters = @{@"site":@"2", @"code":@"1", @"position":@"1"};
     [manager POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         self.recommenders = [[responseObject objectForKey:@"data"] objectForKey:@"goods"];
+        [self.recommenderCollectionView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
@@ -275,12 +282,19 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return self.recommenders.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    RecommenderCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    [cell.goodsImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [Config imgBaseURL], [self.recommenders[indexPath.row] objectForKey:@"goods_main_img"]]]];
+    cell.goodsPriceLabel.text = [self.recommenders[indexPath.row] objectForKey:@"price3"];
+    cell.goodsPriceStrikethroughLabel.text = [self.recommenders[indexPath.row] objectForKey:@"price2"];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@/detail/index.html?goodsId=%@", [Config baseURL], [self.recommenders[indexPath.row] objectForKey:@"goods_id"]]];
 }
 
 - (void)didReceiveMemoryWarning {

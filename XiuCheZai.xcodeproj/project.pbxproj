@@ -82,7 +82,6 @@
 		6C8B108C1CC85A73003CF8F5 /* CachingURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B10891CC85A73003CF8F5 /* CachingURLProtocol.m */; };
 		6C8B108D1CC85A73003CF8F5 /* URLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B108B1CC85A73003CF8F5 /* URLCache.m */; };
 		6C8B11031CC8B840003CF8F5 /* RecommenderCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8B11021CC8B840003CF8F5 /* RecommenderCollectionViewCell.m */; };
-		6C8B11071CC8BA73003CF8F5 /* recommender.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B11061CC8BA73003CF8F5 /* recommender.jpg */; };
 		6C8EC2541C1E546E00BCABB5 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8EC2481C1E546E00BCABB5 /* AFHTTPSessionManager.m */; };
 		6C8EC2551C1E546E00BCABB5 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8EC24B1C1E546E00BCABB5 /* AFNetworkReachabilityManager.m */; };
 		6C8EC2561C1E546E00BCABB5 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8EC24D1C1E546E00BCABB5 /* AFSecurityPolicy.m */; };
@@ -116,6 +115,7 @@
 		6C91C35D1C9A84D2004C0CB4 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91C3551C9A84D2004C0CB4 /* RSADataVerifier.m */; };
 		6C91C3601C9A86FE004C0CB4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91C35F1C9A86FE004C0CB4 /* LoginViewController.m */; };
 		6C9D851A1C9B8B3C008BD470 /* RSADataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9D85191C9B8B3C008BD470 /* RSADataEncryptor.m */; };
+		6CA67C6F1CC9B8A2001BAF4F /* recommender.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6CA67C6E1CC9B8A2001BAF4F /* recommender.jpg */; };
 		6CABF70C1C0E978B00DF3EFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CABF70B1C0E978B00DF3EFF /* main.m */; };
 		6CABF70F1C0E978B00DF3EFF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CABF70E1C0E978B00DF3EFF /* AppDelegate.m */; };
 		6CABF7151C0E978B00DF3EFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CABF7131C0E978B00DF3EFF /* Main.storyboard */; };
@@ -262,7 +262,6 @@
 		6C8B108B1CC85A73003CF8F5 /* URLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLCache.m; sourceTree = "<group>"; };
 		6C8B11011CC8B840003CF8F5 /* RecommenderCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommenderCollectionViewCell.h; sourceTree = "<group>"; };
 		6C8B11021CC8B840003CF8F5 /* RecommenderCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommenderCollectionViewCell.m; sourceTree = "<group>"; };
-		6C8B11061CC8BA73003CF8F5 /* recommender.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = recommender.jpg; sourceTree = "<group>"; };
 		6C8EC2471C1E546E00BCABB5 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		6C8EC2481C1E546E00BCABB5 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		6C8EC2491C1E546E00BCABB5 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -404,6 +403,7 @@
 		6C91C35F1C9A86FE004C0CB4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6C9D85181C9B8B3C008BD470 /* RSADataEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataEncryptor.h; sourceTree = "<group>"; };
 		6C9D85191C9B8B3C008BD470 /* RSADataEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataEncryptor.m; sourceTree = "<group>"; };
+		6CA67C6E1CC9B8A2001BAF4F /* recommender.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = recommender.jpg; sourceTree = "<group>"; };
 		6CABF7071C0E978B00DF3EFF /* XiuCheZai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XiuCheZai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CABF70B1C0E978B00DF3EFF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6CABF70D1C0E978B00DF3EFF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -888,12 +888,12 @@
 		6CF1DAC51C51B1ED0077B468 /* Banner */ = {
 			isa = PBXGroup;
 			children = (
-				6C8B11061CC8BA73003CF8F5 /* recommender.jpg */,
 				6C8B10831CC859D6003CF8F5 /* banner01.jpg */,
 				6C8B10841CC859D6003CF8F5 /* banner02.jpg */,
 				6CF1DAC61C51B21D0077B468 /* banner03.jpg */,
 				6C24460D1C9FD69300F4F3C0 /* banner04.jpg */,
 				6CCDA6EE1CA8CC510008EB40 /* banner05.jpg */,
+				6CA67C6E1CC9B8A2001BAF4F /* recommender.jpg */,
 			);
 			name = Banner;
 			path = banner;
@@ -970,7 +970,7 @@
 				6C53DD141CA1275700168230 /* common_blank.png in Resources */,
 				6C5C5F011C86DA66008CDD3C /* home_icon13.png in Resources */,
 				6C1365BD1C24F6C300B217DD /* home_icon05.png in Resources */,
-				6C8B11071CC8BA73003CF8F5 /* recommender.jpg in Resources */,
+				6CA67C6F1CC9B8A2001BAF4F /* recommender.jpg in Resources */,
 				6C51EBDD1C44D5F8006DF544 /* common_back.png in Resources */,
 				6C1365CE1C252C0F00B217DD /* home_activity05.png in Resources */,
 				6C8B10551CC4D087003CF8F5 /* menu_icon08.jpg in Resources */,

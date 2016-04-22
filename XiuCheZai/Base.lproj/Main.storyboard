@@ -971,7 +971,7 @@
                                                         </constraints>
                                                     </view>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qdy-4B-p7l">
-                                                        <rect key="frame" x="0.0" y="36" width="375" height="104"/>
+                                                        <rect key="frame" x="8" y="36" width="359" height="104"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="dZo-Ig-NYC">
                                                             <size key="itemSize" width="66" height="91"/>
@@ -987,24 +987,29 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="66" height="91"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="recommender.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0ax-7G-JWC">
+                                                                            <rect key="frame" x="4" y="2" width="58" height="58"/>
+                                                                        </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="¥137.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmq-vs-hLT">
-                                                                            <rect key="frame" x="8" y="62" width="58" height="16"/>
+                                                                            <rect key="frame" x="4" y="62" width="58" height="16"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" red="0.94901960784313721" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="¥137.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9u-7A-NQf">
-                                                                            <rect key="frame" x="8" y="77" width="58" height="14"/>
+                                                                            <rect key="frame" x="4" y="77" width="58" height="14"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="recommender.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0ax-7G-JWC">
-                                                                            <rect key="frame" x="8" y="2" width="58" height="58"/>
-                                                                        </imageView>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 </view>
+                                                                <connections>
+                                                                    <outlet property="goodsImageView" destination="0ax-7G-JWC" id="Hgl-ps-WfM"/>
+                                                                    <outlet property="goodsPriceLabel" destination="bmq-vs-hLT" id="q6P-oN-95i"/>
+                                                                    <outlet property="goodsPriceStrikethroughLabel" destination="w9u-7A-NQf" id="Hez-ck-c5u"/>
+                                                                </connections>
                                                             </collectionViewCell>
                                                         </cells>
                                                     </collectionView>

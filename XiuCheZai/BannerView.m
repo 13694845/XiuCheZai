@@ -73,7 +73,7 @@
 }
 
 - (NSURL *)imageURLAtIndex:(int)index {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [Config webBaseURL], [self.banners[index] objectForKey:kBannerImageKey]]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [Config baseURL], [self.banners[index] objectForKey:kBannerImageKey]]];
 }
 
 - (NSURL *)imageURLLeftIndex:(int)index {
