@@ -10,7 +10,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
-// #import "CachingURLProtocol.h"
 
 @interface AppDelegate () <CLLocationManagerDelegate>
 
@@ -35,7 +34,6 @@
                                                                                                 UIUserNotificationTypeSound |
                                                                                                 UIUserNotificationTypeAlert) categories:nil]];
     [application registerForRemoteNotifications];
-    // [NSURLProtocol registerClass:[CachingURLProtocol class]];
     [WXApi registerApp:@"wx6f70675b8950f10e" withDescription:nil];
     return YES;
 }
