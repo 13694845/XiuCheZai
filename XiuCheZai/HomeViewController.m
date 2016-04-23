@@ -20,20 +20,18 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
-
 @property (weak, nonatomic) IBOutlet UIView *buttonPageA;
 @property (weak, nonatomic) IBOutlet UIView *buttonPageB;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIButton *myCarButton;
 @property (weak, nonatomic) IBOutlet BannerView *bannerView;
 @property (weak, nonatomic) IBOutlet ReminderView *reminderView;
 @property (weak, nonatomic) IBOutlet UICollectionView *recommenderCollectionView;
 
-@property (nonatomic, copy) NSArray *banners;
-@property (nonatomic, copy) NSString *reminderText;
-@property (nonatomic, copy) NSArray *recommenders;
+@property (copy, nonatomic) NSArray *banners;
+@property (copy, nonatomic) NSString *reminderText;
+@property (copy, nonatomic) NSArray *recommenders;
 
 @end
 
@@ -59,19 +57,21 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tabBarController.tabBar.tintColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
-    
     self.topView.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:0.0];
-    for (UIView *view in self.bannerView.subviews) {
-        [view removeFromSuperview];
-    }
-    for (UIView *view in self.reminderView.subviews) {
-        [view removeFromSuperview];
-    }
+    for (UIView *view in self.bannerView.subviews) [view removeFromSuperview];
+    for (UIView *view in self.reminderView.subviews) [view removeFromSuperview];
+    
     self.bannerView.dataSource = self;
     self.bannerView.delegate = self;
     self.reminderView.dataSource = self;
     self.recommenderCollectionView.dataSource = self;
     self.recommenderCollectionView.delegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.tabBarController.tabBar.hidden = NO;
     
     [self loadData];
 }
@@ -80,7 +80,6 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSString *userAgent = [NSString stringWithFormat:@"%@ %@/%@", [manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]];
     [manager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-    
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
     NSDictionary *parameters = nil;
     [manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -103,12 +102,6 @@
         self.recommenders = [[responseObject objectForKey:@"data"] objectForKey:@"goods"];
         [self.recommenderCollectionView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)viewWillLayoutSubviews {
@@ -288,7 +281,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     RecommenderCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    [cell.goodsImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [Config imgBaseURL], [self.recommenders[indexPath.row] objectForKey:@"goods_main_img"]]]];
+    [cell.goodsImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",
+                                                                  [Config imgBaseURL], [self.recommenders[indexPath.row] objectForKey:@"goods_main_img"]]]];
     cell.goodsPriceLabel.text = [self.recommenders[indexPath.row] objectForKey:@"price3"];
     cell.goodsPriceStrikethroughLabel.text = [self.recommenders[indexPath.row] objectForKey:@"price2"];
     return cell;
