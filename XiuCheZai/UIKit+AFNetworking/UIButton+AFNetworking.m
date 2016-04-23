@@ -1,5 +1,5 @@
 // UIButton+AFNetworking.m
-// Copyright (c) 2011–2015 Alamofire Software Foundation (http://alamofire.org/)
+// Copyright (c) 2011–2016 Alamofire Software Foundation ( http://alamofire.org/ )
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -220,7 +220,7 @@ static const char * af_backgroundImageDownloadReceiptKeyForState(UIControlState 
         return;
     }
 
-    [self cancelImageDownloadTaskForState:state];
+    [self cancelBackgroundImageDownloadTaskForState:state];
 
     AFImageDownloader *downloader = [[self class] sharedImageDownloader];
     id <AFImageRequestCache> imageCache = downloader.imageCache;
@@ -231,12 +231,12 @@ static const char * af_backgroundImageDownloadReceiptKeyForState(UIControlState 
         if (success) {
             success(urlRequest, nil, cachedImage);
         } else {
-            [self setImage:cachedImage forState:state];
+            [self setBackgroundImage:cachedImage forState:state];
         }
         [self af_setBackgroundImageDownloadReceipt:nil forState:state];
     } else {
         if (placeholderImage) {
-            [self setImage:placeholderImage forState:state];
+            [self setBackgroundImage:placeholderImage forState:state];
         }
 
         __weak __typeof(self)weakSelf = self;
@@ -251,9 +251,9 @@ static const char * af_backgroundImageDownloadReceiptKeyForState(UIControlState 
                            if (success) {
                                success(request, response, responseObject);
                            } else if(responseObject) {
-                               [strongSelf setImage:responseObject forState:state];
+                               [strongSelf setBackgroundImage:responseObject forState:state];
                            }
-                           [strongSelf af_setImageDownloadReceipt:nil forState:state];
+                           [strongSelf af_setBackgroundImageDownloadReceipt:nil forState:state];
                        }
 
                    }
