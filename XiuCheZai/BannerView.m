@@ -20,7 +20,7 @@
 @property (nonatomic) UIPageControl *pageControl;
 @property (nonatomic) NSTimer *timer;
 
-@property (nonatomic, copy) NSArray *banners;
+@property (copy, nonatomic) NSArray *banners;
 @property (nonatomic) int index;
 
 @end
@@ -35,7 +35,6 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.contentSize = CGSizeMake(self.bounds.size.width * 3, self.bounds.size.height);
     [self addSubview:self.scrollView];
-    
     self.leftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.bounds.size.width * 0, 0, self.bounds.size.width, self.bounds.size.height)];
     self.leftImageView.userInteractionEnabled = YES;
     [self.leftImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBanner:)]];
@@ -48,7 +47,6 @@
     self.rightImageView.userInteractionEnabled = YES;
     [self.rightImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBanner:)]];
     [self.scrollView addSubview:self.rightImageView];
-    
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.bounds.size.width - 45.0, self.bounds.size.height - 25.0, 30.0, 30.0)];
     self.pageControl.numberOfPages = self.banners.count;
     self.pageControl.currentPage = self.index;
