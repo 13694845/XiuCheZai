@@ -10,6 +10,6 @@
 
 @interface GoodsDetailViewController : UIViewController
 
-@property (nonatomic, copy) NSString *goodsId;
+@property (copy, nonatomic) NSString *goodsId;
 
 @end

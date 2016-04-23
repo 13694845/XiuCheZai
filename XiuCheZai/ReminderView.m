@@ -13,7 +13,7 @@
 @property (nonatomic) UITextView *textView;
 @property (nonatomic) NSTimer *timer;
 
-@property (nonatomic, copy) NSString *text;
+@property (copy, nonatomic) NSString *text;
 
 @end
 
@@ -29,8 +29,8 @@
 }
 
 - (void)reloadData {
-    self.text = [self.dataSource textForReminderView:self];
     [self stopAutoPlay];
+    self.text = [self.dataSource textForReminderView:self];
     [self startAutoPlay];
 }
 

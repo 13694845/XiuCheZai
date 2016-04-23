@@ -47,19 +47,25 @@
     self.rightImageView.userInteractionEnabled = YES;
     [self.rightImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBanner:)]];
     [self.scrollView addSubview:self.rightImageView];
-    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.bounds.size.width - 45.0, self.bounds.size.height - 25.0, 30.0, 30.0)];
-    self.pageControl.numberOfPages = self.banners.count;
-    self.pageControl.currentPage = self.index;
+    self.pageControl = [[UIPageControl alloc] init];
     [self addSubview:self.pageControl];
     
     [self reloadData];
 }
 
 - (void)reloadData {
-    self.banners = [self.dataSource bannersForBannerView:self];
-    [self resetImages];
     [self stopAutoPlay];
+    self.banners = [self.dataSource bannersForBannerView:self];
+    [self resetPages];
+    [self resetImages];
     [self startAutoPlay];
+}
+
+- (void)resetPages {
+    CGSize size = [self.pageControl sizeForNumberOfPages:self.banners.count];
+    self.pageControl.frame = CGRectMake(self.bounds.size.width - size.width - 10.0, self.bounds.size.height - size.height + 10.0, size.width, size.height);
+    self.pageControl.numberOfPages = self.banners.count;
+    self.pageControl.currentPage = self.index;
 }
 
 - (void)resetImages {
@@ -71,6 +77,7 @@
 }
 
 - (NSURL *)imageURLAtIndex:(int)index {
+    if (index < 0 || index >= self.banners.count) return nil;
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [Config baseURL], [self.banners[index] objectForKey:kBannerImageKey]]];
 }
 
@@ -80,7 +87,7 @@
 }
 
 - (NSURL *)imageURLRightIndex:(int)index {
-    if (++index == self.banners.count) index = 0;
+    if (++index >= self.banners.count) index = 0;
     return [self imageURLAtIndex:index];
 }
 
@@ -97,7 +104,7 @@
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    if (++self.index == self.banners.count) self.index = 0;
+    if (++self.index >= self.banners.count) self.index = 0;
     [self resetImages];
 }
 
@@ -110,7 +117,7 @@
         if (--self.index < 0) self.index = self.banners.count - 1;
     }
     if (scrollView.contentOffset.x == self.rightImageView.frame.origin.x) {
-        if (++self.index == self.banners.count) self.index = 0;
+        if (++self.index >= self.banners.count) self.index = 0;
     }
     [self resetImages];
     [self startAutoPlay];
