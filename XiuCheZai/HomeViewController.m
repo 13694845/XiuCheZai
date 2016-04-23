@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet ReminderView *reminderView;
 @property (weak, nonatomic) IBOutlet UICollectionView *recommenderCollectionView;
 
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (copy, nonatomic) NSArray *banners;
 @property (copy, nonatomic) NSString *reminderText;
 @property (copy, nonatomic) NSArray *recommenders;
@@ -77,12 +78,12 @@
 }
 
 - (void)loadData {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSString *userAgent = [NSString stringWithFormat:@"%@ %@/%@", [manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]];
-    [manager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
+    self.manager = [AFHTTPSessionManager manager];
+    NSString *userAgent = [NSString stringWithFormat:@"%@ %@/%@", [self.manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]];
+    [self.manager.requestSerializer setValue:userAgent forHTTPHeaderField:@"User-Agent"];
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
     NSDictionary *parameters = nil;
-    [manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
             [self.myCarButton setTitle:nil forState:UIControlStateNormal];
             [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar.png"] forState:UIControlStateNormal];
@@ -96,9 +97,16 @@
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
     
+    URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LunBoAction.do"];
+    parameters = @{@"page_id":@"1", @"ad_id":@"1"};
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        self.banners = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
+        [self.bannerView reloadData];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+    
     URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/MobileIndexAction.do"];
     parameters = @{@"site":@"2", @"code":@"1", @"position":@"1"};
-    [manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         self.recommenders = [[responseObject objectForKey:@"data"] objectForKey:@"goods"];
         [self.recommenderCollectionView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
