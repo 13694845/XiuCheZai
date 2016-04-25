@@ -105,7 +105,7 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
     
     URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LunBoAction.do"];
-    parameters = @{@"page_id":@"1", @"ad_id":@"1"};
+    parameters = @{@"page_id":@"4", @"ad_id":@"1"};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         self.banners = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
         [self.bannerView reloadData];

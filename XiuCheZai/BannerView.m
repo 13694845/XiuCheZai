@@ -78,7 +78,7 @@
 
 - (NSURL *)imageURLAtIndex:(int)index {
     if (index < 0 || index >= self.banners.count) return nil;
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [Config baseURL], [self.banners[index] objectForKey:kBannerImageKey]]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [Config imgBaseURL], [self.banners[index] objectForKey:kBannerImageKey]]];
 }
 
 - (NSURL *)imageURLLeftIndex:(int)index {
