@@ -55,7 +55,7 @@
 
 - (NSString *)reminderText {
     // if (!_reminderText) _reminderText = @"浙J88888在2017-07/5011km需要更换机油及机滤，更换驾驶位雨刷片，更换乘客位雨刷片";
-    if (!_reminderText) _reminderText = @"即将开启：#保养提醒 #到点检测 #车品特惠";
+    if (!_reminderText) _reminderText = @"即将开启：#保养提醒 #到店检测 #车品特惠";
     return _reminderText;
 }
 
