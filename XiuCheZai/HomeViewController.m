@@ -209,7 +209,7 @@
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/Login/login/login.html?url=", [Config baseURL]]];
 }
 
-- (IBAction)toWholeMaintain:(id)sender {
+- (IBAction)toWholeMaintain:(id)sender {    // Page A
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
 }
 
@@ -234,14 +234,14 @@
 }
 
 - (IBAction)toVideoMusic:(id)sender {
-    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html?pjfl=270100&title=%E5%BD%B1%E9%9F%B3%E5%AF%BC%E8%88%AA"]];
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/free_jc/index.html"]];
 }
 
 - (IBAction)toInterior:(id)sender {
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html?pjfl=270300&title=%E5%86%85%E9%A5%B0%E7%94%A8%E5%93%81"]];
 }
 
-- (IBAction)toBrakeBlock:(id)sender {
+- (IBAction)toBrakeBlock:(id)sender {   // Page B
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html?pjfl=170700&title=%E5%88%B9%E8%BD%A6%E7%89%87"]];
 }
 
@@ -251,6 +251,10 @@
 
 - (IBAction)toSparkPlug:(id)sender {
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html?pjfl=110100&title=%E7%81%AB%E8%8A%B1%E5%A1%9E"]];
+}
+
+- (IBAction)toB14:(id)sender {
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html?pjfl=270100&title=%E5%BD%B1%E9%9F%B3%E5%AF%BC%E8%88%AA"]];
 }
 
 - (IBAction)toMaintainRecord:(id)sender {

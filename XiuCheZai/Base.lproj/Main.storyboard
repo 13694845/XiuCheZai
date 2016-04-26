@@ -97,12 +97,15 @@
                                                             <action selector="toSparkPlug:" destination="Q34-hB-W0h" eventType="touchUpInside" id="zMm-Pa-iOY"/>
                                                         </connections>
                                                     </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDn-6U-buP">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDn-6U-buP">
                                                         <rect key="frame" x="304" y="14" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="vDn-6U-buP" secondAttribute="height" multiplier="1:1" id="0Qc-ON-HZd"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="home_icon09.png"/>
+                                                        <state key="normal" backgroundImage="home_icon17.png"/>
+                                                        <connections>
+                                                            <action selector="toB14:" destination="Q34-hB-W0h" eventType="touchUpInside" id="N2R-5x-FOr"/>
+                                                        </connections>
                                                     </button>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fkE-q4-xAR">
                                                         <rect key="frame" x="0.0" y="14" width="14" height="50"/>
@@ -181,16 +184,19 @@
                                                             <action selector="toSparkPlug:" destination="Q34-hB-W0h" eventType="touchUpInside" id="kBI-ym-c1O"/>
                                                         </connections>
                                                     </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cb-dv-Lvg">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cb-dv-Lvg">
                                                         <rect key="frame" x="303" y="69" width="52" height="17"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="52" id="DWR-5B-LNB"/>
                                                             <constraint firstAttribute="height" constant="17" id="ZxG-ii-bnw"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="预约年检">
+                                                        <state key="normal" title="影音导航">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="toB14:" destination="Q34-hB-W0h" eventType="touchUpInside" id="thR-ki-1oD"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GyR-7m-E3U">
                                                         <rect key="frame" x="0.0" y="86" width="375" height="10"/>
@@ -218,7 +224,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ucb-g7-ulJ" secondAttribute="height" multiplier="1:1" id="NMy-jc-KYM"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="home_icon07.png"/>
+                                                        <state key="normal" backgroundImage="home_icon17.png"/>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBE-ue-NLZ">
                                                         <rect key="frame" x="304" y="98" width="50" height="50"/>
@@ -256,7 +262,7 @@
                                                             <constraint firstAttribute="height" constant="17" id="i7I-u9-2z8"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="空调滤芯">
+                                                        <state key="normal" title="影音导航">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                     </button>
@@ -518,7 +524,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="4YP-g9-qwL" secondAttribute="height" multiplier="1:1" id="LFe-E9-9mx"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="home_icon12.png"/>
+                                                        <state key="normal" backgroundImage="home_icon18.png"/>
                                                         <connections>
                                                             <action selector="toVideoMusic:" destination="Q34-hB-W0h" eventType="touchUpInside" id="8Mp-Mc-eTj"/>
                                                         </connections>
@@ -568,7 +574,7 @@
                                                             <constraint firstAttribute="height" constant="17" id="ogF-5D-vLY"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="影音导航">
+                                                        <state key="normal" title="到店检测">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <connections>
@@ -2317,16 +2323,16 @@
         <image name="home_icon02.png" width="148" height="148"/>
         <image name="home_icon03.png" width="148" height="148"/>
         <image name="home_icon05.png" width="148" height="148"/>
-        <image name="home_icon07.png" width="148" height="148"/>
         <image name="home_icon08.png" width="148" height="148"/>
         <image name="home_icon09.png" width="148" height="148"/>
         <image name="home_icon10.png" width="148" height="148"/>
         <image name="home_icon11.png" width="148" height="148"/>
-        <image name="home_icon12.png" width="148" height="148"/>
         <image name="home_icon13.png" width="148" height="148"/>
         <image name="home_icon14.png" width="148" height="148"/>
         <image name="home_icon15.png" width="148" height="148"/>
         <image name="home_icon16.png" width="148" height="148"/>
+        <image name="home_icon17.png" width="148" height="148"/>
+        <image name="home_icon18.png" width="148" height="148"/>
         <image name="home_menu.png" width="60" height="40"/>
         <image name="home_mycar.png" width="60" height="40"/>
         <image name="home_redbar.png" width="21" height="110"/>
