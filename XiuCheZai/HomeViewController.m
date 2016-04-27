@@ -48,13 +48,11 @@
 }
 
 - (NSArray *)banners {
-    if (!_banners) _banners = @[@{kBannerImageKey:@"img/438f03803070a5ff855f8d361aa86c21.jpg", kBannerURLKey:@"/service/detail/index.html?uid=6716"},
-                                @{kBannerImageKey:@"img/bfa756c4f82b4e00c75114f689f9fc67.jpg", kBannerURLKey:@"/ad/free_share/index.html"}];
+    if (!_banners) _banners = [[NSUserDefaults standardUserDefaults] objectForKey:@"banners"];
     return _banners;
 }
 
 - (NSString *)reminderText {
-    // if (!_reminderText) _reminderText = @"浙J88888在2017-07/5011km需要更换机油及机滤，更换驾驶位雨刷片，更换乘客位雨刷片";
     if (!_reminderText) _reminderText = @"即将开启：#保养提醒 #到店检测 #车品特惠";
     return _reminderText;
 }
@@ -107,15 +105,23 @@
     URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LunBoAction.do"];
     parameters = @{@"page_id":@"4", @"ad_id":@"1"};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        self.banners = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
-        [self.bannerView reloadData];
+        NSArray *banners = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
+        if (self.banners.hash != banners.hash) {
+            self.banners = banners;
+            [self.bannerView reloadData];
+            [[NSUserDefaults standardUserDefaults] setObject:banners forKey:@"banners"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
     
     URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/MobileIndexAction.do"];
     parameters = @{@"site":@"2", @"code":@"1", @"position":@"1"};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        self.recommenders = [[responseObject objectForKey:@"data"] objectForKey:@"goods"];
-        [self.recommenderCollectionView reloadData];
+        NSArray *recommenders = [[responseObject objectForKey:@"data"] objectForKey:@"goods"];
+        if (self.recommenders.hash != recommenders.hash) {
+            self.recommenders = recommenders;
+            [self.recommenderCollectionView reloadData];
+        }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
