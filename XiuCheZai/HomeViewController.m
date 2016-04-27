@@ -299,9 +299,12 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *const kImageSize = @"250x250";
+    
     RecommenderCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    [cell.goodsImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",
-                                                                  [Config imgBaseURL], [self.recommenders[indexPath.row] objectForKey:@"goods_main_img"]]]];
+    NSString *imagePath = [self.recommenders[indexPath.row] objectForKey:@"goods_main_img"];
+    NSString *imageURLString = [NSString stringWithFormat:@"%@/%@_%@.%@", [Config imgBaseURL], imagePath.stringByDeletingPathExtension, kImageSize, imagePath.pathExtension];
+    [cell.goodsImageView sd_setImageWithURL:[NSURL URLWithString:imageURLString]];
     cell.goodsPriceLabel.text = [self.recommenders[indexPath.row] objectForKey:@"price3"];
     cell.goodsPriceStrikethroughLabel.text = [self.recommenders[indexPath.row] objectForKey:@"price2"];
     return cell;
