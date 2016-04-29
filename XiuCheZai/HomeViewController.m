@@ -52,11 +52,6 @@
     return _banners;
 }
 
-- (NSString *)reminderText {
-    if (!_reminderText) _reminderText = @"即将开启：#保养提醒 #到店检测 #车品特惠";
-    return _reminderText;
-}
-
 - (NSArray *)recommenders {
     if (!_recommenders) _recommenders = [NSArray array];
     return _recommenders;
@@ -111,6 +106,26 @@
             [self.bannerView reloadData];
             [[NSUserDefaults standardUserDefaults] setObject:banners forKey:@"banners"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+    
+    URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/MaintainRemind.do"];
+    parameters = nil;
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (![[responseObject objectForKey:@"data"] count]) {
+            self.reminderText = @"即将开启：#保养提醒 #到店检测 #车品特惠";
+            [self.reminderView reloadData];
+            return;
+        }
+        NSDictionary *reminderInfo = [[responseObject objectForKey:@"data"] firstObject];
+        NSString *reminderText = [NSString stringWithFormat:@"%@在%@/%@km需要%@",
+                                  [reminderInfo objectForKey:@"car_no"],
+                                  [reminderInfo objectForKey:@"remindtime"],
+                                  [reminderInfo objectForKey:@"remindkilo"],
+                                  [reminderInfo objectForKey:@"about"]];
+        if (self.reminderText.hash != reminderText.hash) {
+            self.reminderText = reminderText;
+            [self.reminderView reloadData];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
     
