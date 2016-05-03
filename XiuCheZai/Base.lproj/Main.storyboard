@@ -2113,6 +2113,25 @@
             </objects>
             <point key="canvasLocation" x="478.5" y="-1477.5"/>
         </scene>
+        <!--Scanner View Controller-->
+        <scene sceneID="eA5-k1-Pn5">
+            <objects>
+                <viewController storyboardIdentifier="QRScannerViewController" id="QgH-8i-djG" customClass="QRScannerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="r46-bk-EcB"/>
+                        <viewControllerLayoutGuide type="bottom" id="nMC-1T-ImZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Od0-Y3-d9V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KKl-t7-rl5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1412.5" y="-1477.5"/>
+        </scene>
         <!--Cart View Controller-->
         <scene sceneID="rdy-AP-pT9">
             <objects>
