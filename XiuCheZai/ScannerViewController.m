@@ -1,22 +1,22 @@
 //
-//  QRScannerViewController.m
+//  ScannerViewController.m
 //  XiuCheZai
 //
 //  Created by QSH on 16/5/3.
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import "QRScannerViewController.h"
+#import "ScannerViewController.h"
 
 @import AVFoundation;
 
-@interface QRScannerViewController () <AVCaptureMetadataOutputObjectsDelegate>
+@interface ScannerViewController () <AVCaptureMetadataOutputObjectsDelegate>
 
 @property (strong, nonatomic) AVCaptureSession *session;
 
 @end
 
-@implementation QRScannerViewController
+@implementation ScannerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,6 +53,8 @@
         AVMetadataMachineReadableCodeObject *metadataObject = metadataObjects.firstObject;
         NSLog(@"%@", metadataObject.stringValue);
         [self.session stopRunning];
+        
+        [self.navigationController popViewControllerAnimated:NO];
     }
 }
 

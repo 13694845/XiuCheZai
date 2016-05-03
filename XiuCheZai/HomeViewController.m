@@ -11,6 +11,7 @@
 #import "ReminderView.h"
 #import "RecommenderCollectionViewCell.h"
 #import "MenuViewController.h"
+#import "ScannerViewController.h"
 #import "WebViewController.h"
 #import "Config.h"
 #import "AFNetworking.h"
@@ -209,6 +210,17 @@
     [UIView animateWithDuration:0.3 animations:^{
         menuViewController.view.frame = rect;
     }];
+}
+
+- (IBAction)toScanner:(id)sender {
+    NSLog(@"_toScanner");
+    
+    ScannerViewController *scannerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QRScannerViewController"];
+    scannerViewController.hidesBottomBarWhenPushed = YES;
+    /*
+    webViewController.url = [NSURL URLWithString:urlString];
+     */
+    [self.navigationController pushViewController:scannerViewController animated:YES];
 }
 
 - (IBAction)toSearch:(id)sender {
