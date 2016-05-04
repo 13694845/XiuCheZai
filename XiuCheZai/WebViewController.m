@@ -11,6 +11,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 #import "Config.h"
+#import "URLEncoder.h"
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
 #import "GoodsDetailViewController.h"
@@ -46,6 +47,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    /*
+    [self isBadiumapAppInstalled];
+    [self launchBadiumap:@{@"service":@"direction", @"origin":@"28.641178,121.463111|name:企商汇", @"destination":@"28.663612,121.446197|name:门店", @"mode":@"driving"}];
+     */
 }
 
 - (void)registerUserAgent {
@@ -328,6 +333,18 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"\")"]];
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)isBadiumapAppInstalled {
+     [self executeJavascript:[NSString stringWithFormat:@"isBadiumapAppInstalledResult(\"%d\")",
+                              [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://map/"]]]];
+}
+
+- (void)launchBadiumap:(NSDictionary *)options {
+    // NSLog(@"options : %@", options);
+    NSString *URLString = [NSString stringWithFormat:@"baidumap://map/%@?origin=latlng:%@&destination=latlng:%@&mode=%@", [options objectForKey:@"service"],
+                   [URLEncoder encodeURLString:[options objectForKey:@"origin"]], [URLEncoder encodeURLString:[options objectForKey:@"destination"]], [options objectForKey:@"mode"]];
+   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
 }
 
 - (void)didReceiveMemoryWarning {
