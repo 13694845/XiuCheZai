@@ -12,6 +12,8 @@
 
 @interface ScannerViewController () <AVCaptureMetadataOutputObjectsDelegate>
 
+@property (strong, nonatomic) UIButton *backButton;
+
 @property (strong, nonatomic) AVCaptureSession *session;
 
 @end
@@ -31,7 +33,7 @@
     [self.session addOutput:output];
     output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
     
-    UIView *boxView = [[UIView alloc] initWithFrame:CGRectMake(60.0, 100.0, 200.0, 200.0)];
+    UIView *boxView = [[UIView alloc] initWithFrame:CGRectMake(60.0, 110.0, 200.0, 200.0)];
     boxView.layer.borderColor = [UIColor greenColor].CGColor;
     boxView.layer.borderWidth = 1.0;
     [self.view addSubview:boxView];
@@ -39,6 +41,7 @@
                                        boxView.frame.origin.x / self.view.bounds.size.width,
                                        boxView.bounds.size.height / self.view.bounds.size.height,
                                        boxView.bounds.size.width / self.view.bounds.size.width);
+    [self addBackButton];
     
     AVCaptureVideoPreviewLayer *layer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
     layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
@@ -46,6 +49,19 @@
     [self.view.layer insertSublayer:layer atIndex:0];
     
     [self.session startRunning];
+}
+
+- (void)addBackButton {
+    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(15.0, 40.0, 25.0, 25.0)];
+    [self.backButton setBackgroundImage:[UIImage imageNamed:@"common_back.png"] forState:UIControlStateNormal];
+    [self.backButton addTarget:self action:@selector(tapBackButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.backButton];
+}
+
+- (void)tapBackButton:(id)sender {
+    [self.backButton removeFromSuperview];
+    self.backButton = nil;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {

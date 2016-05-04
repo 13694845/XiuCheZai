@@ -17,6 +17,8 @@
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 
+@import AVFoundation;
+
 @interface HomeViewController () <UIScrollViewDelegate, ScannerViewControllerDelegate, BannerViewDataSource, BannerViewDelegate, ReminderViewDataSource,
                                     UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -219,6 +221,17 @@
 }
 
 - (IBAction)toScanner:(id)sender {
+    NSError *error;
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+    if (!input) {
+        NSString *message = @"你的相机功能好像有问题哦~\n去“设置>隐私>相机”开启一下吧";
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
     ScannerViewController *scannerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QRScannerViewController"];
     scannerViewController.hidesBottomBarWhenPushed = YES;
     scannerViewController.delegate = self;
