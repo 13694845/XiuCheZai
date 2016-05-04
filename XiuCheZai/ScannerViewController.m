@@ -51,7 +51,6 @@
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     [self.session stopRunning];
     AVMetadataMachineReadableCodeObject *metadataObject = metadataObjects.firstObject;
-    // NSLog(@"%@", metadataObject.stringValue);
     [self.delegate scannerViewController:self didFinishScanningCodeWithInfo:@{@"url":metadataObject.stringValue}];
 }
 
