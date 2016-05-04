@@ -17,7 +17,8 @@
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 
-@interface HomeViewController () <UIScrollViewDelegate, BannerViewDataSource, BannerViewDelegate, ReminderViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface HomeViewController () <UIScrollViewDelegate, ScannerViewControllerDelegate, BannerViewDataSource, BannerViewDelegate, ReminderViewDataSource,
+                                    UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -51,6 +52,11 @@
 - (NSArray *)banners {
     if (!_banners) _banners = [[NSUserDefaults standardUserDefaults] objectForKey:@"banners"];
     return _banners;
+}
+
+- (NSString *)reminderText {
+    if (!_reminderText) _reminderText = @"";
+    return _reminderText;
 }
 
 - (NSArray *)recommenders {
@@ -213,14 +219,15 @@
 }
 
 - (IBAction)toScanner:(id)sender {
-    NSLog(@"_toScanner");
-    
     ScannerViewController *scannerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QRScannerViewController"];
     scannerViewController.hidesBottomBarWhenPushed = YES;
-    /*
-    webViewController.url = [NSURL URLWithString:urlString];
-     */
+    scannerViewController.delegate = self;
     [self.navigationController pushViewController:scannerViewController animated:YES];
+}
+
+- (void)scannerViewController:(ScannerViewController *)scannerViewController didFinishScanningCodeWithInfo:(NSDictionary *)info {
+    [scannerViewController.navigationController popViewControllerAnimated:NO];
+    [self launchWebViewWithURLString:[info objectForKey:@"url"]];
 }
 
 - (IBAction)toSearch:(id)sender {

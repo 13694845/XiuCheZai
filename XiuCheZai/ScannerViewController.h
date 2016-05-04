@@ -10,12 +10,14 @@
 
 @class ScannerViewController;
 
-@protocol scannerViewControllerDelegate <NSObject>
+@protocol ScannerViewControllerDelegate <NSObject>
 
-- (void)scannerViewController:(ScannerViewController *)scannerViewController didSelectBanner:(NSDictionary *)bannerInfo;
+- (void)scannerViewController:(ScannerViewController *)scannerViewController didFinishScanningCodeWithInfo:(NSDictionary *)info;
 
 @end
 
 @interface ScannerViewController : UIViewController
+
+@property (weak, nonatomic) id <ScannerViewControllerDelegate> delegate;
 
 @end

@@ -49,13 +49,10 @@
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
-    if (metadataObjects.count) {
-        AVMetadataMachineReadableCodeObject *metadataObject = metadataObjects.firstObject;
-        NSLog(@"%@", metadataObject.stringValue);
-        [self.session stopRunning];
-        
-        [self.navigationController popViewControllerAnimated:NO];
-    }
+    [self.session stopRunning];
+    AVMetadataMachineReadableCodeObject *metadataObject = metadataObjects.firstObject;
+    // NSLog(@"%@", metadataObject.stringValue);
+    [self.delegate scannerViewController:self didFinishScanningCodeWithInfo:@{@"url":metadataObject.stringValue}];
 }
 
 - (void)didReceiveMemoryWarning {
