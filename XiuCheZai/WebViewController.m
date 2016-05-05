@@ -47,10 +47,18 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+    
+    /*
     [self isBadiumapAppInstalled];
     [self launchBadiumap:@{@"service":@"direction", @"origin":@"latlng:28.641178,121.463111|name:企商汇", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
-    // [self launchBadiumap:@{@"service":@"direction", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
+    [self launchBadiumap:@{@"service":@"direction", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
+     */
+    
+    /*
+    [self isAmapAppInstalled];
+    [self launchAmap:@{@"service":@"path", @"slat":@"28.638289", @"slon":@"121.452475", @"sname":@"当前位置", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
+    [self launchAmap:@{@"service":@"path", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
+     */
 }
 
 - (void)registerUserAgent {
@@ -336,7 +344,7 @@
 }
 
 - (void)isBadiumapAppInstalled {
-     [self executeJavascript:[NSString stringWithFormat:@"isBadiumapAppInstalledResult(\"%d\")",
+    [self executeJavascript:[NSString stringWithFormat:@"isBadiumapAppInstalledResult(\"%d\")",
                               [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://map/"]]]];
 }
 
@@ -352,6 +360,32 @@
     }
     NSString *URLString = [NSString stringWithFormat:@"baidumap://map/%@?origin=%@&destination=%@&mode=%@&coord_type=wgs84", [options objectForKey:@"service"],
                            [URLEncoder encodeURLString:origin], [URLEncoder encodeURLString:[options objectForKey:@"destination"]], [options objectForKey:@"mode"]];
+    // NSLog(@"URLString : %@", URLString);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+}
+
+- (void)isAmapAppInstalled {
+    NSLog(@"%d", [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]);
+    [self executeJavascript:[NSString stringWithFormat:@"isAmapAppInstalledResult(\"%d\")",
+                             [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]]];
+}
+
+- (void)launchAmap:(NSDictionary *)options {
+    NSLog(@"options : %@", options);
+    NSString *slat = [options objectForKey:@"slat"];
+    NSString *slon = [options objectForKey:@"slon"];
+    NSString *sname = [options objectForKey:@"sname"];
+    if (!slat.length) {
+        NSDictionary *locationInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
+        slon = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"longitude"] doubleValue]];
+        slat = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"latitude"] doubleValue]];
+        sname = @"当前位置";
+    }
+    NSString *URLString =
+        [NSString stringWithFormat:@"iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=%@&slon=%@&sname=%@&did=BGVIS2&dlat=%@&dlon=%@&dname=%@&dev=1&m=0&t=%@",
+                slat, slon, [URLEncoder encodeURLString:sname],
+                [options objectForKey:@"dlat"], [options objectForKey:@"dlon"], [URLEncoder encodeURLString:[options objectForKey:@"dname"]], [options objectForKey:@"t"]];
+    // NSLog(@"URLString : %@", URLString);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
 }
 
