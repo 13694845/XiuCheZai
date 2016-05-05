@@ -14,7 +14,7 @@
 
 @implementation Config
 
-static NSString *const kVersion = @"1.4.0";
+static NSString *const kVersion = @"1.5.0";
 static NSString *const kWebBaseURL = @"http://m.8673h.com";
 static NSString *const kApiBaseURL = @"http://m.8673h.com";
 static NSString *const kImgBaseURL = @"http://img.8673h.com";
