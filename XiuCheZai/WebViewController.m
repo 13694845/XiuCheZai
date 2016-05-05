@@ -48,17 +48,13 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    /*
-    [self isBadiumapAppInstalled];
-    [self launchBadiumap:@{@"service":@"direction", @"origin":@"latlng:28.641178,121.463111|name:企商汇", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
-    [self launchBadiumap:@{@"service":@"direction", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
-     */
+    // [self isBadiumapAppInstalled];
+    // [self launchBadiumap:@{@"service":@"direction", @"origin":@"latlng:28.641178,121.463111|name:企商汇", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
+    // [self launchBadiumap:@{@"service":@"direction", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
     
-    /*
-    [self isAmapAppInstalled];
-    [self launchAmap:@{@"service":@"path", @"slat":@"28.638289", @"slon":@"121.452475", @"sname":@"当前位置", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
-    [self launchAmap:@{@"service":@"path", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
-     */
+    // [self isAmapAppInstalled];
+    // [self launchAmap:@{@"service":@"path", @"slat":@"28.638289", @"slon":@"121.452475", @"sname":@"企商汇", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
+    // [self launchAmap:@{@"service":@"path", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
 }
 
 - (void)registerUserAgent {
@@ -356,7 +352,6 @@
         NSString *longitude = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"longitude"] doubleValue]];
         NSString *latitude = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"latitude"] doubleValue]];
         origin = [NSString stringWithFormat:@"latlng:%@,%@|name:当前位置", latitude, longitude];
-        NSLog(@"origin : %@", origin);
     }
     NSString *URLString = [NSString stringWithFormat:@"baidumap://map/%@?origin=%@&destination=%@&mode=%@&coord_type=wgs84", [options objectForKey:@"service"],
                            [URLEncoder encodeURLString:origin], [URLEncoder encodeURLString:[options objectForKey:@"destination"]], [options objectForKey:@"mode"]];
