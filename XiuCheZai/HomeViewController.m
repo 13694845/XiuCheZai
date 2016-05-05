@@ -358,8 +358,11 @@
     NSString *imagePath = [self.recommenders[indexPath.row] objectForKey:@"goods_main_img"];
     NSString *imageURLString = [NSString stringWithFormat:@"%@/%@_%@.%@", [Config imgBaseURL], imagePath.stringByDeletingPathExtension, kImageSize, imagePath.pathExtension];
     [cell.goodsImageView sd_setImageWithURL:[NSURL URLWithString:imageURLString]];
-    cell.goodsPriceLabel.text = [self.recommenders[indexPath.row] objectForKey:@"price3"];
-    cell.goodsPriceStrikethroughLabel.text = [self.recommenders[indexPath.row] objectForKey:@"price2"];
+    cell.goodsPriceLabel.text = [NSString stringWithFormat:@"¥%@", [self.recommenders[indexPath.row] objectForKey:@"price3"]];
+    cell.goodsPriceStrikethroughLabel.attributedText =
+                    [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@", [self.recommenders[indexPath.row] objectForKey:@"price2"]] attributes:
+                                                        @{NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle|NSUnderlinePatternSolid),
+                                                          NSStrikethroughColorAttributeName:[UIColor colorWithRed:153.0/255.0 green:153.0/255.0 blue:153.0/255.0 alpha:1.0]}];
     return cell;
 }
 
