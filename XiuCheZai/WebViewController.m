@@ -16,6 +16,8 @@
 #import "MBProgressHUD.h"
 #import "GoodsDetailViewController.h"
 
+@import MapKit;
+
 @interface WebViewController () <UIWebViewDelegate, WXApiDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic) UIButton *backButton;
@@ -47,7 +49,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     // [self isBadiumapAppInstalled];
     // [self launchBadiumap:@{@"service":@"direction", @"origin":@"latlng:28.641178,121.463111|name:企商汇", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
     // [self launchBadiumap:@{@"service":@"direction", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
@@ -55,6 +56,8 @@
     // [self isAmapAppInstalled];
     // [self launchAmap:@{@"service":@"path", @"slat":@"28.638289", @"slon":@"121.452475", @"sname":@"企商汇", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
     // [self launchAmap:@{@"service":@"path", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
+    
+    // [self launchIOSMap:@{@"latitude":@"28.663612", @"longitude":@"121.446197", @"name":@"门店"}];
     
     [self navigateToPlace:@{@"latitude":@"28.663612", @"longitude":@"121.446197", @"name":@"门店"}];
 }
@@ -354,10 +357,17 @@
     }
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"高德地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self launchAmap:@{@"service":@"path", @"dlat":[place objectForKey:@"latitude"], @"dlon":[place objectForKey:@"longitude"], @"dname":[place objectForKey:@"name"], @"t":@"0"}];
+            [self launchAmap:@{@"service":@"path",
+                               @"dlat":[place objectForKey:@"latitude"], @"dlon":[place objectForKey:@"longitude"], @"dname":[place objectForKey:@"name"], @"t":@"0"}];
         }];
         [alertController addAction:action];
     }
+    /*
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"苹果地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self launchIOSMap:place];
+    }];
+    [alertController addAction:action];
+     */
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
@@ -405,6 +415,20 @@
                 [options objectForKey:@"dlat"], [options objectForKey:@"dlon"], [URLEncoder encodeURLString:[options objectForKey:@"dname"]], [options objectForKey:@"t"]];
     // NSLog(@"URLString : %@", URLString);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
+}
+
+- (void)launchIOSMap:(NSDictionary *)options {
+    NSLog(@"options : %@", options);
+    NSDictionary *locationInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
+    CLLocationCoordinate2D coords1 = CLLocationCoordinate2DMake([[locationInfo objectForKey:@"latitude"] doubleValue], [[locationInfo objectForKey:@"longitude"] doubleValue]);
+    CLLocationCoordinate2D coords2 = CLLocationCoordinate2DMake([[options objectForKey:@"latitude"] doubleValue], [[options objectForKey:@"longitude"] doubleValue]);
+    MKMapItem *currentLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coords1 addressDictionary:nil]];
+    currentLocation.name = @"current";
+    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coords2 addressDictionary:nil]];
+    toLocation.name = @"to";
+    NSArray *items = [NSArray arrayWithObjects:currentLocation, toLocation, nil];
+    NSDictionary *options_ = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
+    [MKMapItem openMapsWithItems:items launchOptions:options_];
 }
 
 - (void)didReceiveMemoryWarning {
