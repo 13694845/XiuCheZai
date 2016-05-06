@@ -55,6 +55,8 @@
     // [self isAmapAppInstalled];
     // [self launchAmap:@{@"service":@"path", @"slat":@"28.638289", @"slon":@"121.452475", @"sname":@"企商汇", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
     // [self launchAmap:@{@"service":@"path", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
+    
+    [self navigateToPlace:@{@"latitude":@"28.663612", @"longitude":@"121.446197", @"name":@"门店"}];
 }
 
 - (void)registerUserAgent {
@@ -337,6 +339,27 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"\")"]];
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)navigateToPlace:(NSDictionary *)place {
+    NSLog(@"place : %@", place);
+    NSString *message = [NSString stringWithFormat:@"修车仔将为您导航到 %@", [place objectForKey:@"name"]];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择您常用的地图APP" message:message preferredStyle:UIAlertControllerStyleActionSheet];
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://map/"]]) {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"百度地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSString *destination = [NSString stringWithFormat:@"latlng:%@,%@|name:%@", [place objectForKey:@"latitude"], [place objectForKey:@"longitude"], [place objectForKey:@"name"]];
+            [self launchBadiumap:@{@"service":@"direction", @"destination":destination, @"mode":@"driving"}];
+        }];
+        [alertController addAction:action];
+    }
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"高德地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self launchAmap:@{@"service":@"path", @"dlat":[place objectForKey:@"latitude"], @"dlon":[place objectForKey:@"longitude"], @"dname":[place objectForKey:@"name"], @"t":@"0"}];
+        }];
+        [alertController addAction:action];
+    }
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)isBadiumapAppInstalled {
