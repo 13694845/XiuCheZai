@@ -23,7 +23,7 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSLog(@"tab.handleNavigationWithRequest : %@", request.URL);
+    // NSLog(@"tab.handleNavigationWithRequest : %@", request.URL);
     if ([request.URL.description isEqualToString:[Config baseURL]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/"]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"]]
