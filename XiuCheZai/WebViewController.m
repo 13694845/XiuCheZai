@@ -49,17 +49,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    // [self isBadiumapAppInstalled];
-    // [self launchBadiumap:@{@"service":@"direction", @"origin":@"latlng:28.641178,121.463111|name:企商汇", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
-    // [self launchBadiumap:@{@"service":@"direction", @"destination":@"latlng:28.663612,121.446197|name:门店", @"mode":@"driving"}];
-    
-    // [self isAmapAppInstalled];
-    // [self launchAmap:@{@"service":@"path", @"slat":@"28.638289", @"slon":@"121.452475", @"sname":@"企商汇", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
-    // [self launchAmap:@{@"service":@"path", @"dlat":@"28.663612", @"dlon":@"121.446197", @"dname":@"门店", @"t":@"0"}];
-    
-    // [self launchIOSMap:@{@"latitude":@"28.663612", @"longitude":@"121.446197", @"name":@"门店"}];
-    
-    [self navigateToPlace:@{@"latitude":@"28.663612", @"longitude":@"121.446197", @"name":@"门店"}];
 }
 
 - (void)registerUserAgent {
@@ -69,21 +58,27 @@
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    // NSLog(@"Web URL : %@", request.URL);
-    if ([request.URL.description containsString:@"about:blank"]) {
-        return NO;
-    }
+    // NSLog(@"request.URL : %@", request.URL);
     if ([request.URL.scheme isEqualToString:@"qsh"]) {
-        NSString *command = request.URL.host;
-        NSDictionary *parameter;
-        NSString *query = [request.URL.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        if (query) parameter = [NSJSONSerialization JSONObjectWithData:[query dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
-        if (parameter) command = [command stringByAppendingString:@":"];
-        SEL selector = NSSelectorFromString(command);
-        if ([self respondsToSelector:selector]) [self performSelector:NSSelectorFromString(command) withObject:parameter afterDelay:0.0];
-        return NO;
+        return [self handleCommandWithRequest:request];
     }
-    
+    return [self handleNavigationWithRequest:request navigationType:navigationType];
+}
+
+- (BOOL)handleCommandWithRequest:(NSURLRequest *)request {
+    // NSLog(@"handleCommandWithRequest : %@", request.URL);
+    NSString *command = request.URL.host;
+    NSDictionary *parameter;
+    NSString *query = [request.URL.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    if (query) parameter = [NSJSONSerialization JSONObjectWithData:[query dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+    if (parameter) command = [command stringByAppendingString:@":"];
+    SEL selector = NSSelectorFromString(command);
+    if ([self respondsToSelector:selector]) [self performSelector:NSSelectorFromString(command) withObject:parameter afterDelay:0.0];
+    return NO;
+}
+
+- (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    // NSLog(@"web.handleNavigationWithRequest : %@", request.URL);
     if ([request.URL.description isEqualToString:[Config baseURL]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/"]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"]]
@@ -345,7 +340,15 @@
 }
 
 - (void)navigateToPlace:(NSDictionary *)place {
-    NSLog(@"place : %@", place);
+    // NSLog(@"navigateToPlace : %@", place);
+    if (![[[[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"] objectForKey:@"longitude"] doubleValue]) {
+        NSString *message = @"请在iOS\"设置\"-\"隐私\"-\"定位服务\"中打开";
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"未获得授权使用定位" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
     NSString *message = [NSString stringWithFormat:@"修车仔将为您导航到 %@", [place objectForKey:@"name"]];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择您常用的地图APP" message:message preferredStyle:UIAlertControllerStyleActionSheet];
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://map/"]]) {
@@ -362,12 +365,14 @@
         }];
         [alertController addAction:action];
     }
-    /*
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"苹果地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self launchIOSMap:place];
-    }];
-    [alertController addAction:action];
-     */
+    if (!alertController.actions.count) {
+        NSString *message = @"请安装百度或高德地图APP";
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"未安装百度或高德地图APP" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
@@ -378,7 +383,7 @@
 }
 
 - (void)launchBadiumap:(NSDictionary *)options {
-    NSLog(@"options : %@", options);
+    // NSLog(@"options : %@", options);
     NSString *origin = [options objectForKey:@"origin"];
     if (!origin.length) {
         NSDictionary *locationInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
@@ -388,18 +393,16 @@
     }
     NSString *URLString = [NSString stringWithFormat:@"baidumap://map/%@?origin=%@&destination=%@&mode=%@&coord_type=wgs84", [options objectForKey:@"service"],
                            [URLEncoder encodeURLString:origin], [URLEncoder encodeURLString:[options objectForKey:@"destination"]], [options objectForKey:@"mode"]];
-    // NSLog(@"URLString : %@", URLString);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
 }
 
 - (void)isAmapAppInstalled {
-    NSLog(@"%d", [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]);
     [self executeJavascript:[NSString stringWithFormat:@"isAmapAppInstalledResult(\"%d\")",
                              [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]]];
 }
 
 - (void)launchAmap:(NSDictionary *)options {
-    NSLog(@"options : %@", options);
+    // NSLog(@"options : %@", options);
     NSString *slat = [options objectForKey:@"slat"];
     NSString *slon = [options objectForKey:@"slon"];
     NSString *sname = [options objectForKey:@"sname"];
@@ -413,22 +416,24 @@
         [NSString stringWithFormat:@"iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=%@&slon=%@&sname=%@&did=BGVIS2&dlat=%@&dlon=%@&dname=%@&dev=1&m=0&t=%@",
                 slat, slon, [URLEncoder encodeURLString:sname],
                 [options objectForKey:@"dlat"], [options objectForKey:@"dlon"], [URLEncoder encodeURLString:[options objectForKey:@"dname"]], [options objectForKey:@"t"]];
-    // NSLog(@"URLString : %@", URLString);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString]];
 }
 
 - (void)launchIOSMap:(NSDictionary *)options {
-    NSLog(@"options : %@", options);
+    // NSLog(@"options : %@", options);
     NSDictionary *locationInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
-    CLLocationCoordinate2D coords1 = CLLocationCoordinate2DMake([[locationInfo objectForKey:@"latitude"] doubleValue], [[locationInfo objectForKey:@"longitude"] doubleValue]);
-    CLLocationCoordinate2D coords2 = CLLocationCoordinate2DMake([[options objectForKey:@"latitude"] doubleValue], [[options objectForKey:@"longitude"] doubleValue]);
-    MKMapItem *currentLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coords1 addressDictionary:nil]];
-    currentLocation.name = @"current";
-    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coords2 addressDictionary:nil]];
-    toLocation.name = @"to";
-    NSArray *items = [NSArray arrayWithObjects:currentLocation, toLocation, nil];
-    NSDictionary *options_ = @{ MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving, MKLaunchOptionsMapTypeKey: [NSNumber numberWithInteger:MKMapTypeStandard], MKLaunchOptionsShowsTrafficKey:@YES };
-    [MKMapItem openMapsWithItems:items launchOptions:options_];
+    CLLocationCoordinate2D originCoordinate = CLLocationCoordinate2DMake([[locationInfo objectForKey:@"latitude"] doubleValue],
+                                                                         [[locationInfo objectForKey:@"longitude"] doubleValue]);
+    MKMapItem *originMapItem = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:originCoordinate addressDictionary:nil]];
+    originMapItem.name = @"current";
+    CLLocationCoordinate2D destinationCoordinate = CLLocationCoordinate2DMake([[options objectForKey:@"latitude"] doubleValue], [[options objectForKey:@"longitude"] doubleValue]);
+    MKMapItem *destinationMapItem = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:destinationCoordinate addressDictionary:nil]];
+    destinationMapItem.name = @"to";
+    NSArray *items = @[originMapItem, destinationMapItem];
+    NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
+                                    MKLaunchOptionsMapTypeKey:[NSNumber numberWithInteger:MKMapTypeStandard],
+                                    MKLaunchOptionsShowsTrafficKey:@YES};
+    [MKMapItem openMapsWithItems:items launchOptions:launchOptions];
 }
 
 - (void)didReceiveMemoryWarning {

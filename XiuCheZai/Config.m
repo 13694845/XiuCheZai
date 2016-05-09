@@ -18,13 +18,14 @@ static NSString *const kVersion = @"1.5.0";
 static NSString *const kWebBaseURL = @"http://m.8673h.com";
 static NSString *const kApiBaseURL = @"http://m.8673h.com";
 static NSString *const kImgBaseURL = @"http://img.8673h.com";
+static NSString *const kTestBaseURL = @"http://192.168.2.4:8080";
 
 + (NSString *)version {
     return kVersion;
 }
 
 + (NSString *)baseURL {
-    return kWebBaseURL;
+    return kTestBaseURL;
 }
 
 + (NSString *)webBaseURL {

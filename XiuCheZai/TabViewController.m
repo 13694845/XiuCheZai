@@ -22,22 +22,8 @@
     [super viewDidLoad];
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    // NSLog(@"Tab URL : %@", request.URL);
-    if ([request.URL.description containsString:@"about:blank"]) {
-        return NO;
-    }
-    if ([request.URL.scheme isEqualToString:@"qsh"]) {
-        NSString *command = request.URL.host;
-        NSDictionary *parameter;
-        NSString *query = [request.URL.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        if (query) parameter = [NSJSONSerialization JSONObjectWithData:[query dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
-        if (parameter) command = [command stringByAppendingString:@":"];
-        SEL selector = NSSelectorFromString(command);
-        if ([self respondsToSelector:selector]) [self performSelector:NSSelectorFromString(command) withObject:parameter afterDelay:0.0];
-        return NO;
-    }
-    
+- (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSLog(@"tab.handleNavigationWithRequest : %@", request.URL);
     if ([request.URL.description isEqualToString:[Config baseURL]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/"]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"]]
