@@ -24,7 +24,7 @@ static NSString *const kCachingURLHeader = @"CachingURLHeader";
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request {
     if (![request valueForHTTPHeaderField:kCachingURLHeader]) {
-        NSArray *cachingPathExtension = @[@"png", @"jpg", @"JPG", @"woff", @"css"];
+        NSArray *cachingPathExtension = @[@"png", @"jpg", @"JPG", @"woff", @"css", @"js"];
         if ([cachingPathExtension containsObject:request.URL.pathExtension]) {
             return YES;
         }
