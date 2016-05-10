@@ -2128,10 +2128,10 @@
             </objects>
             <point key="canvasLocation" x="478.5" y="-1477.5"/>
         </scene>
-        <!--Hello View Controller-->
+        <!--Scanner View Controller-->
         <scene sceneID="eA5-k1-Pn5">
             <objects>
-                <viewController storyboardIdentifier="QRScannerViewController" id="QgH-8i-djG" customClass="HelloViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScannerViewController" id="QgH-8i-djG" customClass="ScannerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r46-bk-EcB"/>
                         <viewControllerLayoutGuide type="bottom" id="nMC-1T-ImZ"/>

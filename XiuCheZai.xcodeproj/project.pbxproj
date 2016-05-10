@@ -63,7 +63,6 @@
 		6C7CE9141CD8773A00617964 /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CE9131CD8773A00617964 /* ScannerViewController.m */; };
 		6C7CE9171CD89ACF00617964 /* home_scanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9151CD89ACF00617964 /* home_scanner.png */; };
 		6C7CE9181CD89ACF00617964 /* home_searcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9161CD89ACF00617964 /* home_searcher.png */; };
-		6C7CE91B1CD999DA00617964 /* HelloViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CE91A1CD999D900617964 /* HelloViewController.m */; };
 		6C7D47861CBDE4E800D9794F /* common_error.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7D47851CBDE4E800D9794F /* common_error.png */; };
 		6C82347E1C436F7D001E6AFE /* home_broadcast.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C82347C1C436F7D001E6AFE /* home_broadcast.png */; };
 		6C82347F1C436F7D001E6AFE /* home_redbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C82347D1C436F7D001E6AFE /* home_redbar.png */; };
@@ -248,8 +247,6 @@
 		6C7CE9131CD8773A00617964 /* ScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerViewController.m; sourceTree = "<group>"; };
 		6C7CE9151CD89ACF00617964 /* home_scanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_scanner.png; sourceTree = "<group>"; };
 		6C7CE9161CD89ACF00617964 /* home_searcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_searcher.png; sourceTree = "<group>"; };
-		6C7CE9191CD999D900617964 /* HelloViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloViewController.h; sourceTree = "<group>"; };
-		6C7CE91A1CD999D900617964 /* HelloViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloViewController.m; sourceTree = "<group>"; };
 		6C7D47851CBDE4E800D9794F /* common_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = common_error.png; sourceTree = "<group>"; };
 		6C82347C1C436F7D001E6AFE /* home_broadcast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_broadcast.png; sourceTree = "<group>"; };
 		6C82347D1C436F7D001E6AFE /* home_redbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_redbar.png; sourceTree = "<group>"; };
@@ -854,8 +851,6 @@
 				6C8EC2781C1E8A7800BCABB5 /* Config.h */,
 				6C8EC2791C1E8A7800BCABB5 /* Config.m */,
 				6CABF7131C0E978B00DF3EFF /* Main.storyboard */,
-				6C7CE9191CD999D900617964 /* HelloViewController.h */,
-				6C7CE91A1CD999D900617964 /* HelloViewController.m */,
 				6CABF7161C0E978B00DF3EFF /* Assets.xcassets */,
 				6CABF7181C0E978B00DF3EFF /* LaunchScreen.storyboard */,
 				6CABF71B1C0E978B00DF3EFF /* Info.plist */,
@@ -1129,7 +1124,6 @@
 				6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */,
 				6CABF70C1C0E978B00DF3EFF /* main.m in Sources */,
 				6C4D0C461C28E998003E96E8 /* UIButton+WebCache.m in Sources */,
-				6C7CE91B1CD999DA00617964 /* HelloViewController.m in Sources */,
 				6C8B11031CC8B840003CF8F5 /* RecommenderCollectionViewCell.m in Sources */,
 				6C4D0C421C28E998003E96E8 /* SDWebImageDownloader.m in Sources */,
 			);

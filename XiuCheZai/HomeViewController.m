@@ -232,7 +232,7 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
-    ScannerViewController *scannerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"QRScannerViewController"];
+    ScannerViewController *scannerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ScannerViewController"];
     scannerViewController.hidesBottomBarWhenPushed = YES;
     scannerViewController.delegate = self;
     [self.navigationController pushViewController:scannerViewController animated:YES];
