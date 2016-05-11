@@ -352,8 +352,8 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
-    NSString *message = [NSString stringWithFormat:@"修车仔将为您导航到 %@", [place objectForKey:@"name"]];
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择您常用的地图APP" message:message preferredStyle:UIAlertControllerStyleActionSheet];
+    NSString *message = [NSString stringWithFormat:@"导航到 %@", [place objectForKey:@"name"]];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择地图APP" message:message preferredStyle:UIAlertControllerStyleActionSheet];
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://map/"]]) {
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"百度地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             NSString *destination = [NSString stringWithFormat:@"latlng:%@,%@|name:%@", [place objectForKey:@"latitude"], [place objectForKey:@"longitude"], [place objectForKey:@"name"]];
@@ -368,14 +368,10 @@
         }];
         [alertController addAction:action];
     }
-    if (!alertController.actions.count) {
-        NSString *message = @"请安装百度或高德地图APP";
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"未安装百度或高德地图APP" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-        return;
-    }
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"苹果地图" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self launchIOSMap:place];
+    }];
+    [alertController addAction:action];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
@@ -428,10 +424,10 @@
     CLLocationCoordinate2D originCoordinate = CLLocationCoordinate2DMake([[locationInfo objectForKey:@"latitude"] doubleValue],
                                                                          [[locationInfo objectForKey:@"longitude"] doubleValue]);
     MKMapItem *originMapItem = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:originCoordinate addressDictionary:nil]];
-    originMapItem.name = @"current";
+    originMapItem.name = @"当前位置";
     CLLocationCoordinate2D destinationCoordinate = CLLocationCoordinate2DMake([[options objectForKey:@"latitude"] doubleValue], [[options objectForKey:@"longitude"] doubleValue]);
     MKMapItem *destinationMapItem = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:destinationCoordinate addressDictionary:nil]];
-    destinationMapItem.name = @"to";
+    destinationMapItem.name = [options objectForKey:@"name"];
     NSArray *items = @[originMapItem, destinationMapItem];
     NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
                                     MKLaunchOptionsMapTypeKey:[NSNumber numberWithInteger:MKMapTypeStandard],
