@@ -79,6 +79,28 @@
     self.reminderView.dataSource = self;
     self.recommenderCollectionView.dataSource = self;
     self.recommenderCollectionView.delegate = self;
+    
+    NSString *URLString = @"https://itunes.apple.com/lookup?id=1064830136";
+    NSDictionary *parameters = nil;
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (((NSNumber *)[responseObject objectForKey:@"resultCount"]).intValue) {
+            NSString *storeVersion = [[[responseObject objectForKey:@"results"] firstObject] objectForKey:@"version"];
+            // NSLog(@"storeVersion : %@", storeVersion);
+            NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            // NSLog(@"appVersion : %@", appVersion);
+            if (![storeVersion isEqualToString:appVersion]) {
+                NSString *message = @"获取新版修车仔，体验更多功能";
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"发现新版本" message:message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"立即更新" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/xiu-che-zi/id1064830136"]];
+                }];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"下次再说" style:UIAlertActionStyleDefault handler:nil];
+                [alertController addAction:cancelAction];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
