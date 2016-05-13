@@ -85,9 +85,7 @@
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if (((NSNumber *)[responseObject objectForKey:@"resultCount"]).intValue) {
             NSString *storeVersion = [[[responseObject objectForKey:@"results"] firstObject] objectForKey:@"version"];
-            // NSLog(@"storeVersion : %@", storeVersion);
             NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-            // NSLog(@"appVersion : %@", appVersion);
             if (![storeVersion isEqualToString:appVersion]) {
                 NSString *message = @"获取新版修车仔，体验更多功能";
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"发现新版本" message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -144,7 +142,7 @@
     parameters = nil;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if (![[responseObject objectForKey:@"data"] count]) {
-            self.reminderText = @"即将开启：#保养提醒 #到店检测 #车品特惠";
+            self.reminderText = @"即将开启：#周边门店导航 #版本更新提示";
             [self.reminderView reloadData];
             return;
         }
