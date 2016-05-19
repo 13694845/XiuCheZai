@@ -244,7 +244,7 @@
 }
 
 - (IBAction)toSearch:(id)sender {
-    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html"]];
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/search/index.html"]];
 }
 
 - (void)launchWebViewWithURLString:(NSString *)urlString {
