@@ -267,11 +267,11 @@
 }
 
 - (IBAction)toPartMaintain:(id)sender {
-    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/product.html?type=2"]];
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/small_mantain/index.html?type=2"]];
 }
 
 - (IBAction)toReplaceTire:(id)sender {
-    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/product.html?type=1"]];
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/small_mantain/index.html?type=1"]];
 }
 
 - (IBAction)toAppointMOT:(id)sender {

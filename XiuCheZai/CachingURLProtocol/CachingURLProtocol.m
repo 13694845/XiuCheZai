@@ -29,6 +29,7 @@ static NSString *const kCachingURLHeader = @"CachingURLHeader";
             return YES;
         }
     }
+    // NSLog(@"URL not cached : %@", request.URL);
     return NO;
 }
 
