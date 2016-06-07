@@ -94,7 +94,7 @@
 }
 
 - (void)addBackButton {
-    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(11.0, 8.5, 28.0, 28.0)];
+    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(11.0, 8.0, 28.0, 28.0)];
     [self.backButton setBackgroundImage:[UIImage imageNamed:@"common_back_150.png"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(tapBackButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.webView addSubview:self.backButton];
