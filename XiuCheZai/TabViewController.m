@@ -52,6 +52,11 @@
         self.backOffset++;
         return YES;
     }
+    if ([request.URL.description containsString:@"/m-center/logistics/index.html"]) {
+        if (!self.backButton) [self addBackButton];
+        self.backOffset++;
+        return YES;
+    }
     
     if ([request.URL.description containsString:self.url.description]) {
         self.tabBarController.tabBar.hidden = NO;
@@ -89,8 +94,8 @@
 }
 
 - (void)addBackButton {
-    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 12.0, 20.0, 20.0)];
-    [self.backButton setBackgroundImage:[UIImage imageNamed:@"common_back.png"] forState:UIControlStateNormal];
+    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(11.0, 8.5, 28.0, 28.0)];
+    [self.backButton setBackgroundImage:[UIImage imageNamed:@"common_back_150.png"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(tapBackButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.webView addSubview:self.backButton];
 }
