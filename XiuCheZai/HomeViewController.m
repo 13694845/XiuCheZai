@@ -122,7 +122,7 @@
     parameters = nil;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if (![[responseObject objectForKey:@"data"] count]) {
-            self.reminderText = @"即将开启：#周边门店导航";
+            self.reminderText = @"手机下单 直供省钱 预约省时 联保省心";
             [self.reminderView reloadData];
             return;
         }
