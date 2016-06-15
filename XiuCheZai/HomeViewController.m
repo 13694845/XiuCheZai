@@ -207,6 +207,7 @@
 }
 
 - (IBAction)toMenu:(id)sender {
+    /*
     MenuViewController *menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
     [self addChildViewController:menuViewController];
     menuViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
@@ -218,6 +219,22 @@
     [UIView animateWithDuration:0.3 animations:^{
         menuViewController.view.frame = rect;
     }];
+     */
+    MenuViewController *menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+//    menuViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    menuViewController.modalPresentationStyle = UIModalPresentationCustom;
+    
+    
+    /*
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.5];
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:kCATransitionFromRight];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [[menuViewController.view layer] addAnimation:animation forKey:@"SwitchToView"];
+     */
+    
+    [self presentViewController:menuViewController animated:YES completion:nil];
 }
 
 - (IBAction)toScanner:(id)sender {
