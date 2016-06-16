@@ -327,7 +327,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     // NSString *server = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/WebUploadServlet.action"];
     NSString *server = [NSString stringWithFormat:@"%@%@", [Config webBaseURL], @"/WebUploadServlet.action"];
-
+    
     NSData *data = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.8);
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:server parameters:nil
                                                                               constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
