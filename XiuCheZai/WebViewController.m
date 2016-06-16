@@ -37,14 +37,14 @@
     [self registerUserAgent];
     self.webView.delegate = self;
     self.webView.dataDetectorTypes = UIDataDetectorTypeNone;
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.tabBarController.tabBar.hidden = NO;
-    
-    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
