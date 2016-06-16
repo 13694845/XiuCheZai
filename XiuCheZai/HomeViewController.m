@@ -221,19 +221,7 @@
     }];
      */
     MenuViewController *menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-//    menuViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    menuViewController.modalPresentationStyle = UIModalPresentationCustom;
-    
-    
-    /*
-    CATransition *animation = [CATransition animation];
-    [animation setDuration:0.5];
-    [animation setType:kCATransitionPush];
-    [animation setSubtype:kCATransitionFromRight];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [[menuViewController.view layer] addAnimation:animation forKey:@"SwitchToView"];
-     */
-    
+    menuViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentViewController:menuViewController animated:YES completion:nil];
 }
 
