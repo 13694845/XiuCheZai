@@ -13,6 +13,7 @@
 
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
+@property (nonatomic) BOOL fullScreen;
 
 @end
 
@@ -20,6 +21,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewWillLayoutSubviews {
+    [self layoutSubviews];
+}
+
+- (void)layoutSubviews {
+    if (!self.fullScreen) {
+        self.tabBarController.tabBar.hidden = NO;
+        CGRect rect = [UIScreen mainScreen].bounds;
+        rect.size.height -= self.tabBarController.tabBar.bounds.size.height;
+        self.view.frame = rect;
+    } else {
+        self.tabBarController.tabBar.hidden = YES;
+        self.view.frame = [UIScreen mainScreen].bounds;
+    }
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -58,15 +75,8 @@
         return YES;
     }
     
-    if ([request.URL.description containsString:self.url.description]) {
-        self.tabBarController.tabBar.hidden = NO;
-        CGRect rect = [UIScreen mainScreen].bounds;
-        rect.size.height -= self.tabBarController.tabBar.bounds.size.height;
-        self.view.frame = rect;
-    } else {
-        self.tabBarController.tabBar.hidden = YES;
-        self.view.frame = [UIScreen mainScreen].bounds;
-    }
+    self.fullScreen = ![request.URL.description containsString:self.url.description];
+    [self layoutSubviews];
     
     return YES;
 }
