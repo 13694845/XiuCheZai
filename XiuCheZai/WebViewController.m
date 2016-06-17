@@ -22,6 +22,7 @@
 
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
+@property (nonatomic) UIView *errorView;
 
 @end
 
@@ -39,6 +40,8 @@
     self.webView.dataDetectorTypes = UIDataDetectorTypeNone;
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    
+    if (self.errorView.superview) [self.errorView removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -137,10 +140,11 @@
         self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
         self.navigationItem.title = @"网络连接失败";
         [self.navigationController setNavigationBarHidden:NO animated:NO];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120, 120)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120.0, 120.0)];
         imageView.image = [UIImage imageNamed:@"common_error.png"];
         imageView.center = self.view.center;
         [self.view addSubview:imageView];
+        self.errorView = imageView;
     }
 }
 
