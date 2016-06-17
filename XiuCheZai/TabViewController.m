@@ -25,7 +25,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (!self.webView.isLoading) [self.webView reload];
+//    if (!self.webView.isLoading) [self.webView reload];
 }
 
 - (void)viewWillLayoutSubviews {
