@@ -24,10 +24,6 @@
 }
 
 - (void)viewWillLayoutSubviews {
-    [self layoutSubviews];
-}
-
-- (void)layoutSubviews {
     if (!self.fullScreen) {
         self.tabBarController.tabBar.hidden = NO;
         CGRect rect = [UIScreen mainScreen].bounds;
@@ -76,7 +72,7 @@
     }
     
     self.fullScreen = ![request.URL.description containsString:self.url.description];
-    [self layoutSubviews];
+    [self viewWillLayoutSubviews];
     
     return YES;
 }
