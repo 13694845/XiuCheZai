@@ -15,9 +15,13 @@
 
 @implementation MineViewController
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_index/index.html"]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_index/index.html"]];
 }
 
 - (void)didReceiveMemoryWarning {

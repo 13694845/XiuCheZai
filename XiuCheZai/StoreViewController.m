@@ -15,9 +15,13 @@
 
 @implementation StoreViewController
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/service/index/index.html"]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/service/index/index.html"]];
 }
 
 - (void)didReceiveMemoryWarning {

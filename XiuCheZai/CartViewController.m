@@ -15,9 +15,13 @@
 
 @implementation CartViewController
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/shopping-cart/index.html"]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/shopping-cart/index.html"]];
 }
 
 - (void)didReceiveMemoryWarning {

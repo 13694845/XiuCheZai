@@ -15,9 +15,13 @@
 
 @implementation AccessoryViewController
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Car_Brand/index.html"]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Car_Brand/index.html"]];
 }
 
 - (void)didReceiveMemoryWarning {
