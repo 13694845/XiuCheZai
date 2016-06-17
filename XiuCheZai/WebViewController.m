@@ -328,6 +328,7 @@
     // NSString *server = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/WebUploadServlet.action"];
     NSString *server = [NSString stringWithFormat:@"%@%@", [Config webBaseURL], @"/WebUploadServlet.action"];
     
+    [picker dismissViewControllerAnimated:YES completion:nil];
     NSData *data = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.8);
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:server parameters:nil
                                                                               constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -337,25 +338,25 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:^(NSProgress *uploadProgress) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"uploadProgress : %@", uploadProgress);
+            // NSLog(@"uploadProgress : %@", uploadProgress);
         });
     } completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         NSDictionary *responseInfo = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         if (![[responseInfo objectForKey:@"filepath"] length]) {
+            // [picker dismissViewControllerAnimated:YES completion:nil];
             [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"\")"]];
-            [picker dismissViewControllerAnimated:YES completion:nil];
             return;
         }
+        // [picker dismissViewControllerAnimated:YES completion:nil];
         [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"%@\")", [responseInfo objectForKey:@"filepath"]]];
-        [picker dismissViewControllerAnimated:YES completion:nil];
-        NSLog(@"filepath : %@", [responseInfo objectForKey:@"filepath"]);
+        // NSLog(@"filepath : %@", [responseInfo objectForKey:@"filepath"]);
     }];
     [uploadTask resume];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"\")"]];
     [picker dismissViewControllerAnimated:YES completion:nil];
+    [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"\")"]];
 }
 
 - (void)navigateToPlace:(NSDictionary *)place {
