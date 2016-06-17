@@ -23,6 +23,11 @@
     [super viewDidLoad];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // [self.webView reload];
+}
+
 - (void)viewWillLayoutSubviews {
     if (!self.fullScreen) {
         self.tabBarController.tabBar.hidden = NO;

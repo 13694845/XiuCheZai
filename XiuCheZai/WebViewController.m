@@ -132,6 +132,7 @@
     NSLog(@"error : %@", error);
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     if (error.code != -999) {
+        /*
         self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
         UIButton *backBarButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 12.0, 17.0, 17.0)];
         [backBarButton setBackgroundImage:[UIImage imageNamed:@"common_back.png"] forState:UIControlStateNormal];
@@ -145,6 +146,7 @@
         imageView.center = self.view.center;
         [self.view addSubview:imageView];
         self.errorView = imageView;
+         */
     }
 }
 
