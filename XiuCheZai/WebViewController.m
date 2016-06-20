@@ -22,11 +22,22 @@
 
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
-@property (nonatomic) UIView *errorView;
+// @property (nonatomic) UIView *errorView;
+
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 
 @end
 
 @implementation WebViewController
+
+- (AFHTTPSessionManager *)manager {
+    if (!_manager) {
+        _manager = [AFHTTPSessionManager manager];
+        [_manager.requestSerializer setValue:[NSString stringWithFormat:@"%@ %@/%@",
+                                              [_manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]] forHTTPHeaderField:@"User-Agent"];
+    }
+    return _manager;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +52,7 @@
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     
-    if (self.errorView.superview) [self.errorView removeFromSuperview];
+    // if (self.errorView.superview) [self.errorView removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
