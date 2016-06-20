@@ -460,6 +460,10 @@
     [MKMapItem openMapsWithItems:items launchOptions:launchOptions];
 }
 
+- (void)pickPlaceAroundService:(NSDictionary *)service {
+    NSLog(@"pickPlaceAroundService");
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
