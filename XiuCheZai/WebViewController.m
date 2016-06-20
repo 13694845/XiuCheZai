@@ -461,7 +461,7 @@
 }
 
 - (void)pickPlaceAroundService:(NSDictionary *)service {
-    NSLog(@"pickPlaceAroundService");
+    NSLog(@"pickPlaceAroundService : %@", service);
 }
 
 - (void)didReceiveMemoryWarning {
