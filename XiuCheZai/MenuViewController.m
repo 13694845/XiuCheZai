@@ -117,7 +117,6 @@
 }
 
 - (IBAction)close:(id)sender {
-    /*
     CGRect rect = self.view.frame;
     rect.origin.x -= rect.size.width;
     [UIView animateWithDuration:0.3 animations:^{
@@ -126,8 +125,7 @@
         [self.view removeFromSuperview];
         [self removeFromParentViewController];
     }];
-     */
-    [self dismissViewControllerAnimated:YES completion:nil];
+    // [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
