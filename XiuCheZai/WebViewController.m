@@ -132,12 +132,8 @@
     NSLog(@"error : %@", error);
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     if (error.code != -999) {
-        
-        NSURL *url = [[NSBundle mainBundle] URLForResource:@"error" withExtension:@"html"];
-        NSLog(@"url : %@", url);
-        
-        [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
-        
+        [self.webView stopLoading];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[[NSBundle mainBundle] URLForResource:@"error" withExtension:@"html"]]];
         /*
         self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
         UIButton *backBarButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 12.0, 17.0, 17.0)];
