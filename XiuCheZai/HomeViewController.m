@@ -380,4 +380,11 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    for (UIViewController *viewController in self.childViewControllers) {
+        [viewController.view removeFromSuperview];
+        [viewController removeFromParentViewController];
+    }
+}
+
 @end
