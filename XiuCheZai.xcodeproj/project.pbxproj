@@ -26,6 +26,7 @@
 		6C19A97C1C1E406C002451F6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */; };
 		6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */; };
 		6C24460E1C9FD69300F4F3C0 /* banner04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C24460D1C9FD69300F4F3C0 /* banner04.jpg */; };
+		6C25D6071D177B85007D8BE4 /* error.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C25D6061D177B85007D8BE4 /* error.html */; };
 		6C3E4E081C96664300268B81 /* home_floatcar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3E4E071C96664300268B81 /* home_floatcar.png */; };
 		6C48C9C41CD9ECC70015515D /* URLEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C48C9C31CD9ECC70015515D /* URLEncoder.m */; };
 		6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4C67611C4A299300DF8D31 /* AccessoryViewController.m */; };
@@ -189,6 +190,7 @@
 		6C24460A1C9FCAAC00F4F3C0 /* GoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDetailViewController.h; sourceTree = "<group>"; };
 		6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
 		6C24460D1C9FD69300F4F3C0 /* banner04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner04.jpg; sourceTree = "<group>"; };
+		6C25D6061D177B85007D8BE4 /* error.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = error.html; sourceTree = "<group>"; };
 		6C3E4E071C96664300268B81 /* home_floatcar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_floatcar.png; sourceTree = "<group>"; };
 		6C48C9C21CD9ECC70015515D /* URLEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLEncoder.h; sourceTree = "<group>"; };
 		6C48C9C31CD9ECC70015515D /* URLEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLEncoder.m; sourceTree = "<group>"; };
@@ -854,6 +856,7 @@
 				6C8EC2781C1E8A7800BCABB5 /* Config.h */,
 				6C8EC2791C1E8A7800BCABB5 /* Config.m */,
 				6CABF7131C0E978B00DF3EFF /* Main.storyboard */,
+				6C25D6061D177B85007D8BE4 /* error.html */,
 				6CABF7161C0E978B00DF3EFF /* Assets.xcassets */,
 				6CABF7181C0E978B00DF3EFF /* LaunchScreen.storyboard */,
 				6CABF71B1C0E978B00DF3EFF /* Info.plist */,
@@ -985,6 +988,7 @@
 				6C91C2CE1C9A3337004C0CB4 /* tab_icon51@2x.png in Resources */,
 				6C8B10531CC4D087003CF8F5 /* menu_icon06.jpg in Resources */,
 				6C8B10571CC4D087003CF8F5 /* menu_icon10.jpg in Resources */,
+				6C25D6071D177B85007D8BE4 /* error.html in Resources */,
 				6C8B10861CC859D6003CF8F5 /* banner02.jpg in Resources */,
 				6C7D47861CBDE4E800D9794F /* common_error.png in Resources */,
 				6C05EDFD1C33C58400BF8C39 /* home_activity03.png in Resources */,
