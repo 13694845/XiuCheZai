@@ -20,11 +20,10 @@
 
 @interface WebViewController () <UIWebViewDelegate, WXApiDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
+
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
-// @property (nonatomic) UIView *errorView;
-
-@property (strong, nonatomic) AFHTTPSessionManager *manager;
 
 @end
 
@@ -49,10 +48,7 @@
     [self registerUserAgent];
     self.webView.delegate = self;
     self.webView.dataDetectorTypes = UIDataDetectorTypeNone;
-    
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-    
-    // if (self.errorView.superview) [self.errorView removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
