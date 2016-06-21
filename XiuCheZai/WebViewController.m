@@ -64,7 +64,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    // [self pickImage];
+    // [self pickPlaceAroundService:nil];
 }
 
 - (void)registerUserAgent {
@@ -472,23 +472,25 @@
 }
 
 - (void)pickPlaceAroundService:(NSDictionary *)service {
-    service = @{@"serviceName":@"黄岩检测站椒江分站（仅限蓝牌车）",
+    service = @{@"serviceId":@"3255",
+                @"serviceName":@"黄岩检测站椒江分站（仅限蓝牌车）",
                 @"serviceAddress":@"台州市疏港大道椒江段2250号3幢一楼",
                 @"serviceLongitude":@"121.463111",
                 @"serviceLatitude":@"28.641178"};
-    
     NSDictionary *place = @{@"placeName":@"黄岩检测站椒江分站（仅限蓝牌车）",
                             @"placeAddress":@"台州市疏港大道椒江段2250号3幢一楼",
                             @"placeLongitude":@"121.463111",
                             @"placeLatitude":@"28.641178"};
-    
     [self feeForPlace:place aroundService:service];
 }
 
-- (float)feeForPlace:(NSDictionary *)place aroundService:(NSDictionary *)service {
-    
-    
-    return 0;
+- (void)feeForPlace:(NSDictionary *)place aroundService:(NSDictionary *)service {
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/KiloCalculateServlet.do"];
+    NSDictionary *parameters = @{@"lng":place[@"placeLongitude"], @"lat":place[@"placeLatitude"], @"type":@"5", @"user_id":service[@"serviceId"], @"is_fee":@"1"};
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"parameters : %@", parameters);
+        NSLog(@"responseObject : %@", responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
 - (void)didReceiveMemoryWarning {
