@@ -25,7 +25,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (!self.fullScreen && !self.webView.isLoading) [self.webView reload];
+    // if (!self.fullScreen && !self.webView.isLoading) [self.webView reload];
+    if (!self.webView.isLoading) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
 - (void)viewWillLayoutSubviews {
