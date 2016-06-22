@@ -70,11 +70,13 @@
         self.backOffset++;
         return YES;
     }
+    /*
     if ([request.URL.description containsString:@"/m-center/logistics/index.html"]) {
         if (!self.backButton) [self addBackButton];
         self.backOffset++;
         return YES;
     }
+     */
     
     self.fullScreen = ![request.URL.description containsString:self.url.description];
     [self viewWillLayoutSubviews];
