@@ -48,7 +48,7 @@
     [self registerUserAgent];
     self.webView.delegate = self;
     self.webView.dataDetectorTypes = UIDataDetectorTypeNone;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    if ([self isMemberOfClass:[WebViewController class]]) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
