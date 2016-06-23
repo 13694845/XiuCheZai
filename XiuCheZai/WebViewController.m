@@ -25,6 +25,8 @@
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
 
+@property (nonatomic) BOOL enableAutoUpdate;
+
 @end
 
 @implementation WebViewController
@@ -60,8 +62,29 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    
+    
+    if (self.enableAutoUpdate) [self autoUpdate];
+    
+    
+    
     // [self pickPlaceAroundService:nil];
 }
+
+
+
+- (void)autoUpdate {
+    NSLog(@"autoUpdate : %@", self.webView.request.URL);
+    
+    if ([self.webView.request.URL.description containsString:@"/m-center/my_car/index.html"]) {
+        
+        
+        
+    }
+    
+}
+
+
 
 - (void)registerUserAgent {
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
@@ -123,6 +146,16 @@
         self.backOffset++;
         return YES;
     }
+    
+    
+    
+    if ([request.URL.description containsString:@"/m-center/my_car/index.html"]) {
+        NSLog(@"/m-center/my_car/index.html");
+        self.enableAutoUpdate = YES;
+        return YES;
+    }
+    
+    
     
     return YES;
 }
