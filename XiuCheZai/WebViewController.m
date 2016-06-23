@@ -25,7 +25,7 @@
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
 
-@property (nonatomic) BOOL enableAutoUpdate;
+// @property (nonatomic) BOOL enableAutoUpdate;
 
 @end
 
@@ -39,6 +39,15 @@
     }
     return _manager;
 }
+
+/*
+- (void)setEnableAutoUpdate:(BOOL)enableAutoUpdate {
+    NSLog(@"setEnableAutoUpdate");
+    [self performSelector:@selector(autoUpdate) withObject:self afterDelay:3.0];
+    if (self.enableAutoUpdate) {
+    }
+}
+*/
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,30 +70,15 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    
-    
-    if (self.enableAutoUpdate) [self autoUpdate];
-    
-    
+//    if (self.enableAutoUpdate) [self performSelector:@selector(autoUpdate) withObject:self afterDelay:1.0];
     
     // [self pickPlaceAroundService:nil];
 }
 
-
-
 - (void)autoUpdate {
-    NSLog(@"autoUpdate : %@", self.webView.request.URL);
-    
-    if ([self.webView.request.URL.description containsString:@"/m-center/my_car/index.html"]) {
-        
-        
-        
-    }
-    
+    NSLog(@"autoUpdate ... : %@", self.webView.request.URL);
+    [self.webView reload];
 }
-
-
 
 - (void)registerUserAgent {
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
@@ -146,16 +140,12 @@
         self.backOffset++;
         return YES;
     }
-    
-    
-    
+    /*
     if ([request.URL.description containsString:@"/m-center/my_car/index.html"]) {
-        NSLog(@"/m-center/my_car/index.html");
         self.enableAutoUpdate = YES;
         return YES;
     }
-    
-    
+    */
     
     return YES;
 }
