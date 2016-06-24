@@ -110,7 +110,7 @@
     parameters = @{@"page_id":@"4", @"ad_id":@"1"};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *banners = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
-        if (self.banners.hash != banners.hash) {
+        if (![self.banners isEqualToArray:banners]) {
             self.banners = banners;
             [self.bannerView reloadData];
             [[NSUserDefaults standardUserDefaults] setObject:banners forKey:@"banners"];
@@ -132,7 +132,7 @@
                                   [reminderInfo objectForKey:@"remindtime"],
                                   [reminderInfo objectForKey:@"remindkilo"],
                                   [reminderInfo objectForKey:@"about"]];
-        if (self.reminderText.hash != reminderText.hash) {
+        if (![self.reminderText isEqualToString:reminderText]) {
             self.reminderText = reminderText;
             [self.reminderView reloadData];
         }
@@ -142,7 +142,7 @@
     parameters = @{@"site":@"2", @"code":@"1", @"position":@"1"};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *recommenders = [[responseObject objectForKey:@"data"] objectForKey:@"goods"];
-        if (self.recommenders.hash != recommenders.hash) {
+        if (![self.recommenders isEqualToArray:recommenders]) {
             self.recommenders = recommenders;
             [self.recommenderCollectionView reloadData];
         }
