@@ -250,14 +250,18 @@
     req.message = webpageMessage;
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"分享给朋友" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        req.scene = WXSceneSession;
-        [WXApi sendReq:req];
-    }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"分享到朋友圈" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        req.scene = WXSceneTimeline;
-        [WXApi sendReq:req];
-    }]];
+    if ([WXApi isWXAppInstalled]) {
+        [alertController addAction:[UIAlertAction actionWithTitle:@"分享给朋友" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            req.scene = WXSceneSession;
+            [WXApi sendReq:req];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"分享到朋友圈" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            req.scene = WXSceneTimeline;
+            [WXApi sendReq:req];
+        }]];
+    } else {
+        alertController.message = @"没有安装微信";
+    }
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
