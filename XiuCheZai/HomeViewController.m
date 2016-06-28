@@ -221,11 +221,6 @@
             menuViewController.view.frame = rect;
         }];
     }
-    /*
-    MenuViewController *menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-    menuViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:menuViewController animated:YES completion:nil];
-     */
 }
 
 - (IBAction)toScanner:(id)sender {
