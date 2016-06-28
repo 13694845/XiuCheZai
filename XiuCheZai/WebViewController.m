@@ -226,10 +226,21 @@
 }
 
 - (void)wxshare:(NSDictionary *)message {
+    CGFloat const kImageMaxWidth = 250.0;
+    CGFloat const kImageMaxHeight = 250.0;
+    
     WXMediaMessage *webpageMessage = [WXMediaMessage message];
     webpageMessage.title = [message objectForKey:@"title"];
     webpageMessage.description = [message objectForKey:@"description"];
-    [webpageMessage setThumbImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[message objectForKey:@"thumbImageUrl"]]]]];
+    
+    UIImage *thumbImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[message objectForKey:@"thumbImageUrl"]]]];
+    if (thumbImage.size.width > kImageMaxWidth) {
+        thumbImage = [self resizeImage:thumbImage toSize:CGSizeMake(kImageMaxWidth, thumbImage.size.height * (kImageMaxWidth / thumbImage.size.width))];
+    }
+    if (thumbImage.size.height > kImageMaxHeight) {
+        thumbImage = [self resizeImage:thumbImage toSize:CGSizeMake(thumbImage.size.width * (kImageMaxHeight / thumbImage.size.height), kImageMaxHeight)];
+    }
+    [webpageMessage setThumbImage:thumbImage];
     WXWebpageObject *webpageObject = [WXWebpageObject object];
     webpageObject.webpageUrl = [message objectForKey:@"webpageUrl"];
     webpageMessage.mediaObject = webpageObject;
@@ -239,7 +250,7 @@
     req.message = webpageMessage;
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"发送给朋友" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:@"分享给朋友" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         req.scene = WXSceneSession;
         [WXApi sendReq:req];
     }]];
@@ -247,12 +258,16 @@
         req.scene = WXSceneTimeline;
         [WXApi sendReq:req];
     }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"收藏" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        req.scene = WXSceneFavorite;
-        [WXApi sendReq:req];
-    }]];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resizedImage;
 }
 
 - (void)wxlogin {
