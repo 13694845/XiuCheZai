@@ -41,7 +41,6 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    // NSLog(@"tab.handleNavigationWithRequest : %@", request.URL);
     if ([request.URL.description isEqualToString:[Config baseURL]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/"]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"]]
@@ -70,13 +69,6 @@
         self.backOffset++;
         return YES;
     }
-    /*
-    if ([request.URL.description containsString:@"/m-center/logistics/index.html"]) {
-        if (!self.backButton) [self addBackButton];
-        self.backOffset++;
-        return YES;
-    }
-     */
     
     self.fullScreen = ![request.URL.description containsString:self.url.description];
     [self viewWillLayoutSubviews];
