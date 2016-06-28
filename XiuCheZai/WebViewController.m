@@ -25,8 +25,6 @@
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
 
-// @property (nonatomic) BOOL enableAutoUpdate;
-
 @end
 
 @implementation WebViewController
@@ -39,15 +37,6 @@
     }
     return _manager;
 }
-
-/*
-- (void)setEnableAutoUpdate:(BOOL)enableAutoUpdate {
-    NSLog(@"setEnableAutoUpdate");
-    [self performSelector:@selector(autoUpdate) withObject:self afterDelay:3.0];
-    if (self.enableAutoUpdate) {
-    }
-}
-*/
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,14 +59,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    if (self.enableAutoUpdate) [self performSelector:@selector(autoUpdate) withObject:self afterDelay:1.0];
-    
-    // [self pickPlaceAroundService:nil];
-}
-
-- (void)autoUpdate {
-    NSLog(@"autoUpdate ... : %@", self.webView.request.URL);
-    [self.webView reload];
 }
 
 - (void)registerUserAgent {
@@ -87,7 +68,6 @@
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    // NSLog(@"request.URL : %@", request.URL);
     if ([request.URL.description containsString:@"about:blank"]) {
         return NO;
     }
@@ -98,7 +78,6 @@
 }
 
 - (BOOL)handleCommandWithRequest:(NSURLRequest *)request {
-    // NSLog(@"handleCommandWithRequest : %@", request.URL);
     NSString *command = request.URL.host;
     NSDictionary *parameter;
     NSString *query = [request.URL.query stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -110,7 +89,6 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    // NSLog(@"web.handleNavigationWithRequest : %@", request.URL);
     if ([request.URL.description isEqualToString:[Config baseURL]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/"]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"]]
@@ -140,12 +118,6 @@
         self.backOffset++;
         return YES;
     }
-    /*
-    if ([request.URL.description containsString:@"/m-center/my_car/index.html"]) {
-        self.enableAutoUpdate = YES;
-        return YES;
-    }
-    */
     
     return YES;
 }
@@ -164,21 +136,6 @@
     if (error.code != -999) {
         [self.webView stopLoading];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[[NSBundle mainBundle] URLForResource:@"error" withExtension:@"html"]]];
-        /*
-        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
-        UIButton *backBarButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 12.0, 17.0, 17.0)];
-        [backBarButton setBackgroundImage:[UIImage imageNamed:@"common_back.png"] forState:UIControlStateNormal];
-        [backBarButton addTarget:self action:@selector(goHome) forControlEvents:UIControlEventTouchUpInside];
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBarButton];
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
-        self.navigationItem.title = @"网络连接失败";
-        [self.navigationController setNavigationBarHidden:NO animated:NO];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 120.0, 120.0)];
-        imageView.image = [UIImage imageNamed:@"common_error.png"];
-        imageView.center = self.view.center;
-        [self.view addSubview:imageView];
-        self.errorView = imageView;
-         */
     }
 }
 
@@ -266,6 +223,36 @@
     if ([[message objectForKey:@"scene"] isEqualToString:@"Favorite"]) req.scene = WXSceneFavorite;
     
     [WXApi sendReq:req];
+}
+
+- (void)wxshare:(NSDictionary *)message {
+    WXMediaMessage *webpageMessage = [WXMediaMessage message];
+    webpageMessage.title = [message objectForKey:@"title"];
+    webpageMessage.description = [message objectForKey:@"description"];
+    [webpageMessage setThumbImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[message objectForKey:@"thumbImageUrl"]]]]];
+    WXWebpageObject *webpageObject = [WXWebpageObject object];
+    webpageObject.webpageUrl = [message objectForKey:@"webpageUrl"];
+    webpageMessage.mediaObject = webpageObject;
+    
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = webpageMessage;
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"发送给朋友" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        req.scene = WXSceneSession;
+        [WXApi sendReq:req];
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"分享到朋友圈" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        req.scene = WXSceneTimeline;
+        [WXApi sendReq:req];
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"收藏" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        req.scene = WXSceneFavorite;
+        [WXApi sendReq:req];
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)wxlogin {
@@ -363,7 +350,6 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    // NSString *server = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/WebUploadServlet.action"];
     NSString *server = [NSString stringWithFormat:@"%@%@", [Config webBaseURL], @"/WebUploadServlet.action"];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -376,18 +362,14 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:^(NSProgress *uploadProgress) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            // NSLog(@"uploadProgress : %@", uploadProgress);
         });
     } completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         NSDictionary *responseInfo = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         if (![[responseInfo objectForKey:@"filepath"] length]) {
-            // [picker dismissViewControllerAnimated:YES completion:nil];
             [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"\")"]];
             return;
         }
-        // [picker dismissViewControllerAnimated:YES completion:nil];
         [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"%@\")", [responseInfo objectForKey:@"filepath"]]];
-        // NSLog(@"filepath : %@", [responseInfo objectForKey:@"filepath"]);
     }];
     [uploadTask resume];
 }
@@ -398,7 +380,6 @@
 }
 
 - (void)navigateToPlace:(NSDictionary *)place {
-    // NSLog(@"navigateToPlace : %@", place);
     if (![[[[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"] objectForKey:@"longitude"] doubleValue]) {
         NSString *message = @"请在iOS\"设置\"-\"隐私\"-\"定位服务\"中打开";
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"未获得授权使用定位" message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -437,7 +418,6 @@
 }
 
 - (void)launchBadiumap:(NSDictionary *)options {
-    // NSLog(@"options : %@", options);
     NSString *origin = [options objectForKey:@"origin"];
     if (!origin.length) {
         NSDictionary *locationInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
@@ -456,7 +436,6 @@
 }
 
 - (void)launchAmap:(NSDictionary *)options {
-    // NSLog(@"options : %@", options);
     NSString *slat = [options objectForKey:@"slat"];
     NSString *slon = [options objectForKey:@"slon"];
     NSString *sname = [options objectForKey:@"sname"];
@@ -474,7 +453,6 @@
 }
 
 - (void)launchIOSMap:(NSDictionary *)options {
-    // NSLog(@"options : %@", options);
     NSDictionary *locationInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
     CLLocationCoordinate2D originCoordinate = CLLocationCoordinate2DMake([[locationInfo objectForKey:@"latitude"] doubleValue],
                                                                          [[locationInfo objectForKey:@"longitude"] doubleValue]);

@@ -125,7 +125,6 @@
         [self.view removeFromSuperview];
         [self removeFromParentViewController];
     }];
-    // [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
