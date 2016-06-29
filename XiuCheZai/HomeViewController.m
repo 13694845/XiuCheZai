@@ -79,6 +79,8 @@
     self.reminderView.dataSource = self;
     self.recommenderCollectionView.dataSource = self;
     self.recommenderCollectionView.delegate = self;
+    
+    [self updateVersion];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -147,6 +149,41 @@
             [self.recommenderCollectionView reloadData];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+}
+
+- (void)updateVersion {
+    NSString *URLString = @"https://itunes.apple.com/lookup?id=1064830136";
+    NSDictionary *parameters = nil;
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if ([[responseObject objectForKey:@"results"] count]) {
+            NSString *latestVersion = [[[responseObject objectForKey:@"results"] objectAtIndex:0] objectForKey:@"version"];
+            NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            if ([self compareVersion:currentVersion withVersion:latestVersion] < 0) {
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"发现新版本" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"下次再说" style:UIAlertActionStyleDefault handler:nil];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"马上升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/xiu-che-zi/id1064830136?mt=8"]];
+                    return;
+                }];
+                [alertController addAction:cancelAction];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+}
+
+- (int)compareVersion:(NSString *)versionA withVersion:(NSString *)versionB {
+    if ([versionA isEqualToString:versionB]) return 0;
+    NSArray *versA = [versionA componentsSeparatedByString:@"."];
+    NSArray *versB = [versionB componentsSeparatedByString:@"."];
+    if (versA.count != 3 || versB.count != 3) return 404;
+    for (int i = 0; i < 3; i++) {
+        int a = [versA[i] intValue];
+        int b = [versB[i] intValue];
+        if (a != b) return a - b;
+    }
+    return 404;
 }
 
 - (void)viewWillLayoutSubviews {
