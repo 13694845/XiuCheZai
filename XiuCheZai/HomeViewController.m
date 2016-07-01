@@ -134,6 +134,17 @@
                                   [reminderInfo objectForKey:@"remindtime"],
                                   [reminderInfo objectForKey:@"remindkilo"],
                                   [reminderInfo objectForKey:@"about"]];
+        /*
+        NSString *reminderText = @"";
+        for (NSDictionary *reminderInfo in [responseObject objectForKey:@"data"]) {
+            NSString *text = [NSString stringWithFormat:@"%@在%@/%@km需要%@",
+                                      [reminderInfo objectForKey:@"car_no"],
+                                      [reminderInfo objectForKey:@"remindtime"],
+                                      [reminderInfo objectForKey:@"remindkilo"],
+                                      [reminderInfo objectForKey:@"about"]];
+            reminderText = [NSString stringWithFormat:@"%@\n%@", reminderText, text];
+        }
+        */
         if (![self.reminderText isEqualToString:reminderText]) {
             self.reminderText = reminderText;
             [self.reminderView reloadData];
