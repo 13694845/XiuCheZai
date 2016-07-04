@@ -143,6 +143,7 @@
 		6CB2AC861C1661710025260A /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB2AC841C1661710025260A /* libcrypto.a */; };
 		6CB2AC871C1661710025260A /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB2AC851C1661710025260A /* libssl.a */; };
 		6CB39AF61D29E5E3007CEAF8 /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB39AF51D29E5E3007CEAF8 /* BaiduMapAPI_Base.framework */; };
+		6CB39AF81D29E8E5007CEAF8 /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB39AF71D29E8E5007CEAF8 /* BaiduMapAPI_Map.framework */; };
 		6CCDA6EF1CA8CC510008EB40 /* banner05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6CCDA6EE1CA8CC510008EB40 /* banner05.jpg */; };
 		6CD2F9FB1C4629BC0033437D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2F9FA1C4629BC0033437D /* WebViewController.m */; };
 		6CD81E831D06B25E00A12F83 /* common_back_150.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CD81E821D06B25E00A12F83 /* common_back_150.png */; };
@@ -445,6 +446,7 @@
 		6CB2AC841C1661710025260A /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = XiuCheZai/libcrypto.a; sourceTree = "<group>"; };
 		6CB2AC851C1661710025260A /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = XiuCheZai/libssl.a; sourceTree = "<group>"; };
 		6CB39AF51D29E5E3007CEAF8 /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Base.framework; path = XiuCheZai/BaiduMapAPI_Base.framework; sourceTree = "<group>"; };
+		6CB39AF71D29E8E5007CEAF8 /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Map.framework; path = XiuCheZai/BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
 		6CCDA6EE1CA8CC510008EB40 /* banner05.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner05.jpg; sourceTree = "<group>"; };
 		6CD2F9F91C4629BC0033437D /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		6CD2F9FA1C4629BC0033437D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				6CB2AB131C12DE230025260A /* libz.tbd in Frameworks */,
 				6CB2AB111C12DDED0025260A /* SystemConfiguration.framework in Frameworks */,
 				6CB2AB0F1C12DDE10025260A /* CoreTelephony.framework in Frameworks */,
+				6CB39AF81D29E8E5007CEAF8 /* BaiduMapAPI_Map.framework in Frameworks */,
 				6CB2AB0D1C12DDD40025260A /* QuartzCore.framework in Frameworks */,
 				6CB2AC061C1659FB0025260A /* CoreText.framework in Frameworks */,
 				6CB2AB0B1C12DDC20025260A /* CoreGraphics.framework in Frameworks */,
@@ -886,6 +889,7 @@
 		6CB2AB901C157DB80025260A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6CB39AF71D29E8E5007CEAF8 /* BaiduMapAPI_Map.framework */,
 				6CB39AF51D29E5E3007CEAF8 /* BaiduMapAPI_Base.framework */,
 				6C59779D1C52FE3700547428 /* CoreLocation.framework */,
 				6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */,
