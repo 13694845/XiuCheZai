@@ -30,13 +30,11 @@
     [NSURLProtocol registerClass:[CachingURLProtocol class]];
     [WXApi registerApp:@"wx6f70675b8950f10e" withDescription:nil];
     
-    
     self.mapManager = [[BMKMapManager alloc] init];
-    BOOL ret = [_mapManager start:@"SGYQezd7y420cBN1Auj6KNlv" generalDelegate:nil];
+    BOOL ret = [self.mapManager start:@"SGYQezd7y420cBN1Auj6KNlv" generalDelegate:nil];
     if (!ret) {
         NSLog(@"manager start failed!");
     }
-    
     
     return YES;
 }
