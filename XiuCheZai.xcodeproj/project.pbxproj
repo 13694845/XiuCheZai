@@ -30,10 +30,6 @@
 		6C37A8D21D2C8C9F0063207D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C37A8D11D2C8C9F0063207D /* OpenGLES.framework */; };
 		6C37A8D41D2C8CA80063207D /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C37A8D31D2C8CA80063207D /* libstdc++.6.0.9.tbd */; };
 		6C37A8D61D2C8E2D0063207D /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6C37A8D51D2C8E2D0063207D /* mapapi.bundle */; };
-		6C37A8DE1D2C901B0063207D /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C37A8D91D2C901B0063207D /* location.png */; };
-		6C37A8DF1D2C901B0063207D /* qucheIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C37A8DA1D2C901B0063207D /* qucheIcon.png */; };
-		6C37A8E01D2C901B0063207D /* storeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C37A8DB1D2C901B0063207D /* storeIcon.png */; };
-		6C37A8E11D2C901B0063207D /* PlacePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C37A8DD1D2C901B0063207D /* PlacePickerViewController.m */; };
 		6C3E4E081C96664300268B81 /* home_floatcar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3E4E071C96664300268B81 /* home_floatcar.png */; };
 		6C48C9C41CD9ECC70015515D /* URLEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C48C9C31CD9ECC70015515D /* URLEncoder.m */; };
 		6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4C67611C4A299300DF8D31 /* AccessoryViewController.m */; };
@@ -208,11 +204,6 @@
 		6C37A8D11D2C8C9F0063207D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		6C37A8D31D2C8CA80063207D /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		6C37A8D51D2C8E2D0063207D /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = XiuCheZai/BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
-		6C37A8D91D2C901B0063207D /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
-		6C37A8DA1D2C901B0063207D /* qucheIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qucheIcon.png; sourceTree = "<group>"; };
-		6C37A8DB1D2C901B0063207D /* storeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = storeIcon.png; sourceTree = "<group>"; };
-		6C37A8DC1D2C901B0063207D /* PlacePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacePickerViewController.h; sourceTree = "<group>"; };
-		6C37A8DD1D2C901B0063207D /* PlacePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacePickerViewController.m; sourceTree = "<group>"; };
 		6C3E4E071C96664300268B81 /* home_floatcar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_floatcar.png; sourceTree = "<group>"; };
 		6C48C9C21CD9ECC70015515D /* URLEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLEncoder.h; sourceTree = "<group>"; };
 		6C48C9C31CD9ECC70015515D /* URLEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLEncoder.m; sourceTree = "<group>"; };
@@ -536,26 +527,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6C37A8D71D2C901B0063207D /* PlacePick */ = {
-			isa = PBXGroup;
-			children = (
-				6C37A8D81D2C901B0063207D /* icon */,
-				6C37A8DC1D2C901B0063207D /* PlacePickerViewController.h */,
-				6C37A8DD1D2C901B0063207D /* PlacePickerViewController.m */,
-			);
-			path = PlacePick;
-			sourceTree = "<group>";
-		};
-		6C37A8D81D2C901B0063207D /* icon */ = {
-			isa = PBXGroup;
-			children = (
-				6C37A8D91D2C901B0063207D /* location.png */,
-				6C37A8DA1D2C901B0063207D /* qucheIcon.png */,
-				6C37A8DB1D2C901B0063207D /* storeIcon.png */,
-			);
-			path = icon;
-			sourceTree = "<group>";
-		};
 		6C4D0C1B1C28E998003E96E8 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -870,7 +841,6 @@
 		6CABF7091C0E978B00DF3EFF /* XiuCheZai */ = {
 			isa = PBXGroup;
 			children = (
-				6C37A8D71D2C901B0063207D /* PlacePick */,
 				6C91C3441C9A84D2004C0CB4 /* Util */,
 				6C91C2F81C9A84C6004C0CB4 /* openssl */,
 				6CF1DAC51C51B1ED0077B468 /* Banner */,
@@ -1066,7 +1036,6 @@
 				6C1365CC1C25022C00B217DD /* home_activity04.png in Resources */,
 				6C5C5F001C86DA66008CDD3C /* home_icon12.png in Resources */,
 				6C53DD141CA1275700168230 /* common_blank.png in Resources */,
-				6C37A8DF1D2C901B0063207D /* qucheIcon.png in Resources */,
 				6C7CE9181CD89ACF00617964 /* home_searcher.png in Resources */,
 				6C5C5F011C86DA66008CDD3C /* home_icon13.png in Resources */,
 				6C1365BD1C24F6C300B217DD /* home_icon05.png in Resources */,
@@ -1092,7 +1061,6 @@
 				6C37A8D61D2C8E2D0063207D /* mapapi.bundle in Resources */,
 				6CABF7171C0E978B00DF3EFF /* Assets.xcassets in Resources */,
 				6CE400671C322B7C007F6D03 /* menu_icon18.jpg in Resources */,
-				6C37A8E01D2C901B0063207D /* storeIcon.png in Resources */,
 				6CE4003E1C322077007F6D03 /* menu_back.png in Resources */,
 				6C91C2C81C9A331D004C0CB4 /* tab_icon21@2x.png in Resources */,
 				6C4F64601C3A43C600A526C4 /* home_mycar.png in Resources */,
@@ -1132,7 +1100,6 @@
 				6CF784411C477397004C9CA1 /* home_icon09.png in Resources */,
 				6C1365C01C24F6C300B217DD /* home_icon08.png in Resources */,
 				6C91C2CA1C9A3324004C0CB4 /* tab_icon41@2x.png in Resources */,
-				6C37A8DE1D2C901B0063207D /* location.png in Resources */,
 				6CE400421C32276C007F6D03 /* menu_xcz.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1200,7 +1167,6 @@
 				6C1608841C93E4CD00A9E16F /* TabViewController.m in Sources */,
 				6C4D0C3E1C28E998003E96E8 /* NSData+ImageContentType.m in Sources */,
 				6CD2F9FB1C4629BC0033437D /* WebViewController.m in Sources */,
-				6C37A8E11D2C901B0063207D /* PlacePickerViewController.m in Sources */,
 				6C4C67651C4A29BF00DF8D31 /* CartViewController.m in Sources */,
 				6C9D851A1C9B8B3C008BD470 /* RSADataEncryptor.m in Sources */,
 				6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */,
