@@ -9,6 +9,13 @@
 #import "LoginViewController.h"
 #import "RSADataEncryptor.h"
 
+
+
+#import <BaiduMapAPI_Base/BMKBaseComponent.h>
+#import <BaiduMapAPI_Map/BMKMapComponent.h>
+
+
+
 @interface LoginViewController ()
 
 @end
@@ -21,6 +28,9 @@
     RSADataEncryptor *encryptor = [[RSADataEncryptor alloc] initWithPublicKey:publicKey];
     NSString * encryptedString = [encryptor encryptString:@"password"];
     NSLog(@"encryptedString : %@", encryptedString);
+    
+    BMKMapView* mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)];
+    self.view = mapView;
 }
 
 - (void)didReceiveMemoryWarning {

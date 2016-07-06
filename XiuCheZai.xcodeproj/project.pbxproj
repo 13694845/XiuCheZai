@@ -27,6 +27,7 @@
 		6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */; };
 		6C24460E1C9FD69300F4F3C0 /* banner04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C24460D1C9FD69300F4F3C0 /* banner04.jpg */; };
 		6C25D6091D17BBD0007D8BE4 /* error.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C25D6081D17BBD0007D8BE4 /* error.html */; };
+		6C37A8CA1D2C89CC0063207D /* Hello.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C37A8C91D2C89CC0063207D /* Hello.mm */; };
 		6C3E4E081C96664300268B81 /* home_floatcar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3E4E071C96664300268B81 /* home_floatcar.png */; };
 		6C48C9C41CD9ECC70015515D /* URLEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C48C9C31CD9ECC70015515D /* URLEncoder.m */; };
 		6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4C67611C4A299300DF8D31 /* AccessoryViewController.m */; };
@@ -198,6 +199,8 @@
 		6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
 		6C24460D1C9FD69300F4F3C0 /* banner04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner04.jpg; sourceTree = "<group>"; };
 		6C25D6081D17BBD0007D8BE4 /* error.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = error.html; sourceTree = "<group>"; };
+		6C37A8C81D2C89CC0063207D /* Hello.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hello.h; sourceTree = "<group>"; };
+		6C37A8C91D2C89CC0063207D /* Hello.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Hello.mm; sourceTree = "<group>"; };
 		6C3E4E071C96664300268B81 /* home_floatcar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_floatcar.png; sourceTree = "<group>"; };
 		6C48C9C21CD9ECC70015515D /* URLEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLEncoder.h; sourceTree = "<group>"; };
 		6C48C9C31CD9ECC70015515D /* URLEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLEncoder.m; sourceTree = "<group>"; };
@@ -882,6 +885,8 @@
 				6CABF7181C0E978B00DF3EFF /* LaunchScreen.storyboard */,
 				6CABF71B1C0E978B00DF3EFF /* Info.plist */,
 				6CABF70A1C0E978B00DF3EFF /* Supporting Files */,
+				6C37A8C81D2C89CC0063207D /* Hello.h */,
+				6C37A8C91D2C89CC0063207D /* Hello.mm */,
 			);
 			path = XiuCheZai;
 			sourceTree = "<group>";
@@ -1121,6 +1126,7 @@
 				6C8B108C1CC85A73003CF8F5 /* CachingURLProtocol.m in Sources */,
 				6C4D0C481C28E998003E96E8 /* UIImage+MultiFormat.m in Sources */,
 				6C4D0C4A1C28E998003E96E8 /* UIImageView+HighlightedWebCache.m in Sources */,
+				6C37A8CA1D2C89CC0063207D /* Hello.mm in Sources */,
 				6C8EC2741C1E548000BCABB5 /* UIImageView+AFNetworking.m in Sources */,
 				6C4D0C471C28E998003E96E8 /* UIImage+GIF.m in Sources */,
 				6C4D0C401C28E998003E96E8 /* SDWebImageCompat.m in Sources */,
