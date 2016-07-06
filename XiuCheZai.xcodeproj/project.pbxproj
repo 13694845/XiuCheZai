@@ -27,7 +27,9 @@
 		6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */; };
 		6C24460E1C9FD69300F4F3C0 /* banner04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C24460D1C9FD69300F4F3C0 /* banner04.jpg */; };
 		6C25D6091D17BBD0007D8BE4 /* error.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C25D6081D17BBD0007D8BE4 /* error.html */; };
-		6C37A8CA1D2C89CC0063207D /* Hello.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C37A8C91D2C89CC0063207D /* Hello.mm */; };
+		6C37A8D21D2C8C9F0063207D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C37A8D11D2C8C9F0063207D /* OpenGLES.framework */; };
+		6C37A8D41D2C8CA80063207D /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C37A8D31D2C8CA80063207D /* libstdc++.6.0.9.tbd */; };
+		6C37A8D61D2C8E2D0063207D /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6C37A8D51D2C8E2D0063207D /* mapapi.bundle */; };
 		6C3E4E081C96664300268B81 /* home_floatcar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3E4E071C96664300268B81 /* home_floatcar.png */; };
 		6C48C9C41CD9ECC70015515D /* URLEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C48C9C31CD9ECC70015515D /* URLEncoder.m */; };
 		6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4C67611C4A299300DF8D31 /* AccessoryViewController.m */; };
@@ -199,8 +201,9 @@
 		6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
 		6C24460D1C9FD69300F4F3C0 /* banner04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner04.jpg; sourceTree = "<group>"; };
 		6C25D6081D17BBD0007D8BE4 /* error.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = error.html; sourceTree = "<group>"; };
-		6C37A8C81D2C89CC0063207D /* Hello.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hello.h; sourceTree = "<group>"; };
-		6C37A8C91D2C89CC0063207D /* Hello.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Hello.mm; sourceTree = "<group>"; };
+		6C37A8D11D2C8C9F0063207D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		6C37A8D31D2C8CA80063207D /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		6C37A8D51D2C8E2D0063207D /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = XiuCheZai/BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
 		6C3E4E071C96664300268B81 /* home_floatcar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_floatcar.png; sourceTree = "<group>"; };
 		6C48C9C21CD9ECC70015515D /* URLEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLEncoder.h; sourceTree = "<group>"; };
 		6C48C9C31CD9ECC70015515D /* URLEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLEncoder.m; sourceTree = "<group>"; };
@@ -492,6 +495,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C37A8D41D2C8CA80063207D /* libstdc++.6.0.9.tbd in Frameworks */,
+				6C37A8D21D2C8C9F0063207D /* OpenGLES.framework in Frameworks */,
 				6C8F05F81C17FC4E00D7EFD5 /* libsqlite3.0.tbd in Frameworks */,
 				6CB2AC861C1661710025260A /* libcrypto.a in Frameworks */,
 				6C19A97C1C1E406C002451F6 /* libWeChatSDK.a in Frameworks */,
@@ -885,8 +890,6 @@
 				6CABF7181C0E978B00DF3EFF /* LaunchScreen.storyboard */,
 				6CABF71B1C0E978B00DF3EFF /* Info.plist */,
 				6CABF70A1C0E978B00DF3EFF /* Supporting Files */,
-				6C37A8C81D2C89CC0063207D /* Hello.h */,
-				6C37A8C91D2C89CC0063207D /* Hello.mm */,
 			);
 			path = XiuCheZai;
 			sourceTree = "<group>";
@@ -909,6 +912,9 @@
 		6CB2AB901C157DB80025260A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C37A8D51D2C8E2D0063207D /* mapapi.bundle */,
+				6C37A8D31D2C8CA80063207D /* libstdc++.6.0.9.tbd */,
+				6C37A8D11D2C8C9F0063207D /* OpenGLES.framework */,
 				6CB39B071D29E951007CEAF8 /* BaiduMapAPI_Base.framework */,
 				6CB39B081D29E951007CEAF8 /* BaiduMapAPI_Cloud.framework */,
 				6CB39B091D29E951007CEAF8 /* BaiduMapAPI_Location.framework */,
@@ -1052,6 +1058,7 @@
 				6C91C2C61C9A315B004C0CB4 /* tab_icon11@2x.png in Resources */,
 				6C1365CA1C25022C00B217DD /* home_activity02.png in Resources */,
 				6C8B104E1CC4D087003CF8F5 /* menu_icon01.jpg in Resources */,
+				6C37A8D61D2C8E2D0063207D /* mapapi.bundle in Resources */,
 				6CABF7171C0E978B00DF3EFF /* Assets.xcassets in Resources */,
 				6CE400671C322B7C007F6D03 /* menu_icon18.jpg in Resources */,
 				6CE4003E1C322077007F6D03 /* menu_back.png in Resources */,
@@ -1126,7 +1133,6 @@
 				6C8B108C1CC85A73003CF8F5 /* CachingURLProtocol.m in Sources */,
 				6C4D0C481C28E998003E96E8 /* UIImage+MultiFormat.m in Sources */,
 				6C4D0C4A1C28E998003E96E8 /* UIImageView+HighlightedWebCache.m in Sources */,
-				6C37A8CA1D2C89CC0063207D /* Hello.mm in Sources */,
 				6C8EC2741C1E548000BCABB5 /* UIImageView+AFNetworking.m in Sources */,
 				6C4D0C471C28E998003E96E8 /* UIImage+GIF.m in Sources */,
 				6C4D0C401C28E998003E96E8 /* SDWebImageCompat.m in Sources */,

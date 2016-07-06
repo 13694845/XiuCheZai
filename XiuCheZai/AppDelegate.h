@@ -8,18 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "WXApi.h"
-
-
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>
-
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (weak, nonatomic) id <WXApiDelegate> wxApiDelegate;
-
-
 @property (strong, nonatomic) BMKMapManager *mapManager;
-
 
 @end
