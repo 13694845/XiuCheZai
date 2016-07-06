@@ -14,6 +14,7 @@
 @property (nonatomic) NSTimer *timer;
 
 @property (copy, nonatomic) NSString *text;
+@property (nonatomic) CGFloat contentHeight;
 
 @end
 
@@ -37,6 +38,8 @@
 
 - (void)startAutoPlay {
     self.textView.text = self.text;
+    self.contentHeight = self.textView.contentSize.height;
+    self.textView.text = [NSString stringWithFormat:@"%@\n%@", self.text, self.text];
     if (!self.timer.valid) self.timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(autoPlay) userInfo:nil repeats:YES];
 }
 
@@ -45,20 +48,12 @@
 }
 
 - (void)autoPlay {
-    CGFloat const kRowHeight = 15.0;
+    CGFloat const kRowHeight = 15.5;
     
-    if (self.textView.contentOffset.y + kRowHeight * 2 > self.textView.contentSize.height) {
-        self.textView.text = [NSString stringWithFormat:@"%@\n%@", self.text, self.text];
-        [UIView animateWithDuration:0.5 animations:^{
-            self.textView.contentOffset = CGPointMake(0, self.textView.contentOffset.y + kRowHeight);
-        } completion:^(BOOL finished) {
-            self.textView.text = self.text;
-            self.textView.contentOffset = CGPointZero;
-        }];
-        return;
-    }
     [UIView animateWithDuration:0.5 animations:^{
         self.textView.contentOffset = CGPointMake(0, self.textView.contentOffset.y + kRowHeight);
+    } completion:^(BOOL finished) {
+        if (self.textView.contentOffset.y + kRowHeight > self.contentHeight) self.textView.contentOffset = CGPointZero;
     }];
 }
 
