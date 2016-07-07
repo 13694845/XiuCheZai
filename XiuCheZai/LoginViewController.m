@@ -24,7 +24,7 @@
     NSString * encryptedString = [encryptor encryptString:@"password"];
     NSLog(@"encryptedString : %@", encryptedString);
     
-    BMKMapView* mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, 320, 480)];
+    BMKMapView *mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 480.0)];
     self.view = mapView;
 }
 
