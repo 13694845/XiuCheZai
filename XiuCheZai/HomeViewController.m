@@ -297,7 +297,7 @@
 }
 
 - (IBAction)toSearch:(id)sender {
-    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/search/index.html"]];
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/search/index.html"] animated:NO];
 }
 
 - (void)launchWebViewWithURLString:(NSString *)urlString {
@@ -305,6 +305,13 @@
     webViewController.url = [NSURL URLWithString:urlString];
     webViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webViewController animated:YES];
+}
+
+- (void)launchWebViewWithURLString:(NSString *)urlString animated:(BOOL)animated {
+    WebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WebViewController"];
+    webViewController.url = [NSURL URLWithString:urlString];
+    webViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webViewController animated:animated];
 }
 
 - (void)toMyCar:(id)sender {
