@@ -89,7 +89,17 @@
     self.tabBarController.tabBar.hidden = NO;
     
     [self loadData];
+    
+    [self addMyCar];
 }
+
+
+
+- (void)addMyCar {
+    NSLog(@"addCar");
+}
+
+
 
 - (void)loadData {
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];

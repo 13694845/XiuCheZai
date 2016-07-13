@@ -122,6 +122,10 @@
         sleep(1.0);
         return YES;
     }
+    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
+        [self addMyCar];
+        return NO;
+    }
     
     return YES;
 }
@@ -511,6 +515,10 @@
         NSLog(@"parameters : %@", parameters);
         NSLog(@"responseObject : %@", responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+}
+
+- (void)addMyCar {
+    NSLog(@"addCar");
 }
 
 - (void)didReceiveMemoryWarning {
