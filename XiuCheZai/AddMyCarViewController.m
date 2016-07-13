@@ -41,30 +41,9 @@
 }
 
 - (void)scan {
-    NSLog(@"scan");
-    /*
-    UIImagePickerController *imagePickController = [[UIImagePickerController alloc] init];
-    imagePickController.delegate = self;
-    imagePickController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePickController.showsCameraControls = NO;
-    imagePickController.edgesForExtendedLayout = UIRectEdgeNone;
-    CGAffineTransform t = CGAffineTransformMakeScale(1.0, 1.0);
-    imagePickController.cameraViewTransform = CGAffineTransformTranslate(t, 0, [UIScreen mainScreen].bounds.size.height * 0.125);
-    self.imagePickController = imagePickController;
-    //添加自定义信息层
-    self.scanView = [[ScanView alloc] init];
-    self.scanView.frame = self.view.bounds;
-    self.scanView.backgroundColor = [UIColor clearColor];//设定透明背景色
-    imagePickController.cameraOverlayView = self.scanView;
-    [self presentViewController:imagePickController animated:YES completion:nil];
-    [self.scanView.scanOverBtn addTarget:self action:@selector(scanOverBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
-     */
-    
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
     imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    // imagePickerController.showsCameraControls = NO;
-    
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
