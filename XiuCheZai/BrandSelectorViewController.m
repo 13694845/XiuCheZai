@@ -77,6 +77,7 @@
     BrandSelectorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     NSString *imageURLString = [NSString stringWithFormat:@"%@/%@", [Config imgBaseURL], [self.brands[indexPath.row] objectForKey:@"brand_logo"]];
     [cell.brandLogoImageView sd_setImageWithURL:[NSURL URLWithString:imageURLString]];
+    cell.brandNameLabel.text = [self.brands[indexPath.row] objectForKey:@"brand_name"];
     return cell;
 }
 
