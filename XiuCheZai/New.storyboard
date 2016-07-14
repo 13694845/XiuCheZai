@@ -397,7 +397,6 @@
                                         <connections>
                                             <outlet property="brandLogoImageView" destination="0Qh-kH-2i4" id="pQV-Q1-eya"/>
                                             <outlet property="brandNameLabel" destination="Qdt-KG-RTl" id="ns9-Ho-DvH"/>
-                                            <segue destination="5MT-Ti-VDh" kind="show" id="RqI-H9-7qU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -470,9 +469,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="brandNameLabel" destination="jAz-jV-Fxq" id="YTq-R4-ObD"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -485,6 +481,7 @@
                             <constraint firstItem="Xjr-8Z-EsM" firstAttribute="leading" secondItem="dkQ-jm-tZl" secondAttribute="leading" id="nxc-Ht-N2k"/>
                         </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="Xjr-8Z-EsM" id="Puu-d4-BDA"/>

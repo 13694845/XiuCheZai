@@ -88,20 +88,19 @@
     
     if (!self.childViewControllers.count) {
         SeriesSelectorViewController *seriesSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SeriesSelectorViewController"];
+        [self addChildViewController:seriesSelectorViewController];
+        seriesSelectorViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
         
-        /*
-        [self addChildViewController:menuViewController];
-        menuViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
-        CGRect rect = menuViewController.view.frame;
+        
+        CGRect rect = seriesSelectorViewController.view.frame;
         rect.origin.x -= rect.size.width;
         rect.size.height = [UIScreen mainScreen].bounds.size.height - self.tabBarController.tabBar.bounds.size.height;
-        menuViewController.view.frame = rect;
-        [self.view addSubview:menuViewController.view];
+        seriesSelectorViewController.view.frame = rect;
+        [self.view addSubview:seriesSelectorViewController.view];
         rect.origin.x = 0;
         [UIView animateWithDuration:0.3 animations:^{
-            menuViewController.view.frame = rect;
+            seriesSelectorViewController.view.frame = rect;
         }];
-         */
     }
 }
 
