@@ -10,7 +10,7 @@
 
 @interface SeriesSelectorViewController : UIViewController
 
-@property (assign, nonatomic) BOOL hidden;
+// @property (assign, nonatomic) BOOL hidden;
 @property (copy, nonatomic) NSString *brandId;
 
 @end

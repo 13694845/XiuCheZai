@@ -19,7 +19,8 @@
 @property (strong, nonatomic) NSMutableArray *brands;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) SeriesSelectorViewController *seriesSelectorViewController;
+
+
 
 @end
 
@@ -37,11 +38,6 @@
 - (NSMutableArray *)brands {
     if (!_brands) _brands = [NSMutableArray array];
     return _brands;
-}
-
-- (SeriesSelectorViewController *)seriesSelectorViewController {
-    if (!_seriesSelectorViewController) _seriesSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SeriesSelectorViewController"];
-    return _seriesSelectorViewController;
 }
 
 - (void)viewDidLoad {
@@ -92,27 +88,39 @@
     NSDictionary *brand = self.brands[indexPath.row];
     NSLog(@"brand : %@", brand);
     
-    self.seriesSelectorViewController.hidden = NO;
-    self.seriesSelectorViewController.brandId = brand[@"brand_id"];
+    SeriesSelectorViewController *seriesSelectorViewController = self.childViewControllers.firstObject;
+    if (!seriesSelectorViewController) {
+        
+        
+        [self showSeriesSelectorView];
+    }
+    
+    
+    
+    // self.childViewControllers.firstObject
+    
+//    [self showSeriesSelectorView];
+    
+    // seriesSelectorViewController.brandId = brand[@"brand_id"];
+
+//    self.seriesSelectorViewController.hidden = NO;
 }
 
 - (void)showSeriesSelectorView {
-    
-    // SeriesSelectorViewController *seriesSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SeriesSelectorViewController"];
-    self.seriesSelectorViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
-    [self addChildViewController:self.seriesSelectorViewController];
-    
-    CGRect rect = self.seriesSelectorViewController.view.frame;
+    SeriesSelectorViewController *seriesSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SeriesSelectorViewController"];
+    seriesSelectorViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
+    [self addChildViewController:seriesSelectorViewController];
+
+    CGRect rect = seriesSelectorViewController.view.frame;
     rect.origin.x += rect.size.width;
     rect.size.height = [UIScreen mainScreen].bounds.size.height - self.tabBarController.tabBar.bounds.size.height;
-    self.seriesSelectorViewController.view.frame = rect;
+    seriesSelectorViewController.view.frame = rect;
     
-    [self.view addSubview:self.seriesSelectorViewController.view];
+    [self.view addSubview:seriesSelectorViewController.view];
     rect.origin.x = 100;
     [UIView animateWithDuration:0.3 animations:^{
-        self.seriesSelectorViewController.view.frame = rect;
+        seriesSelectorViewController.view.frame = rect;
     }];
-
 }
 
 - (void)didReceiveMemoryWarning {

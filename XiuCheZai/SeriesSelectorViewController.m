@@ -21,6 +21,11 @@
 
 @implementation SeriesSelectorViewController
 
+
+- (void)setHidden:(BOOL)hidden {
+//    NSLog(@"nav height : %f", self.navigationController.navigationBar.bounds.size.height);
+}
+
 - (AFHTTPSessionManager *)manager {
     if (!_manager) {
         _manager = [AFHTTPSessionManager manager];
@@ -41,7 +46,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    [self loadData];
+    if (self.brandId) [self loadData];
 }
 
 - (void)loadData {
