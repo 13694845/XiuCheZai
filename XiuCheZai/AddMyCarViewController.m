@@ -86,8 +86,11 @@
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"responseObject : %@", responseObject);
         [self.hud hide:YES];
+        self.hud.progress = 0;
         [self fillOutFormWithVehicleLicense:responseObject[@"result"]];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self.hud hide:YES];
+        self.hud.progress = 0;
     }];
 }
 
