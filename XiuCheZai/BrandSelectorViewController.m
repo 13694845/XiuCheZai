@@ -39,6 +39,11 @@
     return _brands;
 }
 
+- (SeriesSelectorViewController *)seriesSelectorViewController {
+    if (!_seriesSelectorViewController) _seriesSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SeriesSelectorViewController"];
+    return _seriesSelectorViewController;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -88,20 +93,20 @@
     NSLog(@"brand : %@", brand);
     
     if (!self.childViewControllers.count) {
-        SeriesSelectorViewController *seriesSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SeriesSelectorViewController"];
-        seriesSelectorViewController.brandId = brand[@"brand_id"];
-        seriesSelectorViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
-        [self addChildViewController:seriesSelectorViewController];
+        // SeriesSelectorViewController *seriesSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SeriesSelectorViewController"];
+        self.seriesSelectorViewController.brandId = brand[@"brand_id"];
+        self.seriesSelectorViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
+        [self addChildViewController:self.seriesSelectorViewController];
         
-        CGRect rect = seriesSelectorViewController.view.frame;
+        CGRect rect = self.seriesSelectorViewController.view.frame;
         rect.origin.x += rect.size.width;
         rect.size.height = [UIScreen mainScreen].bounds.size.height - self.tabBarController.tabBar.bounds.size.height;
-        seriesSelectorViewController.view.frame = rect;
+        self.seriesSelectorViewController.view.frame = rect;
         
-        [self.view addSubview:seriesSelectorViewController.view];
+        [self.view addSubview:self.seriesSelectorViewController.view];
         rect.origin.x = 100;
         [UIView animateWithDuration:0.3 animations:^{
-            seriesSelectorViewController.view.frame = rect;
+            self.seriesSelectorViewController.view.frame = rect;
         }];
     }
 }
