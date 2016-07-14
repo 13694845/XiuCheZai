@@ -54,6 +54,7 @@
                                         <state key="normal" title="&gt;"/>
                                         <connections>
                                             <action selector="selectBrandModel:" destination="cR1-p9-qE7" eventType="touchUpInside" id="aLh-R9-4OA"/>
+                                            <segue destination="MeL-pS-oGz" kind="show" id="vPb-5x-mrl"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -357,6 +358,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nx2-Sf-utC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1092.5" y="793.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="T2M-xf-Hfy">
+            <objects>
+                <viewController id="MeL-pS-oGz" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ed9-I8-rIs"/>
+                        <viewControllerLayoutGuide type="bottom" id="5EH-xf-wT2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YvD-9k-i2W">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bo1-TY-ckX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1538.5" y="793.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HKq-3C-ApW">
