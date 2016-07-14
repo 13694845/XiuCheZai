@@ -80,13 +80,17 @@
         });
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"responseObject : %@", responseObject);
-        [self fillOutFormWithVehicleLicense:responseObject];
+        [self fillOutFormWithVehicleLicense:responseObject[@"result"]];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
     }];
 }
 
 - (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo {
-    
+    self.ownerTextField.text = vehicleLicenseInfo[@"所有人"];
+    self.plateNoTextField.text = vehicleLicenseInfo[@"号牌号码"];
+    self.registerDateTextField.text = vehicleLicenseInfo[@"注册日期"];
+    self.vinTextField.text = vehicleLicenseInfo[@"车辆识别代号"];
+    self.engineNoTextField.text = vehicleLicenseInfo[@"发动机号码"];
 }
 
 - (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
