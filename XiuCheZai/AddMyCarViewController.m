@@ -7,6 +7,8 @@
 //
 
 #import "AddMyCarViewController.h"
+#import "Config.h"
+#import "AFNetworking.h"
 
 @interface AddMyCarViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -48,7 +50,31 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    // UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
+    NSString *server = [NSString stringWithFormat:@"%@%@", [Config webBaseURL], @"/Action/CertificatesAction.do?type=2&img_type=6"];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    NSData *data = UIImageJPEGRepresentation([info objectForKey:UIImagePickerControllerOriginalImage], 0.5);
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:server parameters:nil
+                                                                              constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                                                                                  [formData appendPartWithFileData:data name:@"file" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
+                                                                              } error:nil];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:^(NSProgress *uploadProgress) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+        });
+    } completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        NSDictionary *responseInfo = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"responseInfo : %@", responseInfo[@"msg"]);
+        /*
+        if (![[responseInfo objectForKey:@"filepath"] length]) {
+            [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"\")"]];
+            return;
+        }
+        [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"%@\")", [responseInfo objectForKey:@"filepath"]]];
+         */
+    }];
+    [uploadTask resume];
 }
 
 @end
