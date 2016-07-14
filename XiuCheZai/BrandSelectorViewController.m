@@ -91,13 +91,13 @@
         [self addChildViewController:seriesSelectorViewController];
         seriesSelectorViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
         
-        
         CGRect rect = seriesSelectorViewController.view.frame;
-        rect.origin.x -= rect.size.width;
+        rect.origin.x += rect.size.width;
         rect.size.height = [UIScreen mainScreen].bounds.size.height - self.tabBarController.tabBar.bounds.size.height;
         seriesSelectorViewController.view.frame = rect;
+        
         [self.view addSubview:seriesSelectorViewController.view];
-        rect.origin.x = 0;
+        rect.origin.x = 100;
         [UIView animateWithDuration:0.3 animations:^{
             seriesSelectorViewController.view.frame = rect;
         }];
