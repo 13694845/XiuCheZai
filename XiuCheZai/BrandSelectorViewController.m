@@ -88,8 +88,9 @@
     
     if (!self.childViewControllers.count) {
         SeriesSelectorViewController *seriesSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SeriesSelectorViewController"];
-        [self addChildViewController:seriesSelectorViewController];
+        seriesSelectorViewController.brandId = brand[@"brand_id"];
         seriesSelectorViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
+        [self addChildViewController:seriesSelectorViewController];
         
         CGRect rect = seriesSelectorViewController.view.frame;
         rect.origin.x += rect.size.width;

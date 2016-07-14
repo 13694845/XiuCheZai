@@ -10,4 +10,6 @@
 
 @interface SeriesSelectorViewController : UIViewController
 
+@property (copy, nonatomic) NSString *brandId;
+
 @end

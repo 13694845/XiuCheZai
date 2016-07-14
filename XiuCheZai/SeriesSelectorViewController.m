@@ -7,8 +7,13 @@
 //
 
 #import "SeriesSelectorViewController.h"
+#import "Config.h"
+#import "AFNetworking.h"
 
 @interface SeriesSelectorViewController ()
+
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
+@property (strong, nonatomic) NSMutableArray *series;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
