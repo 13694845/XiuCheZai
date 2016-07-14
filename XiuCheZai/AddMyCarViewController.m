@@ -107,8 +107,4 @@
     return resizedImage;
 }
 
-- (IBAction)selectBrandModel:(id)sender {
-    
-}
-
 @end
