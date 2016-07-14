@@ -439,10 +439,10 @@
             </objects>
             <point key="canvasLocation" x="645.5" y="793.5"/>
         </scene>
-        <!--Brand Selector View Controller-->
+        <!--Series Selector View Controller-->
         <scene sceneID="01T-ZN-sRo">
             <objects>
-                <viewController id="5MT-Ti-VDh" customClass="BrandSelectorViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SeriesSelectorViewController" id="5MT-Ti-VDh" customClass="SeriesSelectorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Th0-CI-djK"/>
                         <viewControllerLayoutGuide type="bottom" id="Q24-K6-LW0"/>
