@@ -53,7 +53,6 @@
 		6C4D0C4C1C28E998003E96E8 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D0C3C1C28E998003E96E8 /* UIView+WebCacheOperation.m */; };
 		6C4E41901D360C0A001EE8DF /* New.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4E418F1D360C0A001EE8DF /* New.storyboard */; };
 		6C4E41931D360E37001EE8DF /* AddMyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E41921D360E37001EE8DF /* AddMyCarViewController.m */; };
-		6C4E41961D371012001EE8DF /* VehicleLicenseRecognizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E41951D371012001EE8DF /* VehicleLicenseRecognizerView.m */; };
 		6C4F645D1C3A3F5200A526C4 /* menu_coord.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C4F645C1C3A3F5200A526C4 /* menu_coord.jpg */; };
 		6C4F64601C3A43C600A526C4 /* home_mycar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4F645E1C3A43C600A526C4 /* home_mycar.png */; };
 		6C4F64611C3A43C600A526C4 /* home_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4F645F1C3A43C600A526C4 /* home_menu.png */; };
@@ -252,8 +251,6 @@
 		6C4E418F1D360C0A001EE8DF /* New.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = New.storyboard; sourceTree = "<group>"; };
 		6C4E41911D360E37001EE8DF /* AddMyCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMyCarViewController.h; sourceTree = "<group>"; };
 		6C4E41921D360E37001EE8DF /* AddMyCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMyCarViewController.m; sourceTree = "<group>"; };
-		6C4E41941D371012001EE8DF /* VehicleLicenseRecognizerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VehicleLicenseRecognizerView.h; sourceTree = "<group>"; };
-		6C4E41951D371012001EE8DF /* VehicleLicenseRecognizerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VehicleLicenseRecognizerView.m; sourceTree = "<group>"; };
 		6C4F645C1C3A3F5200A526C4 /* menu_coord.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = menu_coord.jpg; sourceTree = "<group>"; };
 		6C4F645E1C3A43C600A526C4 /* home_mycar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_mycar.png; sourceTree = "<group>"; };
 		6C4F645F1C3A43C600A526C4 /* home_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_menu.png; sourceTree = "<group>"; };
@@ -894,8 +891,6 @@
 				6C8EC2791C1E8A7800BCABB5 /* Config.m */,
 				6C4E41911D360E37001EE8DF /* AddMyCarViewController.h */,
 				6C4E41921D360E37001EE8DF /* AddMyCarViewController.m */,
-				6C4E41941D371012001EE8DF /* VehicleLicenseRecognizerView.h */,
-				6C4E41951D371012001EE8DF /* VehicleLicenseRecognizerView.m */,
 				6C4E418F1D360C0A001EE8DF /* New.storyboard */,
 				6CABF7131C0E978B00DF3EFF /* Main.storyboard */,
 				6C25D6081D17BBD0007D8BE4 /* error.html */,
@@ -1147,7 +1142,6 @@
 				6C8B108C1CC85A73003CF8F5 /* CachingURLProtocol.m in Sources */,
 				6C4D0C481C28E998003E96E8 /* UIImage+MultiFormat.m in Sources */,
 				6C4D0C4A1C28E998003E96E8 /* UIImageView+HighlightedWebCache.m in Sources */,
-				6C4E41961D371012001EE8DF /* VehicleLicenseRecognizerView.m in Sources */,
 				6C8EC2741C1E548000BCABB5 /* UIImageView+AFNetworking.m in Sources */,
 				6C4E41931D360E37001EE8DF /* AddMyCarViewController.m in Sources */,
 				6C4D0C471C28E998003E96E8 /* UIImage+GIF.m in Sources */,

@@ -80,8 +80,13 @@
         });
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"responseObject : %@", responseObject);
+        [self fillOutFormWithVehicleLicense:responseObject];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
     }];
+}
+
+- (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo {
+    
 }
 
 - (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
