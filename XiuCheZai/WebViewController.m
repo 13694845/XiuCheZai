@@ -15,6 +15,7 @@
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
 #import "GoodsDetailViewController.h"
+#import "AddMyCarViewController.h"
 
 @import MapKit;
 
@@ -119,7 +120,7 @@
         return YES;
     }
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
-        sleep(1.0);
+        // sleep(1.0);
         return YES;
     }
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
@@ -518,7 +519,9 @@
 }
 
 - (void)addMyCar {
-    NSLog(@"addCar");
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"New" bundle:nil];
+    AddMyCarViewController *addMyCarViewController = [storyboard instantiateViewControllerWithIdentifier:@"AddMyCarViewController"];
+    [self.navigationController pushViewController:addMyCarViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
