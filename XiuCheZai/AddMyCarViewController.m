@@ -9,10 +9,12 @@
 #import "AddMyCarViewController.h"
 #import "Config.h"
 #import "AFNetworking.h"
+#import "MBProgressHUD.h"
 
 @interface AddMyCarViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
+@property (strong, nonatomic) MBProgressHUD *hud;
 
 @property (weak, nonatomic) IBOutlet UITextField *modelTextField;
 @property (weak, nonatomic) IBOutlet UITextField *ownerTextField;
@@ -47,7 +49,7 @@
     self.navigationItem.title = @"添加车型";
     
     // UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"common_back.png"] style:UIBarButtonItemStylePlain target:self action:@selector(scan)];
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"行驶证" style:UIBarButtonItemStylePlain target:self action:@selector(scan)];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"行驶证" style:UIBarButtonItemStylePlain target:self action:@selector(recognizeVehicleLicense)];
     self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
@@ -55,7 +57,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)scan {
+- (void)recognizeVehicleLicense {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
     imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -68,20 +70,24 @@
     NSDictionary *parameters = @{@"key":@"a1f24fa8cb9e8de0c5cbc7ee3e2fd060", @"cardType":@"6"};
     
     [picker dismissViewControllerAnimated:YES completion:nil];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
     [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:data name:@"pic" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
+    } progress:^(NSProgress *uploadProgress) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"%f", uploadProgress.fractionCompleted);
+            self.hud.progress = uploadProgress.fractionCompleted;
         });
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"responseObject : %@", responseObject);
+        [self.hud hide:YES];
         [self fillOutFormWithVehicleLicense:responseObject[@"result"]];
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
     }];
 }
 
