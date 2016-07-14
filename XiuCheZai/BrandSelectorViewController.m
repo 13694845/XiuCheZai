@@ -10,6 +10,7 @@
 #import "BrandSelectorCell.h"
 #import "Config.h"
 #import "AFNetworking.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 
 @interface BrandSelectorViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -50,28 +51,32 @@
     NSDictionary *parameters = @{@"type":@"1"};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *data = responseObject[@"data"];
-        
-        for (int i = 'A'; i < 'Z'; i++) {
-            
+        for (char i = 'A'; i <= 'Z'; i++) {
+            NSArray *brands = [data objectForKey:[NSString stringWithFormat:@"%c", i]];
+            for (NSDictionary *brand in brands) {
+                [self.brands addObject:brand];
+            }
         }
-        
-        
-        NSArray *brands = data[@"A"];
-        NSLog(@"brand A : %@", brands);
-        
+        NSLog(@"brands : %@", self.brands);
+        [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.brands.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    /*
+    NSString *const kImageSize = @"30x30";
+    
     BrandSelectorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    cell.brandImageView.image = [UIImage imageNamed:@"bmw.jpg"];
-    cell.brandNameLabel.text = @"进口宝马";
-    
+    NSString *imagePath = [self.brands[indexPath.row] objectForKey:@"brand_logo"];
+    NSString *imageURLString = [NSString stringWithFormat:@"%@/%@_%@.%@", [Config imgBaseURL], imagePath.stringByDeletingPathExtension, kImageSize, imagePath.pathExtension];
+     */
+    BrandSelectorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    NSString *imageURLString = [NSString stringWithFormat:@"%@/%@", [Config imgBaseURL], [self.brands[indexPath.row] objectForKey:@"brand_logo"]];
+    [cell.brandLogoImageView sd_setImageWithURL:[NSURL URLWithString:imageURLString]];
     return cell;
 }
 

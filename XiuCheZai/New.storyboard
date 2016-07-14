@@ -395,7 +395,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="brandImageView" destination="0Qh-kH-2i4" id="TQv-0D-BV7"/>
+                                            <outlet property="brandLogoImageView" destination="0Qh-kH-2i4" id="pQV-Q1-eya"/>
                                             <outlet property="brandNameLabel" destination="Qdt-KG-RTl" id="ns9-Ho-DvH"/>
                                         </connections>
                                     </tableViewCell>

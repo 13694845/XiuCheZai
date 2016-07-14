@@ -10,7 +10,7 @@
 
 @interface BrandSelectorCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *brandImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *brandLogoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *brandNameLabel;
 
 @end
