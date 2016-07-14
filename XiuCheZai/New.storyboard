@@ -339,6 +339,7 @@
                         <outlet property="engineNoTextField" destination="v1N-P6-nyI" id="hK6-9w-vWO"/>
                         <outlet property="mileageTextField" destination="jup-04-mbP" id="xM3-CD-ymN"/>
                         <outlet property="modelTextField" destination="qAm-VN-hVj" id="AxC-0D-e4P"/>
+                        <outlet property="okButton" destination="yGr-EK-og4" id="Ygv-HJ-OiW"/>
                         <outlet property="ownerTextField" destination="Ed8-VN-AQP" id="ftg-gq-882"/>
                         <outlet property="plateNoTextField" destination="IBw-ef-S15" id="Dce-8z-PnF"/>
                         <outlet property="registerDateTextField" destination="Gkt-Ug-iRd" id="h5w-FM-byc"/>

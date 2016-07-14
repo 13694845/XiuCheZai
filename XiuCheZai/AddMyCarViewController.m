@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *mileageTextField;
 @property (weak, nonatomic) IBOutlet UITextField *vinTextField;
 @property (weak, nonatomic) IBOutlet UITextField *engineNoTextField;
+@property (weak, nonatomic) IBOutlet UIButton *okButton;
 
 @end
 
@@ -41,16 +42,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationItem.title = @"添加车型";
-    
     // UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"common_back.png"] style:UIBarButtonItemStylePlain target:self action:@selector(scan)];
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"行驶证" style:UIBarButtonItemStylePlain target:self action:@selector(recognizeVehicleLicense)];
     self.navigationItem.rightBarButtonItem = barButtonItem;
+    
+    self.okButton.layer.cornerRadius = 8.0;
 }
 
 - (void)didReceiveMemoryWarning {
