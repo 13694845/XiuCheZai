@@ -52,6 +52,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TF0-lF-pjT">
                                         <rect key="frame" x="329" y="10" width="38" height="30"/>
                                         <state key="normal" title="&gt;"/>
+                                        <connections>
+                                            <action selector="selectBrandModel:" destination="cR1-p9-qE7" eventType="touchUpInside" id="aLh-R9-4OA"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
