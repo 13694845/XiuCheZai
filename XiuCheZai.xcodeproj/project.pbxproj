@@ -53,6 +53,8 @@
 		6C4D0C4C1C28E998003E96E8 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D0C3C1C28E998003E96E8 /* UIView+WebCacheOperation.m */; };
 		6C4E41901D360C0A001EE8DF /* New.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4E418F1D360C0A001EE8DF /* New.storyboard */; };
 		6C4E41931D360E37001EE8DF /* AddMyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E41921D360E37001EE8DF /* AddMyCarViewController.m */; };
+		6C4E41991D375E75001EE8DF /* BrandSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E41981D375E75001EE8DF /* BrandSelectorViewController.m */; };
+		6C4E41C21D375FFB001EE8DF /* BrandSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E41C11D375FFB001EE8DF /* BrandSelectorCell.m */; };
 		6C4F645D1C3A3F5200A526C4 /* menu_coord.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C4F645C1C3A3F5200A526C4 /* menu_coord.jpg */; };
 		6C4F64601C3A43C600A526C4 /* home_mycar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4F645E1C3A43C600A526C4 /* home_mycar.png */; };
 		6C4F64611C3A43C600A526C4 /* home_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4F645F1C3A43C600A526C4 /* home_menu.png */; };
@@ -251,6 +253,10 @@
 		6C4E418F1D360C0A001EE8DF /* New.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = New.storyboard; sourceTree = "<group>"; };
 		6C4E41911D360E37001EE8DF /* AddMyCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMyCarViewController.h; sourceTree = "<group>"; };
 		6C4E41921D360E37001EE8DF /* AddMyCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMyCarViewController.m; sourceTree = "<group>"; };
+		6C4E41971D375E75001EE8DF /* BrandSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandSelectorViewController.h; sourceTree = "<group>"; };
+		6C4E41981D375E75001EE8DF /* BrandSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandSelectorViewController.m; sourceTree = "<group>"; };
+		6C4E41C01D375FFB001EE8DF /* BrandSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandSelectorCell.h; sourceTree = "<group>"; };
+		6C4E41C11D375FFB001EE8DF /* BrandSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandSelectorCell.m; sourceTree = "<group>"; };
 		6C4F645C1C3A3F5200A526C4 /* menu_coord.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = menu_coord.jpg; sourceTree = "<group>"; };
 		6C4F645E1C3A43C600A526C4 /* home_mycar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_mycar.png; sourceTree = "<group>"; };
 		6C4F645F1C3A43C600A526C4 /* home_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_menu.png; sourceTree = "<group>"; };
@@ -891,6 +897,10 @@
 				6C8EC2791C1E8A7800BCABB5 /* Config.m */,
 				6C4E41911D360E37001EE8DF /* AddMyCarViewController.h */,
 				6C4E41921D360E37001EE8DF /* AddMyCarViewController.m */,
+				6C4E41971D375E75001EE8DF /* BrandSelectorViewController.h */,
+				6C4E41981D375E75001EE8DF /* BrandSelectorViewController.m */,
+				6C4E41C01D375FFB001EE8DF /* BrandSelectorCell.h */,
+				6C4E41C11D375FFB001EE8DF /* BrandSelectorCell.m */,
 				6C4E418F1D360C0A001EE8DF /* New.storyboard */,
 				6CABF7131C0E978B00DF3EFF /* Main.storyboard */,
 				6C25D6081D17BBD0007D8BE4 /* error.html */,
@@ -1126,6 +1136,7 @@
 				6C4D0C411C28E998003E96E8 /* SDWebImageDecoder.m in Sources */,
 				6C8B108D1CC85A73003CF8F5 /* URLCache.m in Sources */,
 				6C4D0C441C28E998003E96E8 /* SDWebImageManager.m in Sources */,
+				6C4E41C21D375FFB001EE8DF /* BrandSelectorCell.m in Sources */,
 				6C8EC2711C1E548000BCABB5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */,
 				6C91C35B1C9A84D2004C0CB4 /* openssl_wrapper.m in Sources */,
@@ -1157,6 +1168,7 @@
 				6C8EC2731C1E548000BCABB5 /* UIButton+AFNetworking.m in Sources */,
 				6C8EC2571C1E546E00BCABB5 /* AFURLRequestSerialization.m in Sources */,
 				6C8EC26F1C1E548000BCABB5 /* AFAutoPurgingImageCache.m in Sources */,
+				6C4E41991D375E75001EE8DF /* BrandSelectorViewController.m in Sources */,
 				6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */,
 				6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */,
 				6C91C35A1C9A84D2004C0CB4 /* NSDataEx.m in Sources */,

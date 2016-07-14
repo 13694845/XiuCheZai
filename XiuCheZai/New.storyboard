@@ -51,7 +51,9 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TF0-lF-pjT">
                                         <rect key="frame" x="329" y="10" width="38" height="30"/>
-                                        <state key="normal" title="&gt;"/>
+                                        <state key="normal" title="&gt;">
+                                            <color key="titleColor" red="0.56470588235294117" green="0.56470588235294117" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <segue destination="MeL-pS-oGz" kind="show" id="vPb-5x-mrl"/>
                                         </connections>
@@ -358,10 +360,10 @@
             </objects>
             <point key="canvasLocation" x="1092.5" y="793.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Brand Selector View Controller-->
         <scene sceneID="T2M-xf-Hfy">
             <objects>
-                <viewController id="MeL-pS-oGz" sceneMemberID="viewController">
+                <viewController id="MeL-pS-oGz" customClass="BrandSelectorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ed9-I8-rIs"/>
                         <viewControllerLayoutGuide type="bottom" id="5EH-xf-wT2"/>
@@ -369,9 +371,49 @@
                     <view key="view" contentMode="scaleToFill" id="YvD-9k-i2W">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CN8-h6-Leh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="56" id="FHi-ol-cYP" customClass="BrandSelectorCell">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="56"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FHi-ol-cYP" id="AVy-He-ubZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Qh-kH-2i4">
+                                                    <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="奥迪" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdt-KG-RTl">
+                                                    <rect key="frame" x="56" y="17" width="34" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="brandImageView" destination="0Qh-kH-2i4" id="TQv-0D-BV7"/>
+                                            <outlet property="brandNameLabel" destination="Qdt-KG-RTl" id="ns9-Ho-DvH"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5EH-xf-wT2" firstAttribute="top" secondItem="CN8-h6-Leh" secondAttribute="bottom" id="3bn-GH-MvK"/>
+                            <constraint firstAttribute="trailing" secondItem="CN8-h6-Leh" secondAttribute="trailing" id="Fnh-xr-xiE"/>
+                            <constraint firstItem="CN8-h6-Leh" firstAttribute="leading" secondItem="YvD-9k-i2W" secondAttribute="leading" id="SWV-a0-Vdp"/>
+                            <constraint firstItem="CN8-h6-Leh" firstAttribute="top" secondItem="Ed9-I8-rIs" secondAttribute="bottom" constant="-64" id="kJ5-Up-5WR"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="CN8-h6-Leh" id="FW3-9r-77p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bo1-TY-ckX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
