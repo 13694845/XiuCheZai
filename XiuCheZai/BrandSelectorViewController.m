@@ -57,7 +57,7 @@
                 [self.brands addObject:brand];
             }
         }
-        NSLog(@"brands : %@", self.brands);
+        // NSLog(@"brands : %@", self.brands);
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
@@ -84,6 +84,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *brand = self.brands[indexPath.row];
     NSLog(@"brand : %@", brand);
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

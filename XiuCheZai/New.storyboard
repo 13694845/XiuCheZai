@@ -397,6 +397,7 @@
                                         <connections>
                                             <outlet property="brandLogoImageView" destination="0Qh-kH-2i4" id="pQV-Q1-eya"/>
                                             <outlet property="brandNameLabel" destination="Qdt-KG-RTl" id="ns9-Ho-DvH"/>
+                                            <segue destination="5MT-Ti-VDh" kind="show" id="RqI-H9-7qU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -437,6 +438,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zLQ-fy-OWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="645.5" y="793.5"/>
+        </scene>
+        <!--Brand Selector View Controller-->
+        <scene sceneID="01T-ZN-sRo">
+            <objects>
+                <viewController id="5MT-Ti-VDh" customClass="BrandSelectorViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Th0-CI-djK"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q24-K6-LW0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dkQ-jm-tZl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xjr-8Z-EsM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="56" id="mqI-02-ATy" customClass="BrandSelectorCell">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="56"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mqI-02-ATy" id="cCi-ap-MnJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Z4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAz-jV-Fxq">
+                                                    <rect key="frame" x="8" y="17" width="120" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="brandNameLabel" destination="jAz-jV-Fxq" id="YTq-R4-ObD"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Q24-K6-LW0" firstAttribute="top" secondItem="Xjr-8Z-EsM" secondAttribute="bottom" id="6ko-bF-7Qz"/>
+                            <constraint firstItem="Xjr-8Z-EsM" firstAttribute="top" secondItem="Th0-CI-djK" secondAttribute="bottom" constant="-64" id="VyM-lc-a8e"/>
+                            <constraint firstAttribute="trailing" secondItem="Xjr-8Z-EsM" secondAttribute="trailing" id="mDC-Cf-DHs"/>
+                            <constraint firstItem="Xjr-8Z-EsM" firstAttribute="leading" secondItem="dkQ-jm-tZl" secondAttribute="leading" id="nxc-Ht-N2k"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="Xjr-8Z-EsM" id="Puu-d4-BDA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c5y-x0-MhB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1984.5" y="793.5"/>
         </scene>
     </scenes>
     <resources>
