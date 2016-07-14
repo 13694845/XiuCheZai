@@ -55,6 +55,7 @@
 		6C4E41931D360E37001EE8DF /* AddMyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E41921D360E37001EE8DF /* AddMyCarViewController.m */; };
 		6C4E41991D375E75001EE8DF /* BrandSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E41981D375E75001EE8DF /* BrandSelectorViewController.m */; };
 		6C4E41C21D375FFB001EE8DF /* BrandSelectorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4E41C11D375FFB001EE8DF /* BrandSelectorCell.m */; };
+		6C4E41C41D376151001EE8DF /* bmw.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C4E41C31D376151001EE8DF /* bmw.jpg */; };
 		6C4F645D1C3A3F5200A526C4 /* menu_coord.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C4F645C1C3A3F5200A526C4 /* menu_coord.jpg */; };
 		6C4F64601C3A43C600A526C4 /* home_mycar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4F645E1C3A43C600A526C4 /* home_mycar.png */; };
 		6C4F64611C3A43C600A526C4 /* home_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4F645F1C3A43C600A526C4 /* home_menu.png */; };
@@ -257,6 +258,7 @@
 		6C4E41981D375E75001EE8DF /* BrandSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandSelectorViewController.m; sourceTree = "<group>"; };
 		6C4E41C01D375FFB001EE8DF /* BrandSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrandSelectorCell.h; sourceTree = "<group>"; };
 		6C4E41C11D375FFB001EE8DF /* BrandSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrandSelectorCell.m; sourceTree = "<group>"; };
+		6C4E41C31D376151001EE8DF /* bmw.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bmw.jpg; sourceTree = "<group>"; };
 		6C4F645C1C3A3F5200A526C4 /* menu_coord.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = menu_coord.jpg; sourceTree = "<group>"; };
 		6C4F645E1C3A43C600A526C4 /* home_mycar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_mycar.png; sourceTree = "<group>"; };
 		6C4F645F1C3A43C600A526C4 /* home_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_menu.png; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 		6C8EC2801C1E917300BCABB5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6C4E41C31D376151001EE8DF /* bmw.jpg */,
 				6C7D47851CBDE4E800D9794F /* common_error.png */,
 				6C53DD131CA1275700168230 /* common_blank.png */,
 				6C51EBDC1C44D5F8006DF544 /* common_back.png */,
@@ -1085,6 +1088,7 @@
 				6C4F64601C3A43C600A526C4 /* home_mycar.png in Resources */,
 				6C5C5F041C86DA66008CDD3C /* home_icon16.png in Resources */,
 				6C82347F1C436F7D001E6AFE /* home_redbar.png in Resources */,
+				6C4E41C41D376151001EE8DF /* bmw.jpg in Resources */,
 				6CABF7151C0E978B00DF3EFF /* Main.storyboard in Resources */,
 				6C91C2CC1C9A332F004C0CB4 /* tab_icon31@2x.png in Resources */,
 				6C4F645D1C3A3F5200A526C4 /* menu_coord.jpg in Resources */,

@@ -7,20 +7,32 @@
 //
 
 #import "BrandSelectorViewController.h"
+#import "BrandSelectorCell.h"
 
 @interface BrandSelectorViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *brands;
 
 @end
 
 @implementation BrandSelectorViewController
+
+- (NSMutableArray *)brands {
+    if (!_brands) _brands = [NSMutableArray array];
+    return _brands;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    [self loadData];
+}
+
+- (void)loadData {
     
 }
 
@@ -29,9 +41,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    BrandSelectorCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    cell.textLabel.text = @"xyz";
+    cell.brandImageView.image = [UIImage imageNamed:@"bmw.jpg"];
+    cell.brandNameLabel.text = @"进口宝马";
+    
     return cell;
 }
 
