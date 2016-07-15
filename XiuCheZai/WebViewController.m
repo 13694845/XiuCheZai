@@ -119,11 +119,11 @@
         self.backOffset++;
         return YES;
     }
-    /*
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
         // sleep(1.0);
         return YES;
     }
+    /*
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
         [self addMyCar];
         return NO;
