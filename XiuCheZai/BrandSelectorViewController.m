@@ -19,8 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *brands;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-
+@property (weak, nonatomic) SeriesSelectorViewController *seriesSelectorViewController;
 
 @end
 
@@ -45,6 +44,15 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    self.seriesSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SeriesSelectorViewController"];
+    self.seriesSelectorViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
+    [self addChildViewController:self.seriesSelectorViewController];
+    CGRect rect = self.seriesSelectorViewController.view.frame;
+    rect.origin.x = 100; // rect.size.width;
+    rect.size.height = [UIScreen mainScreen].bounds.size.height - self.tabBarController.tabBar.bounds.size.height;
+    self.seriesSelectorViewController.view.frame = rect;
+    [self.view addSubview:self.seriesSelectorViewController.view];
     
     [self loadData];
 }
@@ -88,12 +96,19 @@
     NSDictionary *brand = self.brands[indexPath.row];
     NSLog(@"brand : %@", brand);
     
-    SeriesSelectorViewController *seriesSelectorViewController = self.childViewControllers.firstObject;
-    if (!seriesSelectorViewController) {
-        
-        
-        [self showSeriesSelectorView];
+    if (!self.childViewControllers.count) {
+        SeriesSelectorViewController *seriesSelectorViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SeriesSelectorViewController"];
+        seriesSelectorViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.6];
+        [self addChildViewController:seriesSelectorViewController];
     }
+    
+    SeriesSelectorViewController *seriesSelectorViewController = self.childViewControllers.firstObject;
+    seriesSelectorViewController.brandId = brand[@"brand_id"];
+    seriesSelectorViewController.hidden = NO;
+    
+    
+//        [self showSeriesSelectorView];
+
     
     
     
@@ -121,6 +136,8 @@
     [UIView animateWithDuration:0.3 animations:^{
         seriesSelectorViewController.view.frame = rect;
     }];
+    
+    seriesSelectorViewController.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

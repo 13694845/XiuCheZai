@@ -23,7 +23,7 @@
 
 
 - (void)setHidden:(BOOL)hidden {
-//    NSLog(@"nav height : %f", self.navigationController.navigationBar.bounds.size.height);
+    NSLog(@"nav height : %f", self.navigationController.navigationBar.bounds.size.height);
 }
 
 - (AFHTTPSessionManager *)manager {
