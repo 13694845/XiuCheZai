@@ -180,6 +180,7 @@
 - (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo {
     NSLog(@"vehicleLicenseInfo : %@", vehicleLicenseInfo);
     
+    [self.webView stringByEvaluatingJavaScriptFromString:@"var x=document.getElementsByName(\"user_name\"); alert(x[0].value); x[0].value=\"test ok\";"];
     
     /*
     self.ownerTextField.text = vehicleLicenseInfo[@"所有人"];
