@@ -26,6 +26,8 @@
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
 
+@property (strong, nonatomic) MBProgressHUD *hud;
+
 @end
 
 @implementation WebViewController
@@ -124,7 +126,8 @@
         return YES;
     }
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(250.0, 18.0, 100.0, 50.0)];
+        // re positon
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(200.0, 18.0, 80.0, 50.0)];
         [button setTitle:@"行驶证" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(recognizeVehicleLicense) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
@@ -135,8 +138,64 @@
 }
 
 - (void)recognizeVehicleLicense {
-    NSLog(@"changeSomething");
-    [self.webView stringByEvaluatingJavaScriptFromString:@"var x=document.getElementsByName(\"user_name\"); alert(x[0].value); x[0].value=\"test ok\";"];
+    NSLog(@"recognizeVehicleLicense");
+    // [self.webView stringByEvaluatingJavaScriptFromString:@"var x=document.getElementsByName(\"user_name\"); alert(x[0].value); x[0].value=\"test ok\";"];
+    
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    // NSString *server = [NSString stringWithFormat:@"%@%@", [Config webBaseURL], @"/Action/CertificatesAction.do?type=2&img_type=6"];
+    NSString *server = @"http://v.juhe.cn/certificates/query.php";
+    NSDictionary *parameters = @{@"key":@"a1f24fa8cb9e8de0c5cbc7ee3e2fd060", @"cardType":@"6"};
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
+    
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
+    NSData *data = UIImageJPEGRepresentation(image, 0.8);
+    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:data name:@"pic" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
+    } progress:^(NSProgress *uploadProgress) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"%f", uploadProgress.fractionCompleted);
+            self.hud.progress = uploadProgress.fractionCompleted;
+        });
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"responseObject : %@", responseObject);
+        [self.hud hide:YES];
+        self.hud.progress = 0;
+        [self fillOutFormWithVehicleLicense:responseObject[@"result"]];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self.hud hide:YES];
+        self.hud.progress = 0;
+    }];
+}
+
+- (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo {
+    NSLog(@"vehicleLicenseInfo : %@", vehicleLicenseInfo);
+    
+    
+    /*
+    self.ownerTextField.text = vehicleLicenseInfo[@"所有人"];
+    self.plateNoTextField.text = vehicleLicenseInfo[@"号牌号码"];
+    self.registerDateTextField.text = vehicleLicenseInfo[@"注册日期"];
+    self.vinTextField.text = vehicleLicenseInfo[@"车辆识别代号"];
+    self.engineNoTextField.text = vehicleLicenseInfo[@"发动机号码"];
+     */
+}
+
+- (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resizedImage;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
@@ -283,14 +342,6 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
-    UIGraphicsBeginImageContext(size);
-    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return resizedImage;
-}
-
 - (void)wxlogin {
     SendAuthReq *req = [[SendAuthReq alloc] init];
     req.scope = @"snsapi_userinfo";
@@ -385,7 +436,8 @@
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+/*
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSString *server = [NSString stringWithFormat:@"%@%@", [Config webBaseURL], @"/WebUploadServlet.action"];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -414,6 +466,7 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     [self executeJavascript:[NSString stringWithFormat:@"pickImageResult(\"\")"]];
 }
+ */
 
 - (void)navigateToPlace:(NSDictionary *)place {
     if (![[[[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"] objectForKey:@"longitude"] doubleValue]) {
