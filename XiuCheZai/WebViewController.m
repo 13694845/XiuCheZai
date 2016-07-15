@@ -120,20 +120,13 @@
         return YES;
     }
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
-        // sleep(1.0);
+        sleep(0.5);
         return YES;
     }
-    /*
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
-        [self addMyCar];
-        return NO;
-    }
-     */
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(250.0, 18.0, 100.0, 50.0)];
-        // [button setImage:[UIImage imageNamed:@"bmw.jpg"] forState:UIControlStateNormal];
         [button setTitle:@"行驶证" forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(changeSomething) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(recognizeVehicleLicense) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:button];
         return YES;
     }
@@ -141,23 +134,10 @@
     return YES;
 }
 
-
-
-- (void)changeSomething {
+- (void)recognizeVehicleLicense {
     NSLog(@"changeSomething");
-    
-    
-//    [self.webView stringByEvaluatingJavaScriptFromString:@"alert('Welcome!')"];
-
-//    [self.webView stringByEvaluatingJavaScriptFromString:@"var x=document.getElementsByTagName(\"input\"); alert(x.length);"];
-//    [self.webView stringByEvaluatingJavaScriptFromString:@"alert(usernameText)"];
-    
     [self.webView stringByEvaluatingJavaScriptFromString:@"var x=document.getElementsByName(\"user_name\"); alert(x[0].value); x[0].value=\"test ok\";"];
-
 }
-
-
-
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
