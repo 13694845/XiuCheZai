@@ -16,6 +16,7 @@
 @property (nonatomic) UIButton *vlrcButton;
 
 @property (nonatomic) BOOL fullScreen;
+@property (nonatomic) BOOL needsRefresh;
 
 @end
 
@@ -23,11 +24,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.needsRefresh = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (!self.webView.isLoading) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    if (!self.webView.isLoading && self.needsRefresh) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -89,6 +91,16 @@
     }
     
     return YES;
+}
+
+- (void)recognizeVehicleLicense {
+    [super recognizeVehicleLicense];
+    self.needsRefresh = NO;
+}
+
+- (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo {
+    [super fillOutFormWithVehicleLicense:vehicleLicenseInfo];
+    self.needsRefresh = YES;
 }
 
 - (void)goBack {
