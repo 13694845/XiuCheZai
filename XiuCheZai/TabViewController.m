@@ -13,6 +13,8 @@
 
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
+@property (nonatomic) UIButton *vlrcButton;
+
 @property (nonatomic) BOOL fullScreen;
 
 @end
@@ -70,15 +72,34 @@
         return YES;
     }
     
+    self.fullScreen = ![request.URL.description containsString:self.url.description];
+    [self viewWillLayoutSubviews];
+    
+    if (self.vlrcButton) [self.vlrcButton removeFromSuperview];
+    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
+        self.vlrcButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 80.0 - 30.0, 18.0, 80.0, 50.0)];
+        [self.vlrcButton setTitle:@"行驶证" forState:UIControlStateNormal];
+        [self.vlrcButton addTarget:self action:@selector(recognizeVehicleLicense) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.vlrcButton];
+        return YES;
+    }
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
         sleep(0.5);
         return YES;
     }
     
-    self.fullScreen = ![request.URL.description containsString:self.url.description];
-    [self viewWillLayoutSubviews];
-    
     return YES;
+}
+
+- (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo {
+    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"user_name\"); x[0].value=\"%@\";", vehicleLicenseInfo[@"所有人"]]];
+    NSString *plateNo = vehicleLicenseInfo[@"号牌号码"];
+    if (plateNo.length) plateNo = [plateNo substringFromIndex:1];
+    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"car_num\"); x[0].value=\"%@\";", plateNo]];
+    NSString *registerDate = vehicleLicenseInfo[@"注册日期"];
+    if (registerDate.length) registerDate = [registerDate substringToIndex:7];
+    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"buy_date\"); x[0].value=\"%@\";", registerDate]];
+    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"vin\"); x[0].value=\"%@\";", vehicleLicenseInfo[@"车辆识别代号"]]];
 }
 
 - (void)goBack {

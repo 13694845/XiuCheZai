@@ -124,7 +124,7 @@
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
         self.vlrcButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 80.0 - 30.0, 18.0, 80.0, 50.0)];
         [self.vlrcButton setTitle:@"行驶证" forState:UIControlStateNormal];
-        [self.vlrcButton addTarget:self action:@selector(fillOutFormWithVehicleLicense:) forControlEvents:UIControlEventTouchUpInside];
+        [self.vlrcButton addTarget:self action:@selector(recognizeVehicleLicense) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.vlrcButton];
         return YES;
     }
