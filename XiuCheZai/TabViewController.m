@@ -79,9 +79,14 @@
     
     if (self.vlrcButton) [self.vlrcButton removeFromSuperview];
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
-        self.vlrcButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 80.0 - 30.0, 18.0, 80.0, 50.0)];
+        self.vlrcButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 68.0 - 42.0, 28.0, 68.0, 30.0)];
+        self.vlrcButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        self.vlrcButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
         [self.vlrcButton setTitle:@"行驶证" forState:UIControlStateNormal];
         [self.vlrcButton addTarget:self action:@selector(recognizeVehicleLicense) forControlEvents:UIControlEventTouchUpInside];
+        UIImageView *cameraImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.vlrcButton.frame.size.height / 2 - 20.0 / 2, 20.0, 20.0)];
+        cameraImageView.image = [UIImage imageNamed:@"vlcr_camera"];
+        [self.vlrcButton addSubview:cameraImageView];
         [self.view addSubview:self.vlrcButton];
         return YES;
     }
