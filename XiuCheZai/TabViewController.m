@@ -91,17 +91,6 @@
     return YES;
 }
 
-- (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo {
-    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"user_name\"); x[0].value=\"%@\";", vehicleLicenseInfo[@"所有人"]]];
-    NSString *plateNo = vehicleLicenseInfo[@"号牌号码"];
-    if (plateNo.length) plateNo = [plateNo substringFromIndex:1];
-    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"car_num\"); x[0].value=\"%@\";", plateNo]];
-    NSString *registerDate = vehicleLicenseInfo[@"注册日期"];
-    if (registerDate.length) registerDate = [registerDate substringToIndex:7];
-    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"buy_date\"); x[0].value=\"%@\";", registerDate]];
-    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"vin\"); x[0].value=\"%@\";", vehicleLicenseInfo[@"车辆识别代号"]]];
-}
-
 - (void)goBack {
     if (self.webView.isLoading) [self.webView stopLoading];
     if (![self.webView.request.URL.description isEqualToString:self.url.description]) [self.webView goBack];
