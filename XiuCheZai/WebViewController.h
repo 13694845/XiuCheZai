@@ -21,4 +21,6 @@ typedef NS_ENUM(int, TabIndex) {
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic) NSURL *url;
 
+- (void)recognizeVehicleLicense;
+
 @end
