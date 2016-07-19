@@ -45,6 +45,10 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    self.fullScreen = ![request.URL.description containsString:self.url.description];
+    [self viewWillLayoutSubviews];
+    self.needsRefresh = ![request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/save_info/index.html"]];
+    
     if ([request.URL.description isEqualToString:[Config baseURL]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/"]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"]]
@@ -73,9 +77,6 @@
         self.backOffset++;
         return YES;
     }
-    
-    self.fullScreen = ![request.URL.description containsString:self.url.description];
-    [self viewWillLayoutSubviews];
     
     if (self.vlrcButton) [self.vlrcButton removeFromSuperview];
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
