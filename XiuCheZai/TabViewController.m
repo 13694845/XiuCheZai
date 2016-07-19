@@ -47,7 +47,8 @@
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     self.fullScreen = ![request.URL.description containsString:self.url.description];
     [self viewWillLayoutSubviews];
-    self.needsRefresh = ![request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/save_info/index.html"]];
+    self.needsRefresh = !([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/save_info/index.html"]]
+                        || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/refund/index.html?orderId="]]);
     
     if ([request.URL.description isEqualToString:[Config baseURL]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/"]]
