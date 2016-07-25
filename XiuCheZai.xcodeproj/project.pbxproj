@@ -141,6 +141,7 @@
 		6C9F60C21D4598C600910335 /* 组-13@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F60B21D4598C600910335 /* 组-13@3x.png */; };
 		6C9F60C31D4598C600910335 /* 门店@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F60B31D4598C600910335 /* 门店@2x.png */; };
 		6C9F60C41D4598C600910335 /* 门店@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F60B41D4598C600910335 /* 门店@3x.png */; };
+		6C9F60C71D459C9200910335 /* NewHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9F60C61D459C9200910335 /* NewHomeViewController.m */; };
 		6CA67C6F1CC9B8A2001BAF4F /* recommender.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6CA67C6E1CC9B8A2001BAF4F /* recommender.jpg */; };
 		6CA7A5081CCEF15100425D23 /* home_icon17.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7A5071CCEF15100425D23 /* home_icon17.png */; };
 		6CA7A50A1CCEF17A00425D23 /* home_icon18.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7A5091CCEF17A00425D23 /* home_icon18.png */; };
@@ -467,6 +468,8 @@
 		6C9F60B21D4598C600910335 /* 组-13@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-13@3x.png"; sourceTree = "<group>"; };
 		6C9F60B31D4598C600910335 /* 门店@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "门店@2x.png"; sourceTree = "<group>"; };
 		6C9F60B41D4598C600910335 /* 门店@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "门店@3x.png"; sourceTree = "<group>"; };
+		6C9F60C51D459C9200910335 /* NewHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHomeViewController.h; sourceTree = "<group>"; };
+		6C9F60C61D459C9200910335 /* NewHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHomeViewController.m; sourceTree = "<group>"; };
 		6CA67C6E1CC9B8A2001BAF4F /* recommender.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = recommender.jpg; sourceTree = "<group>"; };
 		6CA7A5071CCEF15100425D23 /* home_icon17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon17.png; sourceTree = "<group>"; };
 		6CA7A5091CCEF17A00425D23 /* home_icon18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon18.png; sourceTree = "<group>"; };
@@ -952,6 +955,8 @@
 				6CABF71B1C0E978B00DF3EFF /* Info.plist */,
 				6CABF70A1C0E978B00DF3EFF /* Supporting Files */,
 				6C9F60A21D42179700910335 /* New.storyboard */,
+				6C9F60C51D459C9200910335 /* NewHomeViewController.h */,
+				6C9F60C61D459C9200910335 /* NewHomeViewController.m */,
 			);
 			path = XiuCheZai;
 			sourceTree = "<group>";
@@ -1227,6 +1232,7 @@
 				6C8EC2731C1E548000BCABB5 /* UIButton+AFNetworking.m in Sources */,
 				6C8EC2571C1E546E00BCABB5 /* AFURLRequestSerialization.m in Sources */,
 				6C8EC26F1C1E548000BCABB5 /* AFAutoPurgingImageCache.m in Sources */,
+				6C9F60C71D459C9200910335 /* NewHomeViewController.m in Sources */,
 				6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */,
 				6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */,
 				6C91C35A1C9A84D2004C0CB4 /* NSDataEx.m in Sources */,
