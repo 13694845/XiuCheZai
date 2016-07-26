@@ -28,7 +28,7 @@
         <!--首页-->
         <scene sceneID="B7n-DH-kdy">
             <objects>
-                <viewController storyboardIdentifier="NewHomeViewController" id="56j-fL-Sp5" customClass="NewHomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewHomeViewController" id="56j-fL-Sp5" customClass="XCZHomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3uc-Aa-X9Q"/>
                         <viewControllerLayoutGuide type="bottom" id="rms-O9-jBf"/>

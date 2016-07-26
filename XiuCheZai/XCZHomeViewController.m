@@ -1,14 +1,14 @@
 //
-//  NewHomeViewController.m
+//  XCZHomeViewController.m
 //  XiuCheZai
 //
 //  Created by QSH on 16/7/25.
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import "NewHomeViewController.h"
+#import "XCZHomeViewController.h"
 
-@interface NewHomeViewController ()
+@interface XCZHomeViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation NewHomeViewController
+@implementation XCZHomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

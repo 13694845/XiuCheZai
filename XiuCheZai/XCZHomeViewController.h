@@ -1,5 +1,5 @@
 //
-//  NewHomeViewController.h
+//  XCZHomeViewController.h
 //  XiuCheZai
 //
 //  Created by QSH on 16/7/25.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewHomeViewController : UIViewController
+@interface XCZHomeViewController : UIViewController
 
 @end
