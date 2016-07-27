@@ -24,7 +24,7 @@
 
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
-@property (nonatomic) UIButton *vlrcButton;
+// @property (nonatomic) UIButton *vlrcButton;
 
 @end
 
