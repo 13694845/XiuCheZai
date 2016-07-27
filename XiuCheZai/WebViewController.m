@@ -60,8 +60,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self recognizeVehicleLicense];
 }
 
 - (void)registerUserAgent {
@@ -136,7 +134,7 @@
         [self.view addSubview:self.vlrcButton];
         return YES;
     }
-     */
+    */
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
         sleep(0.5);
         return YES;
@@ -153,8 +151,8 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSString *server = @"http://v.juhe.cn/certificates/query.php";
-    NSDictionary *parameters = @{@"key":@"a1f24fa8cb9e8de0c5cbc7ee3e2fd060", @"cardType":@"6"};
+    NSString *server = @"http://m.8673h.com/Action/CertificatesAction.do?type=2&img_type=6";
+    NSDictionary *parameters = nil;
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -163,7 +161,7 @@
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
-    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:data name:@"pic" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
     } progress:^(NSProgress *uploadProgress) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -172,13 +170,15 @@
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         [hud hide:YES];
         hud.progress = 0;
-        [self fillOutFormWithVehicleLicense:responseObject[@"result"]];
+        // [self fillOutFormWithVehicleLicense:responseObject[@"data"][@"result"]];
+        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", responseObject]];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [hud hide:YES];
         hud.progress = 0;
     }];
 }
 
+/*
 - (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo {
     [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"user_name\"); x[0].value=\"%@\";", vehicleLicenseInfo[@"所有人"]]];
     NSString *plateNo = vehicleLicenseInfo[@"号牌号码"];
@@ -189,6 +189,7 @@
     [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"buy_date\"); x[0].value=\"%@\";", registerDate]];
     [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"vin\"); x[0].value=\"%@\";", vehicleLicenseInfo[@"车辆识别代号"]]];
 }
+*/
 
 - (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
     UIGraphicsBeginImageContext(size);

@@ -13,7 +13,7 @@
 
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
-@property (nonatomic) UIButton *vlrcButton;
+// @property (nonatomic) UIButton *vlrcButton;
 
 @property (nonatomic) BOOL fullScreen;
 @property (nonatomic) BOOL needsRefresh;
@@ -79,6 +79,7 @@
         return YES;
     }
     
+    /*
     if (self.vlrcButton) [self.vlrcButton removeFromSuperview];
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
         self.vlrcButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 68.0 - 42.0, 28.0, 68.0, 30.0)];
@@ -92,6 +93,7 @@
         [self.view addSubview:self.vlrcButton];
         return YES;
     }
+     */
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
         sleep(0.5);
         return YES;
@@ -100,6 +102,7 @@
     return YES;
 }
 
+/*
 - (void)recognizeVehicleLicense {
     [super recognizeVehicleLicense];
     self.needsRefresh = NO;
@@ -109,6 +112,7 @@
     [super fillOutFormWithVehicleLicense:vehicleLicenseInfo];
     self.needsRefresh = YES;
 }
+*/
 
 - (void)goBack {
     if (self.webView.isLoading) [self.webView stopLoading];
