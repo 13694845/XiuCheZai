@@ -129,7 +129,54 @@
     return YES;
 }
 
+
+- (NSString *)convertString:(NSString *)s {
+    
+    
+//    s = [s stringByReplacingOccurrencesOfString:@"\\u" withString:@"\\U"];
+    
+    NSData *data = [s dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    NSString *str = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListImmutable format:nil error:nil];
+    
+    
+    // NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    
+    NSLog(@"str : %@", str);
+    
+    return nil;
+    
+}
+
+
+
+- (NSString *)replaceUnicode:(NSString *)unicodeStr {
+    
+    NSString *tempStr1 = [unicodeStr stringByReplacingOccurrencesOfString:@"\\u" withString:@"\\U"];
+    NSString *tempStr2 = [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    NSString *tempStr3 = [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSString* returnStr = [NSPropertyListSerialization propertyListFromData:tempData
+                                                          mutabilityOption:NSPropertyListImmutable
+                                                                    format:NULL
+                                                          errorDescription:NULL];
+    
+    return [returnStr stringByReplacingOccurrencesOfString:@"\\r\\n" withString:@"\n"];
+}
+
 - (void)recognizeVehicleLicense {
+/*
+    NSString *s = @"\"{      '所有人' : '苏x'}\"";
+    NSLog(@"s : %@", s);
+    
+    [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", s]];
+    
+    
+    return;
+*/
+    
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
     imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -156,8 +203,36 @@
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         [hud hide:YES];
         hud.progress = 0;
-//        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", responseObject]];
-        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"abc\")"]];
+        
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        
+        NSLog(@"json : %@", jsonString);
+        
+        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult('%@')", jsonString]];
+        
+        /*
+        NSString *s = [responseObject description];
+        s = [self replaceUnicode:s];
+        NSLog(@"%@", [NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", s]);
+
+        s = [s stringByReplacingOccurrencesOfString:@"\"" withString:@"'"];
+        NSLog(@"%@", [NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", s]);
+
+        
+        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", s]];
+        */
+        
+        /*
+        responseObject = [self replaceUnicode:responseObject];
+        
+        NSLog(@"%@", [NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", responseObject]);
+        
+        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", responseObject]];
+        // [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"abc\")"]];
+         */
 
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [hud hide:YES];
