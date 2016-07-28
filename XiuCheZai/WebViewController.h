@@ -21,11 +21,4 @@ typedef NS_ENUM(int, TabIndex) {
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic) NSURL *url;
 
-/*
-- (void)recognizeVehicleLicense;
-- (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo;
-*/
-- (void)recognizeVehicleLicense;
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
-
 @end

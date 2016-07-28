@@ -13,7 +13,6 @@
 
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
-// @property (nonatomic) UIButton *vlrcButton;
 
 @property (nonatomic) BOOL fullScreen;
 @property (nonatomic) BOOL needsRefresh;
@@ -48,7 +47,8 @@
     self.fullScreen = ![request.URL.description containsString:self.url.description];
     [self viewWillLayoutSubviews];
     self.needsRefresh = !([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/save_info/index.html"]]
-                        || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/refund/index.html?orderId="]]);
+                        || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/refund/index.html?orderId="]]
+                        || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]);
     
     if ([request.URL.description isEqualToString:[Config baseURL]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/"]]
@@ -78,22 +78,6 @@
         self.backOffset++;
         return YES;
     }
-    
-    /*
-    if (self.vlrcButton) [self.vlrcButton removeFromSuperview];
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
-        self.vlrcButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 68.0 - 42.0, 28.0, 68.0, 30.0)];
-        self.vlrcButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        self.vlrcButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-        [self.vlrcButton setTitle:@"行驶证" forState:UIControlStateNormal];
-        [self.vlrcButton addTarget:self action:@selector(recognizeVehicleLicense) forControlEvents:UIControlEventTouchUpInside];
-        UIImageView *cameraImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.vlrcButton.frame.size.height / 2 - 20.0 / 2, 20.0, 20.0)];
-        cameraImageView.image = [UIImage imageNamed:@"vlcr_camera"];
-        [self.vlrcButton addSubview:cameraImageView];
-        [self.view addSubview:self.vlrcButton];
-        return YES;
-    }
-     */
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
         sleep(0.5);
         return YES;
@@ -101,28 +85,6 @@
     
     return YES;
 }
-
-- (void)recognizeVehicleLicense {
-    [super recognizeVehicleLicense];
-    self.needsRefresh = NO;
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [super imagePickerController:picker didFinishPickingMediaWithInfo:info];
-    self.needsRefresh = YES;
-}
-
-/*
-- (void)recognizeVehicleLicense {
-    [super recognizeVehicleLicense];
-    self.needsRefresh = NO;
-}
-
-- (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo {
-    [super fillOutFormWithVehicleLicense:vehicleLicenseInfo];
-    self.needsRefresh = YES;
-}
-*/
 
 - (void)goBack {
     if (self.webView.isLoading) [self.webView stopLoading];

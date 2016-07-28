@@ -24,7 +24,6 @@
 
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
-// @property (nonatomic) UIButton *vlrcButton;
 
 @end
 
@@ -119,22 +118,6 @@
         self.backOffset++;
         return YES;
     }
-    
-    /*
-    if (self.vlrcButton) [self.vlrcButton removeFromSuperview];
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]) {
-        self.vlrcButton = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 68.0 - 42.0, 28.0, 68.0, 30.0)];
-        self.vlrcButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        self.vlrcButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-        [self.vlrcButton setTitle:@"行驶证" forState:UIControlStateNormal];
-        [self.vlrcButton addTarget:self action:@selector(recognizeVehicleLicense) forControlEvents:UIControlEventTouchUpInside];
-        UIImageView *cameraImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.vlrcButton.frame.size.height / 2 - 20.0 / 2, 20.0, 20.0)];
-        cameraImageView.image = [UIImage imageNamed:@"vlcr_camera"];
-        [self.vlrcButton addSubview:cameraImageView];
-        [self.view addSubview:self.vlrcButton];
-        return YES;
-    }
-    */
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
         sleep(0.5);
         return YES;
@@ -170,26 +153,12 @@
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         [hud hide:YES];
         hud.progress = 0;
-        // [self fillOutFormWithVehicleLicense:responseObject[@"data"][@"result"]];
         [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", responseObject]];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [hud hide:YES];
         hud.progress = 0;
     }];
 }
-
-/*
-- (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo {
-    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"user_name\"); x[0].value=\"%@\";", vehicleLicenseInfo[@"所有人"]]];
-    NSString *plateNo = vehicleLicenseInfo[@"号牌号码"];
-    if (plateNo.length) plateNo = [plateNo substringFromIndex:1];
-    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"car_num\"); x[0].value=\"%@\";", plateNo]];
-    NSString *registerDate = vehicleLicenseInfo[@"注册日期"];
-    if (registerDate.length) registerDate = [registerDate substringToIndex:7];
-    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"buy_date\"); x[0].value=\"%@\";", registerDate]];
-    [self executeJavascript:[NSString stringWithFormat:@"var x=document.getElementsByName(\"vin\"); x[0].value=\"%@\";", vehicleLicenseInfo[@"车辆识别代号"]]];
-}
-*/
 
 - (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
     UIGraphicsBeginImageContext(size);
