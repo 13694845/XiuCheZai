@@ -69,6 +69,8 @@
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSLog(@"request.URL : %@", request.URL.description);
+    
     if ([request.URL.description containsString:@"about:blank"]) {
         return NO;
     }
@@ -154,7 +156,9 @@
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         [hud hide:YES];
         hud.progress = 0;
-        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", responseObject]];
+//        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"%@\")", responseObject]];
+        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult(\"abc\")"]];
+
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [hud hide:YES];
         hud.progress = 0;
