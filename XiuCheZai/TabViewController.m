@@ -102,6 +102,16 @@
     return YES;
 }
 
+- (void)recognizeVehicleLicense {
+    [super recognizeVehicleLicense];
+    self.needsRefresh = NO;
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [super imagePickerController:picker didFinishPickingMediaWithInfo:info];
+    self.needsRefresh = YES;
+}
+
 /*
 - (void)recognizeVehicleLicense {
     [super recognizeVehicleLicense];

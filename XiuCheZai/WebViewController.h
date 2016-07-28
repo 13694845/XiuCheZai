@@ -25,5 +25,7 @@ typedef NS_ENUM(int, TabIndex) {
 - (void)recognizeVehicleLicense;
 - (void)fillOutFormWithVehicleLicense:(NSDictionary *)vehicleLicenseInfo;
 */
+- (void)recognizeVehicleLicense;
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
 
 @end
