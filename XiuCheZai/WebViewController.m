@@ -98,6 +98,7 @@
         [self goHome];
         return NO;
     }
+    /*
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/service/index/index.html"]]) {
         [self goStore];
         return NO;
@@ -106,10 +107,13 @@
         [self goAccessory];
         return NO;
     }
+     */
+    /*
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/shopping-cart/index.html"]]) {
         [self goCart];
         return NO;
     }
+     */
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_index/index.html"]]) {
         [self goMine];
         return NO;

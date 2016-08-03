@@ -46,8 +46,8 @@
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     self.fullScreen = ![request.URL.description containsString:self.url.description];
     if ([self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/index/"]]) self.fullScreen = YES;
-    
     [self viewWillLayoutSubviews];
+    
     self.needsRefresh = !([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/save_info/index.html"]]
                         || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/refund/index.html?orderId="]]
                         || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]);
@@ -59,6 +59,7 @@
         [self goHome];
         return NO;
     }
+    /*
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/shopping-cart/index.html"]]
         && self.tabBarController.selectedIndex != TabIndexCart) {
         [self goCart];
@@ -69,6 +70,7 @@
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/shopping-cart/index.html"]]]];
         return NO;
     }
+     */
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_index/index.html"]]
         && self.tabBarController.selectedIndex != TabIndexMine) {
         [self goMine];
