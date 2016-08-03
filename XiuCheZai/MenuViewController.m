@@ -27,7 +27,7 @@
     CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> *placemarks, NSError *error) {
-        CLPlacemark *placemark = placemarks.firstObject;
+        // CLPlacemark *placemark = placemarks.firstObject;
         // self.cityLabel.text = placemark.subLocality;
         self.cityLabel.text = @"台州";
     }];
@@ -126,6 +126,10 @@
         [self.view removeFromSuperview];
         [self removeFromParentViewController];
     }];
+}
+
+- (IBAction)changeCity:(id)sender {
+    NSLog(@"changeCity");
 }
 
 - (void)didReceiveMemoryWarning {
