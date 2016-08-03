@@ -55,19 +55,19 @@
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "appicon_76x76.png",
+      "filename" : "icon76@X1.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "appicon_152x152.png",
+      "filename" : "icon76@X2.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "appicon_167x167.png",
+      "filename" : "icon83.5@X2.png",
       "scale" : "2x"
     }
   ],
