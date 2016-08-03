@@ -13,9 +13,10 @@
 typedef NS_ENUM(int, TabIndex) {
     TabIndexHome = 0,
     TabIndexStore,
+    TabIndexDiscovery,
     TabIndexAccessory,
+    TabIndexMine,
     TabIndexCart,
-    TabIndexMine
 };
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
