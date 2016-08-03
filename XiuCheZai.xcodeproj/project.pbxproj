@@ -65,6 +65,9 @@
 		6C5C5F021C86DA66008CDD3C /* home_icon14.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C5C5EFB1C86DA66008CDD3C /* home_icon14.png */; };
 		6C5C5F031C86DA66008CDD3C /* home_icon15.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C5C5EFC1C86DA66008CDD3C /* home_icon15.png */; };
 		6C5C5F041C86DA66008CDD3C /* home_icon16.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C5C5EFD1C86DA66008CDD3C /* home_icon16.png */; };
+		6C671B271D517E1300D2CAE5 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C671B261D517E1300D2CAE5 /* DiscoveryViewController.m */; };
+		6C671B2A1D5183AA00D2CAE5 /* tab_icon60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B281D5183AA00D2CAE5 /* tab_icon60@2x.png */; };
+		6C671B2B1D5183AA00D2CAE5 /* tab_icon61@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B291D5183AA00D2CAE5 /* tab_icon61@2x.png */; };
 		6C7CE9141CD8773A00617964 /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CE9131CD8773A00617964 /* ScannerViewController.m */; };
 		6C7CE9171CD89ACF00617964 /* home_scanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9151CD89ACF00617964 /* home_scanner.png */; };
 		6C7CE9181CD89ACF00617964 /* home_searcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9161CD89ACF00617964 /* home_searcher.png */; };
@@ -279,6 +282,10 @@
 		6C5C5EFB1C86DA66008CDD3C /* home_icon14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon14.png; sourceTree = "<group>"; };
 		6C5C5EFC1C86DA66008CDD3C /* home_icon15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon15.png; sourceTree = "<group>"; };
 		6C5C5EFD1C86DA66008CDD3C /* home_icon16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon16.png; sourceTree = "<group>"; };
+		6C671B251D517E1300D2CAE5 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
+		6C671B261D517E1300D2CAE5 /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryViewController.m; sourceTree = "<group>"; };
+		6C671B281D5183AA00D2CAE5 /* tab_icon60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon60@2x.png"; sourceTree = "<group>"; };
+		6C671B291D5183AA00D2CAE5 /* tab_icon61@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon61@2x.png"; sourceTree = "<group>"; };
 		6C7CE9121CD8773A00617964 /* ScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerViewController.h; sourceTree = "<group>"; };
 		6C7CE9131CD8773A00617964 /* ScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerViewController.m; sourceTree = "<group>"; };
 		6C7CE9151CD89ACF00617964 /* home_scanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_scanner.png; sourceTree = "<group>"; };
@@ -691,6 +698,8 @@
 				6C91C2C91C9A3324004C0CB4 /* tab_icon41@2x.png */,
 				6CF1DABE1C5070680077B468 /* tab_icon50@2x.png */,
 				6C91C2CD1C9A3337004C0CB4 /* tab_icon51@2x.png */,
+				6C671B281D5183AA00D2CAE5 /* tab_icon60@2x.png */,
+				6C671B291D5183AA00D2CAE5 /* tab_icon61@2x.png */,
 				6C4F645F1C3A43C600A526C4 /* home_menu.png */,
 				6C4F645E1C3A43C600A526C4 /* home_mycar.png */,
 				6C7CE9151CD89ACF00617964 /* home_scanner.png */,
@@ -938,12 +947,14 @@
 				6C1608831C93E4CD00A9E16F /* TabViewController.m */,
 				6C91C2C01C9A2E66004C0CB4 /* StoreViewController.h */,
 				6C91C2C11C9A2E66004C0CB4 /* StoreViewController.m */,
+				6C671B251D517E1300D2CAE5 /* DiscoveryViewController.h */,
+				6C671B261D517E1300D2CAE5 /* DiscoveryViewController.m */,
 				6C4C67601C4A299300DF8D31 /* AccessoryViewController.h */,
 				6C4C67611C4A299300DF8D31 /* AccessoryViewController.m */,
-				6C4C67631C4A29BF00DF8D31 /* CartViewController.h */,
-				6C4C67641C4A29BF00DF8D31 /* CartViewController.m */,
 				6C4C67661C4A29DE00DF8D31 /* MineViewController.h */,
 				6C4C67671C4A29DE00DF8D31 /* MineViewController.m */,
+				6C4C67631C4A29BF00DF8D31 /* CartViewController.h */,
+				6C4C67641C4A29BF00DF8D31 /* CartViewController.m */,
 				6C24460A1C9FCAAC00F4F3C0 /* GoodsDetailViewController.h */,
 				6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */,
 				6C8EC2781C1E8A7800BCABB5 /* Config.h */,
@@ -1097,6 +1108,7 @@
 				6C25D6091D17BBD0007D8BE4 /* error.html in Resources */,
 				6C9F60B91D4598C600910335 /* massage@2x.png in Resources */,
 				6C8B10861CC859D6003CF8F5 /* banner02.jpg in Resources */,
+				6C671B2A1D5183AA00D2CAE5 /* tab_icon60@2x.png in Resources */,
 				6C7D47861CBDE4E800D9794F /* common_error.png in Resources */,
 				6C05EDFD1C33C58400BF8C39 /* home_activity03.png in Resources */,
 				6C8B10511CC4D087003CF8F5 /* menu_icon04.jpg in Resources */,
@@ -1183,6 +1195,7 @@
 				6CF1DABB1C50700F0077B468 /* tab_icon20@2x.png in Resources */,
 				6CF784411C477397004C9CA1 /* home_icon09.png in Resources */,
 				6C1365C01C24F6C300B217DD /* home_icon08.png in Resources */,
+				6C671B2B1D5183AA00D2CAE5 /* tab_icon61@2x.png in Resources */,
 				6C9F60A31D42179700910335 /* New.storyboard in Resources */,
 				6C91C2CA1C9A3324004C0CB4 /* tab_icon41@2x.png in Resources */,
 				6CE400421C32276C007F6D03 /* menu_xcz.png in Resources */,
@@ -1205,6 +1218,7 @@
 				6C8EC2711C1E548000BCABB5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */,
 				6C91C35B1C9A84D2004C0CB4 /* openssl_wrapper.m in Sources */,
+				6C671B271D517E1300D2CAE5 /* DiscoveryViewController.m in Sources */,
 				6C4D0C3D1C28E998003E96E8 /* MKAnnotationView+WebCache.m in Sources */,
 				6C8EC2541C1E546E00BCABB5 /* AFHTTPSessionManager.m in Sources */,
 				6C4D0C491C28E998003E96E8 /* UIImage+WebP.m in Sources */,

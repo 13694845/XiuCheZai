@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RSr-P5-hKf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RSr-P5-hKf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1209,8 +1209,8 @@
                     <connections>
                         <segue destination="oog-rf-oTd" kind="relationship" relationship="viewControllers" id="h8d-nq-epw"/>
                         <segue destination="99u-8P-6W8" kind="relationship" relationship="viewControllers" id="QLG-tX-Zba"/>
-                        <segue destination="Pal-g4-soi" kind="relationship" relationship="viewControllers" id="Xj9-uM-YdF"/>
                         <segue destination="d6U-8K-4jy" kind="relationship" relationship="viewControllers" id="KcZ-fZ-fDf"/>
+                        <segue destination="Pal-g4-soi" kind="relationship" relationship="viewControllers" id="Xj9-uM-YdF"/>
                         <segue destination="iqt-wy-VWJ" kind="relationship" relationship="viewControllers" id="CoU-3v-MKh"/>
                     </connections>
                 </tabBarController>
@@ -2147,10 +2147,10 @@
             </objects>
             <point key="canvasLocation" x="1412.5" y="-1477.5"/>
         </scene>
-        <!--Cart View Controller-->
+        <!--Discovery View Controller-->
         <scene sceneID="rdy-AP-pT9">
             <objects>
-                <viewController storyboardIdentifier="CartViewController" id="fLL-fA-5GE" customClass="CartViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CartViewController" id="fLL-fA-5GE" customClass="DiscoveryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f80-zK-CWU"/>
                         <viewControllerLayoutGuide type="bottom" id="a49-QZ-uWX"/>
@@ -2221,11 +2221,11 @@
             </objects>
             <point key="canvasLocation" x="-459.5" y="-667.5"/>
         </scene>
-        <!--购物车-->
+        <!--社区-->
         <scene sceneID="F8X-E1-TBD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d6U-8K-4jy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="购物车" image="tab_icon40.png" selectedImage="tab_icon41.png" id="xN4-eb-dJ5"/>
+                    <tabBarItem key="tabBarItem" title="社区" image="tab_icon60.png" selectedImage="tab_icon61.png" id="xN4-eb-dJ5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UNj-li-7Yx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2419,9 +2419,9 @@
         <image name="tab_icon21.png" width="25" height="25"/>
         <image name="tab_icon30.png" width="25" height="25"/>
         <image name="tab_icon31.png" width="25" height="25"/>
-        <image name="tab_icon40.png" width="25" height="25"/>
-        <image name="tab_icon41.png" width="25" height="25"/>
         <image name="tab_icon50.png" width="25" height="25"/>
         <image name="tab_icon51.png" width="25" height="25"/>
+        <image name="tab_icon60.png" width="25" height="25"/>
+        <image name="tab_icon61.png" width="25" height="25"/>
     </resources>
 </document>
