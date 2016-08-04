@@ -1243,10 +1243,10 @@
                                                     <constraint firstAttribute="width" constant="20" id="xhH-IU-gH4"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="台州" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcu-hm-KHb">
-                                                <rect key="frame" x="32" y="15" width="50" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="台州市 - 椒江区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcu-hm-KHb">
+                                                <rect key="frame" x="32" y="16" width="120" height="17"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="fyq-eo-ADL"/>
+                                                    <constraint firstAttribute="width" constant="120" id="fyq-eo-ADL"/>
                                                     <constraint firstAttribute="height" constant="17" id="mgT-H2-SFP"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
