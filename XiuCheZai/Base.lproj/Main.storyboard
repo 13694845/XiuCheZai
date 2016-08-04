@@ -2228,7 +2228,7 @@
         <scene sceneID="F8X-E1-TBD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d6U-8K-4jy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="社区" image="tab_icon60.png" selectedImage="tab_icon61.png" id="xN4-eb-dJ5"/>
+                    <tabBarItem key="tabBarItem" title="社区" image="tab_icon60.png" selectedImage="tab_icon62.png" id="xN4-eb-dJ5"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UNj-li-7Yx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2425,6 +2425,6 @@
         <image name="tab_icon50.png" width="25" height="25"/>
         <image name="tab_icon51.png" width="25" height="25"/>
         <image name="tab_icon60.png" width="25" height="25"/>
-        <image name="tab_icon61.png" width="25" height="25"/>
+        <image name="tab_icon62.png" width="25" height="25"/>
     </resources>
 </document>
