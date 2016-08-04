@@ -17,6 +17,8 @@
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 
+#import "UIButton+WebCache.h"
+
 @import AVFoundation;
 
 @interface HomeViewController () <UIScrollViewDelegate, ScannerViewControllerDelegate, BannerViewDataSource, BannerViewDelegate, ReminderViewDataSource,
@@ -100,6 +102,7 @@
             [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar.png"] forState:UIControlStateNormal];
             [self.myCarButton removeTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
             [self.myCarButton addTarget:self action:@selector(toMyCar:) forControlEvents:UIControlEventTouchUpInside];
+            [self defaultCarIcon];
         } else {
             [self.myCarButton setBackgroundImage:nil forState:UIControlStateNormal];
             [self.myCarButton setTitle:@"登录" forState:UIControlStateNormal];
@@ -151,6 +154,23 @@
         if (![self.recommenders isEqualToArray:recommenders]) {
             self.recommenders = recommenders;
             [self.recommenderCollectionView reloadData];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+}
+
+- (void)defaultCarIcon {
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/McenterQueryMyCarAction.do"];
+    NSDictionary *parameters = @{@"user_id":@"user_id", @"type":@"1"};
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *defaultCars = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
+        NSString *defaultCarId = [[defaultCars firstObject] objectForKey:@"car_id"];
+        NSArray *cars = [[[responseObject objectForKey:@"data"] lastObject] objectForKey:@"rows"];
+        for (NSDictionary *car in cars) {
+            if ([car[@"car_id"] isEqualToString:defaultCarId]) {
+                NSString *brandIcon = [NSString stringWithFormat:@"http://m.8673h.com/images/brand/%@.png", car[@"brand_id"]];
+                [self.myCarButton sd_setBackgroundImageWithURL:[NSURL URLWithString:brandIcon] forState:UIControlStateNormal];
+                break;
+            }
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
