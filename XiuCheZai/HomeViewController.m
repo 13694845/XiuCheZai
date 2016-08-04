@@ -98,7 +98,7 @@
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
             [self.myCarButton setTitle:nil forState:UIControlStateNormal];
-            [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar.png"] forState:UIControlStateNormal];
+            [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar_box.png"] forState:UIControlStateNormal];
             [self.myCarButton removeTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
             [self.myCarButton addTarget:self action:@selector(toMyCar:) forControlEvents:UIControlEventTouchUpInside];
             [self defaultCarIcon];

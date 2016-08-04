@@ -80,6 +80,7 @@
 		6C671B411D52C59300D2CAE5 /* tab_icon62@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B401D52C59300D2CAE5 /* tab_icon62@2x.png */; };
 		6C671B441D5319F400D2CAE5 /* 启动页750x1334.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B421D5319F400D2CAE5 /* 启动页750x1334.jpg */; };
 		6C671B451D5319F400D2CAE5 /* 启动页1920X1080.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B431D5319F400D2CAE5 /* 启动页1920X1080.jpg */; };
+		6C671B471D533A7C00D2CAE5 /* home_mycar_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B461D533A7C00D2CAE5 /* home_mycar_box.png */; };
 		6C7CE9141CD8773A00617964 /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CE9131CD8773A00617964 /* ScannerViewController.m */; };
 		6C7CE9171CD89ACF00617964 /* home_scanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9151CD89ACF00617964 /* home_scanner.png */; };
 		6C7CE9181CD89ACF00617964 /* home_searcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9161CD89ACF00617964 /* home_searcher.png */; };
@@ -310,6 +311,7 @@
 		6C671B401D52C59300D2CAE5 /* tab_icon62@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon62@2x.png"; sourceTree = "<group>"; };
 		6C671B421D5319F400D2CAE5 /* 启动页750x1334.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "启动页750x1334.jpg"; sourceTree = "<group>"; };
 		6C671B431D5319F400D2CAE5 /* 启动页1920X1080.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "启动页1920X1080.jpg"; sourceTree = "<group>"; };
+		6C671B461D533A7C00D2CAE5 /* home_mycar_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_mycar_box.png; sourceTree = "<group>"; };
 		6C7CE9121CD8773A00617964 /* ScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerViewController.h; sourceTree = "<group>"; };
 		6C7CE9131CD8773A00617964 /* ScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerViewController.m; sourceTree = "<group>"; };
 		6C7CE9151CD89ACF00617964 /* home_scanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_scanner.png; sourceTree = "<group>"; };
@@ -726,6 +728,7 @@
 				6C671B401D52C59300D2CAE5 /* tab_icon62@2x.png */,
 				6C4F645F1C3A43C600A526C4 /* home_menu.png */,
 				6C4F645E1C3A43C600A526C4 /* home_mycar.png */,
+				6C671B461D533A7C00D2CAE5 /* home_mycar_box.png */,
 				6C7CE9151CD89ACF00617964 /* home_scanner.png */,
 				6C7CE9161CD89ACF00617964 /* home_searcher.png */,
 				6C82347C1C436F7D001E6AFE /* home_broadcast.png */,
@@ -1247,6 +1250,7 @@
 				6C91C2CA1C9A3324004C0CB4 /* tab_icon41@2x.png in Resources */,
 				6CE400421C32276C007F6D03 /* menu_xcz.png in Resources */,
 				6C671B411D52C59300D2CAE5 /* tab_icon62@2x.png in Resources */,
+				6C671B471D533A7C00D2CAE5 /* home_mycar_box.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
