@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "launchimage_750x1334.png",
+      "filename" : "启动页750x1334.jpg",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "launchimage_1242x2208.png",
+      "filename" : "启动页1920X1080.jpg",
       "scale" : "3x"
     }
   ],
