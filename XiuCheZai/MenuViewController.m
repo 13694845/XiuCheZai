@@ -21,15 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSDictionary *userlocation = [[NSUserDefaults standardUserDefaults] objectForKey:@"userlocation"];
+    self.cityLabel.text = nil;
+    NSDictionary *userlocation = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
     double longitude = [[userlocation objectForKey:@"longitude"] doubleValue];
     double latitude = [[userlocation objectForKey:@"latitude"] doubleValue];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> *placemarks, NSError *error) {
-        // CLPlacemark *placemark = placemarks.firstObject;
-        // self.cityLabel.text = placemark.subLocality;
-        self.cityLabel.text = @"台州";
+        CLPlacemark *placemark = placemarks.firstObject;
+        self.cityLabel.text = placemark.subLocality;
     }];
 }
 
