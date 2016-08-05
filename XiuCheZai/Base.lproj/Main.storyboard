@@ -1137,7 +1137,7 @@
                                             <constraint firstAttribute="width" constant="28" id="tbk-aQ-oor"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" backgroundImage="home_mycar.png">
+                                        <state key="normal" backgroundImage="home_mycar_box.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -2390,7 +2390,7 @@
         <image name="home_icon17.png" width="148" height="148"/>
         <image name="home_icon18.png" width="148" height="148"/>
         <image name="home_menu.png" width="60" height="40"/>
-        <image name="home_mycar.png" width="60" height="40"/>
+        <image name="home_mycar_box.png" width="60" height="60"/>
         <image name="home_redbar.png" width="21" height="110"/>
         <image name="home_scanner.png" width="60" height="60"/>
         <image name="menu_back.png" width="50" height="374"/>
