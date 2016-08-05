@@ -100,7 +100,7 @@
 - (void)goHome {
     if (self.webView.isLoading) [self.webView stopLoading];
     self.tabBarController.selectedIndex = TabIndexHome;
-    [((UINavigationController *)self.tabBarController.selectedViewController) popToRootViewControllerAnimated:NO];
+    [(UINavigationController *)[self.tabBarController.viewControllers firstObject] popToRootViewControllerAnimated:NO];
 }
 
 - (void)goCart {
