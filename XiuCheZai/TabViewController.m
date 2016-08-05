@@ -51,6 +51,7 @@
     self.needsRefresh = !([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/save_info/index.html"]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/refund/index.html?orderId="]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/publish/index.html?session_key="]]
+                          || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/publish/index.html?post_id="]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]);
     
     if ([request.URL.description isEqualToString:[Config baseURL]]
