@@ -44,10 +44,12 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    // ***** fullScreen
     self.fullScreen = ![request.URL.description containsString:self.url.description];
     if ([self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/index/"]]) self.fullScreen = YES;
     [self viewWillLayoutSubviews];
     
+    // ***** needsRefresh
     self.needsRefresh = !([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/save_info/index.html"]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/refund/index.html?orderId="]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/publish/index.html?session_key="]]
