@@ -28,9 +28,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (!self.webView.isLoading && self.needsRefresh) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    // if (!self.webView.isLoading && self.needsRefresh) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    if (self.needsRefresh) {
+        if (self.webView.isLoading) [self.webView stopLoading];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    }
 }
 
+
+// *****
 - (void)viewWillLayoutSubviews {
     if (!self.fullScreen) {
         self.tabBarController.tabBar.hidden = NO;
