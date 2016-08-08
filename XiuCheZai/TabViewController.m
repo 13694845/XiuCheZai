@@ -28,15 +28,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    // if (!self.webView.isLoading && self.needsRefresh) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-    if (self.needsRefresh) {
-        if (self.webView.isLoading) [self.webView stopLoading];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-    }
+    if (!self.webView.isLoading && self.needsRefresh) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
-
-// *****
 - (void)viewWillLayoutSubviews {
     if (!self.fullScreen) {
         self.tabBarController.tabBar.hidden = NO;
@@ -50,12 +44,15 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    // ***** fullScreen
+    /*
     self.fullScreen = ![request.URL.description containsString:self.url.description];
     if ([self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/index/"]]) self.fullScreen = YES;
     [self viewWillLayoutSubviews];
+    */
+    self.fullScreen = ![request.URL.description isEqualToString:self.url.description]
+                        || [self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/index/"]];
+    [self viewWillLayoutSubviews];
     
-    // ***** needsRefresh
     self.needsRefresh = !([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/save_info/index.html"]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/refund/index.html?orderId="]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/publish/index.html?session_key="]]
