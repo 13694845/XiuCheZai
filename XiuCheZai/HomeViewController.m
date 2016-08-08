@@ -303,7 +303,27 @@
 
 - (void)scannerViewController:(ScannerViewController *)scannerViewController didFinishScanningCodeWithInfo:(NSDictionary *)info {
     [scannerViewController.navigationController popViewControllerAnimated:NO];
+    /* must be login */
+    if ([[info objectForKey:@"url"] hasPrefix:@"Qsh://"]) {
+        [self receiveCardWithURLString:[info objectForKey:@"url"]];
+        return;
+    }
     [self launchWebViewWithURLString:[info objectForKey:@"url"]];
+}
+
+- (void)receiveCardWithURLString:(NSString *)url {
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/ErWeiMaAction.do"];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    url = [[url componentsSeparatedByString:@"//"] lastObject];
+    NSArray *kvs = [url componentsSeparatedByString:@"&"];
+    for (NSString *kv in kvs) {
+        NSString *k = [[kv componentsSeparatedByString:@"="] firstObject];
+        NSString *v = [[kv componentsSeparatedByString:@"="] lastObject];
+        if (k && v) [parameters setValue:v forKey:k];
+    }
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"responseObject : %@", responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
 - (IBAction)toSearch:(id)sender {
