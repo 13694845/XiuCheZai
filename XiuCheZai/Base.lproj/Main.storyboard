@@ -1199,7 +1199,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="7JO-lm-MCn">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="RSr-P5-hKf" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="RSr-P5-hKf" customClass="TabBarController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="O1c-zi-A5N">

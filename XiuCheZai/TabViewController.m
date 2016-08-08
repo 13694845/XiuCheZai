@@ -101,6 +101,7 @@
 - (void)goHome {
     if (self.webView.isLoading) [self.webView stopLoading];
     self.tabBarController.selectedIndex = TabIndexHome;
+    // *****
     [(UINavigationController *)[self.tabBarController.viewControllers firstObject] popToRootViewControllerAnimated:NO];
 }
 

@@ -81,6 +81,7 @@
 		6C671B441D5319F400D2CAE5 /* 启动页750x1334.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B421D5319F400D2CAE5 /* 启动页750x1334.jpg */; };
 		6C671B451D5319F400D2CAE5 /* 启动页1920X1080.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B431D5319F400D2CAE5 /* 启动页1920X1080.jpg */; };
 		6C671B471D533A7C00D2CAE5 /* home_mycar_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B461D533A7C00D2CAE5 /* home_mycar_box.png */; };
+		6C671B4D1D580E2800D2CAE5 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C671B4C1D580E2800D2CAE5 /* TabBarController.m */; };
 		6C7CE9141CD8773A00617964 /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CE9131CD8773A00617964 /* ScannerViewController.m */; };
 		6C7CE9171CD89ACF00617964 /* home_scanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9151CD89ACF00617964 /* home_scanner.png */; };
 		6C7CE9181CD89ACF00617964 /* home_searcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9161CD89ACF00617964 /* home_searcher.png */; };
@@ -312,6 +313,8 @@
 		6C671B421D5319F400D2CAE5 /* 启动页750x1334.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "启动页750x1334.jpg"; sourceTree = "<group>"; };
 		6C671B431D5319F400D2CAE5 /* 启动页1920X1080.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "启动页1920X1080.jpg"; sourceTree = "<group>"; };
 		6C671B461D533A7C00D2CAE5 /* home_mycar_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_mycar_box.png; sourceTree = "<group>"; };
+		6C671B4B1D580E2800D2CAE5 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		6C671B4C1D580E2800D2CAE5 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		6C7CE9121CD8773A00617964 /* ScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerViewController.h; sourceTree = "<group>"; };
 		6C7CE9131CD8773A00617964 /* ScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerViewController.m; sourceTree = "<group>"; };
 		6C7CE9151CD89ACF00617964 /* home_scanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_scanner.png; sourceTree = "<group>"; };
@@ -1007,6 +1010,8 @@
 				6C9F60A21D42179700910335 /* New.storyboard */,
 				6C9F60C51D459C9200910335 /* XCZHomeViewController.h */,
 				6C9F60C61D459C9200910335 /* XCZHomeViewController.m */,
+				6C671B4B1D580E2800D2CAE5 /* TabBarController.h */,
+				6C671B4C1D580E2800D2CAE5 /* TabBarController.m */,
 			);
 			path = XiuCheZai;
 			sourceTree = "<group>";
@@ -1288,6 +1293,7 @@
 				6C4D0C471C28E998003E96E8 /* UIImage+GIF.m in Sources */,
 				6C4D0C401C28E998003E96E8 /* SDWebImageCompat.m in Sources */,
 				6C8EC2751C1E548000BCABB5 /* UIProgressView+AFNetworking.m in Sources */,
+				6C671B4D1D580E2800D2CAE5 /* TabBarController.m in Sources */,
 				6C48C9C41CD9ECC70015515D /* URLEncoder.m in Sources */,
 				6C8EC2591C1E546E00BCABB5 /* AFURLSessionManager.m in Sources */,
 				6C8EC2761C1E548000BCABB5 /* UIRefreshControl+AFNetworking.m in Sources */,
