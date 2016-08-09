@@ -985,6 +985,8 @@
 				6C7CE9131CD8773A00617964 /* ScannerViewController.m */,
 				6CD2F9F91C4629BC0033437D /* WebViewController.h */,
 				6CD2F9FA1C4629BC0033437D /* WebViewController.m */,
+				6C671B4B1D580E2800D2CAE5 /* TabBarController.h */,
+				6C671B4C1D580E2800D2CAE5 /* TabBarController.m */,
 				6C1608821C93E4CD00A9E16F /* TabViewController.h */,
 				6C1608831C93E4CD00A9E16F /* TabViewController.m */,
 				6C91C2C01C9A2E66004C0CB4 /* StoreViewController.h */,
@@ -1010,8 +1012,6 @@
 				6C9F60A21D42179700910335 /* New.storyboard */,
 				6C9F60C51D459C9200910335 /* XCZHomeViewController.h */,
 				6C9F60C61D459C9200910335 /* XCZHomeViewController.m */,
-				6C671B4B1D580E2800D2CAE5 /* TabBarController.h */,
-				6C671B4C1D580E2800D2CAE5 /* TabBarController.m */,
 			);
 			path = XiuCheZai;
 			sourceTree = "<group>";
