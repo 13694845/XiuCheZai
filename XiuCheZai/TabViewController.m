@@ -64,12 +64,10 @@
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/publish/index.html?session_key="]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/publish/index.html?post_id="]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/userinfo/index.html"]]
-                          
-                          
+                          /*
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/service/index/index.html"]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Car_Brand/index.html"]]
-                          
-                          
+                          */
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]);
     
     if ([request.URL.description isEqualToString:[Config baseURL]]
