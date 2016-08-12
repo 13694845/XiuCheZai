@@ -312,7 +312,9 @@
                 return;
             }
         } else {
-            [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Login/login/login.html?url=http%3A%2F%2Fm.8673h.com%2Findex.html"]];
+            // [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Login/login/login.html?url=http%3A%2F%2Fm.8673h.com%2Findex.html"]];
+            NSString *url = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"];
+            [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/Login/login/login.html?url=", url]];
             return;
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
