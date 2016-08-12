@@ -32,7 +32,7 @@
     
     // if (!self.webView.isLoading && self.needsRefresh) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     if (self.needsRefresh) {
-        if (self.webView.isLoading) [self.webView stopLoading];
+        // if (self.webView.isLoading) [self.webView stopLoading];
         [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
     }
 }
