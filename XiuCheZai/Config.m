@@ -25,7 +25,7 @@ static NSString *const kTestBaseURL = @"http://192.168.2.4:8080";
 }
 
 + (NSString *)baseURL {
-    return kWebBaseURL;
+    return kTestBaseURL;
 }
 
 + (NSString *)webBaseURL {
