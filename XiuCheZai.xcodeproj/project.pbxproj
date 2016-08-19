@@ -83,6 +83,7 @@
 		6C671B471D533A7C00D2CAE5 /* home_mycar_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B461D533A7C00D2CAE5 /* home_mycar_box.png */; };
 		6C671B4D1D580E2800D2CAE5 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C671B4C1D580E2800D2CAE5 /* TabBarController.m */; };
 		6C6DD9511D66F01700FEAEDD /* XCZDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD9501D66F01700FEAEDD /* XCZDiscoveryViewController.m */; };
+		6C6DD9541D66FEDF00FEAEDD /* XCZNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD9531D66FEDF00FEAEDD /* XCZNewsViewController.m */; };
 		6C7CE9141CD8773A00617964 /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CE9131CD8773A00617964 /* ScannerViewController.m */; };
 		6C7CE9171CD89ACF00617964 /* home_scanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9151CD89ACF00617964 /* home_scanner.png */; };
 		6C7CE9181CD89ACF00617964 /* home_searcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9161CD89ACF00617964 /* home_searcher.png */; };
@@ -318,6 +319,8 @@
 		6C671B4C1D580E2800D2CAE5 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		6C6DD94F1D66F01700FEAEDD /* XCZDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZDiscoveryViewController.h; sourceTree = "<group>"; };
 		6C6DD9501D66F01700FEAEDD /* XCZDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZDiscoveryViewController.m; sourceTree = "<group>"; };
+		6C6DD9521D66FEDF00FEAEDD /* XCZNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZNewsViewController.h; sourceTree = "<group>"; };
+		6C6DD9531D66FEDF00FEAEDD /* XCZNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZNewsViewController.m; sourceTree = "<group>"; };
 		6C7CE9121CD8773A00617964 /* ScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerViewController.h; sourceTree = "<group>"; };
 		6C7CE9131CD8773A00617964 /* ScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerViewController.m; sourceTree = "<group>"; };
 		6C7CE9151CD89ACF00617964 /* home_scanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_scanner.png; sourceTree = "<group>"; };
@@ -1009,6 +1012,8 @@
 				6CABF7131C0E978B00DF3EFF /* Main.storyboard */,
 				6C6DD94F1D66F01700FEAEDD /* XCZDiscoveryViewController.h */,
 				6C6DD9501D66F01700FEAEDD /* XCZDiscoveryViewController.m */,
+				6C6DD9521D66FEDF00FEAEDD /* XCZNewsViewController.h */,
+				6C6DD9531D66FEDF00FEAEDD /* XCZNewsViewController.m */,
 				6C25D6081D17BBD0007D8BE4 /* error.html */,
 				6CABF7161C0E978B00DF3EFF /* Assets.xcassets */,
 				6CABF7181C0E978B00DF3EFF /* LaunchScreen.storyboard */,
@@ -1290,6 +1295,7 @@
 				6C8B105E1CC6084F003CF8F5 /* ReminderView.m in Sources */,
 				6C8EC2551C1E546E00BCABB5 /* AFNetworkReachabilityManager.m in Sources */,
 				6C8EC27A1C1E8A7800BCABB5 /* Config.m in Sources */,
+				6C6DD9541D66FEDF00FEAEDD /* XCZNewsViewController.m in Sources */,
 				6CABF70F1C0E978B00DF3EFF /* AppDelegate.m in Sources */,
 				6C8B108C1CC85A73003CF8F5 /* CachingURLProtocol.m in Sources */,
 				6C4D0C481C28E998003E96E8 /* UIImage+MultiFormat.m in Sources */,
