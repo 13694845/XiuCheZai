@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pd8-nb-hna">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cms-qA-ekR">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1196,25 +1196,25 @@
             </objects>
             <point key="canvasLocation" x="478.5" y="-3332.5"/>
         </scene>
-        <!--View Controller-->
+        <!--发现-->
         <scene sceneID="pBB-t0-EWJ">
             <objects>
-                <viewController id="pd8-nb-hna" sceneMemberID="viewController">
+                <viewController id="pd8-nb-hna" customClass="NewDiscoveryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gya-Cm-XTz"/>
                         <viewControllerLayoutGuide type="bottom" id="Vvg-s6-onn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="V2u-9G-F5Y">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <tabBarItem key="tabBarItem" title="发现" image="发现.png" id="A3T-dM-62z"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ze-Zu-Jtt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-459.5" y="-4386.5"/>
+            <point key="canvasLocation" x="200.5" y="-4386.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7JO-lm-MCn">
@@ -2386,6 +2386,24 @@
             </objects>
             <point key="canvasLocation" x="-459.5" y="148.5"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="0f8-bF-7oB">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="cms-qA-ekR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="lh3-0m-9Yn">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="pd8-nb-hna" kind="relationship" relationship="viewControllers" id="g8v-oJ-Ugo"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FJh-S2-UY9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-459.5" y="-4386.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="banner01.jpg" width="800" height="435"/>
@@ -2446,5 +2464,6 @@
         <image name="tab_icon51.png" width="25" height="25"/>
         <image name="tab_icon60.png" width="25" height="25"/>
         <image name="tab_icon62.png" width="25" height="25"/>
+        <image name="发现.png" width="22" height="22"/>
     </resources>
 </document>
