@@ -1258,11 +1258,18 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.082352941176470587" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pHl-BI-4Xv">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="发现" image="发现.png" id="A3T-dM-62z"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="contentView" destination="pHl-BI-4Xv" id="HMx-ex-UVD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ze-Zu-Jtt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
