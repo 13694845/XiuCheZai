@@ -1,5 +1,5 @@
 //
-//  NewDiscoveryViewController.h
+//  XCZDiscoveryViewController.h
 //  XiuCheZai
 //
 //  Created by QSH on 16/8/19.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewDiscoveryViewController : UIViewController
+@interface XCZDiscoveryViewController : UIViewController
 
 @end

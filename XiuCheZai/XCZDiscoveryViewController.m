@@ -1,18 +1,18 @@
 //
-//  NewDiscoveryViewController.m
+//  XCZDiscoveryViewController.m
 //  XiuCheZai
 //
 //  Created by QSH on 16/8/19.
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import "NewDiscoveryViewController.h"
+#import "XCZDiscoveryViewController.h"
 
-@interface NewDiscoveryViewController ()
+@interface XCZDiscoveryViewController ()
 
 @end
 
-@implementation NewDiscoveryViewController
+@implementation XCZDiscoveryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
