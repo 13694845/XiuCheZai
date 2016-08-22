@@ -21,10 +21,16 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
+    
+    UIImageView *v = [[UIImageView alloc] initWithImage:nil];
+    v.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 110.0);
+    v.backgroundColor = [UIColor lightGrayColor];
+    self.tableView.tableHeaderView = v;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 8;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
