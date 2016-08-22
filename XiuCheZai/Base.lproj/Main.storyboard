@@ -1269,6 +1269,10 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="contentView" destination="pHl-BI-4Xv" id="HMx-ex-UVD"/>
+                        <outletCollection property="buttons" destination="Rqw-yY-UF4" id="jOD-bi-P4z"/>
+                        <outletCollection property="buttons" destination="UOR-iL-LdW" id="OJZ-1G-Llg"/>
+                        <outletCollection property="buttons" destination="3tC-tU-M3P" id="Tdt-Lg-gS6"/>
+                        <outletCollection property="buttons" destination="FXl-ca-Qcf" id="yAq-nH-431"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ze-Zu-Jtt" userLabel="First Responder" sceneMemberID="firstResponder"/>
