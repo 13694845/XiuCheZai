@@ -8,12 +8,14 @@
 
 #import "XCZDiscoveryViewController.h"
 #import "XCZNewsViewController.h"
+#import "XCZCircleViewController.h"
 
 @interface XCZDiscoveryViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @property (nonatomic, strong) XCZNewsViewController *newsViewController;
+@property (nonatomic, strong) XCZCircleViewController *circleViewController;
 
 @end
 
@@ -26,7 +28,13 @@
     self.newsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZNewsViewController"];
     [self addChildViewController:self.newsViewController];
     self.newsViewController.view.frame = self.contentView.frame;
-    [self.view addSubview:self.newsViewController.view];
+//    [self.view addSubview:self.newsViewController.view];
+
+
+    self.circleViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleViewController"];
+    [self addChildViewController:self.circleViewController];
+    self.circleViewController.view.frame = self.contentView.frame;
+    [self.view addSubview:self.circleViewController.view];
 }
 
 - (void)didReceiveMemoryWarning {
