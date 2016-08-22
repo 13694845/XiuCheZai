@@ -35,13 +35,19 @@
     [self.contentView addSubview:viewController.view];
 }
 
+- (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
+                            duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options {
+    
+    
+    
+}
+
 - (void)switchContent:(id)sender {
     UIViewController *currentViewController = self.childViewControllers[self.currentIndex];
     
     int newIndex = [self.buttons indexOfObject:sender];
     UIViewController *newViewController = self.childViewControllers[newIndex];
     
-    /*
     [self transitionFromViewController:currentViewController toViewController:newViewController duration:0.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGRect rect = self.contentView.bounds;
         rect.origin.x -= self.contentView.bounds.size.width;
@@ -50,7 +56,6 @@
         
     } completion:^(BOOL finished) {
     }];
-    */
     
     CGRect rect = self.contentView.bounds;
     
