@@ -37,8 +37,27 @@
 
 - (void)switchContent:(id)sender {
     UIViewController *currentViewController = self.childViewControllers[self.currentIndex];
-    UIViewController *newViewController = self.childViewControllers[[self.buttons indexOfObject:sender]];
+    
+    int newIndex = [self.buttons indexOfObject:sender];
+    UIViewController *newViewController = self.childViewControllers[newIndex];
+    
+    /*
+    [self transitionFromViewController:currentViewController toViewController:newViewController duration:0.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGRect rect = self.contentView.bounds;
+        rect.origin.x -= self.contentView.bounds.size.width;
+        currentViewController.view.frame = rect;
+
+        
+    } completion:^(BOOL finished) {
+    }];
+    */
+    
     CGRect rect = self.contentView.bounds;
+    
+    if (newIndex > self.currentIndex) {
+        
+    }
+    
     rect.origin.x += self.contentView.bounds.size.width;
     newViewController.view.frame = rect;
     [self.contentView addSubview:newViewController.view];
