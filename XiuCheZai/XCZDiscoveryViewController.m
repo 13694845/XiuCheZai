@@ -36,17 +36,19 @@
 }
 
 - (void)switchContent:(id)sender {
-    UIViewController *viewController = self.childViewControllers[self.currentIndex];
+    UIViewController *currentViewController = self.childViewControllers[self.currentIndex];
+    UIViewController *newViewController = self.childViewControllers[[self.buttons indexOfObject:sender]];
+    CGRect rect = self.contentView.bounds;
+    rect.origin.x += self.contentView.bounds.size.width;
+    newViewController.view.frame = rect;
+    [self.contentView addSubview:newViewController.view];
     
-    CGRect rect = viewController.view.frame;
-    rect.origin.x = rect.size.width;
-    // viewController.view.frame = rect;
-    
-    // rect.origin.x = 0;
-    [UIView animateWithDuration:0.3 animations:^{
-        viewController.view.frame = rect;
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect rect = self.contentView.bounds;
+        rect.origin.x -= self.contentView.bounds.size.width;
+        currentViewController.view.frame = rect;
+        newViewController.view.frame = self.contentView.bounds;
     }];
-    // [viewController.view removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning {
