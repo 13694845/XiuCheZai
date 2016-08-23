@@ -429,6 +429,10 @@
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html?pjfl=270100&title=%E5%BD%B1%E9%9F%B3%E5%AF%BC%E8%88%AA"]];
 }
 
+- (IBAction)toA14:(id)sender {
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/make-money/index/index.html"]];
+}
+
 - (IBAction)toMaintainRecord:(id)sender {
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/MaintainFiles/FirstFile/index.html"]];
 }
