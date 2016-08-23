@@ -12,10 +12,16 @@
 @interface XCZNewsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) NSMutableArray *rows;
 
 @end
 
 @implementation XCZNewsViewController
+
+- (NSMutableArray *)rows {
+    if (!_rows) _rows = [NSMutableArray array];
+    return _rows;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
