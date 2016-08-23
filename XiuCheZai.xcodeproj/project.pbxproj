@@ -87,6 +87,7 @@
 		6C6DD9571D67010400FEAEDD /* XCZNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD9561D67010400FEAEDD /* XCZNewsTableViewCell.m */; };
 		6C6DD95D1D6A862900FEAEDD /* XCZCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD95C1D6A862900FEAEDD /* XCZCircleViewController.m */; };
 		6C6DD9601D6A867500FEAEDD /* XCZCircleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD95F1D6A867500FEAEDD /* XCZCircleTableViewCell.m */; };
+		6C6DD9621D6C391B00FEAEDD /* home_icon19.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C6DD9611D6C391B00FEAEDD /* home_icon19.png */; };
 		6C7CE9141CD8773A00617964 /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7CE9131CD8773A00617964 /* ScannerViewController.m */; };
 		6C7CE9171CD89ACF00617964 /* home_scanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9151CD89ACF00617964 /* home_scanner.png */; };
 		6C7CE9181CD89ACF00617964 /* home_searcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CE9161CD89ACF00617964 /* home_searcher.png */; };
@@ -330,6 +331,7 @@
 		6C6DD95C1D6A862900FEAEDD /* XCZCircleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZCircleViewController.m; sourceTree = "<group>"; };
 		6C6DD95E1D6A867500FEAEDD /* XCZCircleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZCircleTableViewCell.h; sourceTree = "<group>"; };
 		6C6DD95F1D6A867500FEAEDD /* XCZCircleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZCircleTableViewCell.m; sourceTree = "<group>"; };
+		6C6DD9611D6C391B00FEAEDD /* home_icon19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon19.png; sourceTree = "<group>"; };
 		6C7CE9121CD8773A00617964 /* ScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerViewController.h; sourceTree = "<group>"; };
 		6C7CE9131CD8773A00617964 /* ScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerViewController.m; sourceTree = "<group>"; };
 		6C7CE9151CD89ACF00617964 /* home_scanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_scanner.png; sourceTree = "<group>"; };
@@ -770,6 +772,7 @@
 				6C5C5EFD1C86DA66008CDD3C /* home_icon16.png */,
 				6CA7A5071CCEF15100425D23 /* home_icon17.png */,
 				6CA7A5091CCEF17A00425D23 /* home_icon18.png */,
+				6C6DD9611D6C391B00FEAEDD /* home_icon19.png */,
 				6CDB3AF01C61DE08007C1AD1 /* home_activity01.png */,
 				6C1365C61C25022C00B217DD /* home_activity02.png */,
 				6C05EDFC1C33C58400BF8C39 /* home_activity03.png */,
@@ -1215,6 +1218,7 @@
 				6C8B104F1CC4D087003CF8F5 /* menu_icon02.jpg in Resources */,
 				6CABF71A1C0E978B00DF3EFF /* LaunchScreen.storyboard in Resources */,
 				6C1365BA1C24F6C300B217DD /* home_icon02.png in Resources */,
+				6C6DD9621D6C391B00FEAEDD /* home_icon19.png in Resources */,
 				6C91C2C61C9A315B004C0CB4 /* tab_icon11@2x.png in Resources */,
 				6C1365CA1C25022C00B217DD /* home_activity02.png in Resources */,
 				6C8B104E1CC4D087003CF8F5 /* menu_icon01.jpg in Resources */,
