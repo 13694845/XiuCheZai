@@ -36,7 +36,8 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
     [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleViewController"]];
     
     [self.buttons.firstObject setAlpha:1.0];
-    UIViewController *viewController = self.childViewControllers.firstObject;
+    // UIViewController *viewController = self.childViewControllers.firstObject;
+    UIViewController *viewController = self.childViewControllers[1];
     viewController.view.frame = self.contentView.bounds;
     [self.contentView addSubview:viewController.view];
 }
