@@ -31,7 +31,7 @@
     
     UIImageView *v = [[UIImageView alloc] initWithImage:nil];
     v.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 110.0);
-    v.backgroundColor = [UIColor lightGrayColor];
+    v.backgroundColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
     self.tableView.tableHeaderView = v;
 }
 
@@ -46,6 +46,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XCZNewsTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellA" forIndexPath:indexPath];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSLog(@"didSelectRowAtIndexPath : %ld", indexPath.row);
 }
 
 - (void)didReceiveMemoryWarning {
