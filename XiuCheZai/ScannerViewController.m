@@ -33,7 +33,13 @@
     [self.session addOutput:output];
     output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
     
-    UIView *boxView = [[UIView alloc] initWithFrame:CGRectMake(60.0, 110.0, 200.0, 200.0)];
+    CGFloat const kBoxWidth = 200.0;
+    CGFloat const kBoxHeight = 200.0;
+    
+    // UIView *boxView = [[UIView alloc] initWithFrame:CGRectMake(60.0, 110.0, 200.0, 200.0)];
+    CGRect screen = [UIScreen mainScreen].bounds;
+    UIView *boxView = [[UIView alloc] initWithFrame:CGRectMake((screen.size.width-kBoxWidth)/2.0, (screen.size.height-kBoxHeight)/2.0, kBoxWidth, kBoxHeight)];
+
     boxView.layer.borderColor = [UIColor greenColor].CGColor;
     boxView.layer.borderWidth = 1.0;
     [self.view addSubview:boxView];
