@@ -12,10 +12,10 @@
 
 typedef NS_ENUM(int, TabIndex) {
     TabIndexHome = 0,
-    TabIndexStore = 1,
-    TabIndexDiscovery = 2,
-    TabIndexAccessory = 3,
-    TabIndexMine = 4,
+    TabIndexStore,
+    // TabIndexDiscovery,
+    TabIndexAccessory,
+    TabIndexMine,
     TabIndexCart
 };
 
