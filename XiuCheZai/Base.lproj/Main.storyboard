@@ -566,7 +566,7 @@
                                                             <constraint firstAttribute="height" constant="17" id="p3W-A6-Mr0"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="到点检测">
+                                                        <state key="normal" title="到店检测">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <connections>
