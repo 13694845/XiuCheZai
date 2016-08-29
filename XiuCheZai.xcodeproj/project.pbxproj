@@ -203,6 +203,7 @@
 		6CE363901D73E2F400AA0B53 /* XCZActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE3638F1D73E2F400AA0B53 /* XCZActivityTableViewCell.m */; };
 		6CE363931D7402F900AA0B53 /* XCZClubTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE363921D7402F900AA0B53 /* XCZClubTableViewCell.m */; };
 		6CE363961D74032800AA0B53 /* XCZClubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE363951D74032800AA0B53 /* XCZClubViewController.m */; };
+		6CE3639A1D741FAE00AA0B53 /* XCZNewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE363991D741FAE00AA0B53 /* XCZNewsDetailViewController.m */; };
 		6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4003B1C320C62007F6D03 /* MenuViewController.m */; };
 		6CE4003E1C322077007F6D03 /* menu_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4003D1C322077007F6D03 /* menu_back.png */; };
 		6CE400421C32276C007F6D03 /* menu_xcz.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE400411C32276C007F6D03 /* menu_xcz.png */; };
@@ -575,6 +576,8 @@
 		6CE363921D7402F900AA0B53 /* XCZClubTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZClubTableViewCell.m; sourceTree = "<group>"; };
 		6CE363941D74032800AA0B53 /* XCZClubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZClubViewController.h; sourceTree = "<group>"; };
 		6CE363951D74032800AA0B53 /* XCZClubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZClubViewController.m; sourceTree = "<group>"; };
+		6CE363981D741FAE00AA0B53 /* XCZNewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZNewsDetailViewController.h; sourceTree = "<group>"; };
+		6CE363991D741FAE00AA0B53 /* XCZNewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZNewsDetailViewController.m; sourceTree = "<group>"; };
 		6CE4003A1C320C62007F6D03 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		6CE4003B1C320C62007F6D03 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		6CE4003D1C322077007F6D03 /* menu_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_back.png; sourceTree = "<group>"; };
@@ -1041,10 +1044,7 @@
 				6C6DD9501D66F01700FEAEDD /* XCZDiscoveryViewController.m */,
 				6CE363881D73BB2800AA0B53 /* XCZContentViewController.h */,
 				6CE363891D73BB2800AA0B53 /* XCZContentViewController.m */,
-				6C6DD9521D66FEDF00FEAEDD /* XCZNewsViewController.h */,
-				6C6DD9531D66FEDF00FEAEDD /* XCZNewsViewController.m */,
-				6C6DD9551D67010400FEAEDD /* XCZNewsTableViewCell.h */,
-				6C6DD9561D67010400FEAEDD /* XCZNewsTableViewCell.m */,
+				6CE363971D741F1400AA0B53 /* News */,
 				6C6DD95B1D6A862900FEAEDD /* XCZCircleViewController.h */,
 				6C6DD95C1D6A862900FEAEDD /* XCZCircleViewController.m */,
 				6C6DD95E1D6A867500FEAEDD /* XCZCircleTableViewCell.h */,
@@ -1116,6 +1116,19 @@
 				6CB2AC811C16613E0025260A /* AlipaySDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CE363971D741F1400AA0B53 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				6C6DD9521D66FEDF00FEAEDD /* XCZNewsViewController.h */,
+				6C6DD9531D66FEDF00FEAEDD /* XCZNewsViewController.m */,
+				6C6DD9551D67010400FEAEDD /* XCZNewsTableViewCell.h */,
+				6C6DD9561D67010400FEAEDD /* XCZNewsTableViewCell.m */,
+				6CE363981D741FAE00AA0B53 /* XCZNewsDetailViewController.h */,
+				6CE363991D741FAE00AA0B53 /* XCZNewsDetailViewController.m */,
+			);
+			name = News;
 			sourceTree = "<group>";
 		};
 		6CE4FFFA1C2D0B63007F6D03 /* MBProgressHUD */ = {
@@ -1341,6 +1354,7 @@
 				6CE4FFFD1C2D0B63007F6D03 /* MBProgressHUD.m in Sources */,
 				6C4D0C3F1C28E998003E96E8 /* SDImageCache.m in Sources */,
 				6CEB5A891C48D1E000717CBA /* BannerView.m in Sources */,
+				6CE3639A1D741FAE00AA0B53 /* XCZNewsDetailViewController.m in Sources */,
 				6C8B105E1CC6084F003CF8F5 /* ReminderView.m in Sources */,
 				6C8EC2551C1E546E00BCABB5 /* AFNetworkReachabilityManager.m in Sources */,
 				6C8EC27A1C1E8A7800BCABB5 /* Config.m in Sources */,
