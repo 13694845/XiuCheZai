@@ -1280,7 +1280,7 @@
                         <outletCollection property="buttons" destination="UOR-iL-LdW" id="OJZ-1G-Llg"/>
                         <outletCollection property="buttons" destination="3tC-tU-M3P" id="Tdt-Lg-gS6"/>
                         <outletCollection property="buttons" destination="FXl-ca-Qcf" id="yAq-nH-431"/>
-                        <segue destination="Qpa-xc-PRv" kind="show" id="vk6-0G-YUE"/>
+                        <segue destination="Qpa-xc-PRv" kind="show" identifier="ABC" id="vk6-0G-YUE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ze-Zu-Jtt" userLabel="First Responder" sceneMemberID="firstResponder"/>
