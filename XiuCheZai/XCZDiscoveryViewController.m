@@ -9,7 +9,8 @@
 #import "XCZDiscoveryViewController.h"
 #import "XCZNewsViewController.h"
 #import "XCZCircleViewController.h"
-#import "XCZActivityTableViewCell.h"
+#import "XCZActivityViewController.h"
+#import "XCZClubViewController.h"
 
 typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
     DiscoveryContentTransitionScrollLeft     = 1 << 0,
