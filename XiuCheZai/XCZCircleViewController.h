@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XCZContentViewController.h"
 
-@interface XCZCircleViewController : UIViewController
+@interface XCZCircleViewController : XCZContentViewController
 
 @end

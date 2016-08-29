@@ -198,6 +198,7 @@
 		6CD2F9FB1C4629BC0033437D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2F9FA1C4629BC0033437D /* WebViewController.m */; };
 		6CD81E831D06B25E00A12F83 /* common_back_150.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CD81E821D06B25E00A12F83 /* common_back_150.png */; };
 		6CDB3AF11C61DE08007C1AD1 /* home_activity01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CDB3AF01C61DE08007C1AD1 /* home_activity01.png */; };
+		6CE3638A1D73BB2800AA0B53 /* XCZContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE363891D73BB2800AA0B53 /* XCZContentViewController.m */; };
 		6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4003B1C320C62007F6D03 /* MenuViewController.m */; };
 		6CE4003E1C322077007F6D03 /* menu_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4003D1C322077007F6D03 /* menu_back.png */; };
 		6CE400421C32276C007F6D03 /* menu_xcz.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE400411C32276C007F6D03 /* menu_xcz.png */; };
@@ -560,6 +561,8 @@
 		6CD2F9FA1C4629BC0033437D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		6CD81E821D06B25E00A12F83 /* common_back_150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = common_back_150.png; sourceTree = "<group>"; };
 		6CDB3AF01C61DE08007C1AD1 /* home_activity01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_activity01.png; sourceTree = "<group>"; };
+		6CE363881D73BB2800AA0B53 /* XCZContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZContentViewController.h; sourceTree = "<group>"; };
+		6CE363891D73BB2800AA0B53 /* XCZContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZContentViewController.m; sourceTree = "<group>"; };
 		6CE4003A1C320C62007F6D03 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		6CE4003B1C320C62007F6D03 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		6CE4003D1C322077007F6D03 /* menu_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_back.png; sourceTree = "<group>"; };
@@ -1024,6 +1027,8 @@
 				6CABF7131C0E978B00DF3EFF /* Main.storyboard */,
 				6C6DD94F1D66F01700FEAEDD /* XCZDiscoveryViewController.h */,
 				6C6DD9501D66F01700FEAEDD /* XCZDiscoveryViewController.m */,
+				6CE363881D73BB2800AA0B53 /* XCZContentViewController.h */,
+				6CE363891D73BB2800AA0B53 /* XCZContentViewController.m */,
 				6C6DD9521D66FEDF00FEAEDD /* XCZNewsViewController.h */,
 				6C6DD9531D66FEDF00FEAEDD /* XCZNewsViewController.m */,
 				6C6DD9551D67010400FEAEDD /* XCZNewsTableViewCell.h */,
@@ -1339,6 +1344,7 @@
 				6C9F60C71D459C9200910335 /* XCZHomeViewController.m in Sources */,
 				6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */,
 				6C6DD95D1D6A862900FEAEDD /* XCZCircleViewController.m in Sources */,
+				6CE3638A1D73BB2800AA0B53 /* XCZContentViewController.m in Sources */,
 				6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */,
 				6C91C35A1C9A84D2004C0CB4 /* NSDataEx.m in Sources */,
 				6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */,

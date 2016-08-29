@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XCZContentViewController.h"
 
-@interface XCZNewsViewController : UIViewController
+@interface XCZNewsViewController : XCZContentViewController
 
 @end
