@@ -7,6 +7,7 @@
 //
 
 #import "XCZActivityViewController.h"
+#import "XCZActivityTableViewCell.h"
 
 @interface XCZActivityViewController () <UITableViewDataSource, UITableViewDelegate>
 
