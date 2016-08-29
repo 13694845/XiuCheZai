@@ -48,7 +48,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
