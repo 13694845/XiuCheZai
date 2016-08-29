@@ -6,7 +6,6 @@
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "XCZContentViewController.h"
 
 @interface XCZNewsViewController : XCZContentViewController

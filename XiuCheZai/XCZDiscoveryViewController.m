@@ -32,7 +32,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
     for (UIButton *button in self.buttons) [button addTarget:self action:@selector(switchContent:) forControlEvents:UIControlEventTouchUpInside];
     [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZNewsViewController"]];
     [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleViewController"]];
-    [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZNewsViewController"]];
+    [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZActivityViewController"]];
     [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleViewController"]];
     
     [self.buttons.firstObject setAlpha:1.0];
