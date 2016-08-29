@@ -34,7 +34,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
     [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZNewsViewController"]];
     [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleViewController"]];
     [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZActivityViewController"]];
-    [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleViewController"]];
+    [self addChildViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"XCZClubViewController"]];
     
     [self.buttons.firstObject setAlpha:1.0];
     UIViewController *viewController = self.childViewControllers.firstObject;
