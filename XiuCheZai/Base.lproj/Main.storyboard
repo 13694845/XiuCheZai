@@ -2977,7 +2977,7 @@
         <!--News Detail View Controller-->
         <scene sceneID="MOJ-Gw-q4Y">
             <objects>
-                <viewController storyboardIdentifier="XCZNewsDetailViewController" id="Qpa-xc-PRv" customClass="XCZNewsDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="XCZNewsDetailViewController" hidesBottomBarWhenPushed="YES" id="Qpa-xc-PRv" customClass="XCZNewsDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6hP-uL-kIb"/>
                         <viewControllerLayoutGuide type="bottom" id="FYY-N2-uF5"/>
@@ -3012,11 +3012,11 @@
                             <constraint firstItem="irn-F7-4mt" firstAttribute="leading" secondItem="zOP-y6-CG9" secondAttribute="leading" id="AUZ-iM-dTb"/>
                             <constraint firstItem="vyg-Jz-EyZ" firstAttribute="leading" secondItem="WEs-aI-X89" secondAttribute="leadingMargin" id="I9H-py-E5u"/>
                             <constraint firstItem="vyg-Jz-EyZ" firstAttribute="leading" secondItem="irn-F7-4mt" secondAttribute="leading" id="LVD-lt-cLp"/>
+                            <constraint firstItem="FYY-N2-uF5" firstAttribute="top" secondItem="zOP-y6-CG9" secondAttribute="bottom" constant="356" id="SU1-Xe-bgj"/>
                             <constraint firstItem="irn-F7-4mt" firstAttribute="top" secondItem="vyg-Jz-EyZ" secondAttribute="bottom" constant="8" symbolic="YES" id="VFm-zl-05y"/>
                             <constraint firstItem="vyg-Jz-EyZ" firstAttribute="top" secondItem="6hP-uL-kIb" secondAttribute="bottom" constant="8" symbolic="YES" id="eJr-eh-wR3"/>
                             <constraint firstItem="vyg-Jz-EyZ" firstAttribute="trailing" secondItem="zOP-y6-CG9" secondAttribute="trailing" id="p1P-75-zH7"/>
                             <constraint firstItem="vyg-Jz-EyZ" firstAttribute="trailing" secondItem="WEs-aI-X89" secondAttribute="trailingMargin" id="ukR-j1-D16"/>
-                            <constraint firstItem="FYY-N2-uF5" firstAttribute="top" secondItem="zOP-y6-CG9" secondAttribute="bottom" constant="356" id="v0D-Cs-kX3"/>
                         </constraints>
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
