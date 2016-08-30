@@ -94,6 +94,8 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
 
 - (IBAction)doTest:(id)sender {
     XCZNewsDetailViewController *newsDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZNewsDetailViewController"];
+    // newsDetailViewController.tabBarController.tabBar.hidden = YES;
+    // newsDetailViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:newsDetailViewController animated:YES];
 }
 
