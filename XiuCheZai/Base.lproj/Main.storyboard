@@ -2997,7 +2997,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pgj-XJ-PFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076.5" y="-4848.5"/>
+            <point key="canvasLocation" x="1076.5" y="-4852.5"/>
         </scene>
         <!--News Detail View Controller-->
         <scene sceneID="MOJ-Gw-q4Y">
@@ -3019,6 +3019,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9UK-7A-GhU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1533.5" y="-7334.5"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="rQ4-uW-nZO">
+            <objects>
+                <viewController id="wWE-Zi-Pu7" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jyp-1r-ugX"/>
+                        <viewControllerLayoutGuide type="bottom" id="eeh-OW-Zuy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="daA-Au-D3K">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dW8-ec-Uqz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-464.5" y="-5228.5"/>
         </scene>
         <!--发现-->
         <scene sceneID="rb5-Mc-YHE">
