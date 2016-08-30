@@ -8,7 +8,6 @@
 
 #import "XCZNewsViewController.h"
 #import "XCZNewsTableViewCell.h"
-
 #import "XCZNewsDetailViewController.h"
 
 @interface XCZNewsViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -53,10 +52,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     XCZNewsDetailViewController *newsDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZNewsDetailViewController"];
-    
-    
     [self.parentViewController.navigationController pushViewController:newsDetailViewController animated:YES];
-    
 }
 
 - (void)didReceiveMemoryWarning {
