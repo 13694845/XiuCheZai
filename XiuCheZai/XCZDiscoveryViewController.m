@@ -12,6 +12,8 @@
 #import "XCZActivityViewController.h"
 #import "XCZClubViewController.h"
 
+#import "XCZNewsDetailViewController.h"
+
 typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
     DiscoveryContentTransitionScrollLeft     = 1 << 0,
     DiscoveryContentTransitionScrollRight    = 1 << 1
@@ -88,6 +90,11 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
                                   duration:0.2 options:newIndex > self.currentIndex ? DiscoveryContentTransitionScrollLeft : DiscoveryContentTransitionScrollRight];
         self.currentIndex = newIndex;
     }
+}
+
+- (IBAction)doTest:(id)sender {
+    XCZNewsDetailViewController *newsDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZNewsDetailViewController"];
+    [self.navigationController pushViewController:newsDetailViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
