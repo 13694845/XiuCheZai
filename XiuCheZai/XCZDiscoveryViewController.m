@@ -51,7 +51,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self.tabBarController.tabBar setHidden:NO];
 }
 
 - (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
@@ -90,12 +89,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
                                   duration:0.2 options:newIndex > self.currentIndex ? DiscoveryContentTransitionScrollLeft : DiscoveryContentTransitionScrollRight];
         self.currentIndex = newIndex;
     }
-}
-
-- (IBAction)doTest:(id)sender {
-    XCZNewsDetailViewController *newsDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZNewsDetailViewController"];
-    newsDetailViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:newsDetailViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
