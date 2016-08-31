@@ -29,11 +29,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 299.0;
+    return 291;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    XCZCircleTableViewCell*cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellA" forIndexPath:indexPath];
+    XCZCircleTableViewCell*cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellC" forIndexPath:indexPath];
     return cell;
 }
 
