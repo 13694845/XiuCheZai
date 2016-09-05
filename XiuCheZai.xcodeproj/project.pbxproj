@@ -936,6 +936,39 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		6C944B571D7D3A3900820C14 /* Circle */ = {
+			isa = PBXGroup;
+			children = (
+				6C6DD95B1D6A862900FEAEDD /* XCZCircleViewController.h */,
+				6C6DD95C1D6A862900FEAEDD /* XCZCircleViewController.m */,
+				6C6DD95E1D6A867500FEAEDD /* XCZCircleTableViewCell.h */,
+				6C6DD95F1D6A867500FEAEDD /* XCZCircleTableViewCell.m */,
+			);
+			name = Circle;
+			sourceTree = "<group>";
+		};
+		6C944B581D7D3A5900820C14 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				6CE3638B1D73C1DF00AA0B53 /* XCZActivityViewController.h */,
+				6CE3638C1D73C1DF00AA0B53 /* XCZActivityViewController.m */,
+				6CE3638E1D73E2F400AA0B53 /* XCZActivityTableViewCell.h */,
+				6CE3638F1D73E2F400AA0B53 /* XCZActivityTableViewCell.m */,
+			);
+			name = Activity;
+			sourceTree = "<group>";
+		};
+		6C944B591D7D3B0900820C14 /* Club */ = {
+			isa = PBXGroup;
+			children = (
+				6CE363941D74032800AA0B53 /* XCZClubViewController.h */,
+				6CE363951D74032800AA0B53 /* XCZClubViewController.m */,
+				6CE363911D7402F900AA0B53 /* XCZClubTableViewCell.h */,
+				6CE363921D7402F900AA0B53 /* XCZClubTableViewCell.m */,
+			);
+			name = Club;
+			sourceTree = "<group>";
+		};
 		6C9F60A41D4598C600910335 /* icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -1045,18 +1078,9 @@
 				6CE363881D73BB2800AA0B53 /* XCZContentViewController.h */,
 				6CE363891D73BB2800AA0B53 /* XCZContentViewController.m */,
 				6CE363971D741F1400AA0B53 /* News */,
-				6C6DD95B1D6A862900FEAEDD /* XCZCircleViewController.h */,
-				6C6DD95C1D6A862900FEAEDD /* XCZCircleViewController.m */,
-				6C6DD95E1D6A867500FEAEDD /* XCZCircleTableViewCell.h */,
-				6C6DD95F1D6A867500FEAEDD /* XCZCircleTableViewCell.m */,
-				6CE3638B1D73C1DF00AA0B53 /* XCZActivityViewController.h */,
-				6CE3638C1D73C1DF00AA0B53 /* XCZActivityViewController.m */,
-				6CE3638E1D73E2F400AA0B53 /* XCZActivityTableViewCell.h */,
-				6CE3638F1D73E2F400AA0B53 /* XCZActivityTableViewCell.m */,
-				6CE363941D74032800AA0B53 /* XCZClubViewController.h */,
-				6CE363951D74032800AA0B53 /* XCZClubViewController.m */,
-				6CE363911D7402F900AA0B53 /* XCZClubTableViewCell.h */,
-				6CE363921D7402F900AA0B53 /* XCZClubTableViewCell.m */,
+				6C944B571D7D3A3900820C14 /* Circle */,
+				6C944B581D7D3A5900820C14 /* Activity */,
+				6C944B591D7D3B0900820C14 /* Club */,
 				6C25D6081D17BBD0007D8BE4 /* error.html */,
 				6CABF7161C0E978B00DF3EFF /* Assets.xcassets */,
 				6CABF7181C0E978B00DF3EFF /* LaunchScreen.storyboard */,

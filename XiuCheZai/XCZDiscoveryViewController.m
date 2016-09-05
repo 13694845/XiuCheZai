@@ -53,6 +53,17 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
+- (void)switchContent:(id)sender {
+    int newIndex = [self.buttons indexOfObject:sender];
+    if (newIndex != self.currentIndex) {
+        [sender setAlpha:1.0];
+        [self.buttons[self.currentIndex] setAlpha:0.7];
+        [self transitionFromViewController:self.childViewControllers[self.currentIndex] toViewController:self.childViewControllers[newIndex]
+                                  duration:0.2 options:newIndex > self.currentIndex ? DiscoveryContentTransitionScrollLeft : DiscoveryContentTransitionScrollRight];
+        self.currentIndex = newIndex;
+    }
+}
+
 - (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
                             duration:(NSTimeInterval)duration options:(DiscoveryContentTransition)options {
     CGRect rect = self.contentView.bounds;
@@ -78,17 +89,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
     } completion:^(BOOL finished) {
         [fromViewController.view removeFromSuperview];
     }];
-}
-
-- (void)switchContent:(id)sender {
-    int newIndex = [self.buttons indexOfObject:sender];
-    if (newIndex != self.currentIndex) {
-        [sender setAlpha:1.0];
-        [self.buttons[self.currentIndex] setAlpha:0.7];
-        [self transitionFromViewController:self.childViewControllers[self.currentIndex] toViewController:self.childViewControllers[newIndex]
-                                  duration:0.2 options:newIndex > self.currentIndex ? DiscoveryContentTransitionScrollLeft : DiscoveryContentTransitionScrollRight];
-        self.currentIndex = newIndex;
-    }
 }
 
 - (void)didReceiveMemoryWarning {

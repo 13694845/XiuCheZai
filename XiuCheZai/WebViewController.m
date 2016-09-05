@@ -72,7 +72,7 @@
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSLog(@"webView.request : %@", request.URL);
+    // NSLog(@"webView.request : %@", request.URL);
     if ([request.URL.description containsString:@"about:blank"]) {  // Under China mobile 4G.
         return NO;
     }
