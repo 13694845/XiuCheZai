@@ -1148,14 +1148,14 @@
 		6CE363971D741F1400AA0B53 /* news */ = {
 			isa = PBXGroup;
 			children = (
-				6C944B5A1D7E823500820C14 /* XCZNewsDetailModel.h */,
-				6C944B5B1D7E823500820C14 /* XCZNewsDetailModel.m */,
 				6C6DD9521D66FEDF00FEAEDD /* XCZNewsViewController.h */,
 				6C6DD9531D66FEDF00FEAEDD /* XCZNewsViewController.m */,
 				6C6DD9551D67010400FEAEDD /* XCZNewsTableViewCell.h */,
 				6C6DD9561D67010400FEAEDD /* XCZNewsTableViewCell.m */,
 				6CE363981D741FAE00AA0B53 /* XCZNewsDetailViewController.h */,
 				6CE363991D741FAE00AA0B53 /* XCZNewsDetailViewController.m */,
+				6C944B5A1D7E823500820C14 /* XCZNewsDetailModel.h */,
+				6C944B5B1D7E823500820C14 /* XCZNewsDetailModel.m */,
 			);
 			name = news;
 			sourceTree = "<group>";
