@@ -10,4 +10,6 @@
 
 @interface XCZNewsDetailViewController : UIViewController
 
+@property (nonatomic, copy) NSString *newsId;
+
 @end
