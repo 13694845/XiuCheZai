@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 700)];
+    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.bounds.size.width, 700)];
     
     // ...
     
