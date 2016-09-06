@@ -10,6 +10,6 @@
 
 @interface XCZNewsTableViewCell : UITableViewCell
 
-@property (nonatomic) NSMutableArray *row;
+@property (nonatomic, copy) NSDictionary *row;
 
 @end
