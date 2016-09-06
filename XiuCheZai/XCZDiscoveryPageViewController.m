@@ -22,4 +22,12 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)loadData {
+    
+}
+
+- (void)refreshData {
+    
+}
+
 @end
