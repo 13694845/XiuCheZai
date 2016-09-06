@@ -6,7 +6,7 @@
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import "XCZDiscoveryViewController.h"
+#import "XCZDiscoveryFrameViewController.h"
 #import "XCZNewsViewController.h"
 #import "XCZCircleViewController.h"
 #import "XCZActivityViewController.h"
@@ -19,7 +19,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
     DiscoveryContentTransitionScrollRight    = 1 << 1
 };
 
-@interface XCZDiscoveryViewController ()
+@interface XCZDiscoveryFrameViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
@@ -27,7 +27,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
 
 @end
 
-@implementation XCZDiscoveryViewController
+@implementation XCZDiscoveryFrameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

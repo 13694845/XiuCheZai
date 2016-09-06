@@ -6,8 +6,8 @@
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import "XCZContentViewController.h"
+#import "XCZDiscoveryPageViewController.h"
 
-@interface XCZClubViewController : XCZContentViewController
+@interface XCZClubViewController : XCZDiscoveryPageViewController
 
 @end

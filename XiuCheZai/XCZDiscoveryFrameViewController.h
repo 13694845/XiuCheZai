@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XCZDiscoveryViewController : UIViewController
+@interface XCZDiscoveryFrameViewController : UIViewController
 
 @end

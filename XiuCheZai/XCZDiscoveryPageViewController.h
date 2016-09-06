@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XCZContentViewController : UIViewController
+@interface XCZDiscoveryPageViewController : UIViewController
 
 @end

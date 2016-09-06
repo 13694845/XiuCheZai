@@ -82,7 +82,7 @@
 		6C671B451D5319F400D2CAE5 /* 启动页1920X1080.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B431D5319F400D2CAE5 /* 启动页1920X1080.jpg */; };
 		6C671B471D533A7C00D2CAE5 /* home_mycar_box.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C671B461D533A7C00D2CAE5 /* home_mycar_box.png */; };
 		6C671B4D1D580E2800D2CAE5 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C671B4C1D580E2800D2CAE5 /* TabBarController.m */; };
-		6C6DD9511D66F01700FEAEDD /* XCZDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD9501D66F01700FEAEDD /* XCZDiscoveryViewController.m */; };
+		6C6DD9511D66F01700FEAEDD /* XCZDiscoveryFrameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD9501D66F01700FEAEDD /* XCZDiscoveryFrameViewController.m */; };
 		6C6DD9541D66FEDF00FEAEDD /* XCZNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD9531D66FEDF00FEAEDD /* XCZNewsViewController.m */; };
 		6C6DD9571D67010400FEAEDD /* XCZNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD9561D67010400FEAEDD /* XCZNewsTableViewCell.m */; };
 		6C6DD95D1D6A862900FEAEDD /* XCZCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DD95C1D6A862900FEAEDD /* XCZCircleViewController.m */; };
@@ -198,7 +198,7 @@
 		6CD2F9FB1C4629BC0033437D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2F9FA1C4629BC0033437D /* WebViewController.m */; };
 		6CD81E831D06B25E00A12F83 /* common_back_150.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CD81E821D06B25E00A12F83 /* common_back_150.png */; };
 		6CDB3AF11C61DE08007C1AD1 /* home_activity01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CDB3AF01C61DE08007C1AD1 /* home_activity01.png */; };
-		6CE3638A1D73BB2800AA0B53 /* XCZContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE363891D73BB2800AA0B53 /* XCZContentViewController.m */; };
+		6CE3638A1D73BB2800AA0B53 /* XCZDiscoveryPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE363891D73BB2800AA0B53 /* XCZDiscoveryPageViewController.m */; };
 		6CE3638D1D73C1DF00AA0B53 /* XCZActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE3638C1D73C1DF00AA0B53 /* XCZActivityViewController.m */; };
 		6CE363901D73E2F400AA0B53 /* XCZActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE3638F1D73E2F400AA0B53 /* XCZActivityTableViewCell.m */; };
 		6CE363931D7402F900AA0B53 /* XCZClubTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE363921D7402F900AA0B53 /* XCZClubTableViewCell.m */; };
@@ -327,8 +327,8 @@
 		6C671B461D533A7C00D2CAE5 /* home_mycar_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_mycar_box.png; sourceTree = "<group>"; };
 		6C671B4B1D580E2800D2CAE5 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		6C671B4C1D580E2800D2CAE5 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
-		6C6DD94F1D66F01700FEAEDD /* XCZDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZDiscoveryViewController.h; sourceTree = "<group>"; };
-		6C6DD9501D66F01700FEAEDD /* XCZDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZDiscoveryViewController.m; sourceTree = "<group>"; };
+		6C6DD94F1D66F01700FEAEDD /* XCZDiscoveryFrameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZDiscoveryFrameViewController.h; sourceTree = "<group>"; };
+		6C6DD9501D66F01700FEAEDD /* XCZDiscoveryFrameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZDiscoveryFrameViewController.m; sourceTree = "<group>"; };
 		6C6DD9521D66FEDF00FEAEDD /* XCZNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZNewsViewController.h; sourceTree = "<group>"; };
 		6C6DD9531D66FEDF00FEAEDD /* XCZNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZNewsViewController.m; sourceTree = "<group>"; };
 		6C6DD9551D67010400FEAEDD /* XCZNewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZNewsTableViewCell.h; sourceTree = "<group>"; };
@@ -566,8 +566,8 @@
 		6CD2F9FA1C4629BC0033437D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		6CD81E821D06B25E00A12F83 /* common_back_150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = common_back_150.png; sourceTree = "<group>"; };
 		6CDB3AF01C61DE08007C1AD1 /* home_activity01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_activity01.png; sourceTree = "<group>"; };
-		6CE363881D73BB2800AA0B53 /* XCZContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZContentViewController.h; sourceTree = "<group>"; };
-		6CE363891D73BB2800AA0B53 /* XCZContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZContentViewController.m; sourceTree = "<group>"; };
+		6CE363881D73BB2800AA0B53 /* XCZDiscoveryPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZDiscoveryPageViewController.h; sourceTree = "<group>"; };
+		6CE363891D73BB2800AA0B53 /* XCZDiscoveryPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZDiscoveryPageViewController.m; sourceTree = "<group>"; };
 		6CE3638B1D73C1DF00AA0B53 /* XCZActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZActivityViewController.h; sourceTree = "<group>"; };
 		6CE3638C1D73C1DF00AA0B53 /* XCZActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZActivityViewController.m; sourceTree = "<group>"; };
 		6CE3638E1D73E2F400AA0B53 /* XCZActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZActivityTableViewCell.h; sourceTree = "<group>"; };
@@ -1073,10 +1073,10 @@
 				6C8EC2781C1E8A7800BCABB5 /* Config.h */,
 				6C8EC2791C1E8A7800BCABB5 /* Config.m */,
 				6CABF7131C0E978B00DF3EFF /* Main.storyboard */,
-				6C6DD94F1D66F01700FEAEDD /* XCZDiscoveryViewController.h */,
-				6C6DD9501D66F01700FEAEDD /* XCZDiscoveryViewController.m */,
-				6CE363881D73BB2800AA0B53 /* XCZContentViewController.h */,
-				6CE363891D73BB2800AA0B53 /* XCZContentViewController.m */,
+				6C6DD94F1D66F01700FEAEDD /* XCZDiscoveryFrameViewController.h */,
+				6C6DD9501D66F01700FEAEDD /* XCZDiscoveryFrameViewController.m */,
+				6CE363881D73BB2800AA0B53 /* XCZDiscoveryPageViewController.h */,
+				6CE363891D73BB2800AA0B53 /* XCZDiscoveryPageViewController.m */,
 				6CE363971D741F1400AA0B53 /* News */,
 				6C944B571D7D3A3900820C14 /* Circle */,
 				6C944B581D7D3A5900820C14 /* Activity */,
@@ -1406,7 +1406,7 @@
 				6C9F60C71D459C9200910335 /* XCZHomeViewController.m in Sources */,
 				6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */,
 				6C6DD95D1D6A862900FEAEDD /* XCZCircleViewController.m in Sources */,
-				6CE3638A1D73BB2800AA0B53 /* XCZContentViewController.m in Sources */,
+				6CE3638A1D73BB2800AA0B53 /* XCZDiscoveryPageViewController.m in Sources */,
 				6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */,
 				6C91C35A1C9A84D2004C0CB4 /* NSDataEx.m in Sources */,
 				6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */,
@@ -1420,7 +1420,7 @@
 				6C91C3591C9A84D2004C0CB4 /* MD5DataSigner.m in Sources */,
 				6C91C3581C9A84D2004C0CB4 /* DataVerifier.m in Sources */,
 				6C91C2C21C9A2E66004C0CB4 /* StoreViewController.m in Sources */,
-				6C6DD9511D66F01700FEAEDD /* XCZDiscoveryViewController.m in Sources */,
+				6C6DD9511D66F01700FEAEDD /* XCZDiscoveryFrameViewController.m in Sources */,
 				6C8EC2771C1E548000BCABB5 /* UIWebView+AFNetworking.m in Sources */,
 				6C4D0C4C1C28E998003E96E8 /* UIView+WebCacheOperation.m in Sources */,
 				6C4D0C451C28E998003E96E8 /* SDWebImagePrefetcher.m in Sources */,

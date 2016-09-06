@@ -6,13 +6,13 @@
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import "XCZContentViewController.h"
+#import "XCZDiscoveryPageViewController.h"
 
-@interface XCZContentViewController ()
+@interface XCZDiscoveryPageViewController ()
 
 @end
 
-@implementation XCZContentViewController
+@implementation XCZDiscoveryPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

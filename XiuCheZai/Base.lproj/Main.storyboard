@@ -1202,10 +1202,10 @@
             </objects>
             <point key="canvasLocation" x="478.5" y="-3332.5"/>
         </scene>
-        <!--Discovery View Controller-->
+        <!--Discovery Frame View Controller-->
         <scene sceneID="pBB-t0-EWJ">
             <objects>
-                <viewController storyboardIdentifier="XCZDiscoveryViewController" id="pd8-nb-hna" customClass="XCZDiscoveryViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="XCZDiscoveryFrameViewController" id="pd8-nb-hna" customClass="XCZDiscoveryFrameViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gya-Cm-XTz"/>
                         <viewControllerLayoutGuide type="bottom" id="Vvg-s6-onn"/>
