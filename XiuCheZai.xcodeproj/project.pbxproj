@@ -1080,7 +1080,7 @@
 				6C6DD9501D66F01700FEAEDD /* XCZDiscoveryFrameViewController.m */,
 				6CE363881D73BB2800AA0B53 /* XCZDiscoveryPageViewController.h */,
 				6CE363891D73BB2800AA0B53 /* XCZDiscoveryPageViewController.m */,
-				6CE363971D741F1400AA0B53 /* News */,
+				6CE363971D741F1400AA0B53 /* news */,
 				6C944B571D7D3A3900820C14 /* Circle */,
 				6C944B581D7D3A5900820C14 /* Activity */,
 				6C944B591D7D3B0900820C14 /* Club */,
@@ -1145,7 +1145,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6CE363971D741F1400AA0B53 /* News */ = {
+		6CE363971D741F1400AA0B53 /* news */ = {
 			isa = PBXGroup;
 			children = (
 				6C944B5A1D7E823500820C14 /* XCZNewsDetailModel.h */,
@@ -1157,7 +1157,7 @@
 				6CE363981D741FAE00AA0B53 /* XCZNewsDetailViewController.h */,
 				6CE363991D741FAE00AA0B53 /* XCZNewsDetailViewController.m */,
 			);
-			name = News;
+			name = news;
 			sourceTree = "<group>";
 		};
 		6CE4FFFA1C2D0B63007F6D03 /* MBProgressHUD */ = {
