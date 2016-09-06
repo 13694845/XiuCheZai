@@ -146,6 +146,7 @@
 		6C91C35C1C9A84D2004C0CB4 /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91C3531C9A84D2004C0CB4 /* RSADataSigner.m */; };
 		6C91C35D1C9A84D2004C0CB4 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91C3551C9A84D2004C0CB4 /* RSADataVerifier.m */; };
 		6C91C3601C9A86FE004C0CB4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91C35F1C9A86FE004C0CB4 /* LoginViewController.m */; };
+		6C944B5C1D7E823500820C14 /* XCZNewsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C944B5B1D7E823500820C14 /* XCZNewsDetailModel.m */; };
 		6C9D851A1C9B8B3C008BD470 /* RSADataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9D85191C9B8B3C008BD470 /* RSADataEncryptor.m */; };
 		6C9F60A31D42179700910335 /* New.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F60A21D42179700910335 /* New.storyboard */; };
 		6C9F60B51D4598C600910335 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F60A51D4598C600910335 /* home@2x.png */; };
@@ -508,6 +509,8 @@
 		6C91C3551C9A84D2004C0CB4 /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
 		6C91C35E1C9A86FE004C0CB4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6C91C35F1C9A86FE004C0CB4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6C944B5A1D7E823500820C14 /* XCZNewsDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZNewsDetailModel.h; sourceTree = "<group>"; };
+		6C944B5B1D7E823500820C14 /* XCZNewsDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZNewsDetailModel.m; sourceTree = "<group>"; };
 		6C9D85181C9B8B3C008BD470 /* RSADataEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataEncryptor.h; sourceTree = "<group>"; };
 		6C9D85191C9B8B3C008BD470 /* RSADataEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataEncryptor.m; sourceTree = "<group>"; };
 		6C9F60A21D42179700910335 /* New.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = New.storyboard; sourceTree = "<group>"; };
@@ -1145,6 +1148,8 @@
 		6CE363971D741F1400AA0B53 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				6C944B5A1D7E823500820C14 /* XCZNewsDetailModel.h */,
+				6C944B5B1D7E823500820C14 /* XCZNewsDetailModel.m */,
 				6C6DD9521D66FEDF00FEAEDD /* XCZNewsViewController.h */,
 				6C6DD9531D66FEDF00FEAEDD /* XCZNewsViewController.m */,
 				6C6DD9551D67010400FEAEDD /* XCZNewsTableViewCell.h */,
@@ -1376,6 +1381,7 @@
 				6C8EC2541C1E546E00BCABB5 /* AFHTTPSessionManager.m in Sources */,
 				6C4D0C491C28E998003E96E8 /* UIImage+WebP.m in Sources */,
 				6CE4FFFD1C2D0B63007F6D03 /* MBProgressHUD.m in Sources */,
+				6C944B5C1D7E823500820C14 /* XCZNewsDetailModel.m in Sources */,
 				6C4D0C3F1C28E998003E96E8 /* SDImageCache.m in Sources */,
 				6CEB5A891C48D1E000717CBA /* BannerView.m in Sources */,
 				6CE3639A1D741FAE00AA0B53 /* XCZNewsDetailViewController.m in Sources */,
