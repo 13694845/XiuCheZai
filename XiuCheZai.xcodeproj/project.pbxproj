@@ -147,6 +147,7 @@
 		6C91C35D1C9A84D2004C0CB4 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91C3551C9A84D2004C0CB4 /* RSADataVerifier.m */; };
 		6C91C3601C9A86FE004C0CB4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91C35F1C9A86FE004C0CB4 /* LoginViewController.m */; };
 		6C944B5C1D7E823500820C14 /* XCZNewsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C944B5B1D7E823500820C14 /* XCZNewsDetailModel.m */; };
+		6C944B5F1D7E928900820C14 /* XCZNewDetailRemarkRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C944B5E1D7E928900820C14 /* XCZNewDetailRemarkRow.m */; };
 		6C9D851A1C9B8B3C008BD470 /* RSADataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9D85191C9B8B3C008BD470 /* RSADataEncryptor.m */; };
 		6C9F60A31D42179700910335 /* New.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F60A21D42179700910335 /* New.storyboard */; };
 		6C9F60B51D4598C600910335 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F60A51D4598C600910335 /* home@2x.png */; };
@@ -511,6 +512,8 @@
 		6C91C35F1C9A86FE004C0CB4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6C944B5A1D7E823500820C14 /* XCZNewsDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZNewsDetailModel.h; sourceTree = "<group>"; };
 		6C944B5B1D7E823500820C14 /* XCZNewsDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZNewsDetailModel.m; sourceTree = "<group>"; };
+		6C944B5D1D7E928900820C14 /* XCZNewDetailRemarkRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZNewDetailRemarkRow.h; sourceTree = "<group>"; };
+		6C944B5E1D7E928900820C14 /* XCZNewDetailRemarkRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZNewDetailRemarkRow.m; sourceTree = "<group>"; };
 		6C9D85181C9B8B3C008BD470 /* RSADataEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataEncryptor.h; sourceTree = "<group>"; };
 		6C9D85191C9B8B3C008BD470 /* RSADataEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataEncryptor.m; sourceTree = "<group>"; };
 		6C9F60A21D42179700910335 /* New.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = New.storyboard; sourceTree = "<group>"; };
@@ -1156,6 +1159,8 @@
 				6CE363991D741FAE00AA0B53 /* XCZNewsDetailViewController.m */,
 				6C944B5A1D7E823500820C14 /* XCZNewsDetailModel.h */,
 				6C944B5B1D7E823500820C14 /* XCZNewsDetailModel.m */,
+				6C944B5D1D7E928900820C14 /* XCZNewDetailRemarkRow.h */,
+				6C944B5E1D7E928900820C14 /* XCZNewDetailRemarkRow.m */,
 			);
 			name = news;
 			sourceTree = "<group>";
@@ -1405,6 +1410,7 @@
 				6C8EC2701C1E548000BCABB5 /* AFImageDownloader.m in Sources */,
 				6C91C3601C9A86FE004C0CB4 /* LoginViewController.m in Sources */,
 				6C4D0C431C28E998003E96E8 /* SDWebImageDownloaderOperation.m in Sources */,
+				6C944B5F1D7E928900820C14 /* XCZNewDetailRemarkRow.m in Sources */,
 				6C8EC2581C1E546E00BCABB5 /* AFURLResponseSerialization.m in Sources */,
 				6C8EC2731C1E548000BCABB5 /* UIButton+AFNetworking.m in Sources */,
 				6C8EC2571C1E546E00BCABB5 /* AFURLRequestSerialization.m in Sources */,
