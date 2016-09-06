@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
 
+@property (nonatomic, assign) CGFloat height;
+
 @end
 
 @implementation XCZNewsDetailViewController
