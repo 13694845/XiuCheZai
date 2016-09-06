@@ -48,6 +48,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XCZNewsTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellA" forIndexPath:indexPath];
+    // <row>
+    // cell.row = self.rows[indexPath.row];
+    // <row>
+
     return cell;
 }
 
