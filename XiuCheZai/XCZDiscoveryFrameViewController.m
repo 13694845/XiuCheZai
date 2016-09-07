@@ -12,8 +12,6 @@
 #import "XCZActivityViewController.h"
 #import "XCZClubViewController.h"
 
-#import "XCZNewsDetailViewController.h"
-
 typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
     DiscoveryContentTransitionScrollLeft     = 1 << 0,
     DiscoveryContentTransitionScrollRight    = 1 << 1

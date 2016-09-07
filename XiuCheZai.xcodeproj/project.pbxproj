@@ -148,7 +148,6 @@
 		6C91C3601C9A86FE004C0CB4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91C35F1C9A86FE004C0CB4 /* LoginViewController.m */; };
 		6C944B5C1D7E823500820C14 /* XCZNewsDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C944B5B1D7E823500820C14 /* XCZNewsDetailModel.m */; };
 		6C944B5F1D7E928900820C14 /* XCZNewDetailRemarkRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C944B5E1D7E928900820C14 /* XCZNewDetailRemarkRow.m */; };
-		6C944B621D7F99AE00820C14 /* XCZConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C944B611D7F99AE00820C14 /* XCZConfig.m */; };
 		6C9D851A1C9B8B3C008BD470 /* RSADataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9D85191C9B8B3C008BD470 /* RSADataEncryptor.m */; };
 		6C9F60A31D42179700910335 /* New.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F60A21D42179700910335 /* New.storyboard */; };
 		6C9F60B51D4598C600910335 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F60A51D4598C600910335 /* home@2x.png */; };
@@ -515,8 +514,6 @@
 		6C944B5B1D7E823500820C14 /* XCZNewsDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZNewsDetailModel.m; sourceTree = "<group>"; };
 		6C944B5D1D7E928900820C14 /* XCZNewDetailRemarkRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZNewDetailRemarkRow.h; sourceTree = "<group>"; };
 		6C944B5E1D7E928900820C14 /* XCZNewDetailRemarkRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZNewDetailRemarkRow.m; sourceTree = "<group>"; };
-		6C944B601D7F99AE00820C14 /* XCZConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZConfig.h; sourceTree = "<group>"; };
-		6C944B611D7F99AE00820C14 /* XCZConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZConfig.m; sourceTree = "<group>"; };
 		6C9D85181C9B8B3C008BD470 /* RSADataEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataEncryptor.h; sourceTree = "<group>"; };
 		6C9D85191C9B8B3C008BD470 /* RSADataEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataEncryptor.m; sourceTree = "<group>"; };
 		6C9F60A21D42179700910335 /* New.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = New.storyboard; sourceTree = "<group>"; };
@@ -1082,8 +1079,6 @@
 				6C8EC2781C1E8A7800BCABB5 /* Config.h */,
 				6C8EC2791C1E8A7800BCABB5 /* Config.m */,
 				6CABF7131C0E978B00DF3EFF /* Main.storyboard */,
-				6C944B601D7F99AE00820C14 /* XCZConfig.h */,
-				6C944B611D7F99AE00820C14 /* XCZConfig.m */,
 				6C6DD94F1D66F01700FEAEDD /* XCZDiscoveryFrameViewController.h */,
 				6C6DD9501D66F01700FEAEDD /* XCZDiscoveryFrameViewController.m */,
 				6CE363881D73BB2800AA0B53 /* XCZDiscoveryPageViewController.h */,
@@ -1421,7 +1416,6 @@
 				6C8EC2571C1E546E00BCABB5 /* AFURLRequestSerialization.m in Sources */,
 				6C8EC26F1C1E548000BCABB5 /* AFAutoPurgingImageCache.m in Sources */,
 				6C9F60C71D459C9200910335 /* XCZHomeViewController.m in Sources */,
-				6C944B621D7F99AE00820C14 /* XCZConfig.m in Sources */,
 				6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */,
 				6C6DD95D1D6A862900FEAEDD /* XCZCircleViewController.m in Sources */,
 				6CE3638A1D73BB2800AA0B53 /* XCZDiscoveryPageViewController.m in Sources */,

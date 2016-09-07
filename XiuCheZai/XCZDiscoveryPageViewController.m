@@ -7,12 +7,22 @@
 //
 
 #import "XCZDiscoveryPageViewController.h"
+#import "Config.h"
 
 @interface XCZDiscoveryPageViewController ()
 
 @end
 
 @implementation XCZDiscoveryPageViewController
+
+- (AFHTTPSessionManager *)manager {
+    if (!_manager) {
+        _manager = [AFHTTPSessionManager manager];
+        [_manager.requestSerializer setValue:[NSString stringWithFormat:@"%@ %@/%@",
+                                              [_manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]] forHTTPHeaderField:@"User-Agent"];
+    }
+    return _manager;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

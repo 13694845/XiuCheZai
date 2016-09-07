@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AFNetworking.h"
 
 @interface XCZDiscoveryPageViewController : UIViewController
+
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 
 @end
