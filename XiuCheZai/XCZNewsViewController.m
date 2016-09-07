@@ -17,9 +17,21 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSMutableArray *rows;
 
+@property (nonatomic) NSMutableArray *newses;
+
 @end
 
 @implementation XCZNewsViewController
+
+
+- (void)setNewses:(NSMutableArray *)newses {
+    
+}
+
+- (NSMutableArray *)newses {
+    return nil;
+}
+
 
 - (NSMutableArray *)rows {
     if (!_rows) _rows = [NSMutableArray array];
