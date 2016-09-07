@@ -36,10 +36,18 @@
     v.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 110.0);
     v.backgroundColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
     self.tableView.tableHeaderView = v;
+    
+    NSLog(@"test");
+    
+    [self loadData];
 }
 
 - (void)loadData {
-    
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/BbsArtListAction.do"];
+    NSDictionary *parameters = nil;
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
