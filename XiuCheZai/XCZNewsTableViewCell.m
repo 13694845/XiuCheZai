@@ -10,6 +10,16 @@
 
 @interface XCZNewsTableViewCell ()
 
+@property (weak, nonatomic) IBOutlet NSString *newsTitle;
+@property (weak, nonatomic) IBOutlet NSString *publishDate;
+@property (weak, nonatomic) IBOutlet NSString *reprintFrom;
+@property (weak, nonatomic) IBOutlet NSString *newsText;
+@property (weak, nonatomic) IBOutlet NSArray *admiredPersons;
+@property (weak, nonatomic) IBOutlet NSArray *newsRemarks;
+
+
+
+
 @end
 
 @implementation XCZNewsTableViewCell
