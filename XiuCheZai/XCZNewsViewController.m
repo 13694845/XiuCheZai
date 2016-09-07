@@ -17,21 +17,16 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSMutableArray *rows;
 
-@property (nonatomic) NSMutableArray *newses;
-
 @end
 
 @implementation XCZNewsViewController
 
+@synthesize rows = _rows;
 
-- (void)setNewses:(NSMutableArray *)newses {
-    
+- (void)setRows:(NSMutableArray *)rows {
+    _rows = rows;
+    [self updateUI];
 }
-
-- (NSMutableArray *)newses {
-    return nil;
-}
-
 
 - (NSMutableArray *)rows {
     if (!_rows) _rows = [NSMutableArray array];
@@ -49,8 +44,6 @@
     v.backgroundColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
     self.tableView.tableHeaderView = v;
     
-    NSLog(@"test");
-    
     [self loadData];
 }
 
@@ -58,12 +51,16 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/BbsArtListAction.do"];
     NSDictionary *parameters = nil;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"%@", responseObject);
+        self.rows = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
+- (void)updateUI {
+    [self.tableView reloadData];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    return self.rows.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,7 +73,7 @@
     XCZNewsTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellA" forIndexPath:indexPath];
     // XCZNewsTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellB" forIndexPath:indexPath];
     // row
-    cell.row = nil;
+    cell.row = self.rows[indexPath.row];
     return cell;
 }
 
