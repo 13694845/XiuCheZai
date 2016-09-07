@@ -8,6 +8,10 @@
 
 #import "XCZNewsTableViewCell.h"
 
+@interface XCZNewsTableViewCell ()
+
+@end
+
 @implementation XCZNewsTableViewCell
 
 - (void)awakeFromNib {
