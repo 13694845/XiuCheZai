@@ -9,6 +9,7 @@
 #import "XCZNewsViewController.h"
 #import "XCZNewsTableViewCell.h"
 #import "XCZNewsDetailViewController.h"
+#import "XCZConfig.h"
 
 @interface XCZNewsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -30,12 +31,10 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     
-    // <BannerView>
     UIImageView *v = [[UIImageView alloc] initWithImage:nil];
     v.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 110.0);
     v.backgroundColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
     self.tableView.tableHeaderView = v;
-    // </BannerView>
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
