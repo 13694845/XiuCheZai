@@ -10,19 +10,8 @@
 
 @interface XCZNewsTableViewCell ()
 
-/*
-@property (weak, nonatomic) IBOutlet NSString *newsTitle;
-@property (weak, nonatomic) IBOutlet NSString *publishDate;
-@property (weak, nonatomic) IBOutlet NSString *reprintFrom;
-@property (weak, nonatomic) IBOutlet NSString *newsText;
-@property (weak, nonatomic) IBOutlet NSArray *admiredPersons;
-@property (weak, nonatomic) IBOutlet NSArray *newsRemarks;
-*/
-
 @property (weak, nonatomic) IBOutlet UILabel *newsTitleLabel;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *newsImageViews;
-
-
 @property (weak, nonatomic) IBOutlet UILabel *reprintFromLabel;
 @property (weak, nonatomic) IBOutlet UILabel *remarkCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *praiseCountLabel;
@@ -33,9 +22,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
     // self.reuseIdentifier = @"CellA"
-    NSLog(@"");
+    // self.reuseIdentifier = @"CellB"
+    NSLog(@"%ld", self.newsImageViews.count);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

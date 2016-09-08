@@ -15,7 +15,9 @@
 @interface XCZNewsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic) NSMutableArray *rows;
+@property (strong, nonatomic) NSMutableArray *rows;
+
+@property (assign, nonatomic) int currentPage;
 
 @end
 
