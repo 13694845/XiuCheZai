@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *rows;
 
+@property (strong, nonatomic) UIView *bannerView;
+@property (strong, nonatomic) NSMutableArray *banners;
+
 @property (assign, nonatomic) int currentPage;
 
 @end
@@ -24,10 +27,20 @@
 @implementation XCZNewsViewController
 
 @synthesize rows = _rows;
+@synthesize banners = _banners;
+
+- (void)setBanners:(NSMutableArray *)banners {
+    _banners = banners;
+    [self updateBannerView];
+}
+
+- (NSMutableArray *)banners {
+    return _banners;
+}
 
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
-    [self updateUI];
+    [self updateTableView];
 }
 
 - (NSMutableArray *)rows {
@@ -41,10 +54,12 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     
+    /*
     UIImageView *v = [[UIImageView alloc] initWithImage:nil];
     v.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 110.0);
     v.backgroundColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0];
     self.tableView.tableHeaderView = v;
+    */
     
     [self loadData];
 }
@@ -55,10 +70,23 @@
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         self.rows = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+
+    /*
+    URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/banner.do"];
+    parameters = nil;
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        self.banner = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+     */
+
 }
 
-- (void)updateUI {
+- (void)updateTableView {
     [self.tableView reloadData];
+}
+
+- (void)updateBannerView {
+    // [self.bannerView reloadData];   HomeViewController.m
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

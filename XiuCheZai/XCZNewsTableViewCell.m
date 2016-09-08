@@ -22,9 +22,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    /*
     // self.reuseIdentifier = @"CellA"
     // self.reuseIdentifier = @"CellB"
-    NSLog(@"%ld", self.newsImageViews.count);
+    */
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
