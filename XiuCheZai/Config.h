@@ -13,7 +13,7 @@
 typedef NS_ENUM(int, TabIndex) {
     TabIndexHome = 0,
     TabIndexStore,
-    // TabIndexDiscovery,
+    TabIndexDiscovery,
     TabIndexAccessory,
     TabIndexMine,
     TabIndexCart
