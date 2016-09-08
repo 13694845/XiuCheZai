@@ -1310,6 +1310,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="文章标题文章标题文章标题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JP2-oa-poS">
+                                                    <rect key="frame" x="16" y="8" width="343" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vge-OL-gqn">
                                                     <rect key="frame" x="16" y="32" width="109" height="75"/>
                                                     <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
@@ -1322,12 +1328,6 @@
                                                     <rect key="frame" x="250" y="32" width="109" height="75"/>
                                                     <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="文章标题文章标题文章标题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JP2-oa-poS">
-                                                    <rect key="frame" x="16" y="8" width="343" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="汽车之家" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haO-t2-ql0">
                                                     <rect key="frame" x="16" y="115" width="40" height="10"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -1352,6 +1352,15 @@
                                                 </view>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="newsTitleLabel" destination="JP2-oa-poS" id="u5i-yW-647"/>
+                                            <outlet property="praiseCountLabel" destination="EGq-vK-toI" id="RCf-xF-zNq"/>
+                                            <outlet property="remarkCountLabel" destination="eBy-Uv-ayW" id="AgL-OX-xYN"/>
+                                            <outlet property="reprintFromLabel" destination="haO-t2-ql0" id="jjt-g1-JfL"/>
+                                            <outletCollection property="newsImageViews" destination="vge-OL-gqn" id="Qap-e3-Lwj"/>
+                                            <outletCollection property="newsImageViews" destination="c9h-5q-R9L" id="QYe-Bq-39K"/>
+                                            <outletCollection property="newsImageViews" destination="5Vd-Vn-hCI" id="Tzv-I0-7T1"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellB" rowHeight="92" id="MxL-db-hKO" customClass="XCZNewsTableViewCell">
                                         <rect key="frame" x="0.0" y="162" width="375" height="92"/>
@@ -1394,6 +1403,9 @@
                                                 </view>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outletCollection property="newsImageViews" destination="vgT-H3-0rF" id="sjz-M5-X1U"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
