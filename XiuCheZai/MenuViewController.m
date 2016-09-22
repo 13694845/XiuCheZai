@@ -29,7 +29,7 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> *placemarks, NSError *error) {
         CLPlacemark *placemark = placemarks.firstObject;
-        self.cityLabel.text = [NSString stringWithFormat:@"%@", placemark.locality ? : @""];
+        self.cityLabel.text = [NSString stringWithFormat:@"%@", placemark.subLocality ? : @""];
     }];
 }
 
