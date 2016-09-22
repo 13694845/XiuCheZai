@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RSr-P5-hKf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RSr-P5-hKf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -2138,15 +2138,15 @@
                                                     <constraint firstAttribute="height" constant="1" id="B2w-gq-RuV"/>
                                                 </constraints>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_xcz.png" translatesAutoresizingMaskIntoConstraints="NO" id="D9a-pb-jlD">
-                                                <rect key="frame" x="8" y="9" width="40" height="40"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_newxcz.png" translatesAutoresizingMaskIntoConstraints="NO" id="D9a-pb-jlD">
+                                                <rect key="frame" x="8" y="13" width="32" height="32"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="KWM-IW-LNf"/>
-                                                    <constraint firstAttribute="width" constant="40" id="TEv-kt-sO9"/>
+                                                    <constraint firstAttribute="height" constant="32" id="KWM-IW-LNf"/>
+                                                    <constraint firstAttribute="width" constant="32" id="TEv-kt-sO9"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="企商汇 8673h.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tUA-Fk-SiW">
-                                                <rect key="frame" x="56" y="21" width="120" height="17"/>
+                                                <rect key="frame" x="48" y="20" width="120" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="6HA-uH-rv0"/>
                                                     <constraint firstAttribute="height" constant="17" id="V50-Dz-j8T"/>
@@ -2162,12 +2162,12 @@
                                             <constraint firstItem="YeH-76-Sfe" firstAttribute="top" secondItem="9gQ-Y3-quw" secondAttribute="top" constant="1" id="3DU-QG-1MB"/>
                                             <constraint firstAttribute="height" constant="57" id="NTG-0b-FiV"/>
                                             <constraint firstItem="D9a-pb-jlD" firstAttribute="leading" secondItem="9gQ-Y3-quw" secondAttribute="leading" constant="8" id="Prr-Vg-Dm8"/>
-                                            <constraint firstItem="tUA-Fk-SiW" firstAttribute="top" secondItem="YeH-76-Sfe" secondAttribute="bottom" constant="19" id="Tke-gT-OfY"/>
-                                            <constraint firstAttribute="bottom" secondItem="D9a-pb-jlD" secondAttribute="bottom" constant="8" id="ZSc-xF-VvP"/>
+                                            <constraint firstItem="tUA-Fk-SiW" firstAttribute="top" secondItem="YeH-76-Sfe" secondAttribute="bottom" constant="18" id="Tke-gT-OfY"/>
+                                            <constraint firstAttribute="bottom" secondItem="D9a-pb-jlD" secondAttribute="bottom" constant="12" id="ZSc-xF-VvP"/>
                                             <constraint firstItem="YeH-76-Sfe" firstAttribute="leading" secondItem="9gQ-Y3-quw" secondAttribute="leading" id="hWR-ZC-0Yn"/>
                                             <constraint firstItem="tUA-Fk-SiW" firstAttribute="leading" secondItem="D9a-pb-jlD" secondAttribute="trailing" constant="8" id="pCV-1Y-Amt"/>
-                                            <constraint firstAttribute="bottom" secondItem="tUA-Fk-SiW" secondAttribute="bottom" constant="19" id="uIi-Tb-PFr"/>
-                                            <constraint firstItem="D9a-pb-jlD" firstAttribute="top" secondItem="YeH-76-Sfe" secondAttribute="bottom" constant="7" id="wkd-P5-gRx"/>
+                                            <constraint firstAttribute="bottom" secondItem="tUA-Fk-SiW" secondAttribute="bottom" constant="20" id="uIi-Tb-PFr"/>
+                                            <constraint firstItem="D9a-pb-jlD" firstAttribute="top" secondItem="YeH-76-Sfe" secondAttribute="bottom" constant="11" id="wkd-P5-gRx"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -3215,7 +3215,7 @@
         <image name="menu_icon17.jpg" width="150" height="150"/>
         <image name="menu_icon18.jpg" width="150" height="150"/>
         <image name="menu_icon19.jpg" width="150" height="150"/>
-        <image name="menu_xcz.png" width="124" height="124"/>
+        <image name="menu_newxcz.png" width="128" height="126"/>
         <image name="recommender.jpg" width="250" height="250"/>
         <image name="tab_icon10.png" width="25" height="25"/>
         <image name="tab_icon11.png" width="25" height="25"/>
