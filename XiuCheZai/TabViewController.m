@@ -16,6 +16,8 @@
 
 @property (nonatomic) BOOL fullScreen;
 @property (nonatomic) BOOL needsRefresh;
+// *******
+@property (nonatomic) BOOL showBack;
 
 @end
 
@@ -50,6 +52,7 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    // NSLog(@"webView.request : %@", request.URL);
     /*
     self.fullScreen = ![request.URL.description containsString:self.url.description];
     if ([self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/index/"]]) self.fullScreen = YES;
@@ -100,12 +103,30 @@
         self.backOffset++;
         return YES;
     }
+    if ([request.URL.host isEqualToString:@"mobile.abchina.com"]) {
+        self.showBack = YES;
+        /*
+        if (!self.backButton) [self addBackButton];
+        self.backOffset++;
+         */
+        return YES;
+    }
+    
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
         sleep(0.5);
         return YES;
     }
     
     return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    if (self.showBack) {
+        if (!self.backButton) [self addBackButton];
+        self.backOffset++;
+        self.showBack = NO;
+    }
 }
 
 - (void)goBack {
