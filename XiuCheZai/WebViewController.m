@@ -49,7 +49,28 @@
     self.webView.delegate = self;
     self.webView.dataDetectorTypes = UIDataDetectorTypeNone;
     
+    [self updateLocation];
+    
     if ([self isMemberOfClass:[WebViewController class]]) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+}
+
+- (void)updateLocation {
+    NSDictionary *locationInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
+    NSString *longitude = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"longitude"] doubleValue]];
+    NSString *latitude = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"latitude"] doubleValue]];
+    
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/CityLocation.do"];
+    NSDictionary *parameters = ![longitude isEqualToString:@"0.000000"] ? @{@"lng":longitude, @"lat":latitude, @"type":@"1"} : @{};
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        /*
+        NSLog(@"input longitude : %@ | latitude : %@", longitude, latitude);
+        NSLog(@"output responseObject : %@", responseObject);
+        NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+            NSLog(@"%@\n", cookie);
+        }
+         */
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
