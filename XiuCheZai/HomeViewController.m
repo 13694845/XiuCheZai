@@ -303,6 +303,10 @@
 
 - (void)scannerViewController:(ScannerViewController *)scannerViewController didFinishScanningCodeWithInfo:(NSDictionary *)info {
     [scannerViewController.navigationController popViewControllerAnimated:NO];
+    if ([[info objectForKey:@"url"] hasPrefix:@"http://"]) {
+        [self launchWebViewWithURLString:[info objectForKey:@"url"]];
+        return;
+    }
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
     NSDictionary *parameters = nil;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
