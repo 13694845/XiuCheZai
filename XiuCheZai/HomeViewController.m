@@ -307,6 +307,11 @@
         [self launchWebViewWithURLString:[info objectForKey:@"url"]];
         return;
     }
+    //*******
+    if ([[info objectForKey:@"url"] hasPrefix:@"http://a.zj-qsh.com"]) {
+        [self launchWebViewWithURLString:[info objectForKey:@"url"]];
+        return;
+    }
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
     NSDictionary *parameters = nil;
