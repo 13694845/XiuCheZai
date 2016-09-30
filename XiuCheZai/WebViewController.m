@@ -25,6 +25,8 @@
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
 
+@property (nonatomic) BOOL showBack;
+
 @end
 
 @implementation WebViewController
@@ -148,6 +150,15 @@
         self.backOffset++;
         return YES;
     }
+    if ([request.URL.host isEqualToString:@"mobile.abchina.com"]) {
+        self.showBack = YES;
+        /*
+         if (!self.backButton) [self addBackButton];
+         self.backOffset++;
+         */
+        return YES;
+    }
+    
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
         sleep(0.5);
         return YES;
@@ -204,6 +215,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    //
+    if (self.showBack) {
+        if (!self.backButton) [self addBackButton];
+        self.backOffset++;
+        self.showBack = NO;
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
