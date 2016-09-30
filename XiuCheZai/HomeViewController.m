@@ -303,10 +303,11 @@
 
 - (void)scannerViewController:(ScannerViewController *)scannerViewController didFinishScanningCodeWithInfo:(NSDictionary *)info {
     [scannerViewController.navigationController popViewControllerAnimated:NO];
-    if ([[info objectForKey:@"url"] hasPrefix:@"http://"]) {
+    if ([[info objectForKey:@"url"] hasPrefix:@"http://m.8673h.com"]) {
         [self launchWebViewWithURLString:[info objectForKey:@"url"]];
         return;
     }
+    
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
     NSDictionary *parameters = nil;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -316,7 +317,6 @@
                 return;
             }
         } else {
-            // [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Login/login/login.html?url=http%3A%2F%2Fm.8673h.com%2Findex.html"]];
             NSString *url = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"];
             [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/Login/login/login.html?url=", url]];
             return;
