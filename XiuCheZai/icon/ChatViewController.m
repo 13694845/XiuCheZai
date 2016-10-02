@@ -22,7 +22,7 @@
     [self setupSocket];
     [self conn];
     [self send];
-    // [self login];
+    [self login];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,7 +35,7 @@
     asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
 }
 
-#define HOST @"192.168.2.25"
+#define HOST @"192.168.2.63"
 #define PORT 9999
 - (void)conn {
     NSString *host = HOST;
@@ -70,7 +70,16 @@
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"didReadData : %@", msg);
+    
+    
+    // if (query) parameter = [NSJSONSerialization JSONObjectWithData:[query dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+    
 }
+
+
+
+
+
 
 - (void)login {
     NSString *msg = @"{\"type\":\"LOGIN\", \"sender_id\":\"555\"}\n";
