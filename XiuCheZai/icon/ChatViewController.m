@@ -96,6 +96,15 @@
     if ([type isEqualToString:@"LOGIN"]) {
         NSLog(@"LOGIN : %@", json[@"content"]);
     }
+    
+    if ([type isEqualToString:@"MESSAGE"]) {
+        NSLog(@"MESSAGE : %@", json[@"content"]);
+    }
+    
+    if ([type isEqualToString:@"CHATHISTORY"]) {
+        NSLog(@"CHATHISTORY : %@", json[@"content"]);
+    }
+    
     if ([type isEqualToString:@"ECHO"]) {
         NSLog(@"ECHO : %@", json[@"content"]);
     }
