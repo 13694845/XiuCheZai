@@ -28,9 +28,11 @@
     [self conn];
     // [self send];
     // [self loginWithUserId:@"555"];
-    // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
+    
+    [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     // [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-10" page:@"1"];
-    [self heartbeat];
+    
+    // [self heartbeat];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +56,7 @@
         NSLog(@"conn error: %@", error);
     }
     
-    [self setupTimer];
+    // [self setupTimer];
 }
 
 - (void)setupTimer {
