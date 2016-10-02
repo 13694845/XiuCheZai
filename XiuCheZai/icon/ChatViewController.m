@@ -21,7 +21,8 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self setupSocket];
     [self conn];
-    [self login];
+    [self send];
+    // [self login];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,7 +35,7 @@
     asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
 }
 
-#define HOST @"192.168.2.63"
+#define HOST @"192.168.2.25"
 #define PORT 9999
 - (void)conn {
     NSString *host = HOST;
