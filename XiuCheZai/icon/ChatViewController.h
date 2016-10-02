@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+/*
 typedef NS_ENUM(NSUInteger, ChatActionType) {
     ChatActionTypeTest,
     ChatActionTypeLogin
 };
+*/
 
 @interface ChatViewController : UIViewController
 
