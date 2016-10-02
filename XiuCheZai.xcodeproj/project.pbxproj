@@ -196,6 +196,9 @@
 		6CB39B121D29E951007CEAF8 /* BaiduMapAPI_Radar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB39B0B1D29E951007CEAF8 /* BaiduMapAPI_Radar.framework */; };
 		6CB39B131D29E951007CEAF8 /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB39B0C1D29E951007CEAF8 /* BaiduMapAPI_Search.framework */; };
 		6CB39B141D29E951007CEAF8 /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB39B0D1D29E951007CEAF8 /* BaiduMapAPI_Utils.framework */; };
+		6CC190911DA08A290098BB40 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC1908E1DA08A290098BB40 /* GCDAsyncSocket.m */; };
+		6CC190921DA08A290098BB40 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC190901DA08A290098BB40 /* GCDAsyncUdpSocket.m */; };
+		6CC190951DA08A8E0098BB40 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC190941DA08A8E0098BB40 /* ChatViewController.m */; };
 		6CCDA6EF1CA8CC510008EB40 /* banner05.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6CCDA6EE1CA8CC510008EB40 /* banner05.jpg */; };
 		6CD2F9FB1C4629BC0033437D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2F9FA1C4629BC0033437D /* WebViewController.m */; };
 		6CD81E831D06B25E00A12F83 /* common_back_150.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CD81E821D06B25E00A12F83 /* common_back_150.png */; };
@@ -568,6 +571,12 @@
 		6CB39B0B1D29E951007CEAF8 /* BaiduMapAPI_Radar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Radar.framework; path = XiuCheZai/BaiduMapAPI_Radar.framework; sourceTree = "<group>"; };
 		6CB39B0C1D29E951007CEAF8 /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Search.framework; path = XiuCheZai/BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
 		6CB39B0D1D29E951007CEAF8 /* BaiduMapAPI_Utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI_Utils.framework; path = XiuCheZai/BaiduMapAPI_Utils.framework; sourceTree = "<group>"; };
+		6CC1908D1DA08A290098BB40 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		6CC1908E1DA08A290098BB40 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		6CC1908F1DA08A290098BB40 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		6CC190901DA08A290098BB40 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		6CC190931DA08A8E0098BB40 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = icon/ChatViewController.h; sourceTree = "<group>"; };
+		6CC190941DA08A8E0098BB40 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = icon/ChatViewController.m; sourceTree = "<group>"; };
 		6CCDA6EE1CA8CC510008EB40 /* banner05.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner05.jpg; sourceTree = "<group>"; };
 		6CD2F9F91C4629BC0033437D /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		6CD2F9FA1C4629BC0033437D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
@@ -1033,6 +1042,7 @@
 		6CABF7091C0E978B00DF3EFF /* XiuCheZai */ = {
 			isa = PBXGroup;
 			children = (
+				6CC1908C1DA08A100098BB40 /* GCDAsyncSocket */,
 				6C91C3441C9A84D2004C0CB4 /* Util */,
 				6C91C2F81C9A84C6004C0CB4 /* openssl */,
 				6CF1DAC51C51B1ED0077B468 /* Banner */,
@@ -1045,6 +1055,8 @@
 				6CB2AB161C1506610025260A /* Alipay */,
 				6C8B10821CC858F2003CF8F5 /* Wxpay */,
 				6C9F60A41D4598C600910335 /* icon */,
+				6CC190931DA08A8E0098BB40 /* ChatViewController.h */,
+				6CC190941DA08A8E0098BB40 /* ChatViewController.m */,
 				6CABF70D1C0E978B00DF3EFF /* AppDelegate.h */,
 				6CABF70E1C0E978B00DF3EFF /* AppDelegate.m */,
 				6C91C35E1C9A86FE004C0CB4 /* LoginViewController.h */,
@@ -1149,6 +1161,17 @@
 				6CB2AC811C16613E0025260A /* AlipaySDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CC1908C1DA08A100098BB40 /* GCDAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				6CC1908D1DA08A290098BB40 /* GCDAsyncSocket.h */,
+				6CC1908E1DA08A290098BB40 /* GCDAsyncSocket.m */,
+				6CC1908F1DA08A290098BB40 /* GCDAsyncUdpSocket.h */,
+				6CC190901DA08A290098BB40 /* GCDAsyncUdpSocket.m */,
+			);
+			name = GCDAsyncSocket;
 			sourceTree = "<group>";
 		};
 		6CE363971D741F1400AA0B53 /* news */ = {
@@ -1387,6 +1410,8 @@
 				6C91C35B1C9A84D2004C0CB4 /* openssl_wrapper.m in Sources */,
 				6C671B271D517E1300D2CAE5 /* DiscoveryViewController.m in Sources */,
 				6C4D0C3D1C28E998003E96E8 /* MKAnnotationView+WebCache.m in Sources */,
+				6CC190951DA08A8E0098BB40 /* ChatViewController.m in Sources */,
+				6CC190911DA08A290098BB40 /* GCDAsyncSocket.m in Sources */,
 				6C8EC2541C1E546E00BCABB5 /* AFHTTPSessionManager.m in Sources */,
 				6C4D0C491C28E998003E96E8 /* UIImage+WebP.m in Sources */,
 				6CE4FFFD1C2D0B63007F6D03 /* MBProgressHUD.m in Sources */,
@@ -1425,6 +1450,7 @@
 				6CE3638A1D73BB2800AA0B53 /* XCZDiscoveryPageViewController.m in Sources */,
 				6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */,
 				6C91C35A1C9A84D2004C0CB4 /* NSDataEx.m in Sources */,
+				6CC190921DA08A290098BB40 /* GCDAsyncUdpSocket.m in Sources */,
 				6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */,
 				6C8EC2721C1E548000BCABB5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				6C4C67681C4A29DE00DF8D31 /* MineViewController.m in Sources */,
