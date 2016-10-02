@@ -110,6 +110,10 @@
     }
 }
 
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+    NSLog(@"socketDidDisconnect error: %@", err);
+}
+
 - (void)loginWithUserId:(NSString *)userId {
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", userId];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
