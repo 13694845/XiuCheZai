@@ -72,6 +72,9 @@
     NSLog(@"didReadData : %@", msg);
     
     
+    
+    
+    
     // if (query) parameter = [NSJSONSerialization JSONObjectWithData:[query dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
     
 }
