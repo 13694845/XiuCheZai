@@ -9,7 +9,7 @@
 #import "ChatViewController.h"
 #import "GCDAsyncSocket.h"
 
-@interface ChatViewController () <GCDAsyncSocketDelegate>
+@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (nonatomic) NSTimer *timer;
@@ -43,9 +43,32 @@
     [self.tableView reloadData];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.rows.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    } else {
+        for (UIView *view in cell.subviews){
+            [view removeFromSuperview];
+        }
+    }
+    cell.textLabel.text = @"textLabel";
+    return cell;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
+    
+    self.rows = [@[@"aaa", @"bbb", @"ccc"] mutableCopy];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
