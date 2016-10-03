@@ -14,6 +14,14 @@
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (nonatomic) NSTimer *timer;
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *barView;
+
+@property (weak, nonatomic) IBOutlet UIButton *voiceButton;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIButton *emotionButton;
+@property (weak, nonatomic) IBOutlet UIButton *othersButton;
+
 @end
 
 @implementation ChatViewController
@@ -29,7 +37,7 @@
     // [self send];
     
     [self loginWithUserId:@"123"];
-    [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
+    // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     
     // [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-10" page:@"1"];
     // [self heartbeat];
@@ -144,6 +152,13 @@
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
+}
+
+- (IBAction)showEmotionPad:(id)sender {
+    NSLog(@"showEmotionPad");
+    NSString *content = self.textView.text;
+    if (content)
+        [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:content type:@"txt"];
 }
 
 @end
