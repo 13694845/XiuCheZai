@@ -62,7 +62,13 @@
         }
     }
      */
-    cell.textLabel.text = self.rows[indexPath.row];
+    ChatMessage *message = self.rows[indexPath.row];
+    
+    NSString *text;
+    if (message.isSend) text = [NSString stringWithFormat:@"SEND : %@", message.content];
+    else text = [NSString stringWithFormat:@"RECV : %@", message.content];
+    cell.textLabel.text = text;
+    
     return cell;
 }
 
@@ -72,20 +78,20 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     
-    ChatMessage *message = [[ChatMessage alloc] init];
-    message.isSend = YES;
+    ChatMessage *chatMessage = [[ChatMessage alloc] init];
+    chatMessage.isSend = YES;
     
-    message.type = @"txt";
-    message.content = @"content";
-    message.playTime = @"-1";
+    chatMessage.type = @"txt";
+    chatMessage.content = @"content";
+    chatMessage.playTime = @"-1";
     
-    message.senderTime = @"2016-10-03 13:01:01";
-    message.senderId = @"555";
-    message.senderId = @"zhangsan";
-    message.receiverId = @"123";
-    message.receiverName = @"lisi";
+    chatMessage.senderTime = @"2016-10-03 13:01:01";
+    chatMessage.senderId = @"555";
+    chatMessage.senderName = @"zhangsan";
+    chatMessage.receiverId = @"123";
+    chatMessage.receiverName = @"lisi";
     
-    self.rows = [@[message] mutableCopy];
+    self.rows = [@[chatMessage] mutableCopy];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -186,7 +192,26 @@
 
 - (void)handleReceipt:(NSDictionary *)message {
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
-    [self.rows addObject:[NSString stringWithFormat:@"SEND : %@", msg[@"msg_content"]]];
+    
+    ChatMessage *chatMessage = [[ChatMessage alloc] init];
+    chatMessage.isSend = YES;
+    
+    chatMessage.type = msg[@"msg_type"];
+    chatMessage.content = msg[@"msg_content"];
+    chatMessage.playTime = msg[@"play_time"];
+    
+    chatMessage.senderTime = msg[@"send_time"];
+    chatMessage.senderId = msg[@"sender_id"];
+    chatMessage.senderName = msg[@"sender_name"];
+    chatMessage.receiverId = msg[@"receiver_id"];
+    chatMessage.receiverName = msg[@"receiver_name"];
+    
+    // self.rows = [@[chatMessage] mutableCopy];
+
+    
+    [self.rows addObject:chatMessage];
+    
+    // [self.rows addObject:[NSString stringWithFormat:@"SEND : %@", msg[@"msg_content"]]];
     [self.tableView reloadData];
 }
 
