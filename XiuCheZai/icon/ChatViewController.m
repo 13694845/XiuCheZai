@@ -79,7 +79,7 @@
     [self conn];
     // [self send];
     
-    [self loginWithUserId:@"123"];
+    [self loginWithUserId:@"555"];
     // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     
     // [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-10" page:@"1"];
@@ -98,15 +98,15 @@
 
 #define HOST @"192.168.2.63"
 #define PORT 9999
+#define TERMINATOR @"\n"
+
 - (void)conn {
     NSString *host = HOST;
     uint16_t port = PORT;
-    
     NSError *error = nil;
     if (![self.asyncSocket connectToHost:host onPort:port error:&error]) {
         NSLog(@"conn error: %@", error);
     }
-    
     // [self setupTimer];
 }
 
@@ -115,21 +115,7 @@
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
-    // NSLog(@"didConnectToHost");
-    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
-    [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
-
-}
-
-- (void)send {
-    NSString *msg = @"{\"type\":\"TEST\"}\n";
-    
-    NSString *requestStr = msg;
-    NSData *requestData = [requestStr dataUsingEncoding:NSUTF8StringEncoding];
-    [self.asyncSocket writeData:requestData withTimeout:-1.0 tag:0];
-    
-    // [asyncSocket readDataWithTimeout:-1.0 tag:0];
-    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *terminatorData = [TERMINATOR dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
 }
 
@@ -149,7 +135,6 @@
     
     if ([type isEqualToString:@"LOGIN"]) {
         NSLog(@"LOGIN : %@", message);
-        
     }
     
     if ([type isEqualToString:@"RECEIPT"]) {
@@ -187,15 +172,15 @@
         // NSLog(@"ECHO : %@", json[@"content"]);
     }
     
-    
-    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
+    /*
+    NSData *terminatorData = [TERMINATOR dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
-
+     */
 }
 
 - (void)handleReceipt:(NSDictionary *)message {
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
-    [self.rows addObject:[NSString stringWithFormat:@"recP : %@", msg[@"msg_content"]]];
+    [self.rows addObject:[NSString stringWithFormat:@"SEND : %@", msg[@"msg_content"]]];
     [self.tableView reloadData];
 }
 
@@ -205,35 +190,27 @@
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
     NSLog(@"msg_content : %@", msg[@"msg_content"]);
 
-    [self.rows addObject:[NSString stringWithFormat:@"recv : %@", msg[@"msg_content"]]];
+    [self.rows addObject:[NSString stringWithFormat:@"RECV : %@", msg[@"msg_content"]]];
     [self.tableView reloadData];
-    /*
-    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
-    [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
-     */
-
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"socketDidDisconnect error: %@", err);
-    [self.voiceButton setTitle:@"OUT" forState:UIControlStateNormal];
 }
 
 - (void)loginWithUserId:(NSString *)userId {
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", userId];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
-    /*
-    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *terminatorData = [TERMINATOR dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
-     */
 }
 
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
-    NSString *messageFormat = @"{\"type\":\"MESSAGE\", \"sender_id\":\"%@\", \"receiver_id\":\"%@\", \"sender_name\":\"%@\", \"receiver_name\":\"%@\", \"msg_content\":\"%@\", \"msg_type\":\"%@\", \"play_time\":\"%@\", \"contact\":\"0\"}\n";
+    NSString *messageFormat = @"{\"type\":\"MESSAGE\", \"sender_id\":\"%@\", \"receiver_id\":\"%@\", \"sender_name\":\"%@\", \"receiver_name\":\"%@\", \"msg_content\":\"%@\", \"msg_type\":\"%@\", \"play_time\":\"%@\", \"contact\":\"1\"}\n";
     NSString *message = [NSString stringWithFormat:messageFormat, sender[@"sender_id"], receiver[@"receiver_id"], sender[@"sender_name"], receiver[@"receiver_name"], content, type, @"-1"];
     NSLog(@"sendMessage : %@", message);
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
-    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *terminatorData = [TERMINATOR dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
 }
 
@@ -242,14 +219,14 @@
     NSString *message = [NSString stringWithFormat:messageFormat, senderId, receiverId, sendTime, page];
     NSLog(@"historyMessages : %@", message);
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
-    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *terminatorData = [TERMINATOR dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
 }
 
 - (void)heartbeat {
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"ECHO\"}\n"];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
-    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
+    NSData *terminatorData = [TERMINATOR dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
 }
 
