@@ -25,7 +25,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
 
 @property (strong, nonatomic) NSString *senderId;
+@property (strong, nonatomic) NSString *senderName;
 @property (strong, nonatomic) NSString *receiverId;
+@property (strong, nonatomic) NSString *receiverName;
 @property (assign, nonatomic) NSUInteger historyPage;
 
 @end
@@ -84,8 +86,11 @@
     
     // **************************
     self.senderId = @"555";
-    
-    
+    self.senderName = @"zhangsan";
+    self.receiverId = @"123";
+    self.receiverName = @"lisi";
+
+    /*
     ChatMessage *chatMessage = [[ChatMessage alloc] init];
     chatMessage.isSend = YES;
     
@@ -100,6 +105,7 @@
     chatMessage.receiverName = @"lisi";
     
     self.rows = [@[chatMessage] mutableCopy];
+     */
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -107,10 +113,10 @@
     [self conn];
     // [self send];
     
-    [self loginWithUserId:@"555"];
+    [self loginWithSenderId:self.senderId];
     // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     
-    [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
+    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
     // [self heartbeat];
 }
 
@@ -269,12 +275,14 @@
     NSLog(@"socketDidDisconnect error: %@", err);
 }
 
-- (void)loginWithUserId:(NSString *)userId {
-    NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", userId];
+
+- (void)loginWithSenderId:(NSString *)senderId {
+    NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", senderId];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     NSData *terminatorData = [TERMINATOR dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
 }
+
 
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
     NSString *messageFormat = @"{\"type\":\"MESSAGE\", \"sender_id\":\"%@\", \"receiver_id\":\"%@\", \"sender_name\":\"%@\", \"receiver_name\":\"%@\", \"msg_content\":\"%@\", \"msg_type\":\"%@\", \"play_time\":\"%@\", \"contact\":\"1\"}\n";
@@ -305,12 +313,12 @@
     NSLog(@"showEmotionPad");
     NSString *content = self.textView.text;
     if (content)
-        [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:content type:@"txt"];
+        [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:@"txt"];
 }
 
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
-    [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
+    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
 }
 
 - (IBAction)showOtherPad:(id)sender {
