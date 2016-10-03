@@ -53,12 +53,15 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    } else {
+    }
+    /*
+    else {
         for (UIView *view in cell.subviews){
             [view removeFromSuperview];
         }
     }
-    cell.textLabel.text = @"textLabel";
+     */
+    cell.textLabel.text = self.rows[indexPath.row];
     return cell;
 }
 
@@ -113,6 +116,9 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     // NSLog(@"didConnectToHost");
+    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
+    [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
+
 }
 
 - (void)send {
@@ -132,22 +138,46 @@
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    // NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    // NSLog(@"didReadData : %@", msg);
+    // NSString *m = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    // NSLog(@"didReadData : %@", m);
     
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-    NSLog(@"json : %@", json);
+    NSDictionary *message = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    // NSLog(@"json : %@", message);
     
-    NSString *type = json[@"type"];
+    NSString *type = message[@"type"];
     // NSLog(@"type : %@", type);
     
     if ([type isEqualToString:@"LOGIN"]) {
-        // NSLog(@"LOGIN : %@", json[@"content"]);
+        NSLog(@"LOGIN : %@", message);
+        
+    }
+    
+    if ([type isEqualToString:@"RECEIPT"]) {
+        NSLog(@"RECEIPT : %@", message);
+        [self handleReceipt:message];
     }
     
     if ([type isEqualToString:@"MESSAGE"]) {
-        // NSLog(@"MESSAGE : %@", json[@"content"]);
+        NSLog(@"MESSAGE : %@", message);
+        [self handleMessage:message];
+
     }
+
+    
+    
+    
+    
+    /*
+    if ([type isEqualToString:@"MESSAGE"]) {
+        if (message[@"send_result"]) {
+            // NSLog(@"handle receipt");
+            [self handleReceiptMessage:message];
+        } else {
+            NSLog(@"handle receive");
+            [self handleReceiveMessage:message];
+        }
+    }
+     */
     
     if ([type isEqualToString:@"CHATHISTORY"]) {
         // NSLog(@"CHATHISTORY : %@", json[@"content"]);
@@ -156,17 +186,46 @@
     if ([type isEqualToString:@"ECHO"]) {
         // NSLog(@"ECHO : %@", json[@"content"]);
     }
+    
+    
+    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
+    [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
+
+}
+
+- (void)handleReceipt:(NSDictionary *)message {
+    NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+    [self.rows addObject:[NSString stringWithFormat:@"recP : %@", msg[@"msg_content"]]];
+    [self.tableView reloadData];
+}
+
+- (void)handleMessage:(NSDictionary *)message {
+    NSLog(@"handleMessage %@ : ", message);
+    
+    NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+    NSLog(@"msg_content : %@", msg[@"msg_content"]);
+
+    [self.rows addObject:[NSString stringWithFormat:@"recv : %@", msg[@"msg_content"]]];
+    [self.tableView reloadData];
+    /*
+    NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
+    [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
+     */
+
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    // NSLog(@"socketDidDisconnect error: %@", err);
+    NSLog(@"socketDidDisconnect error: %@", err);
+    [self.voiceButton setTitle:@"OUT" forState:UIControlStateNormal];
 }
 
 - (void)loginWithUserId:(NSString *)userId {
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", userId];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
+    /*
     NSData *terminatorData = [@"\n" dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
+     */
 }
 
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
