@@ -2439,6 +2439,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCV-zG-zr3">
                                         <rect key="frame" x="8" y="20" width="32" height="28"/>
                                         <state key="normal" title="VOC"/>
+                                        <connections>
+                                            <action selector="showVoicePad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="4OZ-HE-EG9"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="国庆节加班" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CcZ-ap-oIF">
                                         <rect key="frame" x="48" y="20" width="239" height="28"/>
@@ -2449,6 +2452,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLY-9a-Vyl">
                                         <rect key="frame" x="335" y="20" width="32" height="28"/>
                                         <state key="normal" title="+"/>
+                                        <connections>
+                                            <action selector="showOtherPad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="dO8-t8-Rvc"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzZ-uR-BKd">
                                         <rect key="frame" x="295" y="20" width="32" height="28"/>

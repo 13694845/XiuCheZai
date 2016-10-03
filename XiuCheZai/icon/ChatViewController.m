@@ -19,12 +19,14 @@
 @property (strong, nonatomic) NSMutableArray *rows;
 
 @property (weak, nonatomic) IBOutlet UIView *barView;
-@property (weak, nonatomic) IBOutlet UIButton *voiceButton;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIButton *voiceButton;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
 
-@property (strong, nonatomic) NSString *userId;
+@property (strong, nonatomic) NSString *senderId;
+@property (strong, nonatomic) NSString *receiverId;
+@property (assign, nonatomic) NSUInteger currentPage;
 
 @end
 
@@ -81,7 +83,7 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     
     // **************************
-    self.userId = @"555";
+    self.senderId = @"555";
     
     
     ChatMessage *chatMessage = [[ChatMessage alloc] init];
@@ -108,7 +110,7 @@
     [self loginWithUserId:@"555"];
     // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     
-    [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-03 13:01:01" page:@"1"];
+    [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.currentPage]];
     // [self heartbeat];
 }
 
@@ -237,7 +239,7 @@
     NSMutableArray *chatMessages = [NSMutableArray array];
     for (NSDictionary *msg in message[@"content"]) {
         ChatMessage *chatMessage = [[ChatMessage alloc] init];
-        chatMessage.isSend = [[msg[@"sender_id"] description] isEqualToString:@"123"];
+        chatMessage.isSend = [[msg[@"sender_id"] description] isEqualToString:self.senderId];
         
         chatMessage.type = msg[@"msg_type"];
         chatMessage.content = msg[@"msg_content"];
@@ -258,6 +260,7 @@
     // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 
 }
+
 
 
 
@@ -302,6 +305,15 @@
     NSString *content = self.textView.text;
     if (content)
         [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:content type:@"txt"];
+}
+
+- (IBAction)showVoicePad:(id)sender {
+    NSLog(@"showVoicePad");
+    [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.currentPage]];
+}
+
+- (IBAction)showOtherPad:(id)sender {
+    NSLog(@"showOtherPad =");
 }
 
 @end
