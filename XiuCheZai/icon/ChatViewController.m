@@ -8,6 +8,7 @@
 
 #import "ChatViewController.h"
 #import "GCDAsyncSocket.h"
+#import "ChatMessage.h"
 
 @interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -71,7 +72,20 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     
-    self.rows = [@[@"aaa", @"bbb", @"ccc"] mutableCopy];
+    ChatMessage *message = [[ChatMessage alloc] init];
+    message.isSend = YES;
+    
+    message.type = @"txt";
+    message.content = @"content";
+    message.playTime = @"-1";
+    
+    message.senderTime = @"2016-10-03 13:01:01";
+    message.senderId = @"555";
+    message.senderId = @"zhangsan";
+    message.receiverId = @"123";
+    message.receiverName = @"lisi";
+    
+    self.rows = [@[message] mutableCopy];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

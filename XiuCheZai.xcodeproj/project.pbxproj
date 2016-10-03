@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6C05EDFD1C33C58400BF8C39 /* home_activity03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C05EDFC1C33C58400BF8C39 /* home_activity03.png */; };
+		6C1207081DA229B700FF4138 /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207071DA229B700FF4138 /* ChatMessage.m */; };
 		6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1365A61C23D83E00B217DD /* HomeViewController.m */; };
 		6C1365B91C24F6C300B217DD /* home_icon01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B11C24F6C300B217DD /* home_icon01.png */; };
 		6C1365BA1C24F6C300B217DD /* home_icon02.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B21C24F6C300B217DD /* home_icon02.png */; };
@@ -231,6 +232,8 @@
 
 /* Begin PBXFileReference section */
 		6C05EDFC1C33C58400BF8C39 /* home_activity03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_activity03.png; sourceTree = "<group>"; };
+		6C1207061DA229B700FF4138 /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
+		6C1207071DA229B700FF4138 /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
 		6C1365A51C23D83E00B217DD /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6C1365A61C23D83E00B217DD /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		6C1365B11C24F6C300B217DD /* home_icon01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon01.png; sourceTree = "<group>"; };
@@ -1057,6 +1060,8 @@
 				6C9F60A41D4598C600910335 /* icon */,
 				6CC190931DA08A8E0098BB40 /* ChatViewController.h */,
 				6CC190941DA08A8E0098BB40 /* ChatViewController.m */,
+				6C1207061DA229B700FF4138 /* ChatMessage.h */,
+				6C1207071DA229B700FF4138 /* ChatMessage.m */,
 				6CABF70D1C0E978B00DF3EFF /* AppDelegate.h */,
 				6CABF70E1C0E978B00DF3EFF /* AppDelegate.m */,
 				6C91C35E1C9A86FE004C0CB4 /* LoginViewController.h */,
@@ -1474,6 +1479,7 @@
 				6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */,
 				6CABF70C1C0E978B00DF3EFF /* main.m in Sources */,
 				6C4D0C461C28E998003E96E8 /* UIButton+WebCache.m in Sources */,
+				6C1207081DA229B700FF4138 /* ChatMessage.m in Sources */,
 				6C8B11031CC8B840003CF8F5 /* RecommenderCollectionViewCell.m in Sources */,
 				6C4D0C421C28E998003E96E8 /* SDWebImageDownloader.m in Sources */,
 			);
