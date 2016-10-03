@@ -89,7 +89,7 @@
     self.senderName = @"zhangsan";
     self.receiverId = @"123";
     self.receiverName = @"lisi";
-
+    
     /*
     ChatMessage *chatMessage = [[ChatMessage alloc] init];
     chatMessage.isSend = YES;
@@ -142,6 +142,10 @@
         NSLog(@"conn error: %@", error);
     }
     // [self setupTimer];
+}
+
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+    NSLog(@"socketDidDisconnect error: %@", err);
 }
 
 - (void)setupTimer {
@@ -268,21 +272,12 @@
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
-
-
-
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    NSLog(@"socketDidDisconnect error: %@", err);
-}
-
-
 - (void)loginWithSenderId:(NSString *)senderId {
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", senderId];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     NSData *terminatorData = [TERMINATOR dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
 }
-
 
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
     NSString *messageFormat = @"{\"type\":\"MESSAGE\", \"sender_id\":\"%@\", \"receiver_id\":\"%@\", \"sender_name\":\"%@\", \"receiver_name\":\"%@\", \"msg_content\":\"%@\", \"msg_type\":\"%@\", \"play_time\":\"%@\", \"contact\":\"1\"}\n";
