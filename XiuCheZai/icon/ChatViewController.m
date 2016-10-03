@@ -13,7 +13,7 @@
 @interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
-@property (nonatomic) NSTimer *timer;
+@property (strong, nonatomic) NSTimer *timer;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *rows;
@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
+
+@property (strong, nonatomic) NSString *userId;
 
 @end
 
@@ -77,6 +79,10 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
+    
+    // **************************
+    self.userId = @"555";
+    
     
     ChatMessage *chatMessage = [[ChatMessage alloc] init];
     chatMessage.isSend = YES;
@@ -213,6 +219,8 @@
     
     // [self.rows addObject:[NSString stringWithFormat:@"SEND : %@", msg[@"msg_content"]]];
     [self.tableView reloadData];
+    
+    
 }
 
 - (void)handleMessage:(NSDictionary *)message {
@@ -225,14 +233,30 @@
     [self.tableView reloadData];
 }
 
-
-
 - (void)handleHistory:(NSDictionary *)message {
-    /*
-    NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
-    [self.rows addObject:[NSString stringWithFormat:@"HIST : %@", msg[@"msg_content"]]];
+    NSMutableArray *chatMessages = [NSMutableArray array];
+    for (NSDictionary *msg in message[@"content"]) {
+        ChatMessage *chatMessage = [[ChatMessage alloc] init];
+        chatMessage.isSend = [[msg[@"sender_id"] description] isEqualToString:@"123"];
+        
+        chatMessage.type = msg[@"msg_type"];
+        chatMessage.content = msg[@"msg_content"];
+        chatMessage.playTime = msg[@"play_time"];
+        
+        chatMessage.senderTime = msg[@"send_time"];
+        chatMessage.senderId = msg[@"sender_id"];
+        chatMessage.senderName = msg[@"sender_name"];
+        chatMessage.receiverId = msg[@"receiver_id"];
+        chatMessage.receiverName = msg[@"receiver_name"];
+        
+        [chatMessages addObject:chatMessage];
+    }
+    [chatMessages addObjectsFromArray:self.rows];
+    self.rows = chatMessages;
     [self.tableView reloadData];
-     */
+    
+    // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+
 }
 
 
