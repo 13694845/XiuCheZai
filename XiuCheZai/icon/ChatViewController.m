@@ -26,7 +26,7 @@
 
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *receiverId;
-@property (assign, nonatomic) NSUInteger currentPage;
+@property (assign, nonatomic) NSUInteger historyPage;
 
 @end
 
@@ -110,7 +110,7 @@
     [self loginWithUserId:@"555"];
     // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     
-    [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.currentPage]];
+    [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
     // [self heartbeat];
 }
 
@@ -223,6 +223,8 @@
     [self.tableView reloadData];
     
     
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+
 }
 
 - (void)handleMessage:(NSDictionary *)message {
@@ -255,10 +257,9 @@
     }
     [chatMessages addObjectsFromArray:self.rows];
     self.rows = chatMessages;
-    [self.tableView reloadData];
-    
-    // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 
+    [self.tableView reloadData];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
 
@@ -309,7 +310,7 @@
 
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
-    [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.currentPage]];
+    [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
 }
 
 - (IBAction)showOtherPad:(id)sender {
