@@ -110,7 +110,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [self setupSocket];
-    [self conn];
+    [self connect];
     // [self send];
     
     [self loginWithSenderId:self.senderId];
@@ -133,7 +133,7 @@
 #define PORT 9999
 #define TERMINATOR @"\n"
 
-- (void)conn {
+- (void)connect {
     NSString *host = HOST;
     uint16_t port = PORT;
     NSError *error = nil;
