@@ -29,7 +29,7 @@
     // [self send];
     
     [self loginWithUserId:@"123"];
-    // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
+    [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     
     // [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-10" page:@"1"];
     // [self heartbeat];
@@ -64,7 +64,7 @@
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
-    NSLog(@"didConnectToHost");
+    // NSLog(@"didConnectToHost");
 }
 
 - (void)send {
@@ -80,38 +80,38 @@
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-    NSLog(@"didWriteDataWithTag");
+    // NSLog(@"didWriteDataWithTag");
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"didReadData : %@", msg);
+    // NSString *msg = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    // NSLog(@"didReadData : %@", msg);
     
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-    // NSLog(@"json : %@", json);
+    NSLog(@"json : %@", json);
     
     NSString *type = json[@"type"];
-    NSLog(@"type : %@", type);
+    // NSLog(@"type : %@", type);
     
     if ([type isEqualToString:@"LOGIN"]) {
-        NSLog(@"LOGIN : %@", json[@"content"]);
+        // NSLog(@"LOGIN : %@", json[@"content"]);
     }
     
     if ([type isEqualToString:@"MESSAGE"]) {
-        NSLog(@"MESSAGE : %@", json[@"content"]);
+        // NSLog(@"MESSAGE : %@", json[@"content"]);
     }
     
     if ([type isEqualToString:@"CHATHISTORY"]) {
-        NSLog(@"CHATHISTORY : %@", json[@"content"]);
+        // NSLog(@"CHATHISTORY : %@", json[@"content"]);
     }
     
     if ([type isEqualToString:@"ECHO"]) {
-        NSLog(@"ECHO : %@", json[@"content"]);
+        // NSLog(@"ECHO : %@", json[@"content"]);
     }
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    NSLog(@"socketDidDisconnect error: %@", err);
+    // NSLog(@"socketDidDisconnect error: %@", err);
 }
 
 - (void)loginWithUserId:(NSString *)userId {
