@@ -82,7 +82,7 @@
     [self loginWithUserId:@"555"];
     // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     
-    // [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-10" page:@"1"];
+    [self historyMessagesForSenderId:@"555" receiverId:@"123" sendTime:@"2016-10-03 13:01:01" page:@"1"];
     // [self heartbeat];
 }
 
@@ -135,48 +135,40 @@
     
     if ([type isEqualToString:@"LOGIN"]) {
         NSLog(@"LOGIN : %@", message);
+        [self handleLogin:message];
     }
-    
     if ([type isEqualToString:@"RECEIPT"]) {
         NSLog(@"RECEIPT : %@", message);
         [self handleReceipt:message];
     }
-    
     if ([type isEqualToString:@"MESSAGE"]) {
         NSLog(@"MESSAGE : %@", message);
         [self handleMessage:message];
-
     }
-
-    
-    
-    
-    
-    /*
-    if ([type isEqualToString:@"MESSAGE"]) {
-        if (message[@"send_result"]) {
-            // NSLog(@"handle receipt");
-            [self handleReceiptMessage:message];
-        } else {
-            NSLog(@"handle receive");
-            [self handleReceiveMessage:message];
-        }
-    }
-     */
-    
     if ([type isEqualToString:@"CHATHISTORY"]) {
-        // NSLog(@"CHATHISTORY : %@", json[@"content"]);
+        NSLog(@"CHATHISTORY : %@", message);
+        [self handleHistory:message];
     }
-    
     if ([type isEqualToString:@"ECHO"]) {
-        // NSLog(@"ECHO : %@", json[@"content"]);
+        NSLog(@"ECHO : %@", message);
     }
-    
     /*
     NSData *terminatorData = [TERMINATOR dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
      */
 }
+
+
+
+- (void)handleLogin:(NSDictionary *)message {
+    /*
+    NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+    [self.rows addObject:[NSString stringWithFormat:@"SEND : %@", msg[@"msg_content"]]];
+    [self.tableView reloadData];
+     */
+}
+
+
 
 - (void)handleReceipt:(NSDictionary *)message {
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
@@ -193,6 +185,18 @@
     [self.rows addObject:[NSString stringWithFormat:@"RECV : %@", msg[@"msg_content"]]];
     [self.tableView reloadData];
 }
+
+
+
+- (void)handleHistory:(NSDictionary *)message {
+    /*
+    NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
+    [self.rows addObject:[NSString stringWithFormat:@"HIST : %@", msg[@"msg_content"]]];
+    [self.tableView reloadData];
+     */
+}
+
+
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"socketDidDisconnect error: %@", err);
