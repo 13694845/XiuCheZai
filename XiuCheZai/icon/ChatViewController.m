@@ -15,8 +15,9 @@
 @property (nonatomic) NSTimer *timer;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *barView;
+@property (strong, nonatomic) NSMutableArray *rows;
 
+@property (weak, nonatomic) IBOutlet UIView *barView;
 @property (weak, nonatomic) IBOutlet UIButton *voiceButton;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
@@ -25,6 +26,22 @@
 @end
 
 @implementation ChatViewController
+
+@synthesize rows = _rows;
+
+- (void)setRows:(NSMutableArray *)rows {
+    _rows = rows;
+    [self updateTableView];
+}
+
+- (NSMutableArray *)rows {
+    if (!_rows) _rows = [NSMutableArray array];
+    return _rows;
+}
+
+- (void)updateTableView {
+    [self.tableView reloadData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
