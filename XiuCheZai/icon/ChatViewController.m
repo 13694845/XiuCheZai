@@ -78,6 +78,8 @@
     return cell;
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -115,6 +117,8 @@
     self.textView.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
     self.textView.layer.cornerRadius = 4.0f;
     
+    
+    // ***************
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
     self.textView.returnKeyType = UIReturnKeySend;
