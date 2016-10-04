@@ -97,23 +97,6 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
-    
-    /*
-    ChatMessage *chatMessage = [[ChatMessage alloc] init];
-    chatMessage.isSend = YES;
-    
-    chatMessage.type = @"txt";
-    chatMessage.content = @"content";
-    chatMessage.playTime = @"-1";
-    
-    chatMessage.senderTime = @"2016-10-03 13:01:01";
-    chatMessage.senderId = @"555";
-    chatMessage.senderName = @"zhangsan";
-    chatMessage.receiverId = @"123";
-    chatMessage.receiverName = @"lisi";
-    
-    self.rows = [@[chatMessage] mutableCopy];
-     */
 }
 
 - (void)viewDidAppear:(BOOL)animated {
