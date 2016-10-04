@@ -2429,45 +2429,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Zw-5h-sOx">
-                                <rect key="frame" x="0.0" y="64" width="375" height="298"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Zw-5h-sOx">
+                                <rect key="frame" x="0.0" y="64" width="375" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fAt-3S-AMs">
-                                <rect key="frame" x="0.0" y="370" width="375" height="56"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAt-3S-AMs">
+                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h5N-Rt-urd">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCV-zG-zr3">
-                                        <rect key="frame" x="8" y="20" width="32" height="28"/>
-                                        <state key="normal" title="VOC"/>
+                                        <rect key="frame" x="16" y="12" width="22" height="22"/>
+                                        <state key="normal" backgroundImage="vic.png"/>
                                         <connections>
                                             <action selector="showVoicePad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="4OZ-HE-EG9"/>
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="国庆节加班" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CcZ-ap-oIF">
-                                        <rect key="frame" x="48" y="20" width="239" height="28"/>
+                                        <rect key="frame" x="48" y="9" width="239" height="28"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLY-9a-Vyl">
-                                        <rect key="frame" x="335" y="20" width="32" height="28"/>
-                                        <state key="normal" title="+"/>
-                                        <connections>
-                                            <action selector="showOtherPad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="dO8-t8-Rvc"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzZ-uR-BKd">
-                                        <rect key="frame" x="295" y="20" width="32" height="28"/>
-                                        <state key="normal" title=": P"/>
+                                        <rect key="frame" x="303" y="12" width="22" height="22"/>
+                                        <state key="normal" backgroundImage="表情.png"/>
                                         <connections>
                                             <action selector="showEmotionPad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="wJi-jv-kr2"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLY-9a-Vyl">
+                                        <rect key="frame" x="337" y="12" width="22" height="22"/>
+                                        <state key="normal" backgroundImage="add.png"/>
+                                        <connections>
+                                            <action selector="showOtherPad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="dO8-t8-Rvc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="3fY-yD-PgO"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5Zw-5h-sOx" firstAttribute="leading" secondItem="8E4-Ey-tq1" secondAttribute="leading" id="6m5-D4-24x"/>
+                            <constraint firstItem="fAt-3S-AMs" firstAttribute="leading" secondItem="8E4-Ey-tq1" secondAttribute="leading" id="90m-as-62o"/>
+                            <constraint firstItem="5Zw-5h-sOx" firstAttribute="top" secondItem="G3P-1R-BjQ" secondAttribute="bottom" id="Zaq-QB-iuR"/>
+                            <constraint firstItem="hKK-6c-QMu" firstAttribute="top" secondItem="fAt-3S-AMs" secondAttribute="bottom" id="ayp-af-OEN"/>
+                            <constraint firstAttribute="trailing" secondItem="5Zw-5h-sOx" secondAttribute="trailing" id="fIc-8A-54R"/>
+                            <constraint firstItem="fAt-3S-AMs" firstAttribute="top" secondItem="5Zw-5h-sOx" secondAttribute="bottom" id="tsA-w5-dUL"/>
+                            <constraint firstAttribute="trailing" secondItem="fAt-3S-AMs" secondAttribute="trailing" id="wRr-8S-QVZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qQz-54-hAD"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -3255,6 +3271,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add.png" width="22" height="22"/>
         <image name="banner01.jpg" width="800" height="435"/>
         <image name="home_activity01.png" width="411" height="570"/>
         <image name="home_activity02.png" width="671" height="138"/>
@@ -3313,6 +3330,8 @@
         <image name="tab_icon51.png" width="25" height="25"/>
         <image name="tab_icon60.png" width="25" height="25"/>
         <image name="tab_icon62.png" width="25" height="25"/>
+        <image name="vic.png" width="16" height="21"/>
         <image name="发现.png" width="22" height="22"/>
+        <image name="表情.png" width="22" height="22"/>
     </resources>
 </document>
