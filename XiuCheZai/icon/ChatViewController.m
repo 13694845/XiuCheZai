@@ -108,18 +108,35 @@
     [self loginWithSenderId:self.senderId];
     // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     
-    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-05 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
+    // [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-05 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
     // [self heartbeat];
     
     self.textView.returnKeyType = UIReturnKeySend;
     self.textView.delegate = self;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    // [self setupSocket];
+    // [self connect];
+    // [self send];
+    
+    //[self loginWithSenderId:self.senderId];
+    // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
+    
+    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-05 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
+    // [self heartbeat];
+    
+}
+
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
         NSLog(@"returned");
-        [self sendMessageWithContent:text];
+        
+        NSString *content = [text stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        
+        [self sendMessageWithContent:content];
+        textView.text = nil;
         return NO;
     }
     return YES;
