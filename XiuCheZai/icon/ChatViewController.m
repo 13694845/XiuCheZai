@@ -78,8 +78,6 @@
     return cell;
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -116,7 +114,6 @@
     self.textView.layer.borderWidth = 1.0f;
     self.textView.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
     self.textView.layer.cornerRadius = 4.0f;
-    
     
     // ***************
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -223,6 +220,7 @@
 }
 
 - (void)handleLogin:(NSDictionary *)message {
+    NSLog(@"handleMessage %@ : ", message);
     /*
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
     [self.rows addObject:[NSString stringWithFormat:@"SEND : %@", msg[@"msg_content"]]];
@@ -351,22 +349,56 @@
     [self.view endEditing:YES];
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    CGRect rect = self.barView.frame;
+
+    
+    NSLog(@"viewWillLayoutSubviews");
+}
+
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    CGRect rect = self.barView.frame;
+
+    NSLog(@"viewDidLayoutSubviews");
+    
+    
+}
+
+
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+
+    
+    self.tableView.hidden = YES;
+    
+    CGRect rect = self.barView.frame;
+    rect.origin.y += 400.0f;
+    self.barView.frame = rect;
+    
+    // [self.view endEditing:YES];
+    
+    /*
     CGRect rect = self.view.frame;
     rect.origin.y -= keyboardRect.size.height;
     [UIView animateWithDuration:0.2f animations:^{
         self.view.frame = rect;
     } completion:^(BOOL finished) {}];
+     */
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
+    /*
     CGRect rect = self.view.frame;
     rect.origin.y = 0;
     [UIView animateWithDuration:0.2f animations:^{
         self.view.frame = rect;
     } completion:^(BOOL finished) {}];
     self.view.frame = rect;
+     */
 }
 
 @end
