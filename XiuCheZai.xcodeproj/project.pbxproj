@@ -657,6 +657,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C1207091DA33C1000FF4138 /* ChatIcons */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ChatIcons;
+			sourceTree = "<group>";
+		};
 		6C4D0C1B1C28E998003E96E8 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1058,6 +1065,7 @@
 				6CB2AB161C1506610025260A /* Alipay */,
 				6C8B10821CC858F2003CF8F5 /* Wxpay */,
 				6C9F60A41D4598C600910335 /* icon */,
+				6C1207091DA33C1000FF4138 /* ChatIcons */,
 				6CC190931DA08A8E0098BB40 /* ChatViewController.h */,
 				6CC190941DA08A8E0098BB40 /* ChatViewController.m */,
 				6C1207061DA229B700FF4138 /* ChatMessage.h */,

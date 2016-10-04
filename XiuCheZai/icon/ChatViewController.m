@@ -80,15 +80,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.showsVerticalScrollIndicator = NO;
     
     // **************************
     self.senderId = @"555";
     self.senderName = @"zhangsan";
     self.receiverId = @"123";
     self.receiverName = @"lisi";
+    // **************************
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationItem.title = self.receiverName;
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
     
     /*
     ChatMessage *chatMessage = [[ChatMessage alloc] init];
