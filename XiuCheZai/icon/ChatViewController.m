@@ -128,27 +128,14 @@
     
 }
 
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
-        NSLog(@"returned");
-        
-        NSString *content = [text stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        
-        [self sendMessageWithContent:content];
+        [self sendMessageWithContent:[textView.text stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
         textView.text = nil;
         return NO;
     }
     return YES;
 }
-
-
-- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    NSLog(@"textViewShouldEndEditing");
-    return YES;
-}
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -225,8 +212,6 @@
      */
 }
 
-
-
 - (void)handleLogin:(NSDictionary *)message {
     /*
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
@@ -234,8 +219,6 @@
     [self.tableView reloadData];
      */
 }
-
-
 
 - (void)handleReceipt:(NSDictionary *)message {
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
