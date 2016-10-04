@@ -2430,7 +2430,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Zw-5h-sOx">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="614"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAt-3S-AMs">
@@ -2476,7 +2476,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fAt-3S-AMs" firstAttribute="top" secondItem="5Zw-5h-sOx" secondAttribute="bottom" constant="8" id="7Df-BN-p6L"/>
+                            <constraint firstItem="fAt-3S-AMs" firstAttribute="top" secondItem="5Zw-5h-sOx" secondAttribute="bottom" id="7Df-BN-p6L"/>
                             <constraint firstItem="fAt-3S-AMs" firstAttribute="leading" secondItem="8E4-Ey-tq1" secondAttribute="leading" id="90m-as-62o"/>
                             <constraint firstItem="5Zw-5h-sOx" firstAttribute="leading" secondItem="8E4-Ey-tq1" secondAttribute="leading" id="EK7-BU-lqn"/>
                             <constraint firstAttribute="trailing" secondItem="5Zw-5h-sOx" secondAttribute="trailing" id="ZWC-CV-w1g"/>
