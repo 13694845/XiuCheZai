@@ -24,10 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
 
-
-// @property (assign, nonatomic) CGFloat keyboardHeight;
-
-
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderName;
 @property (strong, nonatomic) NSString *receiverId;
@@ -112,7 +108,7 @@
     [self loginWithSenderId:self.senderId];
     // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     
-    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
+    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-04 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
     // [self heartbeat];
 }
 
@@ -308,7 +304,7 @@
 
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
-    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-03 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
+    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-04 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
 }
 
 - (IBAction)showOtherPad:(id)sender {
