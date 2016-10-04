@@ -10,7 +10,7 @@
 #import "GCDAsyncSocket.h"
 #import "ChatMessage.h"
 
-@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (strong, nonatomic) NSTimer *timer;
@@ -108,9 +108,30 @@
     [self loginWithSenderId:self.senderId];
     // [self sendMessageFromSender:@{@"sender_id":@"555", @"sender_name":@"zhangsan"} toReceiver:@{@"receiver_id":@"123", @"receiver_name":@"lisi"} withContent:@"content" type:@"txt"];
     
-    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-04 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
+    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-05 13:01:01" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
     // [self heartbeat];
+    
+    self.textView.returnKeyType = UIReturnKeySend;
+    self.textView.delegate = self;
 }
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        NSLog(@"returned");
+        [self sendMessageWithContent:text];
+        return NO;
+    }
+    return YES;
+}
+
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    NSLog(@"textViewShouldEndEditing");
+    return YES;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -268,6 +289,12 @@
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     NSData *terminatorData = [TERMINATOR dataUsingEncoding:NSASCIIStringEncoding];
     [self.asyncSocket readDataToData:terminatorData withTimeout:-1.0 tag:0];
+}
+
+
+
+- (void)sendMessageWithContent:(NSString *)content {
+    [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:@"txt"];
 }
 
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
