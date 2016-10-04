@@ -337,15 +337,10 @@
 
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
-    self.textView.text = nil;
 }
 
 - (IBAction)showOtherPad:(id)sender {
     NSLog(@"showOtherPad =");
-    
-    CGRect rect = self.tableView.frame;
-    rect.origin.y -= 400.0;
-    self.tableView.frame = rect;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
