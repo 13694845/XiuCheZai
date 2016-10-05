@@ -30,10 +30,8 @@
 @property (strong, nonatomic) NSString *receiverName;
 @property (assign, nonatomic) NSUInteger historyPage;
 
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTop;
-
 
 @end
 
@@ -53,10 +51,6 @@
 
 - (void)updateTableView {
     [self.tableView reloadData];
-    
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -83,9 +77,6 @@
     if (message.isSend) text = [NSString stringWithFormat:@"SEND : %@", message.content];
     else text = [NSString stringWithFormat:@"RECV : %@", message.content];
     cell.textLabel.text = text;
-    
-    
-    NSLog(@"cell pos: %@", NSStringFromCGRect(cell.frame));
     
     return cell;
 }
