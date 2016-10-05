@@ -410,14 +410,15 @@
     
     CGFloat animationTime  = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]; // 获取键盘退出动画时间
 
-    self.tableViewTop.constant -= keyboardRect.size.height;
+    self.tableViewHeight.constant -= keyboardRect.size.height;
     
     // self.tableViewTop.constant -= keyboardRect.size.height;
     
     //[self.tableView setNeedsUpdateConstraints];
     //[self.barView setNeedsUpdateConstraints];
     
-    
+    //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+
     
     [UIView animateWithDuration:0.5f animations:^{
         [self.barView layoutIfNeeded];
@@ -432,7 +433,6 @@
     
     // [self updateTableView];
     
-    // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 
 /*
     [UIView animateWithDuration:0 animations:^{
@@ -461,7 +461,7 @@
     // self.tableViewHeight.constant -= keyboardRect.size.height;
     // [self updateTableView];
     
-    // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
     
     /*
      [UIView animateWithDuration:0 animations:^{
@@ -549,7 +549,7 @@
         self.tableViewHeight.constant += keyboardRect.size.height;
     } completion:^(BOOL finished) {}];
     */
-    self.tableViewTop.constant += keyboardRect.size.height;
+    self.tableViewHeight.constant += keyboardRect.size.height;
 
     
     [UIView animateWithDuration:0.5f animations:^{
