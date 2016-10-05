@@ -84,6 +84,9 @@
     else text = [NSString stringWithFormat:@"RECV : %@", message.content];
     cell.textLabel.text = text;
     
+    
+    NSLog(@"cell pos: %@", NSStringFromCGRect(cell.frame));
+    
     return cell;
 }
 
@@ -410,7 +413,7 @@
     
     CGFloat animationTime  = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]; // 获取键盘退出动画时间
 
-    self.tableViewHeight.constant -= keyboardRect.size.height;
+    self.tableViewTop.constant -= keyboardRect.size.height;
     
     // self.tableViewTop.constant -= keyboardRect.size.height;
     
@@ -556,7 +559,7 @@
         self.tableViewHeight.constant += keyboardRect.size.height;
     } completion:^(BOOL finished) {}];
     */
-    self.tableViewHeight.constant += keyboardRect.size.height;
+    self.tableViewTop.constant += keyboardRect.size.height;
 
     
     [UIView animateWithDuration:0.5f animations:^{
