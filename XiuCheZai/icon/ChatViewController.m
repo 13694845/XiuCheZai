@@ -122,6 +122,26 @@
     
     self.textView.returnKeyType = UIReturnKeySend;
     self.textView.delegate = self;
+    
+    
+    ChatMessage *chatMessage = [[ChatMessage alloc] init];
+    chatMessage.isSend = YES;
+    
+    chatMessage.content = @"opoopoppo";
+    /*
+    chatMessage.playTime = msg[@"play_time"];
+    
+    chatMessage.senderTime = msg[@"send_time"];
+    chatMessage.senderId = msg[@"sender_id"];
+    chatMessage.senderName = msg[@"sender_name"];
+    chatMessage.receiverId = msg[@"receiver_id"];
+    chatMessage.receiverName = msg[@"receiver_name"];
+    */
+    self.rows = [@[chatMessage] mutableCopy];
+    
+    
+    //[self.rows addObject:chatMessage];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -352,21 +372,32 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect rect = self.tableView.frame;
+    rect.origin.y = 50.0;
+    self.tableView.frame = rect;
+
+    
+    /*
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGRect rect = self.view.frame;
     rect.origin.y -= keyboardRect.size.height;
     [UIView animateWithDuration:0.2f animations:^{
         self.view.frame = rect;
     } completion:^(BOOL finished) {}];
+     */
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
+    
+    
+    /*
     CGRect rect = self.view.frame;
     rect.origin.y = 0;
     [UIView animateWithDuration:0.2f animations:^{
         self.view.frame = rect;
     } completion:^(BOOL finished) {}];
     self.view.frame = rect;
+     */
 }
 
 @end
