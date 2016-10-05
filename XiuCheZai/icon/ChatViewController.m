@@ -98,8 +98,10 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
     
     [self setupSocket];
     [self connect];
@@ -349,56 +351,22 @@
     [self.view endEditing:YES];
 }
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    CGRect rect = self.barView.frame;
-
-    
-    NSLog(@"viewWillLayoutSubviews");
-}
-
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    CGRect rect = self.barView.frame;
-
-    NSLog(@"viewDidLayoutSubviews");
-    
-    
-}
-
-
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-
-
-    
-    self.tableView.hidden = YES;
-    
-    CGRect rect = self.barView.frame;
-    rect.origin.y += 400.0f;
-    self.barView.frame = rect;
-    
-    // [self.view endEditing:YES];
-    
-    /*
     CGRect rect = self.view.frame;
     rect.origin.y -= keyboardRect.size.height;
     [UIView animateWithDuration:0.2f animations:^{
         self.view.frame = rect;
     } completion:^(BOOL finished) {}];
-     */
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    /*
     CGRect rect = self.view.frame;
     rect.origin.y = 0;
     [UIView animateWithDuration:0.2f animations:^{
         self.view.frame = rect;
     } completion:^(BOOL finished) {}];
     self.view.frame = rect;
-     */
 }
 
 @end
