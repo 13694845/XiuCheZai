@@ -30,6 +30,11 @@
 @property (strong, nonatomic) NSString *receiverName;
 @property (assign, nonatomic) NSUInteger historyPage;
 
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTop;
+
+
 @end
 
 @implementation ChatViewController
@@ -48,6 +53,10 @@
 
 - (void)updateTableView {
     [self.tableView reloadData];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -98,11 +107,16 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
+
     [self setupSocket];
     [self connect];
     // [self send];
@@ -124,23 +138,38 @@
     self.textView.delegate = self;
     
     
-    ChatMessage *chatMessage = [[ChatMessage alloc] init];
-    chatMessage.isSend = YES;
+    NSMutableArray *chatMessages = [NSMutableArray array];
+
     
-    chatMessage.content = @"opoopoppo";
-    /*
-    chatMessage.playTime = msg[@"play_time"];
+    for (int i = 0; i < 3; i++) {
+        
+        ChatMessage *chatMessage = [[ChatMessage alloc] init];
+        chatMessage.isSend = YES;
+        
+        chatMessage.content = [NSString stringWithFormat:@"test : %d", i];
+        /*
+         chatMessage.playTime = msg[@"play_time"];
+         
+         chatMessage.senderTime = msg[@"send_time"];
+         chatMessage.senderId = msg[@"sender_id"];
+         chatMessage.senderName = msg[@"sender_name"];
+         chatMessage.receiverId = msg[@"receiver_id"];
+         chatMessage.receiverName = msg[@"receiver_name"];
+         */
+        
+        [chatMessages addObject:chatMessage];
+
+
+    }
     
-    chatMessage.senderTime = msg[@"send_time"];
-    chatMessage.senderId = msg[@"sender_id"];
-    chatMessage.senderName = msg[@"sender_name"];
-    chatMessage.receiverId = msg[@"receiver_id"];
-    chatMessage.receiverName = msg[@"receiver_name"];
-    */
-    self.rows = [@[chatMessage] mutableCopy];
+    [chatMessages addObjectsFromArray:self.rows];
+
+    self.rows = chatMessages;
+
     
-    
-    //[self.rows addObject:chatMessage];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+
+
 
 }
 
@@ -372,10 +401,44 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    CGRect rect = self.tableView.frame;
-    rect.origin.y = 50.0;
-    self.tableView.frame = rect;
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    // self.tableViewHeight.constant -= keyboardRect.size.height;
+    
+    
+    
+    
+    CGFloat animationTime  = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue]; // 获取键盘退出动画时间
 
+    self.tableViewTop.constant -= keyboardRect.size.height;
+    
+    // self.tableViewTop.constant -= keyboardRect.size.height;
+    
+    //[self.tableView setNeedsUpdateConstraints];
+    //[self.barView setNeedsUpdateConstraints];
+    
+    
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.barView layoutIfNeeded];
+        [self.tableView layoutIfNeeded];
+    } completion:^(BOOL finished) {}];
+
+    
+    /*
+    [UIView animateWithDuration:200 animations:^{
+    } completion:^(BOOL finished) {}];
+    */
+    
+    // [self updateTableView];
+    
+    // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+
+/*
+    [UIView animateWithDuration:0 animations:^{
+        self.tableViewHeight.constant -= keyboardRect.size.height;
+    } completion:^(BOOL finished) {}];
+*/
     
     /*
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
@@ -387,9 +450,113 @@
      */
 }
 
+
+- (void)keyboardDidShow:(NSNotification *)notification {
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    
+    
+    // self.tableViewHeight.constant -= keyboardRect.size.height;
+    
+    // self.tableViewHeight.constant -= keyboardRect.size.height;
+    // [self updateTableView];
+    
+    // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+    
+    /*
+     [UIView animateWithDuration:0 animations:^{
+     self.tableViewHeight.constant -= keyboardRect.size.height;
+     } completion:^(BOOL finished) {}];
+     */
+    
+    /*
+     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+     CGRect rect = self.view.frame;
+     rect.origin.y -= keyboardRect.size.height;
+     [UIView animateWithDuration:0.2f animations:^{
+     self.view.frame = rect;
+     } completion:^(BOOL finished) {}];
+     */
+}
+
+
+
+- (void)keyboardWillChangeFrame:(NSNotification *)notification {
+    
+    NSLog(@"will will");
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    // self.tableViewHeight.constant -= keyboardRect.size.height;
+    
+    // self.tableViewHeight.constant -= keyboardRect.size.height;
+    // [self updateTableView];
+    
+    // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+    
+    /*
+     [UIView animateWithDuration:0 animations:^{
+     self.tableViewHeight.constant -= keyboardRect.size.height;
+     } completion:^(BOOL finished) {}];
+     */
+    
+    /*
+     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+     CGRect rect = self.view.frame;
+     rect.origin.y -= keyboardRect.size.height;
+     [UIView animateWithDuration:0.2f animations:^{
+     self.view.frame = rect;
+     } completion:^(BOOL finished) {}];
+     */
+}
+
+
+- (void)keyboardDidChangeFrame:(NSNotification *)notification {
+    
+    NSLog(@"fiejofijewfwef");
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    // self.tableViewHeight.constant -= keyboardRect.size.height;
+    
+    // self.tableViewHeight.constant -= keyboardRect.size.height;
+    // [self updateTableView];
+    
+    // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+    
+    /*
+     [UIView animateWithDuration:0 animations:^{
+     self.tableViewHeight.constant -= keyboardRect.size.height;
+     } completion:^(BOOL finished) {}];
+     */
+    
+    /*
+     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+     CGRect rect = self.view.frame;
+     rect.origin.y -= keyboardRect.size.height;
+     [UIView animateWithDuration:0.2f animations:^{
+     self.view.frame = rect;
+     } completion:^(BOOL finished) {}];
+     */
+}
+
+
+
+
 - (void)keyboardWillHide:(NSNotification *)notification {
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
+    /*
+    [UIView animateWithDuration:0.5f animations:^{
+        self.tableViewHeight.constant += keyboardRect.size.height;
+    } completion:^(BOOL finished) {}];
+    */
+    self.tableViewTop.constant += keyboardRect.size.height;
+
     
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.barView layoutIfNeeded];
+        [self.tableView layoutIfNeeded];
+    } completion:^(BOOL finished) {}];
+
     /*
     CGRect rect = self.view.frame;
     rect.origin.y = 0;
