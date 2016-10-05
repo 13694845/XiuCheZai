@@ -144,7 +144,7 @@
     NSMutableArray *chatMessages = [NSMutableArray array];
 
     
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 4; i++) {
         
         ChatMessage *chatMessage = [[ChatMessage alloc] init];
         chatMessage.isSend = YES;
@@ -172,8 +172,14 @@
     
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 
-
-
+    
+    
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    /*
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+    v.backgroundColor = [UIColor grayColor];
+    self.tableView.tableFooterView = v;
+     */
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -397,6 +403,11 @@
 
 - (IBAction)showOtherPad:(id)sender {
     NSLog(@"showOtherPad =");
+    
+    NSLog(@"self.tableView.frame : %@", NSStringFromCGRect(self.tableView.frame));
+    
+    NSLog(@"self.tableView.tableFooterView.frame : %@", NSStringFromCGRect(self.tableView.tableFooterView.frame));
+
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
