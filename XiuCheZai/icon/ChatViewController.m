@@ -141,7 +141,7 @@
     NSMutableArray *chatMessages = [NSMutableArray array];
 
     
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 30; i++) {
         
         ChatMessage *chatMessage = [[ChatMessage alloc] init];
         chatMessage.isSend = YES;
@@ -417,13 +417,20 @@
     //[self.tableView setNeedsUpdateConstraints];
     //[self.barView setNeedsUpdateConstraints];
     
-    //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 
     
     [UIView animateWithDuration:0.5f animations:^{
+        
+        
+        
         [self.barView layoutIfNeeded];
         [self.tableView layoutIfNeeded];
-    } completion:^(BOOL finished) {}];
+    } completion:^(BOOL finished) {
+        //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    
+    }];
 
     
     /*
@@ -461,7 +468,7 @@
     // self.tableViewHeight.constant -= keyboardRect.size.height;
     // [self updateTableView];
     
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
+    // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
     
     /*
      [UIView animateWithDuration:0 animations:^{
