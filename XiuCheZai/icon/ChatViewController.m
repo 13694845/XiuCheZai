@@ -288,9 +288,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (IBAction)showEmotionPad:(id)sender {
     NSLog(@"showEmotionPad");
-    NSString *content = self.textView.text;
-    if (content)
-        [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:@"txt"];
 }
 
 - (IBAction)showVoicePad:(id)sender {
