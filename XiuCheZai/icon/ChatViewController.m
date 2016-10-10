@@ -87,7 +87,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.senderId = @"555";
     self.senderName = @"zhangsan";
     self.receiverId = @"123";
@@ -99,7 +99,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.receiverId = @"555";
     self.receiverName = @"zhangsan";
      */
-
+    
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
@@ -238,13 +238,23 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     // NSLog(@"msg_content : %@", [NSString stringWithFormat:@"SEND : %@", msg[@"msg_content"]]);
     
     [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
 - (void)handleMessage:(NSDictionary *)message {
-    NSLog(@"handleMessage %@ : ", message);
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
-    NSLog(@"msg_content : %@", [NSString stringWithFormat:@"RECV : %@", msg[@"msg_content"]]);
+    ChatMessage *chatMessage = [[ChatMessage alloc] init];
+    chatMessage.isSend = NO;
+    chatMessage.type = msg[@"msg_type"];
+    chatMessage.content = msg[@"msg_content"];
+    chatMessage.playTime = msg[@"play_time"];
+    chatMessage.senderTime = msg[@"send_time"];
+    chatMessage.senderId = msg[@"sender_id"];
+    chatMessage.senderName = msg[@"sender_name"];
+    chatMessage.receiverId = msg[@"receiver_id"];
+    chatMessage.receiverName = msg[@"receiver_name"];
+    [self.rows addObject:chatMessage];
+    // NSLog(@"msg_content : %@", [NSString stringWithFormat:@"RECV : %@", msg[@"msg_content"]]);
     
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
