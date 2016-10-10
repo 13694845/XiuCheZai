@@ -2430,54 +2430,81 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Zw-5h-sOx">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="619"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAt-3S-AMs">
-                                <rect key="frame" x="0.0" y="622" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h5N-Rt-urd">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                                         <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCV-zG-zr3">
-                                        <rect key="frame" x="16" y="12" width="22" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCV-zG-zr3">
+                                        <rect key="frame" x="16" y="13" width="16" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="1cm-9H-E2A"/>
+                                            <constraint firstAttribute="width" constant="16" id="XRg-NX-uDF"/>
+                                        </constraints>
                                         <state key="normal" backgroundImage="vic.png"/>
                                         <connections>
                                             <action selector="showVoicePad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="4OZ-HE-EG9"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="国庆节加班" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CcZ-ap-oIF">
-                                        <rect key="frame" x="48" y="9" width="239" height="28"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzZ-uR-BKd">
-                                        <rect key="frame" x="303" y="12" width="22" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzZ-uR-BKd">
+                                        <rect key="frame" x="303" y="13" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="gNn-1R-gyc"/>
+                                            <constraint firstAttribute="width" constant="22" id="opy-8C-6ok"/>
+                                        </constraints>
                                         <state key="normal" backgroundImage="表情.png"/>
                                         <connections>
                                             <action selector="showEmotionPad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="wJi-jv-kr2"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLY-9a-Vyl">
-                                        <rect key="frame" x="337" y="12" width="22" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLY-9a-Vyl">
+                                        <rect key="frame" x="337" y="13" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="22" id="3ER-Vi-cCQ"/>
+                                            <constraint firstAttribute="height" constant="22" id="hXJ-Vi-K5K"/>
+                                        </constraints>
                                         <state key="normal" backgroundImage="add.png"/>
                                         <connections>
                                             <action selector="showOtherPad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="dO8-t8-Rvc"/>
                                         </connections>
                                     </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="国庆节加班" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CcZ-ap-oIF">
+                                        <rect key="frame" x="48" y="8" width="239" height="32"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="AZJ-MN-ddB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="1JP-wq-1Ks"/>
+                                    <constraint firstAttribute="height" constant="48" id="1JP-wq-1Ks"/>
+                                    <constraint firstAttribute="trailing" secondItem="QLY-9a-Vyl" secondAttribute="trailing" constant="16" id="1eu-bO-VDY"/>
+                                    <constraint firstItem="CcZ-ap-oIF" firstAttribute="top" secondItem="fAt-3S-AMs" secondAttribute="top" constant="8" id="8JG-GQ-lws"/>
+                                    <constraint firstItem="TCV-zG-zr3" firstAttribute="top" secondItem="fAt-3S-AMs" secondAttribute="top" constant="13" id="8qv-dF-M2z"/>
+                                    <constraint firstItem="gzZ-uR-BKd" firstAttribute="top" secondItem="fAt-3S-AMs" secondAttribute="top" constant="13" id="ENz-76-hkz"/>
+                                    <constraint firstAttribute="bottom" secondItem="gzZ-uR-BKd" secondAttribute="bottom" constant="13" id="EzN-nh-Ccp"/>
+                                    <constraint firstAttribute="bottom" secondItem="TCV-zG-zr3" secondAttribute="bottom" constant="13" id="OBi-FF-Hco"/>
+                                    <constraint firstAttribute="bottom" secondItem="CcZ-ap-oIF" secondAttribute="bottom" constant="8" id="S8p-0h-6gD"/>
+                                    <constraint firstItem="QLY-9a-Vyl" firstAttribute="top" secondItem="fAt-3S-AMs" secondAttribute="top" constant="13" id="Tvm-KC-RvQ"/>
+                                    <constraint firstItem="CcZ-ap-oIF" firstAttribute="leading" secondItem="TCV-zG-zr3" secondAttribute="trailing" constant="16" id="aR7-ek-mQl"/>
+                                    <constraint firstItem="QLY-9a-Vyl" firstAttribute="leading" secondItem="gzZ-uR-BKd" secondAttribute="trailing" constant="12" id="gzf-Pm-8Oi"/>
+                                    <constraint firstItem="TCV-zG-zr3" firstAttribute="leading" secondItem="fAt-3S-AMs" secondAttribute="leading" constant="16" id="vRS-cq-xNX"/>
+                                    <constraint firstItem="gzZ-uR-BKd" firstAttribute="leading" secondItem="CcZ-ap-oIF" secondAttribute="trailing" constant="16" id="wMv-6i-0h0"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="fAt-3S-AMs" secondAttribute="trailing" id="3BX-Y5-Wrn"/>
-                            <constraint firstItem="5Zw-5h-sOx" firstAttribute="height" secondItem="8E4-Ey-tq1" secondAttribute="height" constant="-45" id="6rY-Me-LpU"/>
+                            <constraint firstItem="5Zw-5h-sOx" firstAttribute="height" secondItem="8E4-Ey-tq1" secondAttribute="height" constant="-48" id="6rY-Me-LpU"/>
                             <constraint firstItem="5Zw-5h-sOx" firstAttribute="leading" secondItem="8E4-Ey-tq1" secondAttribute="leading" id="EG7-Ih-DLh"/>
                             <constraint firstAttribute="trailing" secondItem="5Zw-5h-sOx" secondAttribute="trailing" id="LFo-m2-VX1"/>
                             <constraint firstItem="fAt-3S-AMs" firstAttribute="leading" secondItem="8E4-Ey-tq1" secondAttribute="leading" id="RCv-5a-led"/>
