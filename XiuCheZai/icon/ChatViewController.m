@@ -42,6 +42,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 @property (strong, nonatomic) NSString *receiverName;
 @property (assign, nonatomic) NSUInteger historyPage;
 
+@property (assign, nonatomic) CGFloat keyboardHeight;
 @property (assign, nonatomic) TableViewTransform tableViewTransform;
 
 @end
@@ -174,14 +175,14 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (void)sendMessageWithContent:(NSString *)content {
-    NSLog(@"sendMessageWithContent");
+    NSLog(@"sendMessageWithContent : %@", content);
     [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:@"txt"];
 }
 
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
     NSString *messageFormat = @"{\"type\":\"MESSAGE\", \"sender_id\":\"%@\", \"receiver_id\":\"%@\", \"sender_name\":\"%@\", \"receiver_name\":\"%@\", \"msg_content\":\"%@\", \"msg_type\":\"%@\", \"play_time\":\"%@\", \"contact\":\"1\"}\n";
     NSString *message = [NSString stringWithFormat:messageFormat, sender[@"sender_id"], receiver[@"receiver_id"], sender[@"sender_name"], receiver[@"receiver_name"], content, type, @"-1"];
-    NSLog(@"sendMessage : %@", message);
+    // NSLog(@"sendMessage : %@", message);
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
@@ -218,35 +219,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)handleLogin:(NSDictionary *)message {
     // NSLog(@"handleLogin %@ : ", message);
-    // [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-10 20:00:00" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
-    
-    NSMutableArray *chatMessages = [NSMutableArray array];
-    
-    
-    for (int i = 0; i < 8; i++) {
-        
-        ChatMessage *chatMessage = [[ChatMessage alloc] init];
-        chatMessage.isSend = YES;
-        
-        chatMessage.content = [NSString stringWithFormat:@"test : %d", i];
-        /*
-         chatMessage.playTime = msg[@"play_time"];
-         
-         chatMessage.senderTime = msg[@"send_time"];
-         chatMessage.senderId = msg[@"sender_id"];
-         chatMessage.senderName = msg[@"sender_name"];
-         chatMessage.receiverId = msg[@"receiver_id"];
-         chatMessage.receiverName = msg[@"receiver_name"];
-         */
-        
-        [chatMessages addObject:chatMessage];
-        
-        
-    }
-    
-    [chatMessages addObjectsFromArray:self.rows];
-    
-    self.rows = chatMessages;
+    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-10 20:00:00" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
 }
 
 - (void)handleReceipt:(NSDictionary *)message {
@@ -262,7 +235,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     chatMessage.receiverId = msg[@"receiver_id"];
     chatMessage.receiverName = msg[@"receiver_name"];
     [self.rows addObject:chatMessage];
-    NSLog(@"msg_content : %@", [NSString stringWithFormat:@"SEND : %@", msg[@"msg_content"]]);
+    // NSLog(@"msg_content : %@", [NSString stringWithFormat:@"SEND : %@", msg[@"msg_content"]]);
     
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
@@ -322,144 +295,52 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     [self.view endEditing:YES];
 }
 
-
-
-- (CGFloat)keyboardHeightFromNotification:(NSNotification *)notification {
-    CGRect beginRect = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-    CGRect endRect   = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-
-    
-    
-    return 0.0;
-}
-
-
 - (void)keyboardWillShow:(NSNotification *)notification {
-    CGRect beginRect = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-
-    
-    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    
-    CGFloat keyboardHeight = keyboardRect.size.height;
-    
-    if (keyboardHeight == 216.0) keyboardHeight += 36;
-    
-    
-    CGFloat tableFooterBottom = self.tableView.tableFooterView.frame.origin.y;
-    
-    CGFloat tableViewHeight = self.tableView.frame.size.height;
-
-    
-    CGFloat blankHeight = [UIScreen mainScreen].bounds.size.height - self.tableView.tableFooterView.frame.origin.y - self.barView.bounds.size.height;
-    
-
-    
-    if (self.tableViewTransform == TableViewTransformNone) {
-        
-        
-        if (tableFooterBottom > tableViewHeight) {
-            NSLog(@"translate");
-            self.tableViewTop.constant -= keyboardHeight;
-            self.tableViewTransform = TableViewTransformTranslate;
-            
-        } else {
-            
-            NSLog(@"scale");
-            self.tableViewHeight.constant -= keyboardHeight;
-            self.tableViewTransform = TableViewTransformScale;
-            
+    CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardDeltaHeight = KeyboardFrameEnd.size.height - self.keyboardHeight;
+    switch (self.tableViewTransform) {
+        case TableViewTransformTranslate: {
+            self.tableViewTop.constant -= keyboardDeltaHeight; break;
         }
-
-        /*
-        if (blankHeight > keyboardHeight) {
-            NSLog(@"translate");
-            
-            self.tableViewHeight.constant -= keyboardHeight;
-            self.tableViewTransform = TableViewTransformScale;
-        } else {
-            
-            NSLog(@"scale");
-
-            self.tableViewTop.constant -= keyboardHeight;
-            self.tableViewTransform = TableViewTransformTranslate;
+        case TableViewTransformScale: {
+            self.tableViewHeight.constant -= keyboardDeltaHeight; break;
         }
-        */
+        case TableViewTransformNone: {
+            CGFloat tableFooterBottom = self.tableView.tableFooterView.frame.origin.y;
+            if (tableFooterBottom > self.tableView.frame.size.height) {
+                self.tableViewTop.constant -= keyboardDeltaHeight;
+                self.tableViewTransform = TableViewTransformTranslate;
+            } else {
+                self.tableViewHeight.constant -= keyboardDeltaHeight;
+                self.tableViewTransform = TableViewTransformScale;
+            }
+            break;
+        }
+        default: break;
     }
-/*
-    
-    if (tableFooterBottom > self.tableView.frame.size.height && self.tableViewTransform == TableViewTransformNone) {
-        NSLog(@"translate");
-        self.tableViewTop.constant -= keyboardHeight;
-        self.tableViewTransform = TableViewTransformTranslate;
-    }
-    
-    if (tableFooterBottom > self.tableView.frame.size.height && self.tableViewTransform == TableViewTransformNone) {
-        NSLog(@"scale");
-        self.tableViewTop.constant -= keyboardHeight;
-        self.tableViewTransform = TableViewTransformTranslate;
-    }
-    
-    
-    else {
-        self.tableViewHeight.constant -= keyboardHeight;
-        self.tableViewTransform = TableViewTransformScale;
-        
-    }
-*/
-    
-    /*
-    if (tableFooterBottom > self.tableView.frame.size.height) {
-        NSLog(@"translate");
-        self.tableViewTop.constant -= keyboardHeight;
-        self.tableViewTransform = TableViewTransformTranslate;
-    } else {
-        self.tableViewHeight.constant -= keyboardHeight;
-        self.tableViewTransform = TableViewTransformScale;
-        
-    }
-*/
-    
-    
-    
-    /*
-    if (blankHeight > keyboardHeight) {
-        self.tableViewHeight.constant -= keyboardHeight;
-        self.tableViewTransform = TableViewTransformScale;
-    } else {
-        self.tableViewTop.constant -= keyboardHeight;
-        self.tableViewTransform = TableViewTransformTranslate;
-    }
-    */
-    
+    self.keyboardHeight = KeyboardFrameEnd.size.height;
+
     CGFloat animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     [UIView animateWithDuration:animationDuration animations:^{
         [self.barView layoutIfNeeded];
         [self.tableView layoutIfNeeded];
     } completion:^(BOOL finished) {
-        //*******
-        // [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+        if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
     }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    
-    if (self.tableViewTransform != TableViewTransformNone) {
-        NSLog(@"de translate");
-    
     switch (self.tableViewTransform) {
-        case TableViewTransformTranslate:
-            self.tableViewTop.constant += keyboardRect.size.height; break;
-        case TableViewTransformScale:
-            self.tableViewHeight.constant += keyboardRect.size.height; break;
+        case TableViewTransformTranslate: {
+            self.tableViewTop.constant += self.keyboardHeight; break;
+        }
+        case TableViewTransformScale: {
+            self.tableViewHeight.constant += self.keyboardHeight; break;
+        }
         default: break;
     }
-    
-    }
-    
     self.tableViewTransform = TableViewTransformNone;
+    self.keyboardHeight = 0.0;
     
     CGFloat animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     [UIView animateWithDuration:animationDuration animations:^{
