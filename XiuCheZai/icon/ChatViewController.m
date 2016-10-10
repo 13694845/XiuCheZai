@@ -179,7 +179,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (void)sendMessageWithContent:(NSString *)content {
-    NSLog(@"sendMessageWithContent : %@", content);
+    // NSLog(@"sendMessageWithContent");
     [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:@"txt"];
 }
 
@@ -239,7 +239,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     chatMessage.receiverId = msg[@"receiver_id"];
     chatMessage.receiverName = msg[@"receiver_name"];
     [self.rows addObject:chatMessage];
-    // NSLog(@"msg_content : %@", [NSString stringWithFormat:@"SEND : %@", msg[@"msg_content"]]);
+    NSLog(@"SEND : %@", msg[@"msg_content"]);
     
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
@@ -258,10 +258,10 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     chatMessage.receiverId = msg[@"receiver_id"];
     chatMessage.receiverName = msg[@"receiver_name"];
     [self.rows addObject:chatMessage];
-    // NSLog(@"msg_content : %@", [NSString stringWithFormat:@"RECV : %@", msg[@"msg_content"]]);
+    NSLog(@"RECV : %@", msg[@"msg_content"]);
     
     [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
 - (void)handleHistory:(NSDictionary *)message {
