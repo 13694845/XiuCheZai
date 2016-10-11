@@ -119,34 +119,28 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     NSLog(@"TextRect : %@", NSStringFromCGRect(TextRect));
     
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(BUBBLE_VIEW_MARGIN_LEFT, BUBBLE_VIEW_MARGIN_TOP, 32.0 + 8.0 + TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2)];
-    bubbleView.backgroundColor = [UIColor grayColor];
+    // bubbleView.backgroundColor = [UIColor grayColor];
     
-    
-    
-    UIView *avatarImageView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0, 32.0)];
+    UIImage *avatarImage = [UIImage imageNamed:@"发送到"];
+    UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
+    avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     avatarImageView.backgroundColor = [UIColor redColor];
-    // [bubbleView addSubview:avatarImageView];
+    avatarImageView.layer.masksToBounds = YES;
+    avatarImageView.layer.cornerRadius = 16.0;
+    [bubbleView addSubview:avatarImageView];
     
-    
-    
-    NSString *bubbleImageName = message.isSend ? @"SenderAppNodeBkg_HL" : @"ReceiverTextNodeBkg";
-    UIImage *bubbleImage = [UIImage imageNamed:bubbleImageName];
+    UIImage *bubbleImage = [UIImage imageNamed:message.isSend ? @"SenderAppNodeBkg_HL" : @"ReceiverTextNodeBkg"];
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubbleImage stretchableImageWithLeftCapWidth:floorf(bubbleImage.size.width / 2) topCapHeight:floorf(bubbleImage.size.height / 2)]];
-    
-    bubbleImageView.frame = CGRectMake(0.0, 0.0, TextRect.size.width + BUBBLE_TEXT_PADDING * 2, 40.0);
+    bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, TextRect.size.width + BUBBLE_TEXT_PADDING * 2 + 10.0, TextRect.size.height + BUBBLE_TEXT_PADDING * 2 + 7.0);
     [bubbleView addSubview:bubbleImageView];
     
-    
-    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(32.0 + 8.0 + 8.0, 8.0, TextRect.size.width, TextRect.size.height)];
-    
-    
+    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(8.0 + 7.0, 8.0, TextRect.size.width, TextRect.size.height)];
     bubbleText.backgroundColor = [UIColor clearColor];
     bubbleText.font = [UIFont systemFontOfSize:14.0];
     bubbleText.numberOfLines = 0;
     bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
     bubbleText.text = message.content;
-
-    //[bubbleView addSubview:bubbleText];
+    [bubbleImageView addSubview:bubbleText];
 
     
     /*
