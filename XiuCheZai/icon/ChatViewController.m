@@ -82,25 +82,14 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    } else {
-        for (UIView *cellView in cell.subviews) [cellView removeFromSuperview];
-    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    for (UIView *cellView in cell.subviews) [cellView removeFromSuperview];
+    
     ChatMessage *message = self.rows[indexPath.row];
     UIView *bubbleView = [self bubbleViewForMessage:message];
     CGRect rect = bubbleView.frame;
-    
-    NSLog(@"rect : %@", NSStringFromCGRect(cell.frame));
-
-    
     if (message.isSend) rect.origin.x += BUBBLE_VIEW_MARGIN_LEFT;
-    else rect.origin.x = cell.frame.size.width - rect.size.width;
-    
+    else rect.origin.x = cell.frame.size.width - rect.size.width - BUBBLE_VIEW_MARGIN_RIGHT;
     rect.origin.y += BUBBLE_VIEW_MARGIN_TOP;
     bubbleView.frame = rect;
     [cell addSubview:bubbleView];
@@ -117,27 +106,25 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     // NSLog(@"TextRect : %@", NSStringFromCGRect(TextRect));
     
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2)];
-    bubbleView.backgroundColor = [UIColor grayColor];
+    // bubbleView.backgroundColor = [UIColor grayColor];
     
     UIImage *avatarImage = [UIImage imageNamed:@"发送到"];
     UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
     if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
-    else avatarImageView.frame = CGRectMake(bubbleView.bounds.size.width - avatarImageView.bounds.size.width, 0.0, 32.0, 32.0);
-    
-    
-    
+    else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
     avatarImageView.backgroundColor = [UIColor redColor];
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 16.0;
-    //[bubbleView addSubview:avatarImageView];
+    [bubbleView addSubview:avatarImageView];
     
     UIImage *bubbleImage = [UIImage imageNamed:message.isSend ? @"sender_bubble" : @"receiver_bubble"];
     UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubbleImage stretchableImageWithLeftCapWidth:floorf(bubbleImage.size.width / 2) topCapHeight:floorf(bubbleImage.size.height / 2)]];
-    bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2);
-    //[bubbleView addSubview:bubbleImageView];
+    if (message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2);
+    else bubbleImageView.frame = CGRectMake(0.0, 0.0, TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2);
+    [bubbleView addSubview:bubbleImageView];
     
-    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(8.0, 8.0, TextRect.size.width, TextRect.size.height)];
-    bubbleText.backgroundColor = [UIColor clearColor];
+    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, TextRect.size.width, TextRect.size.height)];
+    bubbleText.textColor = message.isSend ? [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0] : [UIColor whiteColor];
     bubbleText.font = [UIFont systemFontOfSize:14.0];
     bubbleText.numberOfLines = 0;
     bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
