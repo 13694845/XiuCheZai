@@ -96,7 +96,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.senderName = @"zhangsan";
     self.receiverId = @"123";
     self.receiverName = @"lisi";
-
+    
     /*
     self.senderId = @"123";
     self.senderName = @"lisi";
@@ -115,9 +115,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.tableFooterView = [[UIView alloc] init];
     
-    self.textView.layer.borderWidth = 1.0f;
+    self.textView.layer.borderWidth = 1.0;
     self.textView.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
-    self.textView.layer.cornerRadius = 4.0f;
+    self.textView.layer.cornerRadius = 4.0;
     self.textView.returnKeyType = UIReturnKeySend;
     self.textView.delegate = self;
     
@@ -127,28 +127,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     if (!self.asyncSocket) [self setupSocket];
     [self connectToHost:HOST onPort:PORT];
 }
-
-
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:@"哈哈哈哈哈123456789"];
-    
-    [attri addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, 5)];
-    [attri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 5)];
-    
-    [attri addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(5, 9)];
-    [attri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(5, 9)];
-    
-    NSTextAttachment *attch = [[NSTextAttachment alloc] init];
-    attch.image = [UIImage imageNamed:@"vic"];
-    attch.bounds = CGRectMake(0, 0, 14.0, 14.0);
-    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
-    
-    [attri appendAttributedString:string];
-    self.textView.attributedText = attri;
-}
-*/
-
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
