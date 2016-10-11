@@ -123,7 +123,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     */
     UIView *bubbleImageView = [[UIView alloc] init];
     bubbleImageView.backgroundColor = message.isSend ? [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0] : [UIColor colorWithRed:30.0/255.0 green:130.0/255.0 blue:232.0/255.0 alpha:1.0];
-    bubbleImageView.layer.cornerRadius = 8.0;
+    bubbleImageView.layer.cornerRadius = 5.0;
     if (message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2);
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
@@ -166,7 +166,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     
     self.textView.layer.borderWidth = 1.0;
     self.textView.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
-    self.textView.layer.cornerRadius = 4.0;
+    self.textView.layer.cornerRadius = 5.0;
     self.textView.returnKeyType = UIReturnKeySend;
     self.textView.delegate = self;
     
@@ -228,7 +228,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (void)sendMessageWithContent:(NSString *)content {
-    // NSLog(@"sendMessageWithContent");
+    NSLog(@"sendMessageWithContent");
     [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:@"txt"];
 }
 
