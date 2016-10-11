@@ -78,6 +78,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     }
     
     ChatMessage *message = self.rows[indexPath.row];
+    
+    [self bubbleViewForMessage:message];
+    
     NSString *text;
     if (message.isSend) text = [NSString stringWithFormat:@"SEND : %@", message.content];
     else text = [NSString stringWithFormat:@"RECV : %@", message.content];
@@ -87,6 +90,24 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.view endEditing:YES];
+}
+
+- (void)bubbleViewForMessage:(ChatMessage *)message {
+    // NSLog(@"bubbleViewForMessage : %@", message.content);
+    NSAttributedString *attributedContent = [[NSAttributedString alloc] initWithString:message.content attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
+    CGRect contentRect = [attributedContent boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGSize contentSize = contentRect.size;
+    NSLog(@"contentSize : %@", NSStringFromCGSize(contentSize));
+    
+    UIImage *bubble = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fromSelf?@"SenderAppNodeBkg_HL":@"ReceiverTextNodeBkg" ofType:@"png"]];
+
+    
+    /*
+    UIFont *font = [UIFont systemFontOfSize:14];
+    CGSize size = [message.content sizeWithFont:font constrainedToSize:CGSizeMake(180.0, 20000.0) lineBreakMode:NSLineBreakByWordWrapping];
+    
+    NSLog(@"size : %@", NSStringFromCGSize(size));
+     */
 }
 
 - (void)viewDidLoad {
