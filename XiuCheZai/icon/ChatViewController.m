@@ -144,7 +144,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
     
     
-    UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(12.0, BUBBLE_TEXT_PADDING_TOP, bubbleText.frame.size.width, TextRect.size.height + BUBBLE_TEXT_PADDING_TOP * 2)];
+    UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(12.0, BUBBLE_VIEW_MARGIN_TOP, bubbleText.frame.size.width, TextRect.size.height + BUBBLE_TEXT_PADDING_TOP * 2)];
     bubbleView.backgroundColor = [UIColor grayColor];
     
     
