@@ -324,7 +324,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.rows = chatMessages;
     
     [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
 - (void)handleEcho:(NSDictionary *)message {
