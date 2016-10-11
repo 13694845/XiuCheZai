@@ -103,10 +103,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 - (UIView *)bubbleViewForMessage:(ChatMessage *)message {
     NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:message.content attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
     CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    // NSLog(@"TextRect : %@", NSStringFromCGRect(TextRect));
-    
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2)];
-    // bubbleView.backgroundColor = [UIColor grayColor];
     
     UIImage *avatarImage = [UIImage imageNamed:@"发送到"];
     UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
@@ -130,7 +127,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
     bubbleText.text = message.content;
     [bubbleImageView addSubview:bubbleText];
-    
     return bubbleView;
 }
 
