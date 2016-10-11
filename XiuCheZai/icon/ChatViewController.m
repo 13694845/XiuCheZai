@@ -87,6 +87,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     } else {
         for (UIView *cellView in cell.subviews) [cellView removeFromSuperview];
     }
@@ -94,8 +95,11 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     UIView *bubbleView = [self bubbleViewForMessage:message];
     CGRect rect = bubbleView.frame;
     
+    NSLog(@"rect : %@", NSStringFromCGRect(cell.frame));
+
+    
     if (message.isSend) rect.origin.x += BUBBLE_VIEW_MARGIN_LEFT;
-    else rect.origin.x = cell.bounds.size.width - rect.size.width + BUBBLE_VIEW_MARGIN_RIGHT;
+    else rect.origin.x = cell.frame.size.width - rect.size.width;
     
     rect.origin.y += BUBBLE_VIEW_MARGIN_TOP;
     bubbleView.frame = rect;
