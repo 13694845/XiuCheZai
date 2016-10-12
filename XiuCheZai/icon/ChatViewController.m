@@ -147,43 +147,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.receiverId = @"123";
     self.receiverName = @"lisi";
     
-    
-    
-    /*
-    ChatMessage *msg = [[ChatMessage alloc] init];
-    msg.receiverId = self.receiverId;
-    
-    ChatMessageManager *messageManager = [ChatMessageManager sharedManager];
-    [messageManager saveMessage:msg];
-    */
-    
-    /*
-    
-    ChatMessage *msg = [[ChatMessage alloc] init];
-    msg.receiverId = self.receiverId;
-    
-    
-    NSDictionary *dict = @{@"key":@"value"};
-    
-    NSArray *messages = @[@"abc", msg];
-    
-    
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *filePath = [documentDirectories.firstObject stringByAppendingPathComponent:@"test.msg"];
-    NSLog(@"filePath : %@", filePath);
-    
-    [NSKeyedArchiver archiveRootObject:messages toFile:filePath];
-
-    
-    NSDictionary *res = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
-    
-    
-    // [messages writeToFile:filePath atomically:YES];
-
-    */
-    
-    
-    
     /*
     self.senderId = @"123";
     self.senderName = @"lisi";
