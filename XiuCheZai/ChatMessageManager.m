@@ -20,7 +20,11 @@
 }
 
 - (void)saveMessage:(ChatMessage *)message {
-    
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [documentDirectories.firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.msg", message.receiverId]];
+    NSLog(@"filePath : %@", filePath);
+    [NSKeyedArchiver archiveRootObject:message toFile:filePath];
+
 }
 
 - (void)saveMessages:(NSArray *)messages {
