@@ -379,7 +379,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
         default: break;
     }
     self.keyboardHeight = KeyboardFrameEnd.size.height;
-
+    
     CGFloat animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     [UIView animateWithDuration:animationDuration animations:^{
         [self.barView layoutIfNeeded];
