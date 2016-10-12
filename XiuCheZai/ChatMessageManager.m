@@ -36,7 +36,9 @@
 
 - (NSString *)fileForReceiverId:(NSString *)receiverId {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    return [documentDirectories.firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.msg", receiverId]];
+    NSString *file = [documentDirectories.firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.msg", receiverId]];
+    NSLog(@"file: %@", file);
+    return file;
 }
 
 @end

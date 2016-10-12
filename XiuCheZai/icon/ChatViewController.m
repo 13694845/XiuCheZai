@@ -10,6 +10,7 @@
 #import "GCDAsyncSocket.h"
 #import "ChatMessage.h"
 #import "ChatMessageManager.h"
+#import "NSAttributedString+JTATEmoji.h"
 
 #define HOST        @"192.168.2.63"
 #define PORT        9999
@@ -147,6 +148,10 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.receiverId = @"123";
     self.receiverName = @"lisi";
     
+    // NSString *normalStr = @"This category allows you to convert string into given image like this [kiss] and this [hug]";
+    NSString *normalStr = @"this [kiss] and this [hug]";
+    self.textView.attributedText = [NSAttributedString emojiAttributedString:normalStr withFont:self.textView.font];
+    
     /*
     self.senderId = @"123";
     self.senderName = @"lisi";
@@ -202,7 +207,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
-    [self setupHeartbeat];
+    // [self setupHeartbeat];
     [self loginWithSenderId:self.senderId];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
@@ -236,7 +241,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
     NSString *messageFormat = @"{\"type\":\"MESSAGE\", \"sender_id\":\"%@\", \"receiver_id\":\"%@\", \"sender_name\":\"%@\", \"receiver_name\":\"%@\", \"msg_content\":\"%@\", \"msg_type\":\"%@\", \"play_time\":\"%@\", \"contact\":\"1\"}\n";
     NSString *message = [NSString stringWithFormat:messageFormat, sender[@"sender_id"], receiver[@"receiver_id"], sender[@"sender_name"], receiver[@"receiver_name"], content, type, @"-1"];
-    // NSLog(@"sendMessage : %@", message);
+    NSLog(@"sendMessage : %@", message);
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
