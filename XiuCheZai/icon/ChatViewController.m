@@ -148,6 +148,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.receiverName = @"lisi";
     
     
+    
     /*
     ChatMessage *msg = [[ChatMessage alloc] init];
     msg.receiverId = self.receiverId;
@@ -309,7 +310,14 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)handleLogin:(NSDictionary *)message {
     // NSLog(@"handleLogin %@ : ", message);
-    [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-10 20:00:00" page:[NSString stringWithFormat:@"%ld", ++self.historyPage]];
+    NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
+    if (localHistoryMessages.count) {
+        self.rows = [localHistoryMessages mutableCopy];
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    } else {
+        [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-12 20:00:00" page:[NSString stringWithFormat:@"%d", 1]];
+    }
 }
 
 - (void)handleReceipt:(NSDictionary *)message {
@@ -366,9 +374,8 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
         [chatMessages addObject:chatMessage];
     }
     [chatMessages addObjectsFromArray:self.rows];
+    [[ChatMessageManager sharedManager] saveMessages:chatMessages withReceiverId:self.receiverId];
     self.rows = chatMessages;
-    
-    [[ChatMessageManager sharedManager] saveMessages:self.rows];
     
     [self.tableView reloadData];
     if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];

@@ -23,15 +23,15 @@
     return [NSKeyedUnarchiver unarchiveObjectWithFile:[self fileForReceiverId:receiverId]];
 }
 
-- (void)saveMessage:(ChatMessage *)message {
-    NSMutableArray *messages = [[self messagesForReceiverId:message.receiverId] mutableCopy];
-    if (!messages) messages = [NSMutableArray array];
-    [messages addObject:message];
-    [NSKeyedArchiver archiveRootObject:messages toFile:[self fileForReceiverId:message.receiverId]];
+- (void)saveMessage:(ChatMessage *)message withReceiverId:(NSString *)receiverId {
+    [self saveMessages:@[message] withReceiverId:receiverId];
 }
 
-- (void)saveMessages:(NSArray *)messages {
-    for (ChatMessage *message in messages) [self saveMessage:message];
+- (void)saveMessages:(NSArray *)messages withReceiverId:(NSString *)receiverId {
+    NSMutableArray *Messages_ = [[self messagesForReceiverId:receiverId] mutableCopy];
+    if (!Messages_) Messages_ = [NSMutableArray array];
+    [Messages_ addObjectsFromArray:messages];
+    [NSKeyedArchiver archiveRootObject:messages toFile:[self fileForReceiverId:receiverId]];
 }
 
 - (NSString *)fileForReceiverId:(NSString *)receiverId {
