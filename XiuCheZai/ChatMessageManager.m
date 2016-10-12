@@ -19,4 +19,8 @@
     return sharedManager;
 }
 
+- (void)saveMessages:(NSArray *)messages {
+    
+}
+
 @end

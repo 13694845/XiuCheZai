@@ -11,5 +11,6 @@
 @interface ChatMessageManager : NSObject
 
 + (instancetype)sharedManager;
+- (void)saveMessages:(NSArray *)messages;
 
 @end
