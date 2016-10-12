@@ -85,6 +85,7 @@
 		6C1207C01DAC722300FF4138 /* ReceiverTextNodeBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207BF1DAC722300FF4138 /* ReceiverTextNodeBkg@2x.png */; };
 		6C1207C31DACAF6600FF4138 /* receiver_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207C11DACAF6600FF4138 /* receiver_bubble.png */; };
 		6C1207C41DACAF6600FF4138 /* sender_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207C21DACAF6600FF4138 /* sender_bubble.png */; };
+		6C1207C71DADC5E700FF4138 /* ChatMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207C61DADC5E700FF4138 /* ChatMessageManager.m */; };
 		6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1365A61C23D83E00B217DD /* HomeViewController.m */; };
 		6C1365B91C24F6C300B217DD /* home_icon01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B11C24F6C300B217DD /* home_icon01.png */; };
 		6C1365BA1C24F6C300B217DD /* home_icon02.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B21C24F6C300B217DD /* home_icon02.png */; };
@@ -386,6 +387,8 @@
 		6C1207BF1DAC722300FF4138 /* ReceiverTextNodeBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkg@2x.png"; sourceTree = "<group>"; };
 		6C1207C11DACAF6600FF4138 /* receiver_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = receiver_bubble.png; sourceTree = "<group>"; };
 		6C1207C21DACAF6600FF4138 /* sender_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sender_bubble.png; sourceTree = "<group>"; };
+		6C1207C51DADC5E700FF4138 /* ChatMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageManager.h; sourceTree = "<group>"; };
+		6C1207C61DADC5E700FF4138 /* ChatMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageManager.m; sourceTree = "<group>"; };
 		6C1365A51C23D83E00B217DD /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6C1365A61C23D83E00B217DD /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		6C1365B11C24F6C300B217DD /* home_icon01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon01.png; sourceTree = "<group>"; };
@@ -1298,6 +1301,8 @@
 				6CC190941DA08A8E0098BB40 /* ChatViewController.m */,
 				6C1207061DA229B700FF4138 /* ChatMessage.h */,
 				6C1207071DA229B700FF4138 /* ChatMessage.m */,
+				6C1207C51DADC5E700FF4138 /* ChatMessageManager.h */,
+				6C1207C61DADC5E700FF4138 /* ChatMessageManager.m */,
 				6CABF70D1C0E978B00DF3EFF /* AppDelegate.h */,
 				6CABF70E1C0E978B00DF3EFF /* AppDelegate.m */,
 				6C91C35E1C9A86FE004C0CB4 /* LoginViewController.h */,
@@ -1786,6 +1791,7 @@
 				6C1608841C93E4CD00A9E16F /* TabViewController.m in Sources */,
 				6C4D0C3E1C28E998003E96E8 /* NSData+ImageContentType.m in Sources */,
 				6CD2F9FB1C4629BC0033437D /* WebViewController.m in Sources */,
+				6C1207C71DADC5E700FF4138 /* ChatMessageManager.m in Sources */,
 				6C4C67651C4A29BF00DF8D31 /* CartViewController.m in Sources */,
 				6C9D851A1C9B8B3C008BD470 /* RSADataEncryptor.m in Sources */,
 				6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */,
