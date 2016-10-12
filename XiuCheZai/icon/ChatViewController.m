@@ -52,6 +52,8 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 @property (assign, nonatomic) CGFloat keyboardHeight;
 @property (assign, nonatomic) TableViewTransform tableViewTransform;
 
+// @property (strong, nonatomic) NSString *normalText;
+
 @end
 
 @implementation ChatViewController
