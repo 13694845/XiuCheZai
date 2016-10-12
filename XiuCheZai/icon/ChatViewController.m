@@ -9,6 +9,7 @@
 #import "ChatViewController.h"
 #import "GCDAsyncSocket.h"
 #import "ChatMessage.h"
+#import "ChatMessageManager.h"
 
 #define HOST        @"192.168.2.63"
 #define PORT        9999
@@ -147,6 +148,13 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.receiverName = @"lisi";
     
     
+    /*
+    ChatMessage *msg = [[ChatMessage alloc] init];
+    msg.receiverId = self.receiverId;
+    
+    ChatMessageManager *messageManager = [ChatMessageManager sharedManager];
+    [messageManager saveMessage:msg];
+    */
     
     /*
     
@@ -359,6 +367,8 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     }
     [chatMessages addObjectsFromArray:self.rows];
     self.rows = chatMessages;
+    
+    [[ChatMessageManager sharedManager] saveMessages:self.rows];
     
     [self.tableView reloadData];
     if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];

@@ -19,16 +19,24 @@
     return sharedManager;
 }
 
-- (void)saveMessage:(ChatMessage *)message {
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *filePath = [documentDirectories.firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.msg", message.receiverId]];
-    NSLog(@"filePath : %@", filePath);
-    [NSKeyedArchiver archiveRootObject:message toFile:filePath];
+- (NSArray *)messagesForReceiverId:(NSString *)receiverId {
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:[self fileForReceiverId:receiverId]];
+}
 
+- (void)saveMessage:(ChatMessage *)message {
+    NSMutableArray *messages = [[self messagesForReceiverId:message.receiverId] mutableCopy];
+    if (!messages) messages = [NSMutableArray array];
+    [messages addObject:message];
+    [NSKeyedArchiver archiveRootObject:messages toFile:[self fileForReceiverId:message.receiverId]];
 }
 
 - (void)saveMessages:(NSArray *)messages {
-    
+    for (ChatMessage *message in messages) [self saveMessage:message];
+}
+
+- (NSString *)fileForReceiverId:(NSString *)receiverId {
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    return [documentDirectories.firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.msg", receiverId]];
 }
 
 @end

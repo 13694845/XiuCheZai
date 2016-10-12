@@ -13,6 +13,7 @@
 
 + (instancetype)sharedManager;
 
+- (NSArray *)messagesForReceiverId:(NSString *)receiverId;
 - (void)saveMessage:(ChatMessage *)message;
 - (void)saveMessages:(NSArray *)messages;
 
