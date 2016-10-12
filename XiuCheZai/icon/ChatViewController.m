@@ -332,6 +332,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     chatMessage.senderName = msg[@"sender_name"];
     chatMessage.receiverId = msg[@"receiver_id"];
     chatMessage.receiverName = msg[@"receiver_name"];
+    [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:self.receiverId];
     [self.rows addObject:chatMessage];
     NSLog(@"SEND : %@", msg[@"msg_content"]);
     
@@ -351,6 +352,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     chatMessage.senderName = msg[@"sender_name"];
     chatMessage.receiverId = msg[@"receiver_id"];
     chatMessage.receiverName = msg[@"receiver_name"];
+    [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:self.receiverId];
     [self.rows addObject:chatMessage];
     NSLog(@"RECV : %@", msg[@"msg_content"]);
     
@@ -373,8 +375,8 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
         chatMessage.receiverName = msg[@"receiver_name"];
         [chatMessages addObject:chatMessage];
     }
-    [chatMessages addObjectsFromArray:self.rows];
     [[ChatMessageManager sharedManager] saveMessages:chatMessages withReceiverId:self.receiverId];
+    [chatMessages addObjectsFromArray:self.rows];
     self.rows = chatMessages;
     
     [self.tableView reloadData];

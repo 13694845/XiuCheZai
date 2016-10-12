@@ -28,10 +28,10 @@
 }
 
 - (void)saveMessages:(NSArray *)messages withReceiverId:(NSString *)receiverId {
-    NSMutableArray *Messages_ = [[self messagesForReceiverId:receiverId] mutableCopy];
-    if (!Messages_) Messages_ = [NSMutableArray array];
-    [Messages_ addObjectsFromArray:messages];
-    [NSKeyedArchiver archiveRootObject:messages toFile:[self fileForReceiverId:receiverId]];
+    NSMutableArray *messages_ = [[self messagesForReceiverId:receiverId] mutableCopy];
+    if (!messages_) messages_ = [NSMutableArray array];
+    [messages_ addObjectsFromArray:messages];
+    [NSKeyedArchiver archiveRootObject:messages_ toFile:[self fileForReceiverId:receiverId]];
 }
 
 - (NSString *)fileForReceiverId:(NSString *)receiverId {
