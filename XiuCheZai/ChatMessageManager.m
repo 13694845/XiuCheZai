@@ -19,6 +19,10 @@
     return sharedManager;
 }
 
+- (void)saveMessage:(ChatMessage *)message {
+    
+}
+
 - (void)saveMessages:(NSArray *)messages {
     
 }

@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ChatMessage.h"
 
 @interface ChatMessageManager : NSObject
 
 + (instancetype)sharedManager;
+
+- (void)saveMessage:(ChatMessage *)message;
 - (void)saveMessages:(NSArray *)messages;
 
 @end
