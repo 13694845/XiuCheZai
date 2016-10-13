@@ -8,13 +8,14 @@
 
 #import "AppDelegate.h"
 #import <CoreLocation/CoreLocation.h>
+#import "CachingURLProtocol.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
-#import "CachingURLProtocol.h"
 
 @interface AppDelegate () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
@@ -23,19 +24,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     application.statusBarStyle = UIStatusBarStyleLightContent;
     application.statusBarHidden = NO;
-    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge |
-                                                                                                UIUserNotificationTypeSound |
-                                                                                                UIUserNotificationTypeAlert) categories:nil]];
+    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil]];
     [application registerForRemoteNotifications];
     [NSURLProtocol registerClass:[CachingURLProtocol class]];
+    
     [WXApi registerApp:@"wx6f70675b8950f10e" withDescription:nil];
-    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
     self.mapManager = [[BMKMapManager alloc] init];
-    BOOL ret = [self.mapManager start:@"SGYQezd7y420cBN1Auj6KNlv" generalDelegate:nil];
-    if (!ret) {
-        NSLog(@"manager start failed!");
-    }
-    
+    [self.mapManager start:@"SGYQezd7y420cBN1Auj6KNlv" generalDelegate:nil];
     return YES;
 }
 
@@ -45,29 +42,7 @@
     return YES;
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-}
-
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-}
-
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    if (!self.locationManager) {
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-    }
     switch ([CLLocationManager authorizationStatus]) {
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             [self.locationManager startUpdatingLocation]; break;
@@ -76,9 +51,24 @@
         case kCLAuthorizationStatusDenied: break;
         default: break;
     }
+    [self startHeartbeat];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+- (void)startHeartbeat {
+    if (!self.timer.valid) self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(echo) userInfo:nil repeats:YES];
+}
+
+- (void)stopHeartbeat {
+    NSLog(@"stopHeartbeat");
+
+    if (self.timer.valid) [self.timer invalidate];
+}
+
+- (void)echo {
+    NSLog(@"AppDelegate : %@", [NSString stringWithFormat:@"{\"type\":\"ECHO\"}\n"]);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     [self.locationManager stopUpdatingLocation];
     CLLocation *location = locations.firstObject;
     NSMutableDictionary *userlocation = [NSMutableDictionary dictionary];
@@ -88,10 +78,20 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(nonnull NSError *)error {
+- (void)applicationWillResignActive:(UIApplication *)application {
+    
+    [self stopHeartbeat];
+    
+    NSLog(@"applicationWillResignActive");
+
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-}
+- (void)applicationDidEnterBackground:(UIApplication *)application {}
+- (void)applicationWillEnterForeground:(UIApplication *)application {}
+- (void)applicationWillTerminate:(UIApplication *)application {}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {}
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {}
 
 @end
