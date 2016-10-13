@@ -7,13 +7,15 @@
 //
 
 #import "ChatSocketManager.h"
+#import "GCDAsyncSocket.h"
 
 #define HOST        @"192.168.2.63"
 #define PORT        9999
 #define TERMINATOR  @"\n"
 
+@interface ChatSocketManager () <GCDAsyncSocketDelegate>
 
-
+@end
 
 @implementation ChatSocketManager
 
