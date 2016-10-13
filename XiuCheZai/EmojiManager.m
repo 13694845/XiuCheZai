@@ -13,7 +13,9 @@
 
 + (NSAttributedString *)emojiStringFromPlainString:(NSString *)plainString withFont:(UIFont *)font {
     NSMutableAttributedString *emojiString = [[NSMutableAttributedString alloc] initWithString:plainString attributes:@{NSFontAttributeName:font}];
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\[[A-Za-z0-9]*\\]" options:0 error:nil];
+    // NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\[[A-Za-z0-9]*\\]" options:0 error:nil];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\^[A-Za-z0-9]*\\^" options:0 error:nil];
+
     NSArray* matches = [regex matchesInString:[emojiString string] options:NSMatchingWithoutAnchoringBounds range:NSMakeRange(0, emojiString.length)];
     NSData *emojiData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Emoji" ofType:@"json"]];
     NSDictionary *emojiJson = [NSJSONSerialization JSONObjectWithData:emojiData options:NSJSONReadingMutableLeaves error:nil];
