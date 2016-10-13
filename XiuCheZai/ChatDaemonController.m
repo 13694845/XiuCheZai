@@ -28,4 +28,11 @@
 
 @implementation ChatDaemonController
 
+- (instancetype)init {
+    if (self = [super init]) {
+        NSLog(@"ok");
+    }
+    return self;
+}
+
 @end

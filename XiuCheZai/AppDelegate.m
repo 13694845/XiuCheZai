@@ -12,6 +12,8 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
 
+#import "ChatDaemonController.h"
+
 @interface AppDelegate () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -51,6 +53,10 @@
         case kCLAuthorizationStatusDenied: break;
         default: break;
     }
+    
+    
+    ChatDaemonController *chatDaemonController = [[ChatDaemonController alloc] init];
+    
     [self startHeartbeat];
 }
 
