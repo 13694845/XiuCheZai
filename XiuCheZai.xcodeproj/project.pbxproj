@@ -90,6 +90,7 @@
 		6C1207CD1DAE19A400FF4138 /* Emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207CC1DAE19A400FF4138 /* Emoji.plist */; };
 		6C1207D01DAE19BF00FF4138 /* e01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207CE1DAE19BF00FF4138 /* e01@2x.png */; };
 		6C1207D11DAE19BF00FF4138 /* e02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207CF1DAE19BF00FF4138 /* e02@2x.png */; };
+		6C1207D31DAF121A00FF4138 /* Emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207D21DAF121A00FF4138 /* Emoji.json */; };
 		6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1365A61C23D83E00B217DD /* HomeViewController.m */; };
 		6C1365B91C24F6C300B217DD /* home_icon01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B11C24F6C300B217DD /* home_icon01.png */; };
 		6C1365BA1C24F6C300B217DD /* home_icon02.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B21C24F6C300B217DD /* home_icon02.png */; };
@@ -398,6 +399,7 @@
 		6C1207CC1DAE19A400FF4138 /* Emoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Emoji.plist; sourceTree = "<group>"; };
 		6C1207CE1DAE19BF00FF4138 /* e01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e01@2x.png"; sourceTree = "<group>"; };
 		6C1207CF1DAE19BF00FF4138 /* e02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e02@2x.png"; sourceTree = "<group>"; };
+		6C1207D21DAF121A00FF4138 /* Emoji.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Emoji.json; sourceTree = "<group>"; };
 		6C1365A51C23D83E00B217DD /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6C1365A61C23D83E00B217DD /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		6C1365B11C24F6C300B217DD /* home_icon01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon01.png; sourceTree = "<group>"; };
@@ -910,6 +912,7 @@
 				6C1207C91DAE197400FF4138 /* NSAttributedString+JTATEmoji.h */,
 				6C1207CA1DAE197400FF4138 /* NSAttributedString+JTATEmoji.m */,
 				6C1207CC1DAE19A400FF4138 /* Emoji.plist */,
+				6C1207D21DAF121A00FF4138 /* Emoji.json */,
 				6C1207CE1DAE19BF00FF4138 /* e01@2x.png */,
 				6C1207CF1DAE19BF00FF4138 /* e02@2x.png */,
 			);
@@ -1706,6 +1709,7 @@
 				6C1207781DA33CBE00FF4138 /* 相机@2x.png in Resources */,
 				6C1207791DA33CBE00FF4138 /* 相机@3x.png in Resources */,
 				6C24460E1C9FD69300F4F3C0 /* banner04.jpg in Resources */,
+				6C1207D31DAF121A00FF4138 /* Emoji.json in Resources */,
 				6C8B10581CC4D087003CF8F5 /* menu_icon11.jpg in Resources */,
 				6C8B10591CC4D087003CF8F5 /* menu_icon12.jpg in Resources */,
 				6CE400641C322B7C007F6D03 /* menu_icon15.jpg in Resources */,

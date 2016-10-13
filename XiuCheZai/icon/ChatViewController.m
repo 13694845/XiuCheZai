@@ -151,8 +151,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.receiverName = @"lisi";
     
     // NSString *normalStr = @"This category allows you to convert string into given image like this [kiss] and this [hug]";
-    // NSString *normalStr = @"this [kiss] and this [hug]";
-    NSString *normalStr = @"abcdefg";
+    NSString *normalStr = @"this [kiss] and this [hug]";
     self.textView.attributedText = [NSAttributedString emojiAttributedString:normalStr withFont:self.textView.font];
     
     /*
