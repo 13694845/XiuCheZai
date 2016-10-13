@@ -31,6 +31,12 @@
 - (instancetype)init {
     if (self = [super init]) {
         NSLog(@"ok");
+        self.senderId = @"555";
+        self.senderName = @"zhangsan";
+        self.receiverId = @"123";
+        self.receiverName = @"lisi";
+        
+        
     }
     return self;
 }
