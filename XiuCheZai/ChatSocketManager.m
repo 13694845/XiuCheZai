@@ -12,6 +12,9 @@
 #define PORT        9999
 #define TERMINATOR  @"\n"
 
+
+
+
 @implementation ChatSocketManager
 
 + (instancetype)sharedManager {
