@@ -103,7 +103,11 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (UIView *)bubbleViewForMessage:(ChatMessage *)message {
-    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:message.content attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
+    
+    NSAttributedString *attributedText = [EmojiManager emojiStringFromPlainString:message.content withFont:[UIFont systemFontOfSize:14.0]];
+    
+    // NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:message.content attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
+    
     CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2)];
     
@@ -135,7 +139,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     bubbleText.font = [UIFont systemFontOfSize:14.0];
     bubbleText.numberOfLines = 0;
     bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
-    bubbleText.text = message.content;
+    // bubbleText.text = message.content;
+    bubbleText.attributedText = attributedText;
+    
     [bubbleImageView addSubview:bubbleText];
     return bubbleView;
 }
