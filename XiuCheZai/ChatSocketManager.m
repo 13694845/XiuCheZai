@@ -8,6 +8,10 @@
 
 #import "ChatSocketManager.h"
 
+#define HOST        @"192.168.2.63"
+#define PORT        9999
+#define TERMINATOR  @"\n"
+
 @implementation ChatSocketManager
 
 + (instancetype)sharedManager {
