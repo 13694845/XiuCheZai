@@ -55,12 +55,12 @@
 }
 
 - (void)startHeartbeat {
+    NSLog(@"startHeartbeat");
     if (!self.timer.valid) self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(echo) userInfo:nil repeats:YES];
 }
 
 - (void)stopHeartbeat {
     NSLog(@"stopHeartbeat");
-
     if (self.timer.valid) [self.timer invalidate];
 }
 
@@ -79,11 +79,7 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    
     [self stopHeartbeat];
-    
-    NSLog(@"applicationWillResignActive");
-
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {}
