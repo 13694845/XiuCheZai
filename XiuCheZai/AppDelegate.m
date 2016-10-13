@@ -19,6 +19,9 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSTimer *timer;
 
+@property (strong, nonatomic) ChatDaemonController *chatDaemonController;
+
+
 @end
 
 @implementation AppDelegate
@@ -55,9 +58,11 @@
     }
     
     
-    ChatDaemonController *chatDaemonController = [[ChatDaemonController alloc] init];
+    self.chatDaemonController = [[ChatDaemonController alloc] init];
     
-    [self startHeartbeat];
+    [self.chatDaemonController setupSocket];
+    
+    // [self startHeartbeat];
 }
 
 - (void)startHeartbeat {

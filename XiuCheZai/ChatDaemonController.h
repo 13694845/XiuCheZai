@@ -10,4 +10,6 @@
 
 @interface ChatDaemonController : NSObject
 
+- (void)setupSocket;
+
 @end

@@ -36,9 +36,41 @@
         self.receiverId = @"123";
         self.receiverName = @"lisi";
         
-        
+
     }
     return self;
+}
+
+- (void)setupSocket {
+    NSLog(@"setupSocket");
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    self.asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
+
+    if (!self.asyncSocket) [self setupSocket];
+    [self connectToHost:HOST onPort:PORT];
+}
+
+- (void)connectToHost:(NSString *)host onPort:(uint16_t)port {
+    NSLog(@"connectToHost");
+    NSError *error = nil;
+    if (![self.asyncSocket connectToHost:host onPort:port error:&error]) {
+        NSLog(@"connectToHost : %@", error);
+    }
+}
+
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
+    // [self setupHeartbeat];
+    NSLog(@"didConnectToHost");
+
+    [self loginWithSenderId:self.senderId];
+    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+}
+
+- (void)loginWithSenderId:(NSString *)senderId {
+    NSLog(@"loginWithSenderId");
+    NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", senderId];
+    [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
+    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 @end
