@@ -151,7 +151,8 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.receiverName = @"lisi";
     
     // NSString *normalStr = @"This category allows you to convert string into given image like this [kiss] and this [hug]";
-    NSString *normalStr = @"this [kiss] and this [hug]";
+    // NSString *normalStr = @"this [kiss] and this [hug]";
+    NSString *normalStr = @"abcdefg";
     self.textView.attributedText = [NSAttributedString emojiAttributedString:normalStr withFont:self.textView.font];
     
     /*
@@ -186,6 +187,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSLog(@"shouldChangeTextInRange : %@", NSStringFromRange(range));
+    NSLog(@"replacementText : %@", text);
+    
     if ([text isEqualToString:@"\n"]) {
         [self sendMessageWithContent:[textView.text stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
         textView.text = nil;
@@ -357,12 +361,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     // NSLog(@"handleEcho %@ : ", message);
 }
 
-- (IBAction)showEmotionPad:(id)sender {
-    NSLog(@"showEmotionPad");
-}
-
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
+}
+
+- (IBAction)showEmotionPad:(id)sender {
+    NSLog(@"showEmotionPad");
 }
 
 - (IBAction)showOtherPad:(id)sender {
