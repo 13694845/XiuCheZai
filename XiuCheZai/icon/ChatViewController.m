@@ -158,8 +158,10 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     NSString *normalStr = @"this [kiss] and this [hug]";
     // self.textView.attributedText = [NSAttributedString emojiAttributedString:normalStr withFont:self.textView.font];
     
+    NSAttributedString *emojiString = [EmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
+    self.textView.attributedText = emojiString;
     
-    self.textView.attributedText = [EmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
+    NSLog(@"plainString : %@", [EmojiManager plainStringFromEmojiString:emojiString]);
     
     /*
     self.senderId = @"123";

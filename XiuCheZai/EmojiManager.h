@@ -11,5 +11,6 @@
 @interface EmojiManager : NSObject
 
 + (NSAttributedString *)emojiStringFromPlainString:(NSString *)plainString withFont:(UIFont *)font;
++ (NSString *)plainStringFromEmojiString:(NSAttributedString *)emojiString;
 
 @end
