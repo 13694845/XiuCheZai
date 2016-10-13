@@ -10,4 +10,6 @@
 
 @interface ChatSocketManager : NSObject
 
++ (instancetype)sharedManager;
+
 @end
