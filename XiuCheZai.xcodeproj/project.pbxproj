@@ -91,7 +91,6 @@
 		6C1207D31DAF121A00FF4138 /* Emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207D21DAF121A00FF4138 /* Emoji.json */; };
 		6C1207D61DAF138A00FF4138 /* EmojiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207D51DAF138A00FF4138 /* EmojiManager.m */; };
 		6C1207D91DAF2C6E00FF4138 /* EmojiAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */; };
-		6C1207E11DAF645D00FF4138 /* ChatSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207E01DAF645D00FF4138 /* ChatSocketManager.m */; };
 		6C1207E41DAF6B9F00FF4138 /* ChatDaemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207E31DAF6B9F00FF4138 /* ChatDaemon.m */; };
 		6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1365A61C23D83E00B217DD /* HomeViewController.m */; };
 		6C1365B91C24F6C300B217DD /* home_icon01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B11C24F6C300B217DD /* home_icon01.png */; };
@@ -403,8 +402,6 @@
 		6C1207D51DAF138A00FF4138 /* EmojiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiManager.m; sourceTree = "<group>"; };
 		6C1207D71DAF2C6E00FF4138 /* EmojiAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiAttachment.h; sourceTree = "<group>"; };
 		6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiAttachment.m; sourceTree = "<group>"; };
-		6C1207DF1DAF645D00FF4138 /* ChatSocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatSocketManager.h; sourceTree = "<group>"; };
-		6C1207E01DAF645D00FF4138 /* ChatSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatSocketManager.m; sourceTree = "<group>"; };
 		6C1207E21DAF6B9F00FF4138 /* ChatDaemon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatDaemon.h; sourceTree = "<group>"; };
 		6C1207E31DAF6B9F00FF4138 /* ChatDaemon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatDaemon.m; sourceTree = "<group>"; };
 		6C1365A51C23D83E00B217DD /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -1340,8 +1337,6 @@
 				6C1207091DA33C1000FF4138 /* ChatIcons */,
 				6C1207E21DAF6B9F00FF4138 /* ChatDaemon.h */,
 				6C1207E31DAF6B9F00FF4138 /* ChatDaemon.m */,
-				6C1207DF1DAF645D00FF4138 /* ChatSocketManager.h */,
-				6C1207E01DAF645D00FF4138 /* ChatSocketManager.m */,
 				6CC190931DA08A8E0098BB40 /* ChatViewController.h */,
 				6CC190941DA08A8E0098BB40 /* ChatViewController.m */,
 				6C1207061DA229B700FF4138 /* ChatMessage.h */,
@@ -1806,7 +1801,6 @@
 				6C8EC2751C1E548000BCABB5 /* UIProgressView+AFNetworking.m in Sources */,
 				6C671B4D1D580E2800D2CAE5 /* TabBarController.m in Sources */,
 				6C48C9C41CD9ECC70015515D /* URLEncoder.m in Sources */,
-				6C1207E11DAF645D00FF4138 /* ChatSocketManager.m in Sources */,
 				6C8EC2591C1E546E00BCABB5 /* AFURLSessionManager.m in Sources */,
 				6C8EC2761C1E548000BCABB5 /* UIRefreshControl+AFNetworking.m in Sources */,
 				6C8EC2701C1E548000BCABB5 /* AFImageDownloader.m in Sources */,
