@@ -6,7 +6,7 @@
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import "ChatDaemon.h"
+#import "ChatDaemonController.h"
 #import "GCDAsyncSocket.h"
 
 #define HOST        @"192.168.2.63"
