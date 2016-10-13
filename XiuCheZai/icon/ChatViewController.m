@@ -12,6 +12,10 @@
 #import "ChatMessageManager.h"
 #import "NSAttributedString+JTATEmoji.h"
 
+#import "EmojiManager.h"
+
+
+
 #define HOST        @"192.168.2.63"
 #define PORT        9999
 #define TERMINATOR  @"\n"
@@ -152,7 +156,10 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     
     // NSString *normalStr = @"This category allows you to convert string into given image like this [kiss] and this [hug]";
     NSString *normalStr = @"this [kiss] and this [hug]";
-    self.textView.attributedText = [NSAttributedString emojiAttributedString:normalStr withFont:self.textView.font];
+    // self.textView.attributedText = [NSAttributedString emojiAttributedString:normalStr withFont:self.textView.font];
+    
+    
+    self.textView.attributedText = [EmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
     
     /*
     self.senderId = @"123";
