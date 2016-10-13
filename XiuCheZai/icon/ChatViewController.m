@@ -189,11 +189,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    NSLog(@"shouldChangeTextInRange : %@", NSStringFromRange(range));
-    NSLog(@"replacementText : %@", text);
-    
     if ([text isEqualToString:@"\n"]) {
-        [self sendMessageWithContent:[textView.text stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
+        NSString *content = [EmojiManager plainStringFromEmojiString:textView.attributedText];
+        [self sendMessageWithContent:[content stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
         textView.text = nil;
         return NO;
     }
