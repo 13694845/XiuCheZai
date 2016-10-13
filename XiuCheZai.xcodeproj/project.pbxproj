@@ -86,8 +86,6 @@
 		6C1207C31DACAF6600FF4138 /* receiver_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207C11DACAF6600FF4138 /* receiver_bubble.png */; };
 		6C1207C41DACAF6600FF4138 /* sender_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207C21DACAF6600FF4138 /* sender_bubble.png */; };
 		6C1207C71DADC5E700FF4138 /* ChatMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207C61DADC5E700FF4138 /* ChatMessageManager.m */; };
-		6C1207CB1DAE197400FF4138 /* NSAttributedString+JTATEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207CA1DAE197400FF4138 /* NSAttributedString+JTATEmoji.m */; };
-		6C1207CD1DAE19A400FF4138 /* Emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207CC1DAE19A400FF4138 /* Emoji.plist */; };
 		6C1207D01DAE19BF00FF4138 /* e01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207CE1DAE19BF00FF4138 /* e01@2x.png */; };
 		6C1207D11DAE19BF00FF4138 /* e02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207CF1DAE19BF00FF4138 /* e02@2x.png */; };
 		6C1207D31DAF121A00FF4138 /* Emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207D21DAF121A00FF4138 /* Emoji.json */; };
@@ -396,9 +394,6 @@
 		6C1207C21DACAF6600FF4138 /* sender_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sender_bubble.png; sourceTree = "<group>"; };
 		6C1207C51DADC5E700FF4138 /* ChatMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageManager.h; sourceTree = "<group>"; };
 		6C1207C61DADC5E700FF4138 /* ChatMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageManager.m; sourceTree = "<group>"; };
-		6C1207C91DAE197400FF4138 /* NSAttributedString+JTATEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+JTATEmoji.h"; sourceTree = "<group>"; };
-		6C1207CA1DAE197400FF4138 /* NSAttributedString+JTATEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+JTATEmoji.m"; sourceTree = "<group>"; };
-		6C1207CC1DAE19A400FF4138 /* Emoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Emoji.plist; sourceTree = "<group>"; };
 		6C1207CE1DAE19BF00FF4138 /* e01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e01@2x.png"; sourceTree = "<group>"; };
 		6C1207CF1DAE19BF00FF4138 /* e02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e02@2x.png"; sourceTree = "<group>"; };
 		6C1207D21DAF121A00FF4138 /* Emoji.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Emoji.json; sourceTree = "<group>"; };
@@ -912,21 +907,25 @@
 			name = ChatIcons;
 			sourceTree = "<group>";
 		};
-		6C1207C81DAE196500FF4138 /* JTATEmoji */ = {
+		6C1207C81DAE196500FF4138 /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
-				6C1207C91DAE197400FF4138 /* NSAttributedString+JTATEmoji.h */,
-				6C1207CA1DAE197400FF4138 /* NSAttributedString+JTATEmoji.m */,
 				6C1207D41DAF138A00FF4138 /* EmojiManager.h */,
 				6C1207D51DAF138A00FF4138 /* EmojiManager.m */,
 				6C1207D71DAF2C6E00FF4138 /* EmojiAttachment.h */,
 				6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */,
-				6C1207CC1DAE19A400FF4138 /* Emoji.plist */,
 				6C1207D21DAF121A00FF4138 /* Emoji.json */,
 				6C1207CE1DAE19BF00FF4138 /* e01@2x.png */,
 				6C1207CF1DAE19BF00FF4138 /* e02@2x.png */,
 			);
-			name = JTATEmoji;
+			name = Emoji;
+			sourceTree = "<group>";
+		};
+		6C1207DB1DAF2F0C00FF4138 /* EmojiImages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = EmojiImages;
 			sourceTree = "<group>";
 		};
 		6C4D0C1B1C28E998003E96E8 /* SDWebImage */ = {
@@ -1317,7 +1316,8 @@
 		6CABF7091C0E978B00DF3EFF /* XiuCheZai */ = {
 			isa = PBXGroup;
 			children = (
-				6C1207C81DAE196500FF4138 /* JTATEmoji */,
+				6C1207DB1DAF2F0C00FF4138 /* EmojiImages */,
+				6C1207C81DAE196500FF4138 /* Emoji */,
 				6CC1908C1DA08A100098BB40 /* GCDAsyncSocket */,
 				6C91C3441C9A84D2004C0CB4 /* Util */,
 				6C91C2F81C9A84C6004C0CB4 /* openssl */,
@@ -1699,7 +1699,6 @@
 				6C7CE9171CD89ACF00617964 /* home_scanner.png in Resources */,
 				6C1207561DA33CBE00FF4138 /* 点赞@2x.png in Resources */,
 				6CF1DABD1C50704B0077B468 /* tab_icon40@2x.png in Resources */,
-				6C1207CD1DAE19A400FF4138 /* Emoji.plist in Resources */,
 				6C1207941DA33CBE00FF4138 /* friends@2x.png in Resources */,
 				6C1207611DA33CBE00FF4138 /* 加关注@3x.png in Resources */,
 				6C1365BB1C24F6C300B217DD /* home_icon03.png in Resources */,
@@ -1780,7 +1779,6 @@
 				6CE4FFFD1C2D0B63007F6D03 /* MBProgressHUD.m in Sources */,
 				6C944B5C1D7E823500820C14 /* XCZNewsDetailModel.m in Sources */,
 				6C4D0C3F1C28E998003E96E8 /* SDImageCache.m in Sources */,
-				6C1207CB1DAE197400FF4138 /* NSAttributedString+JTATEmoji.m in Sources */,
 				6CEB5A891C48D1E000717CBA /* BannerView.m in Sources */,
 				6CE3639A1D741FAE00AA0B53 /* XCZNewsDetailViewController.m in Sources */,
 				6C8B105E1CC6084F003CF8F5 /* ReminderView.m in Sources */,

@@ -10,11 +10,7 @@
 #import "GCDAsyncSocket.h"
 #import "ChatMessage.h"
 #import "ChatMessageManager.h"
-#import "NSAttributedString+JTATEmoji.h"
-
 #import "EmojiManager.h"
-
-
 
 #define HOST        @"192.168.2.63"
 #define PORT        9999
@@ -55,8 +51,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 @property (assign, nonatomic) CGFloat keyboardHeight;
 @property (assign, nonatomic) TableViewTransform tableViewTransform;
-
-// @property (strong, nonatomic) NSString *normalText;
 
 @end
 

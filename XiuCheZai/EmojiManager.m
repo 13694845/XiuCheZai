@@ -28,17 +28,11 @@
         UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        NSTextAttachment *textAttachment = [NSTextAttachment new];
-        textAttachment.image = resizedImage;
-        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:textAttachment];
+        EmojiAttachment *emojiAttachment = [[EmojiAttachment alloc] init];
+        emojiAttachment.emojiTag = placeholder;
+        emojiAttachment.image = resizedImage;
+        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:emojiAttachment];
         [emojiString replaceCharactersInRange:matchRange withAttributedString:attachmentString];
-        
-        /*
-        NSTextAttachment *textAttachment = [NSTextAttachment new];
-        textAttachment.image = resizedImage;
-        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:textAttachment];
-        [emojiString replaceCharactersInRange:matchRange withAttributedString:attachmentString];
-         */
     }
     return emojiString;
 }
@@ -46,9 +40,7 @@
 + (NSString *)plainStringFromEmojiString:(NSAttributedString *)emojiString {
     NSMutableString *plainString = [emojiString.string mutableCopy];
     [emojiString enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, emojiString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(id value, NSRange range, BOOL *stop) {
-        if ([value isKindOfClass:[NSTextAttachment class]]) {
-            [plainString replaceCharactersInRange:range withString:@"[emoji]"];
-        }
+        if ([value isKindOfClass:[EmojiAttachment class]]) [plainString replaceCharactersInRange:range withString:((EmojiAttachment *)value).emojiTag];
     }];
     return plainString;
 }
