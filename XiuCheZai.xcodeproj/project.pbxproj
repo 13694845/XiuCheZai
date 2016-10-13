@@ -92,6 +92,7 @@
 		6C1207D11DAE19BF00FF4138 /* e02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207CF1DAE19BF00FF4138 /* e02@2x.png */; };
 		6C1207D31DAF121A00FF4138 /* Emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207D21DAF121A00FF4138 /* Emoji.json */; };
 		6C1207D61DAF138A00FF4138 /* EmojiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207D51DAF138A00FF4138 /* EmojiManager.m */; };
+		6C1207D91DAF2C6E00FF4138 /* EmojiAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */; };
 		6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1365A61C23D83E00B217DD /* HomeViewController.m */; };
 		6C1365B91C24F6C300B217DD /* home_icon01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B11C24F6C300B217DD /* home_icon01.png */; };
 		6C1365BA1C24F6C300B217DD /* home_icon02.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B21C24F6C300B217DD /* home_icon02.png */; };
@@ -403,6 +404,8 @@
 		6C1207D21DAF121A00FF4138 /* Emoji.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Emoji.json; sourceTree = "<group>"; };
 		6C1207D41DAF138A00FF4138 /* EmojiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiManager.h; sourceTree = "<group>"; };
 		6C1207D51DAF138A00FF4138 /* EmojiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiManager.m; sourceTree = "<group>"; };
+		6C1207D71DAF2C6E00FF4138 /* EmojiAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiAttachment.h; sourceTree = "<group>"; };
+		6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiAttachment.m; sourceTree = "<group>"; };
 		6C1365A51C23D83E00B217DD /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6C1365A61C23D83E00B217DD /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		6C1365B11C24F6C300B217DD /* home_icon01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon01.png; sourceTree = "<group>"; };
@@ -916,6 +919,8 @@
 				6C1207CA1DAE197400FF4138 /* NSAttributedString+JTATEmoji.m */,
 				6C1207D41DAF138A00FF4138 /* EmojiManager.h */,
 				6C1207D51DAF138A00FF4138 /* EmojiManager.m */,
+				6C1207D71DAF2C6E00FF4138 /* EmojiAttachment.h */,
+				6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */,
 				6C1207CC1DAE19A400FF4138 /* Emoji.plist */,
 				6C1207D21DAF121A00FF4138 /* Emoji.json */,
 				6C1207CE1DAE19BF00FF4138 /* e01@2x.png */,
@@ -1757,6 +1762,7 @@
 				6C1207D61DAF138A00FF4138 /* EmojiManager.m in Sources */,
 				6C6DD9601D6A867500FEAEDD /* XCZCircleTableViewCell.m in Sources */,
 				6C4D0C411C28E998003E96E8 /* SDWebImageDecoder.m in Sources */,
+				6C1207D91DAF2C6E00FF4138 /* EmojiAttachment.m in Sources */,
 				6C8B108D1CC85A73003CF8F5 /* URLCache.m in Sources */,
 				6C4D0C441C28E998003E96E8 /* SDWebImageManager.m in Sources */,
 				6CE363931D7402F900AA0B53 /* XCZClubTableViewCell.m in Sources */,

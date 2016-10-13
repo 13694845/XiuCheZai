@@ -7,6 +7,7 @@
 //
 
 #import "EmojiManager.h"
+#import "EmojiAttachment.h"
 
 @implementation EmojiManager
 
@@ -31,6 +32,13 @@
         textAttachment.image = resizedImage;
         NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:textAttachment];
         [emojiString replaceCharactersInRange:matchRange withAttributedString:attachmentString];
+        
+        /*
+        NSTextAttachment *textAttachment = [NSTextAttachment new];
+        textAttachment.image = resizedImage;
+        NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:textAttachment];
+        [emojiString replaceCharactersInRange:matchRange withAttributedString:attachmentString];
+         */
     }
     return emojiString;
 }
