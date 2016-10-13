@@ -7,14 +7,12 @@
 //
 
 #import "ScannerViewController.h"
-
 @import AVFoundation;
 
 @interface ScannerViewController () <AVCaptureMetadataOutputObjectsDelegate>
 
-@property (strong, nonatomic) UIButton *backButton;
-
 @property (strong, nonatomic) AVCaptureSession *session;
+@property (strong, nonatomic) UIButton *backButton;
 
 @end
 
@@ -35,10 +33,7 @@
     
     CGFloat const kBoxWidth = 200.0;
     CGFloat const kBoxHeight = 200.0;
-    
-    // UIView *boxView = [[UIView alloc] initWithFrame:CGRectMake(60.0, 110.0, 200.0, 200.0)];
     UIView *boxView = [[UIView alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - kBoxWidth) / 2.0, 120.0, kBoxWidth, kBoxHeight)];
-
     boxView.layer.borderColor = [UIColor greenColor].CGColor;
     boxView.layer.borderWidth = 1.0;
     [self.view addSubview:boxView];
@@ -52,7 +47,6 @@
     layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     layer.frame = self.view.bounds;
     [self.view.layer insertSublayer:layer atIndex:0];
-    
     [self.session startRunning];
 }
 
