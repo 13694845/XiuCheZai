@@ -1,13 +1,13 @@
 //
-//  ChatDaemon.m
+//  ChatDaemonController.h
 //  XiuCheZai
 //
 //  Created by QSH on 16/10/13.
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import "ChatDaemon.h"
+#import <Foundation/Foundation.h>
 
-@implementation ChatDaemon
+@interface ChatDaemonController : NSObject
 
 @end
