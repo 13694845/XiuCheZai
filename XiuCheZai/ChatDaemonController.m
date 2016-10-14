@@ -28,6 +28,7 @@
 
 @implementation ChatDaemonController
 
+/*
 - (instancetype)init {
     if (self = [super init]) {
         NSLog(@"ok");
@@ -39,6 +40,18 @@
 
     }
     return self;
+}
+*/
+
+- (void)start {
+    NSLog(@"start");
+    
+    if (!self.asyncSocket) [self setupSocket];
+    [self connectToHost:HOST onPort:PORT];
+}
+
+- (void)stop {
+    
 }
 
 - (void)setupSocket {
