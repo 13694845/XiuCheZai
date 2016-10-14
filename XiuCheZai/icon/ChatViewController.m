@@ -353,7 +353,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (void)handleEcho:(NSDictionary *)message {
-    // NSLog(@"handleEcho %@ : ", message);
+    NSLog(@"handleEcho %@ : ", message);
 }
 
 - (IBAction)showVoicePad:(id)sender {
