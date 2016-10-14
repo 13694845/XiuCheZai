@@ -122,7 +122,6 @@
     chatMessage.receiverId = msg[@"receiver_id"];
     chatMessage.receiverName = msg[@"receiver_name"];
     [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:self.receiverId];
-    NSLog(@"RECV : %@", msg[@"msg_content"]);
 }
 
 - (void)handleEcho:(NSDictionary *)message {
