@@ -145,6 +145,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationItem.title = self.receiverName;
     
+    
+    // *****
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    // *****
+    
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -161,7 +167,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     
     self.senderId = @"555";
     self.senderName = @"zhangsan";
-    self.receiverId = @"440";
+    self.receiverId = @"123";
     self.receiverName = @"lisi";
     /*
     self.senderId = @"123";
