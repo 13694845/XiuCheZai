@@ -164,18 +164,21 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.receiverId = @"123";
     self.receiverName = @"lisi";
     /*
-     self.senderId = @"123";
-     self.senderName = @"lisi";
-     self.receiverId = @"555";
-     self.receiverName = @"zhangsan";
+    self.senderId = @"123";
+    self.senderName = @"lisi";
+    self.receiverId = @"555";
+    self.receiverName = @"zhangsan";
      */
     
+    /*
     NSString *normalStr = @"this ^kiss^ and this ^hug^";
     self.textView.attributedText = [ChatEmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
-    // NSLog(@"plainString : %@", [EmojiManager plainStringFromEmojiString:emojiString]);
+    NSLog(@"plainString : %@", [EmojiManager plainStringFromEmojiString:emojiString]);
+     */
     
     if (!self.asyncSocket) [self setupSocket];
-    [self connectToHost:HOST onPort:PORT];
+    if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
+    [self loginWithSenderId:self.senderId];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -197,29 +200,15 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 - (void)connectToHost:(NSString *)host onPort:(uint16_t)port {
     NSLog(@"connectToHost");
     NSError *error = nil;
-    if (![self.asyncSocket connectToHost:host onPort:port error:&error]) {
-        NSLog(@"connectToHost : %@", error);
-    }
+    if (![self.asyncSocket connectToHost:host onPort:port error:&error]) NSLog(@"connectToHost : %@", error);
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
-    // [self setupHeartbeat];
-    [self loginWithSenderId:self.senderId];
-    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+    NSLog(@"didConnectToHost");
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"socketDidDisconnect : %@", err);
-}
-
-- (void)setupHeartbeat {
-    if (!self.timer.valid) self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(echo) userInfo:nil repeats:YES];
-}
-
-- (void)echo {
-    NSString *message = [NSString stringWithFormat:@"{\"type\":\"ECHO\"}\n"];
-    [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
-    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)loginWithSenderId:(NSString *)senderId {
@@ -251,6 +240,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
+- (void)echo {
+    NSString *message = [NSString stringWithFormat:@"{\"type\":\"ECHO\"}\n"];
+    [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
+    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+}
+
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSDictionary *message = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
     NSString *type = message[@"type"];
@@ -273,7 +268,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (void)handleLogin:(NSDictionary *)message {
-    // NSLog(@"handleLogin %@ : ", message);
+    NSLog(@"handleLogin %@ : ", message);
     NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
     if (localHistoryMessages.count) {
         self.rows = [localHistoryMessages mutableCopy];
@@ -282,6 +277,16 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     } else {
         [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-12 20:00:00" page:[NSString stringWithFormat:@"%d", 1]];
     }
+}
+
+- (void)startHeartbeat {
+    NSLog(@"startHeartbeat");
+    if (!self.timer.valid) self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(echo) userInfo:nil repeats:YES];
+}
+
+- (void)stopHeartbeat {
+    NSLog(@"stopHeartbeat");
+    if (self.timer.valid) [self.timer invalidate];
 }
 
 - (void)handleReceipt:(NSDictionary *)message {
