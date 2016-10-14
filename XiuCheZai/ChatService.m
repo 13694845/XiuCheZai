@@ -19,10 +19,11 @@
 
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderName;
+/*
 @property (strong, nonatomic) NSString *receiverId;
 @property (strong, nonatomic) NSString *receiverName;
 @property (assign, nonatomic) NSUInteger historyPage;
-
+ */
 @end
 
 @implementation ChatService
@@ -123,7 +124,7 @@
     chatMessage.senderName = msg[@"sender_name"];
     chatMessage.receiverId = msg[@"receiver_id"];
     chatMessage.receiverName = msg[@"receiver_name"];
-    [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:self.receiverId];
+    [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:msg[@"sender_id"]];
 }
 
 - (void)handleEcho:(NSDictionary *)message {
