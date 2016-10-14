@@ -166,9 +166,9 @@
     
     
     // ******
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
-        sleep(0.5);
-        return YES;
+    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/massage/communicate.jsp?bid="]]) {
+        [self chatWithUserId:@"1844"];
+        return NO;
     }
     // *****
     
