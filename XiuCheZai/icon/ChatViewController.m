@@ -362,17 +362,32 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     NSLog(@"handleEcho %@ : ", message);
 }
 
+
+
+// ******
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
 }
 
 - (IBAction)showEmotionPad:(id)sender {
     NSLog(@"showEmotionPad");
+    
+    UIView *emojiInputView = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 200.0, self.view.frame.size.width, 200.0)];
+    emojiInputView.backgroundColor = [UIColor grayColor];
+    
+    
+    
+    
+    
+    [self.view addSubview:emojiInputView];
 }
 
 - (IBAction)showOtherPad:(id)sender {
     NSLog(@"showOtherPad");
 }
+// ******
+
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
