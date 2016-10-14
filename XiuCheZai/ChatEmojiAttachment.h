@@ -10,6 +10,6 @@
 
 @interface ChatEmojiAttachment : NSTextAttachment
 
-@property(copy, nonatomic) NSString *emojiTag;
+@property (copy, nonatomic) NSString *emojiTag;
 
 @end
