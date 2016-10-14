@@ -164,8 +164,25 @@
         return YES;
     }
     
+    
+    // ******
+    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
+        sleep(0.5);
+        return YES;
+    }
+    // *****
+    
+    
     return YES;
 }
+
+
+// *****
+- (void)chatWithUserId:(NSString *)userId {
+    NSLog(@"chatWithUserId");
+}
+// *****
+
 
 - (void)recognizeVehicleLicense {
     [self pickImage];
