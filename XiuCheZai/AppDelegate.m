@@ -29,12 +29,12 @@
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil]];
     [application registerForRemoteNotifications];
     [NSURLProtocol registerClass:[CachingURLProtocol class]];
-    
     [WXApi registerApp:@"wx6f70675b8950f10e" withDescription:nil];
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.mapManager = [[BMKMapManager alloc] init];
     [self.mapManager start:@"SGYQezd7y420cBN1Auj6KNlv" generalDelegate:nil];
+    self.chatService = [[ChatService alloc] init];
     return YES;
 }
 
@@ -53,9 +53,6 @@
         case kCLAuthorizationStatusDenied: break;
         default: break;
     }
-    
-    // ******
-    self.chatService = [[ChatService alloc] init];
     [self.chatService start];
 }
 
@@ -70,6 +67,7 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    [self.chatService stop];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {}

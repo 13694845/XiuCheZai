@@ -92,6 +92,7 @@
 		6C1207D61DAF138A00FF4138 /* EmojiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207D51DAF138A00FF4138 /* EmojiManager.m */; };
 		6C1207D91DAF2C6E00FF4138 /* EmojiAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */; };
 		6C1207E41DAF6B9F00FF4138 /* ChatService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207E31DAF6B9F00FF4138 /* ChatService.m */; };
+		6C1207E71DB0688E00FF4138 /* ChatConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207E61DB0688E00FF4138 /* ChatConfig.m */; };
 		6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1365A61C23D83E00B217DD /* HomeViewController.m */; };
 		6C1365B91C24F6C300B217DD /* home_icon01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B11C24F6C300B217DD /* home_icon01.png */; };
 		6C1365BA1C24F6C300B217DD /* home_icon02.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B21C24F6C300B217DD /* home_icon02.png */; };
@@ -404,6 +405,8 @@
 		6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiAttachment.m; sourceTree = "<group>"; };
 		6C1207E21DAF6B9F00FF4138 /* ChatService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatService.h; sourceTree = "<group>"; };
 		6C1207E31DAF6B9F00FF4138 /* ChatService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatService.m; sourceTree = "<group>"; };
+		6C1207E51DB0688E00FF4138 /* ChatConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatConfig.h; sourceTree = "<group>"; };
+		6C1207E61DB0688E00FF4138 /* ChatConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatConfig.m; sourceTree = "<group>"; };
 		6C1365A51C23D83E00B217DD /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6C1365A61C23D83E00B217DD /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		6C1365B11C24F6C300B217DD /* home_icon01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon01.png; sourceTree = "<group>"; };
@@ -1335,6 +1338,8 @@
 				6C8B10821CC858F2003CF8F5 /* Wxpay */,
 				6C9F60A41D4598C600910335 /* icon */,
 				6C1207091DA33C1000FF4138 /* ChatIcons */,
+				6C1207E51DB0688E00FF4138 /* ChatConfig.h */,
+				6C1207E61DB0688E00FF4138 /* ChatConfig.m */,
 				6C1207E21DAF6B9F00FF4138 /* ChatService.h */,
 				6C1207E31DAF6B9F00FF4138 /* ChatService.m */,
 				6CC190931DA08A8E0098BB40 /* ChatViewController.h */,
@@ -1828,6 +1833,7 @@
 				6C17FADF1CB497F000F95FF4 /* SHA1DataEncryptor.m in Sources */,
 				6C7CE9141CD8773A00617964 /* ScannerViewController.m in Sources */,
 				6C91C3591C9A84D2004C0CB4 /* MD5DataSigner.m in Sources */,
+				6C1207E71DB0688E00FF4138 /* ChatConfig.m in Sources */,
 				6C91C3581C9A84D2004C0CB4 /* DataVerifier.m in Sources */,
 				6C91C2C21C9A2E66004C0CB4 /* StoreViewController.m in Sources */,
 				6C6DD9511D66F01700FEAEDD /* XCZDiscoveryFrameViewController.m in Sources */,
