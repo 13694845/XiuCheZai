@@ -144,21 +144,16 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.senderName = @"zhangsan";
     self.receiverId = @"123";
     self.receiverName = @"lisi";
+    /*
+     self.senderId = @"123";
+     self.senderName = @"lisi";
+     self.receiverId = @"555";
+     self.receiverName = @"zhangsan";
+     */
     
     NSString *normalStr = @"this ^kiss^ and this ^hug^";
-    // self.textView.attributedText = [NSAttributedString emojiAttributedString:normalStr withFont:self.textView.font];
-    
-    NSAttributedString *emojiString = [ChatEmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
-    self.textView.attributedText = emojiString;
-    
+    self.textView.attributedText = [ChatEmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
     // NSLog(@"plainString : %@", [EmojiManager plainStringFromEmojiString:emojiString]);
-    
-    /*
-    self.senderId = @"123";
-    self.senderName = @"lisi";
-    self.receiverId = @"555";
-    self.receiverName = @"zhangsan";
-    */
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
