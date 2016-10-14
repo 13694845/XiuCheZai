@@ -10,8 +10,7 @@
 
 @interface ChatEmojiInputView () <UIScrollViewDelegate>
 
-@property (nonatomic) UIScrollView *scrollView;
-
+@property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIView *contentView;
 
 /*
@@ -41,6 +40,9 @@
         
         NSLog(@"initWithFrame : %@", NSStringFromCGRect(frame));
         
+        
+        
+        
         NSData *emojiData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"EmojiImages" ofType:@"json"]];
         NSDictionary *emojiJson = [NSJSONSerialization JSONObjectWithData:emojiData options:NSJSONReadingMutableLeaves error:nil];
         NSArray *emojiImages = emojiJson[@"emojiImages"];
@@ -51,6 +53,10 @@
         int numberOfRows = ceil(emojiImages.count / 7.0);
         
         CGFloat contentViewHeight = (EMOJI_IMAGE_WIDTH + imagePadding * 2) * numberOfRows;
+        
+        
+        self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, contentViewHeight)];
+
         
         for (int i = 0; i < numberOfRows; i++) {
             for (int j = 0; j < 7; j++) {
@@ -63,7 +69,7 @@
                 imageView.frame = CGRectMake((EMOJI_IMAGE_WIDTH + imagePadding * 2) * j + imagePadding,
                                              (EMOJI_IMAGE_WIDTH + imagePadding * 2) * i + imagePadding, EMOJI_IMAGE_WIDTH, EMOJI_IMAGE_HEIGHT);
                 
-                [self addSubview:imageView];
+                [self.contentView addSubview:imageView];
                 
                 
             }
@@ -72,6 +78,18 @@
         
         
         
+        self.scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
+        /*
+         self.scrollView.delegate = self;
+         self.scrollView.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0];
+         self.scrollView.pagingEnabled = YES;
+         */
+        self.scrollView.showsHorizontalScrollIndicator = NO;
+        self.scrollView.contentSize = self.contentView.frame.size;
+        [self.scrollView addSubview:_contentView];
+        
+        [self addSubview:self.scrollView];
+
 
     }
     return self;
