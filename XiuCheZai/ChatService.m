@@ -46,7 +46,7 @@
 }
 
 - (void)setupSocket {
-    // NSLog(@"setupSocket");
+    NSLog(@"setupSocket");
     dispatch_queue_t mainQueue = dispatch_get_main_queue();
     self.asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
 }
@@ -66,14 +66,12 @@
 }
 
 - (void)loginWithSenderId:(NSString *)senderId {
-    // NSLog(@"loginWithSenderId");
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", senderId];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)echo {
-    // NSLog(@"echo");
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"ECHO\"}\n"];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
@@ -95,7 +93,7 @@
 }
 
 - (void)handleLogin:(NSDictionary *)message {
-    // NSLog(@"handleLogin %@ : ", message);
+    NSLog(@"handleLogin %@ : ", message);
     [self startHeartbeat];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
@@ -111,7 +109,7 @@
 }
 
 - (void)handleMessage:(NSDictionary *)message {
-    // NSLog(@"handleMessage %@ : ", message);
+    NSLog(@"handleMessage %@ : ", message);
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
     ChatMessage *chatMessage = [[ChatMessage alloc] init];
     chatMessage.isSend = NO;
