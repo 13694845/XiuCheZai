@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ChatDaemonController : NSObject
+@interface ChatService : NSObject
 
-- (void)setupSocket;
+- (void)start;
+- (void)stop;
 
 @end

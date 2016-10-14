@@ -6,14 +6,14 @@
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import "ChatDaemonController.h"
+#import "ChatService.h"
 #import "GCDAsyncSocket.h"
 
 #define HOST        @"192.168.2.63"
 #define PORT        9999
 #define TERMINATOR  @"\n"
 
-@interface ChatDaemonController () <GCDAsyncSocketDelegate>
+@interface ChatService () <GCDAsyncSocketDelegate>
 
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (strong, nonatomic) NSTimer *timer;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation ChatDaemonController
+@implementation ChatService
 
 /*
 - (instancetype)init {
@@ -43,16 +43,43 @@
 }
 */
 
+
+
+
 - (void)start {
     NSLog(@"start");
     
+    [self startHeartbeat];
+    /*
     if (!self.asyncSocket) [self setupSocket];
     [self connectToHost:HOST onPort:PORT];
+     */
 }
 
 - (void)stop {
-    
+    NSLog(@"stop");
+
 }
+
+- (void)startHeartbeat {
+    NSLog(@"startHeartbeat");
+    if (!self.timer.valid) self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(echo) userInfo:nil repeats:YES];
+}
+
+- (void)stopHeartbeat {
+    NSLog(@"stopHeartbeat");
+    if (self.timer.valid) [self.timer invalidate];
+}
+
+- (void)echo {
+    NSLog(@"AppDelegate : %@", [NSString stringWithFormat:@"{\"type\":\"ECHO\"}\n"]);
+}
+
+
+
+
+
+
 
 - (void)setupSocket {
     NSLog(@"setupSocket");

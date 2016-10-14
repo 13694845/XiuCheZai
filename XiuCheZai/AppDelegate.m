@@ -11,16 +11,13 @@
 #import "CachingURLProtocol.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
-
-#import "ChatDaemonController.h"
+#import "ChatService.h"
 
 @interface AppDelegate () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSTimer *timer;
-
-@property (strong, nonatomic) ChatDaemonController *chatDaemonController;
-
+@property (strong, nonatomic) ChatService *chatService;
 
 @end
 
@@ -57,26 +54,9 @@
         default: break;
     }
     
-    
-    self.chatDaemonController = [[ChatDaemonController alloc] init];
-    
-    [self.chatDaemonController setupSocket];
-    
-    // [self startHeartbeat];
-}
-
-- (void)startHeartbeat {
-    NSLog(@"startHeartbeat");
-    if (!self.timer.valid) self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(echo) userInfo:nil repeats:YES];
-}
-
-- (void)stopHeartbeat {
-    NSLog(@"stopHeartbeat");
-    if (self.timer.valid) [self.timer invalidate];
-}
-
-- (void)echo {
-    NSLog(@"AppDelegate : %@", [NSString stringWithFormat:@"{\"type\":\"ECHO\"}\n"]);
+    // ******
+    self.chatService = [[ChatService alloc] init];
+    [self.chatService start];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -90,7 +70,6 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [self stopHeartbeat];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {}
