@@ -372,8 +372,8 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (IBAction)showEmotionPad:(id)sender {
     NSLog(@"showEmotionPad");
-    
-    ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 200.0, self.view.frame.size.width, 200.0)];
+    // self.view.frame.size.height - 200.0
+    ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 200.0)];
     emojiInputView.backgroundColor = [UIColor grayColor];
     
     

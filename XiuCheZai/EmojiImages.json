@@ -21,6 +21,7 @@
     {"faceName": "^d_landelini^", "facePath": "d_landelini"},
     {"faceName": "^d_lang^", "facePath": "d_lang"},
     {"faceName": "^d_lei^", "facePath": "d_lei"},
+    {"faceName": "^d_mb^", "facePath": "d_mb"},
     {"faceName": "^d_miao^", "facePath": "d_miao"},
     {"faceName": "^d_nanhaier^", "facePath": "d_nanhaier"},
     {"faceName": "^d_nu^", "facePath": "d_nu"},
@@ -33,6 +34,7 @@
     {"faceName": "^d_shuai^", "facePath": "d_shuai"},
     {"faceName": "^d_shuijiao^", "facePath": "d_shuijiao"},
     {"faceName": "^d_sikao^", "facePath": "d_sikao"},
+    {"faceName": "^d_taikaixin^", "facePath": "d_taikaixin"},
     {"faceName": "^d_touxiao^", "facePath": "d_touxiao"},
     {"faceName": "^d_travel^", "facePath": "d_travel"},
     {"faceName": "^d_wabishi^", "facePath": "d_wabishi"},
@@ -44,7 +46,5 @@
     {"faceName": "^d_yun^", "facePath": "d_yun"},
     {"faceName": "^d_zhuakuang^", "facePath": "d_zhuakuang"},
     {"faceName": "^d_zuiyou^", "facePath": "d_zuiyou"},
-    {"faceName": "^d_zuohengheng^", "facePath": "d_zuohengheng"},
-    {"faceName": "^dmb^", "facePath": "dmb"},
-    {"faceName": "^d_taikaixin^", "facePath": "d_taikaixin"}
+    {"faceName": "^d_zuohengheng^", "facePath": "d_zuohengheng"}
 ]}
