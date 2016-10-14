@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "XiuCheZai/icon/ChatViewController.m"
-            timestampString = "498145601.609308"
+            timestampString = "498149386.647609"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "381"
-            endingLineNumber = "381"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "-showEmotionPad:"
             landmarkType = "5">
          </BreakpointContent>
