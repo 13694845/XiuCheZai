@@ -139,22 +139,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.senderId = @"555";
-    self.senderName = @"zhangsan";
-    self.receiverId = @"123";
-    self.receiverName = @"lisi";
-    /*
-     self.senderId = @"123";
-     self.senderName = @"lisi";
-     self.receiverId = @"555";
-     self.receiverName = @"zhangsan";
-     */
-    
-    NSString *normalStr = @"this ^kiss^ and this ^hug^";
-    self.textView.attributedText = [ChatEmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
-    // NSLog(@"plainString : %@", [EmojiManager plainStringFromEmojiString:emojiString]);
-    
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
@@ -174,6 +158,21 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    self.senderId = @"555";
+    self.senderName = @"zhangsan";
+    self.receiverId = @"123";
+    self.receiverName = @"lisi";
+    /*
+     self.senderId = @"123";
+     self.senderName = @"lisi";
+     self.receiverId = @"555";
+     self.receiverName = @"zhangsan";
+     */
+    
+    NSString *normalStr = @"this ^kiss^ and this ^hug^";
+    self.textView.attributedText = [ChatEmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
+    // NSLog(@"plainString : %@", [EmojiManager plainStringFromEmojiString:emojiString]);
     
     if (!self.asyncSocket) [self setupSocket];
     [self connectToHost:HOST onPort:PORT];
