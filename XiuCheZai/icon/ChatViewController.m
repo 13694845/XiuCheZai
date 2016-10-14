@@ -376,8 +376,15 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     emojiInputView.backgroundColor = [UIColor grayColor];
     
     
+    NSData *emojiData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Emoji" ofType:@"json"]];
+    NSDictionary *emojiJson = [NSJSONSerialization JSONObjectWithData:emojiData options:NSJSONReadingMutableLeaves error:nil];
     
-    
+    /*
+    for (NSString *key in emojiJson) {
+        NSString *value = emojiJson[key];
+        NSLog(@"Value: %@ for key: %@", value, key);
+    }
+    */
     
     [self.view addSubview:emojiInputView];
 }
