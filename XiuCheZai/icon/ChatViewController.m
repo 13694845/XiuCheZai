@@ -368,12 +368,21 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 // ******
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
+    
+    
+    self.textView.inputView = nil;
+    [self.textView reloadInputViews];
+    // [self.textView resignFirstResponder];
+
 }
 
 - (IBAction)showEmotionPad:(id)sender {
     NSLog(@"showEmotionPad");
+    
+    
+    
     // self.view.frame.size.height - 200.0
-    ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 200.0)];
+    ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 253.0)];
     emojiInputView.backgroundColor = [UIColor grayColor];
     
     
@@ -387,7 +396,17 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     }
     */
     
-    [self.view addSubview:emojiInputView];
+    // [self.view addSubview:emojiInputView];
+    
+    
+    
+    
+    self.textView.inputView = emojiInputView;
+    [self.textView reloadInputViews];
+
+    [self.textView becomeFirstResponder];
+
+    
 }
 
 - (IBAction)showOtherPad:(id)sender {
@@ -403,6 +422,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    NSLog(@"KeyboardFrameEnd : %@", NSStringFromCGRect(KeyboardFrameEnd));
+    
     CGFloat keyboardDeltaHeight = KeyboardFrameEnd.size.height - self.keyboardHeight;
     switch (self.tableViewTransform) {
         case TableViewTransformTranslate: {
