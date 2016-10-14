@@ -12,6 +12,7 @@
 #import "ChatMessage.h"
 #import "ChatMessageManager.h"
 #import "ChatEmojiManager.h"
+#import "ChatEmojiInputView.h"
 
 #define BUBBLE_VIEW_MARGIN_TOP      15.0
 #define BUBBLE_VIEW_MARGIN_LEFT     12.0
@@ -372,13 +373,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 - (IBAction)showEmotionPad:(id)sender {
     NSLog(@"showEmotionPad");
     
-    UIView *emojiInputView = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 200.0, self.view.frame.size.width, 200.0)];
+    ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 200.0, self.view.frame.size.width, 200.0)];
     emojiInputView.backgroundColor = [UIColor grayColor];
     
-    
-    NSData *emojiData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"EmojiImages" ofType:@"json"]];
-    NSDictionary *emojiJson = [NSJSONSerialization JSONObjectWithData:emojiData options:NSJSONReadingMutableLeaves error:nil];
-    NSArray *emojiImages = emojiJson[@"emojiImages"];
     
     
     
