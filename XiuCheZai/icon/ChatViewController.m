@@ -161,7 +161,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     
     self.senderId = @"555";
     self.senderName = @"zhangsan";
-    self.receiverId = @"123";
+    self.receiverId = @"440";
     self.receiverName = @"lisi";
     /*
     self.senderId = @"123";

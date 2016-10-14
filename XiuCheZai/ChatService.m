@@ -31,7 +31,7 @@
     NSLog(@"start");
     self.senderId = @"555";
     self.senderName = @"zhangsan";
-    self.receiverId = @"123";
+    self.receiverId = @"440";
     self.receiverName = @"lisi";
     
     if (!self.asyncSocket) [self setupSocket];
