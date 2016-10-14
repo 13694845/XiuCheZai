@@ -290,6 +290,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (void)handleReceipt:(NSDictionary *)message {
+    NSLog(@"handleReceipt %@ : ", message);
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
     ChatMessage *chatMessage = [[ChatMessage alloc] init];
     chatMessage.isSend = YES;
@@ -303,13 +304,13 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     chatMessage.receiverName = msg[@"receiver_name"];
     [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:self.receiverId];
     [self.rows addObject:chatMessage];
-    NSLog(@"SEND : %@", msg[@"msg_content"]);
     
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
 - (void)handleMessage:(NSDictionary *)message {
+    NSLog(@"handleMessage %@ : ", message);
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
     ChatMessage *chatMessage = [[ChatMessage alloc] init];
     chatMessage.isSend = NO;
@@ -323,7 +324,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     chatMessage.receiverName = msg[@"receiver_name"];
     [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:self.receiverId];
     [self.rows addObject:chatMessage];
-    NSLog(@"RECV : %@", msg[@"msg_content"]);
     
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
