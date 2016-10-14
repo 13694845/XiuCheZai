@@ -916,10 +916,6 @@
 		6C1207C81DAE196500FF4138 /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
-				6C1207D41DAF138A00FF4138 /* EmojiManager.h */,
-				6C1207D51DAF138A00FF4138 /* EmojiManager.m */,
-				6C1207D71DAF2C6E00FF4138 /* EmojiAttachment.h */,
-				6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */,
 				6C1207D21DAF121A00FF4138 /* Emoji.json */,
 				6C1207CE1DAE19BF00FF4138 /* e01@2x.png */,
 				6C1207CF1DAE19BF00FF4138 /* e02@2x.png */,
@@ -927,11 +923,25 @@
 			name = Emoji;
 			sourceTree = "<group>";
 		};
-		6C1207DB1DAF2F0C00FF4138 /* EmojiImages */ = {
+		6C1207E81DB06C3500FF4138 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				6C1207E51DB0688E00FF4138 /* ChatConfig.h */,
+				6C1207E61DB0688E00FF4138 /* ChatConfig.m */,
+				6C1207E21DAF6B9F00FF4138 /* ChatService.h */,
+				6C1207E31DAF6B9F00FF4138 /* ChatService.m */,
+				6CC190931DA08A8E0098BB40 /* ChatViewController.h */,
+				6CC190941DA08A8E0098BB40 /* ChatViewController.m */,
+				6C1207061DA229B700FF4138 /* ChatMessage.h */,
+				6C1207071DA229B700FF4138 /* ChatMessage.m */,
+				6C1207C51DADC5E700FF4138 /* ChatMessageManager.h */,
+				6C1207C61DADC5E700FF4138 /* ChatMessageManager.m */,
+				6C1207D41DAF138A00FF4138 /* EmojiManager.h */,
+				6C1207D51DAF138A00FF4138 /* EmojiManager.m */,
+				6C1207D71DAF2C6E00FF4138 /* EmojiAttachment.h */,
+				6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */,
 			);
-			name = EmojiImages;
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		6C4D0C1B1C28E998003E96E8 /* SDWebImage */ = {
@@ -1322,7 +1332,6 @@
 		6CABF7091C0E978B00DF3EFF /* XiuCheZai */ = {
 			isa = PBXGroup;
 			children = (
-				6C1207DB1DAF2F0C00FF4138 /* EmojiImages */,
 				6C1207C81DAE196500FF4138 /* Emoji */,
 				6CC1908C1DA08A100098BB40 /* GCDAsyncSocket */,
 				6C91C3441C9A84D2004C0CB4 /* Util */,
@@ -1338,16 +1347,7 @@
 				6C8B10821CC858F2003CF8F5 /* Wxpay */,
 				6C9F60A41D4598C600910335 /* icon */,
 				6C1207091DA33C1000FF4138 /* ChatIcons */,
-				6C1207E51DB0688E00FF4138 /* ChatConfig.h */,
-				6C1207E61DB0688E00FF4138 /* ChatConfig.m */,
-				6C1207E21DAF6B9F00FF4138 /* ChatService.h */,
-				6C1207E31DAF6B9F00FF4138 /* ChatService.m */,
-				6CC190931DA08A8E0098BB40 /* ChatViewController.h */,
-				6CC190941DA08A8E0098BB40 /* ChatViewController.m */,
-				6C1207061DA229B700FF4138 /* ChatMessage.h */,
-				6C1207071DA229B700FF4138 /* ChatMessage.m */,
-				6C1207C51DADC5E700FF4138 /* ChatMessageManager.h */,
-				6C1207C61DADC5E700FF4138 /* ChatMessageManager.m */,
+				6C1207E81DB06C3500FF4138 /* Chat */,
 				6CABF70D1C0E978B00DF3EFF /* AppDelegate.h */,
 				6CABF70E1C0E978B00DF3EFF /* AppDelegate.m */,
 				6C91C35E1C9A86FE004C0CB4 /* LoginViewController.h */,
