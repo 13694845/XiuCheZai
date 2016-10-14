@@ -275,7 +275,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
         [self.tableView reloadData];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
     } else {
-        [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-12 20:00:00" page:[NSString stringWithFormat:@"%d", 1]];
+        [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-14 20:00:00" page:[NSString stringWithFormat:@"%d", 1]];
     }
 }
 
