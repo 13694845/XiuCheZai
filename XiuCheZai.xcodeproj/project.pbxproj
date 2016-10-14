@@ -89,8 +89,8 @@
 		6C1207D01DAE19BF00FF4138 /* e01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207CE1DAE19BF00FF4138 /* e01@2x.png */; };
 		6C1207D11DAE19BF00FF4138 /* e02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207CF1DAE19BF00FF4138 /* e02@2x.png */; };
 		6C1207D31DAF121A00FF4138 /* Emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207D21DAF121A00FF4138 /* Emoji.json */; };
-		6C1207D61DAF138A00FF4138 /* EmojiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207D51DAF138A00FF4138 /* EmojiManager.m */; };
-		6C1207D91DAF2C6E00FF4138 /* EmojiAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */; };
+		6C1207D61DAF138A00FF4138 /* ChatEmojiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207D51DAF138A00FF4138 /* ChatEmojiManager.m */; };
+		6C1207D91DAF2C6E00FF4138 /* ChatEmojiAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207D81DAF2C6E00FF4138 /* ChatEmojiAttachment.m */; };
 		6C1207E41DAF6B9F00FF4138 /* ChatService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207E31DAF6B9F00FF4138 /* ChatService.m */; };
 		6C1207E71DB0688E00FF4138 /* ChatConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1207E61DB0688E00FF4138 /* ChatConfig.m */; };
 		6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1365A61C23D83E00B217DD /* HomeViewController.m */; };
@@ -399,10 +399,10 @@
 		6C1207CE1DAE19BF00FF4138 /* e01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e01@2x.png"; sourceTree = "<group>"; };
 		6C1207CF1DAE19BF00FF4138 /* e02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e02@2x.png"; sourceTree = "<group>"; };
 		6C1207D21DAF121A00FF4138 /* Emoji.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Emoji.json; sourceTree = "<group>"; };
-		6C1207D41DAF138A00FF4138 /* EmojiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiManager.h; sourceTree = "<group>"; };
-		6C1207D51DAF138A00FF4138 /* EmojiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiManager.m; sourceTree = "<group>"; };
-		6C1207D71DAF2C6E00FF4138 /* EmojiAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiAttachment.h; sourceTree = "<group>"; };
-		6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiAttachment.m; sourceTree = "<group>"; };
+		6C1207D41DAF138A00FF4138 /* ChatEmojiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojiManager.h; sourceTree = "<group>"; };
+		6C1207D51DAF138A00FF4138 /* ChatEmojiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojiManager.m; sourceTree = "<group>"; };
+		6C1207D71DAF2C6E00FF4138 /* ChatEmojiAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojiAttachment.h; sourceTree = "<group>"; };
+		6C1207D81DAF2C6E00FF4138 /* ChatEmojiAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojiAttachment.m; sourceTree = "<group>"; };
 		6C1207E21DAF6B9F00FF4138 /* ChatService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatService.h; sourceTree = "<group>"; };
 		6C1207E31DAF6B9F00FF4138 /* ChatService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatService.m; sourceTree = "<group>"; };
 		6C1207E51DB0688E00FF4138 /* ChatConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatConfig.h; sourceTree = "<group>"; };
@@ -936,10 +936,10 @@
 				6C1207071DA229B700FF4138 /* ChatMessage.m */,
 				6C1207C51DADC5E700FF4138 /* ChatMessageManager.h */,
 				6C1207C61DADC5E700FF4138 /* ChatMessageManager.m */,
-				6C1207D41DAF138A00FF4138 /* EmojiManager.h */,
-				6C1207D51DAF138A00FF4138 /* EmojiManager.m */,
-				6C1207D71DAF2C6E00FF4138 /* EmojiAttachment.h */,
-				6C1207D81DAF2C6E00FF4138 /* EmojiAttachment.m */,
+				6C1207D41DAF138A00FF4138 /* ChatEmojiManager.h */,
+				6C1207D51DAF138A00FF4138 /* ChatEmojiManager.m */,
+				6C1207D71DAF2C6E00FF4138 /* ChatEmojiAttachment.h */,
+				6C1207D81DAF2C6E00FF4138 /* ChatEmojiAttachment.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1768,10 +1768,10 @@
 				6CE3638D1D73C1DF00AA0B53 /* XCZActivityViewController.m in Sources */,
 				6C91C3561C9A84D2004C0CB4 /* base64.m in Sources */,
 				6C91C3571C9A84D2004C0CB4 /* DataSigner.m in Sources */,
-				6C1207D61DAF138A00FF4138 /* EmojiManager.m in Sources */,
+				6C1207D61DAF138A00FF4138 /* ChatEmojiManager.m in Sources */,
 				6C6DD9601D6A867500FEAEDD /* XCZCircleTableViewCell.m in Sources */,
 				6C4D0C411C28E998003E96E8 /* SDWebImageDecoder.m in Sources */,
-				6C1207D91DAF2C6E00FF4138 /* EmojiAttachment.m in Sources */,
+				6C1207D91DAF2C6E00FF4138 /* ChatEmojiAttachment.m in Sources */,
 				6C8B108D1CC85A73003CF8F5 /* URLCache.m in Sources */,
 				6C4D0C441C28E998003E96E8 /* SDWebImageManager.m in Sources */,
 				6CE363931D7402F900AA0B53 /* XCZClubTableViewCell.m in Sources */,

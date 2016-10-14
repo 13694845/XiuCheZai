@@ -11,7 +11,7 @@
 #import "GCDAsyncSocket.h"
 #import "ChatMessage.h"
 #import "ChatMessageManager.h"
-#import "EmojiManager.h"
+#import "ChatEmojiManager.h"
 
 #define BUBBLE_VIEW_MARGIN_TOP      15.0
 #define BUBBLE_VIEW_MARGIN_LEFT     12.0
@@ -100,7 +100,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (UIView *)bubbleViewForMessage:(ChatMessage *)message {
-    NSAttributedString *attributedText = [EmojiManager emojiStringFromPlainString:message.content withFont:[UIFont systemFontOfSize:14.0]];
+    NSAttributedString *attributedText = [ChatEmojiManager emojiStringFromPlainString:message.content withFont:[UIFont systemFontOfSize:14.0]];
     CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2)];
     
@@ -148,7 +148,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     NSString *normalStr = @"this ^kiss^ and this ^hug^";
     // self.textView.attributedText = [NSAttributedString emojiAttributedString:normalStr withFont:self.textView.font];
     
-    NSAttributedString *emojiString = [EmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
+    NSAttributedString *emojiString = [ChatEmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
     self.textView.attributedText = emojiString;
     
     // NSLog(@"plainString : %@", [EmojiManager plainStringFromEmojiString:emojiString]);
@@ -186,7 +186,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
-        NSString *content = [EmojiManager plainStringFromEmojiString:textView.attributedText];
+        NSString *content = [ChatEmojiManager plainStringFromEmojiString:textView.attributedText];
         [self sendMessageWithContent:[content stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
         textView.text = nil;
         return NO;

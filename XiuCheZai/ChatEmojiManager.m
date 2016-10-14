@@ -1,15 +1,15 @@
 //
-//  EmojiManager.m
+//  ChatEmojiManager.m
 //  XiuCheZai
 //
 //  Created by QSH on 16/10/13.
 //  Copyright © 2016年 QSH. All rights reserved.
 //
 
-#import "EmojiManager.h"
-#import "EmojiAttachment.h"
+#import "ChatEmojiManager.h"
+#import "ChatEmojiAttachment.h"
 
-@implementation EmojiManager
+@implementation ChatEmojiManager
 
 + (NSAttributedString *)emojiStringFromPlainString:(NSString *)plainString withFont:(UIFont *)font {
     NSMutableAttributedString *emojiString = [[NSMutableAttributedString alloc] initWithString:plainString attributes:@{NSFontAttributeName:font}];
@@ -30,7 +30,7 @@
         UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        EmojiAttachment *emojiAttachment = [[EmojiAttachment alloc] init];
+        ChatEmojiAttachment *emojiAttachment = [[ChatEmojiAttachment alloc] init];
         emojiAttachment.emojiTag = placeholder;
         emojiAttachment.image = resizedImage;
         NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:emojiAttachment];
@@ -42,7 +42,7 @@
 + (NSString *)plainStringFromEmojiString:(NSAttributedString *)emojiString {
     NSMutableString *plainString = [emojiString.string mutableCopy];
     [emojiString enumerateAttribute:NSAttachmentAttributeName inRange:NSMakeRange(0, emojiString.length) options:NSAttributedStringEnumerationReverse usingBlock:^(id value, NSRange range, BOOL *stop) {
-        if ([value isKindOfClass:[EmojiAttachment class]]) [plainString replaceCharactersInRange:range withString:((EmojiAttachment *)value).emojiTag];
+        if ([value isKindOfClass:[ChatEmojiAttachment class]]) [plainString replaceCharactersInRange:range withString:((ChatEmojiAttachment *)value).emojiTag];
     }];
     return plainString;
 }

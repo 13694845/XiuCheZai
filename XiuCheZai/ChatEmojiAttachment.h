@@ -1,5 +1,5 @@
 //
-//  EmojiAttachment.h
+//  ChatEmojiAttachment.h
 //  XiuCheZai
 //
 //  Created by QSH on 16/10/13.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EmojiAttachment : NSTextAttachment
+@interface ChatEmojiAttachment : NSTextAttachment
 
 @property(copy, nonatomic) NSString *emojiTag;
 
