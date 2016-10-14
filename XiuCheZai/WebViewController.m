@@ -16,6 +16,10 @@
 #import "MBProgressHUD.h"
 #import "GoodsDetailViewController.h"
 
+
+#import "ChatViewController.h"
+
+
 @import MapKit;
 
 @interface WebViewController () <UIWebViewDelegate, WXApiDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -180,6 +184,13 @@
 // *****
 - (void)chatWithUserId:(NSString *)userId {
     NSLog(@"chatWithUserId");
+    
+    
+    ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    
+    
+    [self.navigationController pushViewController:chatViewController animated:YES];
+    
 }
 // *****
 
