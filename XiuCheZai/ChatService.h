@@ -10,7 +10,7 @@
 
 @interface ChatService : NSObject
 
-- (void)startWithSenderId:(NSString *)senderId;
+- (void)start;
 - (void)stop;
 
 @end

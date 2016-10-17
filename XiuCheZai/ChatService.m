@@ -24,15 +24,14 @@
 
 @implementation ChatService
 
-
-
-
-
-
-
 - (void)start {
     NSLog(@"startWithSenderId");
     
+//    [[NSUserDefaults standardUserDefaults] setObject:userlocation forKey:@"userLocation"];
+
+    
+    NSString *senderId = [[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"];
+
     self.senderId = @"555";
     self.senderName = @"zhangsan";
     

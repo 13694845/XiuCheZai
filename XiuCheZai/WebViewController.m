@@ -201,14 +201,14 @@
 
 - (void)saveCookies {
     NSLog(@"saveCookies");
-    NSString *senderId = @"555";
-    NSString *senderName = @"zhangsan";
-    [[NSUserDefaults standardUserDefaults] setObject:senderId forKey:@"senderId"];
-    [[NSUserDefaults standardUserDefaults] setObject:senderName forKey:@"senderName"];
+    NSMutableDictionary *chatSender = [NSMutableDictionary dictionary];
+    chatSender[@"senderId"] = @"555";
+    chatSender[@"senderName"] = @"zhangsan";
+    [[NSUserDefaults standardUserDefaults] setObject:chatSender forKey:@"chatSender"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService startWithSenderId:senderId];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
 }
+
 
 
 

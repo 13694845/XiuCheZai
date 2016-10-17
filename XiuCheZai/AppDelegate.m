@@ -52,13 +52,7 @@
         default: break;
     }
     
-    NSString *senderId = [[NSUserDefaults standardUserDefaults] objectForKey:@"senderId"];
-    if (senderId) [self.chatService startWithSenderId:senderId];
-    
-    
-    // *****
-    // [self.chatService start];
-    // *****
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"]) [self.chatService start];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
