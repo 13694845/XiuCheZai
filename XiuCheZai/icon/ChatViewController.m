@@ -370,7 +370,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showEmotionPad:(id)sender {
     if (self.inputViewType == InputViewTypeEmoji) {
-        // self.inputViewType = InputViewTypeKeyboard;
+        self.inputViewType = InputViewTypeKeyboard;
+        // keyboard icon
         [self.textView becomeFirstResponder];
         return;
     }
@@ -432,10 +433,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }
 }
 
-
-
-
 - (void)keyboardWillShow:(NSNotification *)notification {
+    if (self.inputViewType == InputViewTypeKeyboard) {
+        
+    }
+    
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSLog(@"KeyboardFrameEnd : %@", NSStringFromCGRect(KeyboardFrameEnd));
     CGFloat keyboardDeltaHeight = KeyboardFrameEnd.size.height - self.keyboardHeight;
