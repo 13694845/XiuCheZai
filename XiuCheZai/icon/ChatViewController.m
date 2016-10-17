@@ -409,9 +409,22 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     [self.textView becomeFirstResponder];
 }
 
-- (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButton:(NSDictionary *)buttonInfo {
-    NSLog(@"didSelectButton");
+- (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButton:(OtherInputViewButton)button {
+    switch (button) {
+        case OtherInputViewButtonImageFromPhotoLibrary: {
+            NSLog(@"OtherInputViewButtonImageFromPhotoLibrary");
+            break;
+        }
+        case OtherInputViewButtonImageFromCamera: {
+            NSLog(@"OtherInputViewButtonImageFromCamera");
+            break;
+        }
+        default: break;
+    }
 }
+
+
+
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
