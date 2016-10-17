@@ -26,48 +26,12 @@
 
 - (void)start {
     NSLog(@"startWithSenderId");
-    
-//    [[NSUserDefaults standardUserDefaults] setObject:userlocation forKey:@"userLocation"];
-
-    
-    NSString *senderId = [[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"];
-
-    self.senderId = @"555";
-    self.senderName = @"zhangsan";
-    
-    
-    
-    /*
-     self.receiverId = @"440";
-     self.receiverName = @"lisi";
-     */
+    NSDictionary *chatSender = [[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"];
+    self.senderId = chatSender[@"senderId"];
+    self.senderName = chatSender[@"senderName"];
     
     if (!self.asyncSocket) [self setupSocket];
     if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
-    
-    // *****
-    //    [self loginWithSenderId:self.senderId];
-}
-
-
-- (void)startWithSenderId:(NSString *)senderId {
-    NSLog(@"startWithSenderId");
-    
-    self.senderId = @"555";
-    self.senderName = @"zhangsan";
-    
-    
-    
-    /*
-    self.receiverId = @"440";
-    self.receiverName = @"lisi";
-    */
-    
-    if (!self.asyncSocket) [self setupSocket];
-    if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
-    
-    // *****
-//    [self loginWithSenderId:self.senderId];
 }
 
 - (void)stop {
