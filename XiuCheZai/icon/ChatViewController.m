@@ -354,6 +354,11 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmoji:(NSDictionary *)emojiInfo {
     NSLog(@"emojiInfo : %@", emojiInfo);
+    
+    NSAttributedString *as = [[NSAttributedString alloc] initWithString:@"test" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
+    
+    [self.textView.textStorage insertAttributedString:as atIndex:self.textView.selectedRange.location];
+    
 }
 
 
