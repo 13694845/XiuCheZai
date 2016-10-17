@@ -129,7 +129,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)goBack:(id)sender {
     NSLog(@"goBack");
+    [self.asyncSocket disconnect];
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad {
@@ -457,10 +459,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
         [self.barView layoutIfNeeded];
         [self.tableView layoutIfNeeded];
     } completion:^(BOOL finished) {}];
-}
-
-- (void)viewDidUnload {
-    NSLog(@"viewDidUnload");
 }
 
 - (void)didReceiveMemoryWarning {
