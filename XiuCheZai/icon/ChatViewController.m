@@ -7,6 +7,7 @@
 //
 
 #import "ChatViewController.h"
+#import "AppDelegate.h"
 #import "ChatConfig.h"
 #import "GCDAsyncSocket.h"
 #import "ChatMessage.h"
@@ -184,6 +185,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
     [self loginWithSenderId:self.senderId];
 }
 
@@ -215,7 +217,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     NSLog(@"historyMessagesForSenderId");
     NSString *messageFormat = @"{\"type\":\"CHATHISTORY\", \"sender_id\":\"%@\", \"receiver_id\":\"%@\", \"send_time\":\"%@\", \"NowPage\":\"%@\"}\n";
     NSString *message = [NSString stringWithFormat:messageFormat, senderId, receiverId, sendTime, page];
-    // NSLog(@"historyMessages : %@", message);
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
