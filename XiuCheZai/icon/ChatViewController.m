@@ -157,6 +157,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.receiverName = @"lisi";
     self.receiverAvatar = nil;
     
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
     if (!self.asyncSocket) [self setupSocket];
     if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
 }
@@ -185,7 +186,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
-    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
     [self loginWithSenderId:self.senderId];
 }
 
