@@ -377,6 +377,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     
     
     ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
+    emojiInputView.delegate = self;
     self.textView.inputView = emojiInputView;
     [self.textView reloadInputViews];
     [self.textView becomeFirstResponder];

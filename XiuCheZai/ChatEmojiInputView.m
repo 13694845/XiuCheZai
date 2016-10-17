@@ -54,8 +54,7 @@
 }
 
 - (void)selectEmoji:(id)sender {
-    NSLog(@"selectEmoji");
-    [self.delegate emojiInputView:self didSelectEmoji:[self.emojiImages[((UIButton *)sender).tag] copy]];
+    [self.delegate emojiInputView:self didSelectEmoji:self.emojiImages[((UIButton *)sender).tag]];
 }
 
 @end
