@@ -14,6 +14,7 @@
 #import "ChatMessageManager.h"
 #import "ChatEmojiManager.h"
 #import "ChatEmojiInputView.h"
+#import "ChatEmojiAttachment.h"
 
 #define BUBBLE_VIEW_MARGIN_TOP      15.0
 #define BUBBLE_VIEW_MARGIN_LEFT     12.0
@@ -348,9 +349,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     NSLog(@"handleEcho %@ : ", message);
 }
 
-
-
-// ******
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
     
@@ -376,13 +374,44 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     [self.textView becomeFirstResponder];
 }
 
+
+/*
+for (NSTextCheckingResult* result in [matches reverseObjectEnumerator]) {
+    NSRange matchRange = [result range];
+    NSString *placeholder = [emojiString.string substringWithRange:matchRange];
+    UIImage *emojiImage = [UIImage imageNamed:emojiJson[placeholder]];
+    UIGraphicsBeginImageContextWithOptions(emojiSize, NO, 0.0);
+    [emojiImage drawInRect:CGRectMake(0, 0, emojiSize.width, emojiSize.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    ChatEmojiAttachment *emojiAttachment = [[ChatEmojiAttachment alloc] init];
+    emojiAttachment.emojiTag = placeholder;
+    emojiAttachment.image = resizedImage;
+    NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:emojiAttachment];
+    [emojiString replaceCharactersInRange:matchRange withAttributedString:attachmentString];
+}
+*/
+
 - (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmoji:(NSDictionary *)emojiInfo {
     NSLog(@"emojiInfo : %@", emojiInfo);
+    NSData *emojiData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Emoji" ofType:@"json"]];
+    NSDictionary *emojiJson = [NSJSONSerialization JSONObjectWithData:emojiData options:NSJSONReadingMutableLeaves error:nil];
+    CGSize emojiSize = CGSizeMake([UIFont systemFontOfSize:14.0].lineHeight, [UIFont systemFontOfSize:14.0].lineHeight);
     
-    NSAttributedString *as = [[NSAttributedString alloc] initWithString:@"test" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
+    NSString *placeholder = emojiInfo[@"faceName"];
+    UIImage *emojiImage = [UIImage imageNamed:emojiJson[placeholder]];
+    UIGraphicsBeginImageContextWithOptions(emojiSize, NO, 0.0);
+    [emojiImage drawInRect:CGRectMake(0, 0, emojiSize.width, emojiSize.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
-    [self.textView.textStorage insertAttributedString:as atIndex:self.textView.selectedRange.location];
-    
+    ChatEmojiAttachment *emojiAttachment = [[ChatEmojiAttachment alloc] init];
+    emojiAttachment.emojiTag = placeholder;
+    emojiAttachment.image = resizedImage;
+    NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:emojiAttachment];
+    [self.textView.textStorage insertAttributedString:attachmentString atIndex:self.textView.selectedRange.location];
+    self.textView.selectedRange = NSMakeRange(self.textView.selectedRange.location + 1, 0);
 }
 
 - (IBAction)showOtherPad:(id)sender {
