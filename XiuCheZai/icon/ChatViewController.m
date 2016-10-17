@@ -463,7 +463,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
-    
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:data name:@"pic" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
@@ -474,7 +474,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         });
          */
     } success:^(NSURLSessionDataTask *task, id responseObject) {
-        
+        NSDictionary *res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"NSDictionary : %@", res);
         /*
         [hud hide:YES];
         hud.progress = 0;
@@ -490,9 +491,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
          */
     }];
 }
-
-
-
 
 - (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
     UIGraphicsBeginImageContext(size);
