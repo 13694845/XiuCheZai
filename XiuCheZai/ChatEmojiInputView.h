@@ -21,4 +21,6 @@ static NSString *const kEmojiImagePathKey = @"facePath";
 
 @interface ChatEmojiInputView : UIView
 
+@property (weak, nonatomic) id <ChatEmojiInputViewDelegate> delegate;
+
 @end
