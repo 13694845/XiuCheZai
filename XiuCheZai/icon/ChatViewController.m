@@ -364,6 +364,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (IBAction)showEmotionPad:(id)sender {
     NSLog(@"showEmotionPad");
+    
+    if (!self.textView.inputView) {
+        
+    }
+    
+    
     ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
     self.textView.inputView = emojiInputView;
     [self.textView reloadInputViews];
@@ -383,9 +389,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    NSLog(@"KeyboardFrameEnd : %@", NSStringFromCGRect(KeyboardFrameEnd));
-    
+    // NSLog(@"KeyboardFrameEnd : %@", NSStringFromCGRect(KeyboardFrameEnd));
     CGFloat keyboardDeltaHeight = KeyboardFrameEnd.size.height - self.keyboardHeight;
     switch (self.tableViewTransform) {
         case TableViewTransformTranslate: {
