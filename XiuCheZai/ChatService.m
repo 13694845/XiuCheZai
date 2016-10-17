@@ -33,6 +33,9 @@
     
     self.senderId = @"555";
     self.senderName = @"zhangsan";
+    
+    
+    
     /*
     self.receiverId = @"440";
     self.receiverName = @"lisi";
