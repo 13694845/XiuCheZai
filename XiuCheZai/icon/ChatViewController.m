@@ -7,9 +7,11 @@
 //
 
 #import "ChatViewController.h"
+#import "XCZConfig.h"
 #import "AppDelegate.h"
-#import "ChatConfig.h"
+#import "AFNetworking.h"
 #import "GCDAsyncSocket.h"
+#import "ChatConfig.h"
 #import "ChatMessage.h"
 #import "ChatMessageManager.h"
 #import "ChatEmojiManager.h"
@@ -49,6 +51,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
 @property (assign, nonatomic) InputViewType inputViewType;
 
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (strong, nonatomic) NSTimer *timer;
 @property (assign, nonatomic) NSUInteger historyPage;
@@ -61,6 +64,15 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @implementation ChatViewController
 
 @synthesize rows = _rows;
+
+- (AFHTTPSessionManager *)manager {
+    if (!_manager) {
+        _manager = [AFHTTPSessionManager manager];
+        [_manager.requestSerializer setValue:[NSString stringWithFormat:@"%@ %@/%@",
+                                              [_manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [XCZConfig version]] forHTTPHeaderField:@"User-Agent"];
+    }
+    return _manager;
+}
 
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
@@ -439,9 +451,56 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
+    NSDictionary *parameters = nil;
+    
+    /*
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    */
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
+    NSData *data = UIImageJPEGRepresentation(image, 0.8);
+    
+    
+    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:data name:@"pic" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
+    } progress:^(NSProgress *uploadProgress) {
+        /*
+        dispatch_async(dispatch_get_main_queue(), ^{
+            hud.progress = uploadProgress.fractionCompleted;
+        });
+         */
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        /*
+        [hud hide:YES];
+        hud.progress = 0;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult('%@')", jsonString]];
+         */
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        /*
+        [hud hide:YES];
+        hud.progress = 0;
+         */
+    }];
+}
 
 
 
+
+- (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resizedImage;
+}
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
