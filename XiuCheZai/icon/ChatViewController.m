@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     InputViewTypeVoice
 };
 
-@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, ChatEmojiInputViewDelegate, ChatOtherInputViewDelegate>
+@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, ChatEmojiInputViewDelegate, ChatOtherInputViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
@@ -423,11 +423,17 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     switch (button) {
         case OtherInputViewButtonImageFromPhotoLibrary: {
             NSLog(@"OtherInputViewButtonImageFromPhotoLibrary");
-            break;
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.delegate = self;
+            imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagePickerController animated:YES completion:nil]; break;
         }
         case OtherInputViewButtonImageFromCamera: {
             NSLog(@"OtherInputViewButtonImageFromCamera");
-            break;
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.delegate = self;
+            imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:imagePickerController animated:YES completion:nil]; break;
         }
         default: break;
     }
