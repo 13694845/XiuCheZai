@@ -151,8 +151,10 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     
     self.senderId = @"555";
     self.senderName = @"zhangsan";
+    self.senderAvatar = nil;
     self.receiverId = @"123";
     self.receiverName = @"lisi";
+    self.receiverAvatar = nil;
     
     if (!self.asyncSocket) [self setupSocket];
     if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];

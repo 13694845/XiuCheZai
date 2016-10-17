@@ -132,19 +132,31 @@
         return YES;
     }
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/massage/communicate.jsp?bid="]]) {
-        [self chatWithUserId:@"123"];
+        [self chatWithUserReceiverId:@"123"];
         return NO;
     }
     
     return YES;
 }
 
-- (void)chatWithUserId:(NSString *)userId {
-    NSLog(@"chatWithUserId");
+- (void)chatWithUserReceiverId:(NSString *)receiverId {
+    NSLog(@"chatWithUserReceiverId");
     ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-    
-    
-    
+    /*
+    NSDictionary *chatSender = [[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"];
+    chatViewController.senderId = chatSender[@"senderId"];
+    chatViewController.senderName = chatSender[@"senderName"];
+    chatViewController.senderAvatar = chatSender[@"senderAvatar"];
+    chatViewController.receiverId = receiverId;
+    chatViewController.receiverName = @"lisi";
+    chatViewController.receiverAvatar = chatSender[@"receiverAvatar"];
+     */
+    chatViewController.senderId = @"555";
+    chatViewController.senderName = @"zhangsan";
+    chatViewController.senderAvatar = nil;
+    chatViewController.receiverId = @"123";
+    chatViewController.receiverName = @"lisi";
+    chatViewController.receiverAvatar = nil;
     [self.navigationController pushViewController:chatViewController animated:YES];
 }
 
