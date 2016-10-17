@@ -363,20 +363,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 - (IBAction)showEmotionPad:(id)sender {
     NSLog(@"showEmotionPad");
     
-    if (!self.textView.inputView) {
-        NSLog(@"nil");
-
-    } else {
-        NSLog(@"has");
-
-    }
-    
-    
     ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
     emojiInputView.delegate = self;
-    self.textView.inputView = emojiInputView;
-    [self.textView reloadInputViews];
-    [self.textView becomeFirstResponder];
+    UITextView *textView = [[UITextView alloc] init];
+    [self.barView addSubview:textView];
+    textView.inputView = emojiInputView;
+    [textView becomeFirstResponder];
 }
 
 - (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmoji:(NSDictionary *)emojiInfo {
@@ -402,11 +394,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (IBAction)showOtherPad:(id)sender {
     NSLog(@"showOtherPad");
-    ChatOtherInputView *OtherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
-    OtherInputView.delegate = self;
-    self.textView.inputView = OtherInputView;
-    [self.textView reloadInputViews];
-    [self.textView becomeFirstResponder];
+    ChatOtherInputView *otherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
+    otherInputView.delegate = self;
+    UITextView *textView = [[UITextView alloc] init];
+    [self.barView addSubview:textView];
+    textView.inputView = otherInputView;
+    [textView becomeFirstResponder];
 }
 
 - (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButton:(OtherInputViewButton)button {
