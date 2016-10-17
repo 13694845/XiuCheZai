@@ -480,7 +480,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         
         NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
         
-        // sendMessage
+        // sendMessage    1. jpg/png   2. amr   3. mp4
 
         // [[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
         /*
