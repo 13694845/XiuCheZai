@@ -10,6 +10,7 @@
 #import "XCZConfig.h"
 #import "AppDelegate.h"
 #import "AFNetworking.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 #import "GCDAsyncSocket.h"
 #import "ChatConfig.h"
 #import "ChatMessage.h"
@@ -474,8 +475,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         });
          */
     } success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *res = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"NSDictionary : %@", res);
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"NSDictionary : %@", result);
+        
+        NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
+
+        // [[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
         /*
         [hud hide:YES];
         hud.progress = 0;
