@@ -10,7 +10,6 @@
 #import "RSADataEncryptor.h"
 #import "Config.h"
 #import "AFNetworking.h"
-
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
 
@@ -34,7 +33,7 @@
 - (NSString *)escapeHTMLString:(NSString *)html {
     html = [html stringByReplacingOccurrencesOfString:@"＜" withString:@"<"];
     html = [html stringByReplacingOccurrencesOfString:@"＞" withString:@">"];
-
+    
     html = [html stringByReplacingOccurrencesOfString:@"#3D;" withString:@"="];
     html = [html stringByReplacingOccurrencesOfString:@"#quot;" withString:@"\""];
     html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
@@ -58,15 +57,9 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
     
     NSString *html = @"＜div id#3D;#quot;articleContent#quot;＞#0A;＜p＞#0A;＜span style#3D;#quot;line-height:2;#quot;＞11月14日，国家发改委的一纸通知让国内成品油调价史再创新纪录—“八连跌”，而今年国内油价的涨跌比也再次被刷新，4涨12跌。＜/span＞ #0A;＜/p＞#0A;＜p＞#0A;＜span style#3D;#quot;line-height:2;#quot;＞国内油价#apos;八连跌#apos;分析称九连跌概率大＜/span＞";
-
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 480.0)];
     [webView loadHTMLString:[self escapeHTMLString:html] baseURL:nil];
     [self.view addSubview:webView];
-    
-    /*
-    BMKMapView *mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 0, 320.0, 480.0)];
-    self.view = mapView;
-     */
 }
 
 - (void)didReceiveMemoryWarning {
