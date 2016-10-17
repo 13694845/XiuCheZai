@@ -142,7 +142,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationItem.title = self.receiverName;
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
     
     self.tableView.dataSource = self;
@@ -266,9 +265,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
         [self.tableView reloadData];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
     } else {
-        
-        // *****
-        [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-17 20:00:00" page:[NSString stringWithFormat:@"%d", 1]];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:[NSString stringWithFormat:@"%d", 1]];
     }
 }
 
@@ -351,17 +350,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 
 
-
-- (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmoji:(NSDictionary *)emojiInfo {
-    NSLog(@"emojiInfo : %@", emojiInfo);
-    
-    NSAttributedString *as = [[NSAttributedString alloc] initWithString:@"test" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
-    
-    [self.textView.textStorage insertAttributedString:as atIndex:self.textView.selectedRange.location];
-    
-}
-
-
 // ******
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
@@ -388,18 +376,18 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     [self.textView becomeFirstResponder];
 }
 
+- (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmoji:(NSDictionary *)emojiInfo {
+    NSLog(@"emojiInfo : %@", emojiInfo);
+    
+    NSAttributedString *as = [[NSAttributedString alloc] initWithString:@"test" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
+    
+    [self.textView.textStorage insertAttributedString:as atIndex:self.textView.selectedRange.location];
+    
+}
+
 - (IBAction)showOtherPad:(id)sender {
     NSLog(@"showOtherPad");
 }
-// ******
-
-
-
-/*
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
-}
-*/
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
