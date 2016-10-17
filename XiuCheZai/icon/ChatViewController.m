@@ -127,6 +127,11 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     return bubbleView;
 }
 
+- (void)goBack:(id)sender {
+    NSLog(@"goBack");
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -135,6 +140,8 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationItem.title = self.receiverName;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
