@@ -41,13 +41,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (strong, nonatomic) NSTimer *timer;
 
-@property (strong, nonatomic) NSString *senderId;
-@property (strong, nonatomic) NSString *senderName;
-@property (strong, nonatomic) NSString *senderAvatar;
-@property (strong, nonatomic) NSString *receiverId;
-@property (strong, nonatomic) NSString *receiverName;
-@property (strong, nonatomic) NSString *receiverAvatar;
-
 @property (assign, nonatomic) NSUInteger historyPage;
 
 @property (assign, nonatomic) CGFloat keyboardHeight;
