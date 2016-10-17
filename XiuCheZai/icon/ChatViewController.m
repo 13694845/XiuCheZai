@@ -363,7 +363,11 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     NSLog(@"showEmotionPad");
     
     if (!self.textView.inputView) {
-        
+        NSLog(@"nil");
+
+    } else {
+        NSLog(@"has");
+
     }
     
     
@@ -374,27 +378,8 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     [self.textView becomeFirstResponder];
 }
 
-
-/*
-for (NSTextCheckingResult* result in [matches reverseObjectEnumerator]) {
-    NSRange matchRange = [result range];
-    NSString *placeholder = [emojiString.string substringWithRange:matchRange];
-    UIImage *emojiImage = [UIImage imageNamed:emojiJson[placeholder]];
-    UIGraphicsBeginImageContextWithOptions(emojiSize, NO, 0.0);
-    [emojiImage drawInRect:CGRectMake(0, 0, emojiSize.width, emojiSize.height)];
-    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    ChatEmojiAttachment *emojiAttachment = [[ChatEmojiAttachment alloc] init];
-    emojiAttachment.emojiTag = placeholder;
-    emojiAttachment.image = resizedImage;
-    NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:emojiAttachment];
-    [emojiString replaceCharactersInRange:matchRange withAttributedString:attachmentString];
-}
-*/
-
 - (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmoji:(NSDictionary *)emojiInfo {
-    NSLog(@"emojiInfo : %@", emojiInfo);
+    // NSLog(@"emojiInfo : %@", emojiInfo);
     NSData *emojiData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Emoji" ofType:@"json"]];
     NSDictionary *emojiJson = [NSJSONSerialization JSONObjectWithData:emojiData options:NSJSONReadingMutableLeaves error:nil];
     CGSize emojiSize = CGSizeMake([UIFont systemFontOfSize:14.0].lineHeight, [UIFont systemFontOfSize:14.0].lineHeight);
