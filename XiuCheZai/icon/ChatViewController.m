@@ -451,6 +451,10 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     } completion:^(BOOL finished) {}];
 }
 
+- (void)viewDidUnload {
+    NSLog(@"viewDidUnload");
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
