@@ -43,8 +43,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderName;
+
+
 @property (strong, nonatomic) NSString *receiverId;
 @property (strong, nonatomic) NSString *receiverName;
+
+
 @property (assign, nonatomic) NSUInteger historyPage;
 
 @property (assign, nonatomic) CGFloat keyboardHeight;
