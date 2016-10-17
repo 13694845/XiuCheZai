@@ -28,6 +28,13 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     TableViewTransformScale
 };
 
+typedef NS_ENUM(NSUInteger, InputViewType) {
+    InputViewTypeKeyboard,
+    InputViewTypeEmoji,
+    InputViewTypeOther,
+    InputViewTypeVoice
+};
+
 @interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, ChatEmojiInputViewDelegate, ChatOtherInputViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -40,6 +47,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 @property (weak, nonatomic) IBOutlet UIButton *voiceButton;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
+@property (assign, nonatomic) InputViewType inputViewType;
 
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (strong, nonatomic) NSTimer *timer;
@@ -361,8 +369,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (IBAction)showEmotionPad:(id)sender {
-    NSLog(@"showEmotionPad");
-    
+    if (self.inputViewType == InputViewTypeEmoji) {
+        // self.inputViewType = InputViewTypeKeyboard;
+        [self.textView becomeFirstResponder];
+        return;
+    }
+    self.inputViewType = InputViewTypeEmoji;
     ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
     emojiInputView.delegate = self;
     UITextView *textView = [[UITextView alloc] init];
@@ -372,7 +384,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmoji:(NSDictionary *)emojiInfo {
-    // NSLog(@"emojiInfo : %@", emojiInfo);
     NSData *emojiData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Emoji" ofType:@"json"]];
     NSDictionary *emojiJson = [NSJSONSerialization JSONObjectWithData:emojiData options:NSJSONReadingMutableLeaves error:nil];
     CGSize emojiSize = CGSizeMake([UIFont systemFontOfSize:14.0].lineHeight, [UIFont systemFontOfSize:14.0].lineHeight);
@@ -393,7 +404,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 }
 
 - (IBAction)showOtherPad:(id)sender {
-    NSLog(@"showOtherPad");
+    if (self.inputViewType == InputViewTypeOther) {
+        self.inputViewType = InputViewTypeKeyboard;
+        [self.textView becomeFirstResponder];
+        return;
+    }
+    self.inputViewType = InputViewTypeOther;
     ChatOtherInputView *otherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
     otherInputView.delegate = self;
     UITextView *textView = [[UITextView alloc] init];
@@ -421,7 +437,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    // NSLog(@"KeyboardFrameEnd : %@", NSStringFromCGRect(KeyboardFrameEnd));
+    NSLog(@"KeyboardFrameEnd : %@", NSStringFromCGRect(KeyboardFrameEnd));
     CGFloat keyboardDeltaHeight = KeyboardFrameEnd.size.height - self.keyboardHeight;
     switch (self.tableViewTransform) {
         case TableViewTransformTranslate: {
