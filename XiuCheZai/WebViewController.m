@@ -142,6 +142,9 @@
 - (void)chatWithUserId:(NSString *)userId {
     NSLog(@"chatWithUserId");
     ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    
+    
+    
     [self.navigationController pushViewController:chatViewController animated:YES];
 }
 
