@@ -15,10 +15,7 @@
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
 #import "GoodsDetailViewController.h"
-
-
 #import "ChatViewController.h"
-
 
 @import MapKit;
 
@@ -28,7 +25,6 @@
 
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) int backOffset;
-
 @property (nonatomic) BOOL showBack;
 
 @end
@@ -52,11 +48,9 @@
     
     ((AppDelegate *)[UIApplication sharedApplication].delegate).wxApiDelegate = self;
     [self registerUserAgent];
+    [self updateLocation];
     self.webView.delegate = self;
     self.webView.dataDetectorTypes = UIDataDetectorTypeNone;
-    
-    [self updateLocation];
-    
     if ([self isMemberOfClass:[WebViewController class]]) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
@@ -64,24 +58,14 @@
     NSDictionary *locationInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
     NSString *longitude = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"longitude"] doubleValue]];
     NSString *latitude = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"latitude"] doubleValue]];
-    
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/CityLocation.do"];
     NSDictionary *parameters = ![longitude isEqualToString:@"0.000000"] ? @{@"lng":longitude, @"lat":latitude, @"type":@"1"} : @{};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        /*
-        NSLog(@"input longitude : %@ | latitude : %@", longitude, latitude);
-        NSLog(@"output responseObject : %@", responseObject);
-        NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-        for (NSHTTPCookie *cookie in [cookieJar cookies]) {
-            NSLog(@"%@\n", cookie);
-        }
-         */
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     if ([self isMemberOfClass:[WebViewController class]]) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         self.tabBarController.tabBar.hidden = YES;
@@ -100,9 +84,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSLog(@"webView.request : %@", request.URL);
-    
-    
-    if ([request.URL.description containsString:@"about:blank"]) {  // Under China mobile 4G.
+    if ([request.URL.description containsString:@"about:blank"]) {
         return NO;
     }
     if ([request.URL.scheme isEqualToString:@"qsh"]) {
@@ -130,22 +112,6 @@
         [self goHome];
         return NO;
     }
-    /*
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/service/index/index.html"]]) {
-        [self goStore];
-        return NO;
-    }
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Car_Brand/index.html"]]) {
-        [self goAccessory];
-        return NO;
-    }
-     */
-    /*
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/shopping-cart/index.html"]]) {
-        [self goCart];
-        return NO;
-    }
-     */
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_index/index.html"]]) {
         [self goMine];
         return NO;
@@ -158,10 +124,6 @@
     }
     if ([request.URL.host isEqualToString:@"mobile.abchina.com"]) {
         self.showBack = YES;
-        /*
-         if (!self.backButton) [self addBackButton];
-         self.backOffset++;
-         */
         return YES;
     }
     
@@ -169,21 +131,14 @@
         sleep(0.5);
         return YES;
     }
-    
-    
-    // ******
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/massage/communicate.jsp?bid="]]) {
-        [self chatWithUserId:@"1844"];
+        [self chatWithUserId:@"123"];
         return NO;
     }
-    // *****
-    
     
     return YES;
 }
 
-
-// *****
 - (void)chatWithUserId:(NSString *)userId {
     NSLog(@"chatWithUserId");
     
@@ -194,10 +149,6 @@
     [self.navigationController pushViewController:chatViewController animated:YES];
     
 }
-// *****
-
-
-
 
 - (void)saveCookies {
     NSLog(@"saveCookies");
@@ -208,10 +159,6 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
 }
-
-
-
-
 
 - (void)recognizeVehicleLicense {
     [self pickImage];
@@ -261,7 +208,6 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    //
     if (self.showBack) {
         if (!self.backButton) [self addBackButton];
         self.backOffset++;
@@ -408,7 +354,6 @@
     SendAuthReq *req = [[SendAuthReq alloc] init];
     req.scope = @"snsapi_userinfo";
     req.state = @"123";
-    
     [WXApi sendReq:req];
 }
 
