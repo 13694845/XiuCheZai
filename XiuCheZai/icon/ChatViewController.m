@@ -15,6 +15,7 @@
 #import "ChatEmojiManager.h"
 #import "ChatEmojiInputView.h"
 #import "ChatEmojiAttachment.h"
+#import "ChatOtherInputView.h"
 
 #define BUBBLE_VIEW_MARGIN_TOP      15.0
 #define BUBBLE_VIEW_MARGIN_LEFT     12.0
@@ -27,7 +28,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     TableViewTransformScale
 };
 
-@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, ChatEmojiInputViewDelegate>
+@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, ChatEmojiInputViewDelegate, ChatOtherInputViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
@@ -401,6 +402,15 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (IBAction)showOtherPad:(id)sender {
     NSLog(@"showOtherPad");
+    ChatOtherInputView *OtherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
+    OtherInputView.delegate = self;
+    self.textView.inputView = OtherInputView;
+    [self.textView reloadInputViews];
+    [self.textView becomeFirstResponder];
+}
+
+- (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButton:(NSDictionary *)buttonInfo {
+    NSLog(@"didSelectButton");
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {

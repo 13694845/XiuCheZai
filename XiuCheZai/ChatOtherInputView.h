@@ -10,13 +10,14 @@
 
 @class ChatOtherInputView;
 
-@protocol ChatEmojiInputViewDelegate <NSObject>
+@protocol ChatOtherInputViewDelegate <NSObject>
 
-- (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectFunc:(NSDictionary *)emojiInfo;
+- (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButton:(NSDictionary *)buttonInfo;
 
 @end
 
-
 @interface ChatOtherInputView : UIView
+
+@property (weak, nonatomic) id <ChatOtherInputViewDelegate> delegate;
 
 @end
