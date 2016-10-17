@@ -158,6 +158,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.receiverAvatar = nil;
     
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
+    
     if (!self.asyncSocket) [self setupSocket];
     if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
 }
