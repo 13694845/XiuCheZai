@@ -52,7 +52,7 @@
 }
 
 - (void)selectButton:(id)sender {
-    // [self.delegate emojiInputView:self didSelectEmoji:self.emojiImages[((UIButton *)sender).tag]];
+    [self.delegate otherInputView:self didSelectButton:((UIButton *)sender).tag];
 }
 
 @end
