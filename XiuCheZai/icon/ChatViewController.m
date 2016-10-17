@@ -40,7 +40,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (strong, nonatomic) NSTimer *timer;
-
 @property (assign, nonatomic) NSUInteger historyPage;
 
 @property (assign, nonatomic) CGFloat keyboardHeight;
@@ -110,13 +109,6 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     avatarImageView.layer.cornerRadius = 16.0;
     [bubbleView addSubview:avatarImageView];
     
-    /*
-    UIImage *bubbleImage = [UIImage imageNamed:message.isSend ? @"sender_bubble" : @"receiver_bubble"];
-    UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubbleImage stretchableImageWithLeftCapWidth:floorf(bubbleImage.size.width / 2) topCapHeight:floorf(bubbleImage.size.height / 2)]];
-    if (message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2);
-    else bubbleImageView.frame = CGRectMake(0.0, 0.0, TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2);
-    [bubbleView addSubview:bubbleImageView];
-    */
     UIView *bubbleImageView = [[UIView alloc] init];
     bubbleImageView.backgroundColor = message.isSend ? [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0] : [UIColor colorWithRed:30.0/255.0 green:130.0/255.0 blue:232.0/255.0 alpha:1.0];
     bubbleImageView.layer.cornerRadius = 5.0;
@@ -136,17 +128,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationItem.title = self.receiverName;
-    
-    
-    // *****
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    // *****
-    
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -166,22 +153,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     self.senderName = @"zhangsan";
     self.receiverId = @"123";
     self.receiverName = @"lisi";
-    /*
-    self.senderId = @"123";
-    self.senderName = @"lisi";
-    self.receiverId = @"555";
-    self.receiverName = @"zhangsan";
-     */
-    
-    /*
-    NSString *normalStr = @"this ^kiss^ and this ^hug^";
-    self.textView.attributedText = [ChatEmojiManager emojiStringFromPlainString:normalStr withFont:self.textView.font];
-    NSLog(@"plainString : %@", [EmojiManager plainStringFromEmojiString:emojiString]);
-     */
     
     if (!self.asyncSocket) [self setupSocket];
     if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
-    [self loginWithSenderId:self.senderId];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -208,6 +182,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
+    [self loginWithSenderId:self.senderId];
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
