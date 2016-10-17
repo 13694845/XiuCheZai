@@ -383,9 +383,11 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 
 
+/*
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+*/
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];

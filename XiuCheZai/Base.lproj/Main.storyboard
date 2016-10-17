@@ -2451,10 +2451,10 @@
                                         <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCV-zG-zr3">
-                                        <rect key="frame" x="16" y="13" width="16" height="22"/>
+                                        <rect key="frame" x="16" y="13" width="22" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="1cm-9H-E2A"/>
-                                            <constraint firstAttribute="width" constant="16" id="XRg-NX-uDF"/>
+                                            <constraint firstAttribute="width" constant="22" id="XRg-NX-uDF"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="vic.png"/>
                                         <connections>
@@ -2484,7 +2484,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="国庆节加班" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CcZ-ap-oIF">
-                                        <rect key="frame" x="48" y="8" width="239" height="32"/>
+                                        <rect key="frame" x="54" y="8" width="233" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="AZJ-MN-ddB"/>
