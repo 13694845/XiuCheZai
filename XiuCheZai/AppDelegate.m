@@ -54,6 +54,9 @@
         default: break;
     }
     
+    NSString *senderId = [[NSUserDefaults standardUserDefaults] objectForKey:@"senderId"];
+    if (senderId) [self.chatService startWithSenderId:senderId];
+    
     
     // *****
     // [self.chatService start];

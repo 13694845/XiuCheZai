@@ -28,7 +28,7 @@
 
 @implementation ChatService
 
-- (void)start {
+- (void)startWithSenderId:(NSString *)senderId {
     NSLog(@"start");
     self.senderId = @"555";
     self.senderName = @"zhangsan";
