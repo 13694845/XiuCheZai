@@ -10,11 +10,11 @@
 
 @interface ChatViewController : UIViewController
 
-@property (strong, nonatomic) NSString *senderId;
-@property (strong, nonatomic) NSString *senderName;
-@property (strong, nonatomic) NSString *senderAvatar;
-@property (strong, nonatomic) NSString *receiverId;
-@property (strong, nonatomic) NSString *receiverName;
-@property (strong, nonatomic) NSString *receiverAvatar;
+@property (copy, nonatomic) NSString *senderId;
+@property (copy, nonatomic) NSString *senderName;
+@property (copy, nonatomic) NSString *senderAvatar;
+@property (copy, nonatomic) NSString *receiverId;
+@property (copy, nonatomic) NSString *receiverName;
+@property (copy, nonatomic) NSString *receiverAvatar;
 
 @end
