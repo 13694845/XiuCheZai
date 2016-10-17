@@ -72,10 +72,6 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 - (void)registerUserAgent {
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     NSString *userAgent = [NSString stringWithFormat:@"%@ %@/%@", [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"], @"APP8673h", [Config version]];
@@ -83,7 +79,7 @@
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSLog(@"webView.request : %@", request.URL);
+    // NSLog(@"webView.request : %@", request.URL);
     if ([request.URL.description containsString:@"about:blank"]) {
         return NO;
     }
@@ -161,12 +157,12 @@
 }
 
 - (void)saveCookies {
-    NSLog(@"saveCookies");
     NSMutableDictionary *chatSender = [NSMutableDictionary dictionary];
     chatSender[@"senderId"] = @"555";
     chatSender[@"senderName"] = @"zhangsan";
     [[NSUserDefaults standardUserDefaults] setObject:chatSender forKey:@"chatSender"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
 }
 
