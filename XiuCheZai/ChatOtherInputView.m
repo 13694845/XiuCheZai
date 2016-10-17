@@ -12,38 +12,33 @@
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIView *contentView;
-@property (strong, nonatomic) NSArray *buttons;
+@property (strong, nonatomic) NSArray *buttonImages;
 
 @end
 
 @implementation ChatOtherInputView
 
-#define BUTTON_WIDTH       50.0
-#define BUTTON_HEIGHT      50.0
+#define BUTTON_IMAGE_WIDTH       50.0
+#define BUTTON_IMAGE_HEIGHT      50.0
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.buttons = @[@{}, @{}];
+        self.buttonImages = @[@"vic", @"add"];
         
-        /*
-        NSData *emojiData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"EmojiImages" ofType:@"json"]];
-        NSDictionary *emojiJson = [NSJSONSerialization JSONObjectWithData:emojiData options:NSJSONReadingMutableLeaves error:nil];
-        self.emojiImages = emojiJson[@"emojiImages"];
-        
-        CGFloat imagePadding = (frame.size.width - EMOJI_IMAGE_WIDTH * 7) / 14;
-        int numberOfRows = ceil(self.emojiImages.count / 7.0);
-        CGFloat contentViewHeight = (EMOJI_IMAGE_WIDTH + imagePadding * 2) * numberOfRows;
+        CGFloat imagePadding = (frame.size.width - BUTTON_IMAGE_WIDTH * 5) / 10;
+        int numberOfRows = ceil(self.buttonImages.count / 5.0);
+        CGFloat contentViewHeight = (BUTTON_IMAGE_WIDTH + imagePadding * 2) * numberOfRows;
         self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, contentViewHeight)];
         for (int i = 0; i < numberOfRows; i++) {
-            for (int j = 0; j < 7; j++) {
-                if ((j + i * 7) > (self.emojiImages.count - 1)) break;
+            for (int j = 0; j < 5; j++) {
+                if ((j + i * 5) > (self.buttonImages.count - 1)) break;
                 UIButton *button = [[UIButton alloc] init];
-                [button setBackgroundImage:[UIImage imageNamed:self.emojiImages[j + i * 7][kEmojiImagePathKey]] forState:UIControlStateNormal];
-                button.frame = CGRectMake((EMOJI_IMAGE_WIDTH + imagePadding * 2) * j + imagePadding,
-                                          (EMOJI_IMAGE_WIDTH + imagePadding * 2) * i + imagePadding, EMOJI_IMAGE_WIDTH, EMOJI_IMAGE_HEIGHT);
-                [button addTarget:self action:@selector(selectEmoji:) forControlEvents:UIControlEventTouchUpInside];
-                button.tag = j + i * 7;
+                [button setBackgroundImage:[UIImage imageNamed:self.buttonImages[j + i * 7]] forState:UIControlStateNormal];
+                button.frame = CGRectMake((BUTTON_IMAGE_WIDTH + imagePadding * 2) * j + imagePadding,
+                                          (BUTTON_IMAGE_WIDTH + imagePadding * 2) * i + imagePadding, BUTTON_IMAGE_WIDTH, BUTTON_IMAGE_HEIGHT);
+                [button addTarget:self action:@selector(selectButton:) forControlEvents:UIControlEventTouchUpInside];
+                button.tag = j + i * 5;
                 [self.contentView addSubview:button];
             }
         }
@@ -52,7 +47,6 @@
         self.scrollView.contentSize = self.contentView.frame.size;
         [self.scrollView addSubview:_contentView];
         [self addSubview:self.scrollView];
-         */
     }
     return self;
 }
