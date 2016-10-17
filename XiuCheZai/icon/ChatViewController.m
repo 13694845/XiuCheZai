@@ -358,6 +358,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSLog(@"handleEcho %@ : ", message);
 }
 
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    self.inputViewType = InputViewTypeKeyboard;
+    return YES;
+}
+
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
     
@@ -370,10 +375,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showEmotionPad:(id)sender {
     if (self.inputViewType == InputViewTypeEmoji) {
-        self.inputViewType = InputViewTypeKeyboard;
-        // keyboard icon
-        [self.textView becomeFirstResponder];
-        return;
+        [self.textView becomeFirstResponder]; return;
     }
     self.inputViewType = InputViewTypeEmoji;
     ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
@@ -406,9 +408,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showOtherPad:(id)sender {
     if (self.inputViewType == InputViewTypeOther) {
-        self.inputViewType = InputViewTypeKeyboard;
-        [self.textView becomeFirstResponder];
-        return;
+        [self.textView becomeFirstResponder]; return;
     }
     self.inputViewType = InputViewTypeOther;
     ChatOtherInputView *otherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
@@ -433,15 +433,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }
 }
 
+
+
+
+
 - (void)keyboardWillShow:(NSNotification *)notification {
-    NSLog(@"[notification userInfo] : %@", [notification userInfo]);
-    /*
-    if (self.inputViewType == InputViewTypeKeyboard) {
-        
-    }
-    */
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    NSLog(@"KeyboardFrameEnd : %@", NSStringFromCGRect(KeyboardFrameEnd));
     CGFloat keyboardDeltaHeight = KeyboardFrameEnd.size.height - self.keyboardHeight;
     switch (self.tableViewTransform) {
         case TableViewTransformTranslate: {
