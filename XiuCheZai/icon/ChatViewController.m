@@ -26,7 +26,7 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     TableViewTransformScale
 };
 
-@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
+@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, ChatEmojiInputViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
@@ -349,6 +349,12 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
     NSLog(@"handleEcho %@ : ", message);
 }
 
+
+
+
+- (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmoji:(NSDictionary *)emojiInfo {
+    NSLog(@"emojiInfo : %@", emojiInfo);
+}
 
 
 // ******
