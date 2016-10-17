@@ -54,7 +54,6 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
-    
     [self loginWithSenderId:self.senderId];
 }
 
@@ -63,10 +62,7 @@
 }
 
 - (void)loginWithSenderId:(NSString *)senderId {
-    
     NSLog(@"loginWithSenderId");
-
-    
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", senderId];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
