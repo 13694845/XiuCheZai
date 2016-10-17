@@ -207,10 +207,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:senderName forKey:@"senderName"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    
-  //  ((AppDelegate *)[UIApplication sharedApplication].delegate).chatService startWithSenderId:senderId;
-
-    // [self pickImage];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService startWithSenderId:senderId];
 }
 
 
