@@ -266,7 +266,9 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
         [self.tableView reloadData];
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
     } else {
-        [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-14 20:00:00" page:[NSString stringWithFormat:@"%d", 1]];
+        
+        // *****
+        [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:@"2016-10-17 20:00:00" page:[NSString stringWithFormat:@"%d", 1]];
     }
 }
 
@@ -362,35 +364,10 @@ typedef NS_ENUM(NSUInteger, TableViewTransform) {
 
 - (IBAction)showEmotionPad:(id)sender {
     NSLog(@"showEmotionPad");
-    
-    
-    
-    // self.view.frame.size.height - 200.0
-    ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 253.0)];
-    emojiInputView.backgroundColor = [UIColor grayColor];
-    
-    
-    
-    
-    
-    /*
-    for (NSString *key in emojiJson) {
-        NSString *value = emojiJson[key];
-        NSLog(@"Value: %@ for key: %@", value, key);
-    }
-    */
-    
-    // [self.view addSubview:emojiInputView];
-    
-    
-    
-    
+    ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 252.0)];
     self.textView.inputView = emojiInputView;
     [self.textView reloadInputViews];
-
     [self.textView becomeFirstResponder];
-
-    
 }
 
 - (IBAction)showOtherPad:(id)sender {
