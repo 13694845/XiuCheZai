@@ -31,16 +31,18 @@
 - (void)startWithSenderId:(NSString *)senderId {
     NSLog(@"startWithSenderId");
     
-    /*
     self.senderId = @"555";
     self.senderName = @"zhangsan";
+    /*
     self.receiverId = @"440";
     self.receiverName = @"lisi";
-     */
+    */
     
     if (!self.asyncSocket) [self setupSocket];
     if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
-    [self loginWithSenderId:self.senderId];
+    
+    // *****
+//    [self loginWithSenderId:self.senderId];
 }
 
 - (void)stop {
@@ -63,6 +65,8 @@
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"didConnectToHost");
+    
+    [self loginWithSenderId:self.senderId];
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
@@ -70,6 +74,10 @@
 }
 
 - (void)loginWithSenderId:(NSString *)senderId {
+    
+    NSLog(@"loginWithSenderId");
+
+    
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", senderId];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
