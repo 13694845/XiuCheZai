@@ -8,13 +8,23 @@
 
 #import "ChatOtherInputView.h"
 
+@interface ChatOtherInputView () <UIScrollViewDelegate>
+
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UIView *contentView;
+@property (strong, nonatomic) NSArray *buttons;
+
+@end
+
 @implementation ChatOtherInputView
+
+#define BUTTON_WIDTH       50.0
+#define BUTTON_HEIGHT      50.0
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        self.backgroundColor = [UIColor grayColor];
+        self.buttons = @[@{}, @{}];
         
         /*
         NSData *emojiData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"EmojiImages" ofType:@"json"]];
@@ -47,7 +57,7 @@
     return self;
 }
 
-- (void)selectEmoji:(id)sender {
+- (void)selectButton:(id)sender {
     // [self.delegate emojiInputView:self didSelectEmoji:self.emojiImages[((UIButton *)sender).tag]];
 }
 
