@@ -143,6 +143,7 @@
 		6C1208491DB0C47F00FF4138 /* d_zuohengheng.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1208191DB0C47F00FF4138 /* d_zuohengheng.png */; };
 		6C12084B1DB11F2500FF4138 /* EmojiImages.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C12084A1DB11F2500FF4138 /* EmojiImages.json */; };
 		6C12084E1DB1289300FF4138 /* ChatEmojiInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C12084D1DB1289300FF4138 /* ChatEmojiInputView.m */; };
+		6C1208511DB4B34600FF4138 /* ChatOtherInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1208501DB4B34600FF4138 /* ChatOtherInputView.m */; };
 		6C1365A71C23D83E00B217DD /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1365A61C23D83E00B217DD /* HomeViewController.m */; };
 		6C1365B91C24F6C300B217DD /* home_icon01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B11C24F6C300B217DD /* home_icon01.png */; };
 		6C1365BA1C24F6C300B217DD /* home_icon02.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1365B21C24F6C300B217DD /* home_icon02.png */; };
@@ -508,6 +509,8 @@
 		6C12084A1DB11F2500FF4138 /* EmojiImages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EmojiImages.json; sourceTree = "<group>"; };
 		6C12084C1DB1289300FF4138 /* ChatEmojiInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojiInputView.h; sourceTree = "<group>"; };
 		6C12084D1DB1289300FF4138 /* ChatEmojiInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatEmojiInputView.m; sourceTree = "<group>"; };
+		6C12084F1DB4B34600FF4138 /* ChatOtherInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatOtherInputView.h; sourceTree = "<group>"; };
+		6C1208501DB4B34600FF4138 /* ChatOtherInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatOtherInputView.m; sourceTree = "<group>"; };
 		6C1365A51C23D83E00B217DD /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		6C1365A61C23D83E00B217DD /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		6C1365B11C24F6C300B217DD /* home_icon01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon01.png; sourceTree = "<group>"; };
@@ -1044,6 +1047,8 @@
 				6C1207D81DAF2C6E00FF4138 /* ChatEmojiAttachment.m */,
 				6C12084C1DB1289300FF4138 /* ChatEmojiInputView.h */,
 				6C12084D1DB1289300FF4138 /* ChatEmojiInputView.m */,
+				6C12084F1DB4B34600FF4138 /* ChatOtherInputView.h */,
+				6C1208501DB4B34600FF4138 /* ChatOtherInputView.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -2011,6 +2016,7 @@
 				6C4D0C4A1C28E998003E96E8 /* UIImageView+HighlightedWebCache.m in Sources */,
 				6C8EC2741C1E548000BCABB5 /* UIImageView+AFNetworking.m in Sources */,
 				6C4D0C471C28E998003E96E8 /* UIImage+GIF.m in Sources */,
+				6C1208511DB4B34600FF4138 /* ChatOtherInputView.m in Sources */,
 				6C4D0C401C28E998003E96E8 /* SDWebImageCompat.m in Sources */,
 				6C6DD9571D67010400FEAEDD /* XCZNewsTableViewCell.m in Sources */,
 				6C8EC2751C1E548000BCABB5 /* UIProgressView+AFNetworking.m in Sources */,
