@@ -19,14 +19,37 @@
 
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderName;
-/*
-@property (strong, nonatomic) NSString *receiverId;
-@property (strong, nonatomic) NSString *receiverName;
-@property (assign, nonatomic) NSUInteger historyPage;
- */
+
 @end
 
 @implementation ChatService
+
+
+
+
+
+
+
+- (void)start {
+    NSLog(@"startWithSenderId");
+    
+    self.senderId = @"555";
+    self.senderName = @"zhangsan";
+    
+    
+    
+    /*
+     self.receiverId = @"440";
+     self.receiverName = @"lisi";
+     */
+    
+    if (!self.asyncSocket) [self setupSocket];
+    if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
+    
+    // *****
+    //    [self loginWithSenderId:self.senderId];
+}
+
 
 - (void)startWithSenderId:(NSString *)senderId {
     NSLog(@"startWithSenderId");
