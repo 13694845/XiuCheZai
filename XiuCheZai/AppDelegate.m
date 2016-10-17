@@ -11,13 +11,11 @@
 #import "CachingURLProtocol.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
-#import "ChatService.h"
 
 @interface AppDelegate () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSTimer *timer;
-@property (strong, nonatomic) ChatService *chatService;
 
 @end
 

@@ -99,7 +99,9 @@
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    // NSLog(@"webView.request : %@", request.URL);
+    NSLog(@"webView.request : %@", request.URL);
+    
+    
     if ([request.URL.description containsString:@"about:blank"]) {  // Under China mobile 4G.
         return NO;
     }
@@ -193,6 +195,25 @@
     
 }
 // *****
+
+
+
+
+- (void)saveCookies {
+    NSLog(@"saveCookies");
+    NSString *senderId = @"555";
+    NSString *senderName = @"zhangsan";
+    [[NSUserDefaults standardUserDefaults] setObject:senderId forKey:@"senderId"];
+    [[NSUserDefaults standardUserDefaults] setObject:senderName forKey:@"senderName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+  //  ((AppDelegate *)[UIApplication sharedApplication].delegate).chatService startWithSenderId:senderId;
+
+    // [self pickImage];
+}
+
+
 
 
 - (void)recognizeVehicleLicense {
