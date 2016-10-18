@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     InputViewTypeVoice
 };
 
-@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, ChatEmojiInputViewDelegate, ChatOtherInputViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface ChatViewController () <GCDAsyncSocketDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, ChatEmojiInputViewDelegate, ChatOtherInputViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVAudioRecorderDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
@@ -66,7 +66,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 @property (strong, nonatomic) AVAudioRecorder *audioRecorder;
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
-
 @property (strong, nonatomic) NSString *wavPath;
 
 @end
@@ -83,6 +82,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }
     return _manager;
 }
+
+
+
 
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
@@ -476,9 +478,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSURL *url= [NSURL fileURLWithPath:self.wavPath];
     NSDictionary *setting=[self getAudioSetting];
     NSError *error=nil;
-    _audioRecorder=[[AVAudioRecorder alloc]initWithURL:url settings:setting error:&error];
-    // _audioRecorder.delegate = self;
-    _audioRecorder.meteringEnabled=YES;//如果要监控声波则必须设置为YES
+    self.audioRecorder=[[AVAudioRecorder alloc]initWithURL:url settings:setting error:&error];
+    self.audioRecorder.delegate = self;
+    self.audioRecorder.meteringEnabled=YES;//如果要监控声波则必须设置为YES
     if (error) {
         NSLog(@"创建录音机对象时发生错误，错误信息：%@",error.localizedDescription);
         return;
@@ -500,28 +502,41 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
        [self.audioRecorder stop];
 
     
-    
-     NSURL *url = [NSURL fileURLWithPath:self.wavPath];
-     NSError *error = nil;
-     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-     self.audioPlayer.numberOfLoops = 0;
-     [self.audioPlayer prepareToPlay];
-     if (error) {
-     NSLog(@"创建播放器过程中发生错误，错误信息：%@", error.localizedDescription);
-     return;
-     }
+}
 
+
+
+
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
+    NSLog(@"audioRecorderDidFinishRecording");
+    
+    
+    NSURL *url = [NSURL fileURLWithPath:self.wavPath];
+    NSError *error = nil;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    self.audioPlayer.numberOfLoops = 0;
+    
+    [self.audioPlayer play];
+
+    // [self.audioPlayer prepareToPlay];
+    if (error) {
+        NSLog(@"创建播放器过程中发生错误，错误信息：%@", error.localizedDescription);
+        return;
+    }
+    
     
     
     
     
     NSData *data = [NSData dataWithContentsOfFile:self.wavPath];
     NSLog(@"wav size : %ld", data.length);
-
+    
     NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:self.wavPath]];
     NSData *amrData = [QCEncodeAudio convertWavToAmrFile:wavData];
     NSLog(@"amr size : %ld", amrData.length);
+
 }
+
 
 - (NSDictionary *)getAudioSetting {
     NSMutableDictionary *dicM = [NSMutableDictionary dictionary];
