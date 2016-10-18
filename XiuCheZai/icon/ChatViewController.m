@@ -63,6 +63,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (assign, nonatomic) CGFloat keyboardHeight;
 @property (assign, nonatomic) TableViewTransform tableViewTransform;
 
+@property (strong, nonatomic) AVAudioRecorder *audioRecorder;
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+
+@property (strong, nonatomic) NSString *wavPath;
+
 @end
 
 @implementation ChatViewController
@@ -428,12 +433,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
+    /*
     if (self.inputViewType == InputViewTypeVoice) {
         [self.textView becomeFirstResponder]; return;
     }
     self.inputViewType = InputViewTypeVoice;
     [self.textView resignFirstResponder];
-    
+    */
     UIButton *button = [[UIButton alloc] init];
     button.backgroundColor = [UIColor redColor];
     [button setTitle:@"xxxxx" forState:UIControlStateNormal];
@@ -456,11 +462,69 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)downRecordButton:(id)sender {
     NSLog(@"downRecordButton");
+    
+    AVAudioSession *audioSession=[AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [audioSession setActive:YES error:nil];
+    
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    self.wavPath = [documentsPath stringByAppendingPathComponent:@"sampleSound.wav"];
+
+
+    /*
+    NSURL *url = [NSURL fileURLWithPath:wavPath];
+    NSError *error = nil;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    self.audioPlayer.numberOfLoops = 0;
+    [self.audioPlayer prepareToPlay];
+    if (error) {
+        NSLog(@"创建播放器过程中发生错误，错误信息：%@", error.localizedDescription);
+        return;
+    }
+*/
+    
+    NSURL *url= [NSURL fileURLWithPath:self.wavPath];
+    NSDictionary *setting=[self getAudioSetting];
+    NSError *error=nil;
+    _audioRecorder=[[AVAudioRecorder alloc]initWithURL:url settings:setting error:&error];
+    // _audioRecorder.delegate = self;
+    _audioRecorder.meteringEnabled=YES;//如果要监控声波则必须设置为YES
+    if (error) {
+        NSLog(@"创建录音机对象时发生错误，错误信息：%@",error.localizedDescription);
+        return;
+    }
+
+[self.audioRecorder record];
+
+    /*
+    if (![self.audioRecorder isRecording]) {
+        [self.audioRecorder record];
+        // self.timer.fireDate=[NSDate distantPast];
+    }
+     */
 }
 
 - (void)upRecordButton:(id)sender {
     NSLog(@"upRecordButton");
+    
+       [self.audioRecorder stop];
 
+    NSData *data = [NSData dataWithContentsOfFile:self.wavPath];
+    NSLog(@"wav size : %ld", data.length);
+
+}
+
+
+
+
+- (NSDictionary *)getAudioSetting {
+    NSMutableDictionary *dicM = [NSMutableDictionary dictionary];
+    [dicM setObject:@(kAudioFormatLinearPCM) forKey:AVFormatIDKey];
+    [dicM setObject:@(8000) forKey:AVSampleRateKey];
+    [dicM setObject:@(1) forKey:AVNumberOfChannelsKey];
+    [dicM setObject:@(8) forKey:AVLinearPCMBitDepthKey];
+    [dicM setObject:@(YES) forKey:AVLinearPCMIsFloatKey];
+    return dicM;
 }
 
 
@@ -614,8 +678,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {}];
     return mp4Path;
 }
-
-
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
