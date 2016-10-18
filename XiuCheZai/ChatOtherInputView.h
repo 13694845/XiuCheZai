@@ -11,8 +11,8 @@
 @class ChatOtherInputView;
 
 typedef NS_ENUM(NSUInteger, OtherInputViewButton) {
-    OtherInputViewButtonImageFromPhotoLibrary,
     OtherInputViewButtonImageFromCamera,
+    OtherInputViewButtonImageFromPhotoLibrary,
     OtherInputViewButtonMovieFromCamera
 };
 

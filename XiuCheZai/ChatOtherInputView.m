@@ -8,7 +8,7 @@
 
 #import "ChatOtherInputView.h"
 
-@interface ChatOtherInputView () <UIScrollViewDelegate>
+@interface ChatOtherInputView ()
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIView *contentView;
@@ -18,26 +18,36 @@
 
 @implementation ChatOtherInputView
 
-#define BUTTON_IMAGE_WIDTH       50.0
-#define BUTTON_IMAGE_HEIGHT      50.0
+#define NUMBER_OF_COLUMNS       3
+#define BUTTON_WIDTH            75.0
+#define BUTTON_HEIGHT           50.0
+
+- (NSArray *)buttonImages {
+    if (!_buttonImages) _buttonImages = @[@"camera", @"album"];
+    return _buttonImages;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.buttonImages = @[@"camera", @"album", @"vic"];
-        
-        CGFloat imagePadding = (frame.size.width - BUTTON_IMAGE_WIDTH * 5) / 10;
-        int numberOfRows = ceil(self.buttonImages.count / 5.0);
-        CGFloat contentViewHeight = (BUTTON_IMAGE_WIDTH + imagePadding * 2) * numberOfRows;
-        self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, contentViewHeight)];
+        self.backgroundColor = [UIColor whiteColor];
+        CGFloat imagePadding = (frame.size.width - BUTTON_WIDTH * NUMBER_OF_COLUMNS) / (NUMBER_OF_COLUMNS * 2);
+        int numberOfRows = ceil(self.buttonImages.count / (float)NUMBER_OF_COLUMNS);
+        CGFloat contentViewHeight = (BUTTON_WIDTH + imagePadding * 2) * numberOfRows;
+        self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, contentViewHeight)];
         for (int i = 0; i < numberOfRows; i++) {
-            for (int j = 0; j < 5; j++) {
-                if ((j + i * 5) > (self.buttonImages.count - 1)) break;
+            for (int j = 0; j < NUMBER_OF_COLUMNS; j++) {
+                if ((j + i * NUMBER_OF_COLUMNS) > (self.buttonImages.count - 1)) break;
                 UIButton *button = [[UIButton alloc] init];
-                [button setBackgroundImage:[UIImage imageNamed:self.buttonImages[j + i * 7]] forState:UIControlStateNormal];
-                button.frame = CGRectMake((BUTTON_IMAGE_WIDTH + imagePadding * 2) * j + imagePadding, (BUTTON_IMAGE_WIDTH + imagePadding * 2) * i + imagePadding, BUTTON_IMAGE_WIDTH, BUTTON_IMAGE_HEIGHT);
+                button.layer.borderWidth = 1.0;
+                button.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
+                button.layer.cornerRadius = 4.0;
+                button.frame = CGRectMake((BUTTON_WIDTH + imagePadding * 2) * j + imagePadding, (BUTTON_WIDTH + imagePadding * 2) * i + imagePadding, BUTTON_WIDTH, BUTTON_HEIGHT);
                 [button addTarget:self action:@selector(selectButton:) forControlEvents:UIControlEventTouchUpInside];
-                button.tag = j + i * 5;
+                button.tag = j + i * NUMBER_OF_COLUMNS;
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.buttonImages[j + NUMBER_OF_COLUMNS * i]]];
+                imageView.frame = CGRectMake((button.frame.size.width - 22.0) / 2, (button.frame.size.height - 22.0) / 2, 22.0, 22.0);
+                [button addSubview:imageView];
                 [self.contentView addSubview:button];
             }
         }
@@ -50,8 +60,8 @@
     return self;
 }
 
-- (void)selectButton:(id)sender {
-    [self.delegate otherInputView:self didSelectButton:((UIButton *)sender).tag];
+- (void)selectButton:(UIButton *)sender {
+    [self.delegate otherInputView:self didSelectButton:sender.tag];
 }
 
 @end
