@@ -508,68 +508,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)uploadMovieWithMovieURL:(NSString *)movieURL {
-    
-    NSData *movieData = [NSData dataWithContentsOfFile:movieURL];
-    
-    
-    
-    /*
-    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:url options:nil];
-    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:avAsset presetName:AVAssetExportPresetMediumQuality];
-    
-    NSString *yResultPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"output-public.mp4"];
-    
-    [[NSFileManager defaultManager] removeItemAtPath:yResultPath error:nil];
-    NSString *resultPath = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/output-public.mp4"];
-    exportSession.outputURL =  [NSURL fileURLWithPath:resultPath];
-    exportSession.outputFileType = AVFileTypeMPEG4;
-    [exportSession exportAsynchronouslyWithCompletionHandler:^{
-        switch (exportSession.status) {
-            case AVAssetExportSessionStatusUnknown:
-                break;
-            case AVAssetExportSessionStatusWaiting:
-                break;
-            case AVAssetExportSessionStatusExporting:
-                break;
-            case AVAssetExportSessionStatusCompleted:
-            {
-                UIImage *img = [QCVideoPlayerTools getImage:exportSession.outputURL];
-                NSData *videoImgData = UIImageJPEGRepresentation(img, 1);
-                NSData *videoRecordingData = [NSData dataWithContentsOfURL:exportSession.outputURL];
-                [self.keyboardViewModel sendMsgWithVideoRecording:videoRecordingData   andVideoImgData:videoImgData bodyType:@"video"];
-            }
-                break;
-            case AVAssetExportSessionStatusFailed:
-                break;
-            case AVAssetExportSessionStatusCancelled:
-                break;
-        }
-    }];
-     */
-
-    /*
-    image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
-    NSData *data = UIImageJPEGRepresentation(image, 0.8);
-    
-    NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
-    NSDictionary *parameters = nil;
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
-        [formData appendPartWithFileData:data name:@"file" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
-    } progress:^(NSProgress *uploadProgress) {
-    } success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"NSDictionary : %@", result);
-        NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
-        [self sendMessageWithContent:fileURL contentType:@"img"];
-        // [[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-    }];
-     */
+    // NSData *movieData = [NSData dataWithContentsOfFile:movieURL];
 }
-
-
-
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
