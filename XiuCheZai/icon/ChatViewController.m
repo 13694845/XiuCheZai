@@ -537,7 +537,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         NSLog(@"NSDictionary : %@", result);
         NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
         [self sendMessageWithContent:fileURL contentType:@"img"];
-        // [[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
+        // *****
+        [[SDImageCache sharedImageCache] storeImage:image forKey:fileURL toDisk:YES];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
     }];
 }
