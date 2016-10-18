@@ -95,6 +95,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChatMessage *message = self.rows[indexPath.row];
+    
+    if ([message.type isEqualToString:@"img"]) {
+        // bubbleView = [self imageBubbleViewForMessage:message];
+        return 100.0 + BUBBLE_TEXT_PADDING * 2 + BUBBLE_VIEW_MARGIN_TOP * 2;
+    }
+
+    
     NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:message.content attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
     CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     return TextRect.size.height + BUBBLE_TEXT_PADDING * 2 + BUBBLE_VIEW_MARGIN_TOP * 2;
@@ -159,9 +166,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 
-
-// *****
-
 - (UIView *)imageBubbleViewForMessage:(ChatMessage *)message {
     /*
     NSAttributedString *attributedText = [ChatEmojiManager emojiStringFromPlainString:message.content withFont:[UIFont systemFontOfSize:14.0]];
@@ -188,6 +192,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
     
+    
+    UIImage *img = [UIImage imageNamed:@"发送到"];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
+    [bubbleImageView addSubview:imgView];
     /*
     UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height)];
     bubbleText.textColor = message.isSend ? [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0] : [UIColor whiteColor];
@@ -199,8 +209,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
      */
     return bubbleView;
 }
-
-
 
 
 
