@@ -194,8 +194,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [bubbleView addSubview:bubbleImageView];
     
     
+    /*
     UIImage *img = [UIImage imageNamed:@"发送到"];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
+     */
+    UIImageView *imgView = [[UIImageView alloc] init];
+    [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
+
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
