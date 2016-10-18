@@ -569,10 +569,18 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
-- (IBAction)showEmotionPad:(id)sender {
+- (IBAction)showEmotionPad:(UIButton *)sender {
+    
+
+    
     if (self.inputViewType == InputViewTypeEmoji) {
-        [self.textView becomeFirstResponder]; return;
+        [sender setBackgroundImage:[UIImage imageNamed:@"表情"] forState:UIControlStateNormal];
+        [self.textView becomeFirstResponder];
+        return;
     }
+    
+    [sender setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+
     self.inputViewType = InputViewTypeEmoji;
     ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
     emojiInputView.delegate = self;
