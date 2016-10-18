@@ -574,7 +574,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [self.textView becomeFirstResponder]; return;
     }
     self.inputViewType = InputViewTypeEmoji;
-    ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 200.0)];
+    ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
     emojiInputView.delegate = self;
     UITextView *textView = [[UITextView alloc] init];
     [self.barView addSubview:textView];
@@ -607,7 +607,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [self.textView becomeFirstResponder]; return;
     }
     self.inputViewType = InputViewTypeOther;
-    ChatOtherInputView *otherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 200.0)];
+    ChatOtherInputView *otherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
     otherInputView.delegate = self;
     UITextView *textView = [[UITextView alloc] init];
     [self.barView addSubview:textView];
