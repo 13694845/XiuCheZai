@@ -20,6 +20,8 @@
 #import "ChatEmojiAttachment.h"
 #import "ChatOtherInputView.h"
 
+@import AVFoundation;
+
 #define BUBBLE_VIEW_MARGIN_TOP      15.0
 #define BUBBLE_VIEW_MARGIN_LEFT     12.0
 #define BUBBLE_VIEW_MARGIN_RIGHT    12.0
@@ -427,11 +429,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
     
+    [self uploadMovieWithMovieURL:nil];
     
+    /*
     self.textView.inputView = nil;
     [self.textView reloadInputViews];
     // [self.textView resignFirstResponder];
-
+     */
 }
 
 - (IBAction)showEmotionPad:(id)sender {
@@ -549,8 +553,37 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     return resizedImage;
 }
 
-- (void)uploadMovieWithMovieURL:(NSString *)movieURL {
-    // NSData *movieData = [NSData dataWithContentsOfFile:movieURL];
+- (void)uploadMovieWithMovieURL:(NSURL *)movieURL {
+    NSLog(@"movieURL : %@", movieURL);
+    NSString *mp4Path = [self mp4FromMovURL:movieURL];
+    NSLog(@"mp4 : %@", mp4Path);
+    NSData *data = [NSData dataWithContentsOfFile:mp4Path];
+    NSLog(@"mp4 size : %ld", data.length);
+    
+    NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
+    NSDictionary *parameters = nil;
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
+        [formData appendPartWithFileData:data name:@"file" fileName:@"filename.mp4" mimeType:@"video/mp4"];
+    } progress:^(NSProgress *uploadProgress) {
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"NSDictionary : %@", result);
+        NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
+        [self sendMessageWithContent:fileURL contentType:@"mov"];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    }];
+}
+
+- (NSString *)mp4FromMovURL:(NSURL *)movURL {
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *mp4Path = [documentsPath stringByAppendingPathComponent:@"sampleVideo.mp4"];
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movURL options:nil];
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetPassthrough];
+    exportSession.outputURL = [NSURL fileURLWithPath:mp4Path];
+    exportSession.outputFileType = AVFileTypeMPEG4;
+    [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {}];
+    return mp4Path;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
