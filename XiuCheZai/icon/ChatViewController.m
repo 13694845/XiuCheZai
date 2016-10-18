@@ -428,8 +428,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
+    if (self.inputViewType == InputViewTypeVoice) {
+        [self.textView becomeFirstResponder]; return;
+    }
+    self.inputViewType = InputViewTypeVoice;
+    [self.textView resignFirstResponder];
     
-    [self uploadMovieWithMovieURL:nil];
+    
     
     /*
     self.textView.inputView = nil;
