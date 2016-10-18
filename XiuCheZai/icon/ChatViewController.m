@@ -518,7 +518,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
-
 - (NSDictionary *)getAudioSetting {
     NSMutableDictionary *dicM = [NSMutableDictionary dictionary];
     [dicM setObject:@(kAudioFormatLinearPCM) forKey:AVFormatIDKey];
