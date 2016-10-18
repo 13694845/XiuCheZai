@@ -7,17 +7,17 @@
 //
 
 #import "ChatViewController.h"
-#import "XCZConfig.h"
 #import "AppDelegate.h"
+#import "XCZConfig.h"
 #import "AFNetworking.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "GCDAsyncSocket.h"
 #import "ChatConfig.h"
 #import "ChatMessage.h"
 #import "ChatMessageManager.h"
+#import "ChatEmojiAttachment.h"
 #import "ChatEmojiManager.h"
 #import "ChatEmojiInputView.h"
-#import "ChatEmojiAttachment.h"
 #import "ChatOtherInputView.h"
 #import "QCEncodeAudio.h"
 
