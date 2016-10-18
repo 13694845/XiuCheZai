@@ -24,6 +24,7 @@
 #define BUBBLE_VIEW_MARGIN_LEFT     12.0
 #define BUBBLE_VIEW_MARGIN_RIGHT    12.0
 #define BUBBLE_TEXT_PADDING         8.0
+#define BUBBLE_IMAGE_HEIGHT         100.0
 
 typedef NS_ENUM(NSUInteger, TableViewTransform) {
     TableViewTransformNone,
@@ -94,17 +95,17 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat height = 0.0;
     ChatMessage *message = self.rows[indexPath.row];
-    
-    if ([message.type isEqualToString:@"img"]) {
-        // bubbleView = [self imageBubbleViewForMessage:message];
-        return 100.0 + BUBBLE_TEXT_PADDING * 2 + BUBBLE_VIEW_MARGIN_TOP * 2;
+    if ([message.type isEqualToString:@"txt"]) {
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:message.content attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
+        CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        height = TextRect.size.height + BUBBLE_TEXT_PADDING * 2 + BUBBLE_VIEW_MARGIN_TOP * 2;
     }
-
-    
-    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:message.content attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
-    CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    return TextRect.size.height + BUBBLE_TEXT_PADDING * 2 + BUBBLE_VIEW_MARGIN_TOP * 2;
+    if ([message.type isEqualToString:@"img"]) {
+        height = BUBBLE_IMAGE_HEIGHT + BUBBLE_TEXT_PADDING * 2 + BUBBLE_VIEW_MARGIN_TOP * 2;
+    }
+    return height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -112,10 +113,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     for (UIView *cellView in cell.subviews) [cellView removeFromSuperview];
     
     ChatMessage *message = self.rows[indexPath.row];
-    
     UIView *bubbleView;
     if ([message.type isEqualToString:@"txt"]) {
-        bubbleView = [self bubbleViewForMessage:message];
+        bubbleView = [self textBubbleViewForMessage:message];
     }
     if ([message.type isEqualToString:@"img"]) {
         bubbleView = [self imageBubbleViewForMessage:message];
@@ -134,7 +134,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [self.view endEditing:YES];
 }
 
-- (UIView *)bubbleViewForMessage:(ChatMessage *)message {
+- (UIView *)textBubbleViewForMessage:(ChatMessage *)message {
     NSAttributedString *attributedText = [ChatEmojiManager emojiStringFromPlainString:message.content withFont:[UIFont systemFontOfSize:14.0]];
     CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2)];
@@ -165,16 +165,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     return bubbleView;
 }
 
-
-
 - (UIView *)imageBubbleViewForMessage:(ChatMessage *)message {
-    /*
-    NSAttributedString *attributedText = [ChatEmojiManager emojiStringFromPlainString:message.content withFont:[UIFont systemFontOfSize:14.0]];
-    CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    */
-    CGRect imageRect = CGRectMake(0.0, 0.0, 100, 100);
-    
-    
+    CGRect imageRect = CGRectMake(0.0, 0.0, BUBBLE_IMAGE_HEIGHT, BUBBLE_IMAGE_HEIGHT);
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2)];
     
     UIImage *avatarImage = [UIImage imageNamed:@"发送到"];
@@ -193,30 +185,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
     
-    
-    /*
-    UIImage *img = [UIImage imageNamed:@"发送到"];
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:img];
-     */
     UIImageView *imgView = [[UIImageView alloc] init];
     [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
-
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
-    /*
-    UILabel *bubbleText = [[UILabel alloc] initWithFrame:CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height)];
-    bubbleText.textColor = message.isSend ? [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0] : [UIColor whiteColor];
-    bubbleText.font = [UIFont systemFontOfSize:14.0];
-    bubbleText.numberOfLines = 0;
-    bubbleText.lineBreakMode = NSLineBreakByWordWrapping;
-    bubbleText.attributedText = attributedText;
-    [bubbleImageView addSubview:bubbleText];
-     */
     return bubbleView;
 }
-
-
 
 - (void)goBack:(id)sender {
     NSLog(@"goBack");
