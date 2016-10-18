@@ -434,7 +434,16 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.inputViewType = InputViewTypeVoice;
     [self.textView resignFirstResponder];
     
+    UIButton *button = [[UIButton alloc] init];
+    button.backgroundColor = [UIColor redColor];
+    [button setTitle:@"xxxxx" forState:UIControlStateNormal];
+    // [button setTitle:@"xxxxxxxxxxx" forState:UIControlStateNormal];
+    button.frame = self.textView.frame;
     
+    [button addTarget:self action:@selector(downRecordButton:) forControlEvents:UIControlEventTouchDown];
+    [button addTarget:self action:@selector(upRecordButton:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self.barView addSubview:button];
     
     /*
     self.textView.inputView = nil;
@@ -442,6 +451,21 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     // [self.textView resignFirstResponder];
      */
 }
+
+
+
+- (void)downRecordButton:(id)sender {
+    NSLog(@"downRecordButton");
+}
+
+- (void)upRecordButton:(id)sender {
+    NSLog(@"upRecordButton");
+
+}
+
+
+
+
 
 - (IBAction)showEmotionPad:(id)sender {
     if (self.inputViewType == InputViewTypeEmoji) {
