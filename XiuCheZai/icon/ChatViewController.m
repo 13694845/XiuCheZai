@@ -166,6 +166,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 
+
 - (UIView *)imageBubbleViewForMessage:(ChatMessage *)message {
     /*
     NSAttributedString *attributedText = [ChatEmojiManager emojiStringFromPlainString:message.content withFont:[UIFont systemFontOfSize:14.0]];
