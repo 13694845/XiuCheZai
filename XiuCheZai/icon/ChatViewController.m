@@ -472,17 +472,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.wavPath = [documentsPath stringByAppendingPathComponent:@"sampleSound.wav"];
 
 
-    /*
-    NSURL *url = [NSURL fileURLWithPath:wavPath];
-    NSError *error = nil;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    self.audioPlayer.numberOfLoops = 0;
-    [self.audioPlayer prepareToPlay];
-    if (error) {
-        NSLog(@"创建播放器过程中发生错误，错误信息：%@", error.localizedDescription);
-        return;
-    }
-*/
     
     NSURL *url= [NSURL fileURLWithPath:self.wavPath];
     NSDictionary *setting=[self getAudioSetting];
@@ -510,17 +499,29 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
        [self.audioRecorder stop];
 
+    
+    
+     NSURL *url = [NSURL fileURLWithPath:self.wavPath];
+     NSError *error = nil;
+     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+     self.audioPlayer.numberOfLoops = 0;
+     [self.audioPlayer prepareToPlay];
+     if (error) {
+     NSLog(@"创建播放器过程中发生错误，错误信息：%@", error.localizedDescription);
+     return;
+     }
+
+    
+    
+    
+    
     NSData *data = [NSData dataWithContentsOfFile:self.wavPath];
     NSLog(@"wav size : %ld", data.length);
 
     NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:self.wavPath]];
     NSData *amrData = [QCEncodeAudio convertWavToAmrFile:wavData];
     NSLog(@"amr size : %ld", amrData.length);
-
-    
 }
-
-
 
 - (NSDictionary *)getAudioSetting {
     NSMutableDictionary *dicM = [NSMutableDictionary dictionary];
@@ -532,6 +533,23 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     return dicM;
 }
 
+- (void)uploadAmrWithAmrData:(NSData *)amrData {
+    NSLog(@"image size : %ld", amrData.length);
+    
+    NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
+    NSDictionary *parameters = nil;
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
+        [formData appendPartWithFileData:amrData name:@"file" fileName:@"filename.amr" mimeType:@"audio/amr"];
+    } progress:^(NSProgress *uploadProgress) {
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"NSDictionary : %@", result);
+        NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
+        [self sendMessageWithContent:fileURL contentType:@"msc"];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    }];
+}
 
 
 
