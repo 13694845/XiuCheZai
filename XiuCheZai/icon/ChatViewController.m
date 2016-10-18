@@ -590,7 +590,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [textView becomeFirstResponder];
 }
 
-- (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmoji:(NSDictionary *)emojiInfo {
+- (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmojiWithEmojiInfo:(NSDictionary *)emojiInfo {
     NSData *emojiData = [[NSData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Emoji" ofType:@"json"]];
     NSDictionary *emojiJson = [NSJSONSerialization JSONObjectWithData:emojiData options:NSJSONReadingMutableLeaves error:nil];
     CGSize emojiSize = CGSizeMake([UIFont systemFontOfSize:14.0].lineHeight, [UIFont systemFontOfSize:14.0].lineHeight);
@@ -623,29 +623,28 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [textView becomeFirstResponder];
 }
 
-- (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButton:(OtherInputViewButton)button {
-    switch (button) {
-        case OtherInputViewButtonImageFromPhotoLibrary: {
-            NSLog(@"OtherInputViewButtonImageFromPhotoLibrary");
+- (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButtonWithButtonTag:(OtherInputViewButtonTag)buttonTag {
+    switch (buttonTag) {
+        case OtherInputViewButtonTagImageFromPhotoLibrary: {
+            NSLog(@"OtherInputViewButtonTagImageFromPhotoLibrary");
             UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-            imagePickerController.delegate = self;
             imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePickerController.delegate = self;
             [self presentViewController:imagePickerController animated:YES completion:nil]; break;
         }
-        case OtherInputViewButtonImageFromCamera: {
-            NSLog(@"OtherInputViewButtonImageFromCamera");
+        case OtherInputViewButtonTagImageFromCamera: {
+            NSLog(@"OtherInputViewButtonTagImageFromCamera");
             UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-            imagePickerController.delegate = self;
             imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePickerController.delegate = self;
             [self presentViewController:imagePickerController animated:YES completion:nil]; break;
         }
-        case OtherInputViewButtonMovieFromCamera: {
-            NSLog(@"OtherInputViewButtonMovieFromCamera");
+        case OtherInputViewButtonTagMovieFromCamera: {
+            NSLog(@"OtherInputViewButtonTagMovieFromCamera");
             UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-            imagePickerController.delegate = self;
             imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
             imagePickerController.mediaTypes = @[(NSString *)kUTTypeMovie];
-            imagePickerController.videoMaximumDuration = 0.1;
+            imagePickerController.delegate = self;
             [self presentViewController:imagePickerController animated:YES completion:nil]; break;
         }
         default: break;

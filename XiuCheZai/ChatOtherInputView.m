@@ -61,7 +61,7 @@
 }
 
 - (void)selectButton:(UIButton *)sender {
-    [self.delegate otherInputView:self didSelectButton:sender.tag];
+    [self.delegate otherInputView:self didSelectButtonWithButtonTag:sender.tag];
 }
 
 @end

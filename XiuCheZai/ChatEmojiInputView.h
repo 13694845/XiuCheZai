@@ -15,7 +15,7 @@ static NSString *const kEmojiImagePathKey = @"facePath";
 
 @protocol ChatEmojiInputViewDelegate <NSObject>
 
-- (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmoji:(NSDictionary *)emojiInfo;
+- (void)emojiInputView:(ChatEmojiInputView *)emojiInputView didSelectEmojiWithEmojiInfo:(NSDictionary *)emojiInfo;
 
 @end
 

@@ -10,15 +10,15 @@
 
 @class ChatOtherInputView;
 
-typedef NS_ENUM(NSUInteger, OtherInputViewButton) {
-    OtherInputViewButtonImageFromCamera,
-    OtherInputViewButtonImageFromPhotoLibrary,
-    OtherInputViewButtonMovieFromCamera
+typedef NS_ENUM(NSUInteger, OtherInputViewButtonTag) {
+    OtherInputViewButtonTagImageFromCamera,
+    OtherInputViewButtonTagImageFromPhotoLibrary,
+    OtherInputViewButtonTagMovieFromCamera
 };
 
 @protocol ChatOtherInputViewDelegate <NSObject>
 
-- (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButton:(OtherInputViewButton)button;
+- (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButtonWithButtonTag:(OtherInputViewButtonTag)buttonTag;
 
 @end
 
