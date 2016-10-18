@@ -54,7 +54,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (weak, nonatomic) IBOutlet UIButton *voiceButton;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
-@property (assign, nonatomic) InputViewType inputViewType;
 
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
@@ -63,9 +62,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 @property (assign, nonatomic) CGFloat keyboardHeight;
 @property (assign, nonatomic) TableViewTransform tableViewTransform;
+@property (assign, nonatomic) InputViewType inputViewType;
 
 @property (strong, nonatomic) AVAudioRecorder *audioRecorder;
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+
 @property (strong, nonatomic) NSString *wavPath;
 
 @end
