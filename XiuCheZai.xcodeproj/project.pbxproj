@@ -161,6 +161,9 @@
 		6C17FADF1CB497F000F95FF4 /* SHA1DataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FADE1CB497F000F95FF4 /* SHA1DataEncryptor.m */; };
 		6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FAE11CB885D600F95FF4 /* MD5DataEncryptor.m */; };
 		6C19A97C1C1E406C002451F6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */; };
+		6C20697D1DB61B4200B2E0BC /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069731DB61B4200B2E0BC /* libopencore-amrnb.a */; };
+		6C20697E1DB61B4200B2E0BC /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069741DB61B4200B2E0BC /* libopencore-amrwb.a */; };
+		6C20697F1DB61B4200B2E0BC /* QCEncodeAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C20697C1DB61B4200B2E0BC /* QCEncodeAudio.m */; };
 		6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */; };
 		6C24460E1C9FD69300F4F3C0 /* banner04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C24460D1C9FD69300F4F3C0 /* banner04.jpg */; };
 		6C25D6091D17BBD0007D8BE4 /* error.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C25D6081D17BBD0007D8BE4 /* error.html */; };
@@ -534,6 +537,14 @@
 		6C17FAE01CB885D600F95FF4 /* MD5DataEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5DataEncryptor.h; sourceTree = "<group>"; };
 		6C17FAE11CB885D600F95FF4 /* MD5DataEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5DataEncryptor.m; sourceTree = "<group>"; };
 		6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = XiuCheZai/libWeChatSDK.a; sourceTree = "<group>"; };
+		6C2069731DB61B4200B2E0BC /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		6C2069741DB61B4200B2E0BC /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		6C2069761DB61B4200B2E0BC /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		6C2069771DB61B4200B2E0BC /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		6C2069791DB61B4200B2E0BC /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		6C20697A1DB61B4200B2E0BC /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		6C20697B1DB61B4200B2E0BC /* QCEncodeAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCEncodeAudio.h; sourceTree = "<group>"; };
+		6C20697C1DB61B4200B2E0BC /* QCEncodeAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCEncodeAudio.m; sourceTree = "<group>"; };
 		6C24460A1C9FCAAC00F4F3C0 /* GoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDetailViewController.h; sourceTree = "<group>"; };
 		6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
 		6C24460D1C9FD69300F4F3C0 /* banner04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner04.jpg; sourceTree = "<group>"; };
@@ -930,6 +941,8 @@
 				6CB39B141D29E951007CEAF8 /* BaiduMapAPI_Utils.framework in Frameworks */,
 				6CB2AC831C16613E0025260A /* AlipaySDK.framework in Frameworks */,
 				6CB39B0F1D29E951007CEAF8 /* BaiduMapAPI_Cloud.framework in Frameworks */,
+				6C20697E1DB61B4200B2E0BC /* libopencore-amrwb.a in Frameworks */,
+				6C20697D1DB61B4200B2E0BC /* libopencore-amrnb.a in Frameworks */,
 				6C59779E1C52FE3700547428 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1109,6 +1122,45 @@
 				6C1208191DB0C47F00FF4138 /* d_zuohengheng.png */,
 			);
 			path = loo;
+			sourceTree = "<group>";
+		};
+		6C2069711DB61B4200B2E0BC /* QCEncodeAudio */ = {
+			isa = PBXGroup;
+			children = (
+				6C2069721DB61B4200B2E0BC /* lib */,
+				6C2069751DB61B4200B2E0BC /* opencore-amrnb */,
+				6C2069781DB61B4200B2E0BC /* opencore-amrwb */,
+				6C20697B1DB61B4200B2E0BC /* QCEncodeAudio.h */,
+				6C20697C1DB61B4200B2E0BC /* QCEncodeAudio.m */,
+			);
+			path = QCEncodeAudio;
+			sourceTree = "<group>";
+		};
+		6C2069721DB61B4200B2E0BC /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				6C2069731DB61B4200B2E0BC /* libopencore-amrnb.a */,
+				6C2069741DB61B4200B2E0BC /* libopencore-amrwb.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		6C2069751DB61B4200B2E0BC /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				6C2069761DB61B4200B2E0BC /* interf_dec.h */,
+				6C2069771DB61B4200B2E0BC /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		6C2069781DB61B4200B2E0BC /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				6C2069791DB61B4200B2E0BC /* dec_if.h */,
+				6C20697A1DB61B4200B2E0BC /* if_rom.h */,
+			);
+			path = "opencore-amrwb";
 			sourceTree = "<group>";
 		};
 		6C4D0C1B1C28E998003E96E8 /* SDWebImage */ = {
@@ -1499,6 +1551,7 @@
 		6CABF7091C0E978B00DF3EFF /* XiuCheZai */ = {
 			isa = PBXGroup;
 			children = (
+				6C2069711DB61B4200B2E0BC /* QCEncodeAudio */,
 				6C1207E91DB0C47F00FF4138 /* loo */,
 				6C1207C81DAE196500FF4138 /* Emoji */,
 				6CC1908C1DA08A100098BB40 /* GCDAsyncSocket */,
@@ -2045,6 +2098,7 @@
 				6CE3638A1D73BB2800AA0B53 /* XCZDiscoveryPageViewController.m in Sources */,
 				6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */,
 				6C91C35A1C9A84D2004C0CB4 /* NSDataEx.m in Sources */,
+				6C20697F1DB61B4200B2E0BC /* QCEncodeAudio.m in Sources */,
 				6CC190921DA08A290098BB40 /* GCDAsyncUdpSocket.m in Sources */,
 				6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */,
 				6C8EC2721C1E548000BCABB5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -2119,6 +2173,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2163,6 +2218,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2200,7 +2256,10 @@
 				INFOPLIST_FILE = XiuCheZai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/XiuCheZai";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/XiuCheZai",
+					"$(PROJECT_DIR)/XiuCheZai/QCEncodeAudio/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.8673h.XiuCheZai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2227,7 +2286,10 @@
 				INFOPLIST_FILE = XiuCheZai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/XiuCheZai";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/XiuCheZai",
+					"$(PROJECT_DIR)/XiuCheZai/QCEncodeAudio/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.8673h.XiuCheZai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

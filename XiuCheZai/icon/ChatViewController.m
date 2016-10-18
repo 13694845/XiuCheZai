@@ -512,6 +512,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSData *data = [NSData dataWithContentsOfFile:self.wavPath];
     NSLog(@"wav size : %ld", data.length);
 
+    
+    
 }
 
 
