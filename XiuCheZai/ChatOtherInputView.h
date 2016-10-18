@@ -12,7 +12,8 @@
 
 typedef NS_ENUM(NSUInteger, OtherInputViewButton) {
     OtherInputViewButtonImageFromPhotoLibrary,
-    OtherInputViewButtonImageFromCamera
+    OtherInputViewButtonImageFromCamera,
+    OtherInputViewButtonMovieFromCamera
 };
 
 @protocol ChatOtherInputViewDelegate <NSObject>

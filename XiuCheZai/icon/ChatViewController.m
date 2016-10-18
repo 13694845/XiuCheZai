@@ -237,6 +237,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:@"txt"];
 }
 
+- (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
+    NSLog(@"sendMessageWithContent");
+    [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
+}
+
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
     NSString *messageFormat = @"{\"type\":\"MESSAGE\", \"sender_id\":\"%@\", \"receiver_id\":\"%@\", \"sender_name\":\"%@\", \"receiver_name\":\"%@\", \"msg_content\":\"%@\", \"msg_type\":\"%@\", \"play_time\":\"%@\", \"contact\":\"1\"}\n";
     NSString *message = [NSString stringWithFormat:messageFormat, sender[@"sender_id"], receiver[@"receiver_id"], sender[@"sender_name"], receiver[@"receiver_name"], content, type, @"-1"];
@@ -448,63 +453,83 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
             imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
             [self presentViewController:imagePickerController animated:YES completion:nil]; break;
         }
+        case OtherInputViewButtonMovieFromCamera: {
+            NSLog(@"OtherInputViewButtonMovieFromCamera");
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.delegate = self;
+            imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            imagePickerController.mediaTypes = @[(NSString *)kUTTypeMovie];
+            imagePickerController.videoMaximumDuration = 0.1;
+            [self presentViewController:imagePickerController animated:YES completion:nil]; break;
+        }
         default: break;
     }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
-    NSDictionary *parameters = nil;
-    
-    /*
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
-    */
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    if ([picker.mediaTypes containsObject:(NSString *)kUTTypeImage]) {
+        NSLog(@"kUTTypeImage");
+        [self uploadImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+    }
+    if ([picker.mediaTypes containsObject:(NSString *)kUTTypeMovie]) {
+        NSLog(@"kUTTypeMovie");
+        [self uploadMovieWithMovieURL:[info objectForKey:UIImagePickerControllerMediaURL]];
+    }
+}
+
+- (void)uploadImage:(UIImage *)image {
     image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:data name:@"pic" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
+    NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
+    NSDictionary *parameters = nil;
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
+        [formData appendPartWithFileData:data name:@"file" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
     } progress:^(NSProgress *uploadProgress) {
-        /*
-        dispatch_async(dispatch_get_main_queue(), ^{
-            hud.progress = uploadProgress.fractionCompleted;
-        });
-         */
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         NSLog(@"NSDictionary : %@", result);
-        
         NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
-        
-        // sendMessage    1. jpg/png   2. amr   3. mp4
-
+        [self sendMessageWithContent:fileURL contentType:@"img"];
         // [[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
-        /*
-        [hud hide:YES];
-        hud.progress = 0;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        [self executeJavascript:[NSString stringWithFormat:@"recognizeVehicleLicenseResult('%@')", jsonString]];
-         */
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        /*
-        [hud hide:YES];
-        hud.progress = 0;
-         */
     }];
 }
 
 - (UIImage *)resizeImage:(UIImage *)image toSize:(CGSize)size {
     UIGraphicsBeginImageContext(size);
-    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    [image drawInRect:CGRectMake(0.0, 0.0, size.width, size.height)];
     UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return resizedImage;
+}
+
+- (void)uploadMovieWithMovieURL:(NSString *)movieURL {
+    
+    NSData *movieData = [NSData dataWithContentsOfFile:movieURL];
+    
+    
+    /*
+    image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
+    NSData *data = UIImageJPEGRepresentation(image, 0.8);
+    
+    NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
+    NSDictionary *parameters = nil;
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
+        [formData appendPartWithFileData:data name:@"file" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
+    } progress:^(NSProgress *uploadProgress) {
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"NSDictionary : %@", result);
+        NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
+        [self sendMessageWithContent:fileURL contentType:@"img"];
+        // [[SDImageCache sharedImageCache] storeImage:myImage forKey:myCacheKey];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    }];
+     */
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {

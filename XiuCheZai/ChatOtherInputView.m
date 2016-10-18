@@ -24,7 +24,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.buttonImages = @[@"vic", @"add"];
+        self.buttonImages = @[@"vic", @"add", @"vic"];
         
         CGFloat imagePadding = (frame.size.width - BUTTON_IMAGE_WIDTH * 5) / 10;
         int numberOfRows = ceil(self.buttonImages.count / 5.0);
@@ -35,8 +35,7 @@
                 if ((j + i * 5) > (self.buttonImages.count - 1)) break;
                 UIButton *button = [[UIButton alloc] init];
                 [button setBackgroundImage:[UIImage imageNamed:self.buttonImages[j + i * 7]] forState:UIControlStateNormal];
-                button.frame = CGRectMake((BUTTON_IMAGE_WIDTH + imagePadding * 2) * j + imagePadding,
-                                          (BUTTON_IMAGE_WIDTH + imagePadding * 2) * i + imagePadding, BUTTON_IMAGE_WIDTH, BUTTON_IMAGE_HEIGHT);
+                button.frame = CGRectMake((BUTTON_IMAGE_WIDTH + imagePadding * 2) * j + imagePadding, (BUTTON_IMAGE_WIDTH + imagePadding * 2) * i + imagePadding, BUTTON_IMAGE_WIDTH, BUTTON_IMAGE_HEIGHT);
                 [button addTarget:self action:@selector(selectButton:) forControlEvents:UIControlEventTouchUpInside];
                 button.tag = j + i * 5;
                 [self.contentView addSubview:button];
