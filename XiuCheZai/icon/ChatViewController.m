@@ -481,6 +481,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (void)uploadImage:(UIImage *)image {
     image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
+    NSLog(@"image size : %ld", data.length);
     
     NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
     NSDictionary *parameters = nil;
