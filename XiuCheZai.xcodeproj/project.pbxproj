@@ -47,8 +47,8 @@
 		6C1207751DA33CBE00FF4138 /* 椭圆-1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C12072D1DA33CBD00FF4138 /* 椭圆-1@3x.png */; };
 		6C1207761DA33CBE00FF4138 /* 椭圆2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C12072E1DA33CBD00FF4138 /* 椭圆2@2x.png */; };
 		6C1207771DA33CBE00FF4138 /* 椭圆2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C12072F1DA33CBD00FF4138 /* 椭圆2@3x.png */; };
-		6C1207781DA33CBE00FF4138 /* 相机@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207301DA33CBD00FF4138 /* 相机@2x.png */; };
-		6C1207791DA33CBE00FF4138 /* 相机@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207311DA33CBD00FF4138 /* 相机@3x.png */; };
+		6C1207781DA33CBE00FF4138 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207301DA33CBD00FF4138 /* camera@2x.png */; };
+		6C1207791DA33CBE00FF4138 /* camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207311DA33CBD00FF4138 /* camera@3x.png */; };
 		6C12077A1DA33CBE00FF4138 /* 详情@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207321DA33CBD00FF4138 /* 详情@2x.png */; };
 		6C12077B1DA33CBE00FF4138 /* 详情@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207331DA33CBD00FF4138 /* 详情@3x.png */; };
 		6C12077C1DA33CBE00FF4138 /* 消息@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207341DA33CBD00FF4138 /* 消息@2x.png */; };
@@ -411,8 +411,8 @@
 		6C12072D1DA33CBD00FF4138 /* 椭圆-1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆-1@3x.png"; sourceTree = "<group>"; };
 		6C12072E1DA33CBD00FF4138 /* 椭圆2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆2@2x.png"; sourceTree = "<group>"; };
 		6C12072F1DA33CBD00FF4138 /* 椭圆2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆2@3x.png"; sourceTree = "<group>"; };
-		6C1207301DA33CBD00FF4138 /* 相机@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "相机@2x.png"; sourceTree = "<group>"; };
-		6C1207311DA33CBD00FF4138 /* 相机@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "相机@3x.png"; sourceTree = "<group>"; };
+		6C1207301DA33CBD00FF4138 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		6C1207311DA33CBD00FF4138 /* camera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@3x.png"; sourceTree = "<group>"; };
 		6C1207321DA33CBD00FF4138 /* 详情@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "详情@2x.png"; sourceTree = "<group>"; };
 		6C1207331DA33CBD00FF4138 /* 详情@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "详情@3x.png"; sourceTree = "<group>"; };
 		6C1207341DA33CBD00FF4138 /* 消息@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "消息@2x.png"; sourceTree = "<group>"; };
@@ -995,8 +995,6 @@
 				6C12072D1DA33CBD00FF4138 /* 椭圆-1@3x.png */,
 				6C12072E1DA33CBD00FF4138 /* 椭圆2@2x.png */,
 				6C12072F1DA33CBD00FF4138 /* 椭圆2@3x.png */,
-				6C1207301DA33CBD00FF4138 /* 相机@2x.png */,
-				6C1207311DA33CBD00FF4138 /* 相机@3x.png */,
 				6C1207321DA33CBD00FF4138 /* 详情@2x.png */,
 				6C1207331DA33CBD00FF4138 /* 详情@3x.png */,
 				6C1207341DA33CBD00FF4138 /* 消息@2x.png */,
@@ -1015,8 +1013,6 @@
 				6C1207411DA33CBD00FF4138 /* 组-45@3x.png */,
 				6C1207421DA33CBD00FF4138 /* 组-46@2x.png */,
 				6C1207431DA33CBD00FF4138 /* 组-46@3x.png */,
-				6C1207441DA33CBD00FF4138 /* ablum@2x.png */,
-				6C1207451DA33CBD00FF4138 /* ablum@3x.png */,
 				6C1207461DA33CBD00FF4138 /* add@2x.png */,
 				6C1207471DA33CBD00FF4138 /* add@3x.png */,
 				6C1207481DA33CBD00FF4138 /* data@2x.png */,
@@ -1029,6 +1025,10 @@
 				6C12074F1DA33CBE00FF4138 /* msg@3x.png */,
 				6C1207501DA33CBE00FF4138 /* vic@2x.png */,
 				6C1207511DA33CBE00FF4138 /* vic@3x.png */,
+				6C1207441DA33CBD00FF4138 /* ablum@2x.png */,
+				6C1207451DA33CBD00FF4138 /* ablum@3x.png */,
+				6C1207301DA33CBD00FF4138 /* camera@2x.png */,
+				6C1207311DA33CBD00FF4138 /* camera@3x.png */,
 			);
 			name = ChatIcons;
 			sourceTree = "<group>";
@@ -1994,8 +1994,8 @@
 				6CE400681C322B7C007F6D03 /* menu_icon19.jpg in Resources */,
 				6C12081A1DB0C47F00FF4138 /* d_aini.png in Resources */,
 				6C1207981DA33CBE00FF4138 /* vic@2x.png in Resources */,
-				6C1207781DA33CBE00FF4138 /* 相机@2x.png in Resources */,
-				6C1207791DA33CBE00FF4138 /* 相机@3x.png in Resources */,
+				6C1207781DA33CBE00FF4138 /* camera@2x.png in Resources */,
+				6C1207791DA33CBE00FF4138 /* camera@3x.png in Resources */,
 				6C24460E1C9FD69300F4F3C0 /* banner04.jpg in Resources */,
 				6C1207D31DAF121A00FF4138 /* Emoji.json in Resources */,
 				6C8B10581CC4D087003CF8F5 /* menu_icon11.jpg in Resources */,
