@@ -24,7 +24,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.buttonImages = @[@"vic", @"add", @"vic"];
+        self.buttonImages = @[@"camera", @"album", @"vic"];
         
         CGFloat imagePadding = (frame.size.width - BUTTON_IMAGE_WIDTH * 5) / 10;
         int numberOfRows = ceil(self.buttonImages.count / 5.0);

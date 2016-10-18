@@ -67,8 +67,8 @@
 		6C1207891DA33CBE00FF4138 /* 组-45@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207411DA33CBD00FF4138 /* 组-45@3x.png */; };
 		6C12078A1DA33CBE00FF4138 /* 组-46@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207421DA33CBD00FF4138 /* 组-46@2x.png */; };
 		6C12078B1DA33CBE00FF4138 /* 组-46@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207431DA33CBD00FF4138 /* 组-46@3x.png */; };
-		6C12078C1DA33CBE00FF4138 /* ablum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207441DA33CBD00FF4138 /* ablum@2x.png */; };
-		6C12078D1DA33CBE00FF4138 /* ablum@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207451DA33CBD00FF4138 /* ablum@3x.png */; };
+		6C12078C1DA33CBE00FF4138 /* album@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207441DA33CBD00FF4138 /* album@2x.png */; };
+		6C12078D1DA33CBE00FF4138 /* album@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207451DA33CBD00FF4138 /* album@3x.png */; };
 		6C12078E1DA33CBE00FF4138 /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207461DA33CBD00FF4138 /* add@2x.png */; };
 		6C12078F1DA33CBE00FF4138 /* add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207471DA33CBD00FF4138 /* add@3x.png */; };
 		6C1207901DA33CBE00FF4138 /* data@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1207481DA33CBD00FF4138 /* data@2x.png */; };
@@ -431,8 +431,8 @@
 		6C1207411DA33CBD00FF4138 /* 组-45@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-45@3x.png"; sourceTree = "<group>"; };
 		6C1207421DA33CBD00FF4138 /* 组-46@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-46@2x.png"; sourceTree = "<group>"; };
 		6C1207431DA33CBD00FF4138 /* 组-46@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-46@3x.png"; sourceTree = "<group>"; };
-		6C1207441DA33CBD00FF4138 /* ablum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ablum@2x.png"; sourceTree = "<group>"; };
-		6C1207451DA33CBD00FF4138 /* ablum@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ablum@3x.png"; sourceTree = "<group>"; };
+		6C1207441DA33CBD00FF4138 /* album@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album@2x.png"; sourceTree = "<group>"; };
+		6C1207451DA33CBD00FF4138 /* album@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "album@3x.png"; sourceTree = "<group>"; };
 		6C1207461DA33CBD00FF4138 /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
 		6C1207471DA33CBD00FF4138 /* add@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@3x.png"; sourceTree = "<group>"; };
 		6C1207481DA33CBD00FF4138 /* data@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "data@2x.png"; sourceTree = "<group>"; };
@@ -1025,8 +1025,8 @@
 				6C12074F1DA33CBE00FF4138 /* msg@3x.png */,
 				6C1207501DA33CBE00FF4138 /* vic@2x.png */,
 				6C1207511DA33CBE00FF4138 /* vic@3x.png */,
-				6C1207441DA33CBD00FF4138 /* ablum@2x.png */,
-				6C1207451DA33CBD00FF4138 /* ablum@3x.png */,
+				6C1207441DA33CBD00FF4138 /* album@2x.png */,
+				6C1207451DA33CBD00FF4138 /* album@3x.png */,
 				6C1207301DA33CBD00FF4138 /* camera@2x.png */,
 				6C1207311DA33CBD00FF4138 /* camera@3x.png */,
 			);
@@ -1891,7 +1891,7 @@
 				6C1208481DB0C47F00FF4138 /* d_zuiyou.png in Resources */,
 				6C12076B1DA33CBE00FF4138 /* 十@3x.png in Resources */,
 				6C12078E1DA33CBE00FF4138 /* add@2x.png in Resources */,
-				6C12078C1DA33CBE00FF4138 /* ablum@2x.png in Resources */,
+				6C12078C1DA33CBE00FF4138 /* album@2x.png in Resources */,
 				6C1208291DB0C47F00FF4138 /* d_heng.png in Resources */,
 				6C1207721DA33CBE00FF4138 /* 收藏颜@2x.png in Resources */,
 				6C37A8D61D2C8E2D0063207D /* mapapi.bundle in Resources */,
@@ -1908,7 +1908,7 @@
 				6C5C5F041C86DA66008CDD3C /* home_icon16.png in Resources */,
 				6C12077D1DA33CBE00FF4138 /* 消息@3x.png in Resources */,
 				6C12077B1DA33CBE00FF4138 /* 详情@3x.png in Resources */,
-				6C12078D1DA33CBE00FF4138 /* ablum@3x.png in Resources */,
+				6C12078D1DA33CBE00FF4138 /* album@3x.png in Resources */,
 				6C671B351D51D93000D2CAE5 /* icon114X114.png in Resources */,
 				6C12081F1DB0C47F00FF4138 /* d_chanzui.png in Resources */,
 				6C1207D01DAE19BF00FF4138 /* e01@2x.png in Resources */,
