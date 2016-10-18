@@ -1,6 +1,6 @@
 //
-//  ViewController.m
-//  Chat
+//  ChatViewController.m
+//  XiuCheZai
 //
 //  Created by QSH on 16/10/1.
 //  Copyright © 2016年 Zen. All rights reserved.
