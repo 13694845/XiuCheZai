@@ -19,6 +19,7 @@
 #import "ChatEmojiInputView.h"
 #import "ChatEmojiAttachment.h"
 #import "ChatOtherInputView.h"
+#import "QCEncodeAudio.h"
 
 @import AVFoundation;
 
@@ -512,7 +513,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSData *data = [NSData dataWithContentsOfFile:self.wavPath];
     NSLog(@"wav size : %ld", data.length);
 
-    
+    NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:self.wavPath]];
+    NSData *amrData = [QCEncodeAudio convertWavToAmrFile:wavData];
+    NSLog(@"amr size : %ld", amrData.length);
+
     
 }
 
