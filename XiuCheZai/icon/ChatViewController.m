@@ -480,6 +480,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSDictionary *message = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    NSLog(@"didReadData %@ : ", message);
     NSString *type = message[@"type"];
     if ([type isEqualToString:@"LOGIN"]) {
         [self handleLogin:message]; return;
