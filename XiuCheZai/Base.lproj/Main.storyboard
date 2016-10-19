@@ -2477,7 +2477,7 @@
                                             <constraint firstAttribute="height" constant="22" id="gNn-1R-gyc"/>
                                             <constraint firstAttribute="width" constant="22" id="opy-8C-6ok"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="表情.png"/>
+                                        <state key="normal" backgroundImage="emoji.png"/>
                                         <connections>
                                             <action selector="showEmotionPad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="wJi-jv-kr2"/>
                                         </connections>
@@ -3309,6 +3309,7 @@
     <resources>
         <image name="add.png" width="22" height="22"/>
         <image name="banner01.jpg" width="800" height="435"/>
+        <image name="emoji.png" width="22" height="22"/>
         <image name="home_activity01.png" width="411" height="570"/>
         <image name="home_activity02.png" width="671" height="138"/>
         <image name="home_activity03.png" width="294" height="328"/>
@@ -3368,6 +3369,5 @@
         <image name="tab_icon62.png" width="25" height="25"/>
         <image name="vic.png" width="22" height="22"/>
         <image name="发现.png" width="22" height="22"/>
-        <image name="表情.png" width="22" height="22"/>
     </resources>
 </document>
