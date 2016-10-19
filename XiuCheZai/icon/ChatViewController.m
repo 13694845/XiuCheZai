@@ -67,8 +67,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (strong, nonatomic) AVAudioRecorder *audioRecorder;
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
-@property (strong, nonatomic) NSString *wavPath;
-
 @end
 
 @implementation ChatViewController
@@ -83,9 +81,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }
     return _manager;
 }
-
-
-
 
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
@@ -116,6 +111,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if ([message.type isEqualToString:@"img"]) {
         height = BUBBLE_IMAGE_HEIGHT + BUBBLE_TEXT_PADDING * 2 + BUBBLE_VIEW_MARGIN_TOP * 2;
     }
+    if ([message.type isEqualToString:@"msc"]) {
+        height = 22.0 + BUBBLE_TEXT_PADDING * 2 + BUBBLE_VIEW_MARGIN_TOP * 2;
+    }
+    if ([message.type isEqualToString:@"mov"]) {
+        height = 22.0 + BUBBLE_TEXT_PADDING * 2 + BUBBLE_VIEW_MARGIN_TOP * 2;
+    }
     return height;
 }
 
@@ -124,12 +125,21 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     for (UIView *cellView in cell.subviews) [cellView removeFromSuperview];
     
     ChatMessage *message = self.rows[indexPath.row];
+    
+    NSLog(@"message : %@", message);
+    
     UIView *bubbleView;
     if ([message.type isEqualToString:@"txt"]) {
         bubbleView = [self textBubbleViewForMessage:message];
     }
     if ([message.type isEqualToString:@"img"]) {
         bubbleView = [self imageBubbleViewForMessage:message];
+    }
+    if ([message.type isEqualToString:@"msc"]) {
+        bubbleView = [self soundBubbleViewForMessage:message];
+    }
+    if ([message.type isEqualToString:@"mov"]) {
+        bubbleView = [self movieBubbleViewForMessage:message];
     }
     
     CGRect rect = bubbleView.frame;
@@ -201,6 +211,68 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
+    return bubbleView;
+}
+
+- (UIView *)movieBubbleViewForMessage:(ChatMessage *)message {
+    NSLog(@"movieBubbleViewForMessage");
+    CGRect imageRect = CGRectMake(0.0, 0.0, 22.0, 22.0);
+    UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2)];
+    
+    UIImage *avatarImage = [UIImage imageNamed:@"发送到"];
+    UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
+    if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
+    else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
+    avatarImageView.backgroundColor = [UIColor redColor];
+    avatarImageView.layer.masksToBounds = YES;
+    avatarImageView.layer.cornerRadius = 16.0;
+    [bubbleView addSubview:avatarImageView];
+    
+    UIView *bubbleImageView = [[UIView alloc] init];
+    bubbleImageView.backgroundColor = message.isSend ? [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0] : [UIColor colorWithRed:30.0/255.0 green:130.0/255.0 blue:232.0/255.0 alpha:1.0];
+    bubbleImageView.layer.cornerRadius = 5.0;
+    if (message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
+    else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
+    [bubbleView addSubview:bubbleImageView];
+    
+    /*
+    UIImageView *imgView = [[UIImageView alloc] init];
+    [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
+    [bubbleImageView addSubview:imgView];
+     */
+    return bubbleView;
+}
+
+- (UIView *)soundBubbleViewForMessage:(ChatMessage *)message {
+    NSLog(@"soundBubbleViewForMessage");
+    CGRect imageRect = CGRectMake(0.0, 0.0, 22.0, 22.0);
+    UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2)];
+    
+    UIImage *avatarImage = [UIImage imageNamed:@"发送到"];
+    UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
+    if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
+    else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
+    avatarImageView.backgroundColor = [UIColor redColor];
+    avatarImageView.layer.masksToBounds = YES;
+    avatarImageView.layer.cornerRadius = 16.0;
+    [bubbleView addSubview:avatarImageView];
+    
+    UIView *bubbleImageView = [[UIView alloc] init];
+    bubbleImageView.backgroundColor = message.isSend ? [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0] : [UIColor colorWithRed:30.0/255.0 green:130.0/255.0 blue:232.0/255.0 alpha:1.0];
+    bubbleImageView.layer.cornerRadius = 5.0;
+    if (message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
+    else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
+    [bubbleView addSubview:bubbleImageView];
+    
+    /*
+    UIImageView *imgView = [[UIImageView alloc] init];
+    [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
+    [bubbleImageView addSubview:imgView];
+     */
     return bubbleView;
 }
 
@@ -437,107 +509,40 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
-    /*
     if (self.inputViewType == InputViewTypeVoice) {
         [self.textView becomeFirstResponder]; return;
     }
     self.inputViewType = InputViewTypeVoice;
     [self.textView resignFirstResponder];
-    */
     UIButton *button = [[UIButton alloc] init];
     button.backgroundColor = [UIColor redColor];
     [button setTitle:@"xxxxx" forState:UIControlStateNormal];
-    // [button setTitle:@"xxxxxxxxxxx" forState:UIControlStateNormal];
     button.frame = self.textView.frame;
     
-    [button addTarget:self action:@selector(downRecordButton:) forControlEvents:UIControlEventTouchDown];
-    [button addTarget:self action:@selector(upRecordButton:) forControlEvents:UIControlEventTouchUpInside];
-
-    [self.barView addSubview:button];
+    [button addTarget:self action:@selector(startRecord:) forControlEvents:UIControlEventTouchDown];
+    [button addTarget:self action:@selector(stopRecord:) forControlEvents:UIControlEventTouchUpInside];
     
-    /*
-    self.textView.inputView = nil;
-    [self.textView reloadInputViews];
-    // [self.textView resignFirstResponder];
-     */
+    [self.barView addSubview:button];
 }
 
-
-
-- (void)downRecordButton:(id)sender {
-    NSLog(@"downRecordButton");
+- (void)startRecord:(UIButton *)sender {
+    NSLog(@"startRecord");
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"sampleSound.wav"];
     
     AVAudioSession *audioSession=[AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     [audioSession setActive:YES error:nil];
     
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    self.wavPath = [documentsPath stringByAppendingPathComponent:@"sampleSound.wav"];
-
-
-    
-    NSURL *url= [NSURL fileURLWithPath:self.wavPath];
-    NSDictionary *setting=[self getAudioSetting];
-    NSError *error=nil;
-    self.audioRecorder=[[AVAudioRecorder alloc]initWithURL:url settings:setting error:&error];
-    self.audioRecorder.delegate = self;
-    self.audioRecorder.meteringEnabled=YES;//如果要监控声波则必须设置为YES
-    if (error) {
-        NSLog(@"创建录音机对象时发生错误，错误信息：%@",error.localizedDescription);
-        return;
-    }
-
-[self.audioRecorder record];
-
-    /*
-    if (![self.audioRecorder isRecording]) {
-        [self.audioRecorder record];
-        // self.timer.fireDate=[NSDate distantPast];
-    }
-     */
-}
-
-- (void)upRecordButton:(id)sender {
-    NSLog(@"upRecordButton");
-    
-       [self.audioRecorder stop];
-
-    
-}
-
-
-
-
-- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
-    NSLog(@"audioRecorderDidFinishRecording");
-    
-    
-    NSURL *url = [NSURL fileURLWithPath:self.wavPath];
     NSError *error = nil;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    self.audioPlayer.numberOfLoops = 0;
-    
-    [self.audioPlayer play];
-
-    // [self.audioPlayer prepareToPlay];
+    self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:wavPath] settings:[self getAudioSetting] error:&error];
+    self.audioRecorder.delegate = self;
+    // self.audioRecorder.meteringEnabled=YES;//如果要监控声波则必须设置为YES
     if (error) {
-        NSLog(@"创建播放器过程中发生错误，错误信息：%@", error.localizedDescription);
-        return;
+        NSLog(@"startRecord ：%@", error.localizedDescription); return;
     }
-    
-    
-    
-    
-    
-    NSData *data = [NSData dataWithContentsOfFile:self.wavPath];
-    NSLog(@"wav size : %ld", data.length);
-    
-    NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:self.wavPath]];
-    NSData *amrData = [QCEncodeAudio convertWavToAmrFile:wavData];
-    NSLog(@"amr size : %ld", amrData.length);
-
+    [self.audioRecorder record];
 }
-
 
 - (NSDictionary *)getAudioSetting {
     NSMutableDictionary *dicM = [NSMutableDictionary dictionary];
@@ -547,6 +552,32 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [dicM setObject:@(8) forKey:AVLinearPCMBitDepthKey];
     [dicM setObject:@(YES) forKey:AVLinearPCMIsFloatKey];
     return dicM;
+}
+
+- (void)stopRecord:(UIButton *)sender {
+    [self.audioRecorder stop];
+}
+
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
+    NSLog(@"audioRecorderDidFinishRecording");
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"sampleSound.wav"];
+    
+    NSError *error = nil;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
+    self.audioPlayer.numberOfLoops = 0;
+    [self.audioPlayer play];
+    if (error) {
+        NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
+    }
+    
+    NSData *data = [NSData dataWithContentsOfFile:wavPath];
+    NSLog(@"wav size : %ld", data.length);
+    NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
+    NSData *amrData = [QCEncodeAudio convertWavToAmrFile:wavData];
+    NSLog(@"amr size : %ld", amrData.length);
+    
+    [self uploadAmrWithAmrData:amrData];
 }
 
 - (void)uploadAmrWithAmrData:(NSData *)amrData {
