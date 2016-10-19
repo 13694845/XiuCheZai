@@ -239,16 +239,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     
-    
-    
-    UIButton *button = [[UIButton alloc] init];
-    button.frame = bubbleView.frame;
-    button.backgroundColor = [UIColor grayColor];
-    [button addTarget:self action:@selector(<#selector#>) forControlEvents:<#(UIControlEvents)#>]
-    [bubbleImageView addSubview:button];
-    
-    
-    // [bubbleImageView addSubview:imgView];
     return bubbleView;
 }
 
