@@ -70,13 +70,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 @property (weak, nonatomic) UIView *imageViewerView;
 
-// ******
-@property (strong, nonatomic) NSString *wavPath;
-@property (strong, nonatomic) NSString *amrPath;
-@property (strong, nonatomic) NSData *wavData;
-@property (strong, nonatomic) NSData *amrData;
-// ******
-
 @end
 
 @implementation ChatViewController
@@ -357,14 +350,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSLog(@"amrData : %ld", amrData.length);
     NSLog(@"wavData : %ld", wavData.length);
     
-    
     AVAudioSession *audioSession=[AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     [audioSession setActive:YES error:nil];
-    /*
-    NSLog(@"self.wavPath : %@", self.wavPath);
-    NSLog(@"self.wavData : %ld", self.wavData.length);
-     */
     
     NSError *error = nil;
     self.audioPlayer = [[AVAudioPlayer alloc] initWithData:wavData error:&error];
@@ -373,16 +361,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (error) {
         NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
     }
-    
-    /*
-    NSError *error = nil;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:self.wavPath] error:&error];
-    self.audioPlayer.numberOfLoops = 0;
-    [self.audioPlayer play];
-    if (error) {
-        NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
-    }
-     */
 }
 // *****************
 
@@ -701,12 +679,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
     NSData *amrData = [QCEncodeAudio convertWavToAmrFile:wavData];
     NSLog(@"amr size : %ld", amrData.length);
-    
-    
-    self.wavPath = wavPath;
-    self.wavData = wavData;
-    self.amrData = amrData;
-    
     
     [self uploadAmrWithAmrData:amrData];
 }
