@@ -522,12 +522,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSLog(@"showVoicePad");
     if (self.inputViewType == InputViewTypeVoice) {
         [sender setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
+        
         [self.textView becomeFirstResponder];
         return;
     }
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
     self.inputViewType = InputViewTypeVoice;
     [self.textView resignFirstResponder];
+    
     UIButton *button = [[UIButton alloc] init];
     button.layer.borderWidth = 1.0;
     button.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
