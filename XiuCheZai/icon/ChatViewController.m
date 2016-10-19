@@ -421,7 +421,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.senderId = @"555";
     self.senderName = @"zhangsan";
     self.senderAvatar = nil;
-    self.receiverId = @"123";
+    self.receiverId = @"3140";
     self.receiverName = @"lisi";
     self.receiverAvatar = nil;
     
