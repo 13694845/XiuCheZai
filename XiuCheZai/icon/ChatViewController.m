@@ -578,7 +578,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)stopRecord:(UIButton *)sender {
     NSLog(@"stopRecord");
-    [sender setTitle:@"松开 结束" forState:UIControlStateNormal];
+    [sender setTitle:@"按住 说话" forState:UIControlStateNormal];
     [self.audioRecorder stop];
 }
 
