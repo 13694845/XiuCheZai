@@ -87,10 +87,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSLog(@"setInputViewType : %ld", inputViewType);
     switch (inputViewType) {
         case InputViewTypeKeyboard: {
+            /*
             [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
             [self.recordVoiceButton removeFromSuperview];
             [self.emotionButton setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
             [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+             */
             break;
         }
         default:
@@ -641,7 +643,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showEmotionPad:(UIButton *)sender {
     if (self.inputViewType == InputViewTypeEmoji) {
-        self.inputViewType = InputViewTypeKeyboard;
+        // self.inputViewType = InputViewTypeKeyboard;
         [sender setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder];
         return;
