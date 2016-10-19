@@ -10,6 +10,6 @@
 
 @interface ChatImageViewer : UIView
 
-- (instancetype)initWithImage:(UIImage *)image;
+- (instancetype)initWithImageURL:(NSString *)imageURL;
 
 @end

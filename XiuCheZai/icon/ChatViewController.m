@@ -69,6 +69,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (strong, nonatomic) AVAudioRecorder *audioRecorder;
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
+@property (weak, nonatomic) UIView *imageViewerView;
+
 @end
 
 @implementation ChatViewController
@@ -271,14 +273,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [closeButton addTarget:self action:@selector(closeImageViewer) forControlEvents:UIControlEventTouchUpInside];
     [backgroundView addSubview:closeButton];
     [self.view addSubview:backgroundView];
+    
+    self.imageViewerView = backgroundView;
 }
 
 - (void)closeImageViewer {
-    
+    [self.imageViewerView removeFromSuperview];
 }
 // *****************
-
-
 
 - (UIView *)movieBubbleViewForMessage:(ChatMessage *)message {
     NSLog(@"movieBubbleViewForMessage");
@@ -301,13 +303,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
     
-    /*
-    UIImageView *imgView = [[UIImageView alloc] init];
-    [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
-     */
     return bubbleView;
 }
 
