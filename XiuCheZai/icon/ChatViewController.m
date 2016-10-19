@@ -515,7 +515,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-//    self.inputViewType = InputViewTypeKeyboard;
+    self.inputViewType = InputViewTypeKeyboard;
     return YES;
 }
 
