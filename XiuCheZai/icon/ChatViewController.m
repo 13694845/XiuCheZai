@@ -529,8 +529,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.inputViewType = InputViewTypeVoice;
     [self.textView resignFirstResponder];
     UIButton *button = [[UIButton alloc] init];
+    button.layer.borderWidth = 1.0;
+    button.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
     button.layer.cornerRadius = 4.0;
-    button.backgroundColor = [UIColor grayColor];
+    button.backgroundColor = [UIColor whiteColor];
+    button.titleLabel.font =[UIFont systemFontOfSize:14.0];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [button setTitle:@"按住 说话" forState:UIControlStateNormal];
     button.frame = self.textView.frame;
     [button addTarget:self action:@selector(startRecord:) forControlEvents:UIControlEventTouchDown];
@@ -540,6 +544,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)startRecord:(UIButton *)sender {
     NSLog(@"startRecord");
+    [sender setTitle:@"松开 结束" forState:UIControlStateNormal];
+    
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"sampleSound.wav"];
     
@@ -550,7 +556,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSError *error = nil;
     self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:wavPath] settings:[self getAudioSetting] error:&error];
     self.audioRecorder.delegate = self;
-    // self.audioRecorder.meteringEnabled=YES;//如果要监控声波则必须设置为YES
     if (error) {
         NSLog(@"startRecord ：%@", error.localizedDescription); return;
     }
@@ -568,6 +573,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)stopRecord:(UIButton *)sender {
+    NSLog(@"stopRecord");
+    [sender setTitle:@"松开 结束" forState:UIControlStateNormal];
     [self.audioRecorder stop];
 }
 
