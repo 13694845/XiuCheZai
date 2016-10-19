@@ -20,7 +20,6 @@
 #import "ChatEmojiInputView.h"
 #import "ChatOtherInputView.h"
 #import "QCEncodeAudio.h"
-// #import "ChatTextBubbleView.h"
 
 @import AVFoundation;
 
