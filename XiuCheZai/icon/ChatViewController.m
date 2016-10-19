@@ -613,21 +613,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }];
 }
 
-
-
-
 - (IBAction)showEmotionPad:(UIButton *)sender {
-    
-
-    
     if (self.inputViewType == InputViewTypeEmoji) {
         [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder];
         return;
     }
-    
     [sender setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
-
     self.inputViewType = InputViewTypeEmoji;
     ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
     emojiInputView.delegate = self;
@@ -659,6 +651,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showOtherPad:(id)sender {
     if (self.inputViewType == InputViewTypeOther) {
+        [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder]; return;
     }
     self.inputViewType = InputViewTypeOther;
