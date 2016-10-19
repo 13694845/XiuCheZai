@@ -1015,8 +1015,6 @@
 				6C1207411DA33CBD00FF4138 /* 组-45@3x.png */,
 				6C1207421DA33CBD00FF4138 /* 组-46@2x.png */,
 				6C1207431DA33CBD00FF4138 /* 组-46@3x.png */,
-				6C1207461DA33CBD00FF4138 /* add@2x.png */,
-				6C1207471DA33CBD00FF4138 /* add@3x.png */,
 				6C1207481DA33CBD00FF4138 /* data@2x.png */,
 				6C1207491DA33CBD00FF4138 /* data@3x.png */,
 				6C12074A1DA33CBE00FF4138 /* drafts@2x.png */,
@@ -1035,6 +1033,8 @@
 				6C2069811DB6FDEA00B2E0BC /* keyboard@3x.png */,
 				6C12070C1DA33CBD00FF4138 /* emoji@2x.png */,
 				6C12070D1DA33CBD00FF4138 /* emoji@3x.png */,
+				6C1207461DA33CBD00FF4138 /* add@2x.png */,
+				6C1207471DA33CBD00FF4138 /* add@3x.png */,
 			);
 			name = ChatIcons;
 			sourceTree = "<group>";
