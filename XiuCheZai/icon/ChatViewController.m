@@ -93,8 +93,28 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
             [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
             break;
         }
-        default:
+        case InputViewTypeEmoji: {
+            [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
+            [self.recordVoiceButton removeFromSuperview];
+            [self.emotionButton setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
+            [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
             break;
+        }
+        case InputViewTypeOther: {
+            [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
+            [self.recordVoiceButton removeFromSuperview];
+            [self.emotionButton setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
+            [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+            break;
+        }
+        case InputViewTypeVoice: {
+            [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
+            [self.recordVoiceButton removeFromSuperview];
+            [self.emotionButton setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
+            [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+            break;
+        }
+        default: break;
     }
 }
 
@@ -640,7 +660,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showEmotionPad:(UIButton *)sender {
     if (self.inputViewType == InputViewTypeEmoji) {
-        // self.inputViewType = InputViewTypeKeyboard;
         [sender setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder];
         return;
@@ -677,7 +696,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showOtherPad:(id)sender {
     if (self.inputViewType == InputViewTypeOther) {
-        // self.inputViewType = InputViewTypeKeyboard;
         [sender setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder];
         return;
