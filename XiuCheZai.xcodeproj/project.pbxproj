@@ -1905,7 +1905,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/XiuCheZai",
-					"$(PROJECT_DIR)/XiuCheZai/QCEncodeAudio/lib",
 					"$(PROJECT_DIR)/XiuCheZai/VoiceConvert/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.8673h.XiuCheZai;
@@ -1936,7 +1935,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/XiuCheZai",
-					"$(PROJECT_DIR)/XiuCheZai/QCEncodeAudio/lib",
 					"$(PROJECT_DIR)/XiuCheZai/VoiceConvert/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.8673h.XiuCheZai;

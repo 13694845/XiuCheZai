@@ -16,7 +16,6 @@
 
 @property (nonatomic) BOOL fullScreen;
 @property (nonatomic) BOOL needsRefresh;
-// *******
 @property (nonatomic) BOOL showBack;
 
 @end
@@ -32,11 +31,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
-    // if (!self.webView.isLoading && self.needsRefresh) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-    if (self.needsRefresh) {
-        // if (self.webView.isLoading) [self.webView stopLoading];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-    }
+    if (self.needsRefresh) [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
 }
 
 - (void)viewWillLayoutSubviews {
