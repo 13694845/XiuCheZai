@@ -993,7 +993,7 @@
                                                         </collectionViewFlowLayout>
                                                         <cells>
                                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="rGl-YZ-204" customClass="RecommenderCollectionViewCell">
-                                                                <rect key="frame" x="0.0" y="6.5" width="66" height="91"/>
+                                                                <rect key="frame" x="0.0" y="7" width="66" height="91"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                     <rect key="frame" x="0.0" y="0.0" width="66" height="91"/>
@@ -2437,7 +2437,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yNc-zX-pZJ" id="gIV-Lg-q3m">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -3366,7 +3366,7 @@
         <image name="tab_icon51.png" width="25" height="25"/>
         <image name="tab_icon60.png" width="25" height="25"/>
         <image name="tab_icon62.png" width="25" height="25"/>
-        <image name="vic.png" width="16" height="21"/>
+        <image name="vic.png" width="22" height="22"/>
         <image name="发现.png" width="22" height="22"/>
         <image name="表情.png" width="22" height="22"/>
     </resources>

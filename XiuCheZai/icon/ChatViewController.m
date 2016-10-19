@@ -210,9 +210,24 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
+    
+    
+    UIButton *b = [[UIButton alloc] init];
+    [b setBackgroundImage:[UIImage imageNamed:@"vic"] forState:UIControlStateNormal];
+    b.contentMode = UIViewContentModeScaleAspectFit;
     [bubbleImageView addSubview:imgView];
+    
+    
+    
+    // [bubbleImageView addSubview:imgView];
     return bubbleView;
 }
+
+
+- (void)viewImage:(UIImage *)image {
+    NSLog(@"viewImage");
+}
+
 
 - (UIView *)movieBubbleViewForMessage:(ChatMessage *)message {
     NSLog(@"movieBubbleViewForMessage");
@@ -606,12 +621,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
     
     if (self.inputViewType == InputViewTypeEmoji) {
-        [sender setBackgroundImage:[UIImage imageNamed:@"表情"] forState:UIControlStateNormal];
+        [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder];
         return;
     }
     
-    [sender setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+    [sender setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
 
     self.inputViewType = InputViewTypeEmoji;
     ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
