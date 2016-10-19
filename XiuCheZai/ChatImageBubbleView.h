@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChatMessage.h"
 
 @interface ChatImageBubbleView : UIView
 
