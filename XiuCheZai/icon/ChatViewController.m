@@ -345,30 +345,17 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)playVoice:(UIButton *)sender {
     ChatMessage *message = self.rows[sender.tag];
-    UIView *backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
-    backgroundView.backgroundColor = [UIColor blackColor];
     
-    UIImageView *imgView = [[UIImageView alloc] init];
-    [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
-    imgView.contentMode = UIViewContentModeScaleAspectFit;
-    imgView.frame = self.view.bounds;
-    [backgroundView addSubview:imgView];
     
-    UIButton *closeButton = [[UIButton alloc] init];
-    closeButton.frame = CGRectMake(20.0, 20.0, 32.0, 32.0);
-    [closeButton setTitle:@"X" forState:UIControlStateNormal];
-    closeButton.backgroundColor = [UIColor grayColor];
-    closeButton.layer.cornerRadius = 16.0;
-    [closeButton addTarget:self action:@selector(closeImageViewer) forControlEvents:UIControlEventTouchUpInside];
-    [backgroundView addSubview:closeButton];
-    [self.view addSubview:backgroundView];
-    
-    self.imageViewerView = backgroundView;
+    NSError *error = nil;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:message.content] error:&error];
+    self.audioPlayer.numberOfLoops = 0;
+    [self.audioPlayer play];
+    if (error) {
+        NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
+    }
 }
-
-
-
-
+// *****************
 
 - (void)goBack:(id)sender {
     NSLog(@"goBack");
