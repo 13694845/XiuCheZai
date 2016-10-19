@@ -2466,7 +2466,7 @@
                                             <constraint firstAttribute="height" constant="22" id="1cm-9H-E2A"/>
                                             <constraint firstAttribute="width" constant="22" id="XRg-NX-uDF"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="vic.png"/>
+                                        <state key="normal" backgroundImage="mic.png"/>
                                         <connections>
                                             <action selector="showVoicePad:" destination="0sp-B5-kfJ" eventType="touchUpInside" id="4OZ-HE-EG9"/>
                                         </connections>
@@ -3356,6 +3356,7 @@
         <image name="menu_icon18.jpg" width="150" height="150"/>
         <image name="menu_icon19.jpg" width="150" height="150"/>
         <image name="menu_newxcz.png" width="128" height="126"/>
+        <image name="mic.png" width="22" height="22"/>
         <image name="recommender.jpg" width="250" height="250"/>
         <image name="tab_icon10.png" width="25" height="25"/>
         <image name="tab_icon11.png" width="25" height="25"/>
@@ -3367,7 +3368,6 @@
         <image name="tab_icon51.png" width="25" height="25"/>
         <image name="tab_icon60.png" width="25" height="25"/>
         <image name="tab_icon62.png" width="25" height="25"/>
-        <image name="vic.png" width="22" height="22"/>
         <image name="发现.png" width="22" height="22"/>
     </resources>
 </document>
