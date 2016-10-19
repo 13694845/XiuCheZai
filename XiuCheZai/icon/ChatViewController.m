@@ -247,7 +247,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     // *****************
     UIButton *button = [[UIButton alloc] init];
     button.frame = bubbleView.frame;
-    button.backgroundColor = [UIColor grayColor];
     button.tag = [self.rows indexOfObject:message];
     [button addTarget:self action:@selector(viewImage:) forControlEvents:UIControlEventTouchUpInside];
     [bubbleImageView addSubview:button];
@@ -331,15 +330,45 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
     
-    /*
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_sender"]];
+    imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
+    [bubbleImageView addSubview:imgView];
+
+    // *****************
+    UIButton *button = [[UIButton alloc] init];
+    button.frame = bubbleView.frame;
+    button.tag = [self.rows indexOfObject:message];
+    [button addTarget:self action:@selector(playVoice:) forControlEvents:UIControlEventTouchUpInside];
+    [bubbleImageView addSubview:button];
+    return bubbleView;
+}
+
+- (void)playVoice:(UIButton *)sender {
+    ChatMessage *message = self.rows[sender.tag];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
+    backgroundView.backgroundColor = [UIColor blackColor];
+    
     UIImageView *imgView = [[UIImageView alloc] init];
     [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
-    imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
-    [bubbleImageView addSubview:imgView];
-     */
-    return bubbleView;
+    imgView.frame = self.view.bounds;
+    [backgroundView addSubview:imgView];
+    
+    UIButton *closeButton = [[UIButton alloc] init];
+    closeButton.frame = CGRectMake(20.0, 20.0, 32.0, 32.0);
+    [closeButton setTitle:@"X" forState:UIControlStateNormal];
+    closeButton.backgroundColor = [UIColor grayColor];
+    closeButton.layer.cornerRadius = 16.0;
+    [closeButton addTarget:self action:@selector(closeImageViewer) forControlEvents:UIControlEventTouchUpInside];
+    [backgroundView addSubview:closeButton];
+    [self.view addSubview:backgroundView];
+    
+    self.imageViewerView = backgroundView;
 }
+
+
+
+
 
 - (void)goBack:(id)sender {
     NSLog(@"goBack");
