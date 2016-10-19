@@ -123,11 +123,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     for (UIView *cellView in cell.subviews) [cellView removeFromSuperview];
-    
     ChatMessage *message = self.rows[indexPath.row];
-    
-    NSLog(@"message : %@", message);
-    
     UIView *bubbleView;
     if ([message.type isEqualToString:@"txt"]) {
         bubbleView = [self textBubbleViewForMessage:message];
@@ -136,7 +132,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         bubbleView = [self imageBubbleViewForMessage:message];
     }
     if ([message.type isEqualToString:@"msc"]) {
-        bubbleView = [self soundBubbleViewForMessage:message];
+        bubbleView = [self voiceBubbleViewForMessage:message];
     }
     if ([message.type isEqualToString:@"mov"]) {
         bubbleView = [self movieBubbleViewForMessage:message];
@@ -260,7 +256,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     return bubbleView;
 }
 
-- (UIView *)soundBubbleViewForMessage:(ChatMessage *)message {
+- (UIView *)voiceBubbleViewForMessage:(ChatMessage *)message {
     NSLog(@"soundBubbleViewForMessage");
     CGRect imageRect = CGRectMake(0.0, 0.0, 22.0, 22.0);
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2)];
