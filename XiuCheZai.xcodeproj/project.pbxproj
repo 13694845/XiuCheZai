@@ -161,9 +161,6 @@
 		6C17FADF1CB497F000F95FF4 /* SHA1DataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FADE1CB497F000F95FF4 /* SHA1DataEncryptor.m */; };
 		6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FAE11CB885D600F95FF4 /* MD5DataEncryptor.m */; };
 		6C19A97C1C1E406C002451F6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */; };
-		6C20697D1DB61B4200B2E0BC /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069731DB61B4200B2E0BC /* libopencore-amrnb.a */; };
-		6C20697E1DB61B4200B2E0BC /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069741DB61B4200B2E0BC /* libopencore-amrwb.a */; };
-		6C20697F1DB61B4200B2E0BC /* QCEncodeAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C20697C1DB61B4200B2E0BC /* QCEncodeAudio.m */; };
 		6C2069821DB6FDEA00B2E0BC /* keyboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C2069801DB6FDEA00B2E0BC /* keyboard@2x.png */; };
 		6C2069831DB6FDEA00B2E0BC /* keyboard@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C2069811DB6FDEA00B2E0BC /* keyboard@3x.png */; };
 		6C20698C1DB73AAF00B2E0BC /* ChatTextBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C20698B1DB73AAF00B2E0BC /* ChatTextBubbleView.m */; };
@@ -173,6 +170,10 @@
 		6C20699E1DB74A1700B2E0BC /* voice_sender@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C20699A1DB74A1700B2E0BC /* voice_sender@3x.png */; };
 		6C20699F1DB74A1700B2E0BC /* voice_receiver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C20699B1DB74A1700B2E0BC /* voice_receiver@2x.png */; };
 		6C2069A01DB74A1700B2E0BC /* voice_receiver@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C20699C1DB74A1700B2E0BC /* voice_receiver@3x.png */; };
+		6C2069B01DB79D6B00B2E0BC /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */; };
+		6C2069B11DB79D6B00B2E0BC /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */; };
+		6C2069B21DB79D6B00B2E0BC /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A71DB79D6B00B2E0BC /* libopencore-amrwb.a */; };
+		6C2069B31DB79D6B00B2E0BC /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C2069AF1DB79D6B00B2E0BC /* VoiceConverter.mm */; };
 		6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */; };
 		6C24460E1C9FD69300F4F3C0 /* banner04.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C24460D1C9FD69300F4F3C0 /* banner04.jpg */; };
 		6C25D6091D17BBD0007D8BE4 /* error.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C25D6081D17BBD0007D8BE4 /* error.html */; };
@@ -546,14 +547,6 @@
 		6C17FAE01CB885D600F95FF4 /* MD5DataEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5DataEncryptor.h; sourceTree = "<group>"; };
 		6C17FAE11CB885D600F95FF4 /* MD5DataEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5DataEncryptor.m; sourceTree = "<group>"; };
 		6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = XiuCheZai/libWeChatSDK.a; sourceTree = "<group>"; };
-		6C2069731DB61B4200B2E0BC /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
-		6C2069741DB61B4200B2E0BC /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
-		6C2069761DB61B4200B2E0BC /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
-		6C2069771DB61B4200B2E0BC /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
-		6C2069791DB61B4200B2E0BC /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
-		6C20697A1DB61B4200B2E0BC /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
-		6C20697B1DB61B4200B2E0BC /* QCEncodeAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCEncodeAudio.h; sourceTree = "<group>"; };
-		6C20697C1DB61B4200B2E0BC /* QCEncodeAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCEncodeAudio.m; sourceTree = "<group>"; };
 		6C2069801DB6FDEA00B2E0BC /* keyboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard@2x.png"; sourceTree = "<group>"; };
 		6C2069811DB6FDEA00B2E0BC /* keyboard@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard@3x.png"; sourceTree = "<group>"; };
 		6C20698A1DB73AAF00B2E0BC /* ChatTextBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTextBubbleView.h; sourceTree = "<group>"; };
@@ -566,6 +559,16 @@
 		6C20699A1DB74A1700B2E0BC /* voice_sender@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voice_sender@3x.png"; sourceTree = "<group>"; };
 		6C20699B1DB74A1700B2E0BC /* voice_receiver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voice_receiver@2x.png"; sourceTree = "<group>"; };
 		6C20699C1DB74A1700B2E0BC /* voice_receiver@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voice_receiver@3x.png"; sourceTree = "<group>"; };
+		6C2069A31DB79D6B00B2E0BC /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		6C2069A71DB79D6B00B2E0BC /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		6C2069A91DB79D6B00B2E0BC /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		6C2069AA1DB79D6B00B2E0BC /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		6C2069AC1DB79D6B00B2E0BC /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		6C2069AD1DB79D6B00B2E0BC /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		6C2069AE1DB79D6B00B2E0BC /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
+		6C2069AF1DB79D6B00B2E0BC /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
 		6C24460A1C9FCAAC00F4F3C0 /* GoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDetailViewController.h; sourceTree = "<group>"; };
 		6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
 		6C24460D1C9FD69300F4F3C0 /* banner04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = banner04.jpg; sourceTree = "<group>"; };
@@ -950,6 +953,7 @@
 				6CB2AB111C12DDED0025260A /* SystemConfiguration.framework in Frameworks */,
 				6CB39B111D29E951007CEAF8 /* BaiduMapAPI_Map.framework in Frameworks */,
 				6CB2AB0F1C12DDE10025260A /* CoreTelephony.framework in Frameworks */,
+				6C2069B11DB79D6B00B2E0BC /* libopencore-amrnb.a in Frameworks */,
 				6CB2AB0D1C12DDD40025260A /* QuartzCore.framework in Frameworks */,
 				6CB2AC061C1659FB0025260A /* CoreText.framework in Frameworks */,
 				6CB2AB0B1C12DDC20025260A /* CoreGraphics.framework in Frameworks */,
@@ -962,8 +966,7 @@
 				6CB39B141D29E951007CEAF8 /* BaiduMapAPI_Utils.framework in Frameworks */,
 				6CB2AC831C16613E0025260A /* AlipaySDK.framework in Frameworks */,
 				6CB39B0F1D29E951007CEAF8 /* BaiduMapAPI_Cloud.framework in Frameworks */,
-				6C20697E1DB61B4200B2E0BC /* libopencore-amrwb.a in Frameworks */,
-				6C20697D1DB61B4200B2E0BC /* libopencore-amrnb.a in Frameworks */,
+				6C2069B21DB79D6B00B2E0BC /* libopencore-amrwb.a in Frameworks */,
 				6C59779E1C52FE3700547428 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1157,41 +1160,51 @@
 			path = loo;
 			sourceTree = "<group>";
 		};
-		6C2069711DB61B4200B2E0BC /* QCEncodeAudio */ = {
+		6C2069A11DB79D6B00B2E0BC /* VoiceConvert */ = {
 			isa = PBXGroup;
 			children = (
-				6C2069721DB61B4200B2E0BC /* lib */,
-				6C2069751DB61B4200B2E0BC /* opencore-amrnb */,
-				6C2069781DB61B4200B2E0BC /* opencore-amrwb */,
-				6C20697B1DB61B4200B2E0BC /* QCEncodeAudio.h */,
-				6C20697C1DB61B4200B2E0BC /* QCEncodeAudio.m */,
+				6C2069A21DB79D6B00B2E0BC /* amrwapper */,
+				6C2069A51DB79D6B00B2E0BC /* lib */,
+				6C2069A81DB79D6B00B2E0BC /* opencore-amrnb */,
+				6C2069AB1DB79D6B00B2E0BC /* opencore-amrwb */,
+				6C2069AE1DB79D6B00B2E0BC /* VoiceConverter.h */,
+				6C2069AF1DB79D6B00B2E0BC /* VoiceConverter.mm */,
 			);
-			path = QCEncodeAudio;
+			path = VoiceConvert;
 			sourceTree = "<group>";
 		};
-		6C2069721DB61B4200B2E0BC /* lib */ = {
+		6C2069A21DB79D6B00B2E0BC /* amrwapper */ = {
 			isa = PBXGroup;
 			children = (
-				6C2069731DB61B4200B2E0BC /* libopencore-amrnb.a */,
-				6C2069741DB61B4200B2E0BC /* libopencore-amrwb.a */,
+				6C2069A31DB79D6B00B2E0BC /* amrFileCodec.h */,
+				6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */,
+			);
+			path = amrwapper;
+			sourceTree = "<group>";
+		};
+		6C2069A51DB79D6B00B2E0BC /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */,
+				6C2069A71DB79D6B00B2E0BC /* libopencore-amrwb.a */,
 			);
 			path = lib;
 			sourceTree = "<group>";
 		};
-		6C2069751DB61B4200B2E0BC /* opencore-amrnb */ = {
+		6C2069A81DB79D6B00B2E0BC /* opencore-amrnb */ = {
 			isa = PBXGroup;
 			children = (
-				6C2069761DB61B4200B2E0BC /* interf_dec.h */,
-				6C2069771DB61B4200B2E0BC /* interf_enc.h */,
+				6C2069A91DB79D6B00B2E0BC /* interf_dec.h */,
+				6C2069AA1DB79D6B00B2E0BC /* interf_enc.h */,
 			);
 			path = "opencore-amrnb";
 			sourceTree = "<group>";
 		};
-		6C2069781DB61B4200B2E0BC /* opencore-amrwb */ = {
+		6C2069AB1DB79D6B00B2E0BC /* opencore-amrwb */ = {
 			isa = PBXGroup;
 			children = (
-				6C2069791DB61B4200B2E0BC /* dec_if.h */,
-				6C20697A1DB61B4200B2E0BC /* if_rom.h */,
+				6C2069AC1DB79D6B00B2E0BC /* dec_if.h */,
+				6C2069AD1DB79D6B00B2E0BC /* if_rom.h */,
 			);
 			path = "opencore-amrwb";
 			sourceTree = "<group>";
@@ -1584,7 +1597,7 @@
 		6CABF7091C0E978B00DF3EFF /* XiuCheZai */ = {
 			isa = PBXGroup;
 			children = (
-				6C2069711DB61B4200B2E0BC /* QCEncodeAudio */,
+				6C2069A11DB79D6B00B2E0BC /* VoiceConvert */,
 				6C1207E91DB0C47F00FF4138 /* loo */,
 				6C1207C81DAE196500FF4138 /* Emoji */,
 				6CC1908C1DA08A100098BB40 /* GCDAsyncSocket */,
@@ -2114,6 +2127,7 @@
 				6C4D0C4A1C28E998003E96E8 /* UIImageView+HighlightedWebCache.m in Sources */,
 				6C8EC2741C1E548000BCABB5 /* UIImageView+AFNetworking.m in Sources */,
 				6C4D0C471C28E998003E96E8 /* UIImage+GIF.m in Sources */,
+				6C2069B31DB79D6B00B2E0BC /* VoiceConverter.mm in Sources */,
 				6C1208511DB4B34600FF4138 /* ChatOtherInputView.m in Sources */,
 				6C4D0C401C28E998003E96E8 /* SDWebImageCompat.m in Sources */,
 				6C6DD9571D67010400FEAEDD /* XCZNewsTableViewCell.m in Sources */,
@@ -2139,7 +2153,6 @@
 				6CE3638A1D73BB2800AA0B53 /* XCZDiscoveryPageViewController.m in Sources */,
 				6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */,
 				6C91C35A1C9A84D2004C0CB4 /* NSDataEx.m in Sources */,
-				6C20697F1DB61B4200B2E0BC /* QCEncodeAudio.m in Sources */,
 				6CC190921DA08A290098BB40 /* GCDAsyncUdpSocket.m in Sources */,
 				6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */,
 				6C8EC2721C1E548000BCABB5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -2150,6 +2163,7 @@
 				6C17FADF1CB497F000F95FF4 /* SHA1DataEncryptor.m in Sources */,
 				6C7CE9141CD8773A00617964 /* ScannerViewController.m in Sources */,
 				6C91C3591C9A84D2004C0CB4 /* MD5DataSigner.m in Sources */,
+				6C2069B01DB79D6B00B2E0BC /* amrFileCodec.mm in Sources */,
 				6C1207E71DB0688E00FF4138 /* ChatConfig.m in Sources */,
 				6C91C3581C9A84D2004C0CB4 /* DataVerifier.m in Sources */,
 				6C91C2C21C9A2E66004C0CB4 /* StoreViewController.m in Sources */,
@@ -2301,6 +2315,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/XiuCheZai",
 					"$(PROJECT_DIR)/XiuCheZai/QCEncodeAudio/lib",
+					"$(PROJECT_DIR)/XiuCheZai/VoiceConvert/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.8673h.XiuCheZai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2331,6 +2346,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/XiuCheZai",
 					"$(PROJECT_DIR)/XiuCheZai/QCEncodeAudio/lib",
+					"$(PROJECT_DIR)/XiuCheZai/VoiceConvert/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.8673h.XiuCheZai;
 				PRODUCT_NAME = "$(TARGET_NAME)";

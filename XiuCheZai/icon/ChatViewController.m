@@ -19,7 +19,7 @@
 #import "ChatEmojiManager.h"
 #import "ChatEmojiInputView.h"
 #import "ChatOtherInputView.h"
-#import "QCEncodeAudio.h"
+#import "VoiceConverter.h"
 
 @import AVFoundation;
 
@@ -342,6 +342,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)playVoice:(UIButton *)sender {
+    /*
     ChatMessage *message = self.rows[sender.tag];
     NSLog(@"message.content : %@", message.content);
     
@@ -361,6 +362,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (error) {
         NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
     }
+     */
 }
 // *****************
 
@@ -629,36 +631,109 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [sender setTitle:@"松开 结束" forState:UIControlStateNormal];
     
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"sampleSound.wav"];
+    NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"temp.wav"];
     NSLog(@"wavPath : %@", wavPath);
     
-    AVAudioSession *audioSession=[AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    [audioSession setActive:YES error:nil];
+    /*
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+*/
     
     NSError *error = nil;
-    self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:wavPath] settings:[self getAudioSetting] error:&error];
-    self.audioRecorder.delegate = self;
+    self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:wavPath] settings:[VoiceConverter GetAudioRecorderSettingDict] error:&error];
+    // self.audioRecorder.delegate = self;
     if (error) {
         NSLog(@"startRecord ：%@", error.localizedDescription); return;
     }
-    [self.audioRecorder record];
-}
+    if ([self.audioRecorder prepareToRecord]) {
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+        [[AVAudioSession sharedInstance] setActive:YES error:nil];
 
-- (NSDictionary *)getAudioSetting {
-    NSMutableDictionary *dicM = [NSMutableDictionary dictionary];
-    [dicM setObject:@(kAudioFormatLinearPCM) forKey:AVFormatIDKey];
-    [dicM setObject:@(8000) forKey:AVSampleRateKey];
-    [dicM setObject:@(1) forKey:AVNumberOfChannelsKey];
-    [dicM setObject:@(8) forKey:AVLinearPCMBitDepthKey];
-    [dicM setObject:@(YES) forKey:AVLinearPCMIsFloatKey];
-    return dicM;
+    }
+    [self.audioRecorder record];
 }
 
 - (void)stopRecord:(UIButton *)sender {
     NSLog(@"stopRecord");
     [sender setTitle:@"按住 说话" forState:UIControlStateNormal];
     [self.audioRecorder stop];
+    
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"temp.wav"];
+    NSString *amrPath = [documentsPath stringByAppendingPathComponent:@"temp.amr"];
+
+    
+    if ([VoiceConverter ConvertWavToAmr:wavPath amrSavePath:amrPath]) {
+        NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
+        NSLog(@"wavData : %ld", wavData.length);
+        NSData *amrData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:amrPath]];
+        NSLog(@"amrData : %ld", amrData.length);
+        
+        /*
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+        [[AVAudioSession sharedInstance] setActive:YES error:nil];
+        */
+        
+        /*
+        NSError *error = nil;
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
+        self.audioPlayer.numberOfLoops = 0;
+        [self.audioPlayer play];
+        if (error) {
+            NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
+        }
+         */
+
+    }
+    
+    
+    if ([VoiceConverter ConvertWavToAmr:wavPath amrSavePath:amrPath]) {
+        NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
+        NSLog(@"wavData : %ld", wavData.length);
+        NSData *amrData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:amrPath]];
+        NSLog(@"amrData : %ld", amrData.length);
+        
+        /*
+         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+         [[AVAudioSession sharedInstance] setActive:YES error:nil];
+         */
+        /*
+        NSError *error = nil;
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
+        self.audioPlayer.numberOfLoops = 0;
+        [self.audioPlayer play];
+        if (error) {
+            NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
+        }
+        */
+        // self.audioPlayer = [self.audioPlayer initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:nil];
+        // [self.audioPlayer play];
+        
+    }
+
+    NSString *wav__Path = [documentsPath stringByAppendingPathComponent:@"temp___.wav"];
+
+    
+    if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wav__Path]) {
+        NSData *wav__Data = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wav__Path]];
+        NSLog(@"wav__Data : %ld", wav__Data.length);
+
+        NSError *error = nil;
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wav__Path] error:&error];
+        self.audioPlayer.numberOfLoops = 0;
+        [self.audioPlayer play];
+        if (error) {
+            NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
+        }
+
+    }
+
+    
+    
+    //     self.player = [self.player initWithContentsOfURL:[NSURL URLWithString:self.recordFilePath] error:nil];
+
+    
+
 }
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
@@ -678,10 +753,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSData *data = [NSData dataWithContentsOfFile:wavPath];
     NSLog(@"wav size : %ld", data.length);
     NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
+    /*
     NSData *amrData = [QCEncodeAudio convertWavToAmrFile:wavData];
     NSLog(@"amr size : %ld", amrData.length);
-    
-    [self uploadAmrWithAmrData:amrData];
+    */
+    // [self uploadAmrWithAmrData:amrData];
 }
 
 - (void)uploadAmrWithAmrData:(NSData *)amrData {
