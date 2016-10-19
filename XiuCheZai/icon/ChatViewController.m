@@ -522,27 +522,30 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
     if (self.inputViewType == InputViewTypeVoice) {
+        self.inputViewType = InputViewTypeKeyboard;
         [sender setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
         [self.textView resignFirstResponder];
+        [self.recordVoiceButton removeFromSuperview];
         return;
     }
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
     self.inputViewType = InputViewTypeVoice;
     [self.textView resignFirstResponder];
     
-    // ********
-    UIButton *button = [[UIButton alloc] init];
-    button.layer.borderWidth = 1.0;
-    button.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
-    button.layer.cornerRadius = 4.0;
-    button.backgroundColor = [UIColor whiteColor];
-    button.titleLabel.font =[UIFont systemFontOfSize:14.0];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button setTitle:@"按住 说话" forState:UIControlStateNormal];
-    button.frame = self.textView.frame;
-    [button addTarget:self action:@selector(startRecord:) forControlEvents:UIControlEventTouchDown];
-    [button addTarget:self action:@selector(stopRecord:) forControlEvents:UIControlEventTouchUpInside];
-    [self.barView addSubview:button];
+    if (!self.recordVoiceButton) {
+        self.recordVoiceButton = [[UIButton alloc] init];
+        self.recordVoiceButton.layer.borderWidth = 1.0;
+        self.recordVoiceButton.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
+        self.recordVoiceButton.layer.cornerRadius = 4.0;
+        self.recordVoiceButton.backgroundColor = [UIColor whiteColor];
+        self.recordVoiceButton.titleLabel.font =[UIFont systemFontOfSize:14.0];
+        [self.recordVoiceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.recordVoiceButton.frame = self.textView.frame;
+        [self.recordVoiceButton addTarget:self action:@selector(startRecord:) forControlEvents:UIControlEventTouchDown];
+        [self.recordVoiceButton addTarget:self action:@selector(stopRecord:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    [self.recordVoiceButton setTitle:@"按住 说话" forState:UIControlStateNormal];
+    [self.barView addSubview:self.recordVoiceButton];
 }
 
 - (void)startRecord:(UIButton *)sender {
