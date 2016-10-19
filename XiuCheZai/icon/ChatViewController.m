@@ -240,6 +240,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     
     
+    
+    
     UIButton *b = [[UIButton alloc] init];
     [b setBackgroundImage:[UIImage imageNamed:@"vic"] forState:UIControlStateNormal];
     b.contentMode = UIViewContentModeScaleAspectFit;
