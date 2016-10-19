@@ -354,7 +354,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSLog(@"message.content : %@", message.content);
     
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
-    NSData *wavData = [QCEncodeAudio convertAmrToWav:amrData];
+    NSData *wavData = [QCEncodeAudio convertAmrToWavFile:amrData];
     NSLog(@"amrData : %ld", amrData.length);
     NSLog(@"wavData : %ld", wavData.length);
     
@@ -362,20 +362,20 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     AVAudioSession *audioSession=[AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     [audioSession setActive:YES error:nil];
-    
+    /*
     NSLog(@"self.wavPath : %@", self.wavPath);
     NSLog(@"self.wavData : %ld", self.wavData.length);
+     */
     
-    /*
     NSError *error = nil;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:self.wavData error:&error];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:wavData error:&error];
     self.audioPlayer.numberOfLoops = 0;
     [self.audioPlayer play];
     if (error) {
         NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
     }
-    */
     
+    /*
     NSError *error = nil;
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:self.wavPath] error:&error];
     self.audioPlayer.numberOfLoops = 0;
@@ -383,6 +383,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (error) {
         NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
     }
+     */
 }
 // *****************
 
