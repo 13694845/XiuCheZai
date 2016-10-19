@@ -523,7 +523,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (self.inputViewType == InputViewTypeVoice) {
         [sender setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
         
-        [self.textView becomeFirstResponder];
+        [self.textView resignFirstResponder];
         return;
     }
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
