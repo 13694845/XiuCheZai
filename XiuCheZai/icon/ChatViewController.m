@@ -239,12 +239,33 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
+    
+    // *****************
+    UIButton *button = [[UIButton alloc] init];
+    button.frame = bubbleView.frame;
+    button.backgroundColor = [UIColor grayColor];
+    button.tag = [self.rows indexOfObject:message];
+    [button addTarget:self action:@selector(viewImage:) forControlEvents:UIControlEventTouchUpInside];
+    [bubbleImageView addSubview:button];
     return bubbleView;
 }
 
-- (void)viewImage:(UIImage *)image {
-    NSLog(@"viewImage");
+- (void)viewImage:(UIButton *)sender {
+    ChatMessage *message = self.rows[sender.tag];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
+    backgroundView.backgroundColor = [UIColor blackColor];
+    
+    UIImageView *imgView = [[UIImageView alloc] init];
+    [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    imgView.frame = self.view.bounds;
+    [backgroundView addSubview:imgView];
+    [self.view addSubview:backgroundView];
 }
+// *****************
+
+
+
 
 - (UIView *)movieBubbleViewForMessage:(ChatMessage *)message {
     NSLog(@"movieBubbleViewForMessage");
