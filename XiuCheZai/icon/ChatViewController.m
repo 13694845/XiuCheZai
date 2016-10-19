@@ -260,6 +260,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = self.view.bounds;
     [backgroundView addSubview:imgView];
+    
+    UIButton *closeButton = [[UIButton alloc] init];
+    closeButton.frame = CGRectMake(20.0, 2.0, 32.0, 32.0);
+    [closeButton setTitle:@"X" forState:UIControlStateNormal];
+    closeButton.backgroundColor = [UIColor grayColor];
+    [backgroundView addSubview:closeButton];
+    
     [self.view addSubview:backgroundView];
 }
 // *****************
