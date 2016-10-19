@@ -83,6 +83,21 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     return _manager;
 }
 
+- (void)setInputViewType:(InputViewType)inputViewType {
+    NSLog(@"setInputViewType : %ld", inputViewType);
+    switch (inputViewType) {
+        case InputViewTypeKeyboard: {
+            [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
+            [self.recordVoiceButton removeFromSuperview];
+            [self.emotionButton setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
+            [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
     [self updateTableView];
@@ -626,6 +641,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showEmotionPad:(UIButton *)sender {
     if (self.inputViewType == InputViewTypeEmoji) {
+        self.inputViewType = InputViewTypeKeyboard;
         [sender setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder];
         return;
@@ -662,6 +678,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showOtherPad:(id)sender {
     if (self.inputViewType == InputViewTypeOther) {
+        self.inputViewType = InputViewTypeKeyboard;
         [sender setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder];
         return;
