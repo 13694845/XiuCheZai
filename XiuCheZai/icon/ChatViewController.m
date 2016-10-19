@@ -19,9 +19,8 @@
 #import "ChatEmojiManager.h"
 #import "ChatEmojiInputView.h"
 #import "ChatOtherInputView.h"
-#import "ChatTextBubbleView.h"
-
 #import "QCEncodeAudio.h"
+// #import "ChatTextBubbleView.h"
 
 @import AVFoundation;
 
@@ -160,8 +159,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     ChatMessage *message = self.rows[indexPath.row];
     UIView *bubbleView;
     if ([message.type isEqualToString:@"txt"]) {
-        // bubbleView = [self textBubbleViewForMessage:message];
-        bubbleView = [[ChatTextBubbleView alloc] initWithMessage:message];
+        bubbleView = [self textBubbleViewForMessage:message];
+        // bubbleView = [[ChatTextBubbleView alloc] initWithMessage:message];
     }
     if ([message.type isEqualToString:@"img"]) {
         bubbleView = [self imageBubbleViewForMessage:message];
@@ -186,7 +185,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [self.view endEditing:YES];
 }
 
-/*
 - (UIView *)textBubbleViewForMessage:(ChatMessage *)message {
     NSAttributedString *attributedText = [ChatEmojiManager emojiStringFromPlainString:message.content withFont:[UIFont systemFontOfSize:14.0]];
     CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
@@ -217,7 +215,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [bubbleImageView addSubview:bubbleText];
     return bubbleView;
 }
-*/
 
 - (UIView *)imageBubbleViewForMessage:(ChatMessage *)message {
     CGRect imageRect = CGRectMake(0.0, 0.0, BUBBLE_IMAGE_HEIGHT, BUBBLE_IMAGE_HEIGHT);
@@ -267,15 +264,19 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [backgroundView addSubview:imgView];
     
     UIButton *closeButton = [[UIButton alloc] init];
-    closeButton.frame = CGRectMake(20.0, 2.0, 32.0, 32.0);
+    closeButton.frame = CGRectMake(20.0, 20.0, 32.0, 32.0);
     [closeButton setTitle:@"X" forState:UIControlStateNormal];
     closeButton.backgroundColor = [UIColor grayColor];
+    closeButton.layer.cornerRadius = 16.0;
+    [closeButton addTarget:self action:@selector(closeImageViewer) forControlEvents:UIControlEventTouchUpInside];
     [backgroundView addSubview:closeButton];
-    
     [self.view addSubview:backgroundView];
 }
-// *****************
 
+- (void)closeImageViewer {
+    
+}
+// *****************
 
 
 
