@@ -736,30 +736,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 }
 
-- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
-    NSLog(@"audioRecorderDidFinishRecording");
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"sampleSound.wav"];
-    
-    
-    NSError *error = nil;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
-    self.audioPlayer.numberOfLoops = 0;
-    [self.audioPlayer play];
-    if (error) {
-        NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
-    }
-    
-    NSData *data = [NSData dataWithContentsOfFile:wavPath];
-    NSLog(@"wav size : %ld", data.length);
-    NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
-    /*
-    NSData *amrData = [QCEncodeAudio convertWavToAmrFile:wavData];
-    NSLog(@"amr size : %ld", amrData.length);
-    */
-    // [self uploadAmrWithAmrData:amrData];
-}
-
 - (void)uploadAmrWithAmrData:(NSData *)amrData {
     NSLog(@"image size : %ld", amrData.length);
     
