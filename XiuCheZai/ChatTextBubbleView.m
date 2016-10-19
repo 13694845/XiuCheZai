@@ -13,6 +13,7 @@
 #define BUBBLE_VIEW_MARGIN_LEFT     12.0
 #define BUBBLE_VIEW_MARGIN_RIGHT    12.0
 #define BUBBLE_TEXT_PADDING         8.0
+#define BUBBLE_IMAGE_HEIGHT         100.0
 
 @implementation ChatTextBubbleView
 
