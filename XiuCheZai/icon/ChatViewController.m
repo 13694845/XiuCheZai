@@ -238,15 +238,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
-    
+    [bubbleImageView addSubview:imgView];
     return bubbleView;
 }
-
 
 - (void)viewImage:(UIImage *)image {
     NSLog(@"viewImage");
 }
-
 
 - (UIView *)movieBubbleViewForMessage:(ChatMessage *)message {
     NSLog(@"movieBubbleViewForMessage");
