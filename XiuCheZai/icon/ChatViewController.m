@@ -241,12 +241,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     
     
-    
-    UIButton *b = [[UIButton alloc] init];
-    [b setBackgroundImage:[UIImage imageNamed:@"vic"] forState:UIControlStateNormal];
-    b.contentMode = UIViewContentModeScaleAspectFit;
-    [bubbleImageView addSubview:imgView];
-    
+    UIButton *button = [[UIButton alloc] init];
+    button.frame = bubbleView.frame;
+    button.backgroundColor = [UIColor grayColor];
+    [button addTarget:self action:@selector(<#selector#>) forControlEvents:<#(UIControlEvents)#>]
+    [bubbleImageView addSubview:button];
     
     
     // [bubbleImageView addSubview:imgView];
