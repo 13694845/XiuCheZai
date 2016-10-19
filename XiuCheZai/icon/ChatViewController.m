@@ -19,6 +19,8 @@
 #import "ChatEmojiManager.h"
 #import "ChatEmojiInputView.h"
 #import "ChatOtherInputView.h"
+#import "ChatTextBubbleView.h"
+
 #import "QCEncodeAudio.h"
 
 @import AVFoundation;
@@ -158,7 +160,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     ChatMessage *message = self.rows[indexPath.row];
     UIView *bubbleView;
     if ([message.type isEqualToString:@"txt"]) {
-        bubbleView = [self textBubbleViewForMessage:message];
+        // bubbleView = [self textBubbleViewForMessage:message];
+        bubbleView = [[ChatTextBubbleView alloc] initWithMessage:message];
     }
     if ([message.type isEqualToString:@"img"]) {
         bubbleView = [self imageBubbleViewForMessage:message];
