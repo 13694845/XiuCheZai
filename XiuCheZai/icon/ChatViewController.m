@@ -84,15 +84,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)setInputViewType:(InputViewType)inputViewType {
-    NSLog(@"setInputViewType : %ld", inputViewType);
+    _inputViewType = inputViewType;
     switch (inputViewType) {
         case InputViewTypeKeyboard: {
-            /*
             [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
             [self.recordVoiceButton removeFromSuperview];
             [self.emotionButton setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
             [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
-             */
             break;
         }
         default:
@@ -539,10 +537,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (IBAction)showVoicePad:(id)sender {
     NSLog(@"showVoicePad");
     if (self.inputViewType == InputViewTypeVoice) {
-        self.inputViewType = InputViewTypeKeyboard;
         [sender setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
-        [self.textView resignFirstResponder];
         [self.recordVoiceButton removeFromSuperview];
+        [self.textView becomeFirstResponder];
         return;
     }
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
@@ -680,7 +677,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (IBAction)showOtherPad:(id)sender {
     if (self.inputViewType == InputViewTypeOther) {
-        self.inputViewType = InputViewTypeKeyboard;
+        // self.inputViewType = InputViewTypeKeyboard;
         [sender setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder];
         return;
