@@ -96,7 +96,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         case InputViewTypeEmoji: {
             [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
             [self.recordVoiceButton removeFromSuperview];
-            [self.emotionButton setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
             [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
             break;
         }
@@ -104,12 +103,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
             [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
             [self.recordVoiceButton removeFromSuperview];
             [self.emotionButton setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
-            [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
             break;
         }
         case InputViewTypeVoice: {
-            [self.voiceButton setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
-            [self.recordVoiceButton removeFromSuperview];
             [self.emotionButton setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
             [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
             break;
