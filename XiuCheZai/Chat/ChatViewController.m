@@ -503,7 +503,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if ([type isEqualToString:@"MESSAGE"]) [self handleMessage:message];
     if ([type isEqualToString:@"CHATHISTORY"]) [self handleHistory:message];
     if ([type isEqualToString:@"ECHO"]) [self handleEcho:message];
-    NSLog(@"ERROR : %@", message);
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
@@ -521,7 +520,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         chatMessage.senderName = msg[@"sender_name"];
         chatMessage.receiverId = msg[@"receiver_id"];
         chatMessage.receiverName = msg[@"receiver_name"];
-        [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:self.receiverId];
+        [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.receiverId];
     }
     NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
     if (localHistoryMessages.count) {
@@ -533,8 +532,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:[NSString stringWithFormat:@"%d", 1]];
     }
-    // [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
     [self startHeartbeat];
+    // [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)startHeartbeat {

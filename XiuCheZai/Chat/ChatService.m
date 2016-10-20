@@ -77,22 +77,30 @@
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSDictionary *message = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
     NSString *type = message[@"type"];
-    if ([type isEqualToString:@"LOGIN"]) {
-        [self handleLogin:message]; return;
-    }
-    if ([type isEqualToString:@"MESSAGE"]) {
-        [self handleMessage:message]; return;
-    }
-    if ([type isEqualToString:@"ECHO"]) {
-        [self handleEcho:message]; return;
-    }
-    NSLog(@"ERROR : %@", message);
+    if ([type isEqualToString:@"LOGIN"]) [self handleLogin:message];
+    if ([type isEqualToString:@"MESSAGE"]) [self handleMessage:message];
+    if ([type isEqualToString:@"ECHO"]) [self handleEcho:message];
+    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)handleLogin:(NSDictionary *)message {
     NSLog(@"handleLogin %@ : ", message);
+    NSArray *offlineMessages = message[@"message"];
+    for (NSDictionary *msg in offlineMessages) {
+        ChatMessage *chatMessage = [[ChatMessage alloc] init];
+        chatMessage.isSend = NO;
+        chatMessage.type = msg[@"msg_type"];
+        chatMessage.content = msg[@"msg_content"];
+        chatMessage.playTime = msg[@"play_time"];
+        chatMessage.senderTime = msg[@"send_time"];
+        chatMessage.senderId = msg[@"sender_id"];
+        chatMessage.senderName = msg[@"sender_name"];
+        chatMessage.receiverId = msg[@"receiver_id"];
+        chatMessage.receiverName = msg[@"receiver_name"];
+        [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.receiverId];
+    }
     [self startHeartbeat];
-    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+    // [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)startHeartbeat {
