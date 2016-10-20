@@ -353,15 +353,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"new.wav"];
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
     [amrData writeToFile:amrPath atomically:YES];
-    
-    
     if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wavPath]) {}
-    
+    NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
+    NSLog(@"amrData : %ld", amrData.length);
+    NSLog(@"wavData : %ld", wavData.length);
     
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
-
-    
     NSError *error = nil;
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
     self.audioPlayer.numberOfLoops = 0;
