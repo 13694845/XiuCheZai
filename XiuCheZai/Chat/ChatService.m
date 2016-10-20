@@ -97,7 +97,7 @@
         chatMessage.senderName = msg[@"sender_name"];
         chatMessage.receiverId = msg[@"receiver_id"];
         chatMessage.receiverName = msg[@"receiver_name"];
-        [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.receiverId];
+        [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.senderId];
     }
     [self startHeartbeat];
     // [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];

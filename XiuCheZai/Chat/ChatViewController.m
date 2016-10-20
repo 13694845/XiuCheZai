@@ -162,7 +162,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     UIView *bubbleView;
     if ([message.type isEqualToString:@"txt"]) {
         bubbleView = [self textBubbleViewForMessage:message];
-        // bubbleView = [[ChatTextBubbleView alloc] initWithMessage:message];
     }
     if ([message.type isEqualToString:@"img"]) {
         bubbleView = [self imageBubbleViewForMessage:message];
@@ -173,7 +172,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if ([message.type isEqualToString:@"mov"]) {
         bubbleView = [self movieBubbleViewForMessage:message];
     }
-    
     CGRect rect = bubbleView.frame;
     if (message.isSend) rect.origin.x += BUBBLE_VIEW_MARGIN_LEFT;
     else rect.origin.x = cell.frame.size.width - rect.size.width - BUBBLE_VIEW_MARGIN_RIGHT;
@@ -196,7 +194,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
     if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
-    // avatarImageView.backgroundColor = [UIColor redColor];
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 16.0;
     [bubbleView addSubview:avatarImageView];
@@ -226,7 +223,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
     if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
-    // avatarImageView.backgroundColor = [UIColor redColor];
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 16.0;
     [bubbleView addSubview:avatarImageView];
@@ -244,7 +240,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
     
-    // *****************
+// *****************
     UIButton *button = [[UIButton alloc] init];
     button.frame = bubbleView.frame;
     button.tag = [self.rows indexOfObject:message];
@@ -290,7 +286,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
     if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
-    // avatarImageView.backgroundColor = [UIColor redColor];
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 16.0;
     [bubbleView addSubview:avatarImageView];
@@ -317,7 +312,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
     if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
-    // avatarImageView.backgroundColor = [UIColor redColor];
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 16.0;
     [bubbleView addSubview:avatarImageView];
@@ -334,7 +328,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
     
-    // *****************
+// *****************
     UIButton *button = [[UIButton alloc] init];
     button.frame = bubbleView.frame;
     button.tag = [self.rows indexOfObject:message];
@@ -382,6 +376,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /*
+     self.senderId = @"555";
+     self.senderName = @"zhangsan";
+     self.senderAvatar = nil;
+     self.receiverId = @"123";
+     self.receiverName = @"lisi";
+     self.receiverAvatar = nil;
+     */
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -405,15 +407,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    /*
-    self.senderId = @"555";
-    self.senderName = @"zhangsan";
-    self.senderAvatar = nil;
-    self.receiverId = @"3140";
-    self.receiverName = @"lisi";
-    self.receiverAvatar = nil;
-     */
-    
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
     
     if (!self.asyncSocket) [self setupSocket];
@@ -423,7 +416,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
         NSString *content = [ChatEmojiManager plainStringFromEmojiString:textView.attributedText];
-        [self sendMessageWithContent:[content stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
+        [self sendMessageWithContent:[content stringByReplacingOccurrencesOfString:@"\n" withString:@""] contentType:@"txt"];
         textView.text = nil;
         return NO;
     }
@@ -463,10 +456,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
+/*
 - (void)sendMessageWithContent:(NSString *)content {
     NSLog(@"sendMessageWithContent");
     [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:@"txt"];
 }
+*/
 
 - (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
     NSLog(@"sendMessageWithContent");
@@ -520,7 +515,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         chatMessage.senderName = msg[@"sender_name"];
         chatMessage.receiverId = msg[@"receiver_id"];
         chatMessage.receiverName = msg[@"receiver_name"];
-        [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.receiverId];
+        [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.senderId];
     }
     NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
     if (localHistoryMessages.count) {
@@ -533,7 +528,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:[NSString stringWithFormat:@"%d", 1]];
     }
     [self startHeartbeat];
-    // [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)startHeartbeat {
@@ -564,7 +558,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-    // [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)handleMessage:(NSDictionary *)message {
@@ -585,7 +578,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-    // [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)handleHistory:(NSDictionary *)message {
@@ -609,7 +601,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     [self.tableView reloadData];
     if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-    // [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)handleEcho:(NSDictionary *)message {
