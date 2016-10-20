@@ -534,6 +534,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:[NSString stringWithFormat:@"%d", 1]];
     }
     // [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+    [self startHeartbeat];
 }
 
 - (void)startHeartbeat {
