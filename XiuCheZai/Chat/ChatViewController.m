@@ -851,7 +851,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    // NSLog(@"KeyboardFrameEnd : %@", NSStringFromCGRect(KeyboardFrameEnd));
     CGFloat keyboardDeltaHeight = KeyboardFrameEnd.size.height - self.keyboardHeight;
     switch (self.tableViewTransform) {
         case TableViewTransformTranslate: {
