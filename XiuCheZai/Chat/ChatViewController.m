@@ -369,8 +369,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)goBack:(id)sender {
     NSLog(@"goBack");
+    [self stopHeartbeat];
     [self.asyncSocket disconnect];
-    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
+    // [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

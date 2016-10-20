@@ -28,9 +28,8 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    // self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
-
 }
 
 - (IBAction)testChat:(id)sender {
@@ -42,7 +41,6 @@
     chatViewController.receiverId = self.receiverId.text;
     chatViewController.receiverName = self.receiverName.text;
     chatViewController.receiverAvatar = self.receiverAvatar.text;
-    
     [self.navigationController pushViewController:chatViewController animated:YES];
 }
 
