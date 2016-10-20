@@ -20,12 +20,14 @@ static NSString *const kApiBaseURL = @"http://m.8673h.com";
 static NSString *const kImgBaseURL = @"http://img.8673h.com";
 static NSString *const kTestBaseURL = @"http://192.168.2.4:8080";
 
+static NSString *const kDomainBaseURL = @"http://a.zj-qsh.com";
+
 + (NSString *)version {
     return kVersion;
 }
 
 + (NSString *)baseURL {
-    return kWebBaseURL;
+    return kDomainBaseURL;
 }
 
 + (NSString *)webBaseURL {
