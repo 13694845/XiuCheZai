@@ -720,7 +720,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *placeholder = emojiInfo[@"faceName"];
     UIImage *emojiImage = [UIImage imageNamed:emojiJson[placeholder]];
     UIGraphicsBeginImageContextWithOptions(emojiSize, NO, 0.0);
-    [emojiImage drawInRect:CGRectMake(0, 0, emojiSize.width, emojiSize.height)];
+    [emojiImage drawInRect:CGRectMake(0.0, 0.0, emojiSize.width, emojiSize.height)];
     UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
