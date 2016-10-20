@@ -330,9 +330,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [bubbleView addSubview:bubbleImageView];
     
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_sender"]];
+    if (!message.isSend) imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_receiver"]];
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
-
+    
     // *****************
     UIButton *button = [[UIButton alloc] init];
     button.frame = bubbleView.frame;
@@ -350,10 +351,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *amrPath = [documentsPath stringByAppendingPathComponent:@"temp.amr"];
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"new.wav"];
-
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
     [amrData writeToFile:amrPath atomically:YES];
-    
     if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wavPath]) {}
     NSError *error = nil;
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
@@ -362,25 +361,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (error) {
         NSLog(@"playVoice ：%@", error.localizedDescription); return;
     }
-    
-
-    /*
-    NSData *wavData = [QCEncodeAudio convertAmrToWavFile:amrData];
-    NSLog(@"amrData : %ld", amrData.length);
-    NSLog(@"wavData : %ld", wavData.length);
-    
-    AVAudioSession *audioSession=[AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    [audioSession setActive:YES error:nil];
-    
-    NSError *error = nil;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:wavData error:&error];
-    self.audioPlayer.numberOfLoops = 0;
-    [self.audioPlayer play];
-    if (error) {
-        NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
-    }
-     */
 }
 // *****************
 
@@ -677,60 +657,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSLog(@"wavData : %ld", wavData.length);
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:amrPath]];
     NSLog(@"amrData : %ld", amrData.length);
-
-    
-    if ([VoiceConverter ConvertWavToAmr:wavPath amrSavePath:amrPath]) {
-        NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
-        NSLog(@"wavData : %ld", wavData.length);
-        NSData *amrData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:amrPath]];
-        NSLog(@"amrData : %ld", amrData.length);
-        
-        /*
-         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-         [[AVAudioSession sharedInstance] setActive:YES error:nil];
-         */
-        /*
-        NSError *error = nil;
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
-        self.audioPlayer.numberOfLoops = 0;
-        [self.audioPlayer play];
-        if (error) {
-            NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
-        }
-        */
-        // self.audioPlayer = [self.audioPlayer initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:nil];
-        // [self.audioPlayer play];
-        
-    }
-
-    NSString *wav__Path = [documentsPath stringByAppendingPathComponent:@"temp___.wav"];
-
-    
-    if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wav__Path]) {
-        NSData *wav__Data = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wav__Path]];
-        NSLog(@"wav__Data : %ld", wav__Data.length);
-
-        NSError *error = nil;
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wav__Path] error:&error];
-        self.audioPlayer.numberOfLoops = 0;
-        [self.audioPlayer play];
-        if (error) {
-            NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
-        }
-
-    }
-
-    
-    
-    //     self.player = [self.player initWithContentsOfURL:[NSURL URLWithString:self.recordFilePath] error:nil];
-
-    
-
+    [self uploadAmrWithAmrData:amrData];
 }
 
 - (void)uploadAmrWithAmrData:(NSData *)amrData {
-    NSLog(@"image size : %ld", amrData.length);
-    
     NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
     NSDictionary *parameters = nil;
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
