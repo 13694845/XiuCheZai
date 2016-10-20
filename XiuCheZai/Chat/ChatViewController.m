@@ -11,6 +11,7 @@
 #import "XCZConfig.h"
 #import "AFNetworking.h"
 #import "SDWebImage/UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
 #import "GCDAsyncSocket.h"
 #import "ChatConfig.h"
 #import "ChatMessage.h"
@@ -382,6 +383,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationItem.title = self.receiverName;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
+    self.textView.text = nil;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -439,6 +441,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"socketDidDisconnect : %@", err);
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.alpha = 0.5;
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = @"已经与服务器断开连接";
+    [hud hide:YES afterDelay:2.0];
 }
 
 - (void)loginWithSenderId:(NSString *)senderId {
