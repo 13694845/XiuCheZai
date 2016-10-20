@@ -343,11 +343,28 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)playVoice:(UIButton *)sender {
-    /*
+    NSLog(@"playVoice");
     ChatMessage *message = self.rows[sender.tag];
     NSLog(@"message.content : %@", message.content);
     
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *amrPath = [documentsPath stringByAppendingPathComponent:@"temp.amr"];
+    NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"new.wav"];
+
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
+    [amrData writeToFile:amrPath atomically:YES];
+    
+    if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wavPath]) {}
+    NSError *error = nil;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
+    self.audioPlayer.numberOfLoops = 0;
+    [self.audioPlayer play];
+    if (error) {
+        NSLog(@"playVoice ：%@", error.localizedDescription); return;
+    }
+    
+
+    /*
     NSData *wavData = [QCEncodeAudio convertAmrToWavFile:amrData];
     NSLog(@"amrData : %ld", amrData.length);
     NSLog(@"wavData : %ld", wavData.length);
@@ -637,26 +654,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (void)startRecord:(UIButton *)sender {
     NSLog(@"startRecord");
     [sender setTitle:@"松开 结束" forState:UIControlStateNormal];
-    
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"temp.wav"];
-    NSLog(@"wavPath : %@", wavPath);
-    
-    /*
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    [[AVAudioSession sharedInstance] setActive:YES error:nil];
-*/
-    
     NSError *error = nil;
     self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:wavPath] settings:[VoiceConverter GetAudioRecorderSettingDict] error:&error];
-    // self.audioRecorder.delegate = self;
     if (error) {
         NSLog(@"startRecord ：%@", error.localizedDescription); return;
-    }
-    if ([self.audioRecorder prepareToRecord]) {
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-        [[AVAudioSession sharedInstance] setActive:YES error:nil];
-
     }
     [self.audioRecorder record];
 }
@@ -669,31 +672,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"temp.wav"];
     NSString *amrPath = [documentsPath stringByAppendingPathComponent:@"temp.amr"];
+    if ([VoiceConverter ConvertWavToAmr:wavPath amrSavePath:amrPath]) {}
+    NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
+    NSLog(@"wavData : %ld", wavData.length);
+    NSData *amrData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:amrPath]];
+    NSLog(@"amrData : %ld", amrData.length);
 
-    
-    if ([VoiceConverter ConvertWavToAmr:wavPath amrSavePath:amrPath]) {
-        NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
-        NSLog(@"wavData : %ld", wavData.length);
-        NSData *amrData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:amrPath]];
-        NSLog(@"amrData : %ld", amrData.length);
-        
-        /*
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-        [[AVAudioSession sharedInstance] setActive:YES error:nil];
-        */
-        
-        /*
-        NSError *error = nil;
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
-        self.audioPlayer.numberOfLoops = 0;
-        [self.audioPlayer play];
-        if (error) {
-            NSLog(@"audioRecorderDidFinishRecording ：%@", error.localizedDescription); return;
-        }
-         */
-
-    }
-    
     
     if ([VoiceConverter ConvertWavToAmr:wavPath amrSavePath:amrPath]) {
         NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
