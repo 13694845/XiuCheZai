@@ -636,6 +636,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [sender setTitle:@"松开 结束" forState:UIControlStateNormal];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"temp.wav"];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
     NSError *error = nil;
     self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:wavPath] settings:[VoiceConverter GetAudioRecorderSettingDict] error:&error];
     if (error) {
