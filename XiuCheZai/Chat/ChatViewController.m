@@ -353,7 +353,15 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"new.wav"];
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
     [amrData writeToFile:amrPath atomically:YES];
+    
+    
     if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wavPath]) {}
+    
+    
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+
+    
     NSError *error = nil;
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
     self.audioPlayer.numberOfLoops = 0;
@@ -397,12 +405,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
+    /*
     self.senderId = @"555";
     self.senderName = @"zhangsan";
     self.senderAvatar = nil;
     self.receiverId = @"3140";
     self.receiverName = @"lisi";
     self.receiverAvatar = nil;
+     */
     
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
     
