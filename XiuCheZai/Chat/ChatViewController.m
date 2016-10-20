@@ -353,7 +353,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"new.wav"];
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
     [amrData writeToFile:amrPath atomically:YES];
-    if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wavPath]) {}
+    if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wavPath]) {
+        NSLog(@"converted");
+    }
     NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
     NSLog(@"amrData : %ld", amrData.length);
     NSLog(@"wavData : %ld", wavData.length);
@@ -361,7 +363,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
     NSError *error = nil;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
+    // self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:wavPath] error:&error];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:wavPath] error:&error];
+    
     self.audioPlayer.numberOfLoops = 0;
     [self.audioPlayer play];
     if (error) {
@@ -517,6 +521,20 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)handleLogin:(NSDictionary *)message {
     NSLog(@"handleLogin %@ : ", message);
+    NSArray *offlineMessages = message[@"message"];
+    for (NSDictionary *msg in offlineMessages) {
+        ChatMessage *chatMessage = [[ChatMessage alloc] init];
+        chatMessage.isSend = NO;
+        chatMessage.type = msg[@"msg_type"];
+        chatMessage.content = msg[@"msg_content"];
+        chatMessage.playTime = msg[@"play_time"];
+        chatMessage.senderTime = msg[@"send_time"];
+        chatMessage.senderId = msg[@"sender_id"];
+        chatMessage.senderName = msg[@"sender_name"];
+        chatMessage.receiverId = msg[@"receiver_id"];
+        chatMessage.receiverName = msg[@"receiver_name"];
+        [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:self.receiverId];
+    }
     NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
     if (localHistoryMessages.count) {
         self.rows = [localHistoryMessages mutableCopy];
