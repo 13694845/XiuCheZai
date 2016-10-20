@@ -2514,7 +2514,7 @@
                         <outlet property="senderAvatar" destination="Ttb-IA-cL4" id="u9f-li-esY"/>
                         <outlet property="senderId" destination="xxJ-eK-dRZ" id="baf-a6-6mU"/>
                         <outlet property="senderName" destination="jdl-tX-GWp" id="Azy-ET-csY"/>
-                        <segue destination="0sp-B5-kfJ" kind="show" id="jzM-Vg-HTF"/>
+                        <segue destination="0sp-B5-kfJ" kind="show" identifier="Segue" id="jzM-Vg-HTF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AHL-g6-d6y" userLabel="First Responder" sceneMemberID="firstResponder"/>
