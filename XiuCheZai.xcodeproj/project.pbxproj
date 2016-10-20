@@ -282,6 +282,8 @@
 		6CFEE7B91DB7B21B00676A62 /* Emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7B71DB7B21B00676A62 /* Emoji.json */; };
 		6CFEE7BA1DB7B21B00676A62 /* EmojiImages.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7B81DB7B21B00676A62 /* EmojiImages.json */; };
 		6CFEE7BD1DB850CD00676A62 /* TestChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFEE7BC1DB850CD00676A62 /* TestChatViewController.m */; };
+		6CFEE7C01DB85E1000676A62 /* avatar_xcz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7BE1DB85E1000676A62 /* avatar_xcz@2x.png */; };
+		6CFEE7C11DB85E1000676A62 /* avatar_xcz@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7BF1DB85E1000676A62 /* avatar_xcz@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -744,6 +746,8 @@
 		6CFEE7B81DB7B21B00676A62 /* EmojiImages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EmojiImages.json; sourceTree = "<group>"; };
 		6CFEE7BB1DB850CD00676A62 /* TestChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestChatViewController.h; sourceTree = "<group>"; };
 		6CFEE7BC1DB850CD00676A62 /* TestChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestChatViewController.m; sourceTree = "<group>"; };
+		6CFEE7BE1DB85E1000676A62 /* avatar_xcz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_xcz@2x.png"; sourceTree = "<group>"; };
+		6CFEE7BF1DB85E1000676A62 /* avatar_xcz@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_xcz@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1389,6 +1393,8 @@
 		6CFEE7351DB7B01F00676A62 /* ChatImages */ = {
 			isa = PBXGroup;
 			children = (
+				6CFEE7BE1DB85E1000676A62 /* avatar_xcz@2x.png */,
+				6CFEE7BF1DB85E1000676A62 /* avatar_xcz@3x.png */,
 				6CFEE73A1DB7B04A00676A62 /* mic@2x.png */,
 				6CFEE73B1DB7B04A00676A62 /* mic@3x.png */,
 				6CFEE7461DB7B0A400676A62 /* keyboard@2x.png */,
@@ -1590,6 +1596,7 @@
 				6CFEE7A01DB7B1F100676A62 /* d_nu.png in Resources */,
 				6CABF7171C0E978B00DF3EFF /* Assets.xcassets in Resources */,
 				6CFEE78A1DB7B1F100676A62 /* d_bishi.png in Resources */,
+				6CFEE7C11DB85E1000676A62 /* avatar_xcz@3x.png in Resources */,
 				6CFEE74C1DB7B0BE00676A62 /* emoji@2x.png in Resources */,
 				6CE400671C322B7C007F6D03 /* menu_icon18.jpg in Resources */,
 				6CFEE7A11DB7B1F100676A62 /* d_numa.png in Resources */,
@@ -1640,6 +1647,7 @@
 				6CFEE7AC1DB7B1F100676A62 /* d_travel.png in Resources */,
 				6C1365BB1C24F6C300B217DD /* home_icon03.png in Resources */,
 				6CFEE78B1DB7B1F100676A62 /* d_bizui.png in Resources */,
+				6CFEE7C01DB85E1000676A62 /* avatar_xcz@2x.png in Resources */,
 				6C8B10501CC4D087003CF8F5 /* menu_icon03.jpg in Resources */,
 				6CFEE78E1DB7B1F100676A62 /* d_doge.png in Resources */,
 				6C8B10541CC4D087003CF8F5 /* menu_icon07.jpg in Resources */,
