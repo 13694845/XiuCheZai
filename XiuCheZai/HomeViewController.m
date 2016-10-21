@@ -345,29 +345,35 @@
         NSString *v = [[kv componentsSeparatedByString:@"="] lastObject];
         if (k && v) [parameters setValue:v forKey:k];
     }
-    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        if ([[responseObject objectForKey:@"error"] isEqualToString:@"201"]) {
-            NSString *message = [NSString stringWithFormat:@"恭喜您成功领取 %@", [responseObject objectForKey:@"data"]];
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"领取成功" message:message preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleDefault handler:nil];
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"立即查看" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/hongbao/index.html?type=1"];
-                if ([parameters[@"code"] hasPrefix:@"B-"]) {
-                    URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/hongbao/index.html"];
-                }
-                [self launchWebViewWithURLString:URLString];
-            }];
-            [alertController addAction:cancelAction];
-            [alertController addAction:okAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        } else {
-            NSString *message = [responseObject objectForKey:@"msg"];
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"领取失败" message:message preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleDefault handler:nil];
-            [alertController addAction:cancelAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+    if ([parameters[@"code"] isEqualToString:@"0"]) {
+        [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/getCard/index.html?ext=", parameters[@"ext"]]];
+        return;
+    }
+    if ([parameters[@"code"] isEqualToString:@"1"]) {
+        [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            if ([[responseObject objectForKey:@"error"] isEqualToString:@"201"]) {
+                NSString *message = [NSString stringWithFormat:@"恭喜您成功领取 %@", [responseObject objectForKey:@"data"]];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"领取成功" message:message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleDefault handler:nil];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"立即查看" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/hongbao/index.html?type=1"];
+                    if ([parameters[@"code"] hasPrefix:@"B-"]) {
+                        URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/hongbao/index.html"];
+                    }
+                    [self launchWebViewWithURLString:URLString];
+                }];
+                [alertController addAction:cancelAction];
+                [alertController addAction:okAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            } else {
+                NSString *message = [responseObject objectForKey:@"msg"];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"领取失败" message:message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"关闭" style:UIAlertActionStyleDefault handler:nil];
+                [alertController addAction:cancelAction];
+                [self presentViewController:alertController animated:YES completion:nil];
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+    }
 }
 
 - (IBAction)toSearch:(id)sender {
