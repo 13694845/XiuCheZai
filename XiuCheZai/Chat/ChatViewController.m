@@ -445,8 +445,18 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.alpha = 0.5;
     hud.mode = MBProgressHUDModeText;
-    hud.labelText = @"已经与服务器断开连接";
+    hud.labelText = @"已经与服务器断开连接, 正在重连";
     [hud hide:YES afterDelay:2.0];
+    
+    [self performSelector:@selector(reconnect) withObject:nil afterDelay:2.0];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"viewWillAppear");
+}
+
+- (void)reconnect {
+    [self connectToHost:HOST onPort:PORT];
 }
 
 - (void)loginWithSenderId:(NSString *)senderId {
