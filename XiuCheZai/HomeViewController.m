@@ -303,15 +303,20 @@
 
 - (void)scannerViewController:(ScannerViewController *)scannerViewController didFinishScanningCodeWithInfo:(NSDictionary *)info {
     [scannerViewController.navigationController popViewControllerAnimated:NO];
+    // ********
     if ([[info objectForKey:@"url"] hasPrefix:@"http://m.8673h.com"]) {
         [self launchWebViewWithURLString:[info objectForKey:@"url"]];
         return;
     }
-    //*******
     if ([[info objectForKey:@"url"] hasPrefix:@"http://a.zj-qsh.com"]) {
         [self launchWebViewWithURLString:[info objectForKey:@"url"]];
         return;
     }
+    if ([[info objectForKey:@"url"] hasPrefix:@"http://192.168.2.4:8080"]) {
+        [self launchWebViewWithURLString:[info objectForKey:@"url"]];
+        return;
+    }
+    // ********
     
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
     NSDictionary *parameters = nil;
