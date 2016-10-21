@@ -763,6 +763,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
             imagePickerController.delegate = self;
             [self presentViewController:imagePickerController animated:YES completion:nil]; break;
         }
+        case OtherInputViewButtonTagMovieFromPhotoLibrary: {
+            NSLog(@"OtherInputViewButtonTagMovieFromPhotoLibrary");
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePickerController.mediaTypes = @[(NSString *)kUTTypeMovie];
+            imagePickerController.delegate = self;
+            [self presentViewController:imagePickerController animated:YES completion:nil]; break;
+        }
         default: break;
     }
 }
