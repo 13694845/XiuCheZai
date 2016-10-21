@@ -71,6 +71,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 @property (weak, nonatomic) UIView *imageViewerView;
 
+// *****************
+@property (weak, nonatomic) ChatMessage *sendingMessage;
+// *****************
+
 @end
 
 @implementation ChatViewController
