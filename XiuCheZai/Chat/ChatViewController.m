@@ -22,6 +22,10 @@
 #import "ChatOtherInputView.h"
 #import "VoiceConverter.h"
 
+
+@import MediaPlayer;
+
+
 @import AVFoundation;
 
 #define BUBBLE_VIEW_MARGIN_TOP      15.0
@@ -301,11 +305,111 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
     
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
-    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    // UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"movie_sender"]];
+    if (!message.isSend) imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"movie_receiver"]];
+    
+    // imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
+    // return bubbleView;
+
+    // *****************
+    UIButton *button = [[UIButton alloc] init];
+    button.frame = bubbleView.frame;
+    button.tag = [self.rows indexOfObject:message];
+    [button addTarget:self action:@selector(playMovie:) forControlEvents:UIControlEventTouchUpInside];
+    [bubbleImageView addSubview:button];
     return bubbleView;
+}
+
+- (void)playMovie:(UIButton *)sender {
+    ChatMessage *message = self.rows[sender.tag];
+    
+    
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *mp4Path = [documentsPath stringByAppendingPathComponent:@"temp.mp4"];
+    NSLog(@"mp4Path : %@", mp4Path);
+    
+    NSData *mp4Data = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
+    [mp4Data writeToFile:mp4Path atomically:YES];
+    
+    
+    NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:mp4Path]];
+    NSLog(@"wavData : %ld", wavData.length);
+
+    
+    MPMoviePlayerViewController *moviePlayer =[[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:mp4Path]];
+    
+    [self presentViewController:moviePlayer animated:YES completion:nil];
+    
+    
+
+    
+    
+    /*
+    AVPlayer *player = [AVPlayer];
+    
+    NSURL *url = [NSURL URLWithString:@"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4"];
+    
+    // 2.创建AVPlayerItem
+    AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
+    
+    // 3.创建AVPlayer
+    _player = [AVPlayer playerWithPlayerItem:item];
+    
+    // 4.添加AVPlayerLayer
+    AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    layer.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width * 9 / 16);
+    [self.view.layer addSublayer:layer];
+    */
+    /*
+    MPMoviePlayerController *movie = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:mp4Path]];
+    
+    
+    // movie.controlStyle = MPMovieControlStyleFullscreen;
+    
+    movie.view.frame = CGRectMake(0, 0, 300, 300);
+    // [movie.view setFrame:self.view.bounds];
+    [self.view addSubview:movie.view];
+    [movie play];
+*/
+    /*
+    NSURL *url = [NSURL URLWithString:message.content];
+    
+    // MPMoviePlayerController *movie = [[MPMoviePlayerController alloc] initWithContentURL:url];
+    
+    // movie.movieSourceType=MPMovieSourceTypeStreaming;
+
+    movie.controlStyle = MPMovieControlStyleFullscreen;
+    [movie.view setFrame:self.view.bounds];
+    // movie.initialPlaybackTime = -1;
+    [self.view addSubview:movie.view];
+    [movie play];
+    */
+    
+    /*
+    UIView *backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
+    backgroundView.backgroundColor = [UIColor blackColor];
+    
+    UIImageView *imgView = [[UIImageView alloc] init];
+    [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
+    imgView.contentMode = UIViewContentModeScaleAspectFit;
+    imgView.frame = self.view.bounds;
+    [backgroundView addSubview:imgView];
+    
+    UIButton *closeButton = [[UIButton alloc] init];
+    closeButton.frame = CGRectMake(20.0, 20.0, 32.0, 32.0);
+    [closeButton setTitle:@"X" forState:UIControlStateNormal];
+    closeButton.backgroundColor = [UIColor grayColor];
+    closeButton.layer.cornerRadius = 16.0;
+    [closeButton addTarget:self action:@selector(closeImageViewer) forControlEvents:UIControlEventTouchUpInside];
+    [backgroundView addSubview:closeButton];
+    [self.view addSubview:backgroundView];
+    
+    self.imageViewerView = backgroundView;
+     */
 }
 
 - (UIView *)voiceBubbleViewForMessage:(ChatMessage *)message {
