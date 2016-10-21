@@ -480,6 +480,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
     NSLog(@"sendMessageWithContent");
     [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
+    
+    // *****************
+    ChatMessage *message = [[ChatMessage alloc] init];
+    message.content = content;
+    message.type = contentType;
+    self.sendingMessage = message;
+    // *****************
 }
 
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
@@ -572,6 +579,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    
+    // *****************
+    self.sendingMessage = nil;
+    // *****************
 }
 
 - (void)handleMessage:(NSDictionary *)message {
