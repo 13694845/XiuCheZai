@@ -72,7 +72,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (weak, nonatomic) UIView *imageViewerView;
 
 // *****************
-@property (weak, nonatomic) ChatMessage *sendingMessage;
+@property (strong, nonatomic) ChatMessage *sendingMessage;
 // *****************
 
 @end
@@ -420,6 +420,20 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
         NSString *content = [ChatEmojiManager plainStringFromEmojiString:textView.attributedText];
+        
+        // *****************
+        content = [content stringByReplacingOccurrencesOfString:@"\\n" withString:@""];
+        if (!content.length) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.alpha = 0.5;
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"发送内容不能为空且不能包含\\n";
+            hud.yOffset = -100.0;
+            [hud hide:YES afterDelay:2.0];
+            return NO;
+        }
+        // *****************
+        
         [self sendMessageWithContent:[content stringByReplacingOccurrencesOfString:@"\n" withString:@""] contentType:@"txt"];
         textView.text = nil;
         return NO;
@@ -479,7 +493,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
     NSLog(@"sendMessageWithContent");
-    [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
     
     // *****************
     ChatMessage *message = [[ChatMessage alloc] init];
@@ -487,6 +500,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     message.type = contentType;
     self.sendingMessage = message;
     // *****************
+    
+    [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
 }
 
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
@@ -549,6 +564,15 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:[NSString stringWithFormat:@"%d", 1]];
     }
     [self startHeartbeat];
+    
+    // *****************
+    /*
+    if (self.sendingMessage) {
+        [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:self.sendingMessage.content type:self.sendingMessage.type];
+        [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+    }
+     */
+    // *****************
 }
 
 - (void)startHeartbeat {
@@ -630,6 +654,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)handleEcho:(NSDictionary *)message {
     NSLog(@"handleEcho %@ : ", message);
+    
+    // *****************
+     if (self.sendingMessage) {
+         NSLog(@"self.sendingMessage");
+         [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:self.sendingMessage.content type:self.sendingMessage.type];
+         [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+     }
+    // *****************
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
