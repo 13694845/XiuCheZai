@@ -303,6 +303,7 @@
 
 - (void)scannerViewController:(ScannerViewController *)scannerViewController didFinishScanningCodeWithInfo:(NSDictionary *)info {
     [scannerViewController.navigationController popViewControllerAnimated:NO];
+    NSLog(@"scannerViewController : %@", [info objectForKey:@"url"]);
     // ********
     if ([[info objectForKey:@"url"] hasPrefix:@"http://m.8673h.com"]) {
         [self launchWebViewWithURLString:[info objectForKey:@"url"]];
