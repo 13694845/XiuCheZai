@@ -448,7 +448,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     hud.labelText = @"已经与服务器断开连接, 正在重连";
     [hud hide:YES afterDelay:2.0];
     
-    [self performSelector:@selector(reconnect) withObject:nil afterDelay:2.0];
+    [self performSelector:@selector(reconnect) withObject:nil afterDelay:10.0];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
