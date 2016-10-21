@@ -23,7 +23,7 @@
 #define BUTTON_HEIGHT           50.0
 
 - (NSArray *)buttonImages {
-    if (!_buttonImages) _buttonImages = @[@"camera", @"album", @"camera"];
+    if (!_buttonImages) _buttonImages = @[@"camera", @"album", @"camera", @"album"];
     return _buttonImages;
 }
 
