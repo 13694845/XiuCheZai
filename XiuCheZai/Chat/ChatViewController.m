@@ -775,7 +775,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }
     if ([picker.mediaTypes containsObject:(NSString *)kUTTypeMovie]) {
         NSLog(@"kUTTypeMovie");
-        [self uploadMovieWithMovieURL:[info objectForKey:UIImagePickerControllerMediaURL]];
+        [self uploadMovieWithMovURL:[info objectForKey:UIImagePickerControllerMediaURL]];
     }
 }
 
@@ -807,10 +807,26 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     return resizedImage;
 }
 
-- (void)uploadMovieWithMovieURL:(NSURL *)movieURL {
-    NSLog(@"movieURL : %@", movieURL);
-    NSString *mp4Path = [self mp4FromMovURL:movieURL];
-    NSLog(@"mp4 : %@", mp4Path);
+- (void)uploadMovieWithMovURL:(NSURL *)movURL {
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *mp4Path = [documentsPath stringByAppendingPathComponent:@"sampleVideo.mp4"];
+    
+    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movURL options:nil];
+    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetPassthrough];
+    exportSession.outputURL = [NSURL fileURLWithPath:mp4Path];
+    exportSession.outputFileType = AVFileTypeMPEG4;
+    // exportSession.shouldOptimizeForNetworkUse = YES;
+    [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {
+        NSData *movData = [NSData dataWithContentsOfURL:movURL];
+        NSLog(@"mov size : %ld", movData.length);
+        NSData *mp4Data = [NSData dataWithContentsOfFile:mp4Path];
+        NSLog(@"mp4 size : %ld", mp4Data.length);
+        
+        [self uploadMovieWithMp4Path:mp4Path];
+    }];
+}
+
+- (void)uploadMovieWithMp4Path:(NSString *)mp4Path {
     NSData *data = [NSData dataWithContentsOfFile:mp4Path];
     NSLog(@"mp4 size : %ld", data.length);
     
@@ -827,17 +843,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [self sendMessageWithContent:fileURL contentType:@"mov"];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
     }];
-}
-
-- (NSString *)mp4FromMovURL:(NSURL *)movURL {
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *mp4Path = [documentsPath stringByAppendingPathComponent:@"sampleVideo.mp4"];
-    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movURL options:nil];
-    AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetPassthrough];
-    exportSession.outputURL = [NSURL fileURLWithPath:mp4Path];
-    exportSession.outputFileType = AVFileTypeMPEG4;
-    [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {}];
-    return mp4Path;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
