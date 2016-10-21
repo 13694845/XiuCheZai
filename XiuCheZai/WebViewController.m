@@ -162,8 +162,8 @@
     chatSender[@"senderName"] = @"zhangsan";
     [[NSUserDefaults standardUserDefaults] setObject:chatSender forKey:@"chatSender"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
-    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
+    // [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
+    // [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
 }
 
 - (void)recognizeVehicleLicense {
