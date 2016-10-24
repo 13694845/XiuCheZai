@@ -42,17 +42,14 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/LoginDetectionAction.do"];
     NSDictionary *parameters = nil;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"LoginDetectionAction.do : %@", responseObject);
         if (![[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) return;
         NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactServlet.do"];
         NSDictionary *parameters = nil;
         [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-            NSLog(@"ContactServlet.do : %@", responseObject);
             self.senderId = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"user_id"];
             NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactChannelNumServlet.do"];
             NSDictionary *parameters = nil;
             [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-                NSLog(@"ContactChannelNumServlet.do : %@", responseObject);
                 self.host = [responseObject objectForKey:@"data"] ? : [ChatConfig defaultHost];
                 self.port = [ChatConfig defaultPort];
                 [self startService];
@@ -79,8 +76,8 @@
     self.asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
 }
 
-- (void)connectToHost:(NSString *)host onPort:(uint16_t)port {
-    NSLog(@"connectToHost");
+- (void)connectToHost:(NSString *)host onPort:(NSUInteger)port {
+    NSLog(@"connectToHost : %@ %ld", self.host, self.port);
     NSError *error = nil;
     if (![self.asyncSocket connectToHost:host onPort:port error:&error]) NSLog(@"connectToHost : %@", error);
 }
