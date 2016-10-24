@@ -48,8 +48,6 @@
             NSDictionary *parameters = nil;
             [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                 NSLog(@"ContactServlet.do : %@", responseObject);
-                
-                
                 NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactChannelNumServlet.do"];
                 NSDictionary *parameters = nil;
                 [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -60,9 +58,6 @@
                     
                     
                 } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
-                
-                
-                
             } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
