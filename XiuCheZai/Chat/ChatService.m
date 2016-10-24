@@ -88,7 +88,7 @@
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    NSLog(@"socketDidDisconnect");
+    NSLog(@"socketDidDisconnect : %@ %ld", self.host, self.port);
 }
 
 - (void)loginWithSenderId:(NSString *)senderId {
