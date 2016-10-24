@@ -127,6 +127,7 @@
         return YES;
     }
     
+    /*
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/massage/massage.jsp"]]) {
         NSLog(@"/massage/massage.jsp");
         [self chatWithUserReceiverId:@"123"];
@@ -137,6 +138,7 @@
         [self chatWithUserReceiverId:@"123"];
         return NO;
     }
+     */
     
     return YES;
 }
