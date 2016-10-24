@@ -498,7 +498,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];
-
+    
      self.senderId = @"555";
      self.senderName = @"zhangsan";
      self.senderAvatar = nil;
