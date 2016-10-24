@@ -21,15 +21,7 @@
 @property (strong, nonatomic) NSTimer *timer;
 
 @property (strong, nonatomic) NSString *senderId;
-@property (strong, nonatomic) NSString *senderName;
-
-
-
-avatar
-@property (strong, nonatomic) NSDictionary *senderInfo;
-
 @property (strong, nonatomic) NSString *host;
-
 
 @end
 
@@ -55,13 +47,14 @@ avatar
             NSDictionary *parameters = nil;
             [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                 NSLog(@"ContactServlet.do : %@", responseObject);
-                self.senderInfo = [[responseObject objectForKey:@"data"] firstObject];
-                
+                self.senderId = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"user_id"];
                 NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactChannelNumServlet.do"];
                 NSDictionary *parameters = nil;
                 [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                     NSLog(@"ContactChannelNumServlet.do : %@", responseObject);
                     self.host = [responseObject objectForKey:@"data"];
+                    
+                    NSLog(@"%@ | %@", self.senderId, self.host);
                     
                     
                     
