@@ -50,7 +50,7 @@
             NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactChannelNumServlet.do"];
             NSDictionary *parameters = nil;
             [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-                self.host = [responseObject objectForKey:@"data"] ? : [ChatConfig defaultHost];
+                self.host = [responseObject objectForKey:@"ip"] ? : [ChatConfig defaultHost];
                 self.port = [ChatConfig defaultPort];
                 [self startService];
             } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
@@ -76,7 +76,7 @@
     self.asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:mainQueue];
 }
 
-- (void)connectToHost:(NSString *)host onPort:(NSUInteger)port {
+- (void)connectToHost:(NSString *)host onPort:(uint16_t)port {
     NSLog(@"connectToHost : %@ %ld", self.host, self.port);
     NSError *error = nil;
     if (![self.asyncSocket connectToHost:host onPort:port error:&error]) NSLog(@"connectToHost : %@", error);
@@ -88,11 +88,11 @@
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    NSLog(@"socketDidDisconnect : %@", err);
+    NSLog(@"socketDidDisconnect");
 }
 
 - (void)loginWithSenderId:(NSString *)senderId {
-    NSLog(@"loginWithSenderId");
+    NSLog(@"loginWithSenderId : %@", senderId);
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", senderId];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
@@ -159,7 +159,7 @@
 }
 
 - (void)handleEcho:(NSDictionary *)message {
-    NSLog(@"handleEcho %@ : ", message);
+    NSLog(@"handleEcho");
 }
 
 @end
