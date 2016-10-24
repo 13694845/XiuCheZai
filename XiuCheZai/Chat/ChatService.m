@@ -12,6 +12,10 @@
 #import "ChatMessage.h"
 #import "ChatMessageManager.h"
 
+#import "XCZConfig.h"
+
+
+
 @interface ChatService () <GCDAsyncSocketDelegate>
 
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
