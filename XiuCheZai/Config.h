@@ -19,6 +19,7 @@ typedef NS_ENUM(int, TabIndex) {
     TabIndexCart
 };
 
++ (NSString *)appVersion;
 + (NSString *)version;
 + (NSString *)baseURL;
 + (NSString *)webBaseURL;
