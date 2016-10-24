@@ -10,4 +10,20 @@
 
 @implementation ChatConfig
 
+static NSString *const kDefaultHost = @"192.168.2.63";
+static NSUInteger const kDefaultPort = 9999;
+static NSString *const kTerminator = @"\n";
+
++ (NSString *)defaultHost {
+    return kDefaultHost;
+}
+
++ (NSUInteger)defaultPort {
+    return kDefaultPort;
+}
+
++ (NSString *)terminator {
+    return kTerminator;
+}
+
 @end

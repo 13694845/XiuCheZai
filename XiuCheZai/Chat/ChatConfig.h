@@ -14,4 +14,8 @@
 #define PORT        9999
 #define TERMINATOR  @"\n"
 
++ (NSString *)defaultHost;
++ (NSUInteger)defaultPort;
++ (NSString *)terminator;
+
 @end
