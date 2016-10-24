@@ -12,8 +12,8 @@
 
 static NSString *const kDefaultHost = @"192.168.2.63";
 static NSUInteger const kDefaultPort = 9999;
-static NSString *const kTerminator = @"\n";
 static NSTimeInterval const kHeartbeatInterval = 5.0;
+static NSString *const kTerminator = @"\n";
 
 + (NSString *)defaultHost {
     return kDefaultHost;
@@ -23,12 +23,12 @@ static NSTimeInterval const kHeartbeatInterval = 5.0;
     return kDefaultPort;
 }
 
-+ (NSString *)terminator {
-    return kTerminator;
-}
-
 + (NSTimeInterval)heartbeatInterval {
     return kHeartbeatInterval;
+}
+
++ (NSString *)terminator {
+    return kTerminator;
 }
 
 @end

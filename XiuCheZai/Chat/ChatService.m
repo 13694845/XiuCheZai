@@ -95,13 +95,13 @@
     NSLog(@"loginWithSenderId : %@", senderId);
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"LOGIN\", \"sender_id\":\"%@\"}\n", senderId];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
-    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+    [self.asyncSocket readDataToData:[[ChatConfig terminator] dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)echo {
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"ECHO\"}\n"];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
-    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+    [self.asyncSocket readDataToData:[[ChatConfig terminator] dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
@@ -110,7 +110,7 @@
     if ([type isEqualToString:@"LOGIN"]) [self handleLogin:message];
     if ([type isEqualToString:@"MESSAGE"]) [self handleMessage:message];
     if ([type isEqualToString:@"ECHO"]) [self handleEcho:message];
-    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+    [self.asyncSocket readDataToData:[[ChatConfig terminator] dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)handleLogin:(NSDictionary *)message {
