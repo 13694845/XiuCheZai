@@ -7,22 +7,22 @@
 //
 
 #import "ChatService.h"
+#import "XCZConfig.h"
+#import "AFNetworking.h"
 #import "GCDAsyncSocket.h"
 #import "ChatConfig.h"
 #import "ChatMessage.h"
 #import "ChatMessageManager.h"
-#import "XCZConfig.h"
-#import "AFNetworking.h"
 
 @interface ChatService () <GCDAsyncSocketDelegate>
 
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (strong, nonatomic) NSTimer *timer;
 
-@property (strong, nonatomic) AFHTTPSessionManager *manager;
-
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderName;
+@property (strong, nonatomic) NSString *host;
 
 @end
 
