@@ -11,15 +11,15 @@
 #import "ChatConfig.h"
 #import "ChatMessage.h"
 #import "ChatMessageManager.h"
-
 #import "XCZConfig.h"
-
-
+#import "AFNetworking.h"
 
 @interface ChatService () <GCDAsyncSocketDelegate>
 
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (strong, nonatomic) NSTimer *timer;
+
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderName;
@@ -28,14 +28,52 @@
 
 @implementation ChatService
 
+- (AFHTTPSessionManager *)manager {
+    if (!_manager) {
+        _manager = [AFHTTPSessionManager manager];
+        [_manager.requestSerializer setValue:[NSString stringWithFormat:@"%@ %@/%@",
+                                              [_manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]] forHTTPHeaderField:@"User-Agent"];
+    }
+    return _manager;
+}
+
 - (void)start {
     NSLog(@"start");
+    
+    /*
     NSDictionary *chatSender = [[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"];
     self.senderId = chatSender[@"senderId"];
     self.senderName = chatSender[@"senderName"];
     
     if (!self.asyncSocket) [self setupSocket];
     if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
+     */
+    
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/LoginDetectionAction.do"];
+    NSDictionary *parameters = nil;
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSLog(@"responseObject : %@", responseObject);
+        
+        
+        
+        /*
+        if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
+            [self.myCarButton setTitle:nil forState:UIControlStateNormal];
+            [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar_box.png"] forState:UIControlStateNormal];
+            [self.myCarButton removeTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
+            [self.myCarButton addTarget:self action:@selector(toMyCar:) forControlEvents:UIControlEventTouchUpInside];
+            [self defaultCarIcon];
+        } else {
+            [self.myCarButton setBackgroundImage:nil forState:UIControlStateNormal];
+            [self.myCarButton setTitle:@"登录" forState:UIControlStateNormal];
+            [self.myCarButton removeTarget:self action:@selector(toMyCar:) forControlEvents:UIControlEventTouchUpInside];
+            [self.myCarButton addTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
+        }
+         */
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+
+    
 }
 
 
