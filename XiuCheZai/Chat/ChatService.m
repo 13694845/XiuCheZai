@@ -50,26 +50,22 @@
                 NSLog(@"ContactServlet.do : %@", responseObject);
                 
                 
+                NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactChannelNumServlet.do"];
+                NSDictionary *parameters = nil;
+                [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+                    NSLog(@"ContactChannelNumServlet.do : %@", responseObject);
+                    
+                    
+                    
+                    
+                    
+                } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+                
+                
+                
             } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
-            
         }
-        /*
-        if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
-            [self.myCarButton setTitle:nil forState:UIControlStateNormal];
-            [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar_box.png"] forState:UIControlStateNormal];
-            [self.myCarButton removeTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
-            [self.myCarButton addTarget:self action:@selector(toMyCar:) forControlEvents:UIControlEventTouchUpInside];
-            [self defaultCarIcon];
-        } else {
-            [self.myCarButton setBackgroundImage:nil forState:UIControlStateNormal];
-            [self.myCarButton setTitle:@"登录" forState:UIControlStateNormal];
-            [self.myCarButton removeTarget:self action:@selector(toMyCar:) forControlEvents:UIControlEventTouchUpInside];
-            [self.myCarButton addTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
-        }
-         */
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
-
-    
 }
 
 
