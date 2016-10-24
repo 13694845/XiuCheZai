@@ -178,10 +178,11 @@
     NSString *URLString = @"https://itunes.apple.com/lookup?id=1064830136";
     NSDictionary *parameters = nil;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        if ([[responseObject objectForKey:@"results"] count]) {
-            NSString *latestVersion = [[[responseObject objectForKey:@"results"] objectAtIndex:0] objectForKey:@"version"];
-            NSString *currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-            if ([self compareVersion:currentVersion withVersion:latestVersion] < 0) {
+        NSArray *results = [responseObject objectForKey:@"results"];
+        if (results.count) {
+            NSString *storetVersion = [results.firstObject objectForKey:@"version"];
+            NSString *appVersion = [Config appVersion];
+            if ([self compareVersion:appVersion withVersion:storetVersion] < 0) {
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"发现新版本" message:nil preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"下次再说" style:UIAlertActionStyleDefault handler:nil];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"马上升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
