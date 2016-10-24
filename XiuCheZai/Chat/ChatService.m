@@ -21,11 +21,15 @@
 @property (strong, nonatomic) NSTimer *timer;
 
 @property (strong, nonatomic) NSString *senderId;
-//@property (strong, nonatomic) NSString *senderName;
+@property (strong, nonatomic) NSString *senderName;
 
+
+
+avatar
 @property (strong, nonatomic) NSDictionary *senderInfo;
 
 @property (strong, nonatomic) NSString *host;
+
 
 @end
 
@@ -57,7 +61,6 @@
                 NSDictionary *parameters = nil;
                 [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                     NSLog(@"ContactChannelNumServlet.do : %@", responseObject);
-                    
                     self.host = [responseObject objectForKey:@"data"];
                     
                     
