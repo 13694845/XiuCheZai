@@ -100,7 +100,6 @@
         [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.senderId];
     }
     [self startHeartbeat];
-    // [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)startHeartbeat {
