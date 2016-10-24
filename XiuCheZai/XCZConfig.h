@@ -7,22 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Config.h"
 
-@interface XCZConfig : NSObject
-
-typedef NS_ENUM(int, TabIndex) {
-    TabIndexHome = 0,
-    TabIndexStore,
-    TabIndexDiscovery,
-    TabIndexAccessory,
-    TabIndexMine,
-    TabIndexCart
-};
-
-+ (NSString *)version;
-+ (NSString *)baseURL;
-+ (NSString *)webBaseURL;
-+ (NSString *)apiBaseURL;
-+ (NSString *)imgBaseURL;
+@interface XCZConfig : Config
 
 @end

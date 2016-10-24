@@ -14,12 +14,17 @@
 
 @implementation Config
 
+static NSString *const kAppVersion = @"2.0.0";
 static NSString *const kVersion = @"1.6.0";
 static NSString *const kWebBaseURL = @"http://m.8673h.com";
 static NSString *const kApiBaseURL = @"http://m.8673h.com";
 static NSString *const kImgBaseURL = @"http://img.8673h.com";
 static NSString *const kTestBaseURL = @"http://192.168.2.4:8080";
 static NSString *const kDomainBaseURL = @"http://a.zj-qsh.com";
+
++ (NSString *)appVersion {
+    return kAppVersion;
+}
 
 + (NSString *)version {
     return kVersion;
