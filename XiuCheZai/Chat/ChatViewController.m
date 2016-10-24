@@ -488,9 +488,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 - (void)test:(NSNotification *)notification {
-    
-    
-    CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSDictionary *msg = [notification userInfo];
+    NSLog(@"msg : %@", msg);
 }
 
 - (void)viewDidLoad {
