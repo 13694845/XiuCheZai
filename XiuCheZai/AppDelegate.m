@@ -44,6 +44,10 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // if ([[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"]) [self.chatService start];
+    
+    [self.chatService start];
+    
+    
     switch ([CLLocationManager authorizationStatus]) {
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             [self.locationManager startUpdatingLocation]; break;
