@@ -719,6 +719,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     chatMessage.receiverId = msg[@"receiver_id"];
     chatMessage.receiverName = msg[@"receiver_name"];
     [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:self.receiverId];
+    
+    
     [self.rows addObject:chatMessage];
     
     [self.tableView reloadData];

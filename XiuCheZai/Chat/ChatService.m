@@ -156,6 +156,7 @@
     chatMessage.receiverId = msg[@"receiver_id"];
     chatMessage.receiverName = msg[@"receiver_name"];
     [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:msg[@"sender_id"]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleMessage" object:nil userInfo:message];
 }
 
 - (void)handleEcho:(NSDictionary *)message {
