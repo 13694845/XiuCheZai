@@ -499,14 +499,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];
 
-    /*
      self.senderId = @"555";
      self.senderName = @"zhangsan";
      self.senderAvatar = nil;
      self.receiverId = @"123";
      self.receiverName = @"lisi";
      self.receiverAvatar = nil;
-     */
+    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -532,8 +531,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
     
+    /*
     if (!self.asyncSocket) [self setupSocket];
     if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
+     */
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
