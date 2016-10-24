@@ -673,6 +673,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         chatMessage.receiverName = msg[@"receiver_name"];
         [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.senderId];
     }
+    
+    
+    
     NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
     if (localHistoryMessages.count) {
         self.rows = [localHistoryMessages mutableCopy];
