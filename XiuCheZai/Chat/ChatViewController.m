@@ -482,8 +482,24 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+
+
+
+
+- (void)test:(NSNotification *)notification {
+    
+    
+    CGRect KeyboardFrameEnd = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];
+
     /*
      self.senderId = @"555";
      self.senderName = @"zhangsan";
