@@ -39,32 +39,20 @@
 
 - (void)start {
     NSLog(@"start");
-    
-    /*
-    NSDictionary *chatSender = [[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"];
-    self.senderId = chatSender[@"senderId"];
-    self.senderName = chatSender[@"senderName"];
-    
-    if (!self.asyncSocket) [self setupSocket];
-    if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
-     */
-    
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/LoginDetectionAction.do"];
     NSDictionary *parameters = nil;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSLog(@"responseObject : %@", responseObject);
-        
-        
-        NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactServlet.do"];
-        NSDictionary *parameters = nil;
-        [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-            NSLog(@"responseObject : %@", responseObject);
-
-        
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
-        
+        NSLog(@"LoginDetectionAction.do : %@", responseObject);
+        if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
+            NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactServlet.do"];
+            NSDictionary *parameters = nil;
+            [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+                NSLog(@"ContactServlet.do : %@", responseObject);
+                
+                
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+            
+        }
         /*
         if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
             [self.myCarButton setTitle:nil forState:UIControlStateNormal];
