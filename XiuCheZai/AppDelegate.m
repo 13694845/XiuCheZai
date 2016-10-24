@@ -43,6 +43,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    // if ([[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"]) [self.chatService start];
     switch ([CLLocationManager authorizationStatus]) {
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             [self.locationManager startUpdatingLocation]; break;
@@ -51,8 +52,6 @@
         case kCLAuthorizationStatusDenied: break;
         default: break;
     }
-    
-    // if ([[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"]) [self.chatService start];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -66,7 +65,7 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [self.chatService stop];
+    // [self.chatService stop];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {}
