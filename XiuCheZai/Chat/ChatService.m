@@ -134,7 +134,7 @@
 
 - (void)startHeartbeat {
     NSLog(@"startHeartbeat");
-    if (!self.timer.valid) self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(echo) userInfo:nil repeats:YES];
+    if (!self.timer.valid) self.timer = [NSTimer scheduledTimerWithTimeInterval:[ChatConfig heartbeatInterval] target:self selector:@selector(echo) userInfo:nil repeats:YES];
 }
 
 - (void)stopHeartbeat {

@@ -17,5 +17,6 @@
 + (NSString *)defaultHost;
 + (NSUInteger)defaultPort;
 + (NSString *)terminator;
++ (NSTimeInterval)heartbeatInterval;
 
 @end
