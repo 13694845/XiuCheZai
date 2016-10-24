@@ -199,15 +199,15 @@
 
 - (int)compareVersion:(NSString *)versionA withVersion:(NSString *)versionB {
     if ([versionA isEqualToString:versionB]) return 0;
-    NSArray *versA = [versionA componentsSeparatedByString:@"."];
-    NSArray *versB = [versionB componentsSeparatedByString:@"."];
-    if (versA.count != 3 || versB.count != 3) return 404;
+    NSArray *subVersionsA = [versionA componentsSeparatedByString:@"."];
+    NSArray *subVersionsB = [versionB componentsSeparatedByString:@"."];
+    if (subVersionsA.count != 3 || subVersionsB.count != 3) return 0;
     for (int i = 0; i < 3; i++) {
-        int a = [versA[i] intValue];
-        int b = [versB[i] intValue];
+        int a = [subVersionsA[i] intValue];
+        int b = [subVersionsB[i] intValue];
         if (a != b) return a - b;
     }
-    return 404;
+    return 0;
 }
 
 - (void)viewWillLayoutSubviews {
