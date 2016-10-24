@@ -48,10 +48,10 @@
         [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             self.senderId = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"user_id"];
             NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactChannelNumServlet.do"];
-            NSDictionary *parameters = nil;
+            NSDictionary *parameters = @{@"terminal":@"1"};
             [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                 self.host = [responseObject objectForKey:@"ip"] ? : [ChatConfig defaultHost];
-                self.port = [ChatConfig defaultPort];
+                self.port = [[responseObject objectForKey:@"port"] integerValue] ? : [ChatConfig defaultPort];
                 [self startService];
             } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
         } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
