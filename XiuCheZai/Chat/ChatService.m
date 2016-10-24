@@ -38,6 +38,14 @@
     if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
 }
 
+
+
+- (void)startService {
+    NSLog(@"startService");
+    if (!self.asyncSocket) [self setupSocket];
+    if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
+}
+
 - (void)stop {
     NSLog(@"stop");
     [self stopHeartbeat];
