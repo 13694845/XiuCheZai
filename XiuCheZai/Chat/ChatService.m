@@ -21,7 +21,10 @@
 @property (strong, nonatomic) NSTimer *timer;
 
 @property (strong, nonatomic) NSString *senderId;
-@property (strong, nonatomic) NSString *senderName;
+//@property (strong, nonatomic) NSString *senderName;
+
+@property (strong, nonatomic) NSDictionary *senderInfo;
+
 @property (strong, nonatomic) NSString *host;
 
 @end
@@ -48,12 +51,14 @@
             NSDictionary *parameters = nil;
             [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                 NSLog(@"ContactServlet.do : %@", responseObject);
+                self.senderInfo = [[responseObject objectForKey:@"data"] firstObject];
+                
                 NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactChannelNumServlet.do"];
                 NSDictionary *parameters = nil;
                 [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                     NSLog(@"ContactChannelNumServlet.do : %@", responseObject);
                     
-                    
+                    self.host = [responseObject objectForKey:@"data"];
                     
                     
                     
@@ -71,7 +76,7 @@
 - (void)startService {
     NSLog(@"startService");
     if (!self.asyncSocket) [self setupSocket];
-    if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
+    if (!self.asyncSocket.isConnected) [self connectToHost:self.host onPort:PORT];
 }
 
 - (void)stop {
