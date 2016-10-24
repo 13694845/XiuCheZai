@@ -22,6 +22,7 @@
 
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *host;
+@property (assign, nonatomic) NSUInteger port;
 
 @end
 
@@ -52,21 +53,18 @@
             NSDictionary *parameters = nil;
             [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
                 NSLog(@"ContactChannelNumServlet.do : %@", responseObject);
-                self.host = [responseObject objectForKey:@"data"];
-                NSLog(@"%@ | %@", self.senderId, self.host);
+                self.host = [responseObject objectForKey:@"data"] ? : [ChatConfig defaultHost];
+                self.port = [ChatConfig defaultPort];
+                [self startService];
             } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
         } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
-
-
-
-
 - (void)startService {
     NSLog(@"startService");
     if (!self.asyncSocket) [self setupSocket];
-    if (!self.asyncSocket.isConnected) [self connectToHost:self.host onPort:PORT];
+    if (!self.asyncSocket.isConnected) [self connectToHost:self.host onPort:self.port];
 }
 
 - (void)stop {
