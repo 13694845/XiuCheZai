@@ -56,6 +56,14 @@
         NSLog(@"responseObject : %@", responseObject);
         
         
+        NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactServlet.do"];
+        NSDictionary *parameters = nil;
+        [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+            NSLog(@"responseObject : %@", responseObject);
+
+        
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
         
         /*
         if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
@@ -75,6 +83,9 @@
 
     
 }
+
+
+
 
 
 

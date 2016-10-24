@@ -31,7 +31,7 @@ static NSString *const kDomainBaseURL = @"http://a.zj-qsh.com";
 }
 
 + (NSString *)baseURL {
-    return kWebBaseURL;
+    return kTestBaseURL;
 }
 
 + (NSString *)webBaseURL {
