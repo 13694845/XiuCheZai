@@ -25,7 +25,7 @@
 @implementation ChatService
 
 - (void)start {
-    NSLog(@"startWithSenderId");
+    NSLog(@"start");
     NSDictionary *chatSender = [[NSUserDefaults standardUserDefaults] objectForKey:@"chatSender"];
     self.senderId = chatSender[@"senderId"];
     self.senderName = chatSender[@"senderName"];
