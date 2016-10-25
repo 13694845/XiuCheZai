@@ -22,11 +22,11 @@
 
 @property (strong, nonatomic) NSString *host;
 @property (assign, nonatomic) NSUInteger port;
-
+/*
 @property (strong, readwrite, nonatomic) NSString *senderId;
 @property (strong, readwrite, nonatomic) NSString *senderName;
 @property (strong, readwrite, nonatomic) NSString *senderAvatar;
-
+*/
 @end
 
 @implementation ChatService
@@ -50,9 +50,11 @@
         NSDictionary *parameters = nil;
         [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             NSDictionary *senderInfo = [[responseObject objectForKey:@"data"] firstObject];
+            /*
             self.senderId = senderInfo[@"user_id"];
             self.senderName = senderInfo[@"nick"];
             self.senderAvatar = senderInfo[@"avatar"];
+             */
             NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactChannelNumServlet.do"];
             NSDictionary *parameters = @{@"terminal":@"1"};
             [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
