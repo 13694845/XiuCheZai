@@ -789,16 +789,15 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }
 }
 
+
+
+
+
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    if ([picker.mediaTypes containsObject:(NSString *)kUTTypeImage]) {
-        NSLog(@"kUTTypeImage");
-        [self uploadImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
-    }
-    if ([picker.mediaTypes containsObject:(NSString *)kUTTypeMovie]) {
-        NSLog(@"kUTTypeMovie");
-        [self uploadMovieWithMovURL:[info objectForKey:UIImagePickerControllerMediaURL]];
-    }
+    if ([picker.mediaTypes containsObject:(NSString *)kUTTypeImage]) [self uploadImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+    if ([picker.mediaTypes containsObject:(NSString *)kUTTypeMovie]) [self uploadMovieWithMovURL:[info objectForKey:UIImagePickerControllerMediaURL]];
 }
 
 - (void)uploadImage:(UIImage *)image {
@@ -837,7 +836,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetPassthrough];
     exportSession.outputURL = [NSURL fileURLWithPath:mp4Path];
     exportSession.outputFileType = AVFileTypeMPEG4;
-    // exportSession.shouldOptimizeForNetworkUse = YES;
+    exportSession.shouldOptimizeForNetworkUse = YES;
     [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {
         NSData *movData = [NSData dataWithContentsOfURL:movURL];
         NSLog(@"mov size : %ld", movData.length);
