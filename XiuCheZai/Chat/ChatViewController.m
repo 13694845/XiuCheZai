@@ -150,6 +150,95 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [self.tableView reloadData];
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationItem.title = self.receiverName;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    self.textView.layer.borderWidth = 1.0;
+    self.textView.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
+    self.textView.layer.cornerRadius = 5.0;
+    self.textView.returnKeyType = UIReturnKeySend;
+    self.textView.delegate = self;
+    self.textView.text = nil;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    self.chatService = ((AppDelegate *)[UIApplication sharedApplication].delegate).chatService;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processEcho:) name:@"XCZChatServiceDidHandleEcho" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processLogin:) name:@"XCZChatServiceDidHandleLogin" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processHistory:) name:@"XCZChatServiceDidHandleHistory" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceipt:) name:@"XCZChatServiceDidHandleReceipt" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
+    
+    self.receiverId = @"123";
+    self.receiverName = @"lisi";
+    self.receiverAvatar = nil;
+}
+
+- (void)processEcho:(NSNotification *)notification {
+}
+
+- (void)processLogin:(NSNotification *)notification {
+    NSDictionary *senderInfo = [notification userInfo][@"sender"];
+    self.senderId = senderInfo[@"senderId"];
+    self.senderName = senderInfo[@"senderName"];
+    self.senderAvatar = senderInfo[@"senderAvatar"];
+    NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
+    if (localHistoryMessages.count) {
+        self.rows = [localHistoryMessages mutableCopy];
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    } else {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [self.chatService historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
+    }
+}
+
+- (void)processHistory:(NSNotification *)notification {
+    NSMutableArray *historyMessages = [[notification userInfo][@"historyMessages"] mutableCopy];
+    [historyMessages addObjectsFromArray:self.rows];
+    self.rows = historyMessages;
+    [self.tableView reloadData];
+    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+}
+
+- (void)processReceipt:(NSNotification *)notification {
+    ChatMessage *chatMessage = [notification userInfo][@"receiptMessage"];
+    [self.rows addObject:chatMessage];
+    [self.tableView reloadData];
+    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+}
+
+- (void)processReceive:(NSNotification *)notification {
+    ChatMessage *chatMessage = [notification userInfo][@"receiveMessage"];
+    [self.rows addObject:chatMessage];
+    [self.tableView reloadData];
+    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+}
+
+
+
+
+
+
+
+
+
+
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.rows.count;
 }
@@ -483,13 +572,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         NSLog(@"playVoice ：%@", error.localizedDescription); return;
     }
 }
-// *****************
 
 - (void)goBack:(id)sender {
-    NSLog(@"goBack");
-    [self stopHeartbeat];
-    [self.asyncSocket disconnect];
-    // [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
+    [self.chatService stop];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -499,87 +584,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
-- (void)processEcho:(NSNotification *)notification {
-}
 
-- (void)processLogin:(NSNotification *)notification {
-    NSDictionary *senderInfo = [notification userInfo][@"sender"];
-    self.senderId = senderInfo[@"senderId"];
-    self.senderName = senderInfo[@"senderName"];
-    self.senderAvatar = senderInfo[@"senderAvatar"];
-    NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
-    if (localHistoryMessages.count) {
-        self.rows = [localHistoryMessages mutableCopy];
-        [self.tableView reloadData];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-    } else {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [self.chatService historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
-    }
-}
-
-- (void)processHistory:(NSNotification *)notification {
-    NSMutableArray *historyMessages = [[notification userInfo][@"historyMessages"] mutableCopy];
-    [historyMessages addObjectsFromArray:self.rows];
-    self.rows = historyMessages;
-    [self.tableView reloadData];
-    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-}
-
-- (void)processReceipt:(NSNotification *)notification {
-    ChatMessage *chatMessage = [notification userInfo][@"receiptMessage"];
-    [self.rows addObject:chatMessage];
-    [self.tableView reloadData];
-    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-}
-
-- (void)processReceive:(NSNotification *)notification {
-    ChatMessage *chatMessage = [notification userInfo][@"receiveMessage"];
-    [self.rows addObject:chatMessage];
-    [self.tableView reloadData];
-    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-}
-
-
-
-
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
-    self.navigationItem.title = self.receiverName;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.tableFooterView = [[UIView alloc] init];
-    
-    self.textView.layer.borderWidth = 1.0;
-    self.textView.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
-    self.textView.layer.cornerRadius = 5.0;
-    self.textView.returnKeyType = UIReturnKeySend;
-    self.textView.delegate = self;
-    self.textView.text = nil;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
-    self.chatService = ((AppDelegate *)[UIApplication sharedApplication].delegate).chatService;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processEcho:) name:@"XCZChatServiceDidHandleEcho" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processLogin:) name:@"XCZChatServiceDidHandleLogin" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processHistory:) name:@"XCZChatServiceDidHandleHistory" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceipt:) name:@"XCZChatServiceDidHandleReceipt" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
-    
-    self.receiverId = @"123";
-    self.receiverName = @"lisi";
-    self.receiverAvatar = nil;
-}
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
@@ -657,24 +662,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
     NSLog(@"sendMessageWithContent");
-    
-    // *****************
-    ChatMessage *message = [[ChatMessage alloc] init];
-    message.content = content;
-    message.type = contentType;
-    self.sendingMessage = message;
-    // *****************
-    
     [self.chatService sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
 }
 
-- (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
-    NSString *messageFormat = @"{\"type\":\"MESSAGE\", \"sender_id\":\"%@\", \"receiver_id\":\"%@\", \"sender_name\":\"%@\", \"receiver_name\":\"%@\", \"msg_content\":\"%@\", \"msg_type\":\"%@\", \"play_time\":\"%@\", \"contact\":\"1\"}\n";
-    NSString *message = [NSString stringWithFormat:messageFormat, sender[@"sender_id"], receiver[@"receiver_id"], sender[@"sender_name"], receiver[@"receiver_name"], content, type, @"-1"];
-    NSLog(@"sendMessage : %@", message);
-    [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
-    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
-}
+
+
+
+
+
 
 - (void)historyMessagesForSenderId:(NSString *)senderId receiverId:(NSString *)receiverId sendTime:(NSString *)sendTime page:(NSString *)page {
     NSLog(@"historyMessagesForSenderId");
@@ -688,68 +683,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *message = [NSString stringWithFormat:@"{\"type\":\"ECHO\"}\n"];
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
-}
-
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
-    NSDictionary *message = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-    NSString *type = message[@"type"];
-    if ([type isEqualToString:@"LOGIN"]) [self handleLogin:message];
-    if ([type isEqualToString:@"RECEIPT"]) [self handleReceipt:message];
-    if ([type isEqualToString:@"MESSAGE"]) [self handleMessage:message];
-    if ([type isEqualToString:@"CHATHISTORY"]) [self handleHistory:message];
-    if ([type isEqualToString:@"ECHO"]) [self handleEcho:message];
-    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
-}
-
-- (void)handleLogin:(NSDictionary *)message {
-    NSLog(@"handleLogin %@ : ", message);
-    NSArray *offlineMessages = message[@"message"];
-    for (NSDictionary *msg in offlineMessages) {
-        ChatMessage *chatMessage = [[ChatMessage alloc] init];
-        chatMessage.isSend = NO;
-        chatMessage.type = msg[@"msg_type"];
-        chatMessage.content = msg[@"msg_content"];
-        chatMessage.playTime = msg[@"play_time"];
-        chatMessage.senderTime = msg[@"send_time"];
-        chatMessage.senderId = msg[@"sender_id"];
-        chatMessage.senderName = msg[@"sender_name"];
-        chatMessage.receiverId = msg[@"receiver_id"];
-        chatMessage.receiverName = msg[@"receiver_name"];
-        [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.senderId];
-    }
-    
-    
-    
-    NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
-    if (localHistoryMessages.count) {
-        self.rows = [localHistoryMessages mutableCopy];
-        [self.tableView reloadData];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-    } else {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:[NSString stringWithFormat:@"%d", 1]];
-    }
-    [self startHeartbeat];
-    
-    // *****************
-    /*
-    if (self.sendingMessage) {
-        [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:self.sendingMessage.content type:self.sendingMessage.type];
-        [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
-    }
-     */
-    // *****************
-}
-
-- (void)startHeartbeat {
-    NSLog(@"startHeartbeat");
-    if (!self.timer.valid) self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(echo) userInfo:nil repeats:YES];
-}
-
-- (void)stopHeartbeat {
-    NSLog(@"stopHeartbeat");
-    if (self.timer.valid) [self.timer invalidate];
 }
 
 - (void)handleReceipt:(NSDictionary *)message {
@@ -819,18 +752,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     [self.tableView reloadData];
     if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-}
-
-- (void)handleEcho:(NSDictionary *)message {
-    NSLog(@"handleEcho %@ : ", message);
-    
-    // *****************
-     if (self.sendingMessage) {
-         NSLog(@"self.sendingMessage");
-         [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:self.sendingMessage.content type:self.sendingMessage.type];
-         [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
-     }
-    // *****************
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
