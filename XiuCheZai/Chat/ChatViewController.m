@@ -61,9 +61,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (weak, nonatomic) IBOutlet UIButton *voiceButton;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
+
+@property (strong, nonatomic) ChatEmojiInputView *emojiInputView;
 @property (strong, nonatomic) ChatOtherInputView *otherInputView;
-
-
 
 
 @property (strong, nonatomic) UIButton *recordVoiceButton;
@@ -125,6 +125,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)updateTableView {
     [self.tableView reloadData];
+}
+
+- (ChatEmojiInputView *)emojiInputView {
+    if (!_emojiInputView) {
+        _emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
+        _emojiInputView.delegate = self;
+    }
+    return _emojiInputView;
 }
 
 - (ChatOtherInputView *)otherInputView {
@@ -718,19 +726,21 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }];
 }
 
+
+
+
+
 - (IBAction)showEmotionPad:(UIButton *)sender {
     if (self.inputViewType == InputViewTypeEmoji) {
         [sender setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
-        [self.textView becomeFirstResponder];
-        return;
+        [self.textView becomeFirstResponder]; return;
     }
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
     self.inputViewType = InputViewTypeEmoji;
-    ChatEmojiInputView *emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
-    emojiInputView.delegate = self;
+    
     UITextView *textView = [[UITextView alloc] init];
     [self.barView addSubview:textView];
-    textView.inputView = emojiInputView;
+    textView.inputView = self.emojiInputView;
     [textView becomeFirstResponder];
 }
 
@@ -754,11 +764,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.textView.selectedRange = NSMakeRange(self.textView.selectedRange.location + 1, 0);
 }
 
-
-
-
-
-
 - (IBAction)showOtherPad:(id)sender {
     if (self.inputViewType == InputViewTypeOther) {
         [sender setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
@@ -767,16 +772,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
     self.inputViewType = InputViewTypeOther;
     
-    
-    UITextView *textView = [[UITextView alloc] init];
-    [self.barView addSubview:textView];
-    textView.inputView = self.otherInputView;
-    [textView becomeFirstResponder];
+    UITextView *fakeTextView = [[UITextView alloc] init];
+    [self.barView addSubview:fakeTextView];
+    fakeTextView.inputView = self.otherInputView;
+    [fakeTextView becomeFirstResponder];
 }
-
-
-
-
 
 - (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButtonWithButtonTag:(OtherInputViewButtonTag)buttonTag {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
