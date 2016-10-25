@@ -737,6 +737,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.textView.selectedRange = NSMakeRange(self.textView.selectedRange.location + 1, 0);
 }
 
+
+
+
+
+
 - (IBAction)showOtherPad:(id)sender {
     if (self.inputViewType == InputViewTypeOther) {
         [sender setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
@@ -753,45 +758,35 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [textView becomeFirstResponder];
 }
 
+
+
+
+
 - (void)otherInputView:(ChatOtherInputView *)otherInputView didSelectButtonWithButtonTag:(OtherInputViewButtonTag)buttonTag {
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     switch (buttonTag) {
         case OtherInputViewButtonTagImageFromPhotoLibrary: {
-            NSLog(@"OtherInputViewButtonTagImageFromPhotoLibrary");
-            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
             imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            imagePickerController.delegate = self;
-            [self presentViewController:imagePickerController animated:YES completion:nil]; break;
+            imagePickerController.delegate = self; break;
         }
         case OtherInputViewButtonTagImageFromCamera: {
-            NSLog(@"OtherInputViewButtonTagImageFromCamera");
-            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
             imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-            imagePickerController.delegate = self;
-            [self presentViewController:imagePickerController animated:YES completion:nil]; break;
+            imagePickerController.delegate = self; break;
         }
         case OtherInputViewButtonTagMovieFromCamera: {
-            NSLog(@"OtherInputViewButtonTagMovieFromCamera");
-            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
             imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
             imagePickerController.mediaTypes = @[(NSString *)kUTTypeMovie];
-            imagePickerController.delegate = self;
-            [self presentViewController:imagePickerController animated:YES completion:nil]; break;
+            imagePickerController.delegate = self; break;
         }
         case OtherInputViewButtonTagMovieFromPhotoLibrary: {
-            NSLog(@"OtherInputViewButtonTagMovieFromPhotoLibrary");
-            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
             imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             imagePickerController.mediaTypes = @[(NSString *)kUTTypeMovie];
-            imagePickerController.delegate = self;
-            [self presentViewController:imagePickerController animated:YES completion:nil]; break;
+            imagePickerController.delegate = self; break;
         }
         default: break;
     }
+    [self presentViewController:imagePickerController animated:YES completion:nil];
 }
-
-
-
-
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -801,12 +796,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)uploadImage:(UIImage *)image {
     image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
-    NSData *data = UIImageJPEGRepresentation(image, 0.8);
+    NSData *fileData = UIImageJPEGRepresentation(image, 0.8);
+    
     NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
     NSDictionary *parameters = nil;
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
-        [formData appendPartWithFileData:data name:@"file" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:fileData name:@"file" fileName:@"filename.jpg" mimeType:@"image/jpeg"];
     } progress:^(NSProgress *uploadProgress) {
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
@@ -833,31 +829,20 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     exportSession.outputFileType = AVFileTypeMPEG4;
     exportSession.shouldOptimizeForNetworkUse = YES;
     [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {
+        NSData *fileData = [NSData dataWithContentsOfFile:mp4Path];
         
-        
-        
-        
-        
-        // [self uploadMovieWithMp4Path:mp4Path];
-    }];
-}
-
-- (void)uploadMovieWithMp4Path:(NSString *)mp4Path {
-    NSData *data = [NSData dataWithContentsOfFile:mp4Path];
-    NSLog(@"mp4 size : %ld", data.length);
-    
-    NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
-    NSDictionary *parameters = nil;
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
-        [formData appendPartWithFileData:data name:@"file" fileName:@"filename.mp4" mimeType:@"video/mp4"];
-    } progress:^(NSProgress *uploadProgress) {
-    } success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"NSDictionary : %@", result);
-        NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
-        [self sendMessageWithContent:fileURL contentType:@"mov"];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
+        NSDictionary *parameters = nil;
+        self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
+            [formData appendPartWithFileData:fileData name:@"file" fileName:@"filename.mp4" mimeType:@"video/mp4"];
+        } progress:^(NSProgress *uploadProgress) {
+        } success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+            NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
+            [self sendMessageWithContent:fileURL contentType:@"mov"];
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        }];
     }];
 }
 
