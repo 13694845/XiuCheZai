@@ -104,13 +104,31 @@
     [self.asyncSocket readDataToData:[[ChatConfig terminator] dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
+
+
+// ***********
+
+
+- (void)historyMessagesForSenderId:(NSString *)senderId receiverId:(NSString *)receiverId sendTime:(NSString *)sendTime page:(NSString *)page {
+    NSLog(@"historyMessagesForSenderId");
+    NSString *messageFormat = @"{\"type\":\"CHATHISTORY\", \"sender_id\":\"%@\", \"receiver_id\":\"%@\", \"send_time\":\"%@\", \"NowPage\":\"%@\"}\n";
+    NSString *message = [NSString stringWithFormat:messageFormat, senderId, receiverId, sendTime, page];
+    [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
+    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+}
+
+
+
+
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSDictionary *message = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
     NSString *type = message[@"type"];
     if ([type isEqualToString:@"LOGIN"]) [self handleLogin:message];
+    // if ([type isEqualToString:@"RECEIPT"]) [self handleReceipt:message];
     if ([type isEqualToString:@"MESSAGE"]) [self handleMessage:message];
+    if ([type isEqualToString:@"CHATHISTORY"]) [self handleHistory:message];
     if ([type isEqualToString:@"ECHO"]) [self handleEcho:message];
-    [self.asyncSocket readDataToData:[[ChatConfig terminator] dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
+    [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
 
 - (void)handleLogin:(NSDictionary *)message {
@@ -143,6 +161,32 @@
     if (self.timer.valid) [self.timer invalidate];
 }
 
+- (void)handleEcho:(NSDictionary *)message {
+    NSLog(@"handleEcho");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleEcho" object:nil userInfo:@{@"message":message}];
+}
+
+- (void)handleHistory:(NSDictionary *)message {
+    NSMutableArray *chatMessages = [NSMutableArray array];
+    for (NSDictionary *msg in message[@"content"]) {
+        ChatMessage *chatMessage = [[ChatMessage alloc] init];
+        chatMessage.isSend = [[msg[@"sender_id"] description] isEqualToString:self.senderId];
+        chatMessage.type = msg[@"msg_type"];
+        chatMessage.content = msg[@"msg_content"];
+        chatMessage.playTime = msg[@"play_time"];
+        chatMessage.senderTime = msg[@"send_time"];
+        chatMessage.senderId = msg[@"sender_id"];
+        chatMessage.senderName = msg[@"sender_name"];
+        chatMessage.receiverId = msg[@"receiver_id"];
+        chatMessage.receiverName = msg[@"receiver_name"];
+        [chatMessages addObject:chatMessage];
+    }
+    // [[ChatMessageManager sharedManager] saveMessages:chatMessages withReceiverId:self.receiverId];
+}
+
+
+
+
 - (void)handleMessage:(NSDictionary *)message {
     NSLog(@"handleMessage %@ : ", message);
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
@@ -158,11 +202,6 @@
     chatMessage.receiverName = msg[@"receiver_name"];
     [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:msg[@"sender_id"]];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleMessage" object:nil userInfo:@{@"message":message}];
-}
-
-- (void)handleEcho:(NSDictionary *)message {
-    NSLog(@"handleEcho");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleEcho" object:nil userInfo:@{@"message":message}];
 }
 
 @end

@@ -486,19 +486,53 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
-
 - (void)test:(NSNotification *)notification {
     NSDictionary *msg = [notification userInfo];
     NSLog(@"%@ : %@",notification.name, msg);
+    
+    
+    NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
+    if (localHistoryMessages.count) {
+        self.rows = [localHistoryMessages mutableCopy];
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    }
 }
+
+
+// *****
+
+
+
+- (void)processLogin:(NSNotification *)notification {
+    NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
+    if (localHistoryMessages.count) {
+        self.rows = [localHistoryMessages mutableCopy];
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    } else {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
+    }
+}
+
+
+
+
+
+
+
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleLogin" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processLogin:) name:@"XCZChatServiceDidHandleLogin" object:nil];
 
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];
+    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];
     
      self.senderId = @"555";
      self.senderName = @"zhangsan";
