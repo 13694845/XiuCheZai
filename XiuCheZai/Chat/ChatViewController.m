@@ -745,13 +745,15 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (IBAction)showOtherPad:(id)sender {
     if (self.inputViewType == InputViewTypeOther) {
         [sender setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
-        [self.textView becomeFirstResponder];
-        return;
+        [self.textView becomeFirstResponder]; return;
     }
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
     self.inputViewType = InputViewTypeOther;
+    
     ChatOtherInputView *otherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
     otherInputView.delegate = self;
+    
+    
     UITextView *textView = [[UITextView alloc] init];
     [self.barView addSubview:textView];
     textView.inputView = otherInputView;
