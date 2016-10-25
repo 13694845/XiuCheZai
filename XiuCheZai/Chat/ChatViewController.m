@@ -521,7 +521,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         // [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
         
         
-        
+        [self.chatService historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
+
     }
 }
 
