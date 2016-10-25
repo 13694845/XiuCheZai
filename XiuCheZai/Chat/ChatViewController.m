@@ -545,36 +545,15 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.chatService = ((AppDelegate *)[UIApplication sharedApplication].delegate).chatService;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processEcho:) name:@"XCZChatServiceDidHandleEcho" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processLogin:) name:@"XCZChatServiceDidHandleLogin" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processHistory:) name:@"XCZChatServiceDidHandleHistory" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceipt:) name:@"XCZChatServiceDidHandleReceipt" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
-    
-    
-    
-    
-    self.senderId = @"555";
-    self.senderName = @"zhangsan";
-    self.senderAvatar = nil;
-    self.receiverId = @"123";
-    self.receiverName = @"lisi";
-    self.receiverAvatar = nil;
-    
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationItem.title = self.receiverName;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
-    self.textView.text = nil;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -586,16 +565,20 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.textView.layer.cornerRadius = 5.0;
     self.textView.returnKeyType = UIReturnKeySend;
     self.textView.delegate = self;
-    
+    self.textView.text = nil;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
+    self.chatService = ((AppDelegate *)[UIApplication sharedApplication].delegate).chatService;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processEcho:) name:@"XCZChatServiceDidHandleEcho" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processLogin:) name:@"XCZChatServiceDidHandleLogin" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processHistory:) name:@"XCZChatServiceDidHandleHistory" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceipt:) name:@"XCZChatServiceDidHandleReceipt" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
     
-    /*
-    if (!self.asyncSocket) [self setupSocket];
-    if (!self.asyncSocket.isConnected) [self connectToHost:HOST onPort:PORT];
-     */
+    self.receiverId = @"123";
+    self.receiverName = @"lisi";
+    self.receiverAvatar = nil;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
