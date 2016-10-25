@@ -20,12 +20,12 @@
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (strong, nonatomic) NSTimer *timer;
 
-@property (strong, nonatomic) NSString *senderId;
-
-
-
 @property (strong, nonatomic) NSString *host;
 @property (assign, nonatomic) NSUInteger port;
+
+@property (strong, nonatomic) NSString *senderId;
+@property (strong, nonatomic) NSString *senderName;
+@property (strong, nonatomic) NSString *senderAvatar;
 
 @end
 
@@ -49,7 +49,10 @@
         NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactServlet.do"];
         NSDictionary *parameters = nil;
         [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-            self.senderId = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"user_id"];
+            NSDictionary *senderInfo = [[responseObject objectForKey:@"data"] firstObject];
+            self.senderId = senderInfo[@"user_id"];
+            self.senderName = senderInfo[@"nick"];
+            self.senderAvatar = senderInfo[@"avatar"];
             NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactChannelNumServlet.do"];
             NSDictionary *parameters = @{@"terminal":@"1"};
             [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
