@@ -518,15 +518,17 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     } else {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        // [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
-        
-        
         [self.chatService historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
-
     }
 }
 
-
+- (void)processHistory:(NSNotification *)notification {
+    NSMutableArray *historyMessages = [[notification userInfo][@"historyMessages"] mutableCopy];
+    [historyMessages addObjectsFromArray:self.rows];
+    self.rows = historyMessages;
+    [self.tableView reloadData];
+    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+}
 
 
 
@@ -543,6 +545,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processLogin:) name:@"XCZChatServiceDidHandleLogin" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processHistory:) name:@"XCZChatServiceDidHandleHistory" object:nil];
+    
+    
+    
 
     
     // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];

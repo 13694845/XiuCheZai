@@ -170,7 +170,7 @@
 
 // **********
 - (void)handleHistory:(NSDictionary *)message {
-    NSMutableArray *chatMessages = [NSMutableArray array];
+    NSMutableArray *historyMessages = [NSMutableArray array];
     for (NSDictionary *msg in message[@"content"]) {
         ChatMessage *chatMessage = [[ChatMessage alloc] init];
         chatMessage.isSend = [[msg[@"sender_id"] description] isEqualToString:self.senderId];
@@ -182,11 +182,14 @@
         chatMessage.senderName = msg[@"sender_name"];
         chatMessage.receiverId = msg[@"receiver_id"];
         chatMessage.receiverName = msg[@"receiver_name"];
-        [chatMessages addObject:chatMessage];
+        [historyMessages addObject:chatMessage];
     }
-    // [[ChatMessageManager sharedManager] saveMessages:chatMessages withReceiverId:self.receiverId];
+    if (historyMessages.count) {
+        ChatMessage *aMessage = historyMessages.firstObject;
+        [[ChatMessageManager sharedManager] saveMessages:historyMessages withReceiverId:(aMessage.isSend ? aMessage.receiverId : aMessage.senderId)];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleHistory" object:nil userInfo:@{@"historyMessages":historyMessages}];
 }
-
 
 
 
