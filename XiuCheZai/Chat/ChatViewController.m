@@ -495,17 +495,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
-- (void)test:(NSNotification *)notification {
-    NSDictionary *msg = [notification userInfo];
-    NSLog(@"%@ : %@",notification.name, msg);
-    
-    
-    NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
-    if (localHistoryMessages.count) {
-        self.rows = [localHistoryMessages mutableCopy];
-        [self.tableView reloadData];
-        if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-    }
+- (void)processEcho:(NSNotification *)notification {
 }
 
 - (void)processLogin:(NSNotification *)notification {
@@ -536,8 +526,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
-
-
 - (void)processReceive:(NSNotification *)notification {
     ChatMessage *chatMessage = [notification userInfo][@"receiveMessage"];
     [self.rows addObject:chatMessage];
@@ -554,24 +542,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [super viewDidLoad];
     
     self.chatService = ((AppDelegate *)[UIApplication sharedApplication].delegate).chatService;
-    
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processEcho:) name:@"XCZChatServiceDidHandleEcho" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processLogin:) name:@"XCZChatServiceDidHandleLogin" object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processHistory:) name:@"XCZChatServiceDidHandleHistory" object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceipt:) name:@"XCZChatServiceDidHandleReceipt" object:nil];
-
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
-
-    
-
-
-
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];
     
      self.senderId = @"555";
      self.senderName = @"zhangsan";
