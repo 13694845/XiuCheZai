@@ -34,7 +34,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        self.backgroundColor = [UIColor whiteColor];
         CGFloat imagePadding = (frame.size.width - EMOJI_IMAGE_WIDTH * NUMBER_OF_COLUMNS) / (NUMBER_OF_COLUMNS * 2);
         int numberOfRows = ceil(self.emojiImages.count / (float)NUMBER_OF_COLUMNS);
         CGFloat contentViewHeight = (EMOJI_IMAGE_WIDTH + imagePadding * 2) * numberOfRows;
