@@ -168,6 +168,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         case InputViewTypeVoice: {
             [self.emotionButton setBackgroundImage:[UIImage imageNamed:@"emoji"] forState:UIControlStateNormal];
             [self.othersButton setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+            [self.view endEditing:YES];
             break;
         }
         default: break;
