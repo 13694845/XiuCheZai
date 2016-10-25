@@ -492,6 +492,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
+
+
+
 - (void)test:(NSNotification *)notification {
     NSDictionary *msg = [notification userInfo];
     NSLog(@"%@ : %@",notification.name, msg);
@@ -504,11 +507,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
     }
 }
-
-
-// *****
-
-
 
 - (void)processLogin:(NSNotification *)notification {
     NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
@@ -540,7 +538,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
-
 - (void)processReceive:(NSNotification *)notification {
     ChatMessage *chatMessage = [notification userInfo][@"receiveMessage"];
     [self.rows addObject:chatMessage];
@@ -555,7 +552,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     self.chatService = ((AppDelegate *)[UIApplication sharedApplication].delegate).chatService;
     
@@ -575,7 +571,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
     
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];
     
      self.senderId = @"555";
      self.senderName = @"zhangsan";
