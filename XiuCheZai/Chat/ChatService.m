@@ -151,7 +151,7 @@
         [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.senderId];
     }
     [self startHeartbeat];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleLogin" object:nil userInfo:@{@"message":message}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleLogin" object:nil userInfo:@{@"loginMessage":message}];
 }
 
 - (void)startHeartbeat {
@@ -166,7 +166,7 @@
 
 - (void)handleEcho:(NSDictionary *)message {
     NSLog(@"handleEcho");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleEcho" object:nil userInfo:@{@"message":message}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleEcho" object:nil userInfo:@{@"echoMessage":message}];
 }
 
 - (void)handleHistory:(NSDictionary *)message {
