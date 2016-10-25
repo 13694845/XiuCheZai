@@ -51,7 +51,7 @@
         [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             NSDictionary *senderInfo = [[responseObject objectForKey:@"data"] firstObject];
             self.senderId = senderInfo[@"user_id"];
-            self.senderName = senderInfo[@"nick"];
+            self.senderName = senderInfo[@"user_name"];
             self.senderAvatar = senderInfo[@"avatar"];
             NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactChannelNumServlet.do"];
             NSDictionary *parameters = @{@"terminal":@"1"};
