@@ -43,7 +43,6 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [self.chatService start];
     switch ([CLLocationManager authorizationStatus]) {
         case kCLAuthorizationStatusAuthorizedWhenInUse:
             [self.locationManager startUpdatingLocation]; break;
@@ -52,6 +51,7 @@
         case kCLAuthorizationStatusDenied: break;
         default: break;
     }
+    [self.chatService start];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
