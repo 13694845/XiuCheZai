@@ -540,6 +540,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
+- (void)processReceive:(NSNotification *)notification {
+    ChatMessage *chatMessage = [notification userInfo][@"receiveMessage"];
+    [self.rows addObject:chatMessage];
+    [self.tableView reloadData];
+    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+}
+
 
 
 
@@ -560,6 +567,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
     
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
+
+    
+
 
 
     

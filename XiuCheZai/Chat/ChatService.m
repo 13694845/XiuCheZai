@@ -131,7 +131,7 @@
     NSString *type = message[@"type"];
     if ([type isEqualToString:@"LOGIN"]) [self handleLogin:message];
     if ([type isEqualToString:@"RECEIPT"]) [self handleReceipt:message];
-    if ([type isEqualToString:@"MESSAGE"]) [self handleMessage:message];
+    if ([type isEqualToString:@"MESSAGE"]) [self handleReceive:message];
     if ([type isEqualToString:@"CHATHISTORY"]) [self handleHistory:message];
     if ([type isEqualToString:@"ECHO"]) [self handleEcho:message];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
@@ -211,11 +211,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleReceipt" object:nil userInfo:@{@"receiptMessage":chatMessage}];
 }
 
-
-
-
-
-- (void)handleMessage:(NSDictionary *)message {
+- (void)handleReceive:(NSDictionary *)message {
     NSLog(@"handleMessage %@ : ", message);
     NSDictionary *msg = [NSJSONSerialization JSONObjectWithData:[message[@"msg"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableLeaves error:nil];
     ChatMessage *chatMessage = [[ChatMessage alloc] init];
@@ -228,8 +224,8 @@
     chatMessage.senderName = msg[@"sender_name"];
     chatMessage.receiverId = msg[@"receiver_id"];
     chatMessage.receiverName = msg[@"receiver_name"];
-    [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:msg[@"sender_id"]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleMessage" object:nil userInfo:@{@"message":message}];
+    [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.senderId];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleReceive" object:nil userInfo:@{@"receiveMessage":chatMessage}];
 }
 
 @end
