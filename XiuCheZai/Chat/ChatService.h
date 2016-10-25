@@ -10,6 +10,10 @@
 
 @interface ChatService : NSObject
 
+@property (strong, readonly, nonatomic) NSString *senderId;
+@property (strong, readonly, nonatomic) NSString *senderName;
+@property (strong, readonly, nonatomic) NSString *senderAvatar;
+
 - (void)start;
 - (void)stop;
 

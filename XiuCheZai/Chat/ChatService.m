@@ -23,9 +23,9 @@
 @property (strong, nonatomic) NSString *host;
 @property (assign, nonatomic) NSUInteger port;
 
-@property (strong, nonatomic) NSString *senderId;
-@property (strong, nonatomic) NSString *senderName;
-@property (strong, nonatomic) NSString *senderAvatar;
+@property (strong, readwrite, nonatomic) NSString *senderId;
+@property (strong, readwrite, nonatomic) NSString *senderName;
+@property (strong, readwrite, nonatomic) NSString *senderAvatar;
 
 @end
 
