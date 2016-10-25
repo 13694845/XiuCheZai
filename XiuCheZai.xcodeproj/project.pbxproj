@@ -281,7 +281,6 @@
 		6CFEE7B61DB7B1F100676A62 /* d_zuohengheng.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7861DB7B1F100676A62 /* d_zuohengheng.png */; };
 		6CFEE7B91DB7B21B00676A62 /* Emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7B71DB7B21B00676A62 /* Emoji.json */; };
 		6CFEE7BA1DB7B21B00676A62 /* EmojiImages.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7B81DB7B21B00676A62 /* EmojiImages.json */; };
-		6CFEE7BD1DB850CD00676A62 /* TestChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFEE7BC1DB850CD00676A62 /* TestChatViewController.m */; };
 		6CFEE7C01DB85E1000676A62 /* avatar_xcz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7BE1DB85E1000676A62 /* avatar_xcz@2x.png */; };
 		6CFEE7C11DB85E1000676A62 /* avatar_xcz@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7BF1DB85E1000676A62 /* avatar_xcz@3x.png */; };
 		6CFEE7CA1DB9BEDD00676A62 /* movie_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7C21DB9BEDD00676A62 /* movie_camera@2x.png */; };
@@ -752,8 +751,6 @@
 		6CFEE7861DB7B1F100676A62 /* d_zuohengheng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = d_zuohengheng.png; sourceTree = "<group>"; };
 		6CFEE7B71DB7B21B00676A62 /* Emoji.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Emoji.json; sourceTree = "<group>"; };
 		6CFEE7B81DB7B21B00676A62 /* EmojiImages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EmojiImages.json; sourceTree = "<group>"; };
-		6CFEE7BB1DB850CD00676A62 /* TestChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestChatViewController.h; sourceTree = "<group>"; };
-		6CFEE7BC1DB850CD00676A62 /* TestChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestChatViewController.m; sourceTree = "<group>"; };
 		6CFEE7BE1DB85E1000676A62 /* avatar_xcz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_xcz@2x.png"; sourceTree = "<group>"; };
 		6CFEE7BF1DB85E1000676A62 /* avatar_xcz@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar_xcz@3x.png"; sourceTree = "<group>"; };
 		6CFEE7C21DB9BEDD00676A62 /* movie_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie_camera@2x.png"; sourceTree = "<group>"; };
@@ -1400,8 +1397,6 @@
 				6CFEE7161DB7ABE400676A62 /* ChatTextBubbleView.m */,
 				6CFEE7091DB7ABE400676A62 /* ChatImageBubbleView.h */,
 				6CFEE70A1DB7ABE400676A62 /* ChatImageBubbleView.m */,
-				6CFEE7BB1DB850CD00676A62 /* TestChatViewController.h */,
-				6CFEE7BC1DB850CD00676A62 /* TestChatViewController.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1724,7 +1719,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CFEE7BD1DB850CD00676A62 /* TestChatViewController.m in Sources */,
 				6C91C35D1C9A84D2004C0CB4 /* RSADataVerifier.m in Sources */,
 				6CE3638D1D73C1DF00AA0B53 /* XCZActivityViewController.m in Sources */,
 				6CFEE71B1DB7ABE400676A62 /* ChatEmojiInputView.m in Sources */,

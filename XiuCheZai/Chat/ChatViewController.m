@@ -85,6 +85,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (strong, nonatomic) ChatService *chatService;
 
 
+@property (copy, nonatomic) NSString *senderId;
+@property (copy, nonatomic) NSString *senderName;
+@property (copy, nonatomic) NSString *senderAvatar;
+
+
 @end
 
 @implementation ChatViewController
@@ -548,12 +553,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceipt:) name:@"XCZChatServiceDidHandleReceipt" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
     
-     self.senderId = @"555";
-     self.senderName = @"zhangsan";
-     self.senderAvatar = nil;
-     self.receiverId = @"123";
-     self.receiverName = @"lisi";
-     self.receiverAvatar = nil;
+    self.senderId = self.chatService.senderId;
+    self.senderName = self.chatService.senderName;
+    self.senderAvatar = self.chatService.senderAvatar;
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
