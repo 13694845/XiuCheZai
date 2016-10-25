@@ -22,6 +22,7 @@
 #import "ChatOtherInputView.h"
 #import "VoiceConverter.h"
 
+#import "ChatService.h"
 
 @import MediaPlayer;
 
@@ -78,6 +79,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 // *****************
 @property (strong, nonatomic) ChatMessage *sendingMessage;
 // *****************
+
+
+@property (strong, nonatomic) ChatService *chatService;
+
 
 @end
 
@@ -513,7 +518,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     } else {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
+        // [self historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
+        
+        
+        
     }
 }
 
@@ -528,6 +536,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    self.chatService = ((AppDelegate *)[UIApplication sharedApplication].delegate).chatService;
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processLogin:) name:@"XCZChatServiceDidHandleLogin" object:nil];
 

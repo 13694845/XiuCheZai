@@ -13,4 +13,6 @@
 - (void)start;
 - (void)stop;
 
+- (void)historyMessagesForSenderId:(NSString *)senderId receiverId:(NSString *)receiverId sendTime:(NSString *)sendTime page:(NSString *)page;
+
 @end
