@@ -7,11 +7,13 @@
 //
 
 #import "ChatViewController.h"
-#import "AppDelegate.h"
-#import "XCZConfig.h"
 #import "AFNetworking.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "MBProgressHUD.h"
+
+#import "AppDelegate.h"
+#import "XCZConfig.h"
+
 #import "GCDAsyncSocket.h"
 #import "ChatConfig.h"
 #import "ChatMessage.h"
@@ -25,7 +27,6 @@
 #import "ChatService.h"
 
 @import MediaPlayer;
-
 
 @import AVFoundation;
 
