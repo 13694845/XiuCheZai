@@ -138,7 +138,7 @@
 }
 
 - (void)handleLogin:(NSDictionary *)message {
-    // NSLog(@"handleLogin %@ : ", message);
+    NSLog(@"handleLogin");
     NSArray *offlineMessages = message[@"message"];
     for (NSDictionary *msg in offlineMessages) {
         ChatMessage *chatMessage = [[ChatMessage alloc] init];
