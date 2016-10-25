@@ -166,6 +166,9 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleEcho" object:nil userInfo:@{@"message":message}];
 }
 
+
+
+// **********
 - (void)handleHistory:(NSDictionary *)message {
     NSMutableArray *chatMessages = [NSMutableArray array];
     for (NSDictionary *msg in message[@"content"]) {
