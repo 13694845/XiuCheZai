@@ -306,6 +306,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.view endEditing:YES];
+    self.inputViewType = InputViewTypeKeyboard;
 }
 
 - (UIView *)textBubbleViewForMessage:(ChatMessage *)message {
