@@ -61,14 +61,15 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (weak, nonatomic) IBOutlet UIButton *voiceButton;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
-
 @property (strong, nonatomic) ChatOtherInputView *otherInputView;
 
 
-// ChatOtherInputView *otherInputView
 
 
 @property (strong, nonatomic) UIButton *recordVoiceButton;
+
+
+
 
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
@@ -766,10 +767,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
     self.inputViewType = InputViewTypeOther;
     
-    /*
-    ChatOtherInputView *otherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
-    otherInputView.delegate = self;
-    */
     
     UITextView *textView = [[UITextView alloc] init];
     [self.barView addSubview:textView];
