@@ -489,7 +489,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)test:(NSNotification *)notification {
     NSDictionary *msg = [notification userInfo];
-    NSLog(@"msg : %@", msg);
+    NSLog(@"%@ : %@",notification.name, msg);
 }
 
 - (void)viewDidLoad {
