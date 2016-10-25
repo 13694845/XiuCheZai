@@ -793,7 +793,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     if ([picker.mediaTypes containsObject:(NSString *)kUTTypeImage]) [self uploadImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
@@ -803,8 +802,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (void)uploadImage:(UIImage *)image {
     image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
     NSData *data = UIImageJPEGRepresentation(image, 0.8);
-    NSLog(@"image size : %ld", data.length);
-    
     NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
     NSDictionary *parameters = nil;
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -813,7 +810,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     } progress:^(NSProgress *uploadProgress) {
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"NSDictionary : %@", result);
         NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
         [self sendMessageWithContent:fileURL contentType:@"img"];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -830,20 +826,19 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)uploadMovieWithMovURL:(NSURL *)movURL {
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *mp4Path = [documentsPath stringByAppendingPathComponent:@"sampleVideo.mp4"];
-    
+    NSString *mp4Path = [documentsPath stringByAppendingPathComponent:@"temp.mp4"];
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movURL options:nil];
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetPassthrough];
     exportSession.outputURL = [NSURL fileURLWithPath:mp4Path];
     exportSession.outputFileType = AVFileTypeMPEG4;
     exportSession.shouldOptimizeForNetworkUse = YES;
     [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {
-        NSData *movData = [NSData dataWithContentsOfURL:movURL];
-        NSLog(@"mov size : %ld", movData.length);
-        NSData *mp4Data = [NSData dataWithContentsOfFile:mp4Path];
-        NSLog(@"mp4 size : %ld", mp4Data.length);
         
-        [self uploadMovieWithMp4Path:mp4Path];
+        
+        
+        
+        
+        // [self uploadMovieWithMp4Path:mp4Path];
     }];
 }
 
