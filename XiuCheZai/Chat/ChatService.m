@@ -21,6 +21,9 @@
 @property (strong, nonatomic) NSTimer *timer;
 
 @property (strong, nonatomic) NSString *senderId;
+
+
+
 @property (strong, nonatomic) NSString *host;
 @property (assign, nonatomic) NSUInteger port;
 
@@ -119,12 +122,6 @@
     [self.asyncSocket writeData:[message dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1.0 tag:0];
     [self.asyncSocket readDataToData:[TERMINATOR dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1.0 tag:0];
 }
-
-
-
-
-
-
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     NSDictionary *message = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
