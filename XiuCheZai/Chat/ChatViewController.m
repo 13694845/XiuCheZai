@@ -495,7 +495,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleLogin" object:nil];
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];
     
