@@ -62,6 +62,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
 
+@property (strong, nonatomic) ChatOtherInputView *otherInputView;
+
 
 // ChatOtherInputView *otherInputView
 
@@ -110,6 +112,28 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     return _manager;
 }
 
+- (void)setRows:(NSMutableArray *)rows {
+    _rows = rows;
+    [self updateTableView];
+}
+
+- (NSMutableArray *)rows {
+    if (!_rows) _rows = [NSMutableArray array];
+    return _rows;
+}
+
+- (void)updateTableView {
+    [self.tableView reloadData];
+}
+
+- (ChatOtherInputView *)otherInputView {
+    if (!_otherInputView) {
+        _otherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
+        _otherInputView.delegate = self;
+    }
+    return _otherInputView;
+}
+
 - (void)setInputViewType:(InputViewType)inputViewType {
     _inputViewType = inputViewType;
     switch (inputViewType) {
@@ -139,20 +163,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         }
         default: break;
     }
-}
-
-- (void)setRows:(NSMutableArray *)rows {
-    _rows = rows;
-    [self updateTableView];
-}
-
-- (NSMutableArray *)rows {
-    if (!_rows) _rows = [NSMutableArray array];
-    return _rows;
-}
-
-- (void)updateTableView {
-    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -755,13 +765,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
     self.inputViewType = InputViewTypeOther;
     
+    /*
     ChatOtherInputView *otherInputView = [[ChatOtherInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
     otherInputView.delegate = self;
-    
+    */
     
     UITextView *textView = [[UITextView alloc] init];
     [self.barView addSubview:textView];
-    textView.inputView = otherInputView;
+    textView.inputView = self.otherInputView;
     [textView becomeFirstResponder];
 }
 
