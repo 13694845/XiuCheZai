@@ -154,7 +154,8 @@
         [[ChatMessageManager sharedManager] saveMessage:chatMessage withReceiverId:chatMessage.senderId];
     }
     [self startHeartbeat];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleLogin" object:nil userInfo:@{@"loginMessage":message}];
+    NSDictionary *sender = @{@"senderId":self.senderId, @"senderName":self.senderName, @"senderAvatar":self.senderAvatar};
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleLogin" object:nil userInfo:@{@"sender":sender}];
 }
 
 - (void)startHeartbeat {
