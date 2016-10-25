@@ -61,13 +61,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (weak, nonatomic) IBOutlet UIButton *voiceButton;
 @property (weak, nonatomic) IBOutlet UIButton *emotionButton;
 @property (weak, nonatomic) IBOutlet UIButton *othersButton;
-
+@property (strong, nonatomic) UIButton *recordVoiceButton;
 @property (strong, nonatomic) ChatEmojiInputView *emojiInputView;
 @property (strong, nonatomic) ChatOtherInputView *otherInputView;
-
-
-@property (strong, nonatomic) UIButton *recordVoiceButton;
-
 
 
 
