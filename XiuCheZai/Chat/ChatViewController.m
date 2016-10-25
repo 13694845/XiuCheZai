@@ -500,7 +500,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (localHistoryMessages.count) {
         self.rows = [localHistoryMessages mutableCopy];
         [self.tableView reloadData];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+        if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
     }
 }
 
@@ -530,6 +530,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
+- (void)processReceipt:(NSNotification *)notification {
+    ChatMessage *chatMessage = [notification userInfo][@"receiptMessage"];
+    [self.rows addObject:chatMessage];
+    [self.tableView reloadData];
+    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+}
+
+
 
 
 
@@ -548,8 +556,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processHistory:) name:@"XCZChatServiceDidHandleHistory" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceipt:) name:@"XCZChatServiceDidHandleReceipt" object:nil];
+
     
     
+
 
     
     // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"XCZChatServiceDidHandleEcho" object:nil];
@@ -676,7 +687,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.sendingMessage = message;
     // *****************
     
-    [self sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
+    [self.chatService sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
 }
 
 - (void)sendMessageFromSender:(NSDictionary *)sender toReceiver:(NSDictionary *)receiver withContent:(NSString *)content type:(NSString *)type {
