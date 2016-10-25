@@ -499,14 +499,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
-
 - (void)processEcho:(NSNotification *)notification {
 }
 
 - (void)processLogin:(NSNotification *)notification {
-    
-
-    
+    NSDictionary *senderInfo = [notification userInfo][@"sender"];
+    self.senderId = senderInfo[@"senderId"];
+    self.senderName = senderInfo[@"senderName"];
+    self.senderAvatar = senderInfo[@"senderAvatar"];
     NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
     if (localHistoryMessages.count) {
         self.rows = [localHistoryMessages mutableCopy];

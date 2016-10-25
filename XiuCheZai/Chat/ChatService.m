@@ -170,7 +170,7 @@
 
 - (void)handleEcho:(NSDictionary *)message {
     NSLog(@"handleEcho");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleEcho" object:nil userInfo:@{@"echoMessage":message}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleEcho" object:nil userInfo:nil];
 }
 
 - (void)handleHistory:(NSDictionary *)message {
