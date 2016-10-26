@@ -649,7 +649,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (IBAction)showVoicePad:(id)sender {
-    NSLog(@"showVoicePad");
     if (self.inputViewType == InputViewTypeVoice) {
         [sender setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
         [self.recordVoiceButton removeFromSuperview];
@@ -659,6 +658,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
     self.inputViewType = InputViewTypeVoice;
     [self.textView resignFirstResponder];
+    
+    
+    
     
     if (!self.recordVoiceButton) {
         self.recordVoiceButton = [[UIButton alloc] init];
@@ -700,10 +702,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"temp.wav"];
     NSString *amrPath = [documentsPath stringByAppendingPathComponent:@"temp.amr"];
     if ([VoiceConverter ConvertWavToAmr:wavPath amrSavePath:amrPath]) {}
-    NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
-    NSLog(@"wavData : %ld", wavData.length);
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:amrPath]];
-    NSLog(@"amrData : %ld", amrData.length);
     [self uploadAmrWithAmrData:amrData];
 }
 
@@ -716,16 +715,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     } progress:^(NSProgress *uploadProgress) {
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"NSDictionary : %@", result);
         NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
         [self sendMessageWithContent:fileURL contentType:@"msc"];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
     }];
 }
-
-
-
-
 
 - (IBAction)showEmotionPad:(UIButton *)sender {
     if (self.inputViewType == InputViewTypeEmoji) {

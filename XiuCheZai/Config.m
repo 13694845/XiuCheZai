@@ -14,7 +14,7 @@
 
 @implementation Config
 
-static NSString *const kAppVersion = @"2.0.0";
+static NSString *const kAppVersion = @"1.9.0";
 static NSString *const kVersion = @"1.6.0";
 static NSString *const kWebBaseURL = @"http://m.8673h.com";
 static NSString *const kApiBaseURL = @"http://m.8673h.com";
@@ -32,7 +32,7 @@ static NSString *const kDomainBaseURL = @"http://a.zj-qsh.com";
 }
 
 + (NSString *)baseURL {
-    return kTestBaseURL;
+    return kWebBaseURL;
 }
 
 + (NSString *)webBaseURL {
@@ -44,7 +44,7 @@ static NSString *const kDomainBaseURL = @"http://a.zj-qsh.com";
 }
 
 + (NSString *)imgBaseURL {
-    return kTestImgBaseURL;
+    return kImgBaseURL;
 }
 
 @end
