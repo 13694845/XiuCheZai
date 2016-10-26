@@ -199,6 +199,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processHistory:) name:@"XCZChatServiceDidHandleHistory" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceipt:) name:@"XCZChatServiceDidHandleReceipt" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processDisconnect:) name:@"XCZChatServiceDidDisconnect" object:nil];
     
     self.senderId = self.chatService.senderId;
     self.senderName = self.chatService.senderName;
@@ -279,6 +280,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [self.rows addObject:chatMessage];
     [self.tableView reloadData];
     if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+}
+
+- (void)processDisconnect:(NSNotification *)notification {
+    [self toastWithText:@"竟然与服务器失联了"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
