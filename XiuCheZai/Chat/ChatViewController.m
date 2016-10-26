@@ -554,6 +554,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
      */
 }
 
+
+
+
+
 - (UIView *)voiceBubbleViewForMessage:(ChatMessage *)message {
     CGRect imageRect = CGRectMake(0.0, 0.0, 22.0, 22.0);
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2)];
