@@ -621,36 +621,21 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 
 
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
         NSString *content = [ChatEmojiManager plainStringFromEmojiString:textView.attributedText];
-        
-        // *****************
+        content = [content stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         content = [content stringByReplacingOccurrencesOfString:@"\\n" withString:@""];
         if (!content.length) {
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.alpha = 0.5;
-            hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"发送内容不能为空且不能包含\\n";
-            hud.yOffset = -100.0;
-            [hud hide:YES afterDelay:2.0];
+            [self toastWithText:@"请输入消息内容"];
             return NO;
         }
-        // *****************
-        
-        [self sendMessageWithContent:[content stringByReplacingOccurrencesOfString:@"\n" withString:@""] contentType:@"txt"];
         textView.text = nil;
+        [self sendMessageWithContent:content contentType:@"txt"];
         return NO;
     }
     return YES;
 }
-
-
-
-
-
-
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     self.inputViewType = InputViewTypeKeyboard;
@@ -898,6 +883,15 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [self.barView layoutIfNeeded];
         [self.tableView layoutIfNeeded];
     } completion:^(BOOL finished) {}];
+}
+
+- (void)toastWithText:(NSString *)text {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.alpha = 0.5;
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = text;
+    hud.yOffset = -100.0;
+    [hud hide:YES afterDelay:2.0];
 }
 
 - (void)goBack:(id)sender {
