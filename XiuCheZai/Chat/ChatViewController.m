@@ -214,10 +214,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self loadHistoryMessages];
+    [self loadExistMessages];
 }
 
-- (void)loadHistoryMessages {
+- (void)loadExistMessages {
     NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
     if (localHistoryMessages.count) {
         self.rows = [localHistoryMessages mutableCopy];
@@ -226,8 +226,16 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     } else {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [self.chatService historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
+        [self loadHistoryMessagesWithSendTime:[dateFormatter stringFromDate:[NSDate date]] page:1];
     }
+}
+
+- (void)loadHistoryMessagesWithSendTime:(NSString *)sendTime page:(NSUInteger)page {
+    [self.chatService historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:sendTime page:[NSString stringWithFormat:@"%ld", page]];
+}
+
+- (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
+    [self.chatService sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
 }
 
 - (void)processEcho:(NSNotification *)notification {
@@ -270,11 +278,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [self.rows addObject:chatMessage];
     [self.tableView reloadData];
     if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-}
-
-- (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
-    NSLog(@"sendMessageWithContent");
-    [self.chatService sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
