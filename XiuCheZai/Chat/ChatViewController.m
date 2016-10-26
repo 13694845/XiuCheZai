@@ -10,12 +10,10 @@
 #import "AFNetworking.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "MBProgressHUD.h"
-
 #import "AppDelegate.h"
 #import "XCZConfig.h"
-
-#import "GCDAsyncSocket.h"
 #import "ChatConfig.h"
+#import "ChatService.h"
 #import "ChatMessage.h"
 #import "ChatMessageManager.h"
 #import "ChatEmojiAttachment.h"
@@ -24,11 +22,8 @@
 #import "ChatOtherInputView.h"
 #import "VoiceConverter.h"
 
-#import "ChatService.h"
-
-@import MediaPlayer;
-
 @import AVFoundation;
+@import MediaPlayer;
 
 #define BUBBLE_VIEW_MARGIN_TOP      15.0
 #define BUBBLE_VIEW_MARGIN_LEFT     12.0
@@ -49,7 +44,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     InputViewTypeVoice
 };
 
-@interface ChatViewController () <GCDAsyncSocketDelegate, ChatEmojiInputViewDelegate, ChatOtherInputViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface ChatViewController () <ChatEmojiInputViewDelegate, ChatOtherInputViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
@@ -65,10 +60,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (strong, nonatomic) ChatEmojiInputView *emojiInputView;
 @property (strong, nonatomic) ChatOtherInputView *otherInputView;
 
-
+@property (strong, nonatomic) UIView *imageViewerView;
+@property (strong, nonatomic) AVAudioRecorder *audioRecorder;
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
-@property (strong, nonatomic) GCDAsyncSocket *asyncSocket;
 @property (strong, nonatomic) NSTimer *timer;
 @property (assign, nonatomic) NSUInteger historyPage;
 
@@ -76,23 +72,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (assign, nonatomic) TableViewTransform tableViewTransform;
 @property (assign, nonatomic) InputViewType inputViewType;
 
-@property (strong, nonatomic) AVAudioRecorder *audioRecorder;
-@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
-
-@property (weak, nonatomic) UIView *imageViewerView;
-
-// *****************
-@property (strong, nonatomic) ChatMessage *sendingMessage;
-// *****************
-
-
 @property (strong, nonatomic) ChatService *chatService;
-
-
 @property (copy, nonatomic) NSString *senderId;
 @property (copy, nonatomic) NSString *senderName;
 @property (copy, nonatomic) NSString *senderAvatar;
-
 
 @end
 
@@ -269,16 +252,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSLog(@"sendMessageWithContent");
     [self.chatService sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
 }
-
-
-
-
-
-
-
-
-
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.rows.count;
