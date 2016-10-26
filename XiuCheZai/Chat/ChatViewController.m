@@ -578,7 +578,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
     
-// *****************
     UIButton *button = [[UIButton alloc] init];
     button.frame = bubbleView.frame;
     button.tag = [self.rows indexOfObject:message];
@@ -588,21 +587,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)playVoice:(UIButton *)sender {
-    NSLog(@"playVoice");
     ChatMessage *message = self.rows[sender.tag];
-    NSLog(@"message.content : %@", message.content);
-    
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *amrPath = [documentsPath stringByAppendingPathComponent:@"temp.amr"];
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"new.wav"];
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
     [amrData writeToFile:amrPath atomically:YES];
-    if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wavPath]) {
-        NSLog(@"converted");
-    }
-    NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:wavPath]];
-    NSLog(@"amrData : %ld", amrData.length);
-    NSLog(@"wavData : %ld", wavData.length);
+    if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wavPath]) {}
     
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
@@ -615,17 +606,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }
 }
 
-
-
-
-
-
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
         NSString *content = [ChatEmojiManager plainStringFromEmojiString:textView.attributedText];
-        content = [content stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-        content = [content stringByReplacingOccurrencesOfString:@"\\n" withString:@""];
+        content = [content stringByReplacingOccurrencesOfString:[ChatConfig terminator] withString:@""];
         if (!content.length) {
             [self toastWithText:@"请输入消息内容"];
             return NO;
