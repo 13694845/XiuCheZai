@@ -365,6 +365,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     return bubbleView;
 }
 
+
+
+
+
+
 - (UIView *)imageBubbleViewForMessage:(ChatMessage *)message {
     CGRect imageRect = CGRectMake(0.0, 0.0, BUBBLE_IMAGE_HEIGHT, BUBBLE_IMAGE_HEIGHT);
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2)];
@@ -390,7 +395,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
     
-// *****************
     UIButton *button = [[UIButton alloc] init];
     button.frame = bubbleView.frame;
     button.tag = [self.rows indexOfObject:message];
@@ -425,10 +429,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (void)closeImageViewer {
     [self.imageViewerView removeFromSuperview];
 }
-// *****************
+
+
+
+
 
 - (UIView *)movieBubbleViewForMessage:(ChatMessage *)message {
-    NSLog(@"movieBubbleViewForMessage");
     CGRect imageRect = CGRectMake(0.0, 0.0, 22.0, 22.0);
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2)];
     
@@ -447,17 +453,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
     
-    // UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
-    
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"movie_sender"]];
     if (!message.isSend) imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"movie_receiver"]];
-    
-    // imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
-    // return bubbleView;
-
-    // *****************
+    
     UIButton *button = [[UIButton alloc] init];
     button.frame = bubbleView.frame;
     button.tag = [self.rows indexOfObject:message];
@@ -465,12 +465,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [bubbleImageView addSubview:button];
     return bubbleView;
 }
-
-
-
-
-
-
 
 - (void)playMovie:(UIButton *)sender {
     ChatMessage *message = self.rows[sender.tag];
