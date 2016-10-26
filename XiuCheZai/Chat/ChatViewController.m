@@ -466,98 +466,22 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     return bubbleView;
 }
 
+
+
+
+
+
+
 - (void)playMovie:(UIButton *)sender {
     ChatMessage *message = self.rows[sender.tag];
-    
-    
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *mp4Path = [documentsPath stringByAppendingPathComponent:@"temp.mp4"];
-    NSLog(@"mp4Path : %@", mp4Path);
-    
     NSData *mp4Data = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
     [mp4Data writeToFile:mp4Path atomically:YES];
     
-    
-    NSData *wavData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:mp4Path]];
-    NSLog(@"wavData : %ld", wavData.length);
-
-    
     MPMoviePlayerViewController *moviePlayerViewController =[[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:mp4Path]];
-moviePlayerViewController.con
-    
     [self presentViewController:moviePlayerViewController animated:YES completion:nil];
-    
-    
-
-    
-    
-    /*
-    AVPlayer *player = [AVPlayer];
-    
-    NSURL *url = [NSURL URLWithString:@"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4"];
-    
-    // 2.创建AVPlayerItem
-    AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
-    
-    // 3.创建AVPlayer
-    _player = [AVPlayer playerWithPlayerItem:item];
-    
-    // 4.添加AVPlayerLayer
-    AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-    layer.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width * 9 / 16);
-    [self.view.layer addSublayer:layer];
-    */
-    /*
-    MPMoviePlayerController *movie = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:mp4Path]];
-    
-    
-    // movie.controlStyle = MPMovieControlStyleFullscreen;
-    
-    movie.view.frame = CGRectMake(0, 0, 300, 300);
-    // [movie.view setFrame:self.view.bounds];
-    [self.view addSubview:movie.view];
-    [movie play];
-*/
-    /*
-    NSURL *url = [NSURL URLWithString:message.content];
-    
-    // MPMoviePlayerController *movie = [[MPMoviePlayerController alloc] initWithContentURL:url];
-    
-    // movie.movieSourceType=MPMovieSourceTypeStreaming;
-
-    movie.controlStyle = MPMovieControlStyleFullscreen;
-    [movie.view setFrame:self.view.bounds];
-    // movie.initialPlaybackTime = -1;
-    [self.view addSubview:movie.view];
-    [movie play];
-    */
-    
-    /*
-    UIView *backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
-    backgroundView.backgroundColor = [UIColor blackColor];
-    
-    UIImageView *imgView = [[UIImageView alloc] init];
-    [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
-    imgView.contentMode = UIViewContentModeScaleAspectFit;
-    imgView.frame = self.view.bounds;
-    [backgroundView addSubview:imgView];
-    
-    UIButton *closeButton = [[UIButton alloc] init];
-    closeButton.frame = CGRectMake(20.0, 20.0, 32.0, 32.0);
-    [closeButton setTitle:@"X" forState:UIControlStateNormal];
-    closeButton.backgroundColor = [UIColor grayColor];
-    closeButton.layer.cornerRadius = 16.0;
-    [closeButton addTarget:self action:@selector(closeImageViewer) forControlEvents:UIControlEventTouchUpInside];
-    [backgroundView addSubview:closeButton];
-    [self.view addSubview:backgroundView];
-    
-    self.imageViewerView = backgroundView;
-     */
 }
-
-
-
-
 
 - (UIView *)voiceBubbleViewForMessage:(ChatMessage *)message {
     CGRect imageRect = CGRectMake(0.0, 0.0, 22.0, 22.0);
