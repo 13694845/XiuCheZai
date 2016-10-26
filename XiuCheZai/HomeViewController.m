@@ -401,8 +401,6 @@
 
 - (IBAction)toWholeMaintain:(id)sender {
     // [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
-    NSLog(@"toWholeMaintain");
-    
     ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
     chatViewController.receiverId = @"123";
     chatViewController.receiverName = @"lisi";
