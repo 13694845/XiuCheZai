@@ -415,26 +415,19 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [imageViewerView addSubview:imgView];
     
     UIButton *closeButton = [[UIButton alloc] init];
-    closeButton.frame = CGRectMake(20.0, 20.0, 32.0, 32.0);
+    closeButton.frame = CGRectMake(30.0, 30.0, 32.0, 32.0);
     [closeButton setTitle:@"X" forState:UIControlStateNormal];
     closeButton.backgroundColor = [UIColor grayColor];
     closeButton.layer.cornerRadius = 16.0;
     [closeButton addTarget:self action:@selector(closeImageViewer) forControlEvents:UIControlEventTouchUpInside];
-    
     [imageViewerView addSubview:closeButton];
-    
     [self.view addSubview:imageViewerView];
-    
     self.imageViewerView = imageViewerView;
 }
 
 - (void)closeImageViewer {
     [self.imageViewerView removeFromSuperview];
 }
-
-
-
-
 
 - (UIView *)movieBubbleViewForMessage:(ChatMessage *)message {
     CGRect imageRect = CGRectMake(0.0, 0.0, 22.0, 22.0);
