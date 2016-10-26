@@ -127,23 +127,15 @@
         return YES;
     }
     
-    /*
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/massage/massage.jsp"]]) {
-        NSLog(@"/massage/massage.jsp");
-        [self chatWithUserReceiverId:@"123"];
-        return NO;
-    }
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/massage/communicate.jsp?bid="]]) {
-        NSLog(@"/massage/communicate.jsp?bid=");
-        [self chatWithUserReceiverId:@"123"];
+        [self chatWithReceiverId:@"123"];
         return NO;
     }
-     */
     
     return YES;
 }
 
-- (void)chatWithUserReceiverId:(NSString *)receiverId {
+- (void)chatWithReceiverId:(NSString *)receiverId {
     NSLog(@"chatWithUserReceiverId");
     ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
     chatViewController.receiverId = @"123";
@@ -153,13 +145,10 @@
 }
 
 - (void)saveCookies {
-    NSMutableDictionary *chatSender = [NSMutableDictionary dictionary];
-    chatSender[@"senderId"] = @"555";
-    chatSender[@"senderName"] = @"zhangsan";
-    [[NSUserDefaults standardUserDefaults] setObject:chatSender forKey:@"chatSender"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    // [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
-    // [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
+    /*
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
+    [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
+     */
 }
 
 - (void)recognizeVehicleLicense {
