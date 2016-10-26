@@ -18,7 +18,8 @@
 - (void)saveMessages:(NSArray *)messages withReceiverId:(NSString *)receiverId;
 
 - (NSInteger)unreadCountForReceiverId:(NSString *)receiverId;
-- (void)resetCountForReceiverId:(NSString *)receiverId;
+- (void)incUnreadCountWithReceiverId:(NSString *)receiverId;
 - (void)saveUnreadCount:(NSUInteger)unreadCount withReceiverId:(NSString *)receiverId;
+- (void)resetCountForReceiverId:(NSString *)receiverId;
 
 @end
