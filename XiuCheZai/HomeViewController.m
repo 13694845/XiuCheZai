@@ -18,6 +18,8 @@
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
 
+#import "ChatViewController.h"
+
 @import AVFoundation;
 
 @interface HomeViewController () <UIScrollViewDelegate, ScannerViewControllerDelegate, BannerViewDataSource, BannerViewDelegate, ReminderViewDataSource,
@@ -340,8 +342,7 @@
         if (k && v) [parameters setValue:v forKey:k];
     }
     if ([parameters[@"code"] isEqualToString:@"0"]) {
-        [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/getCard/index.html?ext=", parameters[@"ext"]]];
-        return;
+        [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/getCard/index.html?ext=", parameters[@"ext"]]]; return;
     }
     if ([parameters[@"code"] isEqualToString:@"1"]) {
         [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -396,10 +397,20 @@
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/Login/login/login.html?url=", [Config baseURL]]];
 }
 
+
+
 - (IBAction)toWholeMaintain:(id)sender {
-    NSLog(@"toWholeMaintain");
     // [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
+    NSLog(@"toWholeMaintain");
+    
+    ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    chatViewController.receiverId = @"123";
+    chatViewController.receiverName = @"lisi";
+    chatViewController.receiverAvatar = nil;
+    [self.navigationController pushViewController:chatViewController animated:YES];
 }
+
+
 
 - (IBAction)toPartMaintain:(id)sender {
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/small_mantain/index.html?type=2"]];
