@@ -482,9 +482,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSLog(@"wavData : %ld", wavData.length);
 
     
-    MPMoviePlayerViewController *moviePlayer =[[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:mp4Path]];
+    MPMoviePlayerViewController *moviePlayerViewController =[[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:mp4Path]];
+moviePlayerViewController.con
     
-    [self presentViewController:moviePlayer animated:YES completion:nil];
+    [self presentViewController:moviePlayerViewController animated:YES completion:nil];
     
     
 
