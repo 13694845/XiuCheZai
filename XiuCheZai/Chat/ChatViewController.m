@@ -405,14 +405,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)viewImage:(UIButton *)sender {
     ChatMessage *message = self.rows[sender.tag];
-    UIView *backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
-    backgroundView.backgroundColor = [UIColor blackColor];
+    UIView *imageViewerView = [[UIView alloc] initWithFrame:self.view.bounds];
+    imageViewerView.backgroundColor = [UIColor blackColor];
     
     UIImageView *imgView = [[UIImageView alloc] init];
     [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = self.view.bounds;
-    [backgroundView addSubview:imgView];
+    [imageViewerView addSubview:imgView];
     
     UIButton *closeButton = [[UIButton alloc] init];
     closeButton.frame = CGRectMake(20.0, 20.0, 32.0, 32.0);
@@ -420,10 +420,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     closeButton.backgroundColor = [UIColor grayColor];
     closeButton.layer.cornerRadius = 16.0;
     [closeButton addTarget:self action:@selector(closeImageViewer) forControlEvents:UIControlEventTouchUpInside];
-    [backgroundView addSubview:closeButton];
-    [self.view addSubview:backgroundView];
     
-    self.imageViewerView = backgroundView;
+    [imageViewerView addSubview:closeButton];
+    
+    [self.view addSubview:imageViewerView];
+    
+    self.imageViewerView = imageViewerView;
 }
 
 - (void)closeImageViewer {
