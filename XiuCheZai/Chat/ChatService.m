@@ -97,6 +97,7 @@
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"socketDidDisconnect : %@ %ld", self.host, self.port);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidDisconnect" object:nil userInfo:nil];
 }
 
 - (void)loginWithSenderId:(NSString *)senderId {
