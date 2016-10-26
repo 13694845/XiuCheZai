@@ -123,6 +123,22 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [self.tableView reloadData];
 }
 
+- (UIButton *)recordVoiceButton {
+    if (!_recordVoiceButton) {
+        _recordVoiceButton = [[UIButton alloc] init];
+        _recordVoiceButton.frame = self.textView.frame;
+        _recordVoiceButton.backgroundColor = [UIColor whiteColor];
+        _recordVoiceButton.layer.borderWidth = 1.0;
+        _recordVoiceButton.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
+        _recordVoiceButton.layer.cornerRadius = 4.0;
+        _recordVoiceButton.titleLabel.font =[UIFont systemFontOfSize:14.0];
+        [_recordVoiceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_recordVoiceButton addTarget:self action:@selector(startRecord:) forControlEvents:UIControlEventTouchDown];
+        [_recordVoiceButton addTarget:self action:@selector(stopRecord:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _recordVoiceButton;
+}
+
 - (ChatEmojiInputView *)emojiInputView {
     if (!_emojiInputView) {
         _emojiInputView = [[ChatEmojiInputView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 216.0)];
@@ -249,6 +265,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
+- (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
+    NSLog(@"sendMessageWithContent");
+    [self.chatService sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
+}
 
 
 
@@ -595,12 +615,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }
 }
 
-- (void)goBack:(id)sender {
-    [self.chatService stop];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
 
 
 
@@ -632,11 +646,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     return YES;
 }
 
-- (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
-    NSLog(@"sendMessageWithContent");
-    [self.chatService sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
-}
-
 
 
 
@@ -652,30 +661,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (self.inputViewType == InputViewTypeVoice) {
         [sender setBackgroundImage:[UIImage imageNamed:@"mic"] forState:UIControlStateNormal];
         [self.recordVoiceButton removeFromSuperview];
-        [self.textView becomeFirstResponder];
-        return;
+        [self.textView becomeFirstResponder]; return;
     }
     [sender setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
     self.inputViewType = InputViewTypeVoice;
-    [self.textView resignFirstResponder];
     
-    
-    
-    
-    if (!self.recordVoiceButton) {
-        self.recordVoiceButton = [[UIButton alloc] init];
-        self.recordVoiceButton.layer.borderWidth = 1.0;
-        self.recordVoiceButton.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
-        self.recordVoiceButton.layer.cornerRadius = 4.0;
-        self.recordVoiceButton.backgroundColor = [UIColor whiteColor];
-        self.recordVoiceButton.titleLabel.font =[UIFont systemFontOfSize:14.0];
-        [self.recordVoiceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.recordVoiceButton.frame = self.textView.frame;
-        [self.recordVoiceButton addTarget:self action:@selector(startRecord:) forControlEvents:UIControlEventTouchDown];
-        [self.recordVoiceButton addTarget:self action:@selector(stopRecord:) forControlEvents:UIControlEventTouchUpInside];
-    }
     [self.recordVoiceButton setTitle:@"按住 说话" forState:UIControlStateNormal];
     [self.barView addSubview:self.recordVoiceButton];
+    [self.textView resignFirstResponder];
 }
 
 - (void)startRecord:(UIButton *)sender {
@@ -905,6 +898,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [self.barView layoutIfNeeded];
         [self.tableView layoutIfNeeded];
     } completion:^(BOOL finished) {}];
+}
+
+- (void)goBack:(id)sender {
+    [self.chatService stop];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
