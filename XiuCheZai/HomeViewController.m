@@ -396,8 +396,9 @@
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/Login/login/login.html?url=", [Config baseURL]]];
 }
 
-- (IBAction)toWholeMaintain:(id)sender {    // Page A
-    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
+- (IBAction)toWholeMaintain:(id)sender {
+    NSLog(@"toWholeMaintain");
+    // [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
 }
 
 - (IBAction)toPartMaintain:(id)sender {
@@ -428,7 +429,7 @@
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html?pjfl=270300&title=%E5%86%85%E9%A5%B0%E7%94%A8%E5%93%81"]];
 }
 
-- (IBAction)toBrakeBlock:(id)sender {   // Page B
+- (IBAction)toBrakeBlock:(id)sender {
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/list/category.html?pjfl=170700&title=%E5%88%B9%E8%BD%A6%E7%89%87"]];
 }
 
