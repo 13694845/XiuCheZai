@@ -45,6 +45,10 @@
     return [unreadCounter[receiverId] integerValue];
 }
 
+- (void)incUnreadCountWithReceiverId:(NSString *)receiverId {
+    [self saveUnreadCount:([self unreadCountForReceiverId:receiverId] + 1) withReceiverId:receiverId];
+}
+
 - (void)saveUnreadCount:(NSUInteger)unreadCount withReceiverId:(NSString *)receiverId {
     NSMutableDictionary *unreadCounter = [NSMutableDictionary dictionaryWithContentsOfFile:[self filePathForUnreadCounter]];
     if (!unreadCounter) unreadCounter = [NSMutableDictionary dictionary];
