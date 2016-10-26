@@ -172,14 +172,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tabBarController.tabBar.hidden = YES;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationItem.title = self.receiverName;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -214,6 +212,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
     [self loadExistMessages];
 }
 
