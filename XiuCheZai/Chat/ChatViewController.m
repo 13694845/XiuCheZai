@@ -201,7 +201,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceipt:) name:@"XCZChatServiceDidHandleReceipt" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
     
-    self.receiverId = @"123";
+    self.receiverId = @"3140";
     self.receiverName = @"lisi";
     self.receiverAvatar = nil;
 }
