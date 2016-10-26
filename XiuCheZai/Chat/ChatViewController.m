@@ -210,6 +210,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         self.receiverName = @"lisi";
         self.receiverAvatar = nil;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self loadHistoryMessages];
 }
 
