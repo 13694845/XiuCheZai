@@ -20,7 +20,7 @@
 }
 
 - (NSArray *)messagesForReceiverId:(NSString *)receiverId {
-    return [NSKeyedUnarchiver unarchiveObjectWithFile:[self fileForReceiverId:receiverId]];
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:[self filePathForReceiverId:receiverId]];
 }
 
 - (void)saveMessage:(ChatMessage *)message withReceiverId:(NSString *)receiverId {
@@ -31,13 +31,35 @@
     NSMutableArray *messages_ = [[self messagesForReceiverId:receiverId] mutableCopy];
     if (!messages_) messages_ = [NSMutableArray array];
     [messages_ addObjectsFromArray:messages];
-    [NSKeyedArchiver archiveRootObject:messages_ toFile:[self fileForReceiverId:receiverId]];
+    [NSKeyedArchiver archiveRootObject:messages_ toFile:[self filePathForReceiverId:receiverId]];
 }
 
-- (NSString *)fileForReceiverId:(NSString *)receiverId {
+- (NSString *)filePathForReceiverId:(NSString *)receiverId {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *file = [documentDirectories.firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.msg", receiverId]];
-    return file;
+    NSString *filePath = [documentDirectories.firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.msg", receiverId]];
+    return filePath;
+}
+
+- (NSInteger)unreadCountForReceiverId:(NSString *)receiverId {
+    NSMutableDictionary *unreadCounter = [NSMutableDictionary dictionaryWithContentsOfFile:[self filePathForUnreadCounter]];
+    return [unreadCounter[receiverId] integerValue];
+}
+
+- (void)saveUnreadCount:(NSUInteger)unreadCount withReceiverId:(NSString *)receiverId {
+    NSMutableDictionary *unreadCounter = [NSMutableDictionary dictionaryWithContentsOfFile:[self filePathForUnreadCounter]];
+    if (!unreadCounter) unreadCounter = [NSMutableDictionary dictionary];
+    unreadCounter[receiverId] = [NSNumber numberWithInteger:unreadCount];
+    [unreadCounter writeToFile:[self filePathForUnreadCounter] atomically:YES];
+}
+
+- (void)resetCountForReceiverId:(NSString *)receiverId {
+    [self saveUnreadCount:0 withReceiverId:receiverId];
+}
+
+- (NSString *)filePathForUnreadCounter {
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [documentDirectories.firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"unread.cnt"]];
+    return filePath;
 }
 
 @end
