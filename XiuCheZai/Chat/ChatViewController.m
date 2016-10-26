@@ -73,9 +73,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (assign, nonatomic) InputViewType inputViewType;
 
 @property (strong, nonatomic) ChatService *chatService;
-@property (copy, nonatomic) NSString *senderId;
-@property (copy, nonatomic) NSString *senderName;
-@property (copy, nonatomic) NSString *senderAvatar;
+@property (strong, nonatomic) NSString *senderId;
+@property (strong, nonatomic) NSString *senderName;
+@property (strong, nonatomic) NSString *senderAvatar;
 
 @end
 
@@ -172,6 +172,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tabBarController.tabBar.hidden = YES;
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.translucent = NO;
@@ -201,9 +202,28 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceipt:) name:@"XCZChatServiceDidHandleReceipt" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
     
-    self.receiverId = @"3140";
-    self.receiverName = @"lisi";
-    self.receiverAvatar = nil;
+    self.senderId = self.chatService.senderId;
+    self.senderName = self.chatService.senderName;
+    self.senderAvatar = self.chatService.senderAvatar;
+    if (!self.receiverId) {
+        self.receiverId = @"3140";
+        self.receiverName = @"lisi";
+        self.receiverAvatar = nil;
+    }
+    [self loadHistoryMessages];
+}
+
+- (void)loadHistoryMessages {
+    NSArray *localHistoryMessages = [[ChatMessageManager sharedManager] messagesForReceiverId:self.receiverId];
+    if (localHistoryMessages.count) {
+        self.rows = [localHistoryMessages mutableCopy];
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    } else {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [self.chatService historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:[dateFormatter stringFromDate:[NSDate date]] page:@"1"];
+    }
 }
 
 - (void)processEcho:(NSNotification *)notification {
@@ -765,7 +785,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)goBack:(id)sender {
-    [self.chatService stop];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
