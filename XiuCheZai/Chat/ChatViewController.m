@@ -288,7 +288,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     CGFloat height = 0.0;
     ChatMessage *message = self.rows[indexPath.row];
     if ([message.type isEqualToString:@"txt"]) {
-        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:message.content attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14.0]}];
+        NSAttributedString *attributedText = [ChatEmojiManager emojiStringFromPlainString:message.content withFont:[UIFont systemFontOfSize:14.0]];
         CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
         height = TextRect.size.height + BUBBLE_TEXT_PADDING * 2 + BUBBLE_VIEW_MARGIN_TOP * 2;
     }
@@ -364,11 +364,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [bubbleImageView addSubview:bubbleText];
     return bubbleView;
 }
-
-
-
-
-
 
 - (UIView *)imageBubbleViewForMessage:(ChatMessage *)message {
     CGRect imageRect = CGRectMake(0.0, 0.0, BUBBLE_IMAGE_HEIGHT, BUBBLE_IMAGE_HEIGHT);
