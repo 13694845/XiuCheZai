@@ -21,6 +21,7 @@
 #import "ChatEmojiInputView.h"
 #import "ChatOtherInputView.h"
 #import "VoiceConverter.h"
+#import "MJRefresh.h"
 
 @import AVFoundation;
 @import MediaPlayer;
@@ -209,6 +210,24 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         self.receiverName = @"lisi";
         self.receiverAvatar = nil;
     }
+    
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadHistoryMessages)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    [header setTitle:@"" forState:MJRefreshStateIdle];
+    [header setTitle:@"" forState:MJRefreshStatePulling];
+    [header setTitle:@"" forState:MJRefreshStateRefreshing];
+    self.tableView.mj_header = header;
+}
+
+- (void)loadHistoryMessages {
+    NSLog(@"loadHistoryMessages");
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+
+    [self historyMessagesWithSendTime:[dateFormatter stringFromDate:[NSDate date]] page:++self.historyPage];
+    
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -228,11 +247,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     } else {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [self loadHistoryMessagesWithSendTime:[dateFormatter stringFromDate:[NSDate date]] page:1];
+        [self historyMessagesWithSendTime:[dateFormatter stringFromDate:[NSDate date]] page:1];
     }
 }
 
-- (void)loadHistoryMessagesWithSendTime:(NSString *)sendTime page:(NSUInteger)page {
+- (void)historyMessagesWithSendTime:(NSString *)sendTime page:(NSUInteger)page {
     [self.chatService historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:sendTime page:[NSString stringWithFormat:@"%ld", page]];
 }
 
