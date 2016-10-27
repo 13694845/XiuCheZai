@@ -361,17 +361,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     CGRect TextRect = [attributedText boundingRectWithSize:CGSizeMake(180.0, 20000.0) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + TextRect.size.width + BUBBLE_TEXT_PADDING * 2, TextRect.size.height + BUBBLE_TEXT_PADDING * 2)];
     
-    // UIImage *avatarImage = [UIImage imageNamed:@"avatar_xcz"];
-    // UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
     
     
     UIImageView *avatarImageView = [[UIImageView alloc] init];
     if (message.isSend) [avatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], self.senderAvatar]]];
     else [avatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], self.receiverAvatar]]];
-
     
-    // [avatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], self.senderAvatar]]];
-
     
     
     if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
@@ -401,8 +396,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     CGRect imageRect = CGRectMake(0.0, 0.0, BUBBLE_IMAGE_HEIGHT, BUBBLE_IMAGE_HEIGHT);
     UIView *bubbleView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 32.0 + 8.0 + imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2)];
     
-    UIImage *avatarImage = [UIImage imageNamed:@"avatar_xcz"];
-    UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
+    UIImageView *avatarImageView = [[UIImageView alloc] init];
+    if (message.isSend) [avatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], self.senderAvatar]]];
+    else [avatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], self.receiverAvatar]]];
+    
     if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
     avatarImageView.layer.masksToBounds = YES;
