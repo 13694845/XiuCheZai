@@ -44,13 +44,14 @@
 
 - (NSInteger)unreadCountForReceiverId:(NSString *)receiverId {
     NSMutableDictionary *unreadCounter = [NSMutableDictionary dictionaryWithContentsOfFile:[self filePathForUnreadCounter]];
-    return [unreadCounter[receiverId] integerValue];
+    NSUInteger unreadCount = [[unreadCounter objectForKey:[NSString stringWithFormat:@"%@", receiverId]] integerValue];
+    return unreadCount;
 }
 
 - (void)saveUnreadCount:(NSUInteger)unreadCount withReceiverId:(NSString *)receiverId {
     NSMutableDictionary *unreadCounter = [NSMutableDictionary dictionaryWithContentsOfFile:[self filePathForUnreadCounter]];
     if (!unreadCounter) unreadCounter = [NSMutableDictionary dictionary];
-    unreadCounter[receiverId] = [NSNumber numberWithInteger:unreadCount];
+    [unreadCounter setObject:[NSNumber numberWithInteger:unreadCount] forKey:[NSString stringWithFormat:@"%@", receiverId]];
     [unreadCounter writeToFile:[self filePathForUnreadCounter] atomically:YES];
 }
 
