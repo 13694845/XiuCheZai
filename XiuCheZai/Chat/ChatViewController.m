@@ -798,6 +798,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)goBack:(id)sender {
+    [[ChatMessageManager sharedManager] resetUnreadCountForReceiverId:self.receiverId];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

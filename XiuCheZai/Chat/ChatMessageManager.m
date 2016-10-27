@@ -28,10 +28,12 @@
 }
 
 - (void)saveMessages:(NSArray *)messages withReceiverId:(NSString *)receiverId {
-    NSMutableArray *messages_ = [[self messagesForReceiverId:receiverId] mutableCopy];
-    if (!messages_) messages_ = [NSMutableArray array];
-    [messages_ addObjectsFromArray:messages];
-    [NSKeyedArchiver archiveRootObject:messages_ toFile:[self filePathForReceiverId:receiverId]];
+    NSMutableArray *exsitMessages = [[self messagesForReceiverId:receiverId] mutableCopy];
+    if (!exsitMessages) exsitMessages = [NSMutableArray array];
+    [exsitMessages addObjectsFromArray:messages];
+    [NSKeyedArchiver archiveRootObject:exsitMessages toFile:[self filePathForReceiverId:receiverId]];
+    
+    [self saveUnreadCount:([self unreadCountForReceiverId:receiverId] + messages.count) withReceiverId:receiverId];
 }
 
 - (NSString *)filePathForReceiverId:(NSString *)receiverId {
@@ -45,10 +47,6 @@
     return [unreadCounter[receiverId] integerValue];
 }
 
-- (void)incUnreadCountWithReceiverId:(NSString *)receiverId {
-    [self saveUnreadCount:([self unreadCountForReceiverId:receiverId] + 1) withReceiverId:receiverId];
-}
-
 - (void)saveUnreadCount:(NSUInteger)unreadCount withReceiverId:(NSString *)receiverId {
     NSMutableDictionary *unreadCounter = [NSMutableDictionary dictionaryWithContentsOfFile:[self filePathForUnreadCounter]];
     if (!unreadCounter) unreadCounter = [NSMutableDictionary dictionary];
@@ -56,7 +54,7 @@
     [unreadCounter writeToFile:[self filePathForUnreadCounter] atomically:YES];
 }
 
-- (void)resetCountForReceiverId:(NSString *)receiverId {
+- (void)resetUnreadCountForReceiverId:(NSString *)receiverId {
     [self saveUnreadCount:0 withReceiverId:receiverId];
 }
 
