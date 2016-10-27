@@ -78,6 +78,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (strong, nonatomic) NSString *senderName;
 @property (strong, nonatomic) NSString *senderAvatar;
 
+@property (strong, nonatomic) UIImageView *senderAvatarImageView;
+@property (strong, nonatomic) UIImageView *receiverAvatarImageView;
+
 @end
 
 @implementation ChatViewController
@@ -202,6 +205,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processReceive:) name:@"XCZChatServiceDidHandleReceive" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(processDisconnect:) name:@"XCZChatServiceDidDisconnect" object:nil];
     
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadHistoryMessages)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    [header setTitle:@"" forState:MJRefreshStateIdle];
+    [header setTitle:@"" forState:MJRefreshStatePulling];
+    [header setTitle:@"" forState:MJRefreshStateRefreshing];
+    self.tableView.mj_header = header;
+    
     self.senderId = self.chatService.senderId;
     self.senderName = self.chatService.senderName;
     self.senderAvatar = self.chatService.senderAvatar;
@@ -211,12 +221,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         self.receiverAvatar = nil;
     }
     
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadHistoryMessages)];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    [header setTitle:@"" forState:MJRefreshStateIdle];
-    [header setTitle:@"" forState:MJRefreshStatePulling];
-    [header setTitle:@"" forState:MJRefreshStateRefreshing];
-    self.tableView.mj_header = header;
+    // ***********************
+    
 }
 
 - (void)loadHistoryMessages {
