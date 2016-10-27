@@ -65,7 +65,7 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [self.chatService stop];
+    // [self.chatService stop];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {}
