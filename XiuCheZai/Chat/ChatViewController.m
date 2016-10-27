@@ -221,12 +221,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)loadHistoryMessages {
     NSLog(@"loadHistoryMessages");
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-
-    [self historyMessagesWithSendTime:[dateFormatter stringFromDate:[NSDate date]] page:++self.historyPage];
-    
+    ChatMessage *firstMessage = self.rows.firstObject;
+    if (firstMessage) [self historyMessagesWithSendTime:firstMessage.senderTime page:++self.historyPage];
     [self.tableView.mj_header endRefreshing];
 }
 
