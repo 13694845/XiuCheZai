@@ -216,20 +216,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *defaultAvatar = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/m-center/my_index/img/headpic.jpg"];
     self.senderAvatar = self.senderAvatar.length ? [NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], self.senderAvatar] : defaultAvatar;
     self.receiverAvatar = self.receiverAvatar.length ? [NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], self.receiverAvatar] : defaultAvatar;
-}
 
-- (void)loadHistoryMessages {
-    NSLog(@"loadHistoryMessages");
-    ChatMessage *firstMessage = self.rows.firstObject;
-    if (firstMessage) [self historyMessagesWithSendTime:firstMessage.senderTime page:++self.historyPage];
-    [self.tableView.mj_header endRefreshing];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = YES;
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
-    
     [self loadExistMessages];
 }
 
@@ -244,6 +231,19 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         [self historyMessagesWithSendTime:[dateFormatter stringFromDate:[NSDate date]] page:++self.historyPage];
     }
+}
+
+- (void)loadHistoryMessages {
+    NSLog(@"loadHistoryMessages");
+    ChatMessage *firstMessage = self.rows.firstObject;
+    if (firstMessage) [self historyMessagesWithSendTime:firstMessage.senderTime page:++self.historyPage];
+    [self.tableView.mj_header endRefreshing];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)historyMessagesWithSendTime:(NSString *)sendTime page:(NSUInteger)page {
