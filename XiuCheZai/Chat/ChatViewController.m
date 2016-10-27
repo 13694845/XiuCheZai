@@ -78,6 +78,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (strong, nonatomic) NSString *senderName;
 @property (strong, nonatomic) NSString *senderAvatar;
 
+
+// **************
 @property (strong, nonatomic) UIImageView *senderAvatarImageView;
 @property (strong, nonatomic) UIImageView *receiverAvatarImageView;
 
