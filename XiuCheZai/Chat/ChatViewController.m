@@ -170,6 +170,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     }
 }
 
+
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
