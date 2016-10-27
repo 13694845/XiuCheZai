@@ -371,6 +371,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     UIImage *avatarImage = [UIImage imageNamed:@"avatar_xcz"];
     UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
+    
+    
+    
     if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
     avatarImageView.layer.masksToBounds = YES;
