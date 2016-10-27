@@ -397,18 +397,14 @@
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/Login/login/login.html?url=", [Config baseURL]]];
 }
 
-
-
 - (IBAction)toWholeMaintain:(id)sender {
     // [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
     ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-    chatViewController.receiverId = @"333";
+    chatViewController.receiverId = @"123";
     chatViewController.receiverName = @"lisi";
     chatViewController.receiverAvatar = nil;
     [self.navigationController pushViewController:chatViewController animated:YES];
 }
-
-
 
 - (IBAction)toPartMaintain:(id)sender {
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/small_mantain/index.html?type=2"]];

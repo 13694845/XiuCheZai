@@ -291,6 +291,7 @@
 		6CFEE7CF1DB9BEDD00676A62 /* movie_receiver@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7C71DB9BEDD00676A62 /* movie_receiver@3x.png */; };
 		6CFEE7D01DB9BEDD00676A62 /* movie_sender@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7C81DB9BEDD00676A62 /* movie_sender@2x.png */; };
 		6CFEE7D11DB9BEDD00676A62 /* movie_sender@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFEE7C91DB9BEDD00676A62 /* movie_sender@3x.png */; };
+		6CFEE7D41DC18D4600676A62 /* ChatMessageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFEE7D31DC18D4600676A62 /* ChatMessageTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -761,6 +762,8 @@
 		6CFEE7C71DB9BEDD00676A62 /* movie_receiver@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie_receiver@3x.png"; sourceTree = "<group>"; };
 		6CFEE7C81DB9BEDD00676A62 /* movie_sender@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie_sender@2x.png"; sourceTree = "<group>"; };
 		6CFEE7C91DB9BEDD00676A62 /* movie_sender@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie_sender@3x.png"; sourceTree = "<group>"; };
+		6CFEE7D21DC18D4600676A62 /* ChatMessageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageTableView.h; sourceTree = "<group>"; };
+		6CFEE7D31DC18D4600676A62 /* ChatMessageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1379,6 +1382,8 @@
 				6CFEE7141DB7ABE400676A62 /* ChatService.m */,
 				6CFEE7171DB7ABE400676A62 /* ChatViewController.h */,
 				6CFEE7181DB7ABE400676A62 /* ChatViewController.m */,
+				6CFEE7D21DC18D4600676A62 /* ChatMessageTableView.h */,
+				6CFEE7D31DC18D4600676A62 /* ChatMessageTableView.m */,
 				6CFEE70B1DB7ABE400676A62 /* ChatImageViewer.h */,
 				6CFEE70C1DB7ABE400676A62 /* ChatImageViewer.m */,
 				6CFEE7051DB7ABE400676A62 /* ChatEmojiInputView.h */,
@@ -1791,6 +1796,7 @@
 				6C8EC2721C1E548000BCABB5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				6C4C67681C4A29DE00DF8D31 /* MineViewController.m in Sources */,
 				6C8EC2561C1E546E00BCABB5 /* AFSecurityPolicy.m in Sources */,
+				6CFEE7D41DC18D4600676A62 /* ChatMessageTableView.m in Sources */,
 				6C4D0C4B1C28E998003E96E8 /* UIImageView+WebCache.m in Sources */,
 				6C91C35C1C9A84D2004C0CB4 /* RSADataSigner.m in Sources */,
 				6C17FADF1CB497F000F95FF4 /* SHA1DataEncryptor.m in Sources */,
