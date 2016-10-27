@@ -98,6 +98,11 @@
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"socketDidDisconnect : %@ %ld", self.host, self.port);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidDisconnect" object:nil userInfo:nil];
+    [self performSelector:@selector(reconnect) withObject:nil afterDelay:10.0];
+}
+
+- (void)reconnect {
+    if (!self.asyncSocket.isConnected) [self connectToHost:self.host onPort:self.port];
 }
 
 - (void)loginWithSenderId:(NSString *)senderId {
