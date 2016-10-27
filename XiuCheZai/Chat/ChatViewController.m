@@ -78,11 +78,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (strong, nonatomic) NSString *senderName;
 @property (strong, nonatomic) NSString *senderAvatar;
 
-
-// **************
-@property (strong, nonatomic) UIImageView *senderAvatarImageView;
-@property (strong, nonatomic) UIImageView *receiverAvatarImageView;
-
 @end
 
 @implementation ChatViewController
@@ -222,9 +217,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         self.receiverName = @"lisi";
         self.receiverAvatar = nil;
     }
-    
-    // ***********************
-    
 }
 
 - (void)loadHistoryMessages {
@@ -371,6 +363,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     UIImage *avatarImage = [UIImage imageNamed:@"avatar_xcz"];
     UIImageView *avatarImageView = [[UIImageView alloc] initWithImage:avatarImage];
+    
+    
     
     
     
