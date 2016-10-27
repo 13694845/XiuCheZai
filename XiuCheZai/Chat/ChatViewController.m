@@ -243,7 +243,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     } else {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        [self historyMessagesWithSendTime:[dateFormatter stringFromDate:[NSDate date]] page:1];
+        [self historyMessagesWithSendTime:[dateFormatter stringFromDate:[NSDate date]] page:++self.historyPage];
     }
 }
 
@@ -280,7 +280,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [historyMessages addObjectsFromArray:self.rows];
     self.rows = historyMessages;
     [self.tableView reloadData];
-    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    
+    // if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
 - (void)processReceipt:(NSNotification *)notification {
