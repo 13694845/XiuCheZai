@@ -400,7 +400,7 @@
 - (IBAction)toWholeMaintain:(id)sender {
     // [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
     ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-    chatViewController.receiverId = @"3173";
+    chatViewController.receiverId = @"3140";
     chatViewController.receiverName = @"lisi";
     chatViewController.receiverAvatar = nil;
     [self.navigationController pushViewController:chatViewController animated:YES];
