@@ -355,8 +355,8 @@
 		6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
 		6C25D6081D17BBD0007D8BE4 /* error.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = error.html; sourceTree = "<group>"; };
 		6C2FFA401DC2D20A0086CF1D /* Discovery.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discovery.storyboard; sourceTree = "<group>"; };
-		6C2FFA421DC2E09B0086CF1D /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
-		6C2FFA431DC2E09B0086CF1D /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@3x.png"; sourceTree = "<group>"; };
+		6C2FFA421DC2E09B0086CF1D /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back@2x.png"; path = "../ChatImages/back@2x.png"; sourceTree = "<group>"; };
+		6C2FFA431DC2E09B0086CF1D /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back@3x.png"; path = "../ChatImages/back@3x.png"; sourceTree = "<group>"; };
 		6C37A8D11D2C8C9F0063207D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		6C37A8D31D2C8CA80063207D /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		6C37A8D51D2C8E2D0063207D /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = XiuCheZai/BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
@@ -1030,6 +1030,8 @@
 		6C8EC2801C1E917300BCABB5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6C2FFA421DC2E09B0086CF1D /* back@2x.png */,
+				6C2FFA431DC2E09B0086CF1D /* back@3x.png */,
 				6CFEE7251DB7AEFC00676A62 /* banner01.jpg */,
 				6CFEE7261DB7AEFC00676A62 /* banner02.jpg */,
 				6CFEE7271DB7AEFC00676A62 /* banner03.jpg */,
@@ -1477,8 +1479,6 @@
 		6CFEE7351DB7B01F00676A62 /* ChatImages */ = {
 			isa = PBXGroup;
 			children = (
-				6C2FFA421DC2E09B0086CF1D /* back@2x.png */,
-				6C2FFA431DC2E09B0086CF1D /* back@3x.png */,
 				6CFEE7BE1DB85E1000676A62 /* avatar_xcz@2x.png */,
 				6CFEE7BF1DB85E1000676A62 /* avatar_xcz@3x.png */,
 				6CFEE73A1DB7B04A00676A62 /* mic@2x.png */,
