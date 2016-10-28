@@ -16,6 +16,7 @@
 - (NSArray *)messagesForReceiverId:(NSString *)receiverId;
 - (void)saveMessage:(ChatMessage *)message withReceiverId:(NSString *)receiverId;
 - (void)saveMessages:(NSArray *)messages withReceiverId:(NSString *)receiverId;
+- (void)saveHistoryMessages:(NSArray *)messages withReceiverId:(NSString *)receiverId;
 
 - (NSInteger)unreadCountForReceiverId:(NSString *)receiverId;
 - (void)resetUnreadCountForReceiverId:(NSString *)receiverId;

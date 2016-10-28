@@ -36,6 +36,16 @@
     [self saveUnreadCount:([self unreadCountForReceiverId:receiverId] + messages.count) withReceiverId:receiverId];
 }
 
+- (void)saveHistoryMessages:(NSArray *)messages withReceiverId:(NSString *)receiverId {
+    NSMutableArray *exsitMessages = [[self messagesForReceiverId:receiverId] mutableCopy];
+    if (!exsitMessages) exsitMessages = [NSMutableArray array];
+    NSMutableArray *newMessages = [messages mutableCopy];
+    [newMessages addObjectsFromArray:exsitMessages];
+    [NSKeyedArchiver archiveRootObject:newMessages toFile:[self filePathForReceiverId:receiverId]];
+    
+    // [self saveUnreadCount:([self unreadCountForReceiverId:receiverId] + messages.count) withReceiverId:receiverId];
+}
+
 - (NSString *)filePathForReceiverId:(NSString *)receiverId {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *filePath = [documentDirectories.firstObject stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.msg", receiverId]];

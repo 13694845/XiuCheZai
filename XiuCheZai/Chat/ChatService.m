@@ -197,7 +197,7 @@
     }
     if (historyMessages.count) {
         ChatMessage *aMessage = historyMessages.firstObject;
-        [[ChatMessageManager sharedManager] saveMessages:historyMessages withReceiverId:(aMessage.isSend ? aMessage.receiverId : aMessage.senderId)];
+        [[ChatMessageManager sharedManager] saveHistoryMessages:historyMessages withReceiverId:(aMessage.isSend ? aMessage.receiverId : aMessage.senderId)];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidHandleHistory" object:nil userInfo:@{@"historyMessages":historyMessages}];
 }
