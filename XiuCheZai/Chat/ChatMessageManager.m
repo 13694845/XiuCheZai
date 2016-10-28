@@ -30,11 +30,7 @@
 - (void)saveMessages:(NSArray *)messages withReceiverId:(NSString *)receiverId {
     NSMutableArray *exsitMessages = [[self messagesForReceiverId:receiverId] mutableCopy];
     if (!exsitMessages) exsitMessages = [NSMutableArray array];
-    
-    
     [exsitMessages addObjectsFromArray:messages];
-    
-    
     [NSKeyedArchiver archiveRootObject:exsitMessages toFile:[self filePathForReceiverId:receiverId]];
     
     [self saveUnreadCount:([self unreadCountForReceiverId:receiverId] + messages.count) withReceiverId:receiverId];
