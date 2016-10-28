@@ -31,6 +31,7 @@
 		6C2069B31DB79D6B00B2E0BC /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C2069AF1DB79D6B00B2E0BC /* VoiceConverter.mm */; };
 		6C24460C1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */; };
 		6C25D6091D17BBD0007D8BE4 /* error.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C25D6081D17BBD0007D8BE4 /* error.html */; };
+		6C2FFA411DC2D20A0086CF1D /* Discovery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C2FFA401DC2D20A0086CF1D /* Discovery.storyboard */; };
 		6C37A8D21D2C8C9F0063207D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C37A8D11D2C8C9F0063207D /* OpenGLES.framework */; };
 		6C37A8D41D2C8CA80063207D /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C37A8D31D2C8CA80063207D /* libstdc++.6.0.9.tbd */; };
 		6C37A8D61D2C8E2D0063207D /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6C37A8D51D2C8E2D0063207D /* mapapi.bundle */; };
@@ -351,6 +352,7 @@
 		6C24460A1C9FCAAC00F4F3C0 /* GoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDetailViewController.h; sourceTree = "<group>"; };
 		6C24460B1C9FCAAC00F4F3C0 /* GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewController.m; sourceTree = "<group>"; };
 		6C25D6081D17BBD0007D8BE4 /* error.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = error.html; sourceTree = "<group>"; };
+		6C2FFA401DC2D20A0086CF1D /* Discovery.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discovery.storyboard; sourceTree = "<group>"; };
 		6C37A8D11D2C8C9F0063207D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		6C37A8D31D2C8CA80063207D /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		6C37A8D51D2C8E2D0063207D /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = XiuCheZai/BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
@@ -1328,6 +1330,7 @@
 				6C1208521DB5295B00FF4138 /* XCZConfig.h */,
 				6C1208531DB5295B00FF4138 /* XCZConfig.m */,
 				6CABF7131C0E978B00DF3EFF /* Main.storyboard */,
+				6C2FFA401DC2D20A0086CF1D /* Discovery.storyboard */,
 				6C6DD94F1D66F01700FEAEDD /* XCZDiscoveryFrameViewController.h */,
 				6C6DD9501D66F01700FEAEDD /* XCZDiscoveryFrameViewController.m */,
 				6CE363881D73BB2800AA0B53 /* XCZDiscoveryPageViewController.h */,
@@ -1847,6 +1850,7 @@
 				6C82347E1C436F7D001E6AFE /* home_broadcast.png in Resources */,
 				6CFEE7B31DB7B1F100676A62 /* d_yun.png in Resources */,
 				6CE400681C322B7C007F6D03 /* menu_icon19.jpg in Resources */,
+				6C2FFA411DC2D20A0086CF1D /* Discovery.storyboard in Resources */,
 				6CFEE78D1DB7B1F100676A62 /* d_chijing.png in Resources */,
 				6C8B10581CC4D087003CF8F5 /* menu_icon11.jpg in Resources */,
 				6C8B10591CC4D087003CF8F5 /* menu_icon12.jpg in Resources */,
