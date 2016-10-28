@@ -429,7 +429,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [imageViewerView addSubview:imgView];
     
     UIButton *closeButton = [[UIButton alloc] init];
-    closeButton.frame = CGRectMake(20.0, 32.0, 32.0, 32.0);
+    closeButton.frame = CGRectMake(20.0, 26.0, 32.0, 32.0);
     [closeButton setTitle:@"X" forState:UIControlStateNormal];
     closeButton.backgroundColor = [UIColor grayColor];
     closeButton.alpha = 0.8;
