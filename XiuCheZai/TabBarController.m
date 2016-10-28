@@ -19,10 +19,12 @@
     [super viewDidLoad];
     self.delegate = self;
     
+    /*
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Discovery" bundle:nil];
     UIViewController *discoveryViewController = [storyboard instantiateViewControllerWithIdentifier:@"DiscoveryViewController"];
     UINavigationController *discoverynavigationController = self.viewControllers[TabIndexDiscovery];
     [discoverynavigationController setViewControllers:@[discoveryViewController] animated:NO];
+     */
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
