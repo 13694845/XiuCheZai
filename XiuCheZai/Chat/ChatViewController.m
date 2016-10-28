@@ -179,7 +179,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     self.navigationItem.title = self.receiverName;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"<" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
-    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    self.tabBarController.tabBar.hidden = YES;
+
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -238,12 +240,6 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     ChatMessage *firstMessage = self.rows.firstObject;
     if (firstMessage) [self historyMessagesWithSendTime:firstMessage.senderTime page:++self.historyPage];
     [self.tableView.mj_header endRefreshing];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = YES;
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)historyMessagesWithSendTime:(NSString *)sendTime page:(NSUInteger)page {
