@@ -73,6 +73,9 @@
                                                             <constraint firstAttribute="width" secondItem="YN8-xJ-tLz" secondAttribute="height" multiplier="1:1" id="dOe-c6-4Zh"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon11.png"/>
+                                                        <connections>
+                                                            <action selector="toDrivingRecorder:" destination="Q34-hB-W0h" eventType="touchUpInside" id="l3j-an-V24"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LqB-RD-ZpU">
                                                         <rect key="frame" x="116" y="14" width="50" height="50"/>
@@ -151,7 +154,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="toDrivingRecorder:" destination="Q34-hB-W0h" eventType="touchUpInside" id="GMJ-3A-fD6"/>
-                                                            <action selector="toInterior:" destination="Q34-hB-W0h" eventType="touchUpInside" id="YY7-KM-7J4"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0h-ao-RdJ">
