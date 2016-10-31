@@ -145,10 +145,12 @@
     [self.navigationController pushViewController:chatViewController animated:YES];
 }
 
+/*
 - (void)saveCookies {
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
 }
+ */
 
 - (void)recognizeVehicleLicense {
     [self pickImage];
