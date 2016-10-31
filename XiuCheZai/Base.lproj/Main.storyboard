@@ -544,9 +544,9 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="dNZ-jC-Hng" secondAttribute="height" multiplier="1:1" id="wRb-yh-aMN"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="home_icon11.png"/>
+                                                        <state key="normal" backgroundImage="home_icon19.png"/>
                                                         <connections>
-                                                            <action selector="toDrivingRecorder:" destination="Q34-hB-W0h" eventType="touchUpInside" id="RyI-Ov-FZo"/>
+                                                            <action selector="toA14:" destination="Q34-hB-W0h" eventType="touchUpInside" id="uXl-bH-G7O"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZr-EP-fMI">
@@ -598,11 +598,11 @@
                                                             <constraint firstAttribute="height" constant="17" id="ivh-cQ-JEH"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="行车记录仪">
+                                                        <state key="normal" title="顺路赚">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="toDrivingRecorder:" destination="Q34-hB-W0h" eventType="touchUpInside" id="47K-Xo-krD"/>
+                                                            <action selector="toA14:" destination="Q34-hB-W0h" eventType="touchUpInside" id="dgJ-Ze-pbd"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
