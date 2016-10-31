@@ -407,6 +407,9 @@
                                                             <constraint firstAttribute="width" secondItem="r81-f6-L7E" secondAttribute="height" multiplier="1:1" id="Ae8-je-vJl"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon20.png"/>
+                                                        <connections>
+                                                            <action selector="toMeirong:" destination="Q34-hB-W0h" eventType="touchUpInside" id="bfx-Lm-tZS"/>
+                                                        </connections>
                                                     </button>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ma5-sV-MnN">
                                                         <rect key="frame" x="0.0" y="14" width="14" height="50"/>
@@ -495,6 +498,9 @@
                                                         <state key="normal" title="美容镀膜">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="toMeirong:" destination="Q34-hB-W0h" eventType="touchUpInside" id="kIU-VQ-hsi"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U1Q-tQ-45P">
                                                         <rect key="frame" x="0.0" y="86" width="375" height="10"/>
