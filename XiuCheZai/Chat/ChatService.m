@@ -85,7 +85,7 @@
 }
 
 - (void)connectToHost:(NSString *)host onPort:(uint16_t)port {
-    NSLog(@"connectToHost : %@ %ld", self.host, self.port);
+    NSLog(@"connectToHost : %@ %ld", self.host, (long)self.port);
     NSError *error = nil;
     if (![self.asyncSocket connectToHost:host onPort:port error:&error]) NSLog(@"connectToHost : %@", error);
 }
@@ -96,7 +96,7 @@
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    NSLog(@"socketDidDisconnect : %@ %ld", self.host, self.port);
+    NSLog(@"socketDidDisconnect : %@ %ld", self.host, (long)self.port);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidDisconnect" object:nil userInfo:nil];
     [self performSelector:@selector(reconnect) withObject:nil afterDelay:10.0];
 }

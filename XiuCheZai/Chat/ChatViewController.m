@@ -243,7 +243,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)historyMessagesWithSendTime:(NSString *)sendTime page:(NSUInteger)page {
-    [self.chatService historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:sendTime page:[NSString stringWithFormat:@"%ld", page]];
+    [self.chatService historyMessagesForSenderId:self.senderId receiverId:self.receiverId sendTime:sendTime page:[NSString stringWithFormat:@"%ld", (long)page]];
 }
 
 - (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
