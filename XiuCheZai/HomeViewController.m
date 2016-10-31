@@ -100,7 +100,7 @@
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
             [self.myCarButton setTitle:nil forState:UIControlStateNormal];
-            [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar_box.png"] forState:UIControlStateNormal];
+            // [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar_box.png"] forState:UIControlStateNormal];
             [self.myCarButton removeTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
             [self.myCarButton addTarget:self action:@selector(toMyCar:) forControlEvents:UIControlEventTouchUpInside];
             [self defaultCarIcon];
@@ -170,9 +170,10 @@
             if ([car[@"car_id"] isEqualToString:defaultCarId]) {
                 NSString *brandIcon = [NSString stringWithFormat:@"http://m.8673h.com/images/brand/%@.png", car[@"brand_id"]];
                 [self.myCarButton sd_setBackgroundImageWithURL:[NSURL URLWithString:brandIcon] forState:UIControlStateNormal];
-                break;
+                return;
             }
         }
+        [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar_box.png"] forState:UIControlStateNormal];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
