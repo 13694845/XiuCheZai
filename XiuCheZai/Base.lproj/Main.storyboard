@@ -215,26 +215,27 @@
                                                             <action selector="toB21:" destination="Q34-hB-W0h" eventType="touchUpInside" id="s19-JY-9Wq"/>
                                                         </connections>
                                                     </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sue-Mo-qqJ">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sue-Mo-qqJ">
                                                         <rect key="frame" x="116" y="98" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="sue-Mo-qqJ" secondAttribute="height" multiplier="1:1" id="Svw-D2-zb5"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="home_icon13.png"/>
+                                                        <state key="normal" backgroundImage="home_icon17.png"/>
+                                                        <connections>
+                                                            <action selector="toB21:" destination="Q34-hB-W0h" eventType="touchUpInside" id="2Ny-2d-uWQ"/>
+                                                        </connections>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucb-g7-ulJ">
                                                         <rect key="frame" x="210" y="98" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ucb-g7-ulJ" secondAttribute="height" multiplier="1:1" id="NMy-jc-KYM"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="home_icon17.png"/>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBE-ue-NLZ">
                                                         <rect key="frame" x="304" y="98" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="hBE-ue-NLZ" secondAttribute="height" multiplier="1:1" id="uHj-W6-Fs7"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="home_icon08.png"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4b-Im-WdG">
                                                         <rect key="frame" x="12" y="153" width="70" height="17"/>
@@ -250,16 +251,19 @@
                                                             <action selector="toB21:" destination="Q34-hB-W0h" eventType="touchUpInside" id="yec-wO-WwD"/>
                                                         </connections>
                                                     </button>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddY-hl-ylq">
-                                                        <rect key="frame" x="122" y="153" width="39" height="17"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddY-hl-ylq">
+                                                        <rect key="frame" x="106" y="153" width="70" height="17"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="17" id="9go-Go-bbt"/>
-                                                            <constraint firstAttribute="width" constant="39" id="nkm-u8-kuZ"/>
+                                                            <constraint firstAttribute="width" constant="70" id="nkm-u8-kuZ"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="刹车片">
+                                                        <state key="normal" title="影音导航">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="toB21:" destination="Q34-hB-W0h" eventType="touchUpInside" id="uwh-wb-CcD"/>
+                                                        </connections>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2P3-v9-g49">
                                                         <rect key="frame" x="207" y="153" width="56" height="17"/>
@@ -268,7 +272,7 @@
                                                             <constraint firstAttribute="height" constant="17" id="i7I-u9-2z8"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="影音导航">
+                                                        <state key="normal" title="空位">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                     </button>
@@ -279,7 +283,7 @@
                                                             <constraint firstAttribute="height" constant="17" id="FgQ-bY-JoP"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="火花塞">
+                                                        <state key="normal" title="空位">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                     </button>
@@ -3319,7 +3323,6 @@
         <image name="home_icon01.png" width="148" height="148"/>
         <image name="home_icon02.png" width="148" height="148"/>
         <image name="home_icon03.png" width="148" height="148"/>
-        <image name="home_icon08.png" width="148" height="148"/>
         <image name="home_icon09.png" width="148" height="148"/>
         <image name="home_icon10.png" width="148" height="148"/>
         <image name="home_icon11.png" width="148" height="148"/>
