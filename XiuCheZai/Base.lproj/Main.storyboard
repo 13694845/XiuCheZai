@@ -406,7 +406,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="r81-f6-L7E" secondAttribute="height" multiplier="1:1" id="Ae8-je-vJl"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="home_icon19.png"/>
+                                                        <state key="normal" backgroundImage="home_icon20.png"/>
                                                         <connections>
                                                             <action selector="toA14:" destination="Q34-hB-W0h" eventType="touchUpInside" id="kmI-BI-rhJ"/>
                                                         </connections>
@@ -3333,6 +3333,7 @@
         <image name="home_icon17.png" width="148" height="148"/>
         <image name="home_icon18.png" width="148" height="148"/>
         <image name="home_icon19.png" width="148" height="148"/>
+        <image name="home_icon20.png" width="148" height="148"/>
         <image name="home_menu.png" width="60" height="40"/>
         <image name="home_mycar_box.png" width="60" height="60"/>
         <image name="home_redbar.png" width="21" height="110"/>

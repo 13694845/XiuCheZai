@@ -38,6 +38,7 @@
 		6C37A8D41D2C8CA80063207D /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C37A8D31D2C8CA80063207D /* libstdc++.6.0.9.tbd */; };
 		6C37A8D61D2C8E2D0063207D /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6C37A8D51D2C8E2D0063207D /* mapapi.bundle */; };
 		6C3E4E081C96664300268B81 /* home_floatcar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3E4E071C96664300268B81 /* home_floatcar.png */; };
+		6C3E9C9D1DC6DBA700E060CB /* home_icon20.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3E9C9C1DC6DBA700E060CB /* home_icon20.png */; };
 		6C48C9C41CD9ECC70015515D /* URLEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C48C9C31CD9ECC70015515D /* URLEncoder.m */; };
 		6C4C67621C4A299300DF8D31 /* AccessoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4C67611C4A299300DF8D31 /* AccessoryViewController.m */; };
 		6C4C67651C4A29BF00DF8D31 /* CartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4C67641C4A29BF00DF8D31 /* CartViewController.m */; };
@@ -361,6 +362,7 @@
 		6C37A8D31D2C8CA80063207D /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		6C37A8D51D2C8E2D0063207D /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = XiuCheZai/BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
 		6C3E4E071C96664300268B81 /* home_floatcar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_floatcar.png; sourceTree = "<group>"; };
+		6C3E9C9C1DC6DBA700E060CB /* home_icon20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon20.png; sourceTree = "<group>"; };
 		6C48C9C21CD9ECC70015515D /* URLEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLEncoder.h; sourceTree = "<group>"; };
 		6C48C9C31CD9ECC70015515D /* URLEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLEncoder.m; sourceTree = "<group>"; };
 		6C4C67601C4A299300DF8D31 /* AccessoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessoryViewController.h; sourceTree = "<group>"; };
@@ -1082,6 +1084,7 @@
 				6CA7A5071CCEF15100425D23 /* home_icon17.png */,
 				6CA7A5091CCEF17A00425D23 /* home_icon18.png */,
 				6C6DD9611D6C391B00FEAEDD /* home_icon19.png */,
+				6C3E9C9C1DC6DBA700E060CB /* home_icon20.png */,
 				6CDB3AF01C61DE08007C1AD1 /* home_activity01.png */,
 				6C1365C61C25022C00B217DD /* home_activity02.png */,
 				6C05EDFC1C33C58400BF8C39 /* home_activity03.png */,
@@ -1796,6 +1799,7 @@
 				6CE4003E1C322077007F6D03 /* menu_back.png in Resources */,
 				6C91C2C81C9A331D004C0CB4 /* tab_icon21@2x.png in Resources */,
 				6CFEE7381DB7B02E00676A62 /* add@2x.png in Resources */,
+				6C3E9C9D1DC6DBA700E060CB /* home_icon20.png in Resources */,
 				6C4F64601C3A43C600A526C4 /* home_mycar.png in Resources */,
 				6CFEE7A91DB7B1F100676A62 /* d_sikao.png in Resources */,
 				6C5C5F041C86DA66008CDD3C /* home_icon16.png in Resources */,
