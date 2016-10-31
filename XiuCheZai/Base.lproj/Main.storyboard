@@ -210,9 +210,10 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="hyG-AL-joL" secondAttribute="height" multiplier="1:1" id="mRG-2q-LaR"/>
                                                         </constraints>
-                                                        <state key="normal" backgroundImage="home_icon17.png"/>
+                                                        <state key="normal" backgroundImage="home_icon16.png"/>
                                                         <connections>
                                                             <action selector="toB21:" destination="Q34-hB-W0h" eventType="touchUpInside" id="s19-JY-9Wq"/>
+                                                            <action selector="toSparkPlug:" destination="Q34-hB-W0h" eventType="touchUpInside" id="f8r-sR-JRd"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sue-Mo-qqJ">
@@ -244,11 +245,12 @@
                                                             <constraint firstAttribute="height" constant="17" id="bAm-9y-0eT"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="影音导航">
+                                                        <state key="normal" title="火花塞">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="toB21:" destination="Q34-hB-W0h" eventType="touchUpInside" id="yec-wO-WwD"/>
+                                                            <action selector="toSparkPlug:" destination="Q34-hB-W0h" eventType="touchUpInside" id="6SI-Si-GwQ"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddY-hl-ylq">
