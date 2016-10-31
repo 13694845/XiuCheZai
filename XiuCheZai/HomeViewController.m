@@ -310,10 +310,10 @@
     if ([[info objectForKey:@"url"] hasPrefix:@"http://m.8673h.com"]) {
         [self launchWebViewWithURLString:[info objectForKey:@"url"]]; return;
     }
-    if ([[info objectForKey:@"url"] hasPrefix:@"http://a.zj-qsh.com"]) {
+    if ([[info objectForKey:@"url"] hasPrefix:@"http://192.168.2.4:8080"]) {
         [self launchWebViewWithURLString:[info objectForKey:@"url"]]; return;
     }
-    if ([[info objectForKey:@"url"] hasPrefix:@"http://192.168.2.4:8080"]) {
+    if ([[info objectForKey:@"url"] hasPrefix:@"http://a.zj-qsh.com"]) {
         [self launchWebViewWithURLString:[info objectForKey:@"url"]]; return;
     }
     
@@ -398,12 +398,14 @@
 }
 
 - (IBAction)toWholeMaintain:(id)sender {
-    // [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
+    /*
     ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
     chatViewController.receiverId = @"3140";
     chatViewController.receiverName = @"lisi";
     chatViewController.receiverAvatar = nil;
     [self.navigationController pushViewController:chatViewController animated:YES];
+     */
 }
 
 - (IBAction)toPartMaintain:(id)sender {
