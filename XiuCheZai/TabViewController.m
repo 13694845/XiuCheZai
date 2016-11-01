@@ -49,8 +49,16 @@
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSLog(@"webView.request : %@", request.URL);
+    /*
     self.fullScreen = ![request.URL.description isEqualToString:self.url.description];
                         // || [self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/index/"]];
+     */
+    self.fullScreen = !([request.URL.description isEqualToString:self.url.description]
+                        || [self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/bbs/index.html"]])
+    
+    
+                        || [self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/index/"]];
+
     [self viewWillLayoutSubviews];
     
     self.needsRefresh = !([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/save_info/index.html"]]
