@@ -2582,7 +2582,7 @@
         <scene sceneID="F8X-E1-TBD">
             <objects>
                 <navigationController storyboardIdentifier="DiscoveryNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="d6U-8K-4jy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="发现" image="tab_icon60.png" selectedImage="tab_icon62.png" id="xN4-eb-dJ5"/>
+                    <tabBarItem key="tabBarItem" title="发现" image="tab_icon71.png" selectedImage="tab_icon72.png" id="xN4-eb-dJ5"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UNj-li-7Yx">
@@ -3370,8 +3370,8 @@
         <image name="tab_icon31.png" width="25" height="25"/>
         <image name="tab_icon50.png" width="25" height="25"/>
         <image name="tab_icon51.png" width="25" height="25"/>
-        <image name="tab_icon60.png" width="25" height="25"/>
-        <image name="tab_icon62.png" width="25" height="25"/>
+        <image name="tab_icon71.png" width="22" height="22"/>
+        <image name="tab_icon72.png" width="25" height="25"/>
         <image name="发现.png" width="22" height="22"/>
     </resources>
 </document>
