@@ -18,7 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;
-    
     /*
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Discovery" bundle:nil];
     UIViewController *discoveryViewController = [storyboard instantiateViewControllerWithIdentifier:@"DiscoveryViewController"];
