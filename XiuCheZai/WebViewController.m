@@ -68,7 +68,7 @@
     [super viewWillAppear:animated];
     if ([self isMemberOfClass:[WebViewController class]]) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
-        self.tabBarController.tabBar.hidden = YES;
+        // self.tabBarController.tabBar.hidden = YES;
     }
 }
 
