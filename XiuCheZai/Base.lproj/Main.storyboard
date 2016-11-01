@@ -2578,11 +2578,11 @@
             </objects>
             <point key="canvasLocation" x="12.5" y="-1477.5"/>
         </scene>
-        <!--社区-->
+        <!--发现-->
         <scene sceneID="F8X-E1-TBD">
             <objects>
                 <navigationController storyboardIdentifier="DiscoveryNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="d6U-8K-4jy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="社区" image="tab_icon60.png" selectedImage="tab_icon62.png" id="xN4-eb-dJ5"/>
+                    <tabBarItem key="tabBarItem" title="发现" image="tab_icon60.png" selectedImage="tab_icon62.png" id="xN4-eb-dJ5"/>
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UNj-li-7Yx">

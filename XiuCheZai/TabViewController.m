@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.fullScreen = NO;
     self.needsRefresh = YES;
 }
 
@@ -47,14 +48,9 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    // NSLog(@"webView.request : %@", request.URL);
-    /*
-    self.fullScreen = ![request.URL.description containsString:self.url.description];
-    if ([self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/index/"]]) self.fullScreen = YES;
-    [self viewWillLayoutSubviews];
-    */
-    self.fullScreen = ![request.URL.description isEqualToString:self.url.description]
-                        || [self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/index/"]];
+    NSLog(@"webView.request : %@", request.URL);
+    self.fullScreen = ![request.URL.description isEqualToString:self.url.description];
+                        // || [self.url.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/index/"]];
     [self viewWillLayoutSubviews];
     
     self.needsRefresh = !([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/save_info/index.html"]]
@@ -62,10 +58,6 @@
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/publish/index.html?session_key="]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/community/publish/index.html?post_id="]]
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/userinfo/index.html"]]
-                          /*
-                          || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/service/index/index.html"]]
-                          || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Car_Brand/index.html"]]
-                          */
                           || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/add_mycar/index.html"]]);
     
     if ([request.URL.description isEqualToString:[Config baseURL]]
@@ -75,18 +67,6 @@
         [self goHome];
         return NO;
     }
-    /*
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/shopping-cart/index.html"]]
-        && self.tabBarController.selectedIndex != TabIndexCart) {
-        [self goCart];
-        return NO;
-    }
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/shopping-cart/index.html"]]
-        && navigationType == UIWebViewNavigationTypeBackForward) {
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/shopping-cart/index.html"]]]];
-        return NO;
-    }
-     */
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_index/index.html"]]
         && self.tabBarController.selectedIndex != TabIndexMine) {
         [self goMine];
@@ -100,10 +80,6 @@
     }
     if ([request.URL.host isEqualToString:@"mobile.abchina.com"]) {
         self.showBack = YES;
-        /*
-        if (!self.backButton) [self addBackButton];
-        self.backOffset++;
-         */
         return YES;
     }
     
@@ -133,7 +109,6 @@
 - (void)goHome {
     if (self.webView.isLoading) [self.webView stopLoading];
     self.tabBarController.selectedIndex = TabIndexHome;
-    // *****
     [(UINavigationController *)[self.tabBarController.viewControllers firstObject] popToRootViewControllerAnimated:NO];
 }
 
