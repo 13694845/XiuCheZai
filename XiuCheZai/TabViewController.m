@@ -48,7 +48,7 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSLog(@"webView.request : %@", request.URL);
+    // NSLog(@"webView.request : %@", request.URL);
     self.fullScreen = !([request.URL.description isEqualToString:self.url.description]
                         || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/bbs/index.html"]]
                         || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/bbs/forum/index.html"]]
