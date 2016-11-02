@@ -338,8 +338,10 @@
         return;
     }
     
-    
-    
+    if ([[info objectForKey:@"url"] length] == 13) {
+        
+        return;
+    }
 }
 
 - (void)receiveCardWithURLString:(NSString *)url {
