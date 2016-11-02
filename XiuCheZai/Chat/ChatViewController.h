@@ -13,6 +13,6 @@
 @property (copy, nonatomic) NSString *receiverId;
 @property (copy, nonatomic) NSString *receiverName;
 @property (copy, nonatomic) NSString *receiverAvatar;
-@property (assign, nonatomic) BOOL isContact;
+@property (copy, nonatomic) NSString *isContact;
 
 @end
