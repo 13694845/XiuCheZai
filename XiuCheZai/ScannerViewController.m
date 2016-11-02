@@ -29,7 +29,8 @@
     self.session.sessionPreset = AVCaptureSessionPresetHigh;
     [self.session addInput:input];
     [self.session addOutput:output];
-    output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    // output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    output.metadataObjectTypes = output.availableMetadataObjectTypes;
     
     CGFloat const kBoxWidth = 200.0;
     CGFloat const kBoxHeight = 200.0;
