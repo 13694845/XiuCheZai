@@ -409,6 +409,7 @@
     chatViewController.receiverId = @"3140";
     chatViewController.receiverName = @"BoBo";
     chatViewController.receiverAvatar = nil;
+    chatViewController.isContact = @"1";
     [self.navigationController pushViewController:chatViewController animated:YES];
 }
 
