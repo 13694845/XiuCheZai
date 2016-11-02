@@ -247,7 +247,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)sendMessageWithContent:(NSString *)content contentType:(NSString *)contentType {
-    [self.chatService sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
+    // [self.chatService sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType];
+    [self.chatService sendMessageFromSender:@{@"sender_id":self.senderId, @"sender_name":self.senderName} toReceiver:@{@"receiver_id":self.receiverId, @"receiver_name":self.receiverName} withContent:content type:contentType playTime:@"18" isContact:@"0"];
 }
 
 - (void)processEcho:(NSNotification *)notification {
