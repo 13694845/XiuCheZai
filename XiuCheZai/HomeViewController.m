@@ -338,9 +338,21 @@
         return;
     }
     
+    /*
     if ([[info objectForKey:@"url"] length] == 13) {
-        [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/getCard/index.html?recharge=", [info objectForKey:@"url"]]]; return;
+        NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
+        NSDictionary *parameters = nil;
+        [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
+                [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/getCard/index.html?recharge=", [info objectForKey:@"url"]]]; return;
+            } else {
+                NSString *url = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"];
+                [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/Login/login/login.html?url=", url]]; return;
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+        return;
     }
+     */
 }
 
 - (void)receiveCardWithURLString:(NSString *)url {
