@@ -128,7 +128,7 @@
     }
     
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/massage/communicate.jsp?bid="]]) {
-        [self chatWithReceiverId:@"123"];
+        [self chatWithReceiverId:@""];
         return NO;
     }
     return YES;
