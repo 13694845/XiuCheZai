@@ -341,7 +341,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         bubbleView = [self movieBubbleViewForMessage:message];
     }
     CGRect rect = bubbleView.frame;
-    if (message.isSend) rect.origin.x += BUBBLE_VIEW_MARGIN_LEFT;
+    if (!message.isSend) rect.origin.x += BUBBLE_VIEW_MARGIN_LEFT;
     else rect.origin.x = cell.frame.size.width - rect.size.width - BUBBLE_VIEW_MARGIN_RIGHT;
     rect.origin.y += BUBBLE_VIEW_MARGIN_TOP;
     bubbleView.frame = rect;
@@ -363,7 +363,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (message.isSend) [avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.senderAvatar]];
     else [avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.receiverAvatar]];
     
-    if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
+    if (!message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 16.0;
@@ -372,7 +372,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     UIView *bubbleImageView = [[UIView alloc] init];
     bubbleImageView.backgroundColor = message.isSend ? [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0] : [UIColor colorWithRed:30.0/255.0 green:130.0/255.0 blue:232.0/255.0 alpha:1.0];
     bubbleImageView.layer.cornerRadius = 5.0;
-    if (message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, textRect.size.width + BUBBLE_TEXT_PADDING * 2, textRect.size.height + BUBBLE_TEXT_PADDING * 2);
+    if (!message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, textRect.size.width + BUBBLE_TEXT_PADDING * 2, textRect.size.height + BUBBLE_TEXT_PADDING * 2);
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, textRect.size.width + BUBBLE_TEXT_PADDING * 2, textRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
     
@@ -394,7 +394,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (message.isSend) [avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.senderAvatar]];
     else [avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.receiverAvatar]];
     
-    if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
+    if (!message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 16.0;
@@ -403,7 +403,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     UIView *bubbleImageView = [[UIView alloc] init];
     bubbleImageView.backgroundColor = message.isSend ? [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0] : [UIColor colorWithRed:30.0/255.0 green:130.0/255.0 blue:232.0/255.0 alpha:1.0];
     bubbleImageView.layer.cornerRadius = 5.0;
-    if (message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
+    if (!message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
     
