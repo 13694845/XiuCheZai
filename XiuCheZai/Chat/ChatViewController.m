@@ -686,6 +686,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         case OtherInputViewButtonTagMovieFromCamera: {
             imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
             imagePickerController.mediaTypes = @[(NSString *)kUTTypeMovie];
+            imagePickerController.videoQuality = UIImagePickerControllerQualityTypeLow;
             imagePickerController.delegate = self; break;
         }
         case OtherInputViewButtonTagMovieFromPhotoLibrary: {
@@ -732,7 +733,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)uploadMovieWithMovURL:(NSURL *)movURL {
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *mp4Path = [documentsPath stringByAppendingPathComponent:@"temp.mp4"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *fileName = [NSString stringWithFormat:@"%@.mp4", [dateFormatter stringFromDate:[NSDate date]]];
+    NSString *mp4Path = [documentsPath stringByAppendingPathComponent:fileName];
+    
     AVURLAsset *asset = [AVURLAsset URLAssetWithURL:movURL options:nil];
     AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetPassthrough];
     exportSession.outputURL = [NSURL fileURLWithPath:mp4Path];
