@@ -456,7 +456,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (message.isSend) [avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.senderAvatar]];
     else [avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.receiverAvatar]];
     
-    if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
+    if (!message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 16.0;
@@ -465,12 +465,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     UIView *bubbleImageView = [[UIView alloc] init];
     bubbleImageView.backgroundColor = message.isSend ? [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0] : [UIColor colorWithRed:30.0/255.0 green:130.0/255.0 blue:232.0/255.0 alpha:1.0];
     bubbleImageView.layer.cornerRadius = 5.0;
-    if (message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
+    if (!message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
     
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"movie_sender"]];
-    if (!message.isSend) imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"movie_receiver"]];
+    if (message.isSend) imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"movie_receiver"]];
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
     
@@ -501,7 +501,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if (message.isSend) [avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.senderAvatar]];
     else [avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.receiverAvatar]];
     
-    if (message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
+    if (!message.isSend) avatarImageView.frame = CGRectMake(0.0, 0.0, 32.0, 32.0);
     else avatarImageView.frame = CGRectMake(bubbleView.frame.size.width - 32.0, 0.0, 32.0, 32.0);
     avatarImageView.layer.masksToBounds = YES;
     avatarImageView.layer.cornerRadius = 16.0;
@@ -510,12 +510,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     UIView *bubbleImageView = [[UIView alloc] init];
     bubbleImageView.backgroundColor = message.isSend ? [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0] : [UIColor colorWithRed:30.0/255.0 green:130.0/255.0 blue:232.0/255.0 alpha:1.0];
     bubbleImageView.layer.cornerRadius = 5.0;
-    if (message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
+    if (!message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
     
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_sender"]];
-    if (!message.isSend) imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_receiver"]];
+    if (message.isSend) imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_receiver"]];
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
     
