@@ -137,8 +137,8 @@
 - (void)chatWithReceiverId:(NSString *)receiverId {
     NSLog(@"chatWithUserReceiverId");
     ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-    chatViewController.receiverId = @"123";
-    chatViewController.receiverName = @"lisi";
+    chatViewController.receiverId = @"3140";
+    chatViewController.receiverName = @"BoBo";
     chatViewController.receiverAvatar = nil;
     [self.navigationController pushViewController:chatViewController animated:YES];
 }
