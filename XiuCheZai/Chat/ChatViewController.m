@@ -218,7 +218,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *defaultAvatar = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/m-center/my_index/img/headpic.jpg"];
     self.senderAvatar = self.senderAvatar.length ? [NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], self.senderAvatar] : defaultAvatar;
     self.receiverAvatar = self.receiverAvatar.length ? [NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], self.receiverAvatar] : defaultAvatar;
-
+    
     [self loadExistMessages];
 }
 
