@@ -127,12 +127,10 @@
         return YES;
     }
     
-    /*
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/massage/communicate.jsp?bid="]]) {
         [self chatWithReceiverId:@"123"];
         return NO;
     }
-     */
     return YES;
 }
 
@@ -145,12 +143,10 @@
     [self.navigationController pushViewController:chatViewController animated:YES];
 }
 
-/*
 - (void)saveCookies {
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
 }
- */
 
 - (void)recognizeVehicleLicense {
     [self pickImage];
