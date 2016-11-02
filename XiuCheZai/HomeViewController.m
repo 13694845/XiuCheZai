@@ -339,8 +339,7 @@
     }
     
     if ([[info objectForKey:@"url"] length] == 13) {
-        
-        return;
+        [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/getCard/index.html?recharge=", [info objectForKey:@"url"]]]; return;
     }
 }
 
