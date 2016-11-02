@@ -322,20 +322,24 @@
         return;
     }
     
-    
-    
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
-    NSDictionary *parameters = nil;
-    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
-            if ([[info objectForKey:@"url"] hasPrefix:@"Qsh://"]) {
-                [self receiveCardWithURLString:[info objectForKey:@"url"]]; return;
+    if ([[info objectForKey:@"url"] hasPrefix:@"Qsh://"]) {
+        NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
+        NSDictionary *parameters = nil;
+        [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
+                if ([[info objectForKey:@"url"] hasPrefix:@"Qsh://"]) {
+                    [self receiveCardWithURLString:[info objectForKey:@"url"]]; return;
+                }
+            } else {
+                NSString *url = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"];
+                [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/Login/login/login.html?url=", url]]; return;
             }
-        } else {
-            NSString *url = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"];
-            [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [Config baseURL], @"/Login/login/login.html?url=", url]]; return;
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+        return;
+    }
+    
+    
+    
 }
 
 - (void)receiveCardWithURLString:(NSString *)url {
