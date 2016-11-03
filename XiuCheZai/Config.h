@@ -26,4 +26,6 @@ typedef NS_ENUM(int, TabIndex) {
 + (NSString *)apiBaseURL;
 + (NSString *)imgBaseURL;
 
++ (NSString *)textImgBaseURL;
+
 @end
