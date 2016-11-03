@@ -429,7 +429,7 @@
     // [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
     
     ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-    chatViewController.receiverId = @"3140";
+    chatViewController.receiverId = @"3409"; // @"3140";
     chatViewController.receiverName = @"BoBo";
     chatViewController.receiverAvatar = @"group1/M00/00/6A/wKgCBFfD6ZyAO3zmAAgKHyYE5OE360.jpg";
     chatViewController.isContact = @"1";
