@@ -432,7 +432,7 @@
     chatViewController.receiverId = @"3419"; // @"3140";
     chatViewController.receiverName = @"BoBo";
     chatViewController.receiverAvatar = @"group1/M00/00/6A/wKgCBFfD6ZyAO3zmAAgKHyYE5OE360.jpg";
-    chatViewController.isContact = @"0";
+    chatViewController.isContact = @"1";
     chatViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatViewController animated:YES];
 }
