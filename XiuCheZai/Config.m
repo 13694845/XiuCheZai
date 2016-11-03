@@ -49,7 +49,8 @@ static NSString *const kDomainBaseURL = @"http://a.zj-qsh.com";
 }
 
 + (NSString *)textImgBaseURL {
-    return kTestImgBaseURL;
+    // return kTestImgBaseURL;
+    return kImgBaseURL;
 }
 
 @end
