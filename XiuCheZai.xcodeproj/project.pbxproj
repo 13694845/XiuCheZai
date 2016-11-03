@@ -381,8 +381,6 @@
 		6C91C35D1C9A84D2004C0CB4 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91C3551C9A84D2004C0CB4 /* RSADataVerifier.m */; };
 		6C91C3601C9A86FE004C0CB4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C91C35F1C9A86FE004C0CB4 /* LoginViewController.m */; };
 		6C9D851A1C9B8B3C008BD470 /* RSADataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9D85191C9B8B3C008BD470 /* RSADataEncryptor.m */; };
-		6C9F60A31D42179700910335 /* New.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C9F60A21D42179700910335 /* New.storyboard */; };
-		6C9F60C71D459C9200910335 /* XCZHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9F60C61D459C9200910335 /* XCZHomeViewController.m */; };
 		6CA7A5081CCEF15100425D23 /* home_icon17.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7A5071CCEF15100425D23 /* home_icon17.png */; };
 		6CA7A50A1CCEF17A00425D23 /* home_icon18.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA7A5091CCEF17A00425D23 /* home_icon18.png */; };
 		6CABF70C1C0E978B00DF3EFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CABF70B1C0E978B00DF3EFF /* main.m */; };
@@ -1189,9 +1187,6 @@
 		6C91C35F1C9A86FE004C0CB4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6C9D85181C9B8B3C008BD470 /* RSADataEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataEncryptor.h; sourceTree = "<group>"; };
 		6C9D85191C9B8B3C008BD470 /* RSADataEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataEncryptor.m; sourceTree = "<group>"; };
-		6C9F60A21D42179700910335 /* New.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = New.storyboard; sourceTree = "<group>"; };
-		6C9F60C51D459C9200910335 /* XCZHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZHomeViewController.h; sourceTree = "<group>"; };
-		6C9F60C61D459C9200910335 /* XCZHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZHomeViewController.m; sourceTree = "<group>"; };
 		6CA7A5071CCEF15100425D23 /* home_icon17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon17.png; sourceTree = "<group>"; };
 		6CA7A5091CCEF17A00425D23 /* home_icon18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon18.png; sourceTree = "<group>"; };
 		6CABF7071C0E978B00DF3EFF /* XiuCheZai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XiuCheZai.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2348,9 +2343,6 @@
 				6CABF7181C0E978B00DF3EFF /* LaunchScreen.storyboard */,
 				6CABF71B1C0E978B00DF3EFF /* Info.plist */,
 				6CABF70A1C0E978B00DF3EFF /* Supporting Files */,
-				6C9F60A21D42179700910335 /* New.storyboard */,
-				6C9F60C51D459C9200910335 /* XCZHomeViewController.h */,
-				6C9F60C61D459C9200910335 /* XCZHomeViewController.m */,
 			);
 			path = XiuCheZai;
 			sourceTree = "<group>";
@@ -2984,7 +2976,6 @@
 				6C1365C01C24F6C300B217DD /* home_icon08.png in Resources */,
 				6CFEE7301DB7AEFD00676A62 /* recommender.jpg in Resources */,
 				6C671B2B1D5183AA00D2CAE5 /* tab_icon61@2x.png in Resources */,
-				6C9F60A31D42179700910335 /* New.storyboard in Resources */,
 				6C91C2CA1C9A3324004C0CB4 /* tab_icon41@2x.png in Resources */,
 				6CFEE7991DB7B1F100676A62 /* d_ku.png in Resources */,
 				6CFEE7921DB7B1F100676A62 /* d_haha.png in Resources */,
@@ -3142,7 +3133,6 @@
 				6C8EC2571C1E546E00BCABB5 /* AFURLRequestSerialization.m in Sources */,
 				6C8EC26F1C1E548000BCABB5 /* AFAutoPurgingImageCache.m in Sources */,
 				6C0808D61DCADE9D00307280 /* XCZDiscoveryPageViewController.m in Sources */,
-				6C9F60C71D459C9200910335 /* XCZHomeViewController.m in Sources */,
 				6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */,
 				6C0808C61DCADE9D00307280 /* XCZClubCircleUnsubscribeViewController.m in Sources */,
 				6C0808DD1DCADE9D00307280 /* XCZMessageHeaderView.m in Sources */,
