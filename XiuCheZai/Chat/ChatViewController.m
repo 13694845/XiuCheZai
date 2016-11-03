@@ -555,7 +555,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
         NSString *content = [ChatEmojiManager plainStringFromEmojiString:textView.attributedText];
-        content = [content stringByReplacingOccurrencesOfString:[ChatConfig terminator] withString:@""];
+        // content = [content stringByReplacingOccurrencesOfString:[ChatConfig terminator] withString:@""];
+        content = [content stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        content = [content stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+        
         if (!content.length) {
             [self toastWithText:@"请输入消息内容"];
             return NO;
