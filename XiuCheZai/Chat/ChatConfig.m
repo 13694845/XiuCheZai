@@ -10,7 +10,7 @@
 
 @implementation ChatConfig
 
-static NSString *const kDefaultHost = @"192.168.2.63";
+static NSString *const kDefaultHost = @"192.168.2.51"; // @"192.168.2.63";
 static NSUInteger const kDefaultPort = 9999;
 static NSString *const kTerminator = @"\n";
 static NSTimeInterval const kHeartbeatInterval = 5.0;
