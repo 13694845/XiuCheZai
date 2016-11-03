@@ -181,7 +181,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     // self.tabBarController.tabBar.hidden = YES;
-
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
