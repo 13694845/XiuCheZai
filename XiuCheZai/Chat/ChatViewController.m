@@ -438,22 +438,29 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)viewImage:(UIButton *)sender {
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
     ChatMessage *message = self.rows[sender.tag];
-    UIView *imageViewerView = [[UIView alloc] initWithFrame:self.view.bounds];
+    // UIView *imageViewerView = [[UIView alloc] initWithFrame:self.view.bounds];
+    UIView *imageViewerView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     imageViewerView.backgroundColor = [UIColor blackColor];
     
     UIImageView *imgView = [[UIImageView alloc] init];
     [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
-    imgView.frame = self.view.bounds;
+    
+    imgView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGestureRecognizer =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeImageViewer)];
+    [imgView addGestureRecognizer:tapGestureRecognizer];
+    imgView.frame = imageViewerView.bounds;
     [imageViewerView addSubview:imgView];
     
     UIButton *closeButton = [[UIButton alloc] init];
-    closeButton.frame = CGRectMake(20.0, 26.0, 32.0, 32.0);
+    closeButton.frame = CGRectMake(20.0, 35.0, 40.0, 40.0);
     [closeButton setTitle:@"X" forState:UIControlStateNormal];
     closeButton.backgroundColor = [UIColor grayColor];
-    closeButton.alpha = 0.8;
-    closeButton.layer.cornerRadius = 16.0;
+    closeButton.alpha = 0.5;
+    closeButton.layer.cornerRadius = 20.0;
     [closeButton addTarget:self action:@selector(closeImageViewer) forControlEvents:UIControlEventTouchUpInside];
     [imageViewerView addSubview:closeButton];
     [self.view addSubview:imageViewerView];
@@ -461,6 +468,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)closeImageViewer {
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+
     [self.imageViewerView removeFromSuperview];
 }
 
