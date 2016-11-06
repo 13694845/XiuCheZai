@@ -438,7 +438,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)viewImage:(UIButton *)sender {
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    // [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     ChatMessage *message = self.rows[sender.tag];
     // UIView *imageViewerView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -468,7 +468,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)closeImageViewer {
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    // [self.navigationController setNavigationBarHidden:NO animated:NO];
     
     [self.imageViewerView removeFromSuperview];
 }
