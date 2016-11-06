@@ -638,7 +638,9 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)uploadAmrWithAmrData:(NSData *)amrData {
-    NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
+    long const kFileMaxSize = 1024 * 1024 * 1;
+    
+    NSString *server = [NSString stringWithFormat:@"%@%@%ld", [XCZConfig baseURL], @"/WebUploadServlet.action?limit=", kFileMaxSize];
     NSDictionary *parameters = nil;
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
@@ -734,10 +736,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)uploadImage:(UIImage *)image {
+    long const kFileMaxSize = 1024 * 1024 * 2;
+    
     image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
     NSData *fileData = UIImageJPEGRepresentation(image, 0.8);
-    
-    NSString *server = [NSString stringWithFormat:@"%@%@%ld", [XCZConfig baseURL], @"/WebUploadServlet.action", (long)(1024 * 1024 * 2)];
+    NSString *server = [NSString stringWithFormat:@"%@%@%ld", [XCZConfig baseURL], @"/WebUploadServlet.action?limit=", kFileMaxSize];
     NSDictionary *parameters = nil;
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
@@ -760,6 +763,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)uploadMovieWithMovURL:(NSURL *)movURL {
+    long const kFileMaxSize = 1024 * 1024 * 10;
+    
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -774,7 +779,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {
         NSData *fileData = [NSData dataWithContentsOfFile:mp4Path];
         
-        NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
+        NSString *server = [NSString stringWithFormat:@"%@%@%ld", [XCZConfig baseURL], @"/WebUploadServlet.action?limit=", kFileMaxSize];
         NSDictionary *parameters = nil;
         self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
