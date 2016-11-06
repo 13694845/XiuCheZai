@@ -627,8 +627,13 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)stopRecord:(UIButton *)sender {
     NSLog(@"stopRecord");
-    [sender setTitle:@"按住 说话" forState:UIControlStateNormal];
+    NSTimeInterval recordTime = self.audioRecorder.currentTime;
     [self.audioRecorder stop];
+    [sender setTitle:@"按住 说话" forState:UIControlStateNormal];
+    
+    if (recordTime < 1.0) {
+        [self toastWithText:@"录音时间太短" hideAfterDelay:0.6]; return;
+    }
     
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"temp.wav"];
@@ -847,6 +852,15 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [self.barView layoutIfNeeded];
         [self.tableView layoutIfNeeded];
     } completion:^(BOOL finished) {}];
+}
+
+- (void)toastWithText:(NSString *)text hideAfterDelay:(float)delay {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.alpha = 0.5;
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = text;
+    hud.yOffset = -100.0;
+    [hud hide:YES afterDelay:delay];
 }
 
 - (void)toastWithText:(NSString *)text {
