@@ -638,7 +638,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)uploadAmrWithAmrData:(NSData *)amrData {
-    long const kFileMaxSize = 1024 * 1024 * 1;
+    long const kFileMaxSize = 1024 * 1024 * 10;
     
     NSString *server = [NSString stringWithFormat:@"%@%@%ld", [XCZConfig baseURL], @"/WebUploadServlet.action?limit=", kFileMaxSize];
     NSDictionary *parameters = nil;
@@ -736,7 +736,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 }
 
 - (void)uploadImage:(UIImage *)image {
-    long const kFileMaxSize = 1024 * 1024 * 2;
+    long const kFileMaxSize = 1024 * 1024 * 10;
     
     image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
     NSData *fileData = UIImageJPEGRepresentation(image, 0.8);
