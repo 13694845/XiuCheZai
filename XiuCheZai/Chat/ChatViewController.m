@@ -469,7 +469,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)closeImageViewer {
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-
+    
     [self.imageViewerView removeFromSuperview];
 }
 
