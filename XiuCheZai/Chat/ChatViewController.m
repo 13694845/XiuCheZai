@@ -737,7 +737,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     image = [self resizeImage:image toSize:CGSizeMake(image.size.width / 2, image.size.height / 2)];
     NSData *fileData = UIImageJPEGRepresentation(image, 0.8);
     
-    NSString *server = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
+    NSString *server = [NSString stringWithFormat:@"%@%@%ld", [XCZConfig baseURL], @"/WebUploadServlet.action", (long)(1024 * 1024 * 2)];
     NSDictionary *parameters = nil;
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [self.manager POST:server parameters:parameters constructingBodyWithBlock:^(id formData) {
