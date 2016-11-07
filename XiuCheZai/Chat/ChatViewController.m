@@ -645,11 +645,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)stopRecord:(UIButton *)sender {
     NSLog(@"stopRecord");
-    NSTimeInterval recordTime = self.audioRecorder.currentTime;
+    NSTimeInterval recordLength = self.audioRecorder.currentTime;
     [self.audioRecorder stop];
     [sender setTitle:@"按住 说话" forState:UIControlStateNormal];
     
-    if (recordTime < 1.0) {
+    if (recordLength < 1.0) {
         [self toastWithText:@"录音时间太短" hideAfterDelay:0.6]; return;
     }
     
@@ -658,10 +658,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *amrPath = [documentsPath stringByAppendingPathComponent:@"temp.amr"];
     if ([VoiceConverter ConvertWavToAmr:wavPath amrSavePath:amrPath]) {}
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:amrPath]];
-    [self uploadAmrWithAmrData:amrData];
+    [self uploadAmrWithAmrData:amrData amrLength:recordLength];
 }
 
-- (void)uploadAmrWithAmrData:(NSData *)amrData {
+- (void)uploadAmrWithAmrData:(NSData *)amrData amrLength:(NSTimeInterval)amrlength {
     long const kFileMaxSize = 1024 * 1024 * 10;
     
     NSString *server = [NSString stringWithFormat:@"%@%@%ld", [XCZConfig baseURL], @"/WebUploadServlet.action?limit=", kFileMaxSize];
@@ -673,7 +673,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         NSString *fileURL = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], result[@"filepath"]];
-        [self sendMessageWithContent:fileURL contentType:@"msc"];
+        // [self sendMessageWithContent:fileURL contentType:@"msc"];
+        [self sendMessageWithContent:fileURL contentType:@"msc" playTime:[NSString stringWithFormat:@"%d", (int)ceil(amrlength)]];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
     }];
 }
