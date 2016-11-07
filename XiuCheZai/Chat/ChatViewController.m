@@ -22,6 +22,7 @@
 #import "ChatOtherInputView.h"
 #import "VoiceConverter.h"
 #import "MJRefresh.h"
+#import "ImageViewerViewController.h"
 
 @import AVFoundation;
 @import MediaPlayer;
@@ -77,6 +78,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 @property (strong, nonatomic) NSString *senderId;
 @property (strong, nonatomic) NSString *senderName;
 @property (strong, nonatomic) NSString *senderAvatar;
+
+@property (assign, nonatomic) BOOL isFirstLoad;
 
 @end
 
@@ -219,12 +222,18 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     self.senderAvatar = self.senderAvatar.length ? [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], self.senderAvatar] : defaultAvatar;
     self.receiverAvatar = self.receiverAvatar.length ? [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], self.receiverAvatar] : defaultAvatar;
     
+    self.isFirstLoad = YES;
+    
     [self loadExistMessages];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    
+    if (self.isFirstLoad) {
+        if (self.rows.count) [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+        self.isFirstLoad = NO;
+    }
 }
 
 - (void)loadExistMessages {
@@ -441,6 +450,14 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     // [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     ChatMessage *message = self.rows[sender.tag];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ImageViewerViewController *imageViewerViewController = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewerViewController"];
+    imageViewerViewController.imageURL = message.content;
+    [self presentViewController:imageViewerViewController animated:NO completion:^{}];
+
+    /*
+    ChatMessage *message = self.rows[sender.tag];
     // UIView *imageViewerView = [[UIView alloc] initWithFrame:self.view.bounds];
     UIView *imageViewerView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     imageViewerView.backgroundColor = [UIColor blackColor];
@@ -465,6 +482,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [imageViewerView addSubview:closeButton];
     [self.view addSubview:imageViewerView];
     self.imageViewerView = imageViewerView;
+     */
 }
 
 - (void)closeImageViewer {

@@ -2559,6 +2559,39 @@
             </objects>
             <point key="canvasLocation" x="-1471.5" y="-2280.5"/>
         </scene>
+        <!--Image Viewer View Controller-->
+        <scene sceneID="peF-3p-aBU">
+            <objects>
+                <viewController storyboardIdentifier="ImageViewerViewController" id="dT8-mQ-IrS" customClass="ImageViewerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FNI-UL-3bl"/>
+                        <viewControllerLayoutGuide type="bottom" id="3tu-TK-4mj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cr3-UT-9HP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="idQ-Uh-SmT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="idQ-Uh-SmT" firstAttribute="leading" secondItem="cr3-UT-9HP" secondAttribute="leading" id="0Cf-M0-0HU"/>
+                            <constraint firstAttribute="trailing" secondItem="idQ-Uh-SmT" secondAttribute="trailing" id="fG3-rM-I5Y"/>
+                            <constraint firstItem="3tu-TK-4mj" firstAttribute="top" secondItem="idQ-Uh-SmT" secondAttribute="bottom" id="wmw-SW-7LS"/>
+                            <constraint firstItem="idQ-Uh-SmT" firstAttribute="top" secondItem="cr3-UT-9HP" secondAttribute="top" id="xdY-oY-Baa"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="imageView" destination="idQ-Uh-SmT" id="2NN-7B-hde"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fS1-ST-RLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1010.5" y="-2280.5"/>
+        </scene>
         <!--车品-->
         <scene sceneID="oLa-Ij-wvk">
             <objects>
@@ -3370,7 +3403,7 @@
         <image name="tab_icon31.png" width="25" height="25"/>
         <image name="tab_icon50.png" width="25" height="25"/>
         <image name="tab_icon51.png" width="25" height="25"/>
-        <image name="tab_icon71.png" width="22" height="22"/>
+        <image name="tab_icon71.png" width="25" height="25"/>
         <image name="tab_icon72.png" width="25" height="25"/>
         <image name="发现.png" width="22" height="22"/>
     </resources>

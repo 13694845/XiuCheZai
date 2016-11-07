@@ -417,6 +417,7 @@
 		6CC190921DA08A290098BB40 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC190901DA08A290098BB40 /* GCDAsyncUdpSocket.m */; };
 		6CD2F9FB1C4629BC0033437D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2F9FA1C4629BC0033437D /* WebViewController.m */; };
 		6CD81E831D06B25E00A12F83 /* common_back_150.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CD81E821D06B25E00A12F83 /* common_back_150.png */; };
+		6CDAE6591DD01B080098F3E7 /* ImageViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDAE6581DD01B080098F3E7 /* ImageViewerViewController.m */; };
 		6CDB3AF11C61DE08007C1AD1 /* home_activity01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CDB3AF01C61DE08007C1AD1 /* home_activity01.png */; };
 		6CE4003C1C320C62007F6D03 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE4003B1C320C62007F6D03 /* MenuViewController.m */; };
 		6CE4003E1C322077007F6D03 /* menu_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE4003D1C322077007F6D03 /* menu_back.png */; };
@@ -1229,6 +1230,8 @@
 		6CD2F9F91C4629BC0033437D /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		6CD2F9FA1C4629BC0033437D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		6CD81E821D06B25E00A12F83 /* common_back_150.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = common_back_150.png; sourceTree = "<group>"; };
+		6CDAE6571DD01B080098F3E7 /* ImageViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewerViewController.h; sourceTree = "<group>"; };
+		6CDAE6581DD01B080098F3E7 /* ImageViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewerViewController.m; sourceTree = "<group>"; };
 		6CDB3AF01C61DE08007C1AD1 /* home_activity01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_activity01.png; sourceTree = "<group>"; };
 		6CE4003A1C320C62007F6D03 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		6CE4003B1C320C62007F6D03 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
@@ -2445,6 +2448,8 @@
 				6CFEE7161DB7ABE400676A62 /* ChatTextBubbleView.m */,
 				6CFEE7091DB7ABE400676A62 /* ChatImageBubbleView.h */,
 				6CFEE70A1DB7ABE400676A62 /* ChatImageBubbleView.m */,
+				6CDAE6571DD01B080098F3E7 /* ImageViewerViewController.h */,
+				6CDAE6581DD01B080098F3E7 /* ImageViewerViewController.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -3217,6 +3222,7 @@
 				6C08098E1DCADE9D00307280 /* XCZPersonInfoHeaderView.m in Sources */,
 				6C08099C1DCADE9D00307280 /* XCZPublishOrdersViewCellBottomView.m in Sources */,
 				6C0809A11DCADE9D00307280 /* XCZPublishTextPhoneButton.m in Sources */,
+				6CDAE6591DD01B080098F3E7 /* ImageViewerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
