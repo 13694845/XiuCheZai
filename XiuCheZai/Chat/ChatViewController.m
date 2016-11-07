@@ -415,13 +415,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     [bubbleView addSubview:avatarImageView];
     
     UIView *bubbleImageView = [[UIView alloc] init];
-    /*
     bubbleImageView.backgroundColor = !message.isSend ? [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0] : [UIColor colorWithRed:30.0/255.0 green:130.0/255.0 blue:232.0/255.0 alpha:1.0];
-     */
-    /*
-    bubbleImageView.backgroundColor = [UIColor whiteColor];
     bubbleImageView.layer.cornerRadius = 5.0;
-     */
     if (!message.isSend) bubbleImageView.frame = CGRectMake(32.0 + 8.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     else bubbleImageView.frame = CGRectMake(0.0, 0.0, imageRect.size.width + BUBBLE_TEXT_PADDING * 2, imageRect.size.height + BUBBLE_TEXT_PADDING * 2);
     [bubbleView addSubview:bubbleImageView];
