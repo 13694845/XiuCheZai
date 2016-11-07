@@ -18,8 +18,8 @@
 
 @implementation ChatOtherInputView
 
-#define NUMBER_OF_COLUMNS       3
-#define BUTTON_WIDTH            75.0
+#define NUMBER_OF_COLUMNS       4
+#define BUTTON_WIDTH            50.0
 #define BUTTON_HEIGHT           50.0
 
 - (NSArray *)buttonImages {
