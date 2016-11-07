@@ -26,12 +26,24 @@
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.imageURL]];
     
     self.imageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGestureRecognizer =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close)];
+    UITapGestureRecognizer *tapGestureRecognizer =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapImage:)];
     [self.imageView addGestureRecognizer:tapGestureRecognizer];
+    UIPanGestureRecognizer *panGestureRecognizer =[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panImage:)];
+    [self.imageView addGestureRecognizer:panGestureRecognizer];
+    UIPinchGestureRecognizer *pinchGestureRecognizer =[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchImage:)];
+    [self.imageView addGestureRecognizer:pinchGestureRecognizer];
 }
 
-- (void)close {
+- (void)tapImage:(UITapGestureRecognizer *)tapGestureRecognizer {
     [self dismissViewControllerAnimated:NO completion:^{}];
+}
+
+- (void)panImage:(UIPanGestureRecognizer *)panGestureRecognizer {
+    NSLog(@"panGestureRecognizer");
+}
+
+- (void)pinchImage:(UIPanGestureRecognizer *)pinchGestureRecognizer {
+    NSLog(@"pinchGestureRecognizer");
 }
 
 - (void)didReceiveMemoryWarning {
