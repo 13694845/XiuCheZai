@@ -157,9 +157,9 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0h-ao-RdJ">
-                                                        <rect key="frame" x="115" y="63" width="52" height="28"/>
+                                                        <rect key="frame" x="106" y="63" width="70" height="28"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="52" id="P0p-kC-KKI"/>
+                                                            <constraint firstAttribute="width" constant="70" id="P0p-kC-KKI"/>
                                                             <constraint firstAttribute="height" constant="28" id="ZKZ-h7-eNZ"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -185,9 +185,9 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cb-dv-Lvg">
-                                                        <rect key="frame" x="303" y="69" width="52" height="17"/>
+                                                        <rect key="frame" x="294" y="69" width="70" height="17"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="52" id="DWR-5B-LNB"/>
+                                                            <constraint firstAttribute="width" constant="70" id="DWR-5B-LNB"/>
                                                             <constraint firstAttribute="height" constant="17" id="ZxG-ii-bnw"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -489,10 +489,10 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rfd-Ce-JRJ">
-                                                        <rect key="frame" x="303" y="69" width="52" height="17"/>
+                                                        <rect key="frame" x="294" y="69" width="70" height="17"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="17" id="JWB-5y-N1L"/>
-                                                            <constraint firstAttribute="width" constant="52" id="gYr-1c-gSt"/>
+                                                            <constraint firstAttribute="width" constant="70" id="gYr-1c-gSt"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <state key="normal" title="美容镀膜">
