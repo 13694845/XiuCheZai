@@ -426,8 +426,9 @@
 }
 
 - (IBAction)toWholeMaintain:(id)sender {
-    // [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
+    [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
     
+    /*
     ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
     chatViewController.receiverId = @"3432";
     chatViewController.receiverName = @"BoBo";
@@ -435,6 +436,7 @@
     chatViewController.isContact = @"1";
     chatViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatViewController animated:YES];
+     */
 }
 
 - (IBAction)toPartMaintain:(id)sender {
