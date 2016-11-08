@@ -80,7 +80,15 @@
     self.activityTypeLabel.text = @"活";
     self.activityTypeLabel.layer.cornerRadius = 2.0;
     self.activityTypeLabel.layer.masksToBounds = YES;
-    self.activityTitleLabel.text = [NSString stringWithFormat:@"%@", row[@"summary"]];
+    
+    NSString *summaryShow = [row[@"summary"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    
+//    NSLog(@"summary:%@, summaryShow:%@", row[@"summary"], summaryShow);
+    
+    self.activityTitleLabel.text = [NSString stringWithFormat:@"%@", summaryShow];
     self.activityTimeLabel.text = [NSString stringWithFormat:@"截止日期:  %@", row[@"end_time"]];
     
     CGFloat activityImageViewX = 16;

@@ -73,7 +73,8 @@
         [self.attentionLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(siteCircleLabelDidClick)]];
         [self updateGuanZhu];
     } else {
-        self.attentionLabel.text = @"";
+        self.attentionLabel.text = @"加关注";
+        self.attentionLabel.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
         self.attentionLabel.userInteractionEnabled = NO;
     }
 }

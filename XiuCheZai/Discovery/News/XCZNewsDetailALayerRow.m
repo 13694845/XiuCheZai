@@ -150,7 +150,7 @@
             subViewRow.delegate = self;
             subViewRow.tag = i;
             subViewRow.fatherWidth = subViewRowW;
-            subViewRow.nameDict = @{@"nick": _remark[@"nick"], @"login_name": _remark[@"login_name"], @"user_id": _remark[@"user_id"]};
+            subViewRow.nameDict = @{@"nick": _remark[@"nick"], @"login_name": _remark[@"login_name"], @"user_id": self.louzhuId};
             subViewRow.reply_info = reply_infoArray[i];
             CGFloat subViewRowY = self.height;
             subViewRow.frame = CGRectMake(subViewRowX, subViewRowY, subViewRowW, subViewRow.height);

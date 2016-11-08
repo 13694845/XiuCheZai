@@ -45,6 +45,7 @@
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
     if (_rows.count) {
+        self.currentPage++;
         [self updateTableView];
     }
 }
@@ -65,6 +66,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.currentPage = 1;
     
     [self loadData];
 }
@@ -85,7 +87,6 @@
 }
 
 - (void)loadDataNeedsRefresh {
-    self.currentPage = 1;
     [self requestTableViewNet];
 }
 
@@ -145,7 +146,6 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [MBProgressHUD ZHMHideHUD];
         [MBProgressHUD ZHMShowSuccess:@"失败"];
-        //        [self endHeaderRefresh];
     }];
 }
 

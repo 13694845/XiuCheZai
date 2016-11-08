@@ -19,7 +19,7 @@
 #import "XCZPersonWebViewController.h"
 #import "XCZCircleDetailViewController.h"
 
-@interface XCZPublishOrderViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate, XCZPublishTextPhoneViewDelegate, XCZPublishSelectedCityViewDelegate, XCZPublishBrandsViewControllerDelegate>
+@interface XCZPublishOrderViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate, XCZPublishTextPhoneViewDelegate, XCZPublishSelectedCityViewDelegate, XCZPublishBrandsViewControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
@@ -101,7 +101,6 @@
     [self assistedSetup];
     [self createSubView];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemDidClick)];
     [self.targetingView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(targetingViewDidClick)]];
     [self.sendToView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sendToViewDidClick)]];
     [self requestLoginDetection];
@@ -109,7 +108,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -120,7 +119,6 @@
 - (void)assistedSetup
 {
     self.scrollView.alwaysBounceVertical = YES;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发表   " style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemDidClick)];
 }
 
 - (void)createSubView
@@ -146,6 +144,8 @@
     XCZPublishTextPhoneView *textPhoneView = [[XCZPublishTextPhoneView alloc] initWithFrame:CGRectMake(0, 16 + 91, self.contentView.bounds.size.width, 222)];
     textPhoneView.isNoTopic = YES;
     textPhoneView.delegate = self;
+    textPhoneView.titleField.delegate = self;
+    textPhoneView.textView.delegate = self;
     [writingView addSubview:textPhoneView];
     self.textPhoneView = textPhoneView;
     
@@ -192,15 +192,16 @@
 
 - (void)requestSendPost
 {
-    if (!self.textPhoneView.textView.text.length) {
+    NSString *content = [self.textPhoneView.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; //去除掉首尾的空白字符和换行字符
+    if (!content.length) {
         [MBProgressHUD ZHMShowError:@"说说您当下的感受吧"];
         return;
     }
-    
     if (![self.defaultAttention objectForKey:@"forum_id"]) {
         [MBProgressHUD ZHMShowError:@"请重新要发送的板块..."];
         return;
     }
+    [self.textPhoneView.textView resignFirstResponder];
     
     NSString *share_image = self.imageStrs ? self.imageStrs : @"";
     NSString *post_clazz = @"4";
@@ -227,7 +228,7 @@
     params[@"province_id"] = [self.location objectForKey:@"province_id"];
     params[@"area_id"] = [self.location objectForKey:@"area_id"];
     params[@"addr"] = [self.location objectForKey:@"addr"];
-    params[@"content"] = self.textPhoneView.textView.text;
+    params[@"content"] = content;
     params[@"share_image"] = share_image;
     params[@"post_clazz"] = post_clazz;
     params[@"goods_clazz"] = goods_clazz;
@@ -237,7 +238,7 @@
     [self.manager POST:URLString parameters:params progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
 //        NSLog(@"msg:%@", responseObject[@"msg"]);
-        NSLog(@"params:%@", params);
+//        NSLog(@"params:%@", params);
         if ([[responseObject objectForKey:@"error"] intValue] == 201) { // 发帖成功
             [MBProgressHUD ZHMShowSuccess:@"发帖成功"];
             NSString *post_id = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"post_id"];
@@ -245,6 +246,7 @@
                 XCZCircleDetailViewController *writingTopicVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
                 writingTopicVC.reuseIdentifier = @"CellC";
                 writingTopicVC.post_id = post_id;
+                writingTopicVC.jumpToHome = YES;
                 [self.navigationController pushViewController:writingTopicVC animated:YES];
             });
         } else {
@@ -303,8 +305,7 @@
 }
 
 #pragma mark - 按钮点击方法
-- (void)leftBarButtonItemDidClick
-{
+- (IBAction)leftBtnDidClick:(id)sender {
     [self.view endEditing:YES];
     UIAlertController *alertCtr = [UIAlertController alertControllerWithTitle:nil message:@"确定取消发布?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确认取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -315,12 +316,10 @@
     
     [alertCtr addAction:cancelAction];
     [alertCtr addAction:oneAction];
-    [self presentViewController:alertCtr animated:YES completion:nil];
+    [self.navigationController presentViewController:alertCtr animated:YES completion:nil];
 }
 
-- (void)rightBarButtonItemDidClick
-{
-    [self.view endEditing:YES];
+- (IBAction)rightBtnDidClick:(id)sender {
     [self requestSendPost];
 }
 
@@ -350,6 +349,48 @@
     [self.navigationController pushViewController:publishBrandsVC animated:YES];
 }
 
+#pragma mark - 键盘通知方法 scrollView及textField,textView代理
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    self.targetingView.userInteractionEnabled = NO;
+    self.sendToView.userInteractionEnabled = NO;
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    self.targetingView.userInteractionEnabled = YES;
+    self.sendToView.userInteractionEnabled = YES;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.view endEditing:YES];
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView.text.length) {
+        self.textPhoneView.commentPlaceholderLabel.text = @"";
+    } else {
+        self.textPhoneView.commentPlaceholderLabel.text = XCZPublishTextPhoneViewPWordText;
+    }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        //在这里做你响应return键的代码
+        [textView resignFirstResponder];
+        return YES; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 #pragma mark - XCZPublishBrandsViewControllerDelegate
 - (void)publishBrandsViewController:(UIViewController *)viewController didSelectRow:(NSDictionary *)row
 {
@@ -369,9 +410,16 @@
     UIAlertAction *twoAction = [UIAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self photograph:UIImagePickerControllerSourceTypeCamera]; // 调用拍照
     }];
+    
+    UIAlertAction *threeAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.textPhoneView.selectedPhoneBtnTag = self.selectedPhoneBtnTag;
+        self.textPhoneView.removeImageDict = @{@"image": selectedPhoneButton.currentImage};
+    }];
+    
     [alertCtr addAction:cancelAction];
     [alertCtr addAction:oneAction];
     [alertCtr addAction:twoAction];
+    if(selectedPhoneButton.currentImage)[alertCtr addAction:threeAction];
     [self presentViewController:alertCtr animated:YES completion:nil];
 }
 
@@ -397,10 +445,6 @@
     [self.scrollView insertSubview:self.targetingView atIndex:200];
     [self.scrollView insertSubview:self.sendToView atIndex:200];
     [self.textPhoneView frameHasChange];
-    
-    
-    
-//    NSLog(@"textPhoneView:%@, writingView:%@", textPhoneView, self.writingView);
 }
 
 - (void)textPhoneView:(XCZPublishTextPhoneView *)textPhoneView phoneBtns:(NSArray *)phoneBtns

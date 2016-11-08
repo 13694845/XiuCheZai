@@ -79,8 +79,9 @@ static CGFloat const XCZPublishTextPhoneButtonMarginX = 16;
         textViewRect.origin.y = 16;
         self.textView.frame = textViewRect;
         XCZPublishTextPhoneButton *phoneBtn = [self.phoneBtns firstObject];
-        phoneBtn.frame;
-        
+        CGRect phoneBtnRect = phoneBtn.frame;
+        phoneBtnRect.origin.y = CGRectGetMaxY(self.textView.frame) + XCZPublishTextPhoneButtonMarginX;
+        phoneBtn.frame = phoneBtnRect;
         [self.titleField removeFromSuperview];
         self.titleField = nil;
     }
@@ -192,6 +193,17 @@ static CGFloat const XCZPublishTextPhoneButtonMarginX = 16;
         }
     } completion:^(BOOL finished) {
         [MBProgressHUD ZHMShowSuccess:@"已删除"];
+        XCZPublishTextPhoneButton *zuihouPhoneBtn = [self.phoneBtns lastObject];
+        if (zuihouPhoneBtn.currentImage) {
+            XCZPublishTextPhoneButton *zuihoujiaPhoneBtn = [[XCZPublishTextPhoneButton alloc] initWithFrame:CGRectMake(XCZPublishTextPhoneButtonMarginX, CGRectGetMaxY(zuihouPhoneBtn.frame) + XCZPublishTextPhoneButtonMarginX, zuihouPhoneBtn.bounds.size.width, zuihouPhoneBtn.bounds.size.height)];
+            [self addSubview:zuihoujiaPhoneBtn];
+            [self.phoneBtns addObject:zuihoujiaPhoneBtn];
+            
+            CGFloat height = CGRectGetMaxY(zuihoujiaPhoneBtn.frame);
+            if ([self.delegate respondsToSelector:@selector(textPhoneView:lastPhoneButton:height:)]) {
+                [self.delegate textPhoneView:self lastPhoneButton:[self.phoneBtns lastObject] height:height];
+            }
+        }
     }];
 }
 

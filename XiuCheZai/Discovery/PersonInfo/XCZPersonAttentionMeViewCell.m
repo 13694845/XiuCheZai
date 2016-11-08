@@ -63,42 +63,7 @@
    self.brand_logoImaegView.layer.cornerRadius = self.brand_logoImaegView.bounds.size.height * 0.5;
    self.brand_logoImaegView.layer.masksToBounds = YES;
     
-    NSString *provinceName = [XCZCityManager provinceNameForProvinceId:row[@"province_id"]];
-    NSString *cityName = [XCZCityManager cityNameForCityId:row[@"city_id"]];
-    NSString *areaName = [XCZCityManager townNameForTownId:row[@"area_id"]];
-    NSString *addr;
-    if ([cityName isEqualToString:provinceName]) {
-        if ([areaName isEqualToString:cityName]) {
-            addr = cityName;
-            if (addr.length) {
-                addr = nil;
-            }
-        } else {
-            if (!areaName.length) {
-                addr = provinceName;
-            } else {
-                addr = [NSString stringWithFormat:@"%@%@", provinceName, areaName];
-            }
-        }
-    } else {
-        if ([areaName isEqualToString:cityName]) {
-            if (!cityName.length) {
-                addr = provinceName;
-            } else {
-                addr = [NSString stringWithFormat:@"%@%@", provinceName, cityName];
-            }
-        } else {
-            if (!areaName.length) {
-                if (!cityName.length) {
-                    addr = provinceName;
-                } else {
-                    addr = [NSString stringWithFormat:@"%@%@", provinceName, cityName];
-                }
-            } else {
-                addr = [NSString stringWithFormat:@"%@%@%@", provinceName, cityName, areaName];
-            }
-        }
-    }
+    NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:@"" cityId:row[@"city_id"] andTownId:row[@"area_id"]];
     
     if (!addr.length) {
         self.siteCircleLabel.text = ((NSString *)row[@"forum_name"]).length ? [NSString stringWithFormat:@"%@", row[@"forum_name"]] : @"";

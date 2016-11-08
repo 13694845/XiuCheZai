@@ -31,6 +31,7 @@
 @property (weak, nonatomic) XCZPublishSelectedCityView *selectedCityView;
 @property (nonatomic, strong) NSDictionary *location;
 @property (nonatomic, strong) NSDictionary *defaultAttention;
+@property (nonatomic, strong) NSDictionary *currentPositioning;
 @property (assign, nonatomic) int loginStatu; // 登录状态, 0为已经登录, 1为未登录
 @property (nonatomic, strong) NSArray *showImages;
 @property (nonatomic, copy) NSString *imageStrs;
@@ -109,8 +110,8 @@
     [self.sendToView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sendToViewDidClick)]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
     [self requestLoginDetection];
+    [self requestPositioning];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -229,15 +230,16 @@
 
 - (void)requestSendPost
 {
-    if (!self.textPhoneView.textView.text.length) {
+    NSString *content = [self.textPhoneView.textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; //去除掉首尾的空白字符和换行字符
+    if (!content.length) {
         [MBProgressHUD ZHMShowError:@"说说您当下的感受吧"];
         return;
     }
-    
     if (![self.defaultAttention objectForKey:@"forum_id"]) {
         [MBProgressHUD ZHMShowError:@"请重新要发送的板块..."];
         return;
     }
+     [self.textPhoneView.textView resignFirstResponder];
     
     NSString *topic = !self.textPhoneView.titleField.text.length ? @"" : self.textPhoneView.titleField.text;
     NSString *share_image = self.imageStrs ? self.imageStrs : @"";
@@ -275,6 +277,18 @@
     }];
 }
 
+- (void)requestPositioning
+{
+    NSDictionary *locationInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
+    NSString *longitude = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"longitude"] doubleValue]];
+    NSString *latitude = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"latitude"] doubleValue]];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/CityLocation.do"];
+    NSDictionary *params = ![longitude isEqualToString:@"0.000000"] ? @{@"lng": longitude, @"lat": latitude, @"type": @"1"} : @{};
+    [self.manager POST:URLString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        self.currentPositioning = responseObject;
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {}];
+}
+
 - (void)requestLoginDetection
 {
     NSString *urlString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/LoginDetectionAction.do"];
@@ -303,7 +317,6 @@
 }
 
 - (IBAction)rightBtnDidClick:(id)sender {
-    [self.view endEditing:YES];
     [self requestSendPost];
 }
 
@@ -311,6 +324,7 @@
 {
     if (!self.selectedCityView) {
         XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
+        selectedCityView.currentPositioning = self.currentPositioning;
         selectedCityView.delegate = self;
         [self.view addSubview:selectedCityView];
         self.selectedCityView = selectedCityView;
@@ -373,7 +387,6 @@
     [textField resignFirstResponder];
     return YES;
 }
-
 
 #pragma mark - XCZPublishBrandsViewControllerDelegate
 - (void)publishBrandsViewController:(UIViewController *)viewController didSelectRow:(NSDictionary *)row

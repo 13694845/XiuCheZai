@@ -41,159 +41,12 @@
 @synthesize rows = _rows;
 @synthesize banners = _banners;
 
-- (NSArray *)oneRows
-{
-    if (!_oneRows) {
-        _oneRows = @[
-                     @{
-                         @"cate_sp" : @"122",
-                         @"clicks" : @"0",
-                         @"forum_id" : @"5",
-                         @"forum_name" : @"阿搜狐的回复",
-                         @"forum_remark" : @"zbk啊摔到",
-                         @"forum_style" : @"",
-                         @"members" : @"8",
-                         @"parent_id" : @"0",
-                         @"totals" : @"47",
-                         @"user_id" : @"",
-                         },
-                     @{
-                         @"cate_sp" : @"",
-                         @"clicks" : @"",
-                         @"forum_id" : @"6",
-                         @"forum_name" : @"啊是否撒地方",
-                         @"forum_remark" : @"萨里德好啦好地方啊十分askjdhkasfkjhasd 阿斯 u 代购法国 iu 放丝瓜水淀粉 iu 阿道夫撒上粉底发丝的还是对方哈苏豆腐哈第三幅 i 哈收到份 iu 啊都十分 i 广东省法国大使傅 i 读法死啊 u 的高帅富 i 啊 u 感到十分的发生",
-                         @"forum_style" : @"",
-                         @"members" : @"5",
-                         @"parent_id" : @"0",
-                         @"totals" : @"13",
-                         @"user_id" : @"",
-                         },
-                     @{
-                         @"cate_sp" : @"100",
-                         @"clicks" : @"0",
-                         @"forum_id" : @"109",
-                         @"forum_name" : @"iudf",
-                         @"forum_remark" : @"阿斯顿哥哥 i",
-                         @"forum_style" : @"",
-                         @"members" : @"0",
-                         @"parent_id" : @"0",
-                         @"totals" : @"3",
-                         @"user_id" : @"",
-                         },
-                     ];
-    }
-    return _oneRows;
-}
-
-- (NSArray *)otherRows
-{
-    if (!_otherRows) {
-        _otherRows = @[
-                       @{
-                           @"cate_sp" : @"",
-                           @"clicks" : @"",
-                           @"forum_id" : @"10",
-                           @"forum_name" : @"奔驰",
-                           @"forum_remark" : @"",
-                           @"forum_style" : @"",
-                           @"members" : @"5",
-                           @"parent_id" : @"0",
-                           @"totals" : @"20",
-                           @"user_id" : @"",
-                       },
-                       @{
-                           @"cate_sp" : @"",
-                           @"clicks" : @"",
-                           @"forum_id" : @"106",
-                           @"forum_name" : @"BBS奥迪",
-                           @"forum_remark" : @"非常好",
-                           @"forum_style" : @"subasu",
-                           @"members" : @"0",
-                           @"parent_id" : @"0",
-                           @"totals" : @"1",
-                           @"user_id" : @"",
-                       },
-                       @{
-                           @"cate_sp" : @"98",
-                           @"clicks" : @"0",
-                           @"forum_id" : @"1",
-                           @"forum_name" : @"i 啊上帝",
-                           @"forum_remark" : @"卡蛋糕卡公司打卡时对方空间嘎的司空见惯分开很久的司法鉴定撒开飞机的风格撒娇的撒封口机哈收到反馈就是对法国公司搭风格都十分的思考方法开发包括范冰冰宝宝健康 v 方便看不见看 v 把 v 就看不看就是妇科病计算机考试 v 健康 v 步伐加快步伐",
-                           @"forum_style" : @"",
-                           @"members" : @"2",
-                           @"parent_id" : @"0",
-                           @"totals" : @"63",
-                           @"user_id" : @"",
-                       },
-                       @{
-                           @"cate_sp" : @"122",
-                           @"clicks" : @"0",
-                           @"forum_id" : @"5",
-                           @"forum_name" : @"水淀粉",
-                           @"forum_remark" : @"zbk",
-                           @"forum_style" : @"",
-                           @"members" : @"8",
-                           @"parent_id" : @"0",
-                           @"totals" : @"47",
-                           @"user_id" : @"",
-                       },
-                       @{
-                           @"cate_sp" : @"",
-                           @"clicks" : @"",
-                           @"forum_id" : @"6",
-                           @"forum_name" : @"水淀粉色短发撒地方",
-                           @"forum_remark" : @"askjdhkasfkjhasd 阿斯 u 代购法国 iu 放丝瓜水淀粉 iu 阿道夫撒上粉底发丝的还是对方哈苏豆腐哈第三幅 i 哈收到份 iu 啊都十分 i 广东省法国大使傅 i 读法死啊 u 的高帅富 i 啊 u 感到十分的发生",
-                           @"forum_style" : @"",
-                           @"members" : @"5",
-                           @"parent_id" : @"0",
-                           @"totals" : @"13",
-                           @"user_id" : @"",
-                       },
-                       @{
-                           @"cate_sp" : @"100",
-                           @"clicks" : @"0",
-                           @"forum_id" : @"109",
-                           @"forum_name" : @"ask 的",
-                           @"forum_remark" : @"发生对抗",
-                           @"forum_style" : @"",
-                           @"members" : @"0",
-                           @"parent_id" : @"0",
-                           @"totals" : @"3",
-                           @"user_id" : @"",
-                       },
-                       @{
-                           @"cate_sp" : @"",
-                           @"clicks" : @"",
-                           @"forum_id" : @"101",
-                           @"forum_name" : @"阿苏法国大卡",
-                           @"forum_remark" : @"",
-                           @"forum_style" : @"",
-                           @"members" : @"2",
-                           @"parent_id" : @"0",
-                           @"totals" : @"1",
-                           @"user_id" : @"",
-                       }
-                ];
-    }
-    return _otherRows;
-}
-
 - (void)setBanners:(NSMutableArray *)banners {
     _banners = banners;
     
     [self endHeaderRefresh];
     [self endFooterRefresh];
-    
-    
-    
-//    _banners = nil;
-    
-//    if (banners.count) {
-        [self updateBannerView];
-//    } else {
-//        
-//    }
+    [self updateBannerView];
 }
 
 - (NSMutableArray *)banners {
@@ -203,15 +56,10 @@
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
     
-//    NSLog(@"rowsrows:%@", rows);
-    
     self.currentPage++;
     [self endHeaderRefresh];
     [self endFooterRefresh];
-    
-//    if (_rows.count) {
-        [self updateTableView];
-//    }
+    [self updateTableView];
 }
 
 - (NSMutableArray *)rows {
@@ -226,13 +74,14 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    [self.tabBarController.tabBar setHidden:NO];
+    self.navigationController.navigationBar.translucent = NO;
     [self loadData];
 }
 
@@ -303,19 +152,6 @@
 #pragma mark - 网络请求部分
 - (void)requestTableViewNet
 {
-//     // 测试用
-//    if (self.currentPage == 1) {
-////        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            self.rows = [NSMutableArray arrayWithArray:self.oneRows];
-////        });
-//        
-//    } else {
-//        self.otherRows = nil;
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            self.rows = [[self.rows arrayByAddingObjectsFromArray:self.otherRows] mutableCopy];
-//        });
-//    }
-    
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/CateAction.do"];
     NSDictionary *parameters = @{@"type":[NSString stringWithFormat:@"%d", 1]};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -346,7 +182,6 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/CateAction.do"];
     NSDictionary *parameters = @{@"type":[NSString stringWithFormat:@"%d", 1], @"forum_id": selectedForum_id};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-//        NSLog(@"parameters:%@, 推荐的车友会:%@", parameters, responseObject);
         NSArray *rows = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
         rows.count ? [self jumpToClubBrandsViewController:selectedForum_id andForum_name:selectedForum_name] : [self jumpToClubCircleViewController:selectedForum_id];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -354,7 +189,6 @@
         [self endHeaderRefresh];
         [self endFooterRefresh];
     }];
-
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

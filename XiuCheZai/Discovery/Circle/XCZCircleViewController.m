@@ -123,10 +123,10 @@
        NSArray *rows = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
         if (self.currentPage == 1) {
             self.rows = [NSMutableArray arrayWithArray:rows];
+//            NSLog(@"rowsrows:%@", self.rows);
         } else {
             self.rows = [[self.rows arrayByAddingObjectsFromArray:rows] mutableCopy];
         }
-
         [self endHeaderRefresh];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [self endHeaderRefresh];

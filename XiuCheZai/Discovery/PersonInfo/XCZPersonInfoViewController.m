@@ -82,6 +82,10 @@
 
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
+    
+    NSArray *ar = @[rows[0], rows[0]];
+    _rows = [ar mutableCopy];
+    
     [self updateTableView];
 }
 
@@ -128,8 +132,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.navigationController.navigationBar.translucent = NO;
+    [self.tabBarController.tabBar setHidden:YES];
+    [self.tabBarController setHidesBottomBarWhenPushed:YES];
     self.headerViewResh = YES;
     [self requestUserIdNet];
 }
@@ -339,11 +345,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewCell *yxianCell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *identifier;
     NSArray *list = [self.rows[indexPath.section] objectForKey:@"list"];
+    
+//    
+//    NSLog(@"self.row.count: %ld", self.rows.count);
+//    
     NSDictionary *rowY = list[indexPath.row];
-    NSMutableArray *imageArray = [NSMutableArray array];
-    imageArray = [self changeImage:rowY[@"share_image"] andImageArray:imageArray];
+    NSArray *imageArray = [rowY[@"share_image"] componentsSeparatedByString:@","];
+    NSLog(@"imageArray:%@", imageArray);
     imageArray = [self changeImageFullPath:imageArray];
     
     NSMutableDictionary *row = [NSMutableDictionary dictionaryWithDictionary:rowY];
@@ -364,7 +375,8 @@
         }
     }
 
-    XCZPersonInfoViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%@", identifier] forIndexPath:indexPath];
+    XCZPersonInfoViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%@", identifier]];
+//    for (UIView *cellView in cell.subviews) [cellView removeFromSuperview];
     cell.indexPath = indexPath;
     cell.row = row;
     return cell;
@@ -400,9 +412,11 @@
         XCZPersonInfoLookImageViewController *personInfoImageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZPersonInfoLookImageViewController"];
         personInfoImageVC.row = self.selectRow;
         [self.navigationController pushViewController:personInfoImageVC animated:YES];
-        
     } else if ([post_clazz intValue] == 4) {
-        
+        XCZCircleDetailViewController *newsDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
+        newsDetailViewController.reuseIdentifier = @"CellC";
+        newsDetailViewController.post_id = [self.selectRow objectForKey:@"post_id"];
+        [self.navigationController pushViewController:newsDetailViewController animated:YES];
     }
 }
 
@@ -495,8 +509,6 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-mm-dd"];
     NSDate *create_timeZ = [formatter dateFromString:create_timeQ];
-    NSLog(@"create_timeZ:%@", create_timeZ);
-    
     return [NSString stringWithFormat:@"%@", create_timeZ];
 }
 
@@ -506,24 +518,34 @@
  */
 - (NSMutableArray *)changeImage:(NSString *)imageStrs andImageArray:(NSMutableArray *)imageArray
 {
+    NSString *sdfj  = @"";
+    
+    
+//    NSArray *arr = @[@"", @""];
+//    
+//    NSString *s = [arr componentsJoinedByString:@"|"]
+    
+    
+    
+    NSMutableArray *tempArray = [NSMutableArray array];
     NSRange range = [imageStrs rangeOfString:@","];
     if (range.length) {
-        [imageArray addObject:[imageStrs substringToIndex:range.location]];
+        [tempArray addObject:[imageStrs substringToIndex:range.location]];
         NSString *imageStr = [imageStrs substringFromIndex:(range.location + 1)];
         if (imageStr && ![imageStr isEqualToString:@""]) {
-            if (imageArray.count < 4) {
-                [self changeImage:imageStr andImageArray:imageArray];
+            if (tempArray.count < 4) {
+                [self changeImage:imageStr andImageArray:tempArray];
             }
             
         }
     } else {
         if (imageStrs && ![imageStrs isEqualToString:@""]) {
-            if (imageArray.count < 4) {
-               [imageArray addObject:imageStrs];
+            if (tempArray.count < 4) {
+               [tempArray addObject:imageStrs];
             }
         }
     }
-    return imageArray;
+    return tempArray;
 }
 
 /**
@@ -533,7 +555,7 @@
 {
     NSMutableArray *shuchuArray = [NSMutableArray array];
     for (NSString *imageDStr in imageArray) {
-       [shuchuArray addObject:[NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], imageDStr]];
+       [shuchuArray addObject:[NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], imageDStr]];
     }
     return shuchuArray;
 }
@@ -543,9 +565,58 @@
  */
 - (NSDictionary *)changeTime:(NSString *)time
 {
-    NSString *month = [[time substringFromIndex:5] substringToIndex:2];
-    NSString *day = [[time substringFromIndex:8] substringToIndex:2];
-    return @{@"month": month, @"day": day};
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate * needFormatDate = [dateFormatter dateFromString:time];
+    NSDate * nowDate = [NSDate date];
+    NSTimeInterval detaTime = [nowDate timeIntervalSinceDate:needFormatDate];
+    NSString *dateStr = @"";
+    NSString *month = @"";
+    NSString *day = @"";
+    if (detaTime <= 60*60*24) {
+        [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+        NSString * need_yMd = [dateFormatter stringFromDate:needFormatDate];
+        NSString *now_yMd = [dateFormatter stringFromDate:nowDate];
+        
+        [dateFormatter setDateFormat:@"HH:mm"];
+        if ([need_yMd isEqualToString:now_yMd]) {
+            //// 在同一天
+            dateStr = [NSString stringWithFormat:@"今天"];
+        }else{
+            ////  昨天
+            dateStr = [NSString stringWithFormat:@"昨天"];
+        }
+    } else {
+        month = [[time substringFromIndex:5] substringToIndex:2];
+        day = [[time substringFromIndex:8] substringToIndex:2];
+    }
+    
+    if ([month isEqualToString:@"01"]) {
+        month = @"一月";
+    } else if ([month isEqualToString:@"02"]) {
+        month = @"二月";
+    } else if ([month isEqualToString:@"03"]) {
+        month = @"三月";
+    } else if ([month isEqualToString:@"04"]) {
+        month = @"四月";
+    } else if ([month isEqualToString:@"05"]) {
+        month = @"五月";
+    } else if ([month isEqualToString:@"06"]) {
+        month = @"六月";
+    } else if ([month isEqualToString:@"07"]) {
+        month = @"七月";
+    } else if ([month isEqualToString:@"08"]) {
+        month = @"八月";
+    } else if ([month isEqualToString:@"09"]) {
+        month = @"九月";
+    } else if ([month isEqualToString:@"10"]) {
+        month = @"十月";
+    } else if ([month isEqualToString:@"11"]) {
+        month = @"十一月";
+    } else if ([month isEqualToString:@"12"]) {
+        month = @"十二月";
+    }
+    return @{@"month": month, @"day": day, @"dateStr": dateStr};
 }
 
 @end

@@ -20,6 +20,7 @@
 @interface XCZPublishSelectedCityView : UIView
 
 @property (nonatomic, strong) NSArray *allProvince;
+@property (nonatomic, strong) NSDictionary *currentPositioning;
 @property (nonatomic, weak) id<XCZPublishSelectedCityViewDelegate> delegate;
 
 @end

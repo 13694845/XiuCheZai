@@ -250,9 +250,6 @@
 {
     XCZPublishOrderViewController *orderVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZPublishOrderViewController"];
     int status = [[[[self.rows[indexPath.section] objectForKey:@"order"] firstObject] objectForKey:@"status"] intValue];
-    
-//    NSLog(@"orderVCorderVCstatus:%d", status);
-    
     if (status == 1) { // 整单
         orderVC.status = status;
         orderVC.order_good = [[self.rows[indexPath.section] objectForKey:@"order"] firstObject];

@@ -73,19 +73,14 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 @synthesize rows = _rows;
 @synthesize banners = _banners;
 
+
 - (void)setLoginStatu:(int)loginStatu
 {
     _loginStatu = loginStatu;
-    
-//    if (self.jumpType == ClubCircleLoginOverAddBtn) {
-//        loginStatu ? [self goLogining] : [self requestFormumNet:self.addBtn andType:self.addType];
-//    } else if (self.jumpType == ClubCircleLoginOverJumpTypeCamera) {
-//        loginStatu ? [self goLogining] : [self photograph:UIImagePickerControllerSourceTypeCamera]; // 调用拍照;
-//    } else if (self.jumpType == ClubCircleLoginOverJumpTypePhotoLibrary) {
-//        loginStatu ? [self goLogining] : [self photograph:UIImagePickerControllerSourceTypePhotoLibrary]; // 选择相册
-//    }
-    
-    if (self.jumpType == DiscoveryLoginOverJumpTypePosting) {
+
+    if (self.jumpType == ClubCircleLoginOverAddBtn) {
+                loginStatu ? [self goLogining] : [self requestFormumNet:self.addBtn andType:self.addType];
+    } else if (self.jumpType == DiscoveryLoginOverJumpTypePosting) {
         loginStatu ? [self goLogining] : [self jumpToPublishPhoneViewController]; // 跳转到发帖控制器
     } else if (self.jumpType == DiscoveryLoginOverJumpTypeDryingSingle) {
         loginStatu ? [self goLogining] : [self jumpToPublishOrdersTableViewController]; // 跳到晒单
@@ -117,6 +112,8 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
+    
+//    NSLog(@"rows:%@", rows);
     
     [self endHeaderRefresh];
     [self endFooterRefresh];
@@ -153,11 +150,12 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.tabBarController.tabBar setHidden:YES];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)assistedSetup
@@ -224,7 +222,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 }
 
 - (void)loadDataNeedsRefresh {
-//    self.currentPage = 1;
     [self requestTableViewNet];
 }
 
@@ -267,9 +264,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
                                  };
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *rows = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
-        
-//        NSLog(@"新增1:%ld", rows.count);
-//        
         NSMutableArray *rowMutables = [NSMutableArray array];
         if (self.currentPage == 1) {
             rowMutables = [NSMutableArray arrayWithArray:rows];
@@ -339,7 +333,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/CateAction.do"];
     NSDictionary *parameters = @{@"type":[NSString stringWithFormat:@"%d", type], @"forum_id": self.forum_id};
-    NSLog(@"parameters:%@", parameters);
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSString *msg = responseObject[@"msg"];
         if ([msg containsString:@"成功"]) {
@@ -401,6 +394,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     NSString *identifier;
     if (self.best == 0) { // 普通
         NSDictionary *row = self.rows[indexPath.row];
@@ -438,7 +432,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     if ([cell.reuseIdentifier isEqualToString:@"CellG"]) { // CellE CellF为成员中的Cell
         // 跳到话题详情
         XCZCircleDetailViewController *circleDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
-        
         NSString *post_clazz = self.rows[indexPath.row][@"post_clazz"];
         circleDetailVC.reuseIdentifier = [self identifier:post_clazz andRow:self.rows[indexPath.row]];
         circleDetailVC.post_id = cell.row[@"post_id"];
@@ -641,7 +634,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    
     UIImage *oImage = info[@"UIImagePickerControllerOriginalImage"];
     self.publishImage = oImage;
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -764,7 +756,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 - (UITableViewCell *)creatClubCircleViewCell:(NSString *)identifier andRow:(NSDictionary *)row andIndexPath:(NSIndexPath *)indexPath
 {
     if ([identifier isEqualToString:@"CellWZ"]) {
-        XCZCircleTableViewWenZiCell *wzCell = [self.tableView cellForRowAtIndexPath:indexPath];
+        XCZCircleTableViewWenZiCell *wzCell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
         if (!wzCell) {
             wzCell = [[XCZCircleTableViewWenZiCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
@@ -774,7 +766,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
         wzCell.delegate = self;
         return wzCell;
     } else if ([identifier isEqualToString:@"CellB"]) {
-        XCZCircleTableViewLeafletsImageCell *cellB = [self.tableView cellForRowAtIndexPath:indexPath];
+        XCZCircleTableViewLeafletsImageCell *cellB = [self.tableView dequeueReusableCellWithIdentifier:identifier];
         if (!cellB) {
             cellB = [[XCZCircleTableViewLeafletsImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }

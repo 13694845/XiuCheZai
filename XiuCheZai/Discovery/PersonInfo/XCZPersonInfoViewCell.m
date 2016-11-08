@@ -12,6 +12,8 @@
 
 @interface XCZPersonInfoViewCell()
 
+@property (weak, nonatomic) IBOutlet UILabel *dayMonthLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *monthLabel;
 @property (weak, nonatomic) IBOutlet UIView *imageBackView;
@@ -48,15 +50,15 @@
 {
     _row = row;
 
-    [self clearData];
+//    [self clearData];
     [self setupSubView];
-//    NSLog(@"内部images:%@", images);
 }
 
 - (void)clearData
 {
-//    self.dayLabel.text = @"";
-//    self.monthLabel.text = @"";
+    self.dayMonthLabel.text = @"";
+    self.dayLabel.text = @"";
+    self.monthLabel.text = @"";
     for (int i = 0; i<self.imageBackView.subviews.count; i++) {
         UIImageView *imageView = self.imageBackView.subviews[i];
         [imageView removeFromSuperview];
@@ -71,10 +73,13 @@
         self.dayLabel.text = @"";
         self.monthLabel.text = @"";
     } else {
-        self.dayLabel.text = _row[@"day"];
-        self.monthLabel.text = [NSString stringWithFormat:@"／%@", _row[@"month"]];
+        if (((NSString *)_row[@"dateStr"]).length) {
+            self.dayMonthLabel.text = _row[@"dateStr"];
+        } else {
+            self.dayLabel.text = _row[@"day"];
+            self.monthLabel.text = [NSString stringWithFormat:@"%@", _row[@"month"]];
+        }
     }
-    
     self.contentLabel.text = _row[@"content"];
     
     NSString *post_clazz = _row[@"post_clazz"];
@@ -83,7 +88,7 @@
     } else if ([post_clazz intValue] == 3) {
         NSArray *images = _row[@"images"];
         UIImageView *oneYImgView = [[UIImageView alloc] init];
-        [oneYImgView sd_setImageWithURL:[NSURL URLWithString:[images firstObject]] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [oneYImgView sd_setImageWithURL:[NSURL URLWithString:[images firstObject]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             CGFloat oneImageW = image.size.width;
             CGFloat oneImageH = image.size.height;
             //        NSLog(@"oneImageW:%f, oneImageH:%f", oneImageW, oneImageH);
@@ -101,7 +106,7 @@
                     oneImgView.frame = CGRectMake(0, 0, self.imageBackView.bounds.size.width, self.imageBackView.bounds.size.height * 0.5 - 4);
                     [self.imageBackView addSubview:oneImgView];
                     UIImageView *twoImgView = [[UIImageView alloc] init];
-                    [twoImgView sd_setImageWithURL:[NSURL URLWithString:[images lastObject]] placeholderImage:nil];
+                    [twoImgView sd_setImageWithURL:[NSURL URLWithString:[images lastObject]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
                     twoImgView.frame = CGRectMake(0, self.imageBackView.bounds.size.height * 0.5 + 4, self.imageBackView.bounds.size.width, self.imageBackView.bounds.size.height * 0.5 - 4);
                     [self.imageBackView addSubview:twoImgView];
                 } else if (oneImageW < oneImageH) {
@@ -110,7 +115,7 @@
                     oneImgView.frame = CGRectMake(0, 0, self.imageBackView.bounds.size.width * 0.5 - 4, self.imageBackView.bounds.size.height);
                     [self.imageBackView addSubview:oneImgView];
                     UIImageView *twoImgView = [[UIImageView alloc] init];
-                    [twoImgView sd_setImageWithURL:[NSURL URLWithString:[images lastObject]] placeholderImage:nil];
+                    [twoImgView sd_setImageWithURL:[NSURL URLWithString:[images lastObject]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
                     twoImgView.frame = CGRectMake(self.imageBackView.bounds.size.height * 0.5 + 4, 0, self.imageBackView.bounds.size.width * 0.5 - 4, self.imageBackView.bounds.size.height);
                     [self.imageBackView addSubview:twoImgView];
                 }
@@ -122,7 +127,7 @@
                     [self.imageBackView addSubview:oneImgView];
                     for (int i = 0; i<2; i++) {
                         UIImageView *imgView = [[UIImageView alloc] init];
-                        [imgView sd_setImageWithURL:[NSURL URLWithString:images[i+1]] placeholderImage:nil];
+                        [imgView sd_setImageWithURL:[NSURL URLWithString:images[i+1]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
                         CGFloat imgViewW = self.imageBackView.bounds.size.width * 0.5 - 4;
                         imgView.frame = CGRectMake(i * (imgViewW + 8), self.imageBackView.bounds.size.height * 0.5 + 4, imgViewW, imgViewW);
                         [self.imageBackView addSubview:imgView];
@@ -134,7 +139,7 @@
                     [self.imageBackView addSubview:oneImgView];
                     for (int i = 0; i<2; i++) {
                         UIImageView *imgView = [[UIImageView alloc] init];
-                        [imgView sd_setImageWithURL:[NSURL URLWithString:images[i+1]] placeholderImage:nil];
+                        [imgView sd_setImageWithURL:[NSURL URLWithString:images[i+1]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
                         CGFloat imgViewW = self.imageBackView.bounds.size.height * 0.5 - 4;
                         imgView.frame = CGRectMake(self.imageBackView.bounds.size.height * 0.5 + 4, i * (imgViewW + 8), imgViewW, imgViewW);
                         [self.imageBackView addSubview:imgView];

@@ -200,7 +200,7 @@
         share_image = [NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], self.row[@"share_image"]];
     }
     
-    [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:share_image] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:share_image] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
        
         CGFloat imageViewW = 120;
         CGFloat imageViewH = 0.0;

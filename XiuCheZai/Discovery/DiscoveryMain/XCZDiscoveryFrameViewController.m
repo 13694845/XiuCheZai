@@ -25,7 +25,9 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryContentTransition) {
 
 typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     DiscoveryLoginOverJumpTypePosting          = 1 << 0,
-    DiscoveryLoginOverJumpTypeDryingSingle     = 1 << 1
+    DiscoveryLoginOverJumpTypeDryingSingle     = 1 << 1,
+    DiscoveryLoginOverJumpTypeMessage          = 1 << 2,
+    DiscoveryLoginOverJumpTypeStart            = 1 << 3
 };
 
 @interface XCZDiscoveryFrameViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
@@ -34,7 +36,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 @property (assign, nonatomic) int currentIndex;
 @property (nonatomic, strong) UIImage *publishImage;
-@property (assign, nonatomic) int loginStatu; // 登录状态, 0为已经登录, 1为未登录
 @property (assign, nonatomic) DiscoveryLoginOverJumpType jumpType;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 
@@ -49,17 +50,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
                                               [_manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [XCZConfig version]] forHTTPHeaderField:@"User-Agent"];
     }
     return _manager;
-}
-
-- (void)setLoginStatu:(int)loginStatu
-{
-    _loginStatu = loginStatu;
-    
-    if (self.jumpType == DiscoveryLoginOverJumpTypePosting) {
-        loginStatu ? [self goLogining] : [self jumpToPublishPhoneViewController]; // 跳转到发帖控制器
-    } else if (self.jumpType == DiscoveryLoginOverJumpTypeDryingSingle) {
-        loginStatu ? [self goLogining] : [self jumpToPublishOrdersTableViewController]; // 跳到晒单
-    }
 }
 
 - (void)viewDidLoad {
@@ -79,13 +69,17 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     UIViewController *viewController = self.childViewControllers.firstObject;
     viewController.view.frame = self.contentView.bounds;
     [self.contentView addSubview:viewController.view];
+    self.jumpType = DiscoveryLoginOverJumpTypeStart;
+    [self requestLoginDetection];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    self.navigationController.navigationBar.translucent = NO;
-    self.tabBarController.tabBar.hidden = NO;
+//    self.navigationController.navigationBar.translucent = NO;
+    [self.tabBarController.tabBar setHidden:NO];
+    [self.tabBarController setHidesBottomBarWhenPushed:YES];
+//    [self.navigationController setHidesBottomBarWhenPushed:YES];
 }
 
 - (void)switchContent:(id)sender {
@@ -134,8 +128,12 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
  *  nav右边消息图标被点击
  */
 - (IBAction)messageBtnDidClick:(id)sender {
-    XCZMessageViewController *messageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZMessageViewController"];
-    [self.navigationController pushViewController:messageVC animated:YES];
+    int loginStatu = [[[NSUserDefaults standardUserDefaults] objectForKey:@"discoverLoginStatu"] intValue];
+    if (loginStatu) {
+        [self goLogining];
+    } else {
+        [self jumpToMessageViewController];
+    }
 }
 
 - (IBAction)addBtnDidClick:(id)sender {
@@ -143,12 +141,20 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     UIAlertAction *oneAction = [UIAlertAction actionWithTitle:@"发帖" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.jumpType = DiscoveryLoginOverJumpTypePosting;
-        [self requestLoginDetection];
+         int loginStatu = [[[NSUserDefaults standardUserDefaults] objectForKey:@"discoverLoginStatu"] intValue];
+        if (loginStatu) {
+            [self goLogining];
+        } else {
+            [self jumpToPublishPhoneViewController]; // 跳转到发帖控制器
+        }
     }];
     UIAlertAction *twoAction = [UIAlertAction actionWithTitle:@"晒单" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.jumpType = DiscoveryLoginOverJumpTypeDryingSingle;
-        [self requestLoginDetection];
+        int loginStatu = [[[NSUserDefaults standardUserDefaults] objectForKey:@"discoverLoginStatu"] intValue];
+        if (loginStatu) {
+            [self goLogining];
+        } else {
+            [self jumpToPublishOrdersTableViewController];
+        }
     }];
     
     [alertCtr addAction:cancelAction];
@@ -163,7 +169,9 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     NSDictionary *parameters = nil;
     [self.manager POST:urlString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        self.loginStatu = [responseObject[@"statu"] intValue];
+        int loginStatu = [responseObject[@"statu"] intValue];
+        [[NSUserDefaults standardUserDefaults] setObject:@(loginStatu) forKey:@"discoverLoginStatu"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@", error);
     }];
@@ -196,6 +204,12 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 {
     XCZPublishOrdersTableViewController *orderTableVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZPublishOrdersTableViewController"];
     [self.navigationController pushViewController:orderTableVC animated:YES];
+}
+
+- (void)jumpToMessageViewController
+{
+    XCZMessageViewController *messageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZMessageViewController"];
+    [self.navigationController pushViewController:messageVC animated:YES];
 }
 
 

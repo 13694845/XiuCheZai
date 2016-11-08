@@ -9,6 +9,7 @@
 #import "XCZCirclePostDetailViewController.h"
 #import "XCZConfig.h"
 #import "XCZCirclePostDetailViewCell.h"
+#import "XCZPersonWebViewController.h"
 
 @interface XCZCirclePostDetailViewController()<UITableViewDataSource, UITableViewDelegate>
 
@@ -40,6 +41,7 @@
 {
     [super viewDidLoad];
     
+    self.title = @"订单详情";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
@@ -58,9 +60,6 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/PostDetailAction.do"];
     NSDictionary *parameters = @{@"type": @"4", @"post_id": self.post_id, @"goods_id": self.goods_id};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-//        NSLog(@)
-        
         self.rows = [responseObject objectForKey:@"data"];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
@@ -78,6 +77,27 @@
     XCZCirclePostDetailViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"CellA" forIndexPath:indexPath];
     cell.order_good = self.rows[indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self goProductDetails:self.rows[indexPath.row][@"goods_id"]];
+}
+
+- (void)goProductDetails:(NSString *)goods_id
+{
+#warning 外层需
+        NSString *overUrlStrPin = [NSString stringWithFormat:@"/detail/index.html?goodsId=%@", goods_id];
+        NSString *overUrlStr = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], overUrlStrPin];
+        [self launchOuterWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [XCZConfig baseURL], @"/Login/login/login.html?url=", overUrlStr]];
+}
+
+- (void)launchOuterWebViewWithURLString:(NSString *)urlString {
+    WebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WebViewController"];
+    webViewController.url = [NSURL URLWithString:urlString];
+    webViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 

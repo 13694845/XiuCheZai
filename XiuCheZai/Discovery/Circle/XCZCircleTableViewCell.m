@@ -79,6 +79,8 @@
 {
     _row = row;
     
+    NSLog(@"最新:%@", row);
+    
     NSString *avatar;
     if ([row[@"avatar"] containsString:@"http"]) {
         avatar = row[@"avatar"];

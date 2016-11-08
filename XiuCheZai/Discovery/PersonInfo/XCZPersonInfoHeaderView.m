@@ -294,7 +294,7 @@
     [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], user[@"brand_logo"]]] placeholderImage:nil];
     
     if (!(((NSString *)user[@"car_image"]).length)) {
-        self.typeLabel.text = @"您还没添加任何车型哦,点击立即去添加!";
+        self.typeLabel.text = @"这家伙很懒！未留下车型相关信息！";
     } else {
         self.typeLabel.text = user[@"car_name"];
     }

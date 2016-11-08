@@ -83,10 +83,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    [self.tabBarController.tabBar setHidden:NO];
     self.navigationController.navigationBar.translucent = NO;
-   
-    
-//     NSLog(@"view:%@", self.);
 }
 
 - (void)loadData {

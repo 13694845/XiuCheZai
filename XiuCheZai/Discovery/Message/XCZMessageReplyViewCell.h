@@ -14,7 +14,7 @@
 @optional
 - (void)replyViewCell:(XCZMessageReplyViewCell *)replyViewCell replyViewDidClick:(NSDictionary *)row;
 - (void)replyViewCell:(XCZMessageReplyViewCell *)replyViewCell brandsViewDidClick:(NSString *)user_id;
-
+- (void)replyViewCell:(XCZMessageReplyViewCell *)replyViewCell brandsHuifuBtnDidClick:(NSDictionary *)row;
 @end
 
 

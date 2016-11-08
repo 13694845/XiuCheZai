@@ -104,12 +104,24 @@
 #pragma mark - 通知处理
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect alertViewRect = self.alertView.frame;
-    alertViewRect.origin.y = self.bounds.size.height - keyboardFrame.size.height - self.alertView.bounds.size.height;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.alertView.frame = alertViewRect;
-    }];
+//    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//    CGRect alertViewRect = self.alertView.frame;
+//    alertViewRect.origin.y = self.bounds.size.height - keyboardFrame.size.height - self.alertView.bounds.size.height;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.alertView.frame = alertViewRect;
+//    }];
+//    
+    CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
+    CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    // 第三方键盘回调三次问题，监听仅执行最后一次
+    if(begin.size.height>0 && (begin.origin.y-end.origin.y>0)){
+        CGRect keyboardFrame = [notification.userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
+        CGRect alertViewRect = self.alertView.frame;
+        alertViewRect.origin.y = self.bounds.size.height - keyboardFrame.size.height - self.alertView.bounds.size.height;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.alertView.frame = alertViewRect;
+        }];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification

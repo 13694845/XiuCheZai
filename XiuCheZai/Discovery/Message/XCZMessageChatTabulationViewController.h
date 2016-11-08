@@ -5,7 +5,7 @@
 //  Created by 企商汇 on 16/10/30.
 //  Copyright © 2016年 QSH. All rights reserved.
 //
-//  列表
+//  聊天列表
 //
 
 #import "XCZDiscoveryPageViewController.h"

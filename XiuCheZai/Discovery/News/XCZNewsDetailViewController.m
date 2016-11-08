@@ -215,6 +215,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
+    [self.tabBarController.tabBar setHidden:YES];
     [self loadData];
 }
 
@@ -432,10 +433,12 @@
             [MBProgressHUD ZHMShowSuccess:@"点赞成功"];
             self.praiseBtn.selected = YES;
             self.bottomPraiseType = 3; // 之前已经被点赞，之后要去取消点赞
+            [self loadData];
         } else {
             [MBProgressHUD ZHMShowSuccess:@"取消点赞成功"];
             self.praiseBtn.selected = NO;
             self.bottomPraiseType = 2; // 之前没点赞，之后要去点赞
+            [self loadData];
         }
 //        [self bottomPraiseBtnSetup];
         
@@ -646,7 +649,6 @@
 
 - (void)creatMoreCommentView
 {
-//    NSLog(@"artDictartDict:%@", self.artDict);
     for (NSDictionary *remark in self.comments) {
         XCZNewDetailRemarkRow *remarkRow = [[XCZNewDetailRemarkRow alloc] init];
         remarkRow.fatherWidth = self.remarkView.bounds.size.width;
@@ -725,6 +727,7 @@
     for (NSDictionary *comment in comments) {
         NSMutableDictionary *commentMutableDict = [comment mutableCopy];
         long long floor = [[commentMutableDict objectForKey:@"floor"] longLongValue];
+    
         NSString *title;
         if (floor == 1) {
             title = @"沙发";
@@ -883,17 +886,12 @@
     writeView.delegate = self;
     [self.view addSubview:writeView];
     self.writeView = writeView;
-    
-//    NSLog(@"来到了哈色:%@", writeView);
 }
 
 - (void)keyboardWillHideNot:(NSNotification *)notification
 {
     [self.writeView removeFromSuperview];
     self.writeView = nil;
-    
-//    NSLog(@"关闭了:%@", self.writeView);
-    
     [self createTextFieldZheGaiView];
 }
 

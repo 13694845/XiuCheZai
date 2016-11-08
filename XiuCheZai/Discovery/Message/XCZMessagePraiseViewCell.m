@@ -18,7 +18,6 @@
 @property (weak, nonatomic) UILabel *headerNameLabel;
 @property (weak, nonatomic) UIImageView *headerIconView;
 @property (weak, nonatomic) IBOutlet UILabel *brandsSuosuLabel;
-@property (weak, nonatomic) IBOutlet UIButton *brandsHuifuBtn;
 
 @property (weak, nonatomic) IBOutlet UIView *praiseView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -48,11 +47,6 @@
     UIImage *image = [UIImage imageNamed:@"bbs_dongDuiHuaKuang"];
     self.contentBackImageView.image = [image stretchableImageWithLeftCapWidth:image.size.width * 0.5 topCapHeight:image.size.height * 0.5];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    self.brandsHuifuBtn.layer.borderColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0].CGColor;
-    self.brandsHuifuBtn.layer.borderWidth = 0.5;
-    self.brandsHuifuBtn.layer.cornerRadius = 5.0;
-    self.brandsHuifuBtn.layer.masksToBounds = YES;
     
     self.brandsImageView.layer.cornerRadius = self.brandsImageView.bounds.size.height * 0.5;
     self.brandsImageView.layer.masksToBounds = YES;

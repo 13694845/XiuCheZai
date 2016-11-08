@@ -24,6 +24,7 @@
 
 @property (nonatomic, assign) int type; // 0代表资讯详情传入, 1代表资讯回复楼层 某一层详细传入
 @property (nonatomic, assign) CGFloat fatherWidth;
+@property (nonatomic, copy) NSString *louzhuId;
 @property (nonatomic, copy) NSString *floor;
 @property (nonatomic, copy) NSDictionary *remark;
 @property (nonatomic, assign) CGFloat height;

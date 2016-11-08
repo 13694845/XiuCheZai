@@ -241,7 +241,10 @@
         personInfoImageVC.row = self.selectRow;
         [self.navigationController pushViewController:personInfoImageVC animated:YES];
     } else if ([post_clazz intValue] == 4) {
-        
+        XCZCircleDetailViewController *newsDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
+        newsDetailViewController.reuseIdentifier = @"CellC";
+        newsDetailViewController.post_id = [self.selectRow objectForKey:@"post_id"];
+        [self.navigationController pushViewController:newsDetailViewController animated:YES];
     }
 }
 
@@ -303,10 +306,60 @@
  */
 - (NSDictionary *)changeTime:(NSString *)time
 {
-    NSString *month = [[time substringFromIndex:5] substringToIndex:2];
-    NSString *day = [[time substringFromIndex:8] substringToIndex:2];
-    return @{@"month": month, @"day": day};
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate * needFormatDate = [dateFormatter dateFromString:time];
+    NSDate * nowDate = [NSDate date];
+    NSTimeInterval detaTime = [nowDate timeIntervalSinceDate:needFormatDate];
+    NSString *dateStr = @"";
+    NSString *month = @"";
+    NSString *day = @"";
+    if (detaTime <= 60*60*24) {
+        [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+        NSString * need_yMd = [dateFormatter stringFromDate:needFormatDate];
+        NSString *now_yMd = [dateFormatter stringFromDate:nowDate];
+        
+        [dateFormatter setDateFormat:@"HH:mm"];
+        if ([need_yMd isEqualToString:now_yMd]) {
+            //// 在同一天
+            dateStr = [NSString stringWithFormat:@"今天"];
+        }else{
+            ////  昨天
+            dateStr = [NSString stringWithFormat:@"昨天"];
+        }
+    } else {
+        month = [[time substringFromIndex:5] substringToIndex:2];
+        day = [[time substringFromIndex:8] substringToIndex:2];
+    }
+    
+    if ([month isEqualToString:@"01"]) {
+        month = @"一月";
+    } else if ([month isEqualToString:@"02"]) {
+        month = @"二月";
+    } else if ([month isEqualToString:@"03"]) {
+        month = @"三月";
+    } else if ([month isEqualToString:@"04"]) {
+        month = @"四月";
+    } else if ([month isEqualToString:@"05"]) {
+        month = @"五月";
+    } else if ([month isEqualToString:@"06"]) {
+        month = @"六月";
+    } else if ([month isEqualToString:@"07"]) {
+        month = @"七月";
+    } else if ([month isEqualToString:@"08"]) {
+        month = @"八月";
+    } else if ([month isEqualToString:@"09"]) {
+        month = @"九月";
+    } else if ([month isEqualToString:@"10"]) {
+        month = @"十月";
+    } else if ([month isEqualToString:@"11"]) {
+        month = @"十一月";
+    } else if ([month isEqualToString:@"12"]) {
+        month = @"十二月";
+    }
+    return @{@"month": month, @"day": day, @"dateStr": dateStr};
 }
+
 
 
 @end

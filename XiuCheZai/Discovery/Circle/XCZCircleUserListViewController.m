@@ -45,6 +45,7 @@
     _rows = rows;
     
     if (_rows.count) {
+        self.currentPage++;
         [self updateTableView];
     }
 }
@@ -65,6 +66,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.currentPage++;
     
     [self loadData];
 }
@@ -85,7 +87,6 @@
 }
 
 - (void)loadDataNeedsRefresh {
-    self.currentPage = 1;
     [self requestTableViewNet];
 }
 
@@ -119,9 +120,11 @@
             self.rows = [[self.rows arrayByAddingObjectsFromArray:rows] mutableCopy];
         }
         [self endHeaderRefresh];
+        [self endFooterRefresh];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         //        NSLog(@"error:%@", error);
         [self endHeaderRefresh];
+        [self endFooterRefresh];
     }];
 }
 

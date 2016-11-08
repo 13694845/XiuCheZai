@@ -62,7 +62,7 @@
     self.brand_logoImaegView.layer.cornerRadius = self.brand_logoImaegView.bounds.size.height * 0.5;
     self.brand_logoImaegView.layer.masksToBounds = YES;
     
-    NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:row[@"province_id"] cityId:row[@"city_id"] andTownId:row[@"area_id"]];
+    NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:@"" cityId:row[@"city_id"] andTownId:row[@"area_id"]];
     if (!addr.length) {
         self.siteCircleLabel.text = ((NSString *)row[@"forum_name"]).length ? [NSString stringWithFormat:@"%@", row[@"forum_name"]] : @"";
     } else {

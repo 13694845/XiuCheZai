@@ -12,6 +12,8 @@
 #import "XCZMessageSearchResultClubCell.h"
 #import "XCZMessageSearchResultTopicCell.h"
 #import "MBProgressHUD+ZHM.h"
+#import "XCZClubCircleViewController.h"
+#import "XCZCircleDetailViewController.h"
 
 @interface XCZMessageSearchViewController()<UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -25,6 +27,10 @@
 @property (assign, nonatomic) int currentForumPage;
 @property (assign, nonatomic) int currentPostPage;
 
+@property (nonatomic, strong) NSArray *banners;
+@property (assign, nonatomic) NSInteger sectionOneRow;
+@property (assign, nonatomic) NSInteger sectionTwoRow;
+
 @end
 
 @implementation XCZMessageSearchViewController
@@ -32,6 +38,7 @@
 @synthesize searchResults = _searchResults;
 @synthesize forum = _forum;
 @synthesize post = _post;
+@synthesize banners = _banners;
 
 - (void)setSearchResults:(NSArray *)searchResults
 {
@@ -68,6 +75,22 @@
     }
 }
 
+- (void)setBanners:(NSArray *)banners
+{
+    _banners = banners;
+    
+    int same = 0;
+    for (NSDictionary *dict in banners) {
+        if ([[dict objectForKey:@"forum_id"] isEqualToString:self.forum[self.sectionOneRow][@"forum_id"]]) {
+            same++;
+        }
+    }
+    XCZClubCircleViewController *circleVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZClubCircleViewController"];
+    circleVC.hasJoin = same ? YES : NO ;
+    circleVC.forum_id = self.forum[self.sectionOneRow][@"forum_id"];
+    [self.navigationController pushViewController:circleVC animated:YES];
+}
+
 - (NSMutableArray *)forum
 {
     if (!_forum) {
@@ -92,6 +115,14 @@
     return _searchResults;
 }
 
+- (NSArray *)banners
+{
+    if (!_banners) {
+        _banners = [NSArray array];
+    }
+    return _banners;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -105,7 +136,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.tabBarController.tabBar setHidden:YES];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
 }
 
@@ -131,7 +163,7 @@
     [self.tableView removeFromSuperview];
     self.tableView = nil;
     [self.searchBar resignFirstResponder];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)sectionFooterViewDidClick:(UIGestureRecognizer *)grz
@@ -181,6 +213,20 @@
             } else {
                 [MBProgressHUD ZHMShowError:@"暂无更多相关话题"];
             }
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+}
+
+- (void)requestHeaderViewNet
+{
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/CateAction.do"];
+    NSDictionary *parameters = @{@"type":@"0"};
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"msgmsgmsg:%@", responseObject[@"msg"]);
+        NSString *msg = responseObject[@"msg"];
+        if ([msg containsString:@"未登录"]) {
+        } else { // 已登录
+            self.banners = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
@@ -301,6 +347,24 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 38;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self.view endEditing:YES];
+    if (indexPath.section == 0) {
+        self.sectionOneRow = indexPath.row;
+        [self requestHeaderViewNet];
+    } else if (indexPath.section == 1) {
+        self.sectionTwoRow = indexPath.row;
+        
+        XCZCircleDetailViewController *circleDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
+        circleDetailVC.reuseIdentifier = @"CellC";
+        circleDetailVC.post_id =  [self.post[indexPath.row] objectForKey:@"post_id"];
+        [self.navigationController pushViewController:circleDetailVC animated:YES];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

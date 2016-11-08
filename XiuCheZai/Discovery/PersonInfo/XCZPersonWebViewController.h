@@ -10,6 +10,10 @@
 
 @interface XCZPersonWebViewController : WebViewController
 
+/**
+ *  1.XCZDiscoveryFrameViewController登录
+ */
+@property (nonatomic, assign) int type;
 
 //@property (nonatomic, copy) NSString *urlString;
 

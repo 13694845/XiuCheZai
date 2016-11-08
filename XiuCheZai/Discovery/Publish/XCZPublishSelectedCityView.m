@@ -66,6 +66,34 @@
 
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
+    
+    if (self.currentPositioning) {
+        NSInteger oneRow = 0;
+        NSInteger twoRow = 0;
+        NSInteger threeRow = 0;
+        for (int i = 0; i<allProvince.count; i++) {
+            if ([[allProvince[i] objectForKey:@"number"] isEqualToString:self.currentPositioning[@"provinceid"]]) {
+                NSArray *cities = [XCZCityManager citiesForProvinceId:self.currentPositioning[@"provinceid"]];
+                oneRow = i;
+                for (int j = 0; j<cities.count; j++) {
+                    if ([[cities[j] objectForKey:@"number"] isEqualToString:self.currentPositioning[@"cityid"]]) {
+                        NSArray *towns = [XCZCityManager townNameForCityId:self.currentPositioning[@"cityid"]];
+                        twoRow = j;
+                        for (int k = 0; k<towns.count; k++) {
+                            if ([[towns[k] objectForKey:@"number"] isEqualToString:self.currentPositioning[@"areaid"]]) {
+                                threeRow = k;
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+        [self.pickerView selectRow:oneRow inComponent:0 animated:NO];
+        [self.pickerView selectRow:twoRow inComponent:1 animated:NO];
+        [self.pickerView selectRow:threeRow inComponent:2 animated:NO];
+    }
+    
     [self.pickerView reloadAllComponents];
 }
 
@@ -121,6 +149,9 @@
     if (component == 0) {
         [pickerView reloadComponent:1];
     } else if (component == 1) {
+        [pickerView reloadComponent:2];
+    } else {
+        [pickerView reloadComponent:1];
         [pickerView reloadComponent:2];
     }
 }

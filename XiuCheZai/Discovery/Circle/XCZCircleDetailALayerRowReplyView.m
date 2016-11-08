@@ -33,14 +33,11 @@
     self.height = loginImageViewY + loginImageViewH + XCZNewDetailRemarkRowMarginY;
     
     UILabel *login_nameLabel = [[UILabel alloc] init];
-    NSString *huifuNameText = ((NSString *)_nameDict[@"nick"]).length ? _nameDict[@"nick"]: _nameDict[@"login_name"];
     NSString *nameText = ((NSString *)_reply_info[@"nick"]).length ? _reply_info[@"nick"]: _reply_info[@"login_name"];
     login_nameLabel.font = [UIFont systemFontOfSize:12];
     login_nameLabel.textColor = [UIColor colorWithRed:53/255.0 green:82/255.0 blue:176/255.0 alpha:1.0];
     [self addSubview:login_nameLabel];
     
-    CGFloat dangeKonggeLength = [self oneKonggeLength];
-    int konggeNumber;
     if ([self.nameDict[@"user_id"] isEqualToString:self.reply_info[@"follow_user_id"]]) { // 为楼主
         login_nameLabel.text = [NSString stringWithFormat:@"%@        ", nameText];
         CGSize login_nameLabelSize = [nameText boundingRectWithSize:CGSizeMake(_fatherWidth * 0.5, 30) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : login_nameLabel.font} context:nil].size;

@@ -60,6 +60,7 @@
     
     [self.brandsView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(brandsViewDidClick)]];
     [self.replyView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(replyViewViewDidClick)]];
+    [self.brandsHuifuBtn addTarget:self action:@selector(brandsHuifuBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -131,6 +132,13 @@
 {
     if ([self.delegate respondsToSelector:@selector(replyViewCell:replyViewDidClick:)]) {
         [self.delegate replyViewCell:self replyViewDidClick:self.row];
+    }
+}
+
+- (void)brandsHuifuBtnDidClick
+{
+    if ([self.delegate respondsToSelector:@selector(replyViewCell:brandsHuifuBtnDidClick:)]) {
+        [self.delegate replyViewCell:self brandsHuifuBtnDidClick:self.row];
     }
 }
 

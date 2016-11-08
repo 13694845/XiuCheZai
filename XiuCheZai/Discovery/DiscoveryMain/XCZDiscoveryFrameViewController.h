@@ -10,4 +10,5 @@
 
 @interface XCZDiscoveryFrameViewController : UIViewController
 
+
 @end

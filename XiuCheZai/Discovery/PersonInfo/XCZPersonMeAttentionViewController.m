@@ -28,103 +28,7 @@
 
 @implementation XCZPersonMeAttentionViewController
 
-
 @synthesize rows = _rows;
-
-
-
-- (NSArray *)zeroArray
-{
-    if (!_zeroArray) {
-        _zeroArray = @[
-                       @{
-                           @"taskId" : @"4599",
-                           @"rows" : @[
-                                   @{
-                                       @"user_id":@"348",
-                                       @"nick":@"",
-                                       @"brand_logo":@"",
-                                       @"province_id":@"",
-                                       @"city_id":@"",
-                                       @"area_id":@"",
-                                       @"forum_name":@""
-                                       },
-                                   @{
-                                       @"user_id":@"417",
-                                       @"nick":@"�的慌",
-                                       @"brand_logo":@"",
-                                       @"province_id":@"330000",
-                                       @"city_id":@"331000",
-                                       @"area_id":@"331002",
-                                       @"forum_name":@""
-                                       },
-                                   @{
-                                       @"user_id":@"456",
-                                       @"nick":@"",
-                                       @"brand_logo":@"",
-                                       @"province_id":@"310000",
-                                       @"city_id":@"310100",
-                                       @"area_id":@"310105",
-                                       @"forum_name":@""
-                                       },
-                                   @{
-                                       @"user_id":@"417",
-                                       @"nick":@"�的慌",
-                                       @"brand_logo":@"",
-                                       @"province_id":@"330000",
-                                       @"city_id":@"331000",
-                                       @"area_id":@"331002",
-                                       @"forum_name":@""
-                                       },
-                                   @{
-                                       @"user_id":@"456",
-                                       @"nick":@"",
-                                       @"brand_logo":@"",
-                                       @"province_id":@"310000",
-                                       @"city_id":@"310100",
-                                       @"area_id":@"310105",
-                                       @"forum_name":@""
-                                       }
-                                     ],
-                       },
-                       
-                       @{
-                           @"taskId" : @"4600",
-                           @"rows" : @[
-                                   @{
-                                       @"user_id":@"348",
-                                       @"nick":@"",
-                                       @"brand_logo":@"",
-                                       @"province_id":@"",
-                                       @"city_id":@"",
-                                       @"area_id":@"",
-                                       @"forum_name":@""
-                                       },
-                                   @{
-                                       @"user_id":@"417",
-                                       @"nick":@"�的慌",
-                                       @"brand_logo":@"",
-                                       @"province_id":@"330000",
-                                       @"city_id":@"331000",
-                                       @"area_id":@"331002",
-                                       @"forum_name":@""
-                                       },
-                                   @{
-                                       @"user_id":@"456",
-                                       @"nick":@"",
-                                       @"brand_logo":@"",
-                                       @"province_id":@"310000",
-                                       @"city_id":@"310100",
-                                       @"area_id":@"310105",
-                                       @"forum_name":@""
-                                       }
-                                   ],
-                           },
-                        ];
-        
-    }
-    return _zeroArray;
-}
 
 - (void)setLoginUser_id:(NSString *)loginUser_id
 {
@@ -134,6 +38,7 @@
 
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
+
     [self updateTableView];
 }
 
@@ -161,6 +66,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.tabBarController.tabBar setHidden:YES];
 }
 
 - (void)loadData {
@@ -173,7 +79,6 @@
 }
 
 - (void)loadDataNeedsRefresh {
-    self.currentPage = 1;
     [self requestTableViewNet];
 }
 
@@ -207,20 +112,17 @@
     }
     NSDictionary *parameters = @{@"type":[NSString stringWithFormat:@"%d", 3],
                                  @"bbs_user_id": self.bbs_user_id,
-                                 @"page":[NSString stringWithFormat:@"%d", self.currentPage],
-                                 @"pagesize": [NSString stringWithFormat:@"%d", 10]};
+                               };
+    
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *rows = [responseObject objectForKey:@"data"];
-        rows = [self organizationRows:rows]; // 处理数据并倒序
-        if (self.currentPage == 1) {
-            self.rows = [NSMutableArray arrayWithArray:rows];
-        } else {
-            self.rows = [[self.rows arrayByAddingObjectsFromArray:rows] mutableCopy];
-        }
+        self.rows = [NSMutableArray arrayWithArray:[self organizationRows:rows]];
         [self endHeaderRefresh];
+        [self endFooterRefresh];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         //        NSLog(@"error:%@", error);
         [self endHeaderRefresh];
+        [self endFooterRefresh];
     }];
 }
 
@@ -275,8 +177,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSDictionary *dict = self.rows[section];
     NSArray *attentions = [dict objectForKey:@"attentions"];
-//    NSLog(@"attentions:%@", attentions);
-    
     return attentions.count;
 }
 
@@ -302,13 +202,25 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-     NSDictionary *dict = self.rows[section];
-    return dict[@"title"];
+    NSDictionary *dict = self.rows[section];
+    NSArray *attentions = dict[@"attentions"];
+    if (!attentions.count) {
+        return @"";
+    } else {
+        NSDictionary *dict = self.rows[section];
+        return dict[@"title"];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    NSDictionary *dict = self.rows[section];
+    NSArray *attentions = dict[@"attentions"];
+    if (!attentions.count) {
+        return 0.01;
+    } else {
+        return 30;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -345,7 +257,6 @@
         }
     }
     if (clazzs.count) {
-        NSLog(@"来到了阿斯顿会111");
         [self requestAttionServlet:1 andUser_id:user_id];
     }
 
@@ -492,12 +403,12 @@
     }
     
     if (scrollView.contentOffset.y > 0) { // 上拉加载更多
-        CGFloat bottomY = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.bounds.size.height);
-        if (bottomY > 75) {
-            [self morePullUpRefreshControl:scrollView];
-            [self stopFooterScroll:scrollView];
-            [self startFooterRefresh:scrollView];
-        }
+//        CGFloat bottomY = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.bounds.size.height);
+//        if (bottomY > 75) {
+//            [self morePullUpRefreshControl:scrollView];
+//            [self stopFooterScroll:scrollView];
+//            [self startFooterRefresh:scrollView];
+//        }
     }
 }
 

@@ -34,7 +34,6 @@
         [dateFormatter setDateFormat:formate];
         
         NSDate * nowDate = [NSDate date];
-        
         //  将需要转换的时间转换成 NSDate 对象
         NSDate * needFormatDate = [dateFormatter dateFromString:dateString];
         //  取当前时间和转换时间两个日期对象的时间间隔

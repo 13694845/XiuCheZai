@@ -199,12 +199,13 @@
 - (void)rightBtnDidClick
 {
     XCZMessageSearchViewController *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZMessageSearchViewController"];
-    [self.navigationController presentViewController:searchVC animated:YES completion:nil];
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+     self.navigationController.navigationBar.translucent = NO;
     self.tabBarController.tabBar.hidden = YES;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self requestLoginDetection];
@@ -299,9 +300,6 @@
             [self.navigationController pushViewController:attentionMeVC animated:YES];
         }
     } else if (otherBtn.tag == 2) { // 已点赞按钮被点击 (已点赞)
-#warning 点赞后台说暂时做不了
-//        XCZPersonHasPraiseViewController *hasPraiseVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZPersonHasPraiseViewController"];
-//        [self.navigationController pushViewController:hasPraiseVC animated:YES];
     } else if (otherBtn.tag == 3) { // TA关注的按钮被点击
         if ([otherBtn.valueLabel.text integerValue]) {
             XCZPersonMeAttentionViewController *meAttentionVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZPersonMeAttentionViewController"];
@@ -384,6 +382,7 @@
 
 - (void)launchWebViewWithURLString:(NSString *)urlString {
     XCZPersonWebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZPersonWebViewController"];
+    webViewController.type = 1;
     webViewController.url = [NSURL URLWithString:urlString];
     webViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webViewController animated:YES];

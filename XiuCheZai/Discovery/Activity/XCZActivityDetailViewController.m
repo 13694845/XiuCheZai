@@ -115,7 +115,7 @@
                                @"type" : [NSString stringWithFormat:@"%d", self.bottomPraiseType],
                                @"posts_clazz" : @"1",
                                @"post_id" : self.post_id,
-                               @"host" : self.artDict[@"post_id"]
+                               @"host" : self.tieziUser_id
                                };
         loginStatu ? [self goLogining] : [self requestBottomPraise:dict];
     } else if (self.goType == 8) { // 删除按钮被点击
@@ -358,7 +358,7 @@
         //        [self endHeaderRefresh];
     }];
 }
-
+//@"host" : self.tieziUser_id
 - (void)requestReplyPost:(NSDictionary *)dict
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ReplyPostAction.do"];
@@ -418,6 +418,8 @@
             [self goLogining];
         } else if ([responseObject[@"error"] intValue] == 201) {
             self.praiseBtn.selected = YES;
+            [MBProgressHUD ZHMShowSuccess:@"操作成功!"];
+            [self loadData];
         } else if ([responseObject[@"error"] intValue] == 333) {
             [MBProgressHUD ZHMShowError:@"您已经点过赞了"];
         }

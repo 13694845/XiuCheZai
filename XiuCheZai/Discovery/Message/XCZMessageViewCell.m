@@ -32,7 +32,8 @@
         self.iconView = iconView;
         UILabel *numLabel = [[UILabel alloc] init];
         numLabel.textAlignment = NSTextAlignmentCenter;
-        numLabel.backgroundColor = [UIColor colorWithRed:231/255.0 green:31/255.0 blue:25/255.0 alpha:1.0];
+//        numLabel.backgroundColor = [UIColor colorWithRed:231/255.0 green:31/255.0 blue:25/255.0 alpha:1.0];
+        numLabel.backgroundColor = [UIColor clearColor];
         numLabel.textColor = [UIColor whiteColor];
         numLabel.font = [UIFont systemFontOfSize:10];
         [iconView addSubview:numLabel];
@@ -114,7 +115,8 @@
 
 - (void)setupNumLabelFrame:(int)num
 {
-    self.numLabel.text = [NSString stringWithFormat:@"%d", num];
+//    self.numLabel.text = [NSString stringWithFormat:@"%d", num];
+    self.numLabel.text = @"";
     CGSize numLabelSize = [self.numLabel.text boundingRectWithSize:CGSizeMake(self.iconView.bounds.size.width * 0.5, 24) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.numLabel.font} context:nil].size;
     CGFloat numLabelH = 12;
     CGFloat numLabelW = numLabelSize.width + 6;

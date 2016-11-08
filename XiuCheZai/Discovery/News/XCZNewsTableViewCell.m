@@ -34,7 +34,11 @@
         NSMutableArray *imageArray = [NSMutableArray array];
         imageArray = [self changeImage:self.row[@"art_img"] andImageArray:imageArray];
         self.newsTitleLabel.text = self.row[@"art_title"];
-        self.reprintFromLabel.text = ((NSString *)self.row[@"art_author"]).length ? self.row[@"art_author"] : @"佚名";
+        self.reprintFromLabel.text = ((NSString *)self.row[@"art_origin"]).length ? self.row[@"art_origin"] : self.row[@"art_author"];
+        if (!self.reprintFromLabel.text.length) {
+            self.reprintFromLabel.text = @"佚名";
+        }
+        
         self.remarkCountLabel.text = self.row[@"replies"];
         self.praiseCountLabel.text = self.row[@"goods"];
         for (int i = 0; i<imageArray.count; i++) {
@@ -51,7 +55,10 @@
     
     if ([self.reuseIdentifier isEqualToString:@"CellB"]) {
         self.newsTitleLabel.text = self.row[@"art_title"];
-        self.reprintFromLabel.text = ((NSString *)self.row[@"art_author"]).length ? self.row[@"art_author"] : @"佚名";
+        self.reprintFromLabel.text = ((NSString *)self.row[@"art_origin"]).length ? self.row[@"art_origin"] : self.row[@"art_author"];
+        if (!self.reprintFromLabel.text.length) {
+            self.reprintFromLabel.text = @"佚名";
+        }
         self.remarkCountLabel.text = self.row[@"replies"];
         self.praiseCountLabel.text = self.row[@"goods"];
         UIImageView *imageView = [self.newsImageViews firstObject];

@@ -21,86 +21,15 @@
 @property (nonatomic, weak) UIActivityIndicatorView *indicatorHeaderView;
 @property (nonatomic, weak) UIActivityIndicatorView *indicatorFooterView;
 
-@property (strong,nonatomic) NSArray *oneRows;
-
 @end
 
 @implementation XCZPersonAttentionClubViewController
 
 @synthesize rows = _rows;
 
-- (NSArray *)oneRows
-{
-    if (!_oneRows) {
-        _oneRows = @[
-                     @{
-                         @"area_id" : @"331002",
-                         @"avatar" : @"group2/M00/01/BA/wKgCcFTYQbOAELXIAA1rIuRd3Es121.jpg",
-                         @"brand_name" : @"5",
-                         @"city_id" : @"331000",
-                         @"forum_name" : @"zbk啊摔到",
-                         @"nick" : @"时代风格",
-                         @"province_id" : @"330000",
-                         @"user_id" : @"3190",
-                         },
-                     
-                     @{
-                         @"area_id" : @"331002",
-                         @"avatar" : @"group2/M00/01/BA/wKgCcFTYQbOAELXIAA1rIuRd3Es121.jpg",
-                         @"brand_name" : @"5",
-                         @"city_id" : @"331001",
-                         @"forum_name" : @"是否",
-                         @"nick" : @"时代风格",
-                         @"province_id" : @"330000",
-                         @"user_id" : @"3190",
-                         },
-                     
-                     @{
-                         @"area_id" : @"331002",
-                         @"avatar" : @"group2/M00/01/BA/wKgCcFTYQbOAELXIAA1rIuRd3Es121.jpg",
-                         @"brand_name" : @"5",
-                         @"city_id" : @"331002",
-                         @"forum_name" : @"舒服的更",
-                         @"nick" : @"时代风格",
-                         @"province_id" : @"330000",
-                         @"user_id" : @"3190",
-                         },
-                     
-                     @{
-                         @"area_id" : @"331002",
-                         @"avatar" : @"group2/M00/01/BA/wKgCcFTYQbOAELXIAA1rIuRd3Es121.jpg",
-                         @"brand_name" : @"5",
-                         @"city_id" : @"331003",
-                         @"forum_name" : @"z的撒风",
-                         @"nick" : @"时代风格",
-                         @"province_id" : @"330000",
-                         @"user_id" : @"3190",
-                         },
-                     
-                     @{
-                         @"area_id" : @"331002",
-                         @"avatar" : @"group2/M00/01/BA/wKgCcFTYQbOAELXIAA1rIuRd3Es121.jpg",
-                         @"brand_name" : @"5",
-                         @"city_id" : @"331004",
-                         @"forum_name" : @"saiugd",
-                         @"nick" : @"时代风格",
-                         @"province_id" : @"330000",
-                         @"user_id" : @"3190",
-                         },
-                     ];
-    }
-    return _oneRows;
-}
-
-
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
-    
-    [self endHeaderRefresh];
-    [self endFooterRefresh];
-    if (_rows.count) {
-        [self updateTableView];
-    }
+    [self updateTableView];
 }
 
 - (NSMutableArray *)rows {
@@ -113,22 +42,19 @@
     [super viewDidLoad];
     
     self.title = @"关注的车友会";
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"一键关注" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemDidClick)];
-    
-    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self loadData];
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.tabBarController.tabBar setHidden:YES];
 }
 
 - (void)loadData {
@@ -141,7 +67,6 @@
 }
 
 - (void)loadDataNeedsRefresh {
-    self.currentPage = 1;
     [self requestTableViewNet];
 }
 
@@ -157,33 +82,16 @@
 #pragma mark - 网络请求部分
 - (void)requestTableViewNet
 {
-    //         // 测试用
-    //        if (self.currentPage == 1) {
-    //    //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    //                self.rows = [NSMutableArray arrayWithArray:self.oneRows];
-    //    //        });
-    //
-    //        } else {
-    //            self.oneRows = nil;
-    //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    //                self.rows = [[self.rows arrayByAddingObjectsFromArray:self.oneRows] mutableCopy];
-    //            });
-    //        }
-    
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/BbsUserAction.do"];
     NSDictionary *parameters = @{@"type":[NSString stringWithFormat:@"%d", 5],
                                  @"bbs_user_id": self.bbs_user_id,
-                                 @"page":[NSString stringWithFormat:@"%d", self.currentPage],
-                                 @"pagesize": @"10"};
+                                };
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-//        NSLog(@"推荐的车友会:%@", responseObject);
         NSArray *rows = [responseObject objectForKey:@"data"];
-        if (self.currentPage == 1) {
-            self.rows = [NSMutableArray arrayWithArray:rows];
-        } else {
-            self.rows = [[self.rows arrayByAddingObjectsFromArray:rows] mutableCopy];
-        }
-//                 NSLog(@"rows:%@", self.rows);
+        self.rows = [NSMutableArray arrayWithArray:rows];
+
+        [self endHeaderRefresh];
+        [self endFooterRefresh];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error:%@", error);
         [self endHeaderRefresh];
@@ -362,15 +270,15 @@
         [self startHeaderRefresh:scrollView];
     }
     
-    //    if (scrollView.contentOffset.y > 0) { // 上拉加载更多
-    //        CGFloat bottomY = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.bounds.size.height);
-    //        if (bottomY > 75) {
-    ////            NSLog(@"bottomY:%f, scrollViewY:%f", bottomY, scrollView.contentOffset.y);
-    //            [self morePullUpRefreshControl:scrollView];
-    //            [self stopFooterScroll:scrollView];
-    //            [self startFooterRefresh:scrollView];
-    //        }
-    //    }
+    if (scrollView.contentOffset.y > 0) { // 上拉加载更多
+//        CGFloat bottomY = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.bounds.size.height);
+//        if (bottomY > 75) {
+////            NSLog(@"bottomY:%f, scrollViewY:%f", bottomY, scrollView.contentOffset.y);
+//            [self morePullUpRefreshControl:scrollView];
+//            [self stopFooterScroll:scrollView];
+//            [self startFooterRefresh:scrollView];
+//        }
+    }
 }
 
 

@@ -29,9 +29,6 @@
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
     
-//    self.oneArray = nil;
-//    _rows = [NSMutableArray arrayWithArray:self.oneArray];
-    
     [self updateTableView];
 }
 
@@ -49,7 +46,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self loadData];
     
@@ -60,6 +57,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.tabBarController.tabBar setHidden:YES];
 }
 
 
@@ -73,7 +71,6 @@
 }
 
 - (void)loadDataNeedsRefresh {
-    self.currentPage = 1;
     [self requestTableViewNet];
 }
 
@@ -95,17 +92,9 @@
 - (void)requestTableViewNet
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/BbsUserAction.do"];
-    NSString *bbs_user_id;
-    if (!self.bbs_user_id) {
-#warning 如果bbs_user_id没值则取登录id
-    } else {
-        bbs_user_id = self.bbs_user_id;
-    }
-
     NSDictionary *parameters = @{@"type":[NSString stringWithFormat:@"%d", 4],
                                  @"bbs_user_id": self.bbs_user_id,
-                                 @"page":[NSString stringWithFormat:@"%d", self.currentPage],
-                                 @"pagesize": [NSString stringWithFormat:@"%d", 10]};
+                                };
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *rowsz = [responseObject objectForKey:@"data"];
         NSArray *rows = [NSArray array];
@@ -114,16 +103,13 @@
                 rows = dataDict[@"rows"];
             }
         }
-        if (self.currentPage == 1) {
-            self.rows = [NSMutableArray arrayWithArray:rows];
-        } else {
-            self.rows = [[self.rows arrayByAddingObjectsFromArray:rows] mutableCopy];
-        }
-//                NSLog(@"rows:%@", self.rows);
+        self.rows = [NSMutableArray arrayWithArray:rows];
         [self endHeaderRefresh];
+        [self endFooterRefresh];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         //        NSLog(@"error:%@", error);
         [self endHeaderRefresh];
+        [self endFooterRefresh];
     }];
 }
 
@@ -313,12 +299,12 @@
     }
     
     if (scrollView.contentOffset.y > 0) { // 上拉加载更多
-        CGFloat bottomY = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.bounds.size.height);
-        if (bottomY > 75) {
-            [self morePullUpRefreshControl:scrollView];
-            [self stopFooterScroll:scrollView];
-            [self startFooterRefresh:scrollView];
-        }
+//        CGFloat bottomY = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.bounds.size.height);
+//        if (bottomY > 75) {
+//            [self morePullUpRefreshControl:scrollView];
+//            [self stopFooterScroll:scrollView];
+//            [self startFooterRefresh:scrollView];
+//        }
     }
 }
 

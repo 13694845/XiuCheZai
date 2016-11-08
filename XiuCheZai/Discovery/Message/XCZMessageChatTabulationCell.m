@@ -44,7 +44,6 @@
 {
     _row = row;
 
-    NSLog(@"rowrowrow:%@", row);
     NSString *iconImageStr = [self changeIconStr:row[@"avatar"]];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:iconImageStr] placeholderImage:[UIImage imageNamed:@"bbs_xiuchezhaiIcon"]];
     

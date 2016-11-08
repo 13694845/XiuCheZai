@@ -51,9 +51,8 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    [self.tabBarController.tabBar setHidden:YES];
+    self.tabBarController.tabBar.hidden = YES;
     self.navigationController.navigationBar.translucent = NO;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self loadData];
 }
 

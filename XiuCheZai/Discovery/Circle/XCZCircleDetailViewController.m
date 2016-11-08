@@ -118,14 +118,12 @@
                                @"type" : [NSString stringWithFormat:@"%d", self.bottomPraiseType],
                                @"posts_clazz" : @"1",
                                @"post_id" : self.post_id,
-                               @"host" : self.artDict[@"post_id"]
+                               @"host" : self.tieziUser_id
                                };
         loginStatu ? [self goLogining] : [self requestBottomPraise:dict];
     } else if (self.goType == 8) { // 删除按钮被点击
         loginStatu ? [self goLogining] : [self alertShowIsDeleted];
     } else if (self.goType == 9) { // bottomTextField上遮盖被点击
-        
-                NSLog(@"loginStatuloginStatu1:%d", loginStatu);
         if (loginStatu) {
             [self goLogining];
         } else {
@@ -256,12 +254,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    [self.tabBarController.tabBar setHidden:YES];
     [self loadData];
 }
 
 - (void)leftBarButtonItemDidClick
 {
-    NSLog(@"_jumpToHome_jumpToHome:%d", _jumpToHome);
     if (_jumpToHome) {
         [self.navigationController popToRootViewControllerAnimated:YES];
     } else {
@@ -467,6 +466,7 @@
             [self goLogining];
         } else if ([responseObject[@"error"] intValue] == 201) {
             self.praiseBtn.selected = YES;
+            [self loadData];
         } else if ([responseObject[@"error"] intValue] == 333) {
             [MBProgressHUD ZHMShowError:@"您已经点过赞了"];
         }
@@ -525,7 +525,7 @@
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         [MBProgressHUD ZHMShowSuccess:@"删除成功"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZCircleDetailViewControllerHasDelectedToXCZCircleViewControllerNot" object:nil];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];
         });
         
@@ -675,14 +675,17 @@
 
 - (void)setupGoodsView
 {
-    XCZCircleDetailGoodsView *goodsView = [[XCZCircleDetailGoodsView alloc] initWithFrame:CGRectMake(XCZNewDetailRemarkRowMarginY * 2, self.height + XCZNewDetailRemarkRowMarginY, self.contentView.bounds.size.width - 32, 91)];
-    goodsView.backgroundColor = [UIColor whiteColor];
     NSDictionary *goods_remark = [NSJSONSerialization JSONObjectWithData:[[self.artDict objectForKey:@"goods_remark"] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-    self.goods_remark = goods_remark;
-    goodsView.goods_remark = goods_remark;
-    [self.contentView addSubview:goodsView];
-    self.height += goodsView.bounds.size.height + XCZNewDetailRemarkRowMarginY;
-    [goodsView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goodsViewDidClick:)]];
+    if (goods_remark) {
+        XCZCircleDetailGoodsView *goodsView = [[XCZCircleDetailGoodsView alloc] initWithFrame:CGRectMake(XCZNewDetailRemarkRowMarginY * 2, self.height + XCZNewDetailRemarkRowMarginY, self.contentView.bounds.size.width - 32, 91)];
+        goodsView.backgroundColor = [UIColor whiteColor];
+        
+        self.goods_remark = goods_remark;
+        goodsView.goods_remark = goods_remark;
+        [self.contentView addSubview:goodsView];
+        self.height += goodsView.bounds.size.height + XCZNewDetailRemarkRowMarginY;
+        [goodsView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goodsViewDidClick:)]];
+    }
 }
 
 - (void)setupImagesView
@@ -872,14 +875,22 @@
 - (void)goProductDetails
 {
     if (self.goods_remark) {
+#warning 外层需
         NSString *overUrlStrPin = [NSString stringWithFormat:@"/detail/index.html?goodsId=%@", self.goods_remark[@"id"]];
         NSString *overUrlStr = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], overUrlStrPin];
-        [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [XCZConfig baseURL], @"/Login/login/login.html?url=", overUrlStr]];
+        [self launchOuterWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [XCZConfig baseURL], @"/Login/login/login.html?url=", overUrlStr]];
     }
 }
 
 - (void)launchWebViewWithURLString:(NSString *)urlString {
     XCZPersonWebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZPersonWebViewController"];
+    webViewController.url = [NSURL URLWithString:urlString];
+    webViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webViewController animated:YES];
+}
+
+- (void)launchOuterWebViewWithURLString:(NSString *)urlString {
+    WebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WebViewController"];
     webViewController.url = [NSURL URLWithString:urlString];
     webViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webViewController animated:YES];

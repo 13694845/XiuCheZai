@@ -17,12 +17,10 @@
 #import "XCZNewsDetailViewController.h"
 #import "XCZCircleDetailViewController.h"
 #import "XCZActivityDetailViewController.h"
-#import "XCZCircleDetailALayerViewController.h"
-#import "XCZNewDetailALayerViewController.h"
 #import "XCZDiscoveryFrameViewController.h"
 #import "XCZPersonInfoLookImageViewController.h"
 
-@interface XCZDiscoveryPageViewController ()<XCZShareChannelPickerViewDelegate, XCZNewsDetailViewControllerDelegate, XCZCircleDetailViewControllerDelegate, XCZActivityDetailViewControllerDelegate, XCZCircleDetailALayerViewControllerDelegate, XCZNewDetailALayerViewControllerDelegate>
+@interface XCZDiscoveryPageViewController ()<XCZShareChannelPickerViewDelegate, XCZNewsDetailViewControllerDelegate, XCZCircleDetailViewControllerDelegate, XCZActivityDetailViewControllerDelegate>
 
 @property(nonatomic, assign)CGRect keyboardFrame;
 @property (weak, nonatomic) XCZShareChannelPickerView *shareChannelPickerView;
@@ -91,8 +89,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
-    
-    
     if (self.class == [XCZNewsDetailViewController class]) {
         XCZNewsDetailViewController *newsDetailsVC = (XCZNewsDetailViewController *)self;
         newsDetailsVC.delegate = self;
@@ -105,21 +101,12 @@
         XCZActivityDetailViewController *activityDetailsVC = (XCZActivityDetailViewController *)self;
         activityDetailsVC.delegate = self;
     }
-    if (self.class == [XCZNewDetailALayerViewController class]) {
-        XCZNewDetailALayerViewController *newDetailALayerVC = (XCZNewDetailALayerViewController *)self;
-        newDetailALayerVC.delegate = self;
-    }
-    if (self.class == [XCZCircleDetailALayerViewController class]) {
-        XCZCircleDetailALayerViewController *circleDetailALayerVC = (XCZCircleDetailALayerViewController *)self;
-        circleDetailALayerVC.delegate = self;
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.translucent = NO;
     [self.view endEditing:YES];
 }
 
@@ -152,7 +139,7 @@
 {
     CGRect viewRect = self.view.frame;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"discoveryPageViewControllerKeyboardWillHideToSubClassVCNot" object:nil userInfo:@{@"keyboardHeight": @(self.keyboardFrame.size.height)}];
-    if (self.class == [XCZNewsDetailViewController class] || self.class == [XCZCircleDetailViewController class] || self.class == [XCZActivityDetailViewController class] || self.class == [XCZNewDetailALayerViewController class] || self.class == [XCZCircleDetailALayerViewController class]) {
+    if (self.class == [XCZNewsDetailViewController class] || self.class == [XCZCircleDetailViewController class] || self.class == [XCZActivityDetailViewController class]) {
         viewRect.origin.y = 64;
     } else {
         viewRect.origin.y = 0;
