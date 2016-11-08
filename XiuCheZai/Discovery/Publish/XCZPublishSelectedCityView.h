@@ -23,4 +23,13 @@
 @property (nonatomic, strong) NSDictionary *currentPositioning;
 @property (nonatomic, weak) id<XCZPublishSelectedCityViewDelegate> delegate;
 
+// **********
+@property (nonatomic, strong) NSDictionary *currentLocation;
+
+
+@property (nonatomic, strong) NSString *selectedProvinceId;
+@property (nonatomic, strong) NSString *selectedCityId;
+@property (nonatomic, strong) NSString *selectedTownId;
+// **********
+
 @end

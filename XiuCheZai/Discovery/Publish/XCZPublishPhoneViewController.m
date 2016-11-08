@@ -324,11 +324,20 @@
 {
     if (!self.selectedCityView) {
         XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
-        selectedCityView.currentPositioning = self.currentPositioning;
+        // selectedCityView.currentPositioning = self.currentPositioning;
         selectedCityView.delegate = self;
+        
+        // **********
+        
+        selectedCityView.currentLocation = self.currentPositioning;
+        
+        // selectedCityView.selectedProvinceId = @"330000";
+        // selectedCityView.selectedCityId = @"331000";
+        // **********
+        
         [self.view addSubview:selectedCityView];
         self.selectedCityView = selectedCityView;
-        selectedCityView.allProvince = [XCZCityManager allProvince];
+        // selectedCityView.allProvince = [XCZCityManager allProvince];
     }
     
     CGRect selectedCityViewRect = self.selectedCityView.frame;
