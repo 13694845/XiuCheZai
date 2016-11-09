@@ -542,7 +542,10 @@
     self.scrollView.contentSize = self.contentView.bounds.size;
     [self.scrollView addSubview:self.contentView];
     
-    [newsTitleView loadHTMLString:[self escapeHTMLString:self.artDict[@"art_content"]] baseURL:nil];
+    NSString *content = [self escapeHTMLString:self.artDict[@"art_content"]];
+    content = [content stringByReplacingOccurrencesOfString:@"<img " withString:@"<img width=300 "];
+    [newsTitleView loadHTMLString:content baseURL:nil];
+
     newsTitleView.frame = CGRectMake(XCZNewDetailRemarkRowMarginX * 2, self.height + XCZNewDetailRemarkRowMarginY, self.contentView.bounds.size.width - 4 * XCZNewDetailRemarkRowMarginX, 1);
 }
 
