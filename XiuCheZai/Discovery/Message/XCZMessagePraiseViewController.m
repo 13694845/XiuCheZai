@@ -51,9 +51,14 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1.0];
-    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     [self loadData];
     // Do any additional setup after loading the view.
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated

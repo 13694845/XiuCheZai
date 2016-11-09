@@ -36,8 +36,8 @@
     [super viewDidLoad];
     
     self.title = @"已点赞";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"一键关注" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemDidClick)];
-    
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -48,6 +48,11 @@
 //    [self loadData];
     
     // Do any additional setup after loading the view.
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated

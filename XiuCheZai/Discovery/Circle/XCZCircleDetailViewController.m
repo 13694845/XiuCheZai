@@ -22,6 +22,7 @@
 #import "XCZTimeTools.h"
 #import "XCZCircleUserListViewController.h"
 #import "XCZCirclePostDetailViewController.h"
+#import "XCZPersonInfoViewController.h"
 
 @interface XCZCircleDetailViewController ()<UIWebViewDelegate, XCZCircleDetailRemarkRowDelegate, XCZCircleDetailWriteViewDelegate>
 
@@ -102,9 +103,11 @@
         NSDictionary *dict = @{
                                @"type" : @"0",
                                @"posts_clazz" : @"2",
-                               @"post_id" : self.publisher_id,
-                               @"host" : self.artDict[@"post_id"]
+                               @"post_id" : self.reply_id,
+                               @"host" : self.publisher_id
                                };
+        NSLog(@"中间点赞:%@", dict);
+        
        loginStatu ? [self goLogining] : [self requestPraise:dict];
     } else if (self.goType == 6) { // 收藏按钮被点击
         NSDictionary *dict = @{
@@ -347,7 +350,13 @@
         for (NSDictionary *dict in datas) {
             int taskId = [[dict objectForKey:@"taskId"] intValue];
             if (taskId == 2644) {
-                self.artDict = [[dict objectForKey:@"rows"] firstObject];
+                if (((NSArray *)[dict objectForKey:@"rows"]).count) {
+                    self.artDict = [[dict objectForKey:@"rows"] firstObject];
+                } else {
+                    [MBProgressHUD ZHMShowError:@"帖子已被删除"];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    return;
+                }
             }
             if (taskId == 2645) {
                 self.praiseAvatars = [dict objectForKey:@"rows"];
@@ -581,16 +590,7 @@
     
     if ([self.reuseIdentifier isEqualToString:@"CellWZ"]) { // 只标题文字
         if (((NSString *)self.artDict[@"topic"]).length) {
-            UILabel *newsTitleLabel = [[UILabel alloc] init];
-            newsTitleLabel.numberOfLines = 0;
-            newsTitleLabel.font = [UIFont systemFontOfSize:18];
-            newsTitleLabel.textColor = kXCTITLECOLOR;
-            [self.contentView addSubview:newsTitleLabel];
-            newsTitleLabel.text = self.artDict[@"topic"];
-            CGSize newsTitleViewSize = [newsTitleLabel.text boundingRectWithSize:CGSizeMake(self.contentView.bounds.size.width - 4 * XCZNewDetailRemarkRowMarginX, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : newsTitleLabel.font} context:nil].size;
-            newsTitleLabel.frame = CGRectMake(XCZNewDetailRemarkRowMarginX * 2, self.height + XCZNewDetailRemarkRowMarginY, newsTitleViewSize.width, newsTitleViewSize.height);
-            self.height += newsTitleLabel.bounds.size.height + XCZNewDetailRemarkRowMarginY;
-            
+            [self createNewsTitleLabel];
             [self createDatePublishRow]; // 创建时间这行
             [self createTextContentView]; // 创建正文内容
         } else {
@@ -599,18 +599,19 @@
         }
         [self setupSurplusView]; // 加载下面的控件
     } else if ([self.reuseIdentifier isEqualToString:@"CellA"] || [self.reuseIdentifier isEqualToString:@"CellB"] || [self.reuseIdentifier isEqualToString:@"CellA1"] || [self.reuseIdentifier isEqualToString:@"CellA2"]) { // 图文混排(没有商品)
+        [self createNewsTitleLabel];
 //        if (self.type != 1) {
             [self createTextContentView];
             [self setupImagesView];
 //        }
     } else if ([self.reuseIdentifier isEqualToString:@"CellC"] || [self.reuseIdentifier isEqualToString:@"CellC1"] || [self.reuseIdentifier isEqualToString:@"CellC2"] || [self.reuseIdentifier isEqualToString:@"CellC3"]) { // 含商品的图文混排
+        [self createNewsTitleLabel];
+        [self createDatePublishRow]; // 创建时间这行
         [self setupGoodsView];
         [self createTextContentView];
-        
         if (((NSString *)self.artDict[@"share_image"]).length) {
             [self setupImagesView];
         } else {
-            [self createDatePublishRow]; // 创建时间这行
             [self setupAdmiredView]; // 设置点赞
             [self setupSurplusView]; // 加载下面的控件
         }
@@ -670,6 +671,21 @@
         [self requestZZUser_id]; // 先查询当前帖子作者的user_id，之后再加载评论
     } else if ([self.reuseIdentifier isEqualToString:@"CellC"] || [self.reuseIdentifier isEqualToString:@"CellC1"] || [self.reuseIdentifier isEqualToString:@"CellC2"] || [self.reuseIdentifier isEqualToString:@"CellC3"]) { // 含商品的图文混排
         [self requestZZUser_id]; // 先查询当前帖子作者的user_id，之后再加载评论
+    }
+}
+
+- (void)createNewsTitleLabel
+{
+    if (((NSString *)self.artDict[@"topic"]).length) {
+        UILabel *newsTitleLabel = [[UILabel alloc] init];
+        newsTitleLabel.numberOfLines = 0;
+        newsTitleLabel.font = [UIFont systemFontOfSize:18];
+        newsTitleLabel.textColor = kXCTITLECOLOR;
+        [self.contentView addSubview:newsTitleLabel];
+        newsTitleLabel.text = self.artDict[@"topic"];
+        CGSize newsTitleViewSize = [newsTitleLabel.text boundingRectWithSize:CGSizeMake(self.contentView.bounds.size.width - 4 * XCZNewDetailRemarkRowMarginX, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : newsTitleLabel.font} context:nil].size;
+        newsTitleLabel.frame = CGRectMake(XCZNewDetailRemarkRowMarginX * 2, self.height + XCZNewDetailRemarkRowMarginY, newsTitleViewSize.width, newsTitleViewSize.height);
+        self.height += newsTitleLabel.bounds.size.height + XCZNewDetailRemarkRowMarginY;
     }
 }
 
@@ -1027,6 +1043,7 @@
 - (void)detailRemarkRow:(XCZCircleDetailRemarkRow *)detailRemarkRow likeViewDidClick:(NSDictionary *)likeViewSubViews
 {
     self.reply_id = detailRemarkRow.remark[@"reply_id"];
+//    NSLog(@"remarkremark:%@", detailRemarkRow.remark);
     self.publisher_id = detailRemarkRow.remark[@"user_id"];
     self.likeViewSubViews = likeViewSubViews;
     self.goType = 4;

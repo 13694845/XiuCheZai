@@ -45,10 +45,11 @@
 
 - (void)setHzRow:(NSDictionary *)hzRow
 {
+    _hzRow = hzRow;
     self.cellOneView.cellW = self.cellW;
     self.cellOneView.hzRow = hzRow;
-    [self setupHzFrame];
     
+    [self setupHzFrame];
     [self.cellOneView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellOneViewDidClick:)]];
 }
 
@@ -84,6 +85,7 @@
 {
     UIView *cellOneView = grz.view;
     if ([self.delegate respondsToSelector:@selector(clubCircleViewMemberCell:cellOneViewDidClick:)]) {
+//        NSLog(@"hzRowhzRowhzRow:%@", self);
         [self.delegate clubCircleViewMemberCell:self cellOneViewDidClick:cellOneView];
     }
 }

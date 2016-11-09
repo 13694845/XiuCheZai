@@ -89,7 +89,6 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemDidClick)];
     [self.inviteFriendsJoinView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(inviteFriendsJoinCellDidClick)]];
-    
     [self.addDelectedView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addDelectedViewDidClick)]];
 }
 

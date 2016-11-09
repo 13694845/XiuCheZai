@@ -51,6 +51,7 @@
     [super viewDidLoad];
     
     self.title = @"TA关注的";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"一键关注" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemDidClick)];
     
     self.tableView.dataSource = self;
@@ -60,6 +61,11 @@
     
     [self loadData];
  
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated

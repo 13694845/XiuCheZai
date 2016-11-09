@@ -85,9 +85,7 @@
     summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\r" withString:@""];
     summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\t" withString:@""];
-    
-//    NSLog(@"summary:%@, summaryShow:%@", row[@"summary"], summaryShow);
-    
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.activityTitleLabel.text = [NSString stringWithFormat:@"%@", summaryShow];
     self.activityTimeLabel.text = [NSString stringWithFormat:@"截止日期:  %@", row[@"end_time"]];
     

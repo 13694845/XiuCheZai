@@ -10,7 +10,8 @@
 
 @interface XCZMessageChatTabulationCell : UITableViewCell
 
+/** 未读聊天数目 */
+@property (nonatomic, strong) UILabel *numLabel;
 @property (nonatomic, strong) NSDictionary *row;
-
 
 @end

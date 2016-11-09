@@ -235,9 +235,15 @@
     self.bottomPraiseType = 1;
     
     [self createTextFieldZheGaiView];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     if ([self.delegate respondsToSelector:@selector(detailViewController:bottomTextField:)]) {
         [self.delegate detailViewController:self bottomTextField:self.bottomTextField];
     }
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)createTextFieldZheGaiView
@@ -514,7 +520,11 @@
     UILabel *newsRemarksView = [[UILabel alloc] init];
     [self.contentView addSubview:newsRemarksView];
     
-    newsTitleLabel.text = ((NSString *)self.artDict[@"art_title"]).length ?  self.artDict[@"art_title"] : self.artDict[@"subtitle"];
+    NSString *yart_title = self.artDict[@"art_title"];
+    NSString *art_title = [yart_title stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
+    NSString *ySubtitle = self.artDict[@"subtitle"];
+     NSString *subtitle = [ySubtitle stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
+    newsTitleLabel.text = art_title.length ?  art_title : subtitle;
     publishDateLabel.text = [XCZTimeTools formateDatePicture:self.artDict[@"create_time"] withFormate:@"YYYY-MM-dd HH:mm:ss"];
     reprintFromLabel.text = self.artDict[@"art_origin"];
 
@@ -715,7 +725,8 @@
     
     html = [html stringByReplacingOccurrencesOfString:@"#3D;" withString:@"="];
     html = [html stringByReplacingOccurrencesOfString:@"#quot;" withString:@"\""];
-    html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
+//    html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
+     html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@"<br/>"];
     html = [html stringByReplacingOccurrencesOfString:@"#apos;" withString:@"'"];
 
     return html;

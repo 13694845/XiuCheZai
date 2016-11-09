@@ -161,11 +161,12 @@
         self.headerIconView.frame = CGRectMake(CGRectGetMaxX(self.headerNameLabel.frame), self.headerNameLabel.frame.origin.y, self.headerNameLabel.bounds.size.height, self.headerNameLabel.bounds.size.height);
     }
     
-     NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:@"" cityId:_row[@"city_id"] andTownId:_row[@"area_id"]];
+    NSString *user_forum_name = ((NSString *)_row[@"user_forum_name"]).length ? _row[@"user_forum_name"] : @"修车仔";
+    NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:@"" cityId:_row[@"city_id"] andTownId:_row[@"area_id"]];
     if (!addr.length) {
-        self.headerCityLabel.text = [NSString stringWithFormat:@"%@", _row[@"user_forum_name"]];
+        self.headerCityLabel.text = [NSString stringWithFormat:@"%@", user_forum_name];
     } else {
-        self.headerCityLabel.text = (((NSString *)_row[@"user_forum_name"]).length) ? [NSString stringWithFormat:@"%@ · %@", _row[@"user_forum_name"], addr] : [NSString stringWithFormat:@"%@", addr];
+        self.headerCityLabel.text = [NSString stringWithFormat:@"%@ · %@", user_forum_name, addr];
     }
     
     self.contentTitleLabel.text = _row[@"topic"];

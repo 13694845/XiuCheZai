@@ -33,6 +33,8 @@
 @property (nonatomic, strong) NSDictionary *defaultAttention;
 @property (nonatomic, strong) NSDictionary *currentPositioning;
 @property (assign, nonatomic) int loginStatu; // 登录状态, 0为已经登录, 1为未登录
+@property (assign, nonatomic) int goType; // 1:  2:调起地点选择框
+
 @property (nonatomic, strong) NSArray *showImages;
 @property (nonatomic, copy) NSString *imageStrs;
 @property (strong, nonatomic) AFHTTPSessionManager *phoneManager;
@@ -58,7 +60,12 @@
 {
     _loginStatu = loginStatu;
     
-    loginStatu ? [self goLogining] : [self requestDefaultAttention];
+    if (self.goType == 1) {
+        loginStatu ? [self goLogining] : [self requestDefaultAttention];
+    } else if (self.goType == 2) {
+        loginStatu ? [self goLogining] : [self createAddressView];
+    }
+    
 }
 
 - (NSArray *)showImages
@@ -110,6 +117,7 @@
     [self.sendToView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sendToViewDidClick)]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    self.goType = 1;
     [self requestLoginDetection];
     [self requestPositioning];
 }
@@ -204,20 +212,19 @@
             dataFormatter.dateFormat = @"yyyyMMddHHmmss";
             NSString *timeStr = [dataFormatter stringFromDate:[NSDate date]];
             NSString *fileName = [userType stringByAppendingString:[NSString stringWithFormat:@"%@.jpg", timeStr]];
-            NSData *imgData = UIImageJPEGRepresentation(currentImage, 1.0);
+            NSData *imgData = UIImageJPEGRepresentation(currentImage, 0.1);
             [formData appendPartWithFileData:imgData name:@"file" fileName:fileName mimeType:@"image/jpeg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        //         NSLog(@"uploadProgress:%@", uploadProgress);
+//                 NSLog(@"uploadProgress:%@", uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBProgressHUD ZHMHideHUD];
          NSDictionary *responseInfo = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-//        NSLog(@"responseInfo:%@", responseInfo);
-        if (responseInfo) {
+        if ([responseInfo[@"error"] intValue]) {
             NSString *imageStr = [responseInfo objectForKey:@"filepath"];
             self.textPhoneView.selectedPhoneBtnTag = self.selectedPhoneBtnTag;
             self.textPhoneView.imageDict = @{@"image": currentImage, @"imageStr": imageStr};
         } else {
-            [MBProgressHUD ZHMShowError:@"上传失败"];
+            [MBProgressHUD ZHMShowError:[NSString stringWithFormat:@"%@%@", @"上传失败!", @"文件太大"]];
         }
         [self dismissViewControllerAnimated:YES completion:nil];
         
@@ -236,7 +243,7 @@
         return;
     }
     if (![self.defaultAttention objectForKey:@"forum_id"]) {
-        [MBProgressHUD ZHMShowError:@"请重新要发送的板块..."];
+        [MBProgressHUD ZHMShowError:@"请选择要发送的板块..."];
         return;
     }
      [self.textPhoneView.textView resignFirstResponder];
@@ -322,22 +329,22 @@
 
 - (void)targetingViewDidClick
 {
+    self.goType = 2;
+    [self requestLoginDetection];
+}
+
+- (void)createAddressView
+{
     if (!self.selectedCityView) {
         XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
-        // selectedCityView.currentPositioning = self.currentPositioning;
         selectedCityView.delegate = self;
-        
-        // **********
-        
-        selectedCityView.currentLocation = self.currentPositioning;
-        
-        // selectedCityView.selectedProvinceId = @"330000";
-        // selectedCityView.selectedCityId = @"331000";
-        // **********
-        
+        if (self.currentPositioning.count) {
+            selectedCityView.currentLocation = self.currentPositioning;
+        } else {
+            selectedCityView.currentLocation = @{@"provinceid": @"330000",@"cityid": @"331000",@"townid": @"331001"};
+        }
         [self.view addSubview:selectedCityView];
         self.selectedCityView = selectedCityView;
-        // selectedCityView.allProvince = [XCZCityManager allProvince];
     }
     
     CGRect selectedCityViewRect = self.selectedCityView.frame;
@@ -418,8 +425,16 @@
     }];
     
     UIAlertAction *threeAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.textPhoneView.selectedPhoneBtnTag = self.selectedPhoneBtnTag;
-        self.textPhoneView.removeImageDict = @{@"image": selectedPhoneButton.currentImage};
+        UIAlertController *delecetdAlertCtr = [UIAlertController alertControllerWithTitle:@"要删除这张照片吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *delecetdCancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        UIAlertAction *delecetdOneAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            self.textPhoneView.selectedPhoneBtnTag = self.selectedPhoneBtnTag;
+            self.textPhoneView.removeImageDict = @{@"image": selectedPhoneButton.currentImage};
+        }];
+        [delecetdAlertCtr addAction:delecetdCancelAction];
+        [delecetdAlertCtr addAction:delecetdOneAction];
+        [self presentViewController:delecetdAlertCtr animated:YES completion:nil];
     }];
     
     [alertCtr addAction:cancelAction];
@@ -458,6 +473,18 @@
         XCZPublishTextPhoneButton *phoneBtn = phoneBtns[i];
         if (phoneBtn.imageDict) {
                 imageStrs = i == 0 ? [NSString stringWithFormat:@"%@", [phoneBtn.imageDict objectForKey:@"imageStr"]] : [NSString stringWithFormat:@"%@,%@", imageStrs , [phoneBtn.imageDict objectForKey:@"imageStr"]];
+        }
+    }
+    self.imageStrs = imageStrs;
+}
+
+- (void)textPhoneView:(XCZPublishTextPhoneView *)textPhoneView phoneBtnRemoveOver:(NSArray *)phoneBtns
+{
+    NSString *imageStrs;
+    for (int i = 0; i<phoneBtns.count; i++) {
+        XCZPublishTextPhoneButton *phoneBtn = phoneBtns[i];
+        if (phoneBtn.imageDict) {
+            imageStrs = (i == 0) ? [NSString stringWithFormat:@"%@", [phoneBtn.imageDict objectForKey:@"imageStr"]] : [NSString stringWithFormat:@"%@,%@", imageStrs , [phoneBtn.imageDict objectForKey:@"imageStr"]];
         }
     }
     self.imageStrs = imageStrs;

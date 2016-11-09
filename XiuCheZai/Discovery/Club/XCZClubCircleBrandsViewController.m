@@ -44,6 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     [self.navCloseBtn addTarget:self action:@selector(navCloseBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
     
     self.maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height)];
@@ -55,6 +56,11 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.searchBar.delegate = self;
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated

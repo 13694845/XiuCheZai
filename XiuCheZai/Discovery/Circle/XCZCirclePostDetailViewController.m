@@ -46,7 +46,13 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     [self requestNet];
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -87,7 +93,7 @@
 
 - (void)goProductDetails:(NSString *)goods_id
 {
-#warning 外层需
+//#warning 外层需
         NSString *overUrlStrPin = [NSString stringWithFormat:@"/detail/index.html?goodsId=%@", goods_id];
         NSString *overUrlStr = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], overUrlStrPin];
         [self launchOuterWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [XCZConfig baseURL], @"/Login/login/login.html?url=", overUrlStr]];

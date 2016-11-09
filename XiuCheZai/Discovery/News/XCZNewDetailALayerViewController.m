@@ -142,14 +142,18 @@
     self.bottomTextView.layer.borderWidth = 1.0;
     self.bottomTextView.layer.borderColor = [UIColor colorWithRed:221/255.0 green:221/255.0  blue:221/255.0  alpha:1.0].CGColor;
     self.bottomTextView.delegate = self;
-    
     [self createTextFieldZheGaiView];
     
     self.bottomTextViewPlaceholderLabel.userInteractionEnabled = YES;
     [self.bottomTextViewPlaceholderLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomTextViewPlaceholderLabelDidClick)]];
-    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     [self.expressionBtn addTarget:self action:@selector(expressionBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
     [self.sendBtn addTarget:self action:@selector(sendBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)createTextFieldZheGaiView
@@ -164,6 +168,7 @@
 {
     UIView *zeGaiView = [[UIView alloc] init];
     zeGaiView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    zeGaiView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:zeGaiView];
     self.zeGaiView = zeGaiView;
     [self.zeGaiView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(zeGaiViewDidClick:)]];
@@ -472,8 +477,6 @@
         [self.bottomTextView resignFirstResponder];
     }
 }
-
-
 
 //- (void)newDetailWriteView:(XCZNewDetailWriteView *)XCZNewDetailWriteView commentHeaderLeftBtnDidClick:(UIButton *)commentHeaderLeftBtn
 //{

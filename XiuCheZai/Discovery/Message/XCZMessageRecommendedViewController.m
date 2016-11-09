@@ -39,9 +39,14 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
-    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     [self updateTableView]; // 暂时
     [self loadData];
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)loadData {

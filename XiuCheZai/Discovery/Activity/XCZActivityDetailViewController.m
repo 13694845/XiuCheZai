@@ -99,8 +99,8 @@
         NSDictionary *dict = @{
                                @"type" : @"0",
                                @"posts_clazz" : @"2",
-                               @"post_id" : self.publisher_id,
-                               @"host" : self.artDict[@"post_id"]
+                               @"post_id" : self.reply_id,
+                               @"host" : self.publisher_id
                                };
        loginStatu ? [self goLogining] : [self requestPraise:dict];
     } else if (self.goType == 6) { // 收藏按钮被点击
@@ -254,10 +254,15 @@
     self.collectionType = 0;
     self.praiseType = 0;
     self.bottomPraiseType = 0;
-    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     if ([self.delegate respondsToSelector:@selector(detailViewController:bottomTextField:)]) {
         [self.delegate detailViewController:self bottomTextField:self.bottomTextField];
     }
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)changeNot

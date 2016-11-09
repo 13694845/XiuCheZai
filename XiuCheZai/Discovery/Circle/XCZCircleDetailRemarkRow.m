@@ -121,6 +121,7 @@
     self.likeImgView = likeImgView;
     
     UILabel *likeLabel = [[UILabel alloc] init];
+//    NSLog(@"_remark_remark_remark:%@", _remark);
     likeLabel.text =  _remark[@"goods"];
     likeLabel.font = [UIFont systemFontOfSize:10];
     likeLabel.textColor = kXCTIMEANDAUXILIARYTEXTCOLOR;

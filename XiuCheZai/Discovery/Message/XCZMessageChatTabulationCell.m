@@ -38,6 +38,36 @@
     UIImageView *brand_logoImaegView = [[UIImageView alloc] init];
     [self addSubview:brand_logoImaegView];
     self.brand_logoImaegView = brand_logoImaegView;
+    
+    self.numLabel = [[UILabel alloc] init];
+    self.numLabel.font = [UIFont systemFontOfSize:12];
+    self.numLabel.textColor = [UIColor whiteColor];
+    self.numLabel.textAlignment = NSTextAlignmentCenter;
+    self.numLabel.layer.cornerRadius = 7.5;
+    self.numLabel.layer.masksToBounds = YES;
+    self.numLabel.backgroundColor = [UIColor colorWithRed:229/255.0 green:21/255.0 blue:45/255.0 alpha:1.0];
+    [self addSubview:self.numLabel];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if (self.numLabel.text.length >= 3) {
+        self.numLabel.text = @"99+";
+    }
+    
+    if ([self.numLabel.text intValue]) {
+        CGSize numLabelSize = [self.numLabel.text boundingRectWithSize:CGSizeMake(30, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.numLabel.font} context:nil].size;
+        CGFloat numLabelH = 15;
+        CGFloat numLabelW = self.numLabel.text.length >= 2 ? numLabelSize.width + numLabelH * 0.5 : numLabelSize.width;
+        if (numLabelW <= numLabelH) {
+            numLabelW = numLabelH;
+        }
+        CGFloat numLabelX = self.bounds.size.width - 30 - numLabelW - 8;
+        CGFloat numLabelY = (self.bounds.size.height - numLabelH) * 0.5;
+        self.numLabel.frame = CGRectMake(numLabelX, numLabelY, numLabelW, numLabelH);
+    }
 }
 
 - (void)setRow:(NSDictionary *)row
@@ -62,12 +92,14 @@
     self.brand_logoImaegView.layer.cornerRadius = self.brand_logoImaegView.bounds.size.height * 0.5;
     self.brand_logoImaegView.layer.masksToBounds = YES;
     
-    NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:row[@"province_id"] cityId:row[@"city_id"] andTownId:row[@"area_id"]];
+     NSString *join_forum = ((NSString *)_row[@"join_forum"]).length ? _row[@"join_forum"] : @"修车仔";
+    NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:@"" cityId:row[@"city_id"] andTownId:row[@"area_id"]];
     if (!addr.length) {
-        self.siteCircleLabel.text = ((NSString *)row[@"join_forum"]).length ? [NSString stringWithFormat:@"%@", row[@"join_forum"]] : @"";
+        self.siteCircleLabel.text = join_forum.length ? [NSString stringWithFormat:@"%@", join_forum] : @"";
     } else {
-        self.siteCircleLabel.text = ((NSString *)row[@"join_forum"]).length ? [NSString stringWithFormat:@"%@ · %@", row[@"join_forum"], addr] : [NSString stringWithFormat:@"%@", addr];
+        self.siteCircleLabel.text = join_forum.length ? [NSString stringWithFormat:@"%@ · %@", join_forum, addr] : [NSString stringWithFormat:@"%@", addr];
     }
+    
 }
 
 /**

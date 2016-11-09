@@ -41,9 +41,15 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.tableHeaderView = self.headerView;
 
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     [self.headerView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerViewDidClick)]];
     [self updateTableView]; // 暂时先这样
     [self loadData];
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)loadData {

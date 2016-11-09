@@ -107,7 +107,6 @@ static CGFloat const XCZPublishTextPhoneButtonMarginX = 16;
             XCZPublishTextPhoneButton *phoneBtn = [[XCZPublishTextPhoneButton alloc] initWithFrame:CGRectMake(phoneBtnX, phoneBtnY, lastPhoneBtn.bounds.size.width, lastPhoneBtn.bounds.size.height)];
             [self addSubview:phoneBtn];
             [self.phoneBtns addObject:phoneBtn];
-//            lastPhoneBtn = phoneBtn;
         }
         
         // 设置代理方法
@@ -156,6 +155,8 @@ static CGFloat const XCZPublishTextPhoneButtonMarginX = 16;
     for (int i = 0; i<self.phoneBtns.count; i++) {
         XCZPublishTextPhoneButton *phoneBtn = self.phoneBtns[i];
         if (phoneBtn.tag == self.selectedPhoneBtnTag) {
+            phoneBtn.imageDict = nil;
+            [phoneBtn setImage:nil forState:UIControlStateNormal];
             [self.phoneBtns removeObject:phoneBtn];
             [phoneBtn removeFromSuperview];
             phoneBtn = nil;
@@ -190,6 +191,17 @@ static CGFloat const XCZPublishTextPhoneButtonMarginX = 16;
         CGFloat height = CGRectGetMaxY(lastPhoneBtn.frame);
         if ([self.delegate respondsToSelector:@selector(textPhoneView:lastPhoneButton:height:)]) {
             [self.delegate textPhoneView:self lastPhoneButton:[self.phoneBtns lastObject] height:height];
+        }
+
+        NSMutableArray *newPhoneBtns = [NSMutableArray array];
+        for (UIView *subView in self.subviews) {
+            if ([subView isKindOfClass:[XCZPublishTextPhoneButton class]]) {
+                XCZPublishTextPhoneButton *phoneBtn = (XCZPublishTextPhoneButton *)subView;
+                [newPhoneBtns addObject:phoneBtn];
+            }
+        }
+        if ([self.delegate respondsToSelector:@selector(textPhoneView:phoneBtnRemoveOver:)]) {
+            [self.delegate textPhoneView:self phoneBtnRemoveOver:newPhoneBtns];
         }
     } completion:^(BOOL finished) {
         [MBProgressHUD ZHMShowSuccess:@"已删除"];

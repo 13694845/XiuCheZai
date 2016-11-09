@@ -43,18 +43,21 @@
 @property (nonatomic, strong) NSDictionary *artDict; // 主界面主数据
 @property (assign, nonatomic) int zan; // 是否已经点过赞了
 @property (nonatomic, copy) NSString *postContentText; // 发出的内容
-@property (assign, nonatomic) int goType; // 1:bottomTextField上遮盖被点击 2:点赞按钮被点击 3:发送按钮被点击
+@property (assign, nonatomic) int goType; // 1:bottomTextField上遮盖被点击 2:点赞按钮被点击 3:发送按钮被点击 4:获取文章作者id
+@property (nonatomic, copy) NSString *tieziUser_id;
 @property (assign, nonatomic) int loginStatu; // 登录状态, 0为已经登录, 1为未登录
 
 @end
 
 @implementation XCZPersonInfoLookImageViewController
 
+@synthesize artDict = _artDict;
+
 - (void)setCurrentImageNum:(int)currentImageNum
 {
     _currentImageNum = currentImageNum;
     
-    self.navNumLabel.text = [NSString stringWithFormat:@"%d／%ld", currentImageNum, self.share_images.count];
+    self.navNumLabel.text = [NSString stringWithFormat:@"%d／%ld", currentImageNum, (unsigned long)self.share_images.count];
 }
 
 - (void)setZan:(int)zan
@@ -72,31 +75,51 @@
 {
     _loginStatu = loginStatu;
     
+    
+    
      if (self.goType == 1) {
          if (loginStatu) {
              [self goLogining];
+//             self.goType = 4;
          } else {
              [self.textFieldZheGaiView removeFromSuperview];
              self.textFieldZheGaiView = nil;
          }
      } else if (self.goType == 2) {
-         NSDictionary *dict = @{
-                                @"type" : [NSString stringWithFormat:@"%d", self.zan],
-                                @"posts_clazz" : @"1",
-                                @"post_id" : [self.row objectForKey:@"post_id"],
-                                @"host" : self.artDict[@"post_id"]
-                                };
-         loginStatu ?[self goLogining] : [self requestBottomPraise:dict];
+         if (loginStatu) {
+             [self goLogining];
+         } else {
+             NSDictionary *dict = @{
+                                    @"type" : [NSString stringWithFormat:@"%d", self.zan],
+                                    @"posts_clazz" : @"1",
+                                    @"post_id" : [self.row objectForKey:@"post_id"],
+                                    @"host" : self.tieziUser_id
+                                    };
+             [self requestBottomPraise:dict];
+         }
      } else if (self.goType == 3) {
-         NSDictionary *dict = @{
-                                @"type" : @"1",
-                                @"post_id" : self.artDict[@"post_id"],
-                                @"forum_id" : self.artDict[@"forum_id"],
-                                @"reply_content" : self.postContentText,
-                                @"is_anony" : @"0",
-                                };
-         loginStatu ?[self goLogining] : [self requestReplyPost:dict];
+         if (loginStatu) {
+             [self goLogining];
+         } else {
+             NSDictionary *dict = @{
+                                    @"type" : @"1",
+                                    @"post_id" : self.artDict[@"post_id"],
+                                    @"forum_id" : self.artDict[@"forum_id"],
+                                    @"reply_content" : self.postContentText,
+                                    @"is_anony" : @"0",
+                                    };
+             [self requestReplyPost:dict];
+         }
+     } else if (self.goType == 4) {
+         loginStatu ?  : [self requestZZUser_id];
      }
+}
+
+- (void)setArtDict:(NSDictionary *)artDict
+{
+    _artDict = artDict;
+    self.goType = 4;
+    [self requestLoginDetection];
 }
 
 - (NSDictionary *)artDict
@@ -112,6 +135,8 @@
     [super viewDidLoad];
 
     [self setupSubViews];
+    self.goType = 4;
+    [self requestLoginDetection];
     [self requestDetailsNet];
     [self changeNot]; // 通知处理
     
@@ -133,6 +158,10 @@
     
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.tabBarController.tabBar setHidden:YES];
+    
+    if ([self.row objectForKey:@"post_id"]) {
+        [self requestZZUser_id];
+    }
 }
 
 - (void)backViewDidClick
@@ -174,6 +203,22 @@
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error:%@", error);
+    }];
+}
+
+- (void)requestZZUser_id
+{
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/NJsonDispatcher.do"];
+    NSDictionary *parameters = @{
+                                 @"post_id":[self.row objectForKey:@"post_id"],
+                                 @"taskId": @"2665"
+                                 };
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSString *tieziUser_id = [[[[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"] firstObject] objectForKey:@"user_id"];
+        self.tieziUser_id = tieziUser_id;
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error:%@", error);
+        //        [self endHeaderRefresh];
     }];
 }
 
@@ -273,7 +318,6 @@
 #pragma mark - 触发事件点击
 - (void)bottomPraiseViewDidClick
 {
-    NSLog(@"点赞按钮被点击");
     self.goType = 2;
     [self requestLoginDetection];
 }

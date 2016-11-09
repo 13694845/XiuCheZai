@@ -16,6 +16,7 @@
 
 - (void)textPhoneView:(XCZPublishTextPhoneView *)textPhoneView phoneBtns:(NSArray *)phoneBtns;
 - (void)textPhoneView:(XCZPublishTextPhoneView *)textPhoneView phoneBtnDidClick:(XCZPublishTextPhoneButton *)selectedPhoneButton;
+- (void)textPhoneView:(XCZPublishTextPhoneView *)textPhoneView phoneBtnRemoveOver:(NSArray *)phoneBtns;
 - (void)textPhoneView:(XCZPublishTextPhoneView *)textPhoneView lastPhoneButton:(XCZPublishTextPhoneButton *)lastPhoneButton  height:(CGFloat)height;
 @end
 

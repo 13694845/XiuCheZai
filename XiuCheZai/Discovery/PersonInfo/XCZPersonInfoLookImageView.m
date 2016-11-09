@@ -52,7 +52,6 @@
     [self.scrollView addSubview:self.rightImageView];
     self.pageControl = [[UIPageControl alloc] init];
     [self addSubview:self.pageControl];
-    
     [self reloadData];
 }
 
@@ -72,9 +71,10 @@
 }
 
 - (void)resetImages {
-    [self.leftImageView sd_setImageWithURL:[self imageURLLeftIndex:self.index]];
-    [self.currentImageView sd_setImageWithURL:[self imageURLAtIndex:self.index]];
-    [self.rightImageView sd_setImageWithURL:[self imageURLRightIndex:self.index]];
+    [self.leftImageView sd_setImageWithURL:[self imageURLLeftIndex:self.index] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
+    [self.currentImageView sd_setImageWithURL:[self imageURLAtIndex:self.index] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
+    [self.rightImageView sd_setImageWithURL:[self imageURLRightIndex:self.index] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
+    
     self.scrollView.contentOffset = self.currentImageView.frame.origin;
     self.pageControl.currentPage = self.index;
     if ([self.delegate respondsToSelector:@selector(bannerView:currentImageNum:currentImage:)]) {
@@ -87,7 +87,7 @@
     
     NSString *chuanruUrlStr = self.banners[index];
     if (![chuanruUrlStr containsString:@"http"]) {
-        chuanruUrlStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], chuanruUrlStr];
+        chuanruUrlStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], chuanruUrlStr];
     }
     return [NSURL URLWithString:chuanruUrlStr];
 }

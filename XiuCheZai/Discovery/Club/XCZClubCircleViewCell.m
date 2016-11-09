@@ -99,11 +99,12 @@
         self.headerNameLabel.frame = CGRectMake(64, 12, headerNameLabelSize.width, headerNameLabelSize.height);
         self.headerIconView.frame = CGRectMake(CGRectGetMaxX(self.headerNameLabel.frame), self.headerNameLabel.frame.origin.y, self.headerNameLabel.bounds.size.height, self.headerNameLabel.bounds.size.height);
         
-       NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:row[@"province_id"] cityId:row[@"city_id"] andTownId:row[@"area_id"]];        
+        NSString *user_forum_name = ((NSString *)_row[@"user_forum_name"]).length ? _row[@"user_forum_name"] : @"修车仔";
+        NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:@"" cityId:_row[@"city_id"] andTownId:_row[@"area_id"]];
         if (!addr.length) {
-            self.headerCityLabel.text = [NSString stringWithFormat:@"%@", _row[@"forum_name"]];
+            self.headerCityLabel.text = [NSString stringWithFormat:@"%@", user_forum_name];
         } else {
-            self.headerCityLabel.text = [NSString stringWithFormat:@"%@ · %@", _row[@"forum_name"], addr];
+            self.headerCityLabel.text = [NSString stringWithFormat:@"%@ · %@", user_forum_name, addr];
         }
         
         self.timeLabel.text = [NSString stringWithFormat:@"时间:   %@", row[@"create_time"]];

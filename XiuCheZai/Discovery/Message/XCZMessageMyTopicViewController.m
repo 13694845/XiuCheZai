@@ -64,7 +64,12 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+}
 
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -72,6 +77,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     self.navigationController.navigationBar.translucent = NO;
+    self.currentPage = 1;
     [self requestUserIdNet];
 }
 
@@ -296,7 +302,7 @@
 {
     NSMutableArray *shuchuArray = [NSMutableArray array];
     for (NSString *imageDStr in imageArray) {
-        [shuchuArray addObject:[NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], imageDStr]];
+        [shuchuArray addObject:[NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], imageDStr]];
     }
     return shuchuArray;
 }

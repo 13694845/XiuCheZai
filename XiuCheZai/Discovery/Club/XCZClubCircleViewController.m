@@ -113,8 +113,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
     
-//    NSLog(@"rows:%@", rows);
-    
     [self endHeaderRefresh];
     [self endFooterRefresh];
     if (rows.count) {
@@ -123,7 +121,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
         [self updateTableView];
         [self endHeaderRefresh];
         [self endFooterRefresh];
-        self.currentPage++;
+        
     } else {
         [self.noCellLabel removeFromSuperview];
         self.noCellLabel = nil;
@@ -135,6 +133,12 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
         [self.tableView addSubview:noCellLabel];
         self.noCellLabel = noCellLabel;
     }
+}
+
+- (void)setHuizhangRows:(NSMutableArray *)huizhangRows
+{
+    _huizhangRows = huizhangRows;
+    [self.tableView reloadData];
 }
 
 - (NSMutableArray *)rows {
@@ -176,11 +180,17 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     UIBarButtonItem *navMassageBtnItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_myfinding_mine"] style:UIBarButtonItemStylePlain target:self action:@selector(navMassageBtnItemDidClick)];
     UIBarButtonItem *navAddBtnItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_add"] style:UIBarButtonItemStylePlain target:self action:@selector(navAddBtnItemDidClick)];
     [self.navigationItem setRightBarButtonItems:@[navMassageBtnItem, navAddBtnItem]];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshLoadHeadData:) name:@"XCZClubCircleUnsubscribeViewControllerToXCZClubCircleViewControllerRefreshNot" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupHeight:) name:@"clubCircleViewMemberCellHeightToVC" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellMZHeightNot:) name:@"XCZCircleTableViewWenZiCellWZHeightToVC" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellBHeightNot:) name:@"XCZCircleTableViewLeafletsImageCellBHeightToVC" object:nil];
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)refreshLoadHeadData:(NSNotification *)notification
@@ -197,6 +207,11 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 //         NSLog(@"responseObject:%@", responseObject);
               self.banners = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
      } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+}
+
+- (void)refreshOneData {
+    self.currentPage = 1;
+    [self refreshData];
 }
 
 - (void)loadingCellData {
@@ -243,11 +258,12 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 
 - (void)loadingMore
 {
+    self.currentPage++;
     if (self.best == 0) {
         [self loadingCellData];
     } else if (self.best == 1) {
         [self loadingCellData];
-    } else {
+    } else if (self.best == 2) {
         [self loadingMemberCellData];
     }
 }
@@ -266,10 +282,23 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
         NSArray *rows = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
         NSMutableArray *rowMutables = [NSMutableArray array];
         if (self.currentPage == 1) {
+            self.topRows = nil;
+            for (NSMutableDictionary *dict in rows) {
+                if ([[dict objectForKey:@"is_top"] intValue] == 1) {
+//                    NSLog(@"dictdictdict:%@", dict);
+                    [self.topRows addObject:dict];
+                }
+            }
             rowMutables = [NSMutableArray arrayWithArray:rows];
         } else {
+            for (NSMutableDictionary *dict in rows) {
+                if ([[dict objectForKey:@"is_top"] intValue] == 1) {
+                    [self.topRows addObject:dict];
+                }
+            }
             rowMutables = [[self.rows arrayByAddingObjectsFromArray:rows] mutableCopy];
         }
+
         if (self.best == 0) {
             // 将is_top的帖子加入置顶
             NSMutableArray *topRows = [NSMutableArray array];
@@ -278,15 +307,16 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
                     [topRows addObject:dict];
                 }
             }
-            self.topRows = topRows;
             NSMutableArray *rowZJs = [NSMutableArray array];
-            [rowZJs addObjectsFromArray:self.topRows];
+//            [rowZJs addObjectsFromArray:self.topRows];
             [rowZJs addObjectsFromArray:rowMutables];
             self.rows = rowZJs;
         } else {
             self.rows = rowMutables;
         }
-
+        
+//        NSLog(@"rows2:%ld, currentPage:%d", self.rows.count, self.currentPage);
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error:%@", error);
         [self endHeaderRefresh];
@@ -302,6 +332,13 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
             NSArray *rowsArray = [NSArray array];
             NSArray *huizhangArray = [NSArray array];
     for (NSDictionary *dict in [responseObject objectForKey:@"data"]) {
+        if ([dict[@"taskId"] integerValue] == 4582) { // 会长数据
+            huizhangArray = dict[@"rows"];
+            self.huizhangRows = [huizhangArray mutableCopy];
+            [self endHeaderRefresh];
+            [self endFooterRefresh];
+        }
+        
         if ([dict[@"taskId"] integerValue] == 4579) { // 全部成员数据
             rowsArray = dict[@"rows"];
             if (rowsArray.count) {
@@ -314,12 +351,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
                 [self endHeaderRefresh];
                 [self endFooterRefresh];
             }
-        }
-        if ([dict[@"taskId"] integerValue] == 4582) { // 会长数据
-            huizhangArray = dict[@"rows"];
-            self.huizhangRows = [huizhangArray mutableCopy];
-            [self endHeaderRefresh];
-            [self endFooterRefresh];
         }
     }
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -379,7 +410,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
         NSDictionary *row = [self.rows objectAtIndex:indexPath.row];
         NSString *post_clazz = [[self.rows objectAtIndex:indexPath.row] objectForKey:@"post_clazz"];
         height = [self computeHeight:post_clazz andRow:row andIndexPath:indexPath];
-    } else { // 成员
+    } else if (self.best == 2) { // 成员
         if (self.huizhangRows.count) {
             if (indexPath.row == 0) {
                 height = 98;
@@ -488,6 +519,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 
 - (void)clubCircleViewMemberCell:(XCZClubCircleViewMemberCell *)memberCell cellOneViewDidClick:(UIView *)cellOneView
 {
+//    NSLog(@"点击了哈哈哈:%@", memberCell.hzRow);
     [self jumpToPersonInfoViewController:memberCell.hzRow[@"user_id"]];
 }
 
@@ -878,7 +910,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 - (void)startHeaderRefresh:(UIScrollView *)scrollView
 {
     [self.indicatorHeaderView startAnimating];
-    [self refreshData];
+    [self refreshOneData];
 }
 
 - (void)startFooterRefresh:(UIScrollView *)scrollView

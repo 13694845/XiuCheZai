@@ -93,13 +93,12 @@
         [self.headerIconView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], _row[@"brand_logo"]]] placeholderImage:nil];
     }
     
-   
-     NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:_row[@"province_id"] cityId:_row[@"city_id"] andTownId:_row[@"area_id"]];
-    
+    NSString *forum_name = ((NSString *)_row[@"forum_name"]).length ? _row[@"forum_name"] : @"修车仔";
+     NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:@"" cityId:_row[@"city_id"] andTownId:_row[@"area_id"]];
     if (!addr.length) {
-        self.brandsSuosuLabel.text = [NSString stringWithFormat:@"%@", _row[@"forum_name"]];
+        self.brandsSuosuLabel.text = [NSString stringWithFormat:@"%@", forum_name];
     } else {
-        self.brandsSuosuLabel.text = [NSString stringWithFormat:@"%@ · %@", _row[@"forum_name"], addr];
+        self.brandsSuosuLabel.text = [NSString stringWithFormat:@"%@ · %@", forum_name, addr];
     }
     self.contentLabel.text = [NSString stringWithFormat:@"%@: %@", @"赞了我的帖子", _row[@"content"]];
     

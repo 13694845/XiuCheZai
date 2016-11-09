@@ -45,6 +45,12 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -113,6 +119,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XCZMessageChatTabulationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+//    cell.numLabel.text = @"56";
     cell.row = self.rows[indexPath.row];
     return cell;
 }

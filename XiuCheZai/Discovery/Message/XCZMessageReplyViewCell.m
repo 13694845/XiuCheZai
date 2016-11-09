@@ -104,17 +104,17 @@
         [self.headerIconView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], _row[@"brand_logo"]]] placeholderImage:nil];
     }
 
-    NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:_row[@"province_id"] cityId:_row[@"city_id"] andTownId:_row[@"area_id"]];
-    
+     NSString *forum_name = ((NSString *)_row[@"forum_name"]).length ? _row[@"forum_name"] : @"修车仔";
+    NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:@"" cityId:_row[@"city_id"] andTownId:_row[@"area_id"]];
     if (!addr.length) {
-        self.brandsSuosuLabel.text = [NSString stringWithFormat:@"%@", _row[@"forum_name"]];
+        self.brandsSuosuLabel.text = [NSString stringWithFormat:@"%@", forum_name];
     } else {
-        self.brandsSuosuLabel.text = [NSString stringWithFormat:@"%@ · %@", _row[@"forum_name"], addr];
+        self.brandsSuosuLabel.text = [NSString stringWithFormat:@"%@ · %@", forum_name, addr];
     }
-
-    self.titleLabel.text = _row[@"content"];
+    
+    self.titleLabel.text = _row[@"reply_content"];
     NSString *replyShowText = [self.row[@"clazz"] intValue] == 1 ? @"回复我的主题" : @"回复我的评论";
-    self.replyTextLabel.text = [NSString stringWithFormat:@"%@: %@", replyShowText, _row[@"reply_content"]];
+    self.replyTextLabel.text = [NSString stringWithFormat:@"%@: %@", replyShowText, _row[@"content"]];
     
     CGSize headerNameLabelSize = [self.headerNameLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width - 100, 50) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.headerNameLabel.font} context:nil].size;
     self.headerNameLabel.frame = CGRectMake(64, 12, headerNameLabelSize.width, headerNameLabelSize.height);

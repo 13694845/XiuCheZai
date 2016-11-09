@@ -78,8 +78,8 @@
         NSDictionary *dict = @{
                                @"type" : @"0",
                                @"posts_clazz" : @"2",
-                               @"post_id" : self.publisher_id,
-                               @"host" : self.post_id
+                               @"post_id" : self.reply_id,
+                               @"host" : self.publisher_id
                                };
         [self requestPraise:dict];
     } else if (self.goType == 6) {
@@ -150,9 +150,14 @@
     
     self.bottomTextViewPlaceholderLabel.userInteractionEnabled = YES;
     [self.bottomTextViewPlaceholderLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomTextViewPlaceholderLabelDidClick)]];
-    
+     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     [self.expressionBtn addTarget:self action:@selector(expressionBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
     [self.sendBtn addTarget:self action:@selector(sendBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)createTextFieldZheGaiView

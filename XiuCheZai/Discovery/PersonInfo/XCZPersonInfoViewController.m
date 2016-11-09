@@ -82,10 +82,7 @@
 
 - (void)setRows:(NSMutableArray *)rows {
     _rows = rows;
-    
-    NSArray *ar = @[rows[0], rows[0]];
-    _rows = [ar mutableCopy];
-    
+
     [self updateTableView];
 }
 
@@ -345,18 +342,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *yxianCell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *identifier;
     NSArray *list = [self.rows[indexPath.section] objectForKey:@"list"];
-    
-//    
-//    NSLog(@"self.row.count: %ld", self.rows.count);
-//    
     NSDictionary *rowY = list[indexPath.row];
     NSArray *imageArray = [rowY[@"share_image"] componentsSeparatedByString:@","];
-    NSLog(@"imageArray:%@", imageArray);
     imageArray = [self changeImageFullPath:imageArray];
-    
     NSMutableDictionary *row = [NSMutableDictionary dictionaryWithDictionary:rowY];
     [row addEntriesFromDictionary:@{@"images": imageArray}];
     [row addEntriesFromDictionary:[self changeTime:row[@"create_time"]]];
@@ -376,7 +366,6 @@
     }
 
     XCZPersonInfoViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%@", identifier]];
-//    for (UIView *cellView in cell.subviews) [cellView removeFromSuperview];
     cell.indexPath = indexPath;
     cell.row = row;
     return cell;
@@ -518,15 +507,6 @@
  */
 - (NSMutableArray *)changeImage:(NSString *)imageStrs andImageArray:(NSMutableArray *)imageArray
 {
-    NSString *sdfj  = @"";
-    
-    
-//    NSArray *arr = @[@"", @""];
-//    
-//    NSString *s = [arr componentsJoinedByString:@"|"]
-    
-    
-    
     NSMutableArray *tempArray = [NSMutableArray array];
     NSRange range = [imageStrs rangeOfString:@","];
     if (range.length) {
