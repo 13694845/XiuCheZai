@@ -10,18 +10,31 @@
 #import <CoreLocation/CoreLocation.h>
 #import "WebViewController.h"
 #import "Config.h"
+#import "AFNetworking.h"
 
 @interface MenuViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
+
 @end
 
 @implementation MenuViewController
 
+- (AFHTTPSessionManager *)manager {
+    if (!_manager) {
+        _manager = [AFHTTPSessionManager manager];
+        [_manager.requestSerializer setValue:[NSString stringWithFormat:@"%@ %@/%@",
+                                              [_manager.requestSerializer valueForHTTPHeaderField:@"User-Agent"], @"APP8673h", [Config version]] forHTTPHeaderField:@"User-Agent"];
+    }
+    return _manager;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.cityLabel.text = nil;
+    /*
     NSDictionary *userlocation = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
     double longitude = [[userlocation objectForKey:@"longitude"] doubleValue];
     double latitude = [[userlocation objectForKey:@"latitude"] doubleValue];
@@ -31,6 +44,16 @@
         CLPlacemark *placemark = placemarks.firstObject;
         self.cityLabel.text = [NSString stringWithFormat:@"%@", placemark.subLocality ? : @""];
     }];
+     */
+    NSDictionary *locationInfo = [[NSUserDefaults standardUserDefaults] objectForKey:@"userLocation"];
+    NSString *longitude = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"longitude"] doubleValue]];
+    NSString *latitude = [NSString stringWithFormat:@"%.6f", [[locationInfo objectForKey:@"latitude"] doubleValue]];
+    NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/CityLocation.do"];
+    NSDictionary *parameters = ![longitude isEqualToString:@"0.000000"] ? @{@"lng":longitude, @"lat":latitude, @"type":@"1"} : @{};
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSString *district = responseObject[@"district"];
+        self.cityLabel.text = [NSString stringWithFormat:@"%@", district ? : @""];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
 - (IBAction)toMenu01:(id)sender {
