@@ -66,7 +66,12 @@
     _artDict = artDict;
     
 //    NSLog(@"_clazz_clazz:%d", _clazz);
-    self.clazz == 1 ? [self jumpToDetailsVC] : [self jumpToDetailALayerVC];
+    if (artDict) {
+        self.clazz == 1 ? [self jumpToDetailsVC] : [self jumpToDetailALayerVC];
+    } else {
+        [MBProgressHUD ZHMShowError:@"帖子不存在或已被删除"];
+    }
+    
 }
 
 - (void)setRows:(NSMutableArray *)rows {

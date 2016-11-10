@@ -85,9 +85,9 @@
         }
     } else {
         if (_row[@"nick"] && ![_row[@"nick"] isEqualToString:@""]) {
-           self.headerNameLabel.text = [NSString stringWithFormat:@"%@.%@", _row[@"nick"], _row[@"brand_name"]];
+           self.headerNameLabel.text = [NSString stringWithFormat:@"%@", _row[@"nick"]];
         } else {
-           self.headerNameLabel.text = [NSString stringWithFormat:@"%@.%@", _row[@"login_name"], _row[@"brand_name"]];
+           self.headerNameLabel.text = [NSString stringWithFormat:@"%@", _row[@"login_name"]];
         }
         
         [self.headerIconView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], _row[@"brand_logo"]]] placeholderImage:nil];

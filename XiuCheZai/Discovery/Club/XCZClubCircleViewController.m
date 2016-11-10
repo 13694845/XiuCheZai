@@ -211,7 +211,14 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 
 - (void)refreshOneData {
     self.currentPage = 1;
-    [self refreshData];
+    
+    if (self.best == 0) {
+        [self loadingCellData];
+    } else if (self.best == 1) {
+        [self loadingCellData];
+    } else if (self.best == 2) {
+        [self loadingMemberCellData];
+    }
 }
 
 - (void)loadingCellData {
@@ -328,6 +335,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 {
         NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/BbsUserAction.do"];
         NSDictionary *parameters = @{@"type":[NSString stringWithFormat:@"%d", 0], @"forum_id": self.forum_id, @"page":[NSString stringWithFormat:@"%d", self.currentPage], @"pagesize":[NSString stringWithFormat:@"%d", 10]};
+
         [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
             NSArray *rowsArray = [NSArray array];
             NSArray *huizhangArray = [NSArray array];

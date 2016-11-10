@@ -71,6 +71,11 @@
     [self.cellContentView addSubview:timeLabel];
     self.timeLabel = timeLabel;
     
+    UIView *spView = self.danziImageView.superview;
+    spView.backgroundColor = [UIColor whiteColor];
+    spView.layer.borderWidth = 1.0;
+    spView.layer.borderColor = [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0].CGColor;
+    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.cellHeaderView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellHeaderViewDidClick:)]];
     [self.cellContentView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellContentViewDidClick:)]];

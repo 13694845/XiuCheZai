@@ -30,30 +30,30 @@
 - (void)setCurrentLocation:(NSDictionary *)currentLocation {
     _currentLocation = currentLocation;
 
-//    NSLog(@"", currentLocation);
+  
     
         self.selectedProvinceId = _currentLocation[@"provinceid"];
         self.selectedCityId = _currentLocation[@"cityid"];
         self.selectedTownId = _currentLocation[@"townid"];
 
-    if ([self.selectedProvinceId isEqual:[NSNull null]]) {
-        self.selectedProvinceId = @"";
-    }
-    if ([self.selectedCityId isEqual:[NSNull null]]) {
-        self.selectedCityId = @"";
-    }
-    if ([self.selectedTownId isEqual:[NSNull null]]) {
-        self.selectedTownId = @"";
-    }
-    if (!self.selectedProvinceId.length) {
-         self.selectedProvinceId = @"330000";
-    }
-    if (!self.selectedCityId.length) {
-        self.selectedCityId = @"331000";
-    }
-    if (!self.selectedTownId.length) {
-        self.selectedTownId = @"331001";
-    }
+//    if ([self.selectedProvinceId isEqual:[NSNull null]]) {
+//        self.selectedProvinceId = @"";
+//    }
+//    if ([self.selectedCityId isEqual:[NSNull null]]) {
+//        self.selectedCityId = @"";
+//    }
+//    if ([self.selectedTownId isEqual:[NSNull null]]) {
+//        self.selectedTownId = @"";
+//    }
+//    if (!self.selectedProvinceId.length) {
+//         self.selectedProvinceId = @"330000";
+//    }
+//    if (!self.selectedCityId.length) {
+//        self.selectedCityId = @"331000";
+//    }
+//    if (!self.selectedTownId.length) {
+//        self.selectedTownId = @"331001";
+//    }
     for (NSDictionary *province in self.provinces) {
         if ([province[@"number"] isEqualToString:self.selectedProvinceId]) {
             [self.pickerView selectRow:[self.provinces indexOfObject:province] inComponent:0 animated:YES];
@@ -266,15 +266,11 @@
     NSDictionary *selectedCityDict = self.cities[[self.pickerView selectedRowInComponent:1]];
     NSDictionary *selectedTownDict = self.towns[[self.pickerView selectedRowInComponent:2]];
 
-    
-    
     NSDictionary *selectedLocation = @{
                                            @"selectedProvinceDict": selectedProvinceDict,
                                            @"selectedCityDict": selectedCityDict,
                                            @"selectedTownDict": selectedTownDict,
                                        };
-    
-    
     if ([self.delegate respondsToSelector:@selector(publishSelectedCityView:headerRightBtnDidClickWithSelectedLocation:)]) {
         [self.delegate publishSelectedCityView:self headerRightBtnDidClickWithSelectedLocation:selectedLocation];
     }

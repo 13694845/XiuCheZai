@@ -29,7 +29,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.08];
+//        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.08];
+        self.backgroundColor = [UIColor clearColor];
         
         UIView *commentView = [[UIView alloc] init];
         [self addSubview:commentView];

@@ -56,6 +56,7 @@
     UILabel *forum_nameLabel = [[UILabel alloc] init];
     forum_nameLabel.backgroundColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0];
     forum_nameLabel.textColor = [UIColor whiteColor];
+    forum_nameLabel.textAlignment = NSTextAlignmentCenter;
     forum_nameLabel.font = [UIFont systemFontOfSize:10];
     [self.cellContentView addSubview:forum_nameLabel];
     self.forum_nameLabel = forum_nameLabel;
@@ -65,6 +66,12 @@
     timeLabel.textColor = [UIColor colorWithRed:164/255.0 green:164/255.0 blue:164/255.0 alpha:1.0];
     [self.cellContentView addSubview:timeLabel];
     self.timeLabel = timeLabel;
+    
+    UIView *spView = self.danziImageView.superview;
+    spView.backgroundColor = [UIColor whiteColor];
+    spView.layer.borderWidth = 1.0;
+    spView.layer.borderColor = [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0].CGColor;
+    
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.cellHeaderView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellHeaderViewDidClick)]];
@@ -78,9 +85,7 @@
 - (void)setRow:(NSDictionary *)row
 {
     _row = row;
-    
-    NSLog(@"最新:%@", row);
-    
+
     NSString *avatar;
     if ([row[@"avatar"] containsString:@"http"]) {
         avatar = row[@"avatar"];
@@ -132,7 +137,7 @@
 
     self.forum_nameLabel.text = row[@"forum_name"];
     CGSize forum_nameLabelSize = [self.forum_nameLabel.text boundingRectWithSize:CGSizeMake((self.contentView.bounds.size.width - 64) * 0.2, 14) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.forum_nameLabel.font} context:nil].size;
-    self.forum_nameLabel.frame = CGRectMake(64, self.cellContentView.bounds.size.height - 1.0 - 20.5, forum_nameLabelSize.width, 14);
+    self.forum_nameLabel.frame = CGRectMake(64, self.cellContentView.bounds.size.height - 1.0 - 20.5, forum_nameLabelSize.width + 4, 14);
     
     NSString *creatTime = [XCZTimeTools timeWithTimeIntervalString:self.row[@"create_time"]];
     NSString *showTime = [XCZTimeTools formateDate:creatTime withFormate:@"yyyy-MM-dd HH:mm:ss"];

@@ -48,6 +48,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewHeight;
 @property (assign, nonatomic) int gongJinru;
 @property (assign, nonatomic) BOOL isExpressionViewShow;
+@property (nonatomic, strong) UITextView *zuihouTextView;
+@property (assign, nonatomic) int lastSelected;
+
 @property (nonatomic, weak) XCZKeyboardExpressionView *expressionView;
 
 @property (assign, nonatomic) int selectedBottomBtn;  // 1为表情 2为输入框
@@ -224,6 +227,7 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ReplyPostAction.do"];
     NSDictionary *parameters = dict;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         if ([[responseObject objectForKey:@"error"] intValue] == 201) {
             [MBProgressHUD ZHMShowSuccess:@"评论成功"];
             [self loadData];
@@ -339,6 +343,8 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
+    [self.zeGaiView removeFromSuperview];
+    self.zeGaiView = nil;
     CGRect viewRect = self.view.frame;
     viewRect.origin.y = 64;
     [UIView animateWithDuration:0.3 animations:^{
@@ -412,7 +418,10 @@
     } else {
         self.bottomTextViewPlaceholderLabel.text = @"回复 用户名:";
     }
+  
+    self.postContentText = [self.bottomTextView fullTextWithExpression];
     
+//    NSLog(@"attributedTextattributedTextss:%@", textView.attributedText);
     // 处理textView及inputView跟随文本高度变化而变化
 //    NSLog(@"bottomViewHeight:%@", self.bottomViewHeight);
     CGSize contentSize = textView.contentSize;
@@ -450,7 +459,9 @@
 
 - (void)expressionView:(XCZKeyboardExpressionView *)expressionView exBtnDidClick:(XCZExBtn *)exBtn
 {
-    if (![exBtn.expression[@"name"] isEqualToString:@"compose_emotion_delete"]) { // 点击的非叉叉
+    self.lastSelected = 1;
+    if (![exBtn.expression[@"facePath"] isEqualToString:@"compose_emotion_delete"]) { // 点击的非叉叉
+        self.bottomTextViewPlaceholderLabel.text = @"";
        [self.bottomTextView appendEmotion:exBtn.expression];
        self.postContentText = [self.bottomTextView fullTextWithExpression];
     } else { // 点击的是x
@@ -479,17 +490,6 @@
         }];
         self.postContentText = [self.bottomTextView fullTextWithExpression];
     }
-    
-//    NSLog(@"expression:%@", exBtn.expression);
-   
-//     NSMutableString *string = [NSMutableString string];
-//    [self.bottomTextView.attributedText enumerateAttributesInRange:NSMakeRange(0, self.bottomTextView.attributedText.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
-//        
-//        [string appendString:[NSString stringWithFormat:@"[%@]", [UIImage imageNamed:exBtn.expression[@"name"]]]];
-////        NSLog(@"string:%@", string);
-//        self.bottomTextView = string;
-//    }];
-    
 }
 
 - (void)expressionBtnDidClick
@@ -497,8 +497,8 @@
     self.selectedBottomBtn = 1;
     XCZKeyboardExpressionView *expressionView = [[XCZKeyboardExpressionView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 180)];
     expressionView.delegate = self;
-    NSArray *emotes = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Emotes.plist" ofType:nil]]; // 取出表情包
-    expressionView.expressions = [emotes firstObject][@"expressions"];
+    NSDictionary *emojiDict = [self jsonEmojiToDictWithName:@"DiscoveryEmojiImages" andType:@"json"];
+    expressionView.expressions =  emojiDict[@"emojiImages"];
     
     if (!self.isExpressionViewShow) {
         self.bottomTextView.inputView = expressionView;
@@ -507,6 +507,13 @@
     } else {
         [self.bottomTextView resignFirstResponder];
     }
+}
+
+- (NSDictionary *)jsonEmojiToDictWithName:(NSString *)name andType:(NSString *)type
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:type];
+    NSData *jsonData = [NSData dataWithContentsOfFile:path options:NSDataReadingMappedIfSafe error:nil];
+    return [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
 }
 
 #pragma mark - 去登录等方法
@@ -568,7 +575,7 @@
     [self.view endEditing:YES];
     
     self.goType = 3;
-    self.postContentText = [self.bottomTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    self.postContentText = [self.postContentText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (!self.postContentText.length) {
         [MBProgressHUD ZHMShowError:@"说点再发送吧"];
         return;

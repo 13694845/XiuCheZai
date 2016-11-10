@@ -66,7 +66,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIButton *collectionBtn;
 @property (weak, nonatomic) IBOutlet UIButton *praiseBtn;
-
+@property (nonatomic, weak) UIWebView *newsTitleView;
 
 
 @end
@@ -594,42 +594,49 @@
             [self createDatePublishRow]; // 创建时间这行
             [self createTextContentView]; // 创建正文内容
         } else {
-            [self createDatePublishRow]; // 创建时间这行
             [self createTextContentView]; // 创建正文内容
         }
-        [self setupSurplusView]; // 加载下面的控件
     } else if ([self.reuseIdentifier isEqualToString:@"CellA"] || [self.reuseIdentifier isEqualToString:@"CellB"] || [self.reuseIdentifier isEqualToString:@"CellA1"] || [self.reuseIdentifier isEqualToString:@"CellA2"]) { // 图文混排(没有商品)
-        [self createNewsTitleLabel];
-//        if (self.type != 1) {
+        
+        if (((NSString *)self.artDict[@"topic"]).length) {
+            [self createNewsTitleLabel];
+            [self createDatePublishRow]; // 创建时间这行
             [self createTextContentView];
-            [self setupImagesView];
-//        }
+        } else {
+            [self createNewsTitleLabel];
+            [self createTextContentView];
+        }
     } else if ([self.reuseIdentifier isEqualToString:@"CellC"] || [self.reuseIdentifier isEqualToString:@"CellC1"] || [self.reuseIdentifier isEqualToString:@"CellC2"] || [self.reuseIdentifier isEqualToString:@"CellC3"]) { // 含商品的图文混排
         [self createNewsTitleLabel];
-        [self createDatePublishRow]; // 创建时间这行
         [self setupGoodsView];
         [self createTextContentView];
-        if (((NSString *)self.artDict[@"share_image"]).length) {
-            [self setupImagesView];
-        } else {
-            [self setupAdmiredView]; // 设置点赞
-            [self setupSurplusView]; // 加载下面的控件
-        }
     }
     self.scrollView.contentSize = self.contentView.bounds.size;
 }
 
 - (void)createDatePublishRow
 {
+    UILabel *bankuaiLabel = [[UILabel alloc] init];
+    bankuaiLabel.backgroundColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0];
+    NSString *forum_name = ((NSString *)self.artDict[@"forum_name"]).length ? self.artDict[@"forum_name"] : @"修车仔";
+    bankuaiLabel.text = forum_name;
+    bankuaiLabel.textColor = [UIColor whiteColor];
+    bankuaiLabel.textAlignment = NSTextAlignmentCenter;
+    bankuaiLabel.font = [UIFont systemFontOfSize:10];
+    [self.contentView addSubview:bankuaiLabel];
+    
     UILabel *publishDateLabel = [[UILabel alloc] init];
     publishDateLabel.text = [XCZTimeTools formateDatePicture:[XCZTimeTools timeWithTimeIntervalString:self.artDict[@"create_time"]] withFormate:@"YYYY-MM-dd HH:mm:ss"];
-    
     publishDateLabel.numberOfLines = 1;
     publishDateLabel.font = [UIFont systemFontOfSize:10];
     publishDateLabel.textColor = kXCTIMEANDAUXILIARYTEXTCOLOR;
     [self.contentView addSubview:publishDateLabel];
+    
+    CGSize bankuaiLabelSize = [bankuaiLabel.text boundingRectWithSize:CGSizeMake(self.contentView.bounds.size.width * 0.5, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : bankuaiLabel.font} context:nil].size;
+    bankuaiLabel.frame = CGRectMake(XCZNewDetailRemarkRowMarginX, self.height + XCZNewDetailRemarkRowMarginY * 0.5, bankuaiLabelSize.width + 4, bankuaiLabelSize.height + 2);
+    
     CGSize publishDateLabelSize = [publishDateLabel.text boundingRectWithSize:CGSizeMake((self.contentView.bounds.size.width - 4 * XCZNewDetailRemarkRowMarginX) * 0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : publishDateLabel.font} context:nil].size;
-    publishDateLabel.frame = CGRectMake(XCZNewDetailRemarkRowMarginX * 2, self.height + XCZNewDetailRemarkRowMarginY, publishDateLabelSize.width, publishDateLabelSize.height);
+    publishDateLabel.frame = CGRectMake(CGRectGetMaxX(bankuaiLabel.frame) + XCZNewDetailRemarkRowMarginX, bankuaiLabel.frame.origin.y + 1, publishDateLabelSize.width, publishDateLabelSize.height);
     self.publishDateLabel = publishDateLabel;
     self.height += publishDateLabelSize.height + XCZNewDetailRemarkRowMarginY;
 }
@@ -651,15 +658,65 @@
 
 - (void)createTextContentView
 {
-    UILabel *newsTitleLabel = [[UILabel alloc] init];
-    newsTitleLabel.numberOfLines = 0;
-    newsTitleLabel.font = [UIFont systemFontOfSize:14];
-    newsTitleLabel.text = self.artDict[@"content"];
-    newsTitleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
-    CGSize newsTitleLabelSize = [newsTitleLabel.text boundingRectWithSize:CGSizeMake(self.contentView.bounds.size.width - 16, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : newsTitleLabel.font} context:nil].size;
-    newsTitleLabel.frame = CGRectMake(XCZNewDetailRemarkRowMarginX * 2, self.height + XCZNewDetailRemarkRowMarginY, self.contentView.bounds.size.width - 4 * XCZNewDetailRemarkRowMarginX, newsTitleLabelSize.height);
-    [self.contentView addSubview:newsTitleLabel];
-    self.height += newsTitleLabel.bounds.size.height + XCZNewDetailRemarkRowMarginY;
+    UIWebView *newsTitleView = [[UIWebView alloc] init];
+    newsTitleView.delegate = self;
+    newsTitleView.scrollView.scrollEnabled = NO;
+    [self.contentView addSubview:newsTitleView];
+    self.newsTitleView = newsTitleView;
+    NSString *repWidthStr = [NSString stringWithFormat:@"<img width=%f ", self.contentView.bounds.size.width - 32];
+    NSString *content = [self escapeHTMLString:self.artDict[@"content"]];
+    content = [content stringByReplacingOccurrencesOfString:@"<img " withString: repWidthStr];
+    [newsTitleView loadHTMLString:content baseURL:nil];
+    newsTitleView.frame = CGRectMake(XCZNewDetailRemarkRowMarginX * 2, self.height + XCZNewDetailRemarkRowMarginY, self.contentView.bounds.size.width - 4 * XCZNewDetailRemarkRowMarginX, 1);
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    CGRect frame = webView.frame;
+    frame.size.height =1;
+    webView.frame = frame;
+
+    CGSize fittingSize;
+    if (!(((NSString *)(self.artDict[@"content"])).length)) {
+        fittingSize.height = 0.0;
+    } else {
+        fittingSize = [webView sizeThatFits:CGSizeZero];
+        self.height += fittingSize.height + XCZNewDetailRemarkRowMarginY;
+    }
+    frame.size.height = fittingSize.height;
+    frame.size.width = self.view.bounds.size.width - 16;
+    frame.origin.x = 8;
+    webView.frame = frame;
+    
+  
+    if (!(((NSString *)(self.artDict[@"content"])).length)) {
+        CGRect webViewRect = webView.frame;
+        webViewRect.size.height = 0.0;
+        webView.frame = webViewRect;
+    }
+    
+    if ([self.reuseIdentifier isEqualToString:@"CellWZ"]) { // 只标题文字
+        if (((NSString *)self.artDict[@"topic"]).length) {
+            [self setupSurplusView]; // 加载下面的控件
+        } else {
+            [self createDatePublishRow]; // 创建时间这行
+            [self setupSurplusView]; // 加载下面的控件
+        }
+    } else if ([self.reuseIdentifier isEqualToString:@"CellA"] || [self.reuseIdentifier isEqualToString:@"CellB"] || [self.reuseIdentifier isEqualToString:@"CellA1"] || [self.reuseIdentifier isEqualToString:@"CellA2"]) { // 图文混排(没有商品)
+        if (((NSString *)self.artDict[@"topic"]).length) {
+            [self setupImagesView];
+        } else {
+            [self setupImagesView];
+        }
+    } else if ([self.reuseIdentifier isEqualToString:@"CellC"] || [self.reuseIdentifier isEqualToString:@"CellC1"] || [self.reuseIdentifier isEqualToString:@"CellC2"] || [self.reuseIdentifier isEqualToString:@"CellC3"]) { // 含商品的图文混排
+        if (((NSString *)self.artDict[@"share_image"]).length) {
+            [self setupImagesView];
+        } else {
+            [self createDatePublishRow]; // 创建时间这行
+            [self setupAdmiredView]; // 设置点赞
+            [self setupSurplusView]; // 加载下面的控件
+        }
+    }
 }
 
 - (void)setupSurplusView
@@ -776,6 +833,7 @@
             CGFloat admiredPersonsIconViewX = XCZNewDetailRemarkRowMarginX + (admiredPersonsIconViewW + XCZNewDetailRemarkRowMarginX) * i;
             admiredPersonsIconView.frame = CGRectMake(admiredPersonsIconViewX, admiredPersonsIconViewY, admiredPersonsIconViewW, admiredPersonsIconViewH);
             admiredPersonsIconView.layer.cornerRadius = admiredPersonsIconViewH * 0.5;
+            admiredPersonsIconView.layer.masksToBounds = YES;
             NSDictionary *dict = self.praiseAvatars[i];
             NSString *urlStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], dict[@"avatar"]];
             [admiredPersonsIconView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"bbs_xiuchezhaiIcon"]];
@@ -858,6 +916,23 @@
     self.scrollView.contentSize = contentViewSize;
 }
 
+/**
+ *  处理html
+ */
+- (NSString *)escapeHTMLString:(NSString *)html {
+    // !!!!!!!!!!!!!!!!!!!!!!!
+    html = [html stringByReplacingOccurrencesOfString:@"＜" withString:@"<"];
+    html = [html stringByReplacingOccurrencesOfString:@"＞" withString:@">"];
+    
+    html = [html stringByReplacingOccurrencesOfString:@"#3D;" withString:@"="];
+    html = [html stringByReplacingOccurrencesOfString:@"#quot;" withString:@"\""];
+    //    html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
+    html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@"<br/>"];
+    html = [html stringByReplacingOccurrencesOfString:@"#apos;" withString:@"'"];
+    
+    return html;
+}
+
 - (NSArray *)numberOfFloors:(NSArray *)comments
 {
     NSMutableArray *newComment = [NSMutableArray array];
@@ -891,10 +966,9 @@
 - (void)goProductDetails
 {
     if (self.goods_remark) {
-#warning 外层需
         NSString *overUrlStrPin = [NSString stringWithFormat:@"/detail/index.html?goodsId=%@", self.goods_remark[@"id"]];
         NSString *overUrlStr = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], overUrlStrPin];
-        [self launchOuterWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [XCZConfig baseURL], @"/Login/login/login.html?url=", overUrlStr]];
+        [self launchOuterWebViewWithURLString:overUrlStr];
     }
 }
 
@@ -973,8 +1047,18 @@
         thumbImage = self.oneImageView.image;
     } else if ([self.reuseIdentifier isEqualToString:@"CellC"] || [self.reuseIdentifier isEqualToString:@"CellC1"] || [self.reuseIdentifier isEqualToString:@"CellC2"] || [self.reuseIdentifier isEqualToString:@"CellC3"]) { // 含商品的图文混排
     }
-
-    [self shareMessage:@{@"title": title, @"description": content, @"thumbImage": thumbImage, @"webpageUrl": @"http://m.8673h.com/"}];
+    
+    if (title.length > 30) {
+        title = [title substringToIndex:30];
+    }
+    if (content.length > 100) {
+        content = [content substringToIndex:100];
+    }
+    
+    NSString *pageStr = [NSString stringWithFormat:@"/bbs/detail/index.html?post_id=%@", self.post_id];
+    NSString *webpageUrl = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL],pageStr];
+    NSLog(@"webpageUrlwebpageUrl:%@", webpageUrl);
+    [self shareMessage:@{@"title": title, @"description": content, @"thumbImage": thumbImage, @"webpageUrl": webpageUrl}];
 }
 
 - (void)userBrandsViewDidClick

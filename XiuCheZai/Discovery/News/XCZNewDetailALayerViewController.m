@@ -72,6 +72,9 @@
                                @"reply_id" : self.reply_id,
                                @"is_anony" : @"0",
                                };
+        
+//        NSLog(@"postContentTextpostContentTextpostContentText:%@", dict);
+        
         [self requestReplyPost:dict];
     } else if (self.goType == 4) {
         NSDictionary *dict = @{
@@ -168,7 +171,6 @@
 {
     UIView *zeGaiView = [[UIView alloc] init];
     zeGaiView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
-    zeGaiView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:zeGaiView];
     self.zeGaiView = zeGaiView;
     [self.zeGaiView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(zeGaiViewDidClick:)]];
@@ -248,6 +250,7 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/BbsArtReplyAction.do"];
     NSDictionary *parameters = dict;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         NSString *msg = responseObject[@"msg"];
         if ([msg containsString:@"未登录"]) {
             if (!self.reply_id) {
@@ -381,6 +384,7 @@
     } else {
         self.bottomTextViewPlaceholderLabel.text = @"回复 用户名:";
     }
+    self.postContentText = [self.bottomTextView fullTextWithExpression];
     
     // 处理textView及inputView跟随文本高度变化而变化
     //    NSLog(@"bottomViewHeight:%@", self.bottomViewHeight);
@@ -419,9 +423,11 @@
 
 - (void)expressionView:(XCZKeyboardExpressionView *)expressionView exBtnDidClick:(XCZExBtn *)exBtn
 {
-    if (![exBtn.expression[@"name"] isEqualToString:@"compose_emotion_delete"]) { // 点击的非叉叉
+    if (![exBtn.expression[@"facePath"] isEqualToString:@"compose_emotion_delete"]) { // 点击的非叉叉
+        self.bottomTextViewPlaceholderLabel.text = @"";
         [self.bottomTextView appendEmotion:exBtn.expression];
         self.postContentText = [self.bottomTextView fullTextWithExpression];
+//            NSLog(@"postContentTextpostContentText:%@", self.postContentText);
     } else { // 点击的是x
         NSMutableAttributedString *attributedText = [self.bottomTextView.attributedText mutableCopy];
         [attributedText enumerateAttributesInRange:NSMakeRange(0, attributedText.length) options:0 usingBlock:^(NSDictionary<NSString *,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
@@ -448,17 +454,7 @@
         }];
         self.postContentText = [self.bottomTextView fullTextWithExpression];
     }
-    
-    //    NSLog(@"expression:%@", exBtn.expression);
-    
-    //     NSMutableString *string = [NSMutableString string];
-    //    [self.bottomTextView.attributedText enumerateAttributesInRange:NSMakeRange(0, self.bottomTextView.attributedText.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary<NSString *,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
-    //
-    //        [string appendString:[NSString stringWithFormat:@"[%@]", [UIImage imageNamed:exBtn.expression[@"name"]]]];
-    ////        NSLog(@"string:%@", string);
-    //        self.bottomTextView = string;
-    //    }];
-    
+//    NSLog(@"postContentTextpostContentText:%@", self.postContentText);
 }
 
 - (void)expressionBtnDidClick
@@ -466,8 +462,8 @@
     self.selectedBottomBtn = 1;
     XCZKeyboardExpressionView *expressionView = [[XCZKeyboardExpressionView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 180)];
     expressionView.delegate = self;
-    NSArray *emotes = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Emotes.plist" ofType:nil]]; // 取出表情包
-    expressionView.expressions = [emotes firstObject][@"expressions"];
+    NSDictionary *emojiDict = [self jsonEmojiToDictWithName:@"DiscoveryEmojiImages" andType:@"json"];
+    expressionView.expressions =  emojiDict[@"emojiImages"];
     
     if (!self.isExpressionViewShow) {
         self.bottomTextView.inputView = expressionView;
@@ -478,28 +474,16 @@
     }
 }
 
-//- (void)newDetailWriteView:(XCZNewDetailWriteView *)XCZNewDetailWriteView commentHeaderLeftBtnDidClick:(UIButton *)commentHeaderLeftBtn
-//{
-//    [self.view endEditing:YES];
-//}
-
-//- (void)newDetailWriteView:(XCZNewDetailWriteView *)XCZNewDetailWriteView commentHeaderRightBtnDidClickWithText:(NSString *)text
-//{
-//    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; //去除掉首尾的空白字符和换行字符
-//    if (text.length) {
-//        [self.view endEditing:YES];
-//        self.postContentText = text;
-//        self.goType = 3;
-//        [self requestLoginDetection];
-//    } else {
-//        [MBProgressHUD ZHMShowError:@"说点再发送吧"];
-//    }
-//}
+- (NSDictionary *)jsonEmojiToDictWithName:(NSString *)name andType:(NSString *)type
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:type];
+    NSData *jsonData = [NSData dataWithContentsOfFile:path options:NSDataReadingMappedIfSafe error:nil];
+    return [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+}
 
 #pragma mark - 通知方法
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    //    NSLog(@"bottomTextViewInputView:%@", [self.bottomTextView.inputView class]);
     CGRect begin = [[[notification userInfo] objectForKey:@"UIKeyboardFrameBeginUserInfoKey"] CGRectValue];
     CGRect end = [[[notification userInfo] objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
     // 第三方键盘回调三次问题，监听仅执行最后一次
@@ -517,6 +501,8 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
+    [self.zeGaiView removeFromSuperview];
+    self.zeGaiView = nil;
     CGRect viewRect = self.view.frame;
     viewRect.origin.y = 64;
     [UIView animateWithDuration:0.3 animations:^{
@@ -524,6 +510,7 @@
     } completion:^(BOOL finished) {
         self.isExpressionViewShow = NO;
         self.bottomTextView.inputView = nil;
+        
     }];
 }
 
@@ -584,7 +571,8 @@
     [self.view endEditing:YES];
     
     self.goType = 3;
-    self.postContentText = [self.bottomTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    self.postContentText = [self.postContentText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (!self.postContentText.length) {
         [MBProgressHUD ZHMShowError:@"说点再发送吧"];
         return;

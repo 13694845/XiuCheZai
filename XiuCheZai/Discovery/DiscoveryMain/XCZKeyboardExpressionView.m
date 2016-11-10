@@ -17,7 +17,7 @@
 {
     _expression = expression;
     
-    [self setBackgroundImage:[UIImage imageNamed:expression[@"icon"]] forState:UIControlStateNormal];
+    [self setBackgroundImage:[UIImage imageNamed:expression[@"facePath"]] forState:UIControlStateNormal];
 }
 
 @end

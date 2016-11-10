@@ -70,6 +70,8 @@
 /** 3.6.club按钮 */
 @property(nonatomic, weak)XCZPersonInfoHeaderOtherBtn *attentionClubBtn;
 
+@property (nonatomic, strong) UIImage *imageHou;
+
 
 @end
 
@@ -289,10 +291,17 @@
 {
     NSDictionary *user = [_banner objectForKey:@"user"];
     // 1.图片部分
-    NSString *pictureImageViewURLStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], user[@"car_image"]];
-    [self.pictureImageView sd_setImageWithURL:[NSURL URLWithString:pictureImageViewURLStr] placeholderImage:[UIImage imageNamed:@"mas_car.jpg"]];
+    if (((NSString *)user[@"car_image"]).length) {
+        NSString *pictureImageViewURLStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], user[@"car_image"]];
+        NSData *data =  [NSData dataWithContentsOfURL:[NSURL URLWithString:pictureImageViewURLStr]];
+        UIImage *image = [UIImage imageWithData:data];
+        [self cropImg:image];
+        [self.pictureImageView setImage:self.imageHou];
+    } else {
+        [self.pictureImageView setImage:[UIImage imageNamed:@"mas_car.jpg"]];
+    }
+   
     [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], user[@"brand_logo"]]] placeholderImage:nil];
-    
     if (!(((NSString *)user[@"car_image"]).length)) {
         self.typeLabel.text = @"这家伙很懒！未留下车型相关信息！";
     } else {
@@ -363,7 +372,7 @@
     self.infoIconView.frame = CGRectMake(16, 8, 40, 40);
     CGFloat vipIconViewWH = 13;
     self.vipIconView.frame = CGRectMake(CGRectGetMaxX(self.infoIconView.frame) - vipIconViewWH, CGRectGetMaxY(self.infoIconView.frame) - vipIconViewWH, vipIconViewWH, vipIconViewWH);
-    self.userLavelLabel.frame = CGRectMake(25, 8 + 40 + 8, 24, 29);
+    self.userLavelLabel.frame = CGRectMake(25, 8 + 40 + 4, 34, 34);
     CGFloat userZiLabelX = 72;
     CGFloat userZiLabelY = 8;
     CGFloat userZiLabelW = 32;
@@ -462,6 +471,31 @@
         image = [UIImage imageNamed:@"bbs_vip9"];
     }
     return @{@"name":name, @"image":image};
+}
+
+-(void)cropImg:(UIImage *)image
+{
+    CGFloat width = 0.0;
+    CGFloat height = 0.0;
+    CGFloat orgX = 0.0;
+    CGFloat orgY = 0.0;
+    if (image.size.width > image.size.height) {
+        width = image.size.height;
+        height = width;
+        orgX = (image.size.width - height) * 0.5;
+        orgY = 0;
+    } else {
+        width = image.size.width;
+        height = width;
+        orgX = 0;
+        orgY = (image.size.height - width) * 0.5;
+    }
+    CGRect cropRect = CGRectMake(orgX, orgY, width, height);
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
+    UIImage *nowImage = [UIImage imageWithCGImage:imageRef];
+    self.imageHou = nowImage;
+    CGImageRelease(imageRef);
 }
 
 

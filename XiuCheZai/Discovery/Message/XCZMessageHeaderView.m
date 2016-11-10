@@ -182,6 +182,7 @@
     [self.avatarBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"bbs_xiuchezhaiIcon"]];
     NSDictionary *pointsDict = [self pointsToName:userDict[@"points"]];
     self.vipImgView.image = pointsDict[@"image"];
+    
      self.userNameLabel.text = ((NSString *)userDict[@"nick"]).length ? userDict[@"nick"] : userDict[@"login_name"];
     self.signLabel.text = ((NSString *)userDict[@"remark"]).length ? userDict[@"remark"] : XCZMessageHeaderViewDefaultSignLabelText;
     [self computeSignSize];

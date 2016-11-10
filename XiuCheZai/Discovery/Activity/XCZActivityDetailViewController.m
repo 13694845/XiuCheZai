@@ -484,7 +484,7 @@
         [MBProgressHUD ZHMShowSuccess:@"删除成功"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZCircleDetailViewControllerHasDelectedToXCZCircleViewControllerNot" object:nil];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         });
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -713,6 +713,7 @@
             CGFloat admiredPersonsIconViewX = XCZNewDetailRemarkRowMarginX + (admiredPersonsIconViewW + XCZNewDetailRemarkRowMarginX) * i;
             admiredPersonsIconView.frame = CGRectMake(admiredPersonsIconViewX, admiredPersonsIconViewY, admiredPersonsIconViewW, admiredPersonsIconViewH);
             admiredPersonsIconView.layer.cornerRadius = admiredPersonsIconViewH * 0.5;
+            admiredPersonsIconView.layer.masksToBounds = YES;
             NSDictionary *dict = self.praiseAvatars[i];
             NSString *urlStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], dict[@"avatar"]];
             [admiredPersonsIconView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"bbs_xiuchezhaiIcon"]];
@@ -805,7 +806,7 @@
     
     html = [html stringByReplacingOccurrencesOfString:@"#3D;" withString:@"="];
     html = [html stringByReplacingOccurrencesOfString:@"#quot;" withString:@"\""];
-    html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
+    html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@"<br/>"];
     html = [html stringByReplacingOccurrencesOfString:@"#apos;" withString:@"'"];
     
     // NSLog(@"escapeHTMLString : %@", html);
@@ -888,8 +889,16 @@
     NSString *title = self.artDict[@"topic"];
     NSString *content = self.artDict[@"content"];
     UIImage *thumbImage = [UIImage imageNamed:@"bbs_pro_pic.jpg"];
-//    thumbImage = self.oneImageView.image;
-    [self shareMessage:@{@"title": title, @"description": content, @"thumbImage": thumbImage, @"webpageUrl": @"http://m.8673h.com/"}];
+    if (title.length > 30) {
+        title = [title substringToIndex:30];
+    }
+    if (content.length > 100) {
+        content = [content substringToIndex:100];
+    }
+    
+    NSString *pageStr = [NSString stringWithFormat:@"/bbs/detail/index.html?post_id=%@", self.post_id];
+    NSString *webpageUrl = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL],pageStr];
+    [self shareMessage:@{@"title": title, @"description": content, @"thumbImage": thumbImage, @"webpageUrl": webpageUrl}];
 }
 
 - (void)userBrandsViewDidClick
@@ -899,9 +908,7 @@
             personInfoVC.bbs_user_id = self.tieziUser_id;
         [self.navigationController pushViewController:personInfoVC animated:YES];
     }
-
 }
-
 
 #pragma mark - 跳转控制器
 /**

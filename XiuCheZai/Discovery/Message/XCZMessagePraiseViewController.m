@@ -12,6 +12,7 @@
 #import "XCZConfig.h"
 #import "XCZPersonInfoViewController.h"
 #import "XCZCircleDetailViewController.h"
+#import "MBProgressHUD+ZHM.h"
 
 @interface XCZMessagePraiseViewController () <UITableViewDataSource, UITableViewDelegate, XCZMessagePraiseViewCellDelegate>
 
@@ -29,7 +30,12 @@
 - (void)setArtDict:(NSDictionary *)artDict
 {
     _artDict = artDict;
-    [self jumpToDetailsVC];
+
+    if (artDict) {
+      [self jumpToDetailsVC];
+    } else {
+        [MBProgressHUD ZHMShowError:@"帖子不存在或已被删除"];
+    }
 }
 
 - (void)setRows:(NSMutableArray *)rows {
@@ -90,7 +96,12 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/PostDetailAction.do"];
     NSDictionary *parameters = @{@"type":[NSString stringWithFormat:@"%d", 0] , @"post_id":post_id};
     
+    
+    
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSLog(@"rowrowroresponseObjectw:%@", responseObject);
+        
         NSArray *datas = [responseObject objectForKey:@"data"];
         if ([datas isEqual:[NSNull null]]) {
             datas = nil;

@@ -8,6 +8,13 @@
 
 #import "XCZNewDetailRemarkRowReplyView.h"
 #import "DiscoveryConfig.h"
+#import "XCZEmotionLabel.h"
+
+@interface XCZNewDetailRemarkRowReplyView()
+
+@property (nonatomic, assign) long touxiangCount;
+
+@end
 
 @implementation XCZNewDetailRemarkRowReplyView
 
@@ -58,10 +65,15 @@
     
     [login_nameLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(login_nameLabelDidClick)]];
 
-    NSString *konggeStr = [self setupKongge:konggeNumber];
     UILabel *remarkLabel = [[UILabel alloc] init];
     remarkLabel.numberOfLines = 0;
-    remarkLabel.text = [NSString stringWithFormat:@"%@  %@", konggeStr, _reply_info[@"follow_content"]];
+    NSString *konggeStr = [self setupKongge:konggeNumber];
+    
+    NSString *yfollow_content = [_reply_info[@"follow_content"] stringByReplacingOccurrencesOfString:@"#0A;" withString:@"\n"];
+    NSString *follow_content = [NSString stringWithFormat:@"%@  %@", konggeStr, yfollow_content];
+    NSAttributedString *attributeStr = [self changeRichText:follow_content];
+    [remarkLabel setAttributedText:attributeStr];
+    
     remarkLabel.font = [UIFont systemFontOfSize:12];
     remarkLabel.textColor = [UIColor colorWithRed:34/255.0 green:34/255.0 blue:34/255.0 alpha:1.0];
     CGSize remarkLabelSize = [remarkLabel.text boundingRectWithSize:CGSizeMake(_fatherWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : remarkLabel.font} context:nil].size;
@@ -108,6 +120,81 @@
         konggeStr = [NSString stringWithFormat:@" %@", konggeStr];
     }
     return konggeStr;
+}
+
+- (NSAttributedString *)changeRichText:(NSString *)msg_content
+{
+    // 截取出表情字符串并放入数组中
+    NSMutableArray *textArray = [NSMutableArray array];
+    [self cutOutStringExpressionWithString:msg_content addtextArray:textArray]; // 截取头像放入数组中
+    self.touxiangCount = textArray.count;
+    NSMutableArray *texts = [NSMutableArray array];
+    for (int index = 0; index<textArray.count;index++) {
+        NSString *text = textArray[index];
+        [text rangeOfString:@".png"];
+        if (text && ![text isEqualToString:@""] && [text rangeOfString:@".png"].length) {
+            [texts addObject:text];
+        }
+    }
+    
+    
+    // 将textArray数组拼接成字符串
+    NSMutableString *syTextStr = [NSMutableString string];
+    for (NSString *textN in textArray) {
+        [syTextStr appendString:textN];
+    }
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.0;
+    
+    NSDictionary *attrDict = @{ NSParagraphStyleAttributeName: paraStyle,
+                                NSFontAttributeName: [UIFont systemFontOfSize: 12]
+                                };
+    
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:syTextStr attributes:attrDict];
+    // 创建attachment
+    for (NSString *text in texts) {
+        //        NSLog(@"texttexttext:%@", text);
+        XCZTextAttachmentTwo *attachment = [[XCZTextAttachmentTwo alloc]init];
+        attachment.img = text;
+        attachment.bounds = CGRectMake(0, -4.0, 12 + 2, 12 + 2);
+        NSAttributedString *textA = [NSAttributedString attributedStringWithAttachment:attachment];
+        NSRange range = [[attributeStr string] rangeOfString:text];
+        [attributeStr replaceCharactersInRange:range withAttributedString:textA];
+    }
+    [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, attributeStr.length)];
+    
+    return attributeStr;
+}
+
+/**
+ *  截取头像放入数组中
+ */
+- (NSMutableArray *)cutOutStringExpressionWithString:(NSString *)attText addtextArray:(NSMutableArray *)textArray
+{
+    NSRange range = [attText rangeOfString:@"^"];
+    if (range.length) {
+        
+        NSString *qTextH = [attText substringToIndex:range.location];
+        [textArray addObject:qTextH];
+        
+        NSString *attTextH = [attText substringFromIndex:range.location + 1];
+        NSRange rangeH = [attTextH rangeOfString:@"^"];
+        if (rangeH.length) {
+            NSString *attImageStr = [NSString stringWithFormat:@"%@.png", [attTextH substringToIndex:rangeH.location]];
+            [textArray addObject:attImageStr];
+            NSString *attStrH = [attTextH substringFromIndex:rangeH.location + 1];
+            [self cutOutStringExpressionWithString:attStrH addtextArray:textArray];
+        } else {
+            if (attText) {
+                [textArray addObject:attText];
+            }
+        }
+    } else {
+        if (attText) {
+            [textArray addObject:attText];
+        }
+    }
+    return textArray;
 }
 
 

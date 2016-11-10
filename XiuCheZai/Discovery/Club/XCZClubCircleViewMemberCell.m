@@ -74,9 +74,13 @@
     if ([self.reuseIdentifier isEqualToString:@"CellF"]) {
         CGFloat height;
         CGFloat dheight = 58;
-        height = 31 + (self.rows.count + 1) * dheight;
-        self.cellTwoView.frame = CGRectMake(0, 0, self.cellW, self.cellTwoView.bounds.size.height);
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"clubCircleViewMemberCellHeightToVC" object:nil userInfo:@{@"cellTwoViewHeight": [NSString stringWithFormat:@"%f", self.cellTwoView.bounds.size.height]}];
+        if (self.rows.count/2) {
+            height = 61 + self.rows.count * dheight * 0.5;
+        } else {
+            height = 61 + (self.rows.count + 1) * dheight * 0.5;
+        }
+        self.cellTwoView.frame = CGRectMake(0, 0, self.cellW, height);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"clubCircleViewMemberCellHeightToVC" object:nil userInfo:@{@"cellTwoViewHeight": [NSString stringWithFormat:@"%f", height]}];
     }
 }
 

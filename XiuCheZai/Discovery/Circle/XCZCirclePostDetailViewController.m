@@ -70,7 +70,6 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.rows.count;
 }
@@ -88,15 +87,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self goProductDetails:self.rows[indexPath.row][@"goods_id"]];
+    
+    if (((NSString *)self.rows[indexPath.row][@"goods_id"]).length < 8) {
+    } else {
+        [self goProductDetails:self.rows[indexPath.row][@"goods_id"]];
+    }
+    
 }
 
 - (void)goProductDetails:(NSString *)goods_id
 {
-//#warning 外层需
+    NSLog(@"goods_idgoods_id:%@", goods_id);
         NSString *overUrlStrPin = [NSString stringWithFormat:@"/detail/index.html?goodsId=%@", goods_id];
         NSString *overUrlStr = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], overUrlStrPin];
-        [self launchOuterWebViewWithURLString:[NSString stringWithFormat:@"%@%@%@", [XCZConfig baseURL], @"/Login/login/login.html?url=", overUrlStr]];
+    
+        [self launchOuterWebViewWithURLString:overUrlStr];
 }
 
 - (void)launchOuterWebViewWithURLString:(NSString *)urlString {

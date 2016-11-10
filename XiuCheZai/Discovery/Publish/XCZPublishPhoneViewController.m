@@ -65,7 +65,11 @@
     } else if (self.goType == 2) {
         loginStatu ? [self goLogining] : [self createAddressView];
     }
-    
+}
+
+- (void)setCurrentPositioning:(NSDictionary *)currentPositioning
+{
+    _currentPositioning = currentPositioning;
 }
 
 - (NSArray *)showImages
@@ -292,6 +296,9 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/CityLocation.do"];
     NSDictionary *params = ![longitude isEqualToString:@"0.000000"] ? @{@"lng": longitude, @"lat": latitude, @"type": @"1"} : @{};
     [self.manager POST:URLString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+//        NSLog(@"responseObjectresponseObject:%@", responseObject);
+        
         self.currentPositioning = responseObject;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {}];
 }
@@ -338,20 +345,38 @@
     if (!self.selectedCityView) {
         XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
         selectedCityView.delegate = self;
-        if (self.currentPositioning.count) {
-            selectedCityView.currentLocation = self.currentPositioning;
-        } else {
-            selectedCityView.currentLocation = @{@"provinceid": @"330000",@"cityid": @"331000",@"townid": @"331001"};
-        }
         [self.view addSubview:selectedCityView];
         self.selectedCityView = selectedCityView;
+        
     }
+    if (self.currentPositioning.count) {
+        self.selectedCityView.currentLocation = self.currentPositioning;
+    } else {
+        self.selectedCityView.currentLocation = @{@"provinceid": @"110100",@"cityid": @"110000",@"townid": @"110101"};
+    }
+    self.selectedCityView.allProvince = [XCZCityManager allProvince];
     
     CGRect selectedCityViewRect = self.selectedCityView.frame;
     selectedCityViewRect.origin.y = self.view.bounds.size.height - 250;
     [UIView animateWithDuration:0.3 animations:^{
         self.selectedCityView.frame = selectedCityViewRect;
     }];
+    
+//    XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
+//    selectedCityView.delegate = self;
+//    if (self.currentPositioning.count) {
+//        selectedCityView.currentLocation = self.currentPositioning;
+//    } else {
+//        selectedCityView.currentLocation = @{@"provinceid": @"330000",@"cityid": @"331000",@"townid": @"331001"};
+//    }
+//    [self.view addSubview:selectedCityView];
+//    self.selectedCityView = selectedCityView;
+//
+//    CGRect selectedCityViewRect = self.selectedCityView.frame;
+//    selectedCityViewRect.origin.y = self.view.bounds.size.height - 250;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.selectedCityView.frame = selectedCityViewRect;
+//    }];
 }
 
 - (void)sendToViewDidClick
@@ -560,7 +585,10 @@
     selectedCityViewRect.origin.y = self.view.bounds.size.height;
     [UIView animateWithDuration:0.3 animations:^{
         self.selectedCityView.frame = selectedCityViewRect;
-    } completion:^(BOOL finished) {}];
+    } completion:^(BOOL finished) {
+        [self.selectedCityView removeFromSuperview];
+        self.selectedCityView = nil;
+    }];
 }
 
 @end

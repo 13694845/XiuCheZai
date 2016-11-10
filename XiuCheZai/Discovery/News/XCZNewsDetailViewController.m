@@ -542,10 +542,11 @@
     self.scrollView.contentSize = self.contentView.bounds.size;
     [self.scrollView addSubview:self.contentView];
     
+    NSString *repWidthStr = [NSString stringWithFormat:@"<img width=%f ", self.contentView.bounds.size.width - 32];
     NSString *content = [self escapeHTMLString:self.artDict[@"art_content"]];
-    content = [content stringByReplacingOccurrencesOfString:@"<img " withString:@"<img width=300 "];
+    content = [content stringByReplacingOccurrencesOfString:@"<img " withString: repWidthStr];
     [newsTitleView loadHTMLString:content baseURL:nil];
-
+    
     newsTitleView.frame = CGRectMake(XCZNewDetailRemarkRowMarginX * 2, self.height + XCZNewDetailRemarkRowMarginY, self.contentView.bounds.size.width - 4 * XCZNewDetailRemarkRowMarginX, 1);
 }
 
@@ -609,6 +610,7 @@
             CGFloat admiredPersonsIconViewX = XCZNewDetailRemarkRowMarginX + (admiredPersonsIconViewW + XCZNewDetailRemarkRowMarginX) * i;
             admiredPersonsIconView.frame = CGRectMake(admiredPersonsIconViewX, admiredPersonsIconViewY, admiredPersonsIconViewW, admiredPersonsIconViewH);
             admiredPersonsIconView.layer.cornerRadius = admiredPersonsIconViewH * 0.5;
+            admiredPersonsIconView.layer.masksToBounds = YES;
             NSDictionary *dict = self.praiseAvatars[i];
             NSString *urlStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], dict[@"avatar"]];
             [admiredPersonsIconView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"bbs_xiuchezhaiIcon"]];
@@ -855,7 +857,19 @@
 }
 
 - (IBAction)shareBtnDidClick:(UIButton *)sender {
-    [self shareMessage:@{@"title": self.artDict[@"art_title"], @"description": self.artDict[@"subtitle"], @"thumbImage": [UIImage imageNamed:@"bbs_pro_pic.jpg"], @"webpageUrl": @"http://m.8673h.com/"}];
+    
+    NSString *art_title = self.artDict[@"art_title"];
+    if (art_title.length > 30) {
+        art_title = [art_title substringToIndex:30];
+    }
+    NSString *subtitle = self.artDict[@"subtitle"];
+    if (subtitle.length > 100) {
+        subtitle = [subtitle substringToIndex:100];
+    }
+    
+    NSString *pageStr = [NSString stringWithFormat:@"/bbs/detail/index.html?type=info&&post_id=%@", self.artid];
+    NSString *webpageUrl = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL],pageStr];
+    [self shareMessage:@{@"title": art_title, @"description": subtitle, @"thumbImage": [UIImage imageNamed:@"bbs_pro_pic.jpg"], @"webpageUrl":webpageUrl}];
 }
 
 /**

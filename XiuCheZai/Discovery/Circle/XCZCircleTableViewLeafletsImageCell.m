@@ -79,6 +79,7 @@
         forum_nameLabel.backgroundColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0];
         forum_nameLabel.textColor = [UIColor whiteColor];
         forum_nameLabel.font = [UIFont systemFontOfSize:10];
+        forum_nameLabel.textAlignment = NSTextAlignmentCenter;
         [self.cellContentView addSubview:forum_nameLabel];
         self.forum_nameLabel = forum_nameLabel;
         
@@ -217,7 +218,7 @@
         CGFloat forum_nameLabelH = (self.sourceType == 1) ? 0 : 14;
         self.forum_nameLabel.text = self.row[@"forum_name"];
         CGSize forum_nameLabelSize = [self.forum_nameLabel.text boundingRectWithSize:CGSizeMake((self.contentView.bounds.size.width - 64) * 0.2, 14) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.forum_nameLabel.font} context:nil].size;
-        self.forum_nameLabel.frame = CGRectMake(64, CGRectGetMaxY(self.contentImageView.frame) + 8, forum_nameLabelSize.width, forum_nameLabelH);
+        self.forum_nameLabel.frame = CGRectMake(64, CGRectGetMaxY(self.contentImageView.frame) + 8, forum_nameLabelSize.width + 4, forum_nameLabelH);
         
         CGFloat bottomLineViewY = (self.sourceType == 1) ? CGRectGetMaxY(self.contentImageView.frame) + 32 : CGRectGetMaxY(self.forum_nameLabel.frame) + 8;
         self.bottomLineView.frame = CGRectMake((CGRectGetMaxX(self.headerImageView.frame) + 8), bottomLineViewY, self.selfW - (CGRectGetMaxX(self.headerImageView.frame) + 8), 1);

@@ -12,11 +12,13 @@
 #import "DiscoveryConfig.h"
 #import "XCZCircleDetailRemarkRowReplyView.h"
 #import "XCZTimeTools.h"
+#import "XCZEmotionLabel.h"
 
 @interface XCZCircleDetailRemarkRow () <XCZCircleDetailRemarkRowReplyViewDelegate>
 
 @property (nonatomic, weak) UIImageView *likeImgView;
 @property (nonatomic, weak) UILabel *likeLabel;
+@property (nonatomic, assign) long touxiangCount;
 
 @end
 
@@ -69,13 +71,25 @@
     [self addSubview:iconPartView];
     [iconPartView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconPartViewDidClick)]];
     
-    UILabel *reply_contentLabel = [[UILabel alloc] init];
+    XCZEmotionLabel *reply_contentLabel = [[XCZEmotionLabel alloc] init];
     reply_contentLabel.numberOfLines = 0;
-    reply_contentLabel.text = _remark[@"reply_content"];
+    
+    NSString *replies = [_remark[@"reply_content"] stringByReplacingOccurrencesOfString:@"#0A;" withString:@"\n"];
+    NSAttributedString *attributeStr = [self changeRichText:replies];
+    [reply_contentLabel setAttributedText:attributeStr];
     reply_contentLabel.textColor = kXCTITLECOLOR;
     reply_contentLabel.font = [UIFont systemFontOfSize:14];
-    CGSize reply_contentLabelSize = [reply_contentLabel.text boundingRectWithSize:CGSizeMake(_fatherWidth - (XCZNewDetailRemarkRowMarginX + 33 + XCZNewDetailRemarkRowMarginX + XCZNewDetailRemarkRowMarginX), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : reply_contentLabel.font} context:nil].size;
-    reply_contentLabel.frame = CGRectMake(XCZNewDetailRemarkRowMarginX + 33 + XCZNewDetailRemarkRowMarginX, self.height + XCZNewDetailRemarkRowMarginY * 2, reply_contentLabelSize.width, reply_contentLabelSize.height);
+    
+    NSString *reply_contentLabelAllStr = [reply_contentLabel fullTextWithExpression];
+    CGFloat reply_contentLabelMax = _fatherWidth - (XCZNewDetailRemarkRowMarginX + 33 + XCZNewDetailRemarkRowMarginX + XCZNewDetailRemarkRowMarginX);
+    CGSize reply_contentLabelSize = [reply_contentLabelAllStr boundingRectWithSize:CGSizeMake(reply_contentLabelMax, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : reply_contentLabel.font} context:nil].size;
+    CGFloat reply_contentLabelW = reply_contentLabelSize.width + self.touxiangCount * 14;
+    if (reply_contentLabelW > reply_contentLabelMax) {
+        reply_contentLabelW = reply_contentLabelMax;
+    }
+    reply_contentLabel.frame = CGRectMake(XCZNewDetailRemarkRowMarginX + 33 + XCZNewDetailRemarkRowMarginX, self.height + XCZNewDetailRemarkRowMarginY * 2, reply_contentLabelW, reply_contentLabelSize.height);
+    
+    
     self.height += reply_contentLabel.bounds.size.height + XCZNewDetailRemarkRowMarginY * 2;
     [self addSubview:reply_contentLabel];
     
@@ -251,6 +265,82 @@
     }
     return avatar;
 }
+
+- (NSAttributedString *)changeRichText:(NSString *)msg_content
+{
+    // 截取出表情字符串并放入数组中
+    NSMutableArray *textArray = [NSMutableArray array];
+    [self cutOutStringExpressionWithString:msg_content addtextArray:textArray]; // 截取头像放入数组中
+    self.touxiangCount = textArray.count;
+    NSMutableArray *texts = [NSMutableArray array];
+    for (int index = 0; index<textArray.count;index++) {
+        NSString *text = textArray[index];
+        [text rangeOfString:@".png"];
+        if (text && ![text isEqualToString:@""] && [text rangeOfString:@".png"].length) {
+            [texts addObject:text];
+        }
+    }
+    
+    
+    // 将textArray数组拼接成字符串
+    NSMutableString *syTextStr = [NSMutableString string];
+    for (NSString *textN in textArray) {
+        [syTextStr appendString:textN];
+    }
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.lineHeightMultiple = 1.0;
+    
+    NSDictionary *attrDict = @{ NSParagraphStyleAttributeName: paraStyle,
+                                NSFontAttributeName: [UIFont systemFontOfSize: 12]
+                                };
+    
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc]initWithString:syTextStr attributes:attrDict];
+    // 创建attachment
+    for (NSString *text in texts) {
+        //        NSLog(@"texttexttext:%@", text);
+        XCZTextAttachmentTwo *attachment = [[XCZTextAttachmentTwo alloc]init];
+        attachment.img = text;
+        attachment.bounds = CGRectMake(0, -4.0, 12 + 2, 12 + 2);
+        NSAttributedString *textA = [NSAttributedString attributedStringWithAttachment:attachment];
+        NSRange range = [[attributeStr string] rangeOfString:text];
+        [attributeStr replaceCharactersInRange:range withAttributedString:textA];
+    }
+    [attributeStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, attributeStr.length)];
+    
+    return attributeStr;
+}
+
+/**
+ *  截取头像放入数组中
+ */
+- (NSMutableArray *)cutOutStringExpressionWithString:(NSString *)attText addtextArray:(NSMutableArray *)textArray
+{
+    NSRange range = [attText rangeOfString:@"^"];
+    if (range.length) {
+        
+        NSString *qTextH = [attText substringToIndex:range.location];
+        [textArray addObject:qTextH];
+        
+        NSString *attTextH = [attText substringFromIndex:range.location + 1];
+        NSRange rangeH = [attTextH rangeOfString:@"^"];
+        if (rangeH.length) {
+            NSString *attImageStr = [NSString stringWithFormat:@"%@.png", [attTextH substringToIndex:rangeH.location]];
+            [textArray addObject:attImageStr];
+            NSString *attStrH = [attTextH substringFromIndex:rangeH.location + 1];
+            [self cutOutStringExpressionWithString:attStrH addtextArray:textArray];
+        } else {
+            if (attText) {
+                [textArray addObject:attText];
+            }
+        }
+    } else {
+        if (attText) {
+            [textArray addObject:attText];
+        }
+    }
+    return textArray;
+}
+
 
 
 @end
