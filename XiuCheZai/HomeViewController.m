@@ -116,6 +116,7 @@
     parameters = @{@"page_id":@"4", @"ad_id":@"1"};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *banners = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
+        banners = [[banners reverseObjectEnumerator] allObjects];
         if (![self.banners isEqualToArray:banners]) {
             self.banners = banners;
             [self.bannerView reloadData];
