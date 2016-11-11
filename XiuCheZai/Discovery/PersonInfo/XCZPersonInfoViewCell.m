@@ -165,9 +165,6 @@
         }
 
         
-        
-        id o = self;
-        
         /*
         UIImageView *oneImgView = [[UIImageView alloc] init];
         oneImgView.image = image;

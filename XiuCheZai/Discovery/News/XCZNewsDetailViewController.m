@@ -866,7 +866,8 @@
     if (subtitle.length > 100) {
         subtitle = [subtitle substringToIndex:100];
     }
-    
+    art_title = [art_title stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
+    subtitle = [subtitle stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
     NSString *pageStr = [NSString stringWithFormat:@"/bbs/detail/index.html?type=info&&post_id=%@", self.artid];
     NSString *webpageUrl = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL],pageStr];
     [self shareMessage:@{@"title": art_title, @"description": subtitle, @"thumbImage": [UIImage imageNamed:@"bbs_pro_pic.jpg"], @"webpageUrl":webpageUrl}];

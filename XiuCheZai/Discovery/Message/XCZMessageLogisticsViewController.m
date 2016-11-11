@@ -102,8 +102,6 @@
 #pragma mark - XCZMessageLogisticsViewCellDelegate
 - (void)logisticsViewCell:(XCZMessageLogisticsViewCell *)logisticsViewCell detailsViewDidClick:(NSString *)recommendedId
 {
-    NSLog(@"被点击了哈哈哈哈");
-#warning 跳到查看物流控制器
     
 }
 

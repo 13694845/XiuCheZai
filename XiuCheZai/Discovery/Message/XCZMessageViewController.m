@@ -67,7 +67,7 @@
 {
     _userDict = userDict;
     
-    if (userDict) {
+    if (userDict.count) {
         self.content = @{@"num": userDict[@"bgz"], @"content":@""};
         self.headerView.userDict = userDict;
         [self reloadRow:2];
@@ -78,7 +78,7 @@
 {
     _replys = replys;
     
-    if (replys) {
+    if (replys.count) {
         self.content = @{@"num": @(replys.count), @"content": [[replys firstObject] objectForKey:@"content"]};
         [self reloadRow:3];
     }
@@ -226,7 +226,10 @@
     
     URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactServlet.do"];
     parameters = nil;
+    
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+//         NSLog(@"responseOloadDatddda:%@", responseObject);
+        
         self.chatDatas = [responseObject objectForKey:@"data"];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
 }

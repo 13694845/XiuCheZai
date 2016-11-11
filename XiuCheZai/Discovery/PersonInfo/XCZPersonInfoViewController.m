@@ -441,7 +441,6 @@
             [self.navigationController pushViewController:attentionMeVC animated:YES];
         }
     } else if (otherBtn.tag == 2) { // 已点赞按钮被点击 (已点赞)
-#warning 点赞后台说暂时做不了
 //        XCZPersonHasPraiseViewController *hasPraiseVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZPersonHasPraiseViewController"];
 //        [self.navigationController pushViewController:hasPraiseVC animated:YES];
     } else if (otherBtn.tag == 3) { // TA关注的按钮被点击

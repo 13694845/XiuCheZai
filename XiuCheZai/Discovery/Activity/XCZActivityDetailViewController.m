@@ -895,7 +895,8 @@
     if (content.length > 100) {
         content = [content substringToIndex:100];
     }
-    
+    title = [title stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
+    content = [content stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
     NSString *pageStr = [NSString stringWithFormat:@"/bbs/detail/index.html?post_id=%@", self.post_id];
     NSString *webpageUrl = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL],pageStr];
     [self shareMessage:@{@"title": title, @"description": content, @"thumbImage": thumbImage, @"webpageUrl": webpageUrl}];

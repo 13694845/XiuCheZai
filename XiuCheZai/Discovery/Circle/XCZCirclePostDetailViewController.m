@@ -10,6 +10,7 @@
 #import "XCZConfig.h"
 #import "XCZCirclePostDetailViewCell.h"
 #import "XCZPersonWebViewController.h"
+#import "MBProgressHUD+ZHM.h"
 
 @interface XCZCirclePostDetailViewController()<UITableViewDataSource, UITableViewDelegate>
 
@@ -89,6 +90,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (((NSString *)self.rows[indexPath.row][@"goods_id"]).length < 8) {
+        [MBProgressHUD ZHMShowError:@"产品不存在"];
     } else {
         [self goProductDetails:self.rows[indexPath.row][@"goods_id"]];
     }

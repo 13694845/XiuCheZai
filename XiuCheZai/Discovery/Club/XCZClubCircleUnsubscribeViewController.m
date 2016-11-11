@@ -159,7 +159,6 @@
 - (void)updateView
 {
     self.title = self.row[@"forum_name"];
-#warning  后台没有提供字段
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic"]];
     self.nameLabel.text = self.row[@"forum_name"];
     self.topicLabel.text = self.row[@"num"];

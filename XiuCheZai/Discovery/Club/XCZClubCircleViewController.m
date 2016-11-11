@@ -522,6 +522,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     XCZCircleDetailViewController *circleDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
     circleDetailVC.reuseIdentifier = circleTableViewCell.reuseIdentifier;
     circleDetailVC.post_id = circleTableViewCell.row[@"post_id"];
+    circleDetailVC.user_id = circleTableViewCell.row[@"user_id"];
     [self.navigationController pushViewController:circleDetailVC animated:YES];
 }
 
@@ -548,7 +549,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 
 - (void)circleTableViewWenZiCell:(XCZCircleTableViewWenZiCell *)circleTableViewCell cellContentViewDidClick:(NSDictionary *)row
 {
-    [self jumpToXCZCircleDetailViewController:row[@"post_id"] andReuseIdentifier:circleTableViewCell.reuseIdentifier];
+    [self jumpToXCZCircleDetailViewController:row[@"post_id"] and:row[@"user_id"] andReuseIdentifier:circleTableViewCell.reuseIdentifier];
 }
 
 - (void)circleTableViewLeafletsImageCell:(XCZCircleTableViewLeafletsImageCell *)circleTableViewCell cellHeaderViewDidClick:(NSDictionary *)row
@@ -558,7 +559,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 
 - (void)circleTableViewLeafletsImageCell:(XCZCircleTableViewLeafletsImageCell *)circleTableViewCell cellContentViewDidClick:(NSDictionary *)row
 {
-    [self jumpToXCZCircleDetailViewController:row[@"post_id"] andReuseIdentifier:circleTableViewCell.reuseIdentifier];
+    [self jumpToXCZCircleDetailViewController:row[@"post_id"] and:row[@"user_id"] andReuseIdentifier:circleTableViewCell.reuseIdentifier];
 }
 
 #pragma mark - 按钮被点击
@@ -633,11 +634,12 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 /**
  *  跳到话题详情
  */
-- (void)jumpToXCZCircleDetailViewController:(NSString *)post_id andReuseIdentifier:(NSString *)reuseIdentifier
+- (void)jumpToXCZCircleDetailViewController:(NSString *)post_id and:(NSString *)user_id andReuseIdentifier:(NSString *)reuseIdentifier
 {
     XCZCircleDetailViewController *circleDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
     circleDetailVC.reuseIdentifier = reuseIdentifier;
     circleDetailVC.post_id = post_id;
+    circleDetailVC.user_id = user_id;
     [self.navigationController pushViewController:circleDetailVC animated:YES];
 }
 

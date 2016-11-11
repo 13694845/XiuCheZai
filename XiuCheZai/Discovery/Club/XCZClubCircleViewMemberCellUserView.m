@@ -39,6 +39,7 @@
         UILabel *nameLabel = [[UILabel alloc] init];
         nameLabel.font = [UIFont systemFontOfSize:14];
         nameLabel.textColor = [UIColor colorWithRed:17/255.0 green:17/255.0 blue:17/255.0 alpha:1.0];
+        nameLabel.numberOfLines = 1;
         [self addSubview:nameLabel];
         self.nameLabel = nameLabel;
     
@@ -91,13 +92,13 @@
     self.iconView.layer.cornerRadius = self.iconView.bounds.size.height * 0.5;
     self.iconView.layer.masksToBounds = YES;
     
-    CGFloat nameLabelMaxW = self.cellW - CGRectGetMaxX(self.iconView.frame) - 16;
-    CGSize nameLabelSize = [self.nameLabel.text boundingRectWithSize:CGSizeMake(nameLabelMaxW, 50) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.nameLabel.font} context:nil].size;
+    CGFloat nameLabelMaxW = self.cellW - CGRectGetMaxX(self.iconView.frame) - 8;
+    CGSize nameLabelSize = [self.nameLabel.text boundingRectWithSize:CGSizeMake(nameLabelMaxW, 15) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.nameLabel.font} context:nil].size;
     CGFloat nameLabelX = CGRectGetMaxX(self.iconView.frame) + 8;
     CGFloat nameLabelW = self.type ? (self.cellW * 0.5 - nameLabelX - 8): (self.cellW - nameLabelX - 8);
     self.nameLabel.frame = CGRectMake(nameLabelX, 12, nameLabelW, nameLabelSize.height);
 
-    CGSize suosuLabelSize = [self.suosuLabel.text boundingRectWithSize:CGSizeMake(nameLabelMaxW, 50) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.suosuLabel.font} context:nil].size;
+    CGSize suosuLabelSize = [self.suosuLabel.text boundingRectWithSize:CGSizeMake(nameLabelMaxW, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.suosuLabel.font} context:nil].size;
     self.suosuLabel.frame = CGRectMake(nameLabelX, CGRectGetMaxY(self.nameLabel.frame) + 4, nameLabelW, suosuLabelSize.height);
 }
 

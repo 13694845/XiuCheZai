@@ -9121,6 +9121,11 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="Fob-zs-H6y"/>
+                                                        </mask>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共6件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eb-UX-qsq">
                                                     <rect key="frame" x="99" y="70" width="75" height="14"/>
@@ -9133,7 +9138,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥762.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybv-WU-dfg">
-                                                    <rect key="frame" x="221" y="64.5" width="138" height="20"/>
+                                                    <rect key="frame" x="221" y="64" width="138" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="kvD-Sz-Tf8"/>
                                                     </constraints>
@@ -9152,6 +9157,7 @@
                                             <constraints>
                                                 <constraint firstItem="arE-Gc-zYS" firstAttribute="leading" secondItem="iMy-KF-LKg" secondAttribute="leading" constant="16" id="JY7-MX-2RY"/>
                                                 <constraint firstItem="dh9-pa-Ak2" firstAttribute="leading" secondItem="iMy-KF-LKg" secondAttribute="leading" id="Mm3-kn-D0F"/>
+                                                <constraint firstAttribute="trailing" secondItem="Nxe-ii-zdS" secondAttribute="trailing" constant="16" id="P5A-4M-qsY"/>
                                                 <constraint firstItem="Nxe-ii-zdS" firstAttribute="top" secondItem="iMy-KF-LKg" secondAttribute="top" constant="8" id="RaO-gz-h2d"/>
                                                 <constraint firstAttribute="trailing" secondItem="dh9-pa-Ak2" secondAttribute="trailing" id="Rir-Q1-Wdv"/>
                                                 <constraint firstItem="Ybv-WU-dfg" firstAttribute="leading" secondItem="8eb-UX-qsq" secondAttribute="trailing" constant="47" id="Sjg-Ku-Hyu"/>

@@ -135,11 +135,6 @@
             [self.bottomTextField becomeFirstResponder];
         }
     } else if (self.goType == 10) { // 跳转到商品详情
-        if (loginStatu) {
-            [self goLogining];
-        } else {
-            [self goProductDetails];
-        }
     }
 }
 
@@ -535,7 +530,7 @@
         [MBProgressHUD ZHMShowSuccess:@"删除成功"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZCircleDetailViewControllerHasDelectedToXCZCircleViewControllerNot" object:nil];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         });
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -633,7 +628,7 @@
     [self.contentView addSubview:publishDateLabel];
     
     CGSize bankuaiLabelSize = [bankuaiLabel.text boundingRectWithSize:CGSizeMake(self.contentView.bounds.size.width * 0.5, 15) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : bankuaiLabel.font} context:nil].size;
-    bankuaiLabel.frame = CGRectMake(XCZNewDetailRemarkRowMarginX, self.height + XCZNewDetailRemarkRowMarginY * 0.5, bankuaiLabelSize.width + 4, bankuaiLabelSize.height + 2);
+    bankuaiLabel.frame = CGRectMake(XCZNewDetailRemarkRowMarginX * 2, self.height + XCZNewDetailRemarkRowMarginY * 0.5, bankuaiLabelSize.width + 4, bankuaiLabelSize.height + 2);
     
     CGSize publishDateLabelSize = [publishDateLabel.text boundingRectWithSize:CGSizeMake((self.contentView.bounds.size.width - 4 * XCZNewDetailRemarkRowMarginX) * 0.5, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : publishDateLabel.font} context:nil].size;
     publishDateLabel.frame = CGRectMake(CGRectGetMaxX(bankuaiLabel.frame) + XCZNewDetailRemarkRowMarginX, bankuaiLabel.frame.origin.y + 1, publishDateLabelSize.width, publishDateLabelSize.height);
@@ -695,10 +690,13 @@
         webView.frame = webViewRect;
     }
     
+    NSLog(@"创建时间这行:%@", self.reuseIdentifier);
+    
     if ([self.reuseIdentifier isEqualToString:@"CellWZ"]) { // 只标题文字
         if (((NSString *)self.artDict[@"topic"]).length) {
             [self setupSurplusView]; // 加载下面的控件
         } else {
+            
             [self createDatePublishRow]; // 创建时间这行
             [self setupSurplusView]; // 加载下面的控件
         }
@@ -764,7 +762,18 @@
 - (void)setupImagesView
 {
     NSMutableArray *share_images = [NSMutableArray array];
-    self.share_images = [self changeImage:self.artDict[@"share_image"] andImageArray:share_images];
+    
+    if (!((NSString *)self.artDict[@"share_image"]).length) {
+        
+//        NSLog(@"来冬奥会的话");
+//        
+        if ([self.reuseIdentifier isEqualToString:@"CellB"]) {
+            [self createDatePublishRow];
+            [self setupAdmiredView]; // 设置点赞
+            [self setupSurplusView]; // 加载下面的控件
+        }
+    } else {
+        self.share_images = [self changeImage:self.artDict[@"share_image"] andImageArray:share_images];
         __block UIImageView *previousImageView;
         __block int i = 0;
         for (NSString *imageYStr in share_images) {
@@ -797,12 +806,12 @@
                 self.height += imageViewH + 8;
                 i++;
                 if (i == share_images.count) {
-                    [self createDatePublishRow]; // 创建时间这行
                     [self setupAdmiredView]; // 设置点赞
                     [self setupSurplusView]; // 加载下面的控件
                 }
             }];
         }
+    }
 }
 
 - (void)showDateAdmiredCommentsView
@@ -969,6 +978,8 @@
         NSString *overUrlStrPin = [NSString stringWithFormat:@"/detail/index.html?goodsId=%@", self.goods_remark[@"id"]];
         NSString *overUrlStr = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], overUrlStrPin];
         [self launchOuterWebViewWithURLString:overUrlStr];
+    } else {
+        [MBProgressHUD ZHMShowError:@"产品不存在"];
     }
 }
 
@@ -1054,10 +1065,10 @@
     if (content.length > 100) {
         content = [content substringToIndex:100];
     }
-    
+     title = [title stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
+    content = [content stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
     NSString *pageStr = [NSString stringWithFormat:@"/bbs/detail/index.html?post_id=%@", self.post_id];
     NSString *webpageUrl = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL],pageStr];
-    NSLog(@"webpageUrlwebpageUrl:%@", webpageUrl);
     [self shareMessage:@{@"title": title, @"description": content, @"thumbImage": thumbImage, @"webpageUrl": webpageUrl}];
 }
 
@@ -1070,15 +1081,14 @@
 
 - (void)goodsViewDidClick:(UIGestureRecognizer *)grz
 {
-    self.goType = 10;
     
 //    NSLog(@"artDict:%@", self.artDict);
     
     if ([self.artDict[@"goods_clazz"] integerValue]) { // 非整单
-        [self requestLoginDetection];
+        [self goProductDetails];
     } else { // 整单
         if ([self.goods_remark[@"num"] integerValue] <= 1) {
-            [self requestLoginDetection];
+            [self goProductDetails];
         } else {
             NSLog(@"跳到了这里:%@", self.artDict);
             XCZCirclePostDetailViewController *postDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCirclePostDetailViewController"];
@@ -1087,8 +1097,6 @@
             [self.navigationController pushViewController:postDetailVC animated:YES];
         }
     }
-    
-    
 }
 
 #pragma mark - 跳转控制器

@@ -80,7 +80,7 @@
     }
     
     CGFloat nameLabelX = CGRectGetMaxX(self.iconView.frame) + 8;
-    CGSize nameLabelSize = [self.nameLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width - nameLabelX, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.nameLabel.font} context:nil].size;
+    CGSize nameLabelSize = [self.nameLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width * 0.9 - nameLabelX, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.nameLabel.font} context:nil].size;
     CGFloat nameLabelW = nameLabelSize.width;
     self.nameLabel.frame = CGRectMake(nameLabelX, 12, nameLabelW, 14);
     

@@ -37,7 +37,17 @@
     _banners = banners;
  
     if (banners.count) {
+        XCZNewsBannerView *bannerView = [[XCZNewsBannerView alloc] init];
+        CGFloat bannerViewW = self.tableView.bounds.size.width;
+        CGFloat bannerViewH = (212.0/720) *bannerViewW;
+        bannerView.frame = CGRectMake(0, 0, bannerViewW, bannerViewH);
+        bannerView.dataSource = self;
+        bannerView.delegate = self;
+        self.tableView.tableHeaderView = bannerView;
+        self.bannerView = bannerView;
         [self updateBannerView];
+    } else {
+        self.tableView.tableHeaderView = nil;
     }
 }
 
@@ -68,15 +78,7 @@
     self.tableView.delegate = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     for (UIView *view in self.bannerView.subviews) [view removeFromSuperview];
-    
-    XCZNewsBannerView *bannerView = [[XCZNewsBannerView alloc] init];
-    CGFloat bannerViewW = self.tableView.bounds.size.width;
-    CGFloat bannerViewH = (212.0/720) *bannerViewW;
-    bannerView.frame = CGRectMake(0, 0, bannerViewW, bannerViewH);
-    bannerView.dataSource = self;
-    bannerView.delegate = self;
-    self.tableView.tableHeaderView = bannerView;
-    self.bannerView = bannerView;
+
     [self loadData];
 }
 

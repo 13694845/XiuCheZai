@@ -57,7 +57,7 @@
     }
     NSString *userNameText = [NSString stringWithFormat:@"%@", userText];
     self.userNameLabel.text = ((NSString *)row[@"brand_name"]).length ? userNameText : userText;
-    CGSize userNameLabelSize = [self.userNameLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width, 50) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.userNameLabel.font} context:nil].size;
+    CGSize userNameLabelSize = [self.userNameLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width * 0.5, 50) options:NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.userNameLabel.font} context:nil].size;
     self.userNameLabel.frame = CGRectMake(50 + XCZNewDetailRemarkRowMarginX, XCZNewDetailRemarkRowMarginY, userNameLabelSize.width, userNameLabelSize.height);
     self.brand_logoImaegView.frame = CGRectMake(CGRectGetMaxX(self.userNameLabel.frame) + 4, self.userNameLabel.frame.origin.y, self.userNameLabel.frame.size.height, self.userNameLabel.frame.size.height);
     [self.brand_logoImaegView sd_setImageWithURL:[NSURL URLWithString:[self changeIconStr:row[@"brand_logo"]]] placeholderImage:nil];

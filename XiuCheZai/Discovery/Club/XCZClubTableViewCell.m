@@ -32,7 +32,6 @@
 - (void)setRow:(NSDictionary *)row
 {
     _row = row;
-#warning iconView显示字段没有
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
     self.nameLabel.text = row[@"forum_name"];
     self.describeLabel.text = row[@"forum_remark"];
