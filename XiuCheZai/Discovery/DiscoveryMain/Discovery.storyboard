@@ -156,8 +156,8 @@
                         <outletCollection property="buttons" destination="3tC-tU-M3P" id="Tdt-Lg-gS6"/>
                         <outletCollection property="buttons" destination="FXl-ca-Qcf" id="yAq-nH-431"/>
                         <segue destination="Qpa-xc-PRv" kind="show" identifier="Segue" id="vk6-0G-YUE"/>
-                        <segue destination="piQ-uR-RIx" kind="push" id="mYb-ka-00C"/>
-                        <segue destination="dN2-di-nAA" kind="push" id="0QX-SR-GRc"/>
+                        <segue destination="piQ-uR-RIx" kind="show" identifier="Segue" id="mYb-ka-00C"/>
+                        <segue destination="dN2-di-nAA" kind="show" identifier="Segue" id="0QX-SR-GRc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ze-Zu-Jtt" userLabel="First Responder" sceneMemberID="firstResponder"/>

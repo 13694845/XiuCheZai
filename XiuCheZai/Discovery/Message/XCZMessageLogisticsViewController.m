@@ -101,9 +101,7 @@
 
 #pragma mark - XCZMessageLogisticsViewCellDelegate
 - (void)logisticsViewCell:(XCZMessageLogisticsViewCell *)logisticsViewCell detailsViewDidClick:(NSString *)recommendedId
-{
-    
-}
+{}
 
 /*
 #pragma mark - Navigation
