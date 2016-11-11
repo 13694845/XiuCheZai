@@ -49,7 +49,7 @@
 {
     _row = row;
 
-    [self clearData];
+//    [self clearData];
     [self setupSubView];
 }
 
@@ -68,6 +68,7 @@
 - (void)setupSubView
 {
 
+//    NSLog(@"images:%@", _row[@"images"]);
     for (UIView *cellView in self.imageBackView.subviews) {
         [cellView removeFromSuperview];
     }
@@ -152,7 +153,7 @@
                     [self.imageBackView addSubview:imgView];
                 }
             }
-        } else if(images.count == 4) {
+        } else if(images.count >= 4) {
             for (int i=0; i<4; i++) {
                 UIImageView *imgView = [[UIImageView alloc] init];
                 [imgView sd_setImageWithURL:[NSURL URLWithString:images[i]] placeholderImage:nil];
@@ -164,7 +165,6 @@
             }
         }
 
-        
         /*
         UIImageView *oneImgView = [[UIImageView alloc] init];
         oneImgView.image = image;
