@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (nonatomic) NSURL *url;
 
+- (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
+
 @end
