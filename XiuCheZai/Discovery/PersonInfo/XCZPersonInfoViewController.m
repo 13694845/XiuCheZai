@@ -21,6 +21,8 @@
 #import "DiscoveryConfig.h"
 #import "MBProgressHUD+ZHM.h"
 
+#import "ChatViewController.h"
+
 @interface XCZPersonInfoViewController () <UITableViewDataSource, UITableViewDelegate, XCZPersonInfoHeaderViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -417,7 +419,14 @@
 
 - (void)bottomChatViewDidClick
 {
-    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChatViewController *chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    chatViewController.receiverId = @"6493";
+    chatViewController.receiverName = @"BoBo";
+    chatViewController.receiverAvatar = @"group1/M00/00/6A/wKgCBFfD6ZyAO3zmAAgKHyYE5OE360.jpg";
+    chatViewController.isContact = @"1";
+    chatViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:chatViewController animated:YES];
 }
 
 - (void)addAttention
