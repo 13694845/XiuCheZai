@@ -430,7 +430,7 @@
      chatViewController.isContact = @"0";
      */
     chatViewController.receiverId = receiverInfo[@"user_id"];
-    chatViewController.receiverName = receiverInfo[@"nick"];
+    chatViewController.receiverName = receiverInfo[@"login_name"];
     chatViewController.receiverAvatar = receiverInfo[@"avatar"];
     chatViewController.isContact = @"0";
     
