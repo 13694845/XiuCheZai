@@ -52,6 +52,7 @@
         return NO;
     }
     
+    [super handleNavigationWithRequest:request navigationType:navigationType];
     return YES;
 }
 
