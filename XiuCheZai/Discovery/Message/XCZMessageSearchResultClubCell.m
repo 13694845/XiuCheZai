@@ -47,12 +47,23 @@
     _row = row;
     
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], row[@"forum_style"]]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
-    self.nameLabel.text = row[@"forum_name"];
-    self.remarkLabel.text = row[@"forum_remark"];
+    
+    self.nameLabel.text = [self stringByReplacing:row[@"forum_name"]];
+    self.remarkLabel.text = [self stringByReplacing:row[@"forum_remark"]];
     
     self.iconImageView.frame = CGRectMake(16, 8, 42, 42);
     self.nameLabel.frame = CGRectMake(CGRectGetMaxX(self.iconImageView.frame) + 8, 12, self.selfW - CGRectGetMaxX(self.iconImageView.frame) - 16, 14);
     self.remarkLabel.frame = CGRectMake(self.nameLabel.frame.origin.x, CGRectGetMaxY(self.nameLabel.frame) + 8, self.nameLabel.bounds.size.width, 10);
+}
+
+- (NSString *)stringByReplacing:(NSString *)string
+{
+    NSString *summaryShow = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return summaryShow;
 }
 
 @end

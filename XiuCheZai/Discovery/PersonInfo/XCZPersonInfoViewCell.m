@@ -106,21 +106,25 @@
             if (oneImageW >= oneImageH) {
                 UIImageView *oneImgView = [[UIImageView alloc] init];
                 oneImgView.image = image;
+                oneImgView.contentMode = UIViewContentModeScaleAspectFit;
                 oneImgView.frame = CGRectMake(0, 0, self.imageBackView.bounds.size.width, self.imageBackView.bounds.size.height * 0.5 - 4);
                 [self.imageBackView addSubview:oneImgView];
                 
                 UIImageView *twoImgView = [[UIImageView alloc] init];
+                twoImgView.contentMode = UIViewContentModeScaleAspectFit;
                 [twoImgView sd_setImageWithURL:[NSURL URLWithString:[images lastObject]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
                 twoImgView.frame = CGRectMake(0, self.imageBackView.bounds.size.height * 0.5 + 4, self.imageBackView.bounds.size.width, self.imageBackView.bounds.size.height * 0.5 - 4);
                 [self.imageBackView addSubview:twoImgView];
                 
             } else if (oneImageW < oneImageH) {
                 UIImageView *oneImgView = [[UIImageView alloc] init];
+                oneImgView.contentMode = UIViewContentModeScaleAspectFit;
                 oneImgView.image = image;
                 oneImgView.frame = CGRectMake(0, 0, self.imageBackView.bounds.size.width * 0.5 - 4, self.imageBackView.bounds.size.height);
                 [self.imageBackView addSubview:oneImgView];
                 
                 UIImageView *twoImgView = [[UIImageView alloc] init];
+                twoImgView.contentMode = UIViewContentModeScaleAspectFit;
                 [twoImgView sd_setImageWithURL:[NSURL URLWithString:[images lastObject]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
                 twoImgView.frame = CGRectMake(self.imageBackView.bounds.size.height * 0.5 + 4, 0, self.imageBackView.bounds.size.width * 0.5 - 4, self.imageBackView.bounds.size.height);
                 [self.imageBackView addSubview:twoImgView];
@@ -129,11 +133,13 @@
         } else if (images.count == 3) {
             if (oneImageW >= oneImageH) {
                 UIImageView *oneImgView = [[UIImageView alloc] init];
+                oneImgView.contentMode = UIViewContentModeScaleAspectFit;
                 oneImgView.image = image;
                 oneImgView.frame = CGRectMake(0, 0, self.imageBackView.bounds.size.width, self.imageBackView.bounds.size.height * 0.5 - 4);
                 [self.imageBackView addSubview:oneImgView];
                 for (int i = 0; i<2; i++) {
                     UIImageView *imgView = [[UIImageView alloc] init];
+                    imgView.contentMode = UIViewContentModeScaleAspectFit;
                     [imgView sd_setImageWithURL:[NSURL URLWithString:images[i+1]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
                     CGFloat imgViewW = self.imageBackView.bounds.size.width * 0.5 - 4;
                     imgView.frame = CGRectMake(i * (imgViewW + 8), self.imageBackView.bounds.size.height * 0.5 + 4, imgViewW, imgViewW);
@@ -141,11 +147,13 @@
                 }
             } else {
                 UIImageView *oneImgView = [[UIImageView alloc] init];
+                oneImgView.contentMode = UIViewContentModeScaleAspectFit;
                 oneImgView.image = image;
                 oneImgView.frame = CGRectMake(0, 0, self.imageBackView.bounds.size.width * 0.5 - 4, self.imageBackView.bounds.size.height);
                 [self.imageBackView addSubview:oneImgView];
                 for (int i = 0; i<2; i++) {
                     UIImageView *imgView = [[UIImageView alloc] init];
+                    imgView.contentMode = UIViewContentModeScaleAspectFit;
                     [imgView sd_setImageWithURL:[NSURL URLWithString:images[i+1]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
                     CGFloat imgViewW = self.imageBackView.bounds.size.height * 0.5 - 4;
                     imgView.frame = CGRectMake(self.imageBackView.bounds.size.height * 0.5 + 4, i * (imgViewW + 8), imgViewW, imgViewW);
@@ -155,6 +163,7 @@
         } else if(images.count >= 4) {
             for (int i=0; i<4; i++) {
                 UIImageView *imgView = [[UIImageView alloc] init];
+                imgView.contentMode = UIViewContentModeScaleAspectFit;
                 [imgView sd_setImageWithURL:[NSURL URLWithString:images[i]] placeholderImage:nil];
                 CGFloat imgViewW = self.imageBackView.bounds.size.height * 0.5 - 4;
                 CGFloat hanghao = i/2;
@@ -168,6 +177,7 @@
                                         options:NSJSONReadingMutableContainers
                                           error:nil];
         NSString *urlStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], goods_remark[@"img"]];
+        self.productImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.productImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic"]];
         self.productContentLabel.text = goods_remark[@"name"];
         self.productNumLabel.text = [NSString stringWithFormat:@"共%@件", goods_remark[@"num"]];

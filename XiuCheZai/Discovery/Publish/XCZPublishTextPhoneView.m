@@ -14,8 +14,6 @@
 @interface XCZPublishTextPhoneView()
 
 
-/** 2.phoneBtns */
-@property (nonatomic, strong) NSMutableArray *phoneBtns;
 /** 3.showImages */
 @property (nonatomic, strong) NSMutableArray *showImages;
 

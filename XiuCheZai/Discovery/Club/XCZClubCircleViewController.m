@@ -637,6 +637,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 - (void)jumpToXCZCircleDetailViewController:(NSString *)post_id and:(NSString *)user_id andReuseIdentifier:(NSString *)reuseIdentifier
 {
     XCZCircleDetailViewController *circleDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
+//    NSLog(@"reuseIdentifier:%@", reuseIdentifier);
     circleDetailVC.reuseIdentifier = reuseIdentifier;
     circleDetailVC.post_id = post_id;
     circleDetailVC.user_id = user_id;

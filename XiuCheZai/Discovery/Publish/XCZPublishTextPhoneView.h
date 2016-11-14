@@ -24,6 +24,7 @@
 
 @property (nonatomic, strong) UITextField *titleField;
 @property (nonatomic, weak) UITextView *textView;
+@property (nonatomic, strong) NSMutableArray *phoneBtns;
 /** 是否没有标题 YES:没有标题 NO:有标题 */
 @property (nonatomic, assign) BOOL isNoTopic;
 @property (nonatomic, assign) NSInteger selectedPhoneBtnTag;

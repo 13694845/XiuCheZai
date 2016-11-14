@@ -349,19 +349,18 @@
 
 - (void)targetingViewDidClick
 {
-    if (!self.selectedCityView) {
-        XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
-        selectedCityView.delegate = self;
-        if (self.currentPositioning.count) {
-            selectedCityView.currentLocation = self.currentPositioning;
-        } else {
-            selectedCityView.currentLocation = @{@"provinceid": @"330000",@"cityid": @"331000",@"townid": @"331001"};
-        }
-        [self.view addSubview:selectedCityView];
-        self.selectedCityView = selectedCityView;
-        selectedCityView.allProvince = [XCZCityManager allProvince];
+    self.scrollView.userInteractionEnabled = NO;
+    XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
+    selectedCityView.delegate = self;
+    if (self.currentPositioning.count) {
+        selectedCityView.currentLocation = self.currentPositioning;
+    } else {
+        selectedCityView.currentLocation = @{@"provinceid": @"330000",@"cityid": @"331000",@"townid": @"331001"};
     }
-    
+    [self.view addSubview:selectedCityView];
+    self.selectedCityView = selectedCityView;
+    selectedCityView.allProvince = [XCZCityManager allProvince];
+
     CGRect selectedCityViewRect = self.selectedCityView.frame;
     selectedCityViewRect.origin.y = self.view.bounds.size.height - 250;
     [UIView animateWithDuration:0.3 animations:^{
@@ -513,12 +512,13 @@
 - (void)publishSelectedCityView:(XCZPublishSelectedCityView *)selectedCityView headerLeftBtnDidClick:(UIButton *)leftBtn
 {
     [self closeSelectedCityView];
+    self.scrollView.userInteractionEnabled = YES;
 }
 
 - (void)publishSelectedCityView:(XCZPublishSelectedCityView *)selectedCityView headerRightBtnDidClickWithSelectedLocation:(NSDictionary *)selectedLocation
 {
     [self closeSelectedCityView];
-    
+    self.scrollView.userInteractionEnabled = YES;
     NSString *province_id = [[selectedLocation objectForKey:@"selectedProvinceDict"] objectForKey:@"number"];
     NSString *city_id = [[selectedLocation objectForKey:@"selectedCityDict"] objectForKey:@"number"];
     NSString *area_id = [[selectedLocation objectForKey:@"selectedTownDict"] objectForKey:@"number"];

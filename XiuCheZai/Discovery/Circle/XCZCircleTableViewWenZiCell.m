@@ -168,8 +168,8 @@
         self.headerCityLabel.text = [NSString stringWithFormat:@"%@ · %@", user_forum_name, addr];
     }
     
-    self.contentTitleLabel.text = _row[@"topic"];
-    self.contentLabel.text = _row[@"summary"];
+    self.contentTitleLabel.text = [self stringByReplacing:_row[@"topic"]];
+    self.contentLabel.text = [self stringByReplacing:_row[@"summary"]];
     
     self.cellHeaderView.frame = CGRectMake(0, 8, self.selfW, 56);
     self.headerImageView.frame = CGRectMake(16, 8, 40, 40);
@@ -236,12 +236,6 @@
     CGFloat commentImageViewY = praiseTextLabelY;
     CGFloat commentImageViewX = commentTextLabelX - commentImageViewW - 4;
     self.commentImageView.frame = CGRectMake(commentImageViewX, commentImageViewY, commentImageViewW, commentImageViewH);
-    
-//    
-//    self.commentTextLabel = ;
-//
-//    self.commentImageView = ;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZCircleTableViewWenZiCellWZHeightToVC" object:nil userInfo:@{@"cellWZHeight": @(cellWZHeight)}];
     
 }
@@ -258,6 +252,16 @@
     if ([self.delegate respondsToSelector:@selector(circleTableViewWenZiCell:cellContentViewDidClick:)]) {
         [self.delegate circleTableViewWenZiCell:self cellContentViewDidClick:self.row];
     }
+}
+
+- (NSString *)stringByReplacing:(NSString *)string
+{
+    NSString *summaryShow = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return summaryShow;
 }
 
 @end

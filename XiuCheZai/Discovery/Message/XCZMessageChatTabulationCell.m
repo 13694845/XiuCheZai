@@ -91,8 +91,9 @@
     [self.brand_logoImaegView sd_setImageWithURL:[NSURL URLWithString:[self changeIconStr:row[@"brand_logo"]]] placeholderImage:nil];
     self.brand_logoImaegView.layer.cornerRadius = self.brand_logoImaegView.bounds.size.height * 0.5;
     self.brand_logoImaegView.layer.masksToBounds = YES;
-    
-     NSString *join_forum = ((NSString *)_row[@"join_forum"]).length ? _row[@"join_forum"] : @"修车仔";
+
+    NSString *join_forumY = [[_row[@"join_forum"] componentsSeparatedByString:@","] firstObject];
+     NSString *join_forum = join_forumY.length ? join_forumY : @"修车仔";
     NSString *addr = [XCZCityManager splicingProvinceCityTownNameWithProvinceId:@"" cityId:row[@"city_id"] andTownId:row[@"area_id"]];
     if (!addr.length) {
         self.siteCircleLabel.text = join_forum.length ? [NSString stringWithFormat:@"%@", join_forum] : @"";

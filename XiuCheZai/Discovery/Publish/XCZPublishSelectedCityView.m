@@ -29,8 +29,6 @@
 // **********
 - (void)setCurrentLocation:(NSDictionary *)currentLocation {
     _currentLocation = currentLocation;
-
-  
     
         self.selectedProvinceId = _currentLocation[@"provinceid"];
         self.selectedCityId = _currentLocation[@"cityid"];

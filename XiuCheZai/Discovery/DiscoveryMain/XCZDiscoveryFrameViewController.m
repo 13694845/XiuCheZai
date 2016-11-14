@@ -70,16 +70,14 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     viewController.view.frame = self.contentView.bounds;
     [self.contentView addSubview:viewController.view];
     self.jumpType = DiscoveryLoginOverJumpTypeStart;
-    [self requestLoginDetection];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-//    self.navigationController.navigationBar.translucent = NO;
     [self.tabBarController.tabBar setHidden:NO];
     [self.tabBarController setHidesBottomBarWhenPushed:YES];
-//    [self.navigationController setHidesBottomBarWhenPushed:YES];
+     [self requestLoginDetection];
 }
 
 - (void)switchContent:(id)sender {

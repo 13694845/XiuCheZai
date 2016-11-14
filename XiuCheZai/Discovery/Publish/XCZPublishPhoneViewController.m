@@ -18,6 +18,8 @@
 #import "XCZCircleDetailViewController.h"
 #import "XCZPublishSelectedCityView.h"
 #import "XCZCityManager.h"
+#import "XCZPublishImagePickController.h"
+#import "SGImagePickerController.h"
 
 @interface XCZPublishPhoneViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate, XCZPublishTextPhoneViewDelegate, XCZPublishSelectedCityViewDelegate, XCZPublishBrandsViewControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate, UITextViewDelegate>
 
@@ -181,7 +183,7 @@
     self.sendToView.row = sendRow;
     
     if (self.image) {
-        [self requestPostImage:self.image];
+        [self requestPostImage:self.image andIndex:0 andImages:nil];
     }
 }
 
@@ -202,7 +204,7 @@
     }];
 }
 
-- (void)requestPostImage:(UIImage *)currentImage
+- (void)requestPostImage:(UIImage *)currentImage andIndex:(NSInteger)currentIndex andImages:(NSArray *)images
 {
     [MBProgressHUD ZHMShowMessage:@"正在处理中..."];
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
@@ -217,16 +219,30 @@
             NSString *timeStr = [dataFormatter stringFromDate:[NSDate date]];
             NSString *fileName = [userType stringByAppendingString:[NSString stringWithFormat:@"%@.jpg", timeStr]];
             NSData *imgData = UIImageJPEGRepresentation(currentImage, 0.1);
+        
+        
             [formData appendPartWithFileData:imgData name:@"file" fileName:fileName mimeType:@"image/jpeg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
 //                 NSLog(@"uploadProgress:%@", uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [MBProgressHUD ZHMHideHUD];
-         NSDictionary *responseInfo = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
+        NSDictionary *responseInfo = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         if ([responseInfo[@"error"] intValue]) {
+//            NSLog(@"asfldhilsfahlasfafsfa");
             NSString *imageStr = [responseInfo objectForKey:@"filepath"];
             self.textPhoneView.selectedPhoneBtnTag = self.selectedPhoneBtnTag;
             self.textPhoneView.imageDict = @{@"image": currentImage, @"imageStr": imageStr};
+            int index = currentIndex;
+            index ++;
+            if (images) {
+                self.selectedPhoneBtnTag = (self.textPhoneView.phoneBtns.count <= 1 + index) ? index : self.textPhoneView.phoneBtns.count + index - 2;
+                if (index <images.count && index) {
+                    [self requestPostImage:images[index] andIndex:index andImages:images];
+                }
+            } else {
+                self.textPhoneView.selectedPhoneBtnTag = self.selectedPhoneBtnTag;
+                self.textPhoneView.imageDict = @{@"image": currentImage, @"imageStr": imageStr};
+            }
         } else {
             [MBProgressHUD ZHMShowError:[NSString stringWithFormat:@"%@%@", @"上传失败!", @"文件太大"]];
         }
@@ -342,18 +358,16 @@
 
 - (void)createAddressView
 {
-    if (!self.selectedCityView) {
-        XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
-        selectedCityView.delegate = self;
-        [self.view addSubview:selectedCityView];
-        self.selectedCityView = selectedCityView;
-        
-    }
+    self.scrollView.userInteractionEnabled = NO;
+    XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
+    selectedCityView.delegate = self;
     if (self.currentPositioning.count) {
-        self.selectedCityView.currentLocation = self.currentPositioning;
+        selectedCityView.currentLocation = self.currentPositioning;
     } else {
-        self.selectedCityView.currentLocation = @{@"provinceid": @"110100",@"cityid": @"110000",@"townid": @"110101"};
+        selectedCityView.currentLocation = @{@"provinceid": @"330000",@"cityid": @"331000",@"townid": @"331001"};
     }
+    [self.view addSubview:selectedCityView];
+    self.selectedCityView = selectedCityView;
     self.selectedCityView.allProvince = [XCZCityManager allProvince];
     
     CGRect selectedCityViewRect = self.selectedCityView.frame;
@@ -361,22 +375,6 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.selectedCityView.frame = selectedCityViewRect;
     }];
-    
-//    XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
-//    selectedCityView.delegate = self;
-//    if (self.currentPositioning.count) {
-//        selectedCityView.currentLocation = self.currentPositioning;
-//    } else {
-//        selectedCityView.currentLocation = @{@"provinceid": @"330000",@"cityid": @"331000",@"townid": @"331001"};
-//    }
-//    [self.view addSubview:selectedCityView];
-//    self.selectedCityView = selectedCityView;
-//
-//    CGRect selectedCityViewRect = self.selectedCityView.frame;
-//    selectedCityViewRect.origin.y = self.view.bounds.size.height - 250;
-//    [UIView animateWithDuration:0.3 animations:^{
-//        self.selectedCityView.frame = selectedCityViewRect;
-//    }];
 }
 
 - (void)sendToViewDidClick
@@ -443,7 +441,7 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     UIAlertAction *oneAction = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-       [self photograph:UIImagePickerControllerSourceTypePhotoLibrary]; // 选择相册
+       [self photoAlbumgraph:UIImagePickerControllerSourceTypePhotoLibrary]; // 选择相册
     }];
     UIAlertAction *twoAction = [UIAlertAction actionWithTitle:@"拍摄" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self photograph:UIImagePickerControllerSourceTypeCamera]; // 调用拍照
@@ -519,12 +517,13 @@
 - (void)publishSelectedCityView:(XCZPublishSelectedCityView *)selectedCityView headerLeftBtnDidClick:(UIButton *)leftBtn
 {
     [self closeSelectedCityView];
+    self.scrollView.userInteractionEnabled = YES;
 }
 
 - (void)publishSelectedCityView:(XCZPublishSelectedCityView *)selectedCityView headerRightBtnDidClickWithSelectedLocation:(NSDictionary *)selectedLocation
 {
     [self closeSelectedCityView];
-    
+     self.scrollView.userInteractionEnabled = YES;
     NSString *province_id = [[selectedLocation objectForKey:@"selectedProvinceDict"] objectForKey:@"number"];
     NSString *city_id = [[selectedLocation objectForKey:@"selectedCityDict"] objectForKey:@"number"];
     NSString *area_id = [[selectedLocation objectForKey:@"selectedTownDict"] objectForKey:@"number"];
@@ -543,6 +542,24 @@
 }
 
 #pragma mark - 拍照相册处理
+- (void)photoAlbumgraph:(UIImagePickerControllerSourceType)sourceType
+{
+//    UIImagePickerController *imagePickController = [[UIImagePickerController alloc] init];
+//    imagePickController.delegate = self;
+//    imagePickController.sourceType = sourceType;
+//    [self presentViewController:imagePickController animated:YES completion:nil];
+   
+    SGImagePickerController *imgCtr = [[SGImagePickerController alloc] init];
+    //返回选中的原图
+    [self presentViewController:imgCtr animated:YES completion:nil];
+    [imgCtr setDidFinishSelectImages:^(NSArray *images) {
+        [self requestPostImage:[images firstObject] andIndex:0 andImages:images];
+//        [self requestPostImage:[images firstObject] andIndex:1 andImages:nil];
+    }];
+ 
+    
+}
+
 - (void)photograph:(UIImagePickerControllerSourceType)sourceType
 {
     UIImagePickerController *imagePickController = [[UIImagePickerController alloc] init];
@@ -555,7 +572,8 @@
 {
     UIImage *oImage = info[@"UIImagePickerControllerOriginalImage"];
     UIImage *yImage = [UIImage imageWithData:UIImageJPEGRepresentation(oImage, 0.1)];
-    [self requestPostImage:yImage];
+//    [self requestPostImage:yImage];
+    [self requestPostImage:yImage andIndex:0 andImages:nil];
 }
 
 #pragma mark - 去登录等方法
@@ -589,6 +607,22 @@
         [self.selectedCityView removeFromSuperview];
         self.selectedCityView = nil;
     }];
+}
+
+/**
+ *  压缩图片到指定尺寸大小
+ *
+ *  @param image 原始图片
+ *  @param size  目标大小
+ *
+ *  @return 生成图片
+ */
+-(UIImage *)compressOriginalImage:(UIImage *)image toSize:(CGSize)size{
+    UIImage * resultImage = image;
+    UIGraphicsBeginImageContext(size);
+    [resultImage drawInRect:CGRectMake(00, 0, size.width, size.height)];
+    UIGraphicsEndImageContext();
+    return image;
 }
 
 @end

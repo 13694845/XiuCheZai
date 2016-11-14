@@ -109,7 +109,8 @@
     self.timeLabel.text = [NSString stringWithFormat:@"时间:   %@", row[@"create_time"]];
     self.remarkCountLabel.text = row[@"replies"];
     self.praiseCountLabel.text = row[@"goods"];
-    self.contentLabel.text = row[@"summary"];
+    self.contentLabel.text = [self stringByReplacing:row[@"summary"]];
+    
     if ([self.reuseIdentifier isEqualToString:@"CellA"] || [self.reuseIdentifier isEqualToString:@"CellA1"]  || [self.reuseIdentifier isEqualToString:@"CellA2"]) { // 多张图
         NSMutableArray *imageArray = [NSMutableArray array];
         [imageArray removeAllObjects];
@@ -131,7 +132,7 @@
         imageArray = [self changeImage:row[@"share_image"] andImageArray:imageArray];
         [self setupImage:imageArray];
     } else if ([self.reuseIdentifier isEqualToString:@"CellD"]) {
-        self.contentTitleLabel.text = row[@"topic"];
+        self.contentTitleLabel.text = [self stringByReplacing:row[@"topic"]];
     }
     
 
@@ -222,6 +223,16 @@
         [imageArray addObject:imageStrs];
     }
     return imageArray;
+}
+
+- (NSString *)stringByReplacing:(NSString *)string
+{
+    NSString *summaryShow = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return summaryShow;
 }
 
 @end

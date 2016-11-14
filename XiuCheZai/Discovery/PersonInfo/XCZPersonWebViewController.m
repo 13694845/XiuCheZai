@@ -34,8 +34,6 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
-    NSLog(@"description:%@", request.description);
     if ([request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/index.html"]]) {
         [self.navigationController popToRootViewControllerAnimated:YES];
         return NO;
@@ -51,7 +49,6 @@
         [self.navigationController popViewControllerAnimated:YES];
         return NO;
     }
-    
     [super handleNavigationWithRequest:request navigationType:navigationType];
     return YES;
 }

@@ -594,10 +594,12 @@
     } else if ([self.reuseIdentifier isEqualToString:@"CellA"] || [self.reuseIdentifier isEqualToString:@"CellB"] || [self.reuseIdentifier isEqualToString:@"CellA1"] || [self.reuseIdentifier isEqualToString:@"CellA2"]) { // 图文混排(没有商品)
         
         if (((NSString *)self.artDict[@"topic"]).length) {
+//            NSLog(@"232443234");
             [self createNewsTitleLabel];
             [self createDatePublishRow]; // 创建时间这行
             [self createTextContentView];
         } else {
+//            NSLog(@"232443234ddff");
             [self createNewsTitleLabel];
             [self createTextContentView];
         }
@@ -690,7 +692,7 @@
         webView.frame = webViewRect;
     }
     
-    NSLog(@"创建时间这行:%@", self.reuseIdentifier);
+//    NSLog(@"创建时间这行:%@", self.reuseIdentifier);
     
     if ([self.reuseIdentifier isEqualToString:@"CellWZ"]) { // 只标题文字
         if (((NSString *)self.artDict[@"topic"]).length) {
@@ -806,8 +808,15 @@
                 self.height += imageViewH + 8;
                 i++;
                 if (i == share_images.count) {
-                    [self setupAdmiredView]; // 设置点赞
-                    [self setupSurplusView]; // 加载下面的控件
+                    
+                    if ([self.reuseIdentifier isEqualToString:@"CellB"]) {
+                        [self createDatePublishRow];
+                        [self setupAdmiredView]; // 设置点赞
+                        [self setupSurplusView]; // 加载下面的控件
+                    } else {
+                        [self setupAdmiredView]; // 设置点赞
+                        [self setupSurplusView]; // 加载下面的控件
+                    }
                 }
             }];
         }

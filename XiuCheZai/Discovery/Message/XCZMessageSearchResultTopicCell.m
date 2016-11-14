@@ -54,8 +54,9 @@
 {
     _row = row;
 
-    self.nameLabel.text = row[@"topic"];
-    self.remarkLabel.text = row[@"summary"];
+    self.nameLabel.text = [self stringByReplacing:row[@"topic"]];
+    self.remarkLabel.text = [self stringByReplacing:row[@"summary"]];
+    
      [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], row[@"main_image"]]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
     
     self.nameLabel.frame = CGRectMake(16, 12, self.selfW - 42 - 16 - 8, 14);
@@ -63,5 +64,16 @@
     self.iconImageView.frame = CGRectMake(self.selfW - 42 - 16, 8, 42, 42);
     self.lineView.frame = CGRectMake(0, 58.5, self.selfW, 0.5);
 }
+
+- (NSString *)stringByReplacing:(NSString *)string
+{
+    NSString *summaryShow = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return summaryShow;
+}
+
 
 @end

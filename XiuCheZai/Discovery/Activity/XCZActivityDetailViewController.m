@@ -599,7 +599,13 @@
     [self.contentView addSubview:admiredView];
     UILabel *newsRemarksView = [[UILabel alloc] init];
     [self.contentView addSubview:newsRemarksView];
-    [newsTitleView loadHTMLString:[self escapeHTMLString:self.artDict[@"content"]] baseURL:nil];
+    
+    
+    NSString *repWidthStr = [NSString stringWithFormat:@"<img width=%f ", self.contentView.bounds.size.width - 32];
+    NSString *content = [self escapeHTMLString:self.artDict[@"content"]];
+    content = [content stringByReplacingOccurrencesOfString:@"<img " withString: repWidthStr];
+    [newsTitleView loadHTMLString:content baseURL:nil];
+    
     newsTitleView.frame = CGRectMake(XCZNewDetailRemarkRowMarginX * 2, self.height + XCZNewDetailRemarkRowMarginY, self.contentView.bounds.size.width - 4 * XCZNewDetailRemarkRowMarginX, 1);
 }
 
