@@ -581,7 +581,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *oImage = info[@"UIImagePickerControllerOriginalImage"];
-    [self compressionImage:oImage andCompressionQuality:0.1];
+    [self compressionImage:oImage andCompressionQuality:0.08];
     [self requestPostImage:self.chouImage andIndex:0 andImages:nil];
 }
 
@@ -639,7 +639,7 @@
      NSData *imageData = UIImageJPEGRepresentation(image, quality);
      UIImage *newImage = [UIImage imageWithData:imageData];
 
-    if (imageData.length/1024 >= 300) {
+    if (imageData.length/1024 >= 160) {
         UIImage *scImage = [self scaleToSize:newImage size:CGSizeMake(newImage.size.width * quality, newImage.size.height * quality)];
         NSData *data = UIImageJPEGRepresentation(scImage, quality);
         [self compressionImage:[UIImage imageWithData:data] andCompressionQuality:quality];

@@ -648,14 +648,13 @@
     NSData *imageData = UIImageJPEGRepresentation(image, quality);
     UIImage *newImage = [UIImage imageWithData:imageData];
     
-    if (imageData.length/1024 >= 300) {
+    if (imageData.length/1024 >= 200) {
         UIImage *scImage = [self scaleToSize:newImage size:CGSizeMake(newImage.size.width * quality, newImage.size.height * quality)];
         NSData *data = UIImageJPEGRepresentation(scImage, quality);
         [self compressionImage:[UIImage imageWithData:data] andCompressionQuality:quality];
     } else {
         self.chouImage = newImage;
     }
-    //    return nil;
 }
 
 #pragma mark 裁剪照片

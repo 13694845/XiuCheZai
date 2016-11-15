@@ -189,6 +189,9 @@
     [self.view addSubview:rightBtn];
     
     [rightBtn addTarget:self action:@selector(rightBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view insertSubview:titleLabel atIndex:200];
+    [self.view insertSubview:backBtn atIndex:200];
 }
 
 - (void)backBtnDidClick
