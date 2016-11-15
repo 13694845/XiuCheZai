@@ -78,6 +78,14 @@
 
 - (void)setSelectedProvinceId:(NSString *)selectedProvinceId {
     _selectedProvinceId = selectedProvinceId;
+    [self.pickerView reloadComponent:0];
+    
+    for (NSDictionary *province in self.provinces) {
+        if ([province[@"number"] isEqualToString:self.selectedProvinceId]) {
+            [self.pickerView selectRow:[self.provinces indexOfObject:province] inComponent:0 animated:YES];
+            break;
+        }
+    }
     
     self.cities = [XCZCityManager citiesForProvinceId:_selectedProvinceId];
     self.selectedCityId = [self.cities.firstObject objectForKey:@"number"];
@@ -88,23 +96,39 @@
     }
      */
     // [self.pickerView reloadAllComponents];
-    [self.pickerView reloadComponent:0];
+    // [self.pickerView reloadComponent:0];
 
 }
 
 - (void)setSelectedCityId:(NSString *)selectedCityId {
     _selectedCityId = selectedCityId;
+    [self.pickerView reloadComponent:1];
+
+    for (NSDictionary *city in self.cities) {
+        if ([city[@"number"] isEqualToString:self.selectedCityId]) {
+            [self.pickerView selectRow:[self.cities indexOfObject:city] inComponent:1 animated:YES];
+            break;
+        }
+    }
     
     self.towns = [XCZCityManager townNameForCityId:_selectedCityId];
     self.selectedTownId = [self.towns.firstObject objectForKey:@"number"];
     
-    [self.pickerView reloadComponent:1];
+    // [self.pickerView reloadComponent:1];
 }
 
 - (void)setSelectedTownId:(NSString *)selectedTownId {
     _selectedTownId = selectedTownId;
-    
     [self.pickerView reloadComponent:2];
+
+    for (NSDictionary *town in self.towns) {
+        if ([town[@"number"] isEqualToString:self.selectedTownId]) {
+            [self.pickerView selectRow:[self.towns indexOfObject:town] inComponent:2 animated:YES];
+            break;
+        }
+    }
+
+    // [self.pickerView reloadComponent:2];
 }
 
 
