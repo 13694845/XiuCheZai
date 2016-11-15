@@ -185,7 +185,7 @@
     CGFloat rightBtnX = self.tableView.bounds.size.width - rightBtnWH - 18;
     CGFloat rightBtnY = titleLabelY;
     UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(rightBtnX, rightBtnY, rightBtnWH, rightBtnWH)];
-    [rightBtn setBackgroundImage:[UIImage imageNamed:@"搜索"] forState:UIControlStateNormal];
+    [rightBtn setBackgroundImage:[UIImage imageNamed:@"bbs_search"] forState:UIControlStateNormal];
     [self.view addSubview:rightBtn];
     
     [rightBtn addTarget:self action:@selector(rightBtnDidClick) forControlEvents:UIControlEventTouchUpInside];
