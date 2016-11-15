@@ -339,7 +339,6 @@
         return;
     }
     
-    /*
     if ([[info objectForKey:@"url"] length] == 13) {
         NSString *URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LoginDetectionAction.do"];
         NSDictionary *parameters = nil;
@@ -353,7 +352,6 @@
         } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
         return;
     }
-     */
 }
 
 - (void)receiveCardWithURLString:(NSString *)url {
