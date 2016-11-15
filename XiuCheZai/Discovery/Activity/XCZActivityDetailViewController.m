@@ -545,8 +545,8 @@
 
 - (void)createTopicLabel
 {
-//        NSLog(@"artDictartDict:%@", self.artDict[@"topic"]);
     UILabel *topicLabel = [[UILabel alloc] init];
+    topicLabel.numberOfLines = 0;
     topicLabel.text = self.artDict[@"topic"];
     topicLabel.textColor = [UIColor colorWithRed:34/255.0 green:34/255.0 blue:34/255.0 alpha:1.0];
     topicLabel.font = [UIFont systemFontOfSize:18];

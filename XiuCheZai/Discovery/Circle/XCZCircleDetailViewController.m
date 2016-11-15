@@ -814,6 +814,7 @@
                         [self setupAdmiredView]; // 设置点赞
                         [self setupSurplusView]; // 加载下面的控件
                     } else {
+                        [self createDatePublishRow]; // 创建时间这行
                         [self setupAdmiredView]; // 设置点赞
                         [self setupSurplusView]; // 加载下面的控件
                     }

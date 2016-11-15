@@ -8,6 +8,7 @@
 
 #import "XCZClubTableViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "XCZConfig.h"
 
 @interface XCZClubTableViewCell()
 
@@ -30,7 +31,8 @@
 - (void)setRow:(NSDictionary *)row
 {
     _row = row;
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
+
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], row[@"forum_style"]]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
     self.nameLabel.text = row[@"forum_name"];
     self.describeLabel.text = row[@"forum_remark"];
 }

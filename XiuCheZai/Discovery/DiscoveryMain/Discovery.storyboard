@@ -2173,7 +2173,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmj-sR-wSL">
                                                     <rect key="frame" x="16" y="8" width="40" height="40"/>
-                                                    <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="Jal-td-aWf"/>
                                                         <constraint firstAttribute="height" constant="40" id="w0f-OZ-5WW"/>
@@ -4769,7 +4769,7 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u12-3T-Eb6">
                                                     <rect key="frame" x="8" y="8" width="40" height="40"/>
-                                                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="foA-eJ-n3p"/>
                                                         <constraint firstAttribute="width" constant="40" id="xXr-iK-1Z9"/>
@@ -7148,6 +7148,7 @@
                         <outlet property="bottomAttentView" destination="HY0-Ax-Yzy" id="uVa-W3-O3Z"/>
                         <outlet property="bottomBar" destination="fhM-8i-GET" id="g63-Vw-i7o"/>
                         <outlet property="bottomChatView" destination="FsT-n6-wLx" id="YA2-rS-A6A"/>
+                        <outlet property="bottomLayout" destination="aba-fV-jLB" id="cN6-WJ-xSl"/>
                         <outlet property="guanzhuImageView" destination="GnX-4U-r1O" id="Atd-92-PXX"/>
                         <outlet property="guanzhuLabel" destination="GT6-BW-t4r" id="UQc-xD-wWf"/>
                         <outlet property="tableView" destination="bQd-3f-NoM" id="i7b-16-iDY"/>

@@ -38,6 +38,7 @@
 @property (assign, nonatomic) int goType; // 1:  2:调起地点选择框
 
 @property (nonatomic, strong) NSArray *showImages;
+@property (nonatomic, strong) UIImage *chouImage;
 @property (nonatomic, copy) NSString *imageStrs;
 @property (strong, nonatomic) AFHTTPSessionManager *phoneManager;
 
@@ -218,9 +219,7 @@
             dataFormatter.dateFormat = @"yyyyMMddHHmmss";
             NSString *timeStr = [dataFormatter stringFromDate:[NSDate date]];
             NSString *fileName = [userType stringByAppendingString:[NSString stringWithFormat:@"%@.jpg", timeStr]];
-            NSData *imgData = UIImageJPEGRepresentation(currentImage, 0.1);
-        
-        
+            NSData *imgData = UIImageJPEGRepresentation(currentImage, 1.0);
             [formData appendPartWithFileData:imgData name:@"file" fileName:fileName mimeType:@"image/jpeg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
 //                 NSLog(@"uploadProgress:%@", uploadProgress);
@@ -228,14 +227,18 @@
         [MBProgressHUD ZHMHideHUD];
         NSDictionary *responseInfo = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
         if ([responseInfo[@"error"] intValue]) {
-//            NSLog(@"asfldhilsfahlasfafsfa");
             NSString *imageStr = [responseInfo objectForKey:@"filepath"];
             self.textPhoneView.selectedPhoneBtnTag = self.selectedPhoneBtnTag;
             self.textPhoneView.imageDict = @{@"image": currentImage, @"imageStr": imageStr};
             int index = currentIndex;
             index ++;
             if (images) {
-                self.selectedPhoneBtnTag = (self.textPhoneView.phoneBtns.count <= 1 + index) ? index : self.textPhoneView.phoneBtns.count + index - 2;
+                if (self.textPhoneView.phoneBtns.count <= 1 + index) {
+                    self.selectedPhoneBtnTag = index;
+                } else {
+                    self.selectedPhoneBtnTag += 1;
+                }
+                
                 if (index <images.count && index) {
                     [self requestPostImage:images[index] andIndex:index andImages:images];
                 }
@@ -251,6 +254,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBProgressHUD ZHMHideHUD];
         [MBProgressHUD ZHMShowError:@"失败，请检查网络"];
+        [self dismissViewControllerAnimated:YES completion:nil];
         NSLog(@"error:%@", error);
     }];
 }
@@ -544,20 +548,26 @@
 #pragma mark - 拍照相册处理
 - (void)photoAlbumgraph:(UIImagePickerControllerSourceType)sourceType
 {
-//    UIImagePickerController *imagePickController = [[UIImagePickerController alloc] init];
-//    imagePickController.delegate = self;
-//    imagePickController.sourceType = sourceType;
-//    [self presentViewController:imagePickController animated:YES completion:nil];
-   
     SGImagePickerController *imgCtr = [[SGImagePickerController alloc] init];
     //返回选中的原图
     [self presentViewController:imgCtr animated:YES completion:nil];
     [imgCtr setDidFinishSelectImages:^(NSArray *images) {
-        [self requestPostImage:[images firstObject] andIndex:0 andImages:images];
-//        [self requestPostImage:[images firstObject] andIndex:1 andImages:nil];
+        NSMutableArray *newImages = [NSMutableArray array];
+        for (UIImage *image in images) {
+            [self compressionImage:image andCompressionQuality:0.1];
+            if (self.chouImage) {
+                [newImages addObject:self.chouImage];
+            }
+        }
+        
+        if ([newImages firstObject]) {
+            if (self.textPhoneView.phoneBtns.count - 1 + images.count > 9) {
+                [MBProgressHUD ZHMShowError:@"图片大于9张，请重新选取!"];
+            } else {
+                [self requestPostImage:[newImages firstObject] andIndex:0 andImages:newImages];
+            }
+        }
     }];
- 
-    
 }
 
 - (void)photograph:(UIImagePickerControllerSourceType)sourceType
@@ -571,9 +581,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *oImage = info[@"UIImagePickerControllerOriginalImage"];
-    UIImage *yImage = [UIImage imageWithData:UIImageJPEGRepresentation(oImage, 0.1)];
-//    [self requestPostImage:yImage];
-    [self requestPostImage:yImage andIndex:0 andImages:nil];
+    [self compressionImage:oImage andCompressionQuality:0.1];
+    [self requestPostImage:self.chouImage andIndex:0 andImages:nil];
 }
 
 #pragma mark - 去登录等方法
@@ -610,7 +619,7 @@
 }
 
 /**
- *  压缩图片到指定尺寸大小
+ *  缩小图片到指定尺寸大小
  *
  *  @param image 原始图片
  *  @param size  目标大小
@@ -620,9 +629,39 @@
 -(UIImage *)compressOriginalImage:(UIImage *)image toSize:(CGSize)size{
     UIImage * resultImage = image;
     UIGraphicsBeginImageContext(size);
-    [resultImage drawInRect:CGRectMake(00, 0, size.width, size.height)];
+    [resultImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
     UIGraphicsEndImageContext();
     return image;
+}
+
+- (void)compressionImage:(UIImage *)image andCompressionQuality:(CGFloat)quality
+{
+     NSData *imageData = UIImageJPEGRepresentation(image, quality);
+     UIImage *newImage = [UIImage imageWithData:imageData];
+
+    if (imageData.length/1024 >= 300) {
+        UIImage *scImage = [self scaleToSize:newImage size:CGSizeMake(newImage.size.width * quality, newImage.size.height * quality)];
+        NSData *data = UIImageJPEGRepresentation(scImage, quality);
+        [self compressionImage:[UIImage imageWithData:data] andCompressionQuality:quality];
+    } else {
+        self.chouImage = newImage;
+    }
+//    return nil;
+}
+
+#pragma mark 裁剪照片
+-(UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size
+{
+    //创建一个bitmap的context
+    //并把他设置成当前的context
+    UIGraphicsBeginImageContext(size);
+    //绘制图片的大小
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    //从当前context中创建一个改变大小后的图片
+    UIImage *endImage=UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    return endImage;
 }
 
 @end

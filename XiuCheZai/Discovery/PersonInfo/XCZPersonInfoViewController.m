@@ -21,8 +21,6 @@
 #import "DiscoveryConfig.h"
 #import "MBProgressHUD+ZHM.h"
 
-#import "ChatViewController.h"
-
 @interface XCZPersonInfoViewController () <UITableViewDataSource, UITableViewDelegate, XCZPersonInfoHeaderViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -33,6 +31,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *guanzhuImageView;
 @property (weak, nonatomic) IBOutlet UILabel *guanzhuLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLayout;
+
 
 @property (strong, nonatomic) NSMutableArray *rows;
 @property (strong, nonatomic) XCZPersonInfoHeaderView *headerView;
@@ -261,16 +261,13 @@
                 NSString *user_id = ((NSDictionary *)responseObject[@"data"])[@"user_id"];
                 self.loginUser_id = user_id;
                 if ([user_id isEqualToString:self.bbs_user_id]) {
-                    NSLayoutConstraint *layout = self.view.constraints[7];
-                    layout.constant = -49;
+                    self.bottomLayout.constant = -49;
                 } else {
-                    NSLayoutConstraint *layout = self.view.constraints[7];
-                    layout.constant = 0;
+                    self.bottomLayout.constant = 0;
                 }
             }
         } else {
-            NSLayoutConstraint *layout = self.view.constraints[7];
-            layout.constant = -49;
+            self.bottomLayout.constant = -49;
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@", error);
@@ -419,23 +416,7 @@
 
 - (void)bottomChatViewDidClick
 {
-    NSDictionary *receiverInfo = self.banner[@"user"];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ChatViewController *chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-    /*
-     chatViewController.receiverId = @"6493";
-     chatViewController.receiverName = @"BoBo";
-     chatViewController.receiverAvatar = @"group1/M00/00/6A/wKgCBFfD6ZyAO3zmAAgKHyYE5OE360.jpg";
-     chatViewController.isContact = @"0";
-     */
-    chatViewController.receiverId = receiverInfo[@"user_id"];
-    chatViewController.receiverName = receiverInfo[@"login_name"];
-    chatViewController.receiverAvatar = receiverInfo[@"avatar"];
-    chatViewController.isContact = @"0";
-    
-    chatViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:chatViewController animated:YES];
 }
 
 - (void)addAttention
@@ -517,7 +498,6 @@
     NSDate *create_timeZ = [formatter dateFromString:create_timeQ];
     return [NSString stringWithFormat:@"%@", create_timeZ];
 }
-
 
 /**
  *  将images字符串装入image数组

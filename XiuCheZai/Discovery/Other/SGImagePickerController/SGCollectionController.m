@@ -87,41 +87,30 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 //出口,选择完成图片
 - (void)finishSelecting{
-    
+//    NSLog(@"finishSelecting");
     if ([self.navigationController isKindOfClass:[SGImagePickerController class]]) {
         SGImagePickerController *picker = (SGImagePickerController *)self.navigationController;
+        [self.selectedImages removeAllObjects];
+        self.selectedImages = nil;
         if (picker.didFinishSelectThumbnails || picker.didFinishSelectImages) {
-        
-        for (SGAssetModel *model in self.assetModels) {
-            if (model.isSelected) {
-                [self.selectedModels addObject:model];
-            }
-        }
- 
             //获取原始图片可能是异步的,因此需要判断最后一个,然后传出
             for (int i = 0; i < self.selectedModels.count; i++) {
                 SGAssetModel *model = self.selectedModels[i];
                 [model originalImage:^(UIImage *image) {
                     [self.selectedImages addObject:image];
-                    
                     if ( i == self.selectedModels.count - 1) {//最后一个
                         if (picker.didFinishSelectImages) {
                             picker.didFinishSelectImages(self.selectedImages);
                         }
-                        
                     }
                 }];
             }
-        
         if (picker.didFinishSelectThumbnails) {
             picker.didFinishSelectThumbnails([_selectedModels valueForKeyPath:@"thumbnail"]);
         }
         
         }
     }
-    
-    //移除
-//    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 #pragma mark <UICollectionViewDataSource>
@@ -161,9 +150,12 @@ static NSString * const reuseIdentifier = @"Cell";
     sender.selected = !sender.selected;
     SGAssetModel *model = self.assetModels[sender.tag];
     //因为冲用的问题,不能根据选中状态来记录
-    if (sender.selected == YES) {//选中了记录
+    if (sender.isSelected == YES) {//选中了记录
+        [self.selectedModels addObject:model];
         model.isSelected = YES;
     }else{//否则移除记录
+        NSLog(@"移除记录");
+        [self.selectedModels removeObject:model];
         model.isSelected = NO;
     }
 }

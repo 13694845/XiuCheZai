@@ -155,7 +155,7 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/CateAction.do"];
     NSDictionary *parameters = @{@"type":[NSString stringWithFormat:@"%d", 1]};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        self.rows = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
+        self.rows = [[responseObject[@"data"] firstObject] objectForKey:@"rows"];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error:%@", error);
         [self endHeaderRefresh];
