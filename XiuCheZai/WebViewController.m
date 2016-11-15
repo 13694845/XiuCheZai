@@ -146,8 +146,10 @@
 }
 
 - (void)saveCookies {
+    /*
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService stop];
     [((AppDelegate *)[UIApplication sharedApplication].delegate).chatService start];
+     */
 }
 
 - (void)recognizeVehicleLicense {
