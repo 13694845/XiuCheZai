@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface ChatConfig : NSObject
-
+/*
 #define HOST        @"192.168.2.63"
 #define PORT        9999
 #define TERMINATOR  @"\n"
+ */
 
 + (NSString *)defaultHost;
 + (NSUInteger)defaultPort;
