@@ -86,9 +86,7 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/ContactServlet.do"];
     NSDictionary *parameters = nil;
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"常用联系人:%@", responseObject);
         self.rows = [responseObject objectForKey:@"data"];
-        //         NSLog(@"rows:%@", self.rows);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error:%@", error);
     }];
@@ -116,15 +114,11 @@
 {
     CGRect viewRect = self.view.frame;
     viewRect.origin.y -= 64;
-//    CGRect searchBarRect = searchBar.frame;
-//    searchBarRect.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height;
     [UIView animateWithDuration:0.3 animations:^{
         self.navBar.frame = viewRect;
-//        searchBar.frame = searchBarRect;
         searchBar.showsCancelButton = YES;
         self.maskView.alpha = 0.7;
     }];
-    
 }
 
 @end

@@ -22,6 +22,10 @@
 @property (nonatomic, copy) NSString *post_id;
 @property (nonatomic, copy) NSString *user_id;
 @property (nonatomic, assign) BOOL jumpToHome;
+/** 删除后跳转到上一级 */
+@property (nonatomic, assign) BOOL deleteJumpToUpper;
+///** 删除后跳转到我的话题 */
+@property (nonatomic, assign) BOOL deleteJumpToMessageMyTopic;
 
 @property (nonatomic, weak) id<XCZCircleDetailViewControllerDelegate> delegate;
 

@@ -13,7 +13,8 @@
 @interface XCZPersonInfoLookImageViewController : XCZDiscoveryPageViewController
 
 @property (nonatomic, strong) NSDictionary *row;
-
+///** 删除后跳转到我的话题 */
+@property (nonatomic, assign) BOOL deleteJumpToMessageMyTopic;
 
 
 @end

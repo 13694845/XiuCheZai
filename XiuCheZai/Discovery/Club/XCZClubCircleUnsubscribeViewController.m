@@ -145,21 +145,10 @@
     }];
 }
 
-//clicks = 0;
-//"forum_id" = 111;
-//"forum_name" = "\U4eba\U751f\U5dc5\U5cf0\U5565\U5730";
-//"forum_remark" = "\U8fd9\U8fb9\U52a0\U4e86\U4e0a\U8fb9\U52a0\U4e0d\U52a0\Uff1f";
-//"forum_style" = "\U600e\U4e48\U641e";
-//members = 0;
-//num = 0;
-//"parent_id" = 109;
-//totals = 17;
-//"user_id" = "";
-
 - (void)updateView
 {
     self.title = self.row[@"forum_name"];
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic"]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], self.row[@"forum_style"]]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
     self.nameLabel.text = self.row[@"forum_name"];
     self.topicLabel.text = self.row[@"num"];
     self.attentionLabel.text = self.row[@"members"];
@@ -197,14 +186,24 @@
 #pragma mark - 私有方法
 - (void)showLessBtn
 {
-    NSLog(@"showLessBtn:%@", self.lessBtn);
-    [self.lessBtn setImage:[UIImage imageNamed:@"bbs_circleminus"] forState:UIControlStateNormal];
+    if ([self.forum_id isEqualToString:@"14"]) {
+        self.addDelectedView.userInteractionEnabled = NO;
+        [self.lessBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    } else {
+        self.addDelectedView.userInteractionEnabled = YES;
+         [self.lessBtn setImage:[UIImage imageNamed:@"bbs_circleminus"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)hideLessBtn
 {
-    NSLog(@"hideLessBtn:%@", self.lessBtn);
-    [self.lessBtn setImage:[UIImage imageNamed:@"bbs_circleAdd_green"] forState:UIControlStateNormal];
+    if ([self.forum_id isEqualToString:@"14"]) {
+        self.addDelectedView.userInteractionEnabled = NO;
+        [self.lessBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    } else {
+        self.addDelectedView.userInteractionEnabled = YES;
+        [self.lessBtn setImage:[UIImage imageNamed:@"bbs_circleAdd_green"] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - 去登录等方法

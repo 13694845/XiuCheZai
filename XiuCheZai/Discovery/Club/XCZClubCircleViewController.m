@@ -474,6 +474,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
         NSString *post_clazz = self.rows[indexPath.row][@"post_clazz"];
         circleDetailVC.reuseIdentifier = [self identifier:post_clazz andRow:self.rows[indexPath.row]];
         circleDetailVC.post_id = cell.row[@"post_id"];
+        circleDetailVC.deleteJumpToUpper = YES;
         [self.navigationController pushViewController:circleDetailVC animated:YES];
     }
 }
@@ -523,6 +524,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     circleDetailVC.reuseIdentifier = circleTableViewCell.reuseIdentifier;
     circleDetailVC.post_id = circleTableViewCell.row[@"post_id"];
     circleDetailVC.user_id = circleTableViewCell.row[@"user_id"];
+    circleDetailVC.deleteJumpToUpper = YES;
     [self.navigationController pushViewController:circleDetailVC animated:YES];
 }
 
@@ -641,6 +643,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     circleDetailVC.reuseIdentifier = reuseIdentifier;
     circleDetailVC.post_id = post_id;
     circleDetailVC.user_id = user_id;
+    circleDetailVC.deleteJumpToUpper = YES;
     [self.navigationController pushViewController:circleDetailVC animated:YES];
 }
 
@@ -687,46 +690,32 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 {
     CGFloat height;
     if ([post_clazz intValue] == 1) {
-        height = self.cellWZHeight;
+        NSString *topic = [self stringByReplacing:row[@"topic"]];
+        NSString *summary = [self stringByReplacing:row[@"summary"]];
+        CGSize contentTitleLabelSize = [topic boundingRectWithSize:CGSizeMake(self.view.bounds.size.width - 64 - 8, 50) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18]} context:nil].size;
+        height += topic && [topic length] ? 56 + contentTitleLabelSize.height + 16 : 56 + contentTitleLabelSize.height - 8;
+        CGSize contentLabelSize = [summary boundingRectWithSize:CGSizeMake(self.view.bounds.size.width - 64 - 8, 120) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18]} context:nil].size;
+        height += contentLabelSize.height + 8 + 28;
     } else if ([post_clazz intValue] == 2) { // 假设投票贴子和文字一样
         height = 174;
     } else if ([post_clazz intValue] == 3) {
         NSMutableArray *imageArray = [NSMutableArray array];
         imageArray = [self changeImage:row[@"share_image"] andImageArray:imageArray];
         if (imageArray.count == 1) {
-                CGFloat oneImageCellHeight;
-                CGFloat topicH = 0.0;
-                if (row[@"topic"] && ((NSString *)row[@"topic"]).length) {
-                    topicH = [row[@"topic"] boundingRectWithSize:CGSizeMake(self.view.bounds.size.width - 64 - 8, 50) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18]} context:nil].size.height;
+            CGFloat oneImageCellHeight;
+            CGFloat topicH = 0.0;
+            NSString *topic = [self stringByReplacing:row[@"topic"]];
+            NSString *summary = [self stringByReplacing:row[@"summary"]];
+                if (topic && [topic length]) {
+                    topicH = [topic boundingRectWithSize:CGSizeMake(self.view.bounds.size.width - 64 - 8, 50) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18]} context:nil].size.height;
                     topicH = topicH + 8;
                 }else {
                     topicH = 0.0;
                 }
-                
-                CGFloat summaryH = [row[@"summary"] boundingRectWithSize:CGSizeMake(self.view.bounds.size.width - 64 - 8, 120) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18]} context:nil].size.height;
+            
+                CGFloat summaryH = [summary boundingRectWithSize:CGSizeMake(self.view.bounds.size.width - 64 - 8, 120) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18]} context:nil].size.height;
                 oneImageCellHeight = 56 + topicH + summaryH + 16;
-            
-                UIImageView *imageView = [[UIImageView alloc] init];
-            NSString *share_image = row[@"share_image"];
-            if (![share_image containsString:@"http"]) {
-                share_image = [NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], row[@"share_image"]];
-            }
-            
-            [imageView sd_setImageWithURL:[NSURL URLWithString:share_image] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                    CGFloat imageViewW = 120;
-                    CGFloat imageViewH = 0.0;
-                    if (image.size.width < 120) {
-                        imageViewW = image.size.width;
-                        imageViewH = image.size.height;
-                    } else {
-                        imageViewH = imageViewW * (image.size.height / image.size.width);
-                    }
-                    self.cellBHeight = oneImageCellHeight + imageViewH + 8 + 17 + 12;
-                }];
-            if (!self.cellBHeight) {
-                self.cellBHeight = oneImageCellHeight + 160 + 8 + 17 + 12;
-            }
-            height = self.cellBHeight;
+            height = oneImageCellHeight + XCZCircleTableViewLeafletsImageCellImageHeight + 4 + 17 + 12;
         } else if (imageArray.count <= 3) {
             height = 214;
         } else if (imageArray.count <= 6) {
@@ -869,6 +858,16 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
         [imageArray addObject:imageStrs];
     }
     return imageArray;
+}
+
+- (NSString *)stringByReplacing:(NSString *)string
+{
+    NSString *summaryShow = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    summaryShow = [summaryShow stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return summaryShow;
 }
 
 #pragma mark - 去登录等方法

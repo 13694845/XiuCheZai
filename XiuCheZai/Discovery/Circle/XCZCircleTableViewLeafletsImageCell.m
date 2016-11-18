@@ -72,6 +72,8 @@
         self.cellContentView = cellContentView;
         
         UIImageView *contentImageView = [[UIImageView alloc] init];
+        contentImageView.contentMode = UIViewContentModeScaleAspectFill;
+        contentImageView.clipsToBounds = YES;
         [self.cellContentView addSubview:contentImageView];
         self.contentImageView = contentImageView;
         
@@ -121,6 +123,8 @@
         self.commentTextLabel = commentTextLabel;
         
         UIImageView *commentImageView = [[UIImageView alloc] init];
+//        contentImageView.contentMode = UIViewContentModeScaleAspectFill;
+//        contentImageView.clipsToBounds = YES;
         commentImageView.image = [UIImage imageNamed:@"bbs_message.png"];
         [self.cellContentView addSubview:commentImageView];
         self.commentImageView = commentImageView;
@@ -203,18 +207,12 @@
     }
     
     [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:share_image] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-       
-        CGFloat imageViewW = 120;
-        CGFloat imageViewH = 0.0;
-        if (image.size.width < 120) {
-            imageViewW = image.size.width;
-            imageViewH = image.size.height;
-        } else {
-            imageViewH = imageViewW * (image.size.height / image.size.width);
+        CGFloat imageViewH = XCZCircleTableViewLeafletsImageCellImageHeight;
+        CGFloat imageViewW = image.size.height ? imageViewH * (image.size.width / image.size.height) : 200;
+        if (imageViewW > self.selfW - 64 - 8 - 85) {
+            imageViewW = self.selfW - 64 - 8 - 85;
         }
-        
         self.contentImageView.frame = CGRectMake(64, CGRectGetMaxY(self.contentLabel.frame) + 8, imageViewW, imageViewH);
-        
         CGFloat forum_nameLabelH = (self.sourceType == 1) ? 0 : 14;
         self.forum_nameLabel.text = self.row[@"forum_name"];
         CGSize forum_nameLabelSize = [self.forum_nameLabel.text boundingRectWithSize:CGSizeMake((self.contentView.bounds.size.width - 64) * 0.2, 14) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.forum_nameLabel.font} context:nil].size;
@@ -260,10 +258,11 @@
         
         CGFloat cellBHeight = CGRectGetMaxY(self.cellContentView.frame);
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZCircleTableViewLeafletsImageCellBHeightToVC" object:nil userInfo:@{@"cellBHeight": @(cellBHeight)}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZCircleTableViewLeafletsImageCellBHeightToVC" object:nil userInfo:@{@"cellBHeight": @(cellBHeight)}];
         });
-       
+    
     }];
+    
 }
 
 - (void)cellHeaderViewDidClick

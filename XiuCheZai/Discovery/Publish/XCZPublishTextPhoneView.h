@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #define XCZPublishTextPhoneViewPWordText @"当下的感想"
+/** 上传图片宽高裁剪系数 */
+#define XCZPublishTextPhoneViewPhoneScaleToSize 0.2
+/** 上传图片压缩系数 */
+#define XCZPublishTextPhoneViewPhoneQuality 0.01
 
 @class XCZPublishTextPhoneView, XCZPublishTextPhoneButton;
 

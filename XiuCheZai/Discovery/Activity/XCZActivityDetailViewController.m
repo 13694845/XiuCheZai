@@ -64,6 +64,11 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIButton *collectionBtn;
 @property (weak, nonatomic) IBOutlet UIButton *praiseBtn;
+@property (assign, nonatomic) BOOL isNewRemark; // 是否有新评论
+@property (assign, nonatomic) BOOL noRefresh; // 是否不需要刷新
+@property (assign, nonatomic) CGPoint typeThreeOffset; // 保存点击回复评论时的offset
+
+
 
 @end
 
@@ -127,6 +132,7 @@
 {
     _tieziUser_id = [tieziUser_id copy];
     [self createCommentsView];
+    [self setupScrollViewContentOffset];
 }
 
 - (NSArray *)share_images
@@ -205,10 +211,19 @@
     
 //    NSLog(@"setCommentssetCommentssetComments");
     
-    [self creatDetailsView];
-    self.currentPage ++;
+    if (self.isNewRemark) {
+        [self clearDataNeedsRefresh];
+        [self creatDetailsView];
+        self.currentPage ++;
+    } else {
+        if (self.goType != 2) {
+            [self clearDataNeedsRefresh];
+            [self creatDetailsView];
+            self.currentPage ++;
+        }
+    }
     if (self.goType == 5) {
-        self.pagesize = 10;
+        self.pagesize = 100;
         self.currentPage = 1;
     }
 }
@@ -220,7 +235,6 @@
     }
     return _comments;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -234,8 +248,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
-    [self loadData];
+    if (!self.noRefresh) {
+        [self loadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -248,9 +263,10 @@
     self.title = @"详情";
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.alwaysBounceVertical = YES;
+    [self.tabBarController.tabBar setHidden:YES];
     self.currentPage = 1;
     self.goType = 5;
-    self.pagesize = 10;
+    self.pagesize = 100;
     self.collectionType = 0;
     self.praiseType = 0;
     self.bottomPraiseType = 0;
@@ -276,12 +292,18 @@
 }
 
 - (void)refreshData {
-    [self clearDataNeedsRefresh];
+//    [self clearDataNeedsRefresh];
     [self loadDataNeedsRefresh];
 }
 
 - (void)loadDataNeedsRefresh {
-    self.currentPage = 1;
+    if (self.goType == 1) {
+        self.currentPage = 1;
+        self.pagesize++;
+    }
+    if (self.goType == 3) {
+        self.currentPage = 1;
+    }
    [self requestDetailsNet];
 }
 
@@ -298,7 +320,10 @@
 - (void)loadingMore
 {
     self.goType = 2;
-    [self loadData];
+    if (self.currentPage == 1) {
+        self.currentPage ++;
+    }
+    [self requestDetailsNet];
 }
 
 - (void)requestDetailsNet
@@ -340,7 +365,6 @@
     }];
 }
 
-//
 - (void)requestCommentNet
 {
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/PostDetailAction.do"];
@@ -348,11 +372,24 @@
                                  @"type":[NSString stringWithFormat:@"%d", 1] ,
                                  @"post_id":self.post_id,
                                  @"page": [NSString stringWithFormat:@"%d", self.currentPage],
-                                 @"pagesize": [NSString stringWithFormat:@"%d", 10]
+                                 @"pagesize": [NSString stringWithFormat:@"%d", self.pagesize]
                                  };
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (self.goType == 2 || self.goType == 1 || self.goType == 3) {
+            [self endFooterRefresh];
+        } else {
+            [self endHeaderRefresh];
+        }
+        
         NSArray *comments = [responseObject objectForKey:@"data"];
-        comments = ([comments isEqual:[NSNull null]] || !comments) ? @[] : [self numberOfFloors:comments];
+        if ([comments isEqual:[NSNull null]] || !comments.count) { // 为空时
+            self.isNewRemark = NO;
+            comments = @[];
+        } else {
+            self.isNewRemark = YES;
+            comments = [self numberOfFloors:comments]; // 添加楼层显示数
+        }
+        
         if (self.currentPage == 1) {
             self.comments = [NSMutableArray arrayWithArray:comments];
         } else {
@@ -589,6 +626,7 @@
 - (void)createTextContentView
 {
     UIWebView *newsTitleView = [[UIWebView alloc] init];
+    newsTitleView.dataDetectorTypes = UIDataDetectorTypeNone;
     newsTitleView.delegate = self;
     newsTitleView.scrollView.scrollEnabled = NO;
     [self.contentView addSubview:newsTitleView];
@@ -600,10 +638,10 @@
     UILabel *newsRemarksView = [[UILabel alloc] init];
     [self.contentView addSubview:newsRemarksView];
     
-    
     NSString *repWidthStr = [NSString stringWithFormat:@"<img width=%f ", self.contentView.bounds.size.width - 32];
     NSString *content = [self escapeHTMLString:self.artDict[@"content"]];
     content = [content stringByReplacingOccurrencesOfString:@"<img " withString: repWidthStr];
+    NSLog(@"contentcontent:%@", content);
     [newsTitleView loadHTMLString:content baseURL:nil];
     
     newsTitleView.frame = CGRectMake(XCZNewDetailRemarkRowMarginX * 2, self.height + XCZNewDetailRemarkRowMarginY, self.contentView.bounds.size.width - 4 * XCZNewDetailRemarkRowMarginX, 1);
@@ -635,42 +673,38 @@
 {
     NSMutableArray *share_images = [NSMutableArray array];
     self.share_images = [self changeImage:self.artDict[@"share_image"] andImageArray:share_images];
-    
-    __block UIImageView *previousImageView;
-    __block int i = 0;
-    for (NSString *imageYStr in share_images) {
-        NSString *imageStr;
-        if ([imageYStr containsString:@"http://"]) {
-            imageStr = imageYStr;
-        } else {
-            imageStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], imageYStr];
-        }
-        UIImageView *imageView = [[UIImageView alloc] init];
-        if (i == 0) {
-            self.oneImageView = imageView;
-        }
-        [imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            CGFloat imageViewX = 16;
-            CGFloat imageViewW = self.contentView.bounds.size.width - 2 * imageViewX;
-            CGFloat imageViewH = 0.0;
-            if (image.size.width > imageViewW) {
-                imageViewH = imageViewW * (image.size.height / image.size.width);
+    if (self.share_images.count) {
+        __block UIImageView *previousImageView;
+        __block int i = 0;
+        for (NSString *imageYStr in share_images) {
+            NSString *imageStr;
+            if ([imageYStr containsString:@"http://"]) {
+                imageStr = imageYStr;
             } else {
-                imageViewW = image.size.width;
-                imageViewH = image.size.height;
-                imageViewX = (self.contentView.bounds.size.width - imageViewW) * 0.5;
+                imageStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], imageYStr];
             }
-            CGFloat imageViewY = self.height + 8;
-            imageView.frame = CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH);
-            [self.contentView addSubview:imageView];
-            
-            previousImageView = imageView;
-            self.height += imageViewH + 8;
-            i++;
-            if (i == share_images.count) {
-                [self setupSurplusView]; // 加载下面的控件
+            UIImageView *imageView = [[UIImageView alloc] init];
+            if (i == 0) {
+                self.oneImageView = imageView;
             }
-        }];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                CGFloat imageViewX = 16;
+                CGFloat imageViewW = self.contentView.bounds.size.width - 2 * imageViewX;
+                CGFloat imageViewH = imageViewW * (image.size.height / image.size.width);
+                CGFloat imageViewY = self.height + 8;
+                imageView.frame = CGRectMake(imageViewX, imageViewY, imageViewW, imageViewH);
+                [self.contentView addSubview:imageView];
+                
+                previousImageView = imageView;
+                self.height += imageViewH + 8;
+                i++;
+                if (i == share_images.count) {
+                    [self setupSurplusView]; // 加载下面的控件
+                }
+            }];
+        }
+    } else {
+        [self setupSurplusView]; // 加载下面的控件
     }
 }
 
@@ -809,16 +843,15 @@
     // !!!!!!!!!!!!!!!!!!!!!!!
     html = [html stringByReplacingOccurrencesOfString:@"＜" withString:@"<"];
     html = [html stringByReplacingOccurrencesOfString:@"＞" withString:@">"];
-    
     html = [html stringByReplacingOccurrencesOfString:@"#3D;" withString:@"="];
     html = [html stringByReplacingOccurrencesOfString:@"#quot;" withString:@"\""];
-    html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@"<br/>"];
+    html = [html stringByReplacingOccurrencesOfString:@"<br/>" withString:@""];
+    html = [html stringByReplacingOccurrencesOfString:@"href=" withString:@""];
+    html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
     html = [html stringByReplacingOccurrencesOfString:@"#apos;" withString:@"'"];
     
-    // NSLog(@"escapeHTMLString : %@", html);
     return html;
 }
-
 - (NSArray *)numberOfFloors:(NSArray *)comments
 {
     NSMutableArray *newComment = [NSMutableArray array];
@@ -839,6 +872,31 @@
         [newComment addObject:commentMutableDict];
     }
     return newComment;
+}
+
+- (void)setupScrollViewContentOffset
+{
+    if (self.goType == 1) {
+        CGFloat offsetH = self.scrollView.contentSize.height - self.scrollView.bounds.size.height + 35;
+        if (offsetH > 0)
+        {
+            [self.scrollView setContentOffset:CGPointMake(0, offsetH) animated:YES];
+        }
+    } else if (self.goType == 2) {
+        CGFloat offsetH = self.scrollView.contentSize.height - self.scrollView.bounds.size.height + 35;
+        if (offsetH > 0)
+        {
+            [self.scrollView setContentOffset:CGPointMake(0, offsetH) animated:NO];
+        }
+        
+    } else if (self.goType == 3) {
+        CGFloat offsetH = self.typeThreeOffset.y;
+        [self.scrollView setContentOffset:CGPointMake(0, offsetH)  animated:YES];
+    } else if (self.goType == 5) {
+        
+    } else {
+        [self.scrollView setContentOffset:self.contentOffsetrequestQ animated:YES];
+    }
 }
 
 #pragma mark - 去登录等方法
@@ -931,6 +989,7 @@
 #pragma mark - XCZCircleDetailRemarkRowDelegate
 - (void)detailRemarkRow:(XCZCircleDetailRemarkRow *)detailRemarkRow detailsRemarkRowDidClick:(UIButton *)moreBtn
 {
+    self.noRefresh = YES;
     NSString *reply_id = detailRemarkRow.remark[@"reply_id"];
     XCZCircleDetailALayerViewController *circleDetailALayerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailALayerViewController"];
     circleDetailALayerVC.post_id = self.post_id;
@@ -941,11 +1000,13 @@
 
 - (void)detailRemarkRow:(XCZCircleDetailRemarkRow *)detailRemarkRow iconPartViewDidClickWithUserId:(NSString *)bbs_user_id
 {
+    self.noRefresh = YES;
     [self jumpToPersonInfoVC:bbs_user_id];
 }
 
 - (void)detailRemarkRowReplyView:(XCZCircleDetailRemarkRowReplyView *)detailRemarkRowReplyView nameDidClickWithUserId:(NSString *)bbs_user_id
 {
+    self.noRefresh = YES;
     [self jumpToPersonInfoVC:bbs_user_id];
 }
 
@@ -968,6 +1029,7 @@
 #pragma mark - XCZCircleDetailWriteViewDelegate
 - (void)circleDetailWriteView:(XCZCircleDetailWriteView *)circleDetailWriteView commentHeaderLeftBtnDidClick:(UIButton *)commentHeaderLeftBtn
 {
+    self.noRefresh = YES;
     [self.view endEditing:YES];
 }
 
@@ -981,6 +1043,7 @@
             self.goType = 1;
         } else {
             self.goType = 3;
+            self.typeThreeOffset = self.scrollView.contentOffset;
         }
         [self requestLoginDetection];
     } else {
@@ -999,7 +1062,9 @@
         [imageArray addObject:[imageStrs substringToIndex:range.location]];
         [self changeImage:[imageStrs substringFromIndex:(range.location + 1)] andImageArray:imageArray];
     } else {
-        [imageArray addObject:imageStrs];
+        if ([imageStrs length]) {
+            [imageArray addObject:imageStrs];
+        }
     }
     return imageArray;
 }
@@ -1130,9 +1195,6 @@
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.y < -75) { // 下拉刷新
-        
-        NSLog(@"下拉刷新");
-        
         [self stopHeaderScroll:scrollView];
         [self startHeaderRefresh:scrollView];
     }
@@ -1140,7 +1202,6 @@
     if (scrollView.contentOffset.y > 0) { // 上拉加载更多
         CGFloat bottomY = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.bounds.size.height);
         if (bottomY > 75) {
-            NSLog(@"上拉加载更多");
             [self morePullUpRefreshControl:scrollView];
             [self stopFooterScroll:scrollView];
             [self startFooterRefresh:scrollView];

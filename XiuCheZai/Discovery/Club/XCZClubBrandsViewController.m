@@ -93,7 +93,7 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/CateAction.do"];
     NSDictionary *parameters = @{@"type":[NSString stringWithFormat:@"%d", 1], @"forum_id": self.forum_id};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-            NSLog(@"parameters:%@, 推荐的车友会:%@", parameters, responseObject);
+//            NSLog(@"parameters:%@, 推荐的车友会:%@", parameters, responseObject);
         NSArray *rows = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
         if (self.currentPage == 1) {
             self.rows = [NSMutableArray arrayWithArray:rows];

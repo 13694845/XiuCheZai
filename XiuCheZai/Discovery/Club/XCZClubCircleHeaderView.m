@@ -154,8 +154,10 @@
     self.attentionValueLabel.text = self.banner[@"members"];
     
     if (_hasJoin) { // 如果已经加入
-        [self.addBtn setImage:[UIImage imageNamed:@"bbs_circleminus"] forState:UIControlStateNormal];
+        self.addBtn.userInteractionEnabled = NO;
+        [self.addBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     } else {
+        self.addBtn.userInteractionEnabled = YES;
         [self.addBtn setImage:[UIImage imageNamed:@"bbs_circleAdd_green"] forState:UIControlStateNormal];
     }
     

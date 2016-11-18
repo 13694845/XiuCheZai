@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#define XCZCircleTableViewLeafletsImageCellImageHeight 120
+
 @class XCZCircleTableViewLeafletsImageCell;
 
 @protocol XCZCircleTableViewLeafletsImageCellDelegate <NSObject>

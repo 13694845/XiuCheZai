@@ -72,7 +72,6 @@
     spView.layer.borderWidth = 1.0;
     spView.layer.borderColor = [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0].CGColor;
     
-    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.cellHeaderView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellHeaderViewDidClick)]];
     [self.cellContentView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellContentViewDidClick)]];
@@ -119,11 +118,11 @@
     } else if ([self.reuseIdentifier isEqualToString:@"CellB"]) { // 一张图s
         UIImageView *imageView = [self.contentImageViews firstObject];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], row[@"share_image"]]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic"]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL], row[@"share_image"]]] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
     } else if ([self.reuseIdentifier isEqualToString:@"CellC"] || [self.reuseIdentifier isEqualToString:@"CellC1"]  || [self.reuseIdentifier isEqualToString:@"CellC2"]  || [self.reuseIdentifier isEqualToString:@"CellC3"]) { // 带产品价格
          NSDictionary *goods_remark = [self changeGoods_remark:row[@"goods_remark"]];
         NSString *urlStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], goods_remark[@"img"]];
-        [self.danziImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic"]];
+        [self.danziImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
         self.danziTitleLabel.text = goods_remark[@"name"];
         self.danziNumLabel.text = [NSString stringWithFormat:@"共%@件", goods_remark[@"num"]];
         self.danziPriceLabel.text = [NSString stringWithFormat:@"￥%@", goods_remark[@"amount"]];
@@ -135,7 +134,6 @@
         self.contentTitleLabel.text = [self stringByReplacing:row[@"topic"]];
     }
     
-
     self.forum_nameLabel.text = row[@"forum_name"];
     CGSize forum_nameLabelSize = [self.forum_nameLabel.text boundingRectWithSize:CGSizeMake((self.contentView.bounds.size.width - 64) * 0.2, 14) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.forum_nameLabel.font} context:nil].size;
     self.forum_nameLabel.frame = CGRectMake(64, self.cellContentView.bounds.size.height - 1.0 - 20.5, forum_nameLabelSize.width + 4, 14);
@@ -199,7 +197,8 @@
 - (void)setupImageView:(int)i andImageArray:(NSArray *)imageArray
 {
     UIImageView *imageView = self.contentImageViews[i];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds = YES;
     NSString *imageYStr = imageArray[i];
     NSString *imageStr;
     if ([imageYStr containsString:@"http"]) {
@@ -207,7 +206,7 @@
     } else {
         imageStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig textImgBaseURL],imageArray[i]];
     }
-    [imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic"]];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
 }
 
 /**

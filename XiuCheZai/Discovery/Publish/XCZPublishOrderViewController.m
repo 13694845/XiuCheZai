@@ -123,6 +123,7 @@
 - (void)assistedSetup
 {
     self.scrollView.alwaysBounceVertical = YES;
+    self.scrollView.delegate = self;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bbs_arrow"] style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
 }
 
@@ -410,7 +411,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.view endEditing:YES];
+    if (![scrollView isKindOfClass:[UITextView class]]) {
+         [self.view endEditing:YES];
+    }
 }
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -425,7 +428,6 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
         //在这里做你响应return键的代码
-        [textView resignFirstResponder];
         return YES; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
     }
     return YES;
@@ -564,7 +566,7 @@
     [imgCtr setDidFinishSelectImages:^(NSArray *images) {
         NSMutableArray *newImages = [NSMutableArray array];
         for (UIImage *image in images) {
-            [self compressionImage:image andCompressionQuality:0.1];
+            [self compressionImage:image andCompressionQuality:XCZPublishTextPhoneViewPhoneQuality];
             if (self.chouImage) {
                 [newImages addObject:self.chouImage];
             }
@@ -591,7 +593,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *oImage = info[@"UIImagePickerControllerOriginalImage"];
-    [self compressionImage:oImage andCompressionQuality:0.1];
+    [self compressionImage:oImage andCompressionQuality:XCZPublishTextPhoneViewPhoneQuality];
     [self requestPostImage:self.chouImage andIndex:0 andImages:nil];
 }
 
@@ -638,7 +640,7 @@
 -(UIImage *)compressOriginalImage:(UIImage *)image toSize:(CGSize)size{
     UIImage * resultImage = image;
     UIGraphicsBeginImageContext(size);
-    [resultImage drawInRect:CGRectMake(00, 0, size.width, size.height)];
+    [resultImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
     UIGraphicsEndImageContext();
     return image;
 }
@@ -648,8 +650,8 @@
     NSData *imageData = UIImageJPEGRepresentation(image, quality);
     UIImage *newImage = [UIImage imageWithData:imageData];
     
-    if (imageData.length/1024 >= 200) {
-        UIImage *scImage = [self scaleToSize:newImage size:CGSizeMake(newImage.size.width * quality, newImage.size.height * quality)];
+    if (imageData.length/1024 >= 160) {
+        UIImage *scImage = [self scaleToSize:newImage size:CGSizeMake(newImage.size.width * XCZPublishTextPhoneViewPhoneScaleToSize, newImage.size.height * XCZPublishTextPhoneViewPhoneScaleToSize)];
         NSData *data = UIImageJPEGRepresentation(scImage, quality);
         [self compressionImage:[UIImage imageWithData:data] andCompressionQuality:quality];
     } else {

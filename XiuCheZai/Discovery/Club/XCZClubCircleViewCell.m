@@ -211,6 +211,8 @@
 - (void)setupImageView:(int)i andImageArray:(NSArray *)imageArray
 {
     UIImageView *imageView = self.contentImageViews[i];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds = YES;
     NSString *imageYStr = imageArray[i];
     NSString *imageStr;
     if ([imageYStr containsString:@"http"]) {

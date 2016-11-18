@@ -241,15 +241,18 @@
         XCZCircleDetailViewController *detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
         detailViewController.reuseIdentifier = @"CellWZ";
         detailViewController.post_id = [self.selectRow objectForKey:@"post_id"];
+        detailViewController.deleteJumpToMessageMyTopic = YES;
         [self.navigationController pushViewController:detailViewController animated:YES];
     } else if ([post_clazz intValue] == 3) {
         XCZPersonInfoLookImageViewController *personInfoImageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZPersonInfoLookImageViewController"];
         personInfoImageVC.row = self.selectRow;
+        personInfoImageVC.deleteJumpToMessageMyTopic = YES;
         [self.navigationController pushViewController:personInfoImageVC animated:YES];
     } else if ([post_clazz intValue] == 4) {
         XCZCircleDetailViewController *newsDetailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
         newsDetailViewController.reuseIdentifier = @"CellC";
         newsDetailViewController.post_id = [self.selectRow objectForKey:@"post_id"];
+        newsDetailViewController.deleteJumpToMessageMyTopic = YES;
         [self.navigationController pushViewController:newsDetailViewController animated:YES];
     }
 }

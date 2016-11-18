@@ -18,7 +18,6 @@
 #import "XCZCircleDetailViewController.h"
 #import "XCZPublishSelectedCityView.h"
 #import "XCZCityManager.h"
-#import "XCZPublishImagePickController.h"
 #import "SGImagePickerController.h"
 
 @interface XCZPublishPhoneViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate, XCZPublishTextPhoneViewDelegate, XCZPublishSelectedCityViewDelegate, XCZPublishBrandsViewControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate, UITextViewDelegate>
@@ -404,7 +403,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.view endEditing:YES];
+    if (![scrollView isKindOfClass:[UITextView class]]) {
+        [self.view endEditing:YES];
+    }
 }
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -414,15 +415,6 @@
     } else {
         self.textPhoneView.commentPlaceholderLabel.text = XCZPublishTextPhoneViewPWordText;
     }
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
-        //在这里做你响应return键的代码
-        [textView resignFirstResponder];
-        return YES; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
-    }
-    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -554,7 +546,7 @@
     [imgCtr setDidFinishSelectImages:^(NSArray *images) {
         NSMutableArray *newImages = [NSMutableArray array];
         for (UIImage *image in images) {
-            [self compressionImage:image andCompressionQuality:0.1];
+            [self compressionImage:image andCompressionQuality:XCZPublishTextPhoneViewPhoneQuality];
             if (self.chouImage) {
                 [newImages addObject:self.chouImage];
             }
@@ -581,7 +573,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *oImage = info[@"UIImagePickerControllerOriginalImage"];
-    [self compressionImage:oImage andCompressionQuality:0.08];
+    [self compressionImage:oImage andCompressionQuality:XCZPublishTextPhoneViewPhoneQuality];
     [self requestPostImage:self.chouImage andIndex:0 andImages:nil];
 }
 
@@ -639,14 +631,13 @@
      NSData *imageData = UIImageJPEGRepresentation(image, quality);
      UIImage *newImage = [UIImage imageWithData:imageData];
 
-    if (imageData.length/1024 >= 160) {
-        UIImage *scImage = [self scaleToSize:newImage size:CGSizeMake(newImage.size.width * quality, newImage.size.height * quality)];
+    if (imageData.length/1024 >= 250) {
+        UIImage *scImage = [self scaleToSize:newImage size:CGSizeMake(newImage.size.width * XCZPublishTextPhoneViewPhoneScaleToSize, newImage.size.height * XCZPublishTextPhoneViewPhoneScaleToSize)];
         NSData *data = UIImageJPEGRepresentation(scImage, quality);
         [self compressionImage:[UIImage imageWithData:data] andCompressionQuality:quality];
     } else {
         self.chouImage = newImage;
     }
-//    return nil;
 }
 
 #pragma mark 裁剪照片

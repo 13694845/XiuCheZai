@@ -399,6 +399,7 @@
     XCZCircleDetailViewController *circleDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCircleDetailViewController"];
     circleDetailVC.reuseIdentifier = reuseIdentifier;
     circleDetailVC.post_id = post_id;
+    circleDetailVC.deleteJumpToMessageMyTopic = YES;
     [self.navigationController pushViewController:circleDetailVC animated:YES];
 }
 

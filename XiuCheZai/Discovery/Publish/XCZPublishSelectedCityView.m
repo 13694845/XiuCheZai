@@ -32,7 +32,7 @@
     
         self.selectedProvinceId = _currentLocation[@"provinceid"];
         self.selectedCityId = _currentLocation[@"cityid"];
-        self.selectedTownId = _currentLocation[@"townid"];
+        self.selectedTownId = _currentLocation[@"areaid"];
 
 //    if ([self.selectedProvinceId isEqual:[NSNull null]]) {
 //        self.selectedProvinceId = @"";

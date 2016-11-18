@@ -43,6 +43,8 @@
         self.praiseCountLabel.text = self.row[@"goods"];
         for (int i = 0; i<imageArray.count; i++) {
             UIImageView *imageView = self.newsImageViews[i];
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            imageView.clipsToBounds = YES;
             NSString *imageStr;
             if ([imageArray[i] containsString:@"http"]) {
                 imageStr = [NSString stringWithFormat:@"%@", imageArray[i]];
@@ -62,14 +64,15 @@
         self.remarkCountLabel.text = self.row[@"replies"];
         self.praiseCountLabel.text = self.row[@"goods"];
         UIImageView *imageView = [self.newsImageViews firstObject];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
         NSString *imageStr;
         if ([self.row[@"art_img"] containsString:@"http"]) {
             imageStr = [NSString stringWithFormat:@"%@", self.row[@"art_img"]];
         } else {
             imageStr = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], self.row[@"art_img"]];
         }
-        [imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"bbs_newsDefault.jpg"]];
     }
 }
 

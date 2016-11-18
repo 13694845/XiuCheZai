@@ -71,7 +71,9 @@
     
     self.nameLabel.text = chat[@"name"];
     self.iconView.image = [UIImage imageNamed:chat[@"icon"]] ;
-    self.titleLabel.text = chat[@"content"];
+    
+    NSString *contentText = [self escapeHTMLString:chat[@"content"]];
+    self.titleLabel.text = contentText;
     [self setupFixedDataFrame];
 }
 
@@ -109,7 +111,9 @@
         } else {
             self.numLabel.frame = CGRectMake(0, 0, 0, 0);
         }
-        self.titleLabel.text = content[@"content"];
+        
+        NSString *contentText = [self escapeHTMLString:content[@"content"]];
+        self.titleLabel.text = contentText;
     }
 }
 
@@ -124,6 +128,26 @@
     self.numLabel.frame = CGRectMake(self.iconView.bounds.size.width - numLabelW, 0, numLabelW, numLabelH);
     self.numLabel.layer.cornerRadius = numLabelH * 0.5;
     self.numLabel.layer.masksToBounds = YES;
+}
+
+/**
+ *  处理html
+ */
+- (NSString *)escapeHTMLString:(NSString *)html {
+    // !!!!!!!!!!!!!!!!!!!!!!!
+    html = [html stringByReplacingOccurrencesOfString:@"＜" withString:@"<"];
+    html = [html stringByReplacingOccurrencesOfString:@"＞" withString:@">"];
+    
+    html = [html stringByReplacingOccurrencesOfString:@"#3D;" withString:@"="];
+    html = [html stringByReplacingOccurrencesOfString:@"#quot;" withString:@"\""];
+    html = [html stringByReplacingOccurrencesOfString:@"<br/>" withString:@""];
+    //    html = [html stringByReplacingOccurrencesOfString:@"<br /></span></p>" withString:@"</span></p>"];
+    
+    //    html = [html stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
+    html = [html stringByReplacingOccurrencesOfString:@"#0A;" withString:@""];
+    html = [html stringByReplacingOccurrencesOfString:@"#apos;" withString:@"'"];
+    
+    return html;
 }
 
 @end
