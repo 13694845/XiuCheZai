@@ -34,15 +34,31 @@
     
     CGFloat const kBoxWidth = 200.0;
     CGFloat const kBoxHeight = 200.0;
-    UIView *boxView = [[UIView alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - kBoxWidth) / 2.0, 120.0, kBoxWidth, kBoxHeight)];
+    // UIView *boxView = [[UIView alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - kBoxWidth) / 2.0, 120.0, kBoxWidth, kBoxHeight)];
+    UIView *boxView = [[UIView alloc] initWithFrame:CGRectMake((self.view.bounds.size.width - kBoxWidth) / 2.0, 120.0, kBoxWidth, kBoxHeight)];
     boxView.layer.borderColor = [UIColor greenColor].CGColor;
     boxView.layer.borderWidth = 1.0;
     [self.view addSubview:boxView];
+    
+    UIView  *leftView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, (self.view.bounds.size.width - kBoxWidth) / 2.0, self.view.bounds.size.height)];
+    leftView.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.6];
+    [self.view addSubview:leftView];
+    UIView  *rightView = [[UIView alloc] initWithFrame:CGRectMake(leftView.bounds.size.width + kBoxWidth, 0.0, (self.view.bounds.size.width - kBoxWidth) / 2.0, self.view.bounds.size.height)];
+    rightView.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.6];
+    [self.view addSubview:rightView];
+    UIView  *topView = [[UIView alloc] initWithFrame:CGRectMake(leftView.bounds.size.width, 0.0, kBoxWidth, 120.0)];
+    topView.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.6];
+    [self.view addSubview:topView];
+    UIView  *bottomView = [[UIView alloc] initWithFrame:CGRectMake(leftView.bounds.size.width, 120.0 + kBoxHeight, kBoxWidth, self.view.bounds.size.height - 120.0 - kBoxHeight)];
+    bottomView.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.6];
+    [self.view addSubview:bottomView];
+    
+    [self addBackButton];
+    
     output.rectOfInterest = CGRectMake(boxView.frame.origin.y / self.view.bounds.size.height,
                                        boxView.frame.origin.x / self.view.bounds.size.width,
                                        boxView.bounds.size.height / self.view.bounds.size.height,
                                        boxView.bounds.size.width / self.view.bounds.size.width);
-    [self addBackButton];
     
     AVCaptureVideoPreviewLayer *layer = [AVCaptureVideoPreviewLayer layerWithSession:self.session];
     layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
