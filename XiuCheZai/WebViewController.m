@@ -101,6 +101,12 @@
 }
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    // NSLog(@"webView.request : %@", request.URL);
+    if ([request.URL.host isEqualToString:@"m.8673h.com"]) {
+        if (self.backButton) [self.backButton removeFromSuperview];
+        self.showBack = NO;
+    }
+    
     if ([request.URL.description isEqualToString:[Config baseURL]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/"]]
         || [request.URL.description isEqualToString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/index.html"]]
