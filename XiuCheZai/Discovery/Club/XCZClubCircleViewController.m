@@ -65,6 +65,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 @property (nonatomic, strong) UIImage *publishImage;
 @property (nonatomic, weak) UIActivityIndicatorView *indicatorHeaderView;
 @property (nonatomic, weak) UIActivityIndicatorView *indicatorFooterView;
+@property (assign, nonatomic) BOOL hasNoFooterData;
 
 @end
 
@@ -126,6 +127,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
         [self.noCellLabel removeFromSuperview];
         self.noCellLabel = nil;
         [self updateTableView];
+        self.tableView.tableFooterView = nil;
         UILabel *noCellLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 110, self.view.bounds.size.width, 50)];
         noCellLabel.text = @"报告! 这里没有找到帖子的足迹 ~ ~ ~ ~";
         noCellLabel.textAlignment = NSTextAlignmentCenter;
@@ -289,15 +291,22 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
         NSArray *rows = [[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"rows"];
         NSMutableArray *rowMutables = [NSMutableArray array];
         if (self.currentPage == 1) {
+            self.hasNoFooterData = NO;
+            [self endHeaderRefresh];
             self.topRows = nil;
-            for (NSMutableDictionary *dict in rows) {
-                if ([[dict objectForKey:@"is_top"] intValue] == 1) {
-//                    NSLog(@"dictdictdict:%@", dict);
-                    [self.topRows addObject:dict];
+            
+            if (self.best == 0) {
+                for (NSMutableDictionary *dict in rows) {
+                    if ([[dict objectForKey:@"is_top"] intValue] == 1) {
+                        [self.topRows addObject:dict];
+                    }
                 }
             }
+            
             rowMutables = [NSMutableArray arrayWithArray:rows];
         } else {
+            self.hasNoFooterData = rows.count ? NO : YES;
+            [self endFooterRefresh];
             for (NSMutableDictionary *dict in rows) {
                 if ([[dict objectForKey:@"is_top"] intValue] == 1) {
                     [self.topRows addObject:dict];
@@ -315,7 +324,6 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
                 }
             }
             NSMutableArray *rowZJs = [NSMutableArray array];
-//            [rowZJs addObjectsFromArray:self.topRows];
             [rowZJs addObjectsFromArray:rowMutables];
             self.rows = rowZJs;
         } else {
@@ -351,8 +359,12 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
             rowsArray = dict[@"rows"];
             if (rowsArray.count) {
                 if (self.currentPage == 1) {
+                    self.hasNoFooterData = NO;
+                    [self endHeaderRefresh];
                     self.rows = [rowsArray mutableCopy];
                 } else {
+                    self.hasNoFooterData = rowsArray.count ? NO : YES;
+                    [self endFooterRefresh];
                     self.rows = [[self.rows arrayByAddingObjectsFromArray:rowsArray] mutableCopy];
                 }
             } else {
@@ -482,7 +494,11 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 #pragma mark - headerDelegate
 - (void)clubCircleHeaderView:(XCZClubCircleHeaderView *)clubCircleHeaderView clubTwoViewSubBtnDidClick:(UIButton *)btn
 {
+    if (self.tableView.tableFooterView) {
+        self.tableView.tableFooterView = nil;
+    }
     self.currentPage = 1;
+    
     if (!btn.tag) {
         self.best = 0;
         [self loadingCellData];
@@ -695,7 +711,11 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
         CGSize contentTitleLabelSize = [topic boundingRectWithSize:CGSizeMake(self.view.bounds.size.width - 64 - 8, 50) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18]} context:nil].size;
         height += topic && [topic length] ? 56 + contentTitleLabelSize.height + 16 : 56 + contentTitleLabelSize.height - 8;
         CGSize contentLabelSize = [summary boundingRectWithSize:CGSizeMake(self.view.bounds.size.width - 64 - 8, 120) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:18]} context:nil].size;
-        height += contentLabelSize.height + 8 + 28;
+        CGFloat contentLabelSizeH = contentLabelSize.height;
+        if (isnan(contentLabelSizeH)) {
+            contentLabelSizeH = 0.0;
+        }
+        height += contentLabelSizeH + 8 + 28;
     } else if ([post_clazz intValue] == 2) { // 假设投票贴子和文字一样
         height = 174;
     } else if ([post_clazz intValue] == 3) {
@@ -953,7 +973,9 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 {
     CGPoint offset = scrollView.contentOffset;
     offset.y = -75;
-    [scrollView setContentOffset:offset animated:YES];
+    [UIView animateWithDuration:0.3 animations:^{
+        [scrollView setContentOffset:offset animated:NO];
+    }];
 }
 
 - (void)stopFooterScroll:(UIScrollView *)scrollView
@@ -964,7 +986,11 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     if (scrollView.contentSize.height < scrollView.bounds.size.height - 75) {
         offset.y = 0;
     }
-    [scrollView setContentOffset:offset animated:YES];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [scrollView setContentOffset:offset animated:NO];
+    } completion:^(BOOL finished) {
+    }];
 }
 
 - (void)removeIndicatorHeaderView
@@ -979,6 +1005,34 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     [self.indicatorFooterView stopAnimating];
     [self.indicatorFooterView removeFromSuperview];
     self.indicatorFooterView = nil;
+    
+    if (self.hasNoFooterData) {
+        UITableView *scrollView;
+        for (UIView *view in self.view.subviews) {
+            if ([view isKindOfClass:[UITableView class]]) {
+                scrollView = (UITableView *)view;
+            }
+        }
+        UILabel *noMoreShowLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, scrollView.contentSize.height, scrollView.bounds.size.width, 20)];
+        noMoreShowLabel.text = @"没有更多了~~";
+        noMoreShowLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+        noMoreShowLabel.font = [UIFont systemFontOfSize:12];
+        noMoreShowLabel.textAlignment = NSTextAlignmentCenter;
+        scrollView.tableFooterView = noMoreShowLabel;
+        //        [scrollView.tableFooterView addSubview:noMoreShowLabel];
+        scrollView.contentSize = CGSizeMake(scrollView.bounds.size.width, scrollView.contentSize.height + 75);
+    }
+}
+
+- (void)removeNoMoreShowLabel:(UIScrollView *)scrollView
+{
+    for (UIView *subView in scrollView.subviews) {
+        if ([subView isKindOfClass:[UILabel class]]) {
+            UILabel *noMorelabel = (UILabel *)subView;
+            [noMorelabel removeFromSuperview];
+            noMorelabel = nil;
+        }
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -988,6 +1042,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.y < -75) { // 下拉刷新
+        [self removeNoMoreShowLabel:scrollView];
         [self stopHeaderScroll:scrollView];
         [self startHeaderRefresh:scrollView];
     }
@@ -995,6 +1050,7 @@ typedef NS_OPTIONS(NSUInteger, DiscoveryLoginOverJumpType) {
     if (scrollView.contentOffset.y > 0) { // 上拉加载更多
         CGFloat bottomY = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.bounds.size.height);
         if (bottomY > 75) {
+            [self removeNoMoreShowLabel:scrollView];
             [self morePullUpRefreshControl:scrollView];
             [self stopFooterScroll:scrollView];
             [self startFooterRefresh:scrollView];

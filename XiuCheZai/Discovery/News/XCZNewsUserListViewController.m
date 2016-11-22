@@ -21,11 +21,10 @@
 @property (assign, nonatomic) int goType; // 1:加关注按钮点击时
 @property (assign, nonatomic) int clazz; // 0:去关注  其他:去取消关注
 @property (nonatomic, copy) NSString *cellUser_id;
-
 @property (assign, nonatomic) int currentPage;
-
 @property (nonatomic, weak) UIActivityIndicatorView *indicatorHeaderView;
 @property (nonatomic, weak) UIActivityIndicatorView *indicatorFooterView;
+@property (assign, nonatomic) BOOL hasNoFooterData;
 
 @end
 
@@ -94,6 +93,7 @@
 }
 
 - (void)loadDataNeedsRefresh {
+    self.currentPage = 1;
     [self requestTableViewNet];
 }
 
@@ -121,12 +121,16 @@
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *rows = [responseObject objectForKey:@"data"];
         if (self.currentPage == 1) {
+            self.hasNoFooterData = NO;
+            [self endHeaderRefresh];
             self.rows = [NSMutableArray arrayWithArray:rows];
         } else {
+            
+            self.hasNoFooterData = rows.count ? NO : YES;
+//            NSLog(@"来到了这里的回复:%@", rows);
+            [self endFooterRefresh];
             self.rows = [[self.rows arrayByAddingObjectsFromArray:rows] mutableCopy];
         }
-        [self endHeaderRefresh];
-        [self endFooterRefresh];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [self endHeaderRefresh];
         [self endFooterRefresh];
@@ -305,7 +309,9 @@
 {
     CGPoint offset = scrollView.contentOffset;
     offset.y = -75;
-    [scrollView setContentOffset:offset animated:YES];
+    [UIView animateWithDuration:0.3 animations:^{
+        [scrollView setContentOffset:offset animated:NO];
+    }];
 }
 
 - (void)stopFooterScroll:(UIScrollView *)scrollView
@@ -316,7 +322,11 @@
     if (scrollView.contentSize.height < scrollView.bounds.size.height - 75) {
         offset.y = 0;
     }
-    [scrollView setContentOffset:offset animated:YES];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [scrollView setContentOffset:offset animated:NO];
+    } completion:^(BOOL finished) {
+    }];
 }
 
 - (void)removeIndicatorHeaderView
@@ -331,6 +341,35 @@
     [self.indicatorFooterView stopAnimating];
     [self.indicatorFooterView removeFromSuperview];
     self.indicatorFooterView = nil;
+    
+    if (self.hasNoFooterData) {
+        UITableView *scrollView;
+        for (UIView *view in self.view.subviews) {
+            if ([view isKindOfClass:[UITableView class]]) {
+                scrollView = (UITableView *)view;
+                
+                //                NSLog(@"", scrollView.tableFooterView);
+            }
+        }
+        UILabel *noMoreShowLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, scrollView.contentSize.height, scrollView.bounds.size.width, 20)];
+        noMoreShowLabel.text = @"没有更多了~~";
+        noMoreShowLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+        noMoreShowLabel.font = [UIFont systemFontOfSize:12];
+        noMoreShowLabel.textAlignment = NSTextAlignmentCenter;
+        scrollView.tableFooterView = noMoreShowLabel;
+        scrollView.contentSize = CGSizeMake(scrollView.bounds.size.width, scrollView.contentSize.height + 75);
+    }
+}
+
+- (void)removeNoMoreShowLabel:(UIScrollView *)scrollView
+{
+    for (UIView *subView in scrollView.subviews) {
+        if ([subView isKindOfClass:[UILabel class]]) {
+            UILabel *noMorelabel = (UILabel *)subView;
+            [noMorelabel removeFromSuperview];
+            noMorelabel = nil;
+        }
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -340,6 +379,7 @@
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView.contentOffset.y < -75) { // 下拉刷新
+        [self removeNoMoreShowLabel:scrollView];
         [self stopHeaderScroll:scrollView];
         [self startHeaderRefresh:scrollView];
     }
@@ -347,21 +387,12 @@
     if (scrollView.contentOffset.y > 0) { // 上拉加载更多
         CGFloat bottomY = (scrollView.contentOffset.y) - (scrollView.contentSize.height - scrollView.bounds.size.height);
         if (bottomY > 75) {
+            [self removeNoMoreShowLabel:scrollView];
             [self morePullUpRefreshControl:scrollView];
             [self stopFooterScroll:scrollView];
             [self startFooterRefresh:scrollView];
         }
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

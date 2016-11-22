@@ -30,19 +30,9 @@
 - (void)setCurrentLocation:(NSDictionary *)currentLocation {
     _currentLocation = currentLocation;
     
-        self.selectedProvinceId = _currentLocation[@"provinceid"];
-        self.selectedCityId = _currentLocation[@"cityid"];
-        self.selectedTownId = _currentLocation[@"areaid"];
-
-//    if ([self.selectedProvinceId isEqual:[NSNull null]]) {
-//        self.selectedProvinceId = @"";
-//    }
-//    if ([self.selectedCityId isEqual:[NSNull null]]) {
-//        self.selectedCityId = @"";
-//    }
-//    if ([self.selectedTownId isEqual:[NSNull null]]) {
-//        self.selectedTownId = @"";
-//    }
+    self.selectedProvinceId = _currentLocation[@"provinceid"];
+    self.selectedCityId = _currentLocation[@"cityid"];
+    self.selectedTownId = _currentLocation[@"areaid"];
 //    if (!self.selectedProvinceId.length) {
 //         self.selectedProvinceId = @"330000";
 //    }
@@ -73,8 +63,6 @@
         }
     }
 }
-
-
 
 - (void)setSelectedProvinceId:(NSString *)selectedProvinceId {
     _selectedProvinceId = selectedProvinceId;

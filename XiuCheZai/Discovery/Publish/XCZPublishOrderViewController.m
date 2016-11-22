@@ -372,7 +372,10 @@
     XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
     selectedCityView.delegate = self;
     if (self.currentPositioning.count) {
-        selectedCityView.currentLocation = self.currentPositioning;
+        NSString *provinceid = ([[self.currentPositioning objectForKey:@"provinceid"] isEqual:[NSNull null]] || ![[self.currentPositioning objectForKey:@"provinceid"] length]) ? @"" : [self.currentPositioning objectForKey:@"provinceid"];
+        NSString *cityid = ([[self.currentPositioning objectForKey:@"cityid"] isEqual:[NSNull null]] || ![[self.currentPositioning objectForKey:@"cityid"] length]) ? @"" : [self.currentPositioning objectForKey:@"cityid"];
+        NSString *areaid = ([[self.currentPositioning objectForKey:@"areaid"] isEqual:[NSNull null]] || ![[self.currentPositioning objectForKey:@"areaid"] length]) ? @"" : [self.currentPositioning objectForKey:@"areaid"];
+        selectedCityView.currentLocation = @{@"provinceid": provinceid, @"cityid": cityid,@"areaid": areaid};
     } else {
         selectedCityView.currentLocation = @{@"provinceid": @"330000",@"cityid": @"331000",@"townid": @"331001"};
     }

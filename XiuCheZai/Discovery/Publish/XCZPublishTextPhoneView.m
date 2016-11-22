@@ -14,8 +14,10 @@
 @interface XCZPublishTextPhoneView()
 
 
+@property(nonatomic, weak)UIView *lineView;
 /** 3.showImages */
 @property (nonatomic, strong) NSMutableArray *showImages;
+
 
 @end
 
@@ -38,12 +40,18 @@ static CGFloat const XCZPublishTextPhoneButtonMarginX = 16;
         self.backgroundColor = [UIColor whiteColor];
         UITextField *titleField = [[UITextField alloc] initWithFrame:CGRectMake(16, 16, frame.size.width - 32, 18)];
         titleField.placeholder = @" 标题可选";
+        titleField.font = [UIFont systemFontOfSize:18];
         [self addSubview:titleField];
         self.titleField = titleField;
         
-        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(16, CGRectGetMaxY(titleField.frame) + 8 + 16, frame.size.width - 32, 101)];
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(titleField.frame) + 15, frame.size.width, 1.0)];
+        lineView.backgroundColor = [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1.0];
+        [self addSubview:lineView];
+        
+        UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(16, CGRectGetMaxY(lineView.frame) + 8, frame.size.width - 32, 122)];
         textView.text = @"";
         textView.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
+        textView.font = [UIFont systemFontOfSize:18];
         [self addSubview:textView];
         self.textView = textView;
         
@@ -51,8 +59,8 @@ static CGFloat const XCZPublishTextPhoneButtonMarginX = 16;
         commentPlaceholderLabel.userInteractionEnabled = NO;
         commentPlaceholderLabel.text = XCZPublishTextPhoneViewPWordText;
         commentPlaceholderLabel.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
-        commentPlaceholderLabel.font = [UIFont systemFontOfSize:14];
-        commentPlaceholderLabel.frame = CGRectMake(8, 8, 120, 14);
+        commentPlaceholderLabel.font = textView.font;
+        commentPlaceholderLabel.frame = CGRectMake(8, 8, 120, 18);
         [textView addSubview:commentPlaceholderLabel];
         self.commentPlaceholderLabel = commentPlaceholderLabel;
         

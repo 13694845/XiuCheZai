@@ -553,8 +553,8 @@
     self.scrollView.contentSize = self.contentView.bounds.size;
     [self.scrollView addSubview:self.contentView];
     
-    NSString *repWidthStr = [NSString stringWithFormat:@"<img width=%f ", self.contentView.bounds.size.width - 32];
     NSString *content = [self escapeHTMLString:self.artDict[@"art_content"]];
+    NSString *repWidthStr = [NSString stringWithFormat:@"<img width=%f left=%f ", self.contentView.bounds.size.width - 32, 16.0];
     content = [content stringByReplacingOccurrencesOfString:@"<img " withString: repWidthStr];
     
     [newsTitleView loadHTMLString:content baseURL:nil];

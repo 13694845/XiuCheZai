@@ -50,10 +50,10 @@
     self.userNameLabel.font = [UIFont systemFontOfSize:14];
     self.userNameLabel.textColor = [UIColor colorWithRed:20/255.0 green:20/255.0 blue:20/255.0 alpha:1.0];
     
+    
     NSString *userText = row[@"nick"];
     NSString *userNameText = [NSString stringWithFormat:@"%@", row[@"login_name"]];
-    self.userNameLabel.text = userText.length ? userText : userNameText;
-    
+    self.userNameLabel.text = ([userText length] && ![userText hasPrefix:@"null"]) ? userText : userNameText;
     CGSize userNameLabelSize = [self.userNameLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width, 50) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.userNameLabel.font} context:nil].size;
     self.userNameLabel.frame = CGRectMake(50 + XCZNewDetailRemarkRowMarginX, XCZNewDetailRemarkRowMarginY, userNameLabelSize.width, userNameLabelSize.height);
     

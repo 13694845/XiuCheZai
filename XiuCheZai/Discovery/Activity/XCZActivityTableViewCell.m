@@ -30,7 +30,8 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         UIImageView *activityImageView = [[UIImageView alloc] init];
-        activityImageView.contentMode = UIViewContentModeScaleAspectFit;
+        activityImageView.contentMode = UIViewContentModeScaleAspectFill;
+        activityImageView.clipsToBounds = YES;
         [self.contentView addSubview:activityImageView];
         self.activityImageView = activityImageView;
         

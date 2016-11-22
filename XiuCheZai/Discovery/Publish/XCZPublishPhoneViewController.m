@@ -32,7 +32,7 @@
 @property (weak, nonatomic) XCZPublishSelectedCityView *selectedCityView;
 @property (nonatomic, strong) NSDictionary *location;
 @property (nonatomic, strong) NSDictionary *defaultAttention;
-@property (nonatomic, strong) NSDictionary *currentPositioning;
+@property (nonatomic, strong) NSMutableDictionary *currentPositioning;
 @property (assign, nonatomic) int loginStatu; // 登录状态, 0为已经登录, 1为未登录
 @property (assign, nonatomic) int goType; // 1:  2:调起地点选择框
 
@@ -69,7 +69,7 @@
     }
 }
 
-- (void)setCurrentPositioning:(NSDictionary *)currentPositioning
+- (void)setCurrentPositioning:(NSMutableDictionary *)currentPositioning
 {
     _currentPositioning = currentPositioning;
 }
@@ -158,7 +158,8 @@
     [self.contentView addSubview:writingView];
     self.writingView = writingView;
     
-    XCZPublishTextPhoneView *textPhoneView = [[XCZPublishTextPhoneView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.bounds.size.width, 256)];
+    CGFloat textPhoneViewH = kDevice_Is_iPhone6Plus ? 278 + 16 : (kDevice_Is_iPhone6 ? 278 + 8 : (kDevice_Is_iPhone5 ?  274 : 270));
+    XCZPublishTextPhoneView *textPhoneView = [[XCZPublishTextPhoneView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.bounds.size.width, textPhoneViewH)];
     textPhoneView.delegate = self;
     textPhoneView.titleField.delegate = self;
     textPhoneView.textView.delegate = self;
@@ -365,9 +366,12 @@
     XCZPublishSelectedCityView *selectedCityView = [[XCZPublishSelectedCityView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 250)];
     selectedCityView.delegate = self;
     if (self.currentPositioning.count) {
-        selectedCityView.currentLocation = self.currentPositioning;
+        NSString *provinceid = ([[self.currentPositioning objectForKey:@"provinceid"] isEqual:[NSNull null]] || ![[self.currentPositioning objectForKey:@"provinceid"] length]) ? @"" : [self.currentPositioning objectForKey:@"provinceid"];
+        NSString *cityid = ([[self.currentPositioning objectForKey:@"cityid"] isEqual:[NSNull null]] || ![[self.currentPositioning objectForKey:@"cityid"] length]) ? @"" : [self.currentPositioning objectForKey:@"cityid"];
+        NSString *areaid = ([[self.currentPositioning objectForKey:@"areaid"] isEqual:[NSNull null]] || ![[self.currentPositioning objectForKey:@"areaid"] length]) ? @"" : [self.currentPositioning objectForKey:@"areaid"];
+        selectedCityView.currentLocation = @{@"provinceid": provinceid, @"cityid": cityid,@"areaid": areaid};
     } else {
-        selectedCityView.currentLocation = @{@"provinceid": @"330000",@"cityid": @"331000",@"townid": @"331001"};
+        selectedCityView.currentLocation = @{@"provinceid": @"330000",@"cityid": @"331000",@"areaid": @"331001"};
     }
     [self.view addSubview:selectedCityView];
     self.selectedCityView = selectedCityView;
