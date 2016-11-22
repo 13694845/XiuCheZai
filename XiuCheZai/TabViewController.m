@@ -77,7 +77,8 @@
     }
     
     if ([request.URL.host isEqualToString:@"mcashier.95516.com"]) {
-        if (!self.backButton) [self addBackButton];
+        // if (!self.backButton) [self addBackButton];
+        if (!self.backButton) [self addBackButtonFor95516];
         self.backOffset++;
         return YES;
     }
@@ -127,6 +128,29 @@
 - (void)addBackButton {
     self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(11.0, 8.0, 28.0, 28.0)];
     [self.backButton setBackgroundImage:[UIImage imageNamed:@"common_back_150.png"] forState:UIControlStateNormal];
+    [self.backButton addTarget:self action:@selector(tapBackButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.webView addSubview:self.backButton];
+}
+
+- (void)addBackButtonFor95516 {
+    /*
+    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(11.0, 8.0, 28.0, 28.0)];
+    [self.backButton setBackgroundImage:[UIImage imageNamed:@"common_back_150.png"] forState:UIControlStateNormal];
+     */
+    /*
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:229.0/255.0 green:21.0/255.0 blue:45.0/255.0 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(tapBackButton:)];
+    self.navigationItem.title = @"银联在线";
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+     */
+    self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(11.0, 8.0, 60.0, 28.0)];
+    self.backButton.backgroundColor = [UIColor colorWithRed:95.0/255.0 green:164/255.0 blue:216.0/255.0 alpha:1.0];
+    UIImageView *backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_back_150"]];
+    backImageView.frame = CGRectMake(0, 0, 28.0, 28.0);
+    [self.backButton addSubview:backImageView];
     [self.backButton addTarget:self action:@selector(tapBackButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.webView addSubview:self.backButton];
 }
