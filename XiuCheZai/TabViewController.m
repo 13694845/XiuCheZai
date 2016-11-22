@@ -49,10 +49,12 @@
 
 - (BOOL)handleNavigationWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     NSLog(@"webView.request : %@", request.URL);
+    /*
     if ([request.URL.host isEqualToString:@"m.8673h.com"]) {
         if (self.backButton) [self.backButton removeFromSuperview];
         self.showBack = NO;
     }
+     */
     
     self.fullScreen = !([request.URL.description isEqualToString:self.url.description]
                         || [request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/bbs/index.html"]]
