@@ -397,6 +397,7 @@
      */
     self.backButton = [[UIButton alloc] initWithFrame:CGRectMake(11.0, 8.0, 60.0, 28.0)];
     self.backButton.backgroundColor = [UIColor colorWithRed:95.0/255.0 green:164/255.0 blue:216.0/255.0 alpha:1.0];
+    self.backButton.layer.cornerRadius = 4.0;
     UIImageView *backImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_back_150"]];
     backImageView.frame = CGRectMake(0, 0, 28.0, 28.0);
     [self.backButton addSubview:backImageView];
