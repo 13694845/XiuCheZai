@@ -126,16 +126,21 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="double12_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="3Nd-OB-ogV">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cIO-CL-3ay">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="double12_hometop.png" translatesAutoresizingMaskIntoConstraints="NO" id="cIO-CL-3ay">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="cIO-CL-3ay" secondAttribute="height" multiplier="125:53" id="1H5-is-LmH"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3Nd-OB-ogV" firstAttribute="top" secondItem="I3u-Wj-xng" secondAttribute="top" id="5dB-uh-kE3"/>
+                            <constraint firstItem="cIO-CL-3ay" firstAttribute="top" secondItem="I3u-Wj-xng" secondAttribute="top" id="63k-II-Epd"/>
                             <constraint firstItem="3Nd-OB-ogV" firstAttribute="leading" secondItem="I3u-Wj-xng" secondAttribute="leading" id="9fF-tF-f1s"/>
                             <constraint firstAttribute="trailing" secondItem="3Nd-OB-ogV" secondAttribute="trailing" id="PfC-Jw-xtW"/>
+                            <constraint firstAttribute="trailing" secondItem="cIO-CL-3ay" secondAttribute="trailing" id="QVB-5f-Xar"/>
+                            <constraint firstItem="cIO-CL-3ay" firstAttribute="leading" secondItem="I3u-Wj-xng" secondAttribute="leading" id="V7m-uR-ZS8"/>
                             <constraint firstItem="dnO-eb-bOs" firstAttribute="top" secondItem="3Nd-OB-ogV" secondAttribute="bottom" id="m4D-Zs-oDW"/>
                         </constraints>
                     </view>
@@ -148,5 +153,6 @@
     <resources>
         <image name="double12_awardtop.png" width="1080" height="630"/>
         <image name="double12_bg.png" width="1080" height="1920"/>
+        <image name="double12_hometop.png" width="1080" height="457"/>
     </resources>
 </document>
