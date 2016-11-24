@@ -22,13 +22,16 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tabBarController.tabBar.translucent = NO;
     self.view.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
-    /*
-    CGRect rect = self.passwordTextField.frame;
-    rect.size.height += 30.0;
-    self.passwordTextField.frame = rect;
-     */
+    
     self.passwordTextField.layer.cornerRadius = 8.0;
     self.takeAwardButton.layer.cornerRadius = 8.0;
+}
+
+- (IBAction)takeAward:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Double12" bundle:nil];
+    UIViewController *double12HomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"Double12AwardViewController"];
+    double12HomeViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:double12HomeViewController animated:YES];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

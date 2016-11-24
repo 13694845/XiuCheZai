@@ -75,6 +75,9 @@
                                 <state key="normal" title="领取红包">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="takeAward:" destination="dCF-4x-NOu" eventType="touchUpInside" id="acw-U9-qDB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,6 +135,11 @@
                                     <constraint firstAttribute="width" secondItem="cIO-CL-3ay" secondAttribute="height" multiplier="125:53" id="1H5-is-LmH"/>
                                 </constraints>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="d_wabishi.png" translatesAutoresizingMaskIntoConstraints="NO" id="MWi-iT-xHp">
+                                <rect key="frame" x="147" y="107" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -151,6 +159,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="d_wabishi.png" width="64" height="64"/>
         <image name="double12_awardtop.png" width="1080" height="630"/>
         <image name="double12_bg.png" width="1080" height="1920"/>
         <image name="double12_hometop.png" width="1080" height="457"/>
