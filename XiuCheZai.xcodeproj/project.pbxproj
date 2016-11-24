@@ -25,6 +25,7 @@
 		6C17FADF1CB497F000F95FF4 /* SHA1DataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FADE1CB497F000F95FF4 /* SHA1DataEncryptor.m */; };
 		6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FAE11CB885D600F95FF4 /* MD5DataEncryptor.m */; };
 		6C19A97C1C1E406C002451F6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */; };
+		6C1FDA391DE6B20300D435AA /* Double12.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDA381DE6B20300D435AA /* Double12.storyboard */; };
 		6C2069B01DB79D6B00B2E0BC /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */; };
 		6C2069B11DB79D6B00B2E0BC /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */; };
 		6C2069B21DB79D6B00B2E0BC /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A71DB79D6B00B2E0BC /* libopencore-amrwb.a */; };
@@ -596,6 +597,7 @@
 		6C17FAE01CB885D600F95FF4 /* MD5DataEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5DataEncryptor.h; sourceTree = "<group>"; };
 		6C17FAE11CB885D600F95FF4 /* MD5DataEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5DataEncryptor.m; sourceTree = "<group>"; };
 		6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = XiuCheZai/libWeChatSDK.a; sourceTree = "<group>"; };
+		6C1FDA381DE6B20300D435AA /* Double12.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Double12.storyboard; sourceTree = "<group>"; };
 		6C2069A31DB79D6B00B2E0BC /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
 		6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
 		6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
@@ -1490,6 +1492,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C1FDA371DE6B0E300D435AA /* Double12 */ = {
+			isa = PBXGroup;
+			children = (
+				6C1FDA381DE6B20300D435AA /* Double12.storyboard */,
+			);
+			name = Double12;
+			sourceTree = "<group>";
+		};
 		6C2069A11DB79D6B00B2E0BC /* VoiceConvert */ = {
 			isa = PBXGroup;
 			children = (
@@ -1872,6 +1882,7 @@
 		6CABF7091C0E978B00DF3EFF /* XiuCheZai */ = {
 			isa = PBXGroup;
 			children = (
+				6C1FDA371DE6B0E300D435AA /* Double12 */,
 				6CED79811DE3E1D4007D80D2 /* Discovery */,
 				6CFEE8181DC1991C00676A62 /* MJRefresh */,
 				6C91C3441C9A84D2004C0CB4 /* Util */,
@@ -3003,6 +3014,7 @@
 				6CFEE7CF1DB9BEDD00676A62 /* movie_receiver@3x.png in Resources */,
 				6CED7B9E1DE3E1D5007D80D2 /* bbs_massage_two@2x.png in Resources */,
 				6CED7BBD1DE3E1D5007D80D2 /* bbs_praise_white@3x.png in Resources */,
+				6C1FDA391DE6B20300D435AA /* Double12.storyboard in Resources */,
 				6CE400661C322B7C007F6D03 /* menu_icon17.jpg in Resources */,
 				6CED7BEB1DE3E1D5007D80D2 /* bbs_xinlangshare@3x.png in Resources */,
 				6CF1DAB91C506FAE0077B468 /* tab_icon10@2x.png in Resources */,
