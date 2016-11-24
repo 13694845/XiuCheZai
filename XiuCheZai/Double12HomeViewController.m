@@ -10,6 +10,9 @@
 
 @interface Double12HomeViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIButton *takeAwardButton;
+
 @end
 
 @implementation Double12HomeViewController
@@ -19,6 +22,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tabBarController.tabBar.translucent = NO;
     self.view.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
+    
+    self.passwordTextField.layer.cornerRadius = 8.0;
+    self.takeAwardButton.layer.cornerRadius = 8.0;
 }
 
 - (void)didReceiveMemoryWarning {
