@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Double12 Home View Controller-->
         <scene sceneID="xBm-2h-z5T">
             <objects>
-                <viewController id="dCF-4x-NOu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Double12HomeViewController" id="dCF-4x-NOu" customClass="Double12HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Upp-Je-mfJ"/>
                         <viewControllerLayoutGuide type="bottom" id="nzY-NC-cTr"/>
@@ -35,25 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2eT-MG-flV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="250" y="-552"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="CcQ-hv-loj">
-            <objects>
-                <navigationController storyboardIdentifier="Double12NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="zcQ-MO-jRb" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="c9d-P5-BjV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="dCF-4x-NOu" kind="relationship" relationship="rootViewController" id="VqB-Xq-Ug4"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2ro-bk-I1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-498.39999999999998" y="-551.87406296851577"/>
+            <point key="canvasLocation" x="-241" y="-558"/>
         </scene>
     </scenes>
 </document>

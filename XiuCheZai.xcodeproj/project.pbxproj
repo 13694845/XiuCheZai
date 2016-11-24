@@ -26,6 +26,7 @@
 		6C17FAE21CB885D600F95FF4 /* MD5DataEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C17FAE11CB885D600F95FF4 /* MD5DataEncryptor.m */; };
 		6C19A97C1C1E406C002451F6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */; };
 		6C1FDA391DE6B20300D435AA /* Double12.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDA381DE6B20300D435AA /* Double12.storyboard */; };
+		6C1FDA3C1DE6B57F00D435AA /* Double12HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FDA3B1DE6B57F00D435AA /* Double12HomeViewController.m */; };
 		6C2069B01DB79D6B00B2E0BC /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */; };
 		6C2069B11DB79D6B00B2E0BC /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */; };
 		6C2069B21DB79D6B00B2E0BC /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A71DB79D6B00B2E0BC /* libopencore-amrwb.a */; };
@@ -598,6 +599,8 @@
 		6C17FAE11CB885D600F95FF4 /* MD5DataEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5DataEncryptor.m; sourceTree = "<group>"; };
 		6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = XiuCheZai/libWeChatSDK.a; sourceTree = "<group>"; };
 		6C1FDA381DE6B20300D435AA /* Double12.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Double12.storyboard; sourceTree = "<group>"; };
+		6C1FDA3A1DE6B57F00D435AA /* Double12HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Double12HomeViewController.h; sourceTree = "<group>"; };
+		6C1FDA3B1DE6B57F00D435AA /* Double12HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Double12HomeViewController.m; sourceTree = "<group>"; };
 		6C2069A31DB79D6B00B2E0BC /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
 		6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
 		6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
@@ -1496,6 +1499,8 @@
 			isa = PBXGroup;
 			children = (
 				6C1FDA381DE6B20300D435AA /* Double12.storyboard */,
+				6C1FDA3A1DE6B57F00D435AA /* Double12HomeViewController.h */,
+				6C1FDA3B1DE6B57F00D435AA /* Double12HomeViewController.m */,
 			);
 			name = Double12;
 			sourceTree = "<group>";
@@ -3155,6 +3160,7 @@
 				6CED7B261DE3E1D4007D80D2 /* XCZCircleUserListCell.m in Sources */,
 				6CED7B5E1DE3E1D4007D80D2 /* XCZNewDetailALayerViewController.m in Sources */,
 				6CED7C101DE3E1D5007D80D2 /* XCZPublishBrandsTableViewCell.m in Sources */,
+				6C1FDA3C1DE6B57F00D435AA /* Double12HomeViewController.m in Sources */,
 				6CED7C171DE3E1D5007D80D2 /* XCZPublishOrderViewController.m in Sources */,
 				6CED7C141DE3E1D5007D80D2 /* XCZPublishOrdersTableViewCell.m in Sources */,
 				6CED7BF81DE3E1D5007D80D2 /* SGGroupCell.m in Sources */,
