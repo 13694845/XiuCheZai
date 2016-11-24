@@ -28,14 +28,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="double12_home.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ZBS-Cn-Ohh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nzY-NC-cTr" firstAttribute="top" secondItem="ZBS-Cn-Ohh" secondAttribute="bottom" id="5mn-Et-k6X"/>
+                            <constraint firstItem="ZBS-Cn-Ohh" firstAttribute="leading" secondItem="p70-pt-xZU" secondAttribute="leading" id="Q8a-nB-9kb"/>
+                            <constraint firstAttribute="trailing" secondItem="ZBS-Cn-Ohh" secondAttribute="trailing" id="jex-Do-Iee"/>
+                            <constraint firstItem="ZBS-Cn-Ohh" firstAttribute="top" secondItem="p70-pt-xZU" secondAttribute="top" id="yd8-Sr-Wvp"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hOv-d5-Hft"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2eT-MG-flV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-241" y="-558"/>
+            <point key="canvasLocation" x="-242.40000000000001" y="-558.17091454272872"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="double12_home.jpg" width="1080" height="1920"/>
+    </resources>
 </document>

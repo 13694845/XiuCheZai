@@ -27,6 +27,7 @@
 		6C19A97C1C1E406C002451F6 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C19A97B1C1E406C002451F6 /* libWeChatSDK.a */; };
 		6C1FDA391DE6B20300D435AA /* Double12.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDA381DE6B20300D435AA /* Double12.storyboard */; };
 		6C1FDA3C1DE6B57F00D435AA /* Double12HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FDA3B1DE6B57F00D435AA /* Double12HomeViewController.m */; };
+		6C1FDA401DE6B97500D435AA /* double12_home.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDA3F1DE6B97500D435AA /* double12_home.jpg */; };
 		6C2069B01DB79D6B00B2E0BC /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */; };
 		6C2069B11DB79D6B00B2E0BC /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */; };
 		6C2069B21DB79D6B00B2E0BC /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A71DB79D6B00B2E0BC /* libopencore-amrwb.a */; };
@@ -601,6 +602,7 @@
 		6C1FDA381DE6B20300D435AA /* Double12.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Double12.storyboard; sourceTree = "<group>"; };
 		6C1FDA3A1DE6B57F00D435AA /* Double12HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Double12HomeViewController.h; sourceTree = "<group>"; };
 		6C1FDA3B1DE6B57F00D435AA /* Double12HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Double12HomeViewController.m; sourceTree = "<group>"; };
+		6C1FDA3F1DE6B97500D435AA /* double12_home.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = double12_home.jpg; sourceTree = "<group>"; };
 		6C2069A31DB79D6B00B2E0BC /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
 		6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
 		6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
@@ -1505,6 +1507,14 @@
 			name = Double12;
 			sourceTree = "<group>";
 		};
+		6C1FDA3E1DE6B95F00D435AA /* Double12Images */ = {
+			isa = PBXGroup;
+			children = (
+				6C1FDA3F1DE6B97500D435AA /* double12_home.jpg */,
+			);
+			name = Double12Images;
+			sourceTree = "<group>";
+		};
 		6C2069A11DB79D6B00B2E0BC /* VoiceConvert */ = {
 			isa = PBXGroup;
 			children = (
@@ -1887,6 +1897,7 @@
 		6CABF7091C0E978B00DF3EFF /* XiuCheZai */ = {
 			isa = PBXGroup;
 			children = (
+				6C1FDA3E1DE6B95F00D435AA /* Double12Images */,
 				6C1FDA371DE6B0E300D435AA /* Double12 */,
 				6CED79811DE3E1D4007D80D2 /* Discovery */,
 				6CFEE8181DC1991C00676A62 /* MJRefresh */,
@@ -2836,6 +2847,7 @@
 				6CED7BDF1DE3E1D5007D80D2 /* bbs_vip5@3x.png in Resources */,
 				6CED7BA81DE3E1D5007D80D2 /* bbs_myfinding_recommended@2x.png in Resources */,
 				6CED7B841DE3E1D5007D80D2 /* bbs_data@3x.png in Resources */,
+				6C1FDA401DE6B97500D435AA /* double12_home.jpg in Resources */,
 				6C05EDFD1C33C58400BF8C39 /* home_activity03.png in Resources */,
 				6CED7B801DE3E1D5007D80D2 /* bbs_collection@3x.png in Resources */,
 				6C8B10511CC4D087003CF8F5 /* menu_icon04.jpg in Resources */,
