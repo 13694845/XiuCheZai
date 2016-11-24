@@ -111,10 +111,10 @@
             </objects>
             <point key="canvasLocation" x="-242.40000000000001" y="-558.17091454272872"/>
         </scene>
-        <!--View Controller-->
+        <!--Double12 Award View Controller-->
         <scene sceneID="C5f-Nl-dcQ">
             <objects>
-                <viewController id="sul-tV-bxL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Double12AwardViewController" id="sul-tV-bxL" customClass="Double12AwardViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pKV-zF-JGc"/>
                         <viewControllerLayoutGuide type="bottom" id="dnO-eb-bOs"/>

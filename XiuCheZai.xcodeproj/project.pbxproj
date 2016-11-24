@@ -31,6 +31,7 @@
 		6C1FDA441DE6CD4800D435AA /* double12_awardtop.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDA411DE6CD4800D435AA /* double12_awardtop.png */; };
 		6C1FDA451DE6CD4800D435AA /* double12_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDA421DE6CD4800D435AA /* double12_bg.png */; };
 		6C1FDA461DE6CD4800D435AA /* double12_hometop.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDA431DE6CD4800D435AA /* double12_hometop.png */; };
+		6C1FDA491DE6D46F00D435AA /* Double12AwardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FDA481DE6D46F00D435AA /* Double12AwardViewController.m */; };
 		6C2069B01DB79D6B00B2E0BC /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */; };
 		6C2069B11DB79D6B00B2E0BC /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */; };
 		6C2069B21DB79D6B00B2E0BC /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A71DB79D6B00B2E0BC /* libopencore-amrwb.a */; };
@@ -609,6 +610,8 @@
 		6C1FDA411DE6CD4800D435AA /* double12_awardtop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = double12_awardtop.png; sourceTree = "<group>"; };
 		6C1FDA421DE6CD4800D435AA /* double12_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = double12_bg.png; sourceTree = "<group>"; };
 		6C1FDA431DE6CD4800D435AA /* double12_hometop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = double12_hometop.png; sourceTree = "<group>"; };
+		6C1FDA471DE6D46F00D435AA /* Double12AwardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Double12AwardViewController.h; sourceTree = "<group>"; };
+		6C1FDA481DE6D46F00D435AA /* Double12AwardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Double12AwardViewController.m; sourceTree = "<group>"; };
 		6C2069A31DB79D6B00B2E0BC /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
 		6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
 		6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
@@ -1509,6 +1512,8 @@
 				6C1FDA381DE6B20300D435AA /* Double12.storyboard */,
 				6C1FDA3A1DE6B57F00D435AA /* Double12HomeViewController.h */,
 				6C1FDA3B1DE6B57F00D435AA /* Double12HomeViewController.m */,
+				6C1FDA471DE6D46F00D435AA /* Double12AwardViewController.h */,
+				6C1FDA481DE6D46F00D435AA /* Double12AwardViewController.m */,
 			);
 			name = Double12;
 			sourceTree = "<group>";
@@ -3355,6 +3360,7 @@
 				6C91C3581C9A84D2004C0CB4 /* DataVerifier.m in Sources */,
 				6C91C2C21C9A2E66004C0CB4 /* StoreViewController.m in Sources */,
 				6C8EC2771C1E548000BCABB5 /* UIWebView+AFNetworking.m in Sources */,
+				6C1FDA491DE6D46F00D435AA /* Double12AwardViewController.m in Sources */,
 				6CED7B211DE3E1D4007D80D2 /* XCZCirclePostDetailViewController.m in Sources */,
 				6CED7B4C1DE3E1D4007D80D2 /* XCZMessagePraiseViewController.m in Sources */,
 				6C4D0C4C1C28E998003E96E8 /* UIView+WebCacheOperation.m in Sources */,
