@@ -23,6 +23,9 @@
     self.tabBarController.tabBar.translucent = NO;
     self.view.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
     
+    CGRect rect = self.passwordTextField.frame;
+    rect.size.height += 30.0;
+    self.passwordTextField.frame = rect;
     self.passwordTextField.layer.cornerRadius = 8.0;
     self.takeAwardButton.layer.cornerRadius = 8.0;
 }
