@@ -515,9 +515,11 @@
 }
 
 - (void)bannerView:(BannerView *)bannerView didSelectBanner:(NSDictionary *)bannerInfo {
+    /*
+     * Double12
+     */
     NSString *URLString = bannerInfo[kBannerURLKey];
     if ([URLString containsString:@"/ad/dubele/index.html"]) {
-        NSLog(@"hello double 12");
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Double12" bundle:nil];
         UIViewController *double12HomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"Double12HomeViewController"];
         double12HomeViewController.hidesBottomBarWhenPushed = YES;
