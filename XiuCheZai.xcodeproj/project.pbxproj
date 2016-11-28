@@ -32,6 +32,8 @@
 		6C1FDA801DE7DBBD00D435AA /* Double12.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDA771DE7DBBD00D435AA /* Double12.storyboard */; };
 		6C1FDA811DE7DBBD00D435AA /* Double12AwardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FDA791DE7DBBD00D435AA /* Double12AwardViewController.m */; };
 		6C1FDA821DE7DBBD00D435AA /* Double12HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FDA7B1DE7DBBD00D435AA /* Double12HomeViewController.m */; };
+		6C1FDA841DEC05A600D435AA /* New.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FDA831DEC05A600D435AA /* New.storyboard */; };
+		6C1FDA871DEC05AE00D435AA /* XCZHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FDA861DEC05AE00D435AA /* XCZHomeViewController.m */; };
 		6C2069B01DB79D6B00B2E0BC /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */; };
 		6C2069B11DB79D6B00B2E0BC /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */; };
 		6C2069B21DB79D6B00B2E0BC /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2069A71DB79D6B00B2E0BC /* libopencore-amrwb.a */; };
@@ -612,6 +614,9 @@
 		6C1FDA791DE7DBBD00D435AA /* Double12AwardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Double12AwardViewController.m; sourceTree = "<group>"; };
 		6C1FDA7A1DE7DBBD00D435AA /* Double12HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Double12HomeViewController.h; sourceTree = "<group>"; };
 		6C1FDA7B1DE7DBBD00D435AA /* Double12HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Double12HomeViewController.m; sourceTree = "<group>"; };
+		6C1FDA831DEC05A600D435AA /* New.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = New.storyboard; sourceTree = "<group>"; };
+		6C1FDA851DEC05AE00D435AA /* XCZHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZHomeViewController.h; sourceTree = "<group>"; };
+		6C1FDA861DEC05AE00D435AA /* XCZHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZHomeViewController.m; sourceTree = "<group>"; };
 		6C2069A31DB79D6B00B2E0BC /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
 		6C2069A41DB79D6B00B2E0BC /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
 		6C2069A61DB79D6B00B2E0BC /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
@@ -1981,6 +1986,9 @@
 				6CABF7161C0E978B00DF3EFF /* Assets.xcassets */,
 				6CABF7181C0E978B00DF3EFF /* LaunchScreen.storyboard */,
 				6CABF71B1C0E978B00DF3EFF /* Info.plist */,
+				6C1FDA831DEC05A600D435AA /* New.storyboard */,
+				6C1FDA851DEC05AE00D435AA /* XCZHomeViewController.h */,
+				6C1FDA861DEC05AE00D435AA /* XCZHomeViewController.m */,
 				6CABF70A1C0E978B00DF3EFF /* Supporting Files */,
 			);
 			path = XiuCheZai;
@@ -3010,6 +3018,7 @@
 				6CED7BE21DE3E1D5007D80D2 /* bbs_vip7@2x.png in Resources */,
 				6CFEE7A91DB7B1F100676A62 /* d_sikao.png in Resources */,
 				6C5C5F041C86DA66008CDD3C /* home_icon16.png in Resources */,
+				6C1FDA841DEC05A600D435AA /* New.storyboard in Resources */,
 				6CED7BC31DE3E1D5007D80D2 /* bbs_qqsharekongjianshare@3x.png in Resources */,
 				6CFEE7871DB7B1F100676A62 /* d_aini.png in Resources */,
 				6C82347F1C436F7D001E6AFE /* home_redbar.png in Resources */,
@@ -3359,6 +3368,7 @@
 				6C91C35C1C9A84D2004C0CB4 /* RSADataSigner.m in Sources */,
 				6CFEE84B1DC1991C00676A62 /* MJRefreshHeader.m in Sources */,
 				6CED7C031DE3E1D5007D80D2 /* XCZPersonAttentionClubViewController.m in Sources */,
+				6C1FDA871DEC05AE00D435AA /* XCZHomeViewController.m in Sources */,
 				6C17FADF1CB497F000F95FF4 /* SHA1DataEncryptor.m in Sources */,
 				6CED7B661DE3E1D4007D80D2 /* XCZNewsTableViewCell.m in Sources */,
 				6C7CE9141CD8773A00617964 /* ScannerViewController.m in Sources */,
