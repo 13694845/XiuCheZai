@@ -208,7 +208,8 @@
 - (void)requestPostImage:(UIImage *)currentImage andIndex:(NSInteger)currentIndex andImages:(NSArray *)images
 {
     [MBProgressHUD ZHMShowMessage:@"正在处理中..."];
-    NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/WebUploadServlet.action"];
+    long const kFileMaxSize = 1024 * 1024 * 10;
+    NSString *URLString = [NSString stringWithFormat:@"%@%@%ld", [XCZConfig baseURL], @"/WebUploadServlet.action?limit=", kFileMaxSize];
     
     [self.phoneManager POST:URLString parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             // 1.取文件名 随机数 + ios + 类型(图片为Image) + 时间(201412111537)年月日时分秒
@@ -219,7 +220,7 @@
             dataFormatter.dateFormat = @"yyyyMMddHHmmss";
             NSString *timeStr = [dataFormatter stringFromDate:[NSDate date]];
             NSString *fileName = [userType stringByAppendingString:[NSString stringWithFormat:@"%@.jpg", timeStr]];
-            NSData *imgData = UIImageJPEGRepresentation(currentImage, 1.0);
+            NSData *imgData = UIImageJPEGRepresentation(currentImage, 0.1);
             [formData appendPartWithFileData:imgData name:@"file" fileName:fileName mimeType:@"image/jpeg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
 //                 NSLog(@"uploadProgress:%@", uploadProgress);
@@ -550,10 +551,10 @@
     [imgCtr setDidFinishSelectImages:^(NSArray *images) {
         NSMutableArray *newImages = [NSMutableArray array];
         for (UIImage *image in images) {
-            [self compressionImage:image andCompressionQuality:XCZPublishTextPhoneViewPhoneQuality];
-            if (self.chouImage) {
-                [newImages addObject:self.chouImage];
-            }
+//            [self compressionImage:image andCompressionQuality:XCZPublishTextPhoneViewPhoneQuality];
+//            if (self.chouImage) {
+                [newImages addObject:image];
+//            }
         }
         
         if ([newImages firstObject]) {
@@ -577,8 +578,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     UIImage *oImage = info[@"UIImagePickerControllerOriginalImage"];
-    [self compressionImage:oImage andCompressionQuality:XCZPublishTextPhoneViewPhoneQuality];
-    [self requestPostImage:self.chouImage andIndex:0 andImages:nil];
+//    [self compressionImage:oImage andCompressionQuality:XCZPublishTextPhoneViewPhoneQuality];
+    [self requestPostImage:oImage andIndex:0 andImages:nil];
 }
 
 #pragma mark - 去登录等方法
@@ -630,19 +631,19 @@
     return image;
 }
 
-- (void)compressionImage:(UIImage *)image andCompressionQuality:(CGFloat)quality
-{
-     NSData *imageData = UIImageJPEGRepresentation(image, quality);
-     UIImage *newImage = [UIImage imageWithData:imageData];
-
-    if (imageData.length/1024 >= 250) {
-        UIImage *scImage = [self scaleToSize:newImage size:CGSizeMake(newImage.size.width * XCZPublishTextPhoneViewPhoneScaleToSize, newImage.size.height * XCZPublishTextPhoneViewPhoneScaleToSize)];
-        NSData *data = UIImageJPEGRepresentation(scImage, quality);
-        [self compressionImage:[UIImage imageWithData:data] andCompressionQuality:quality];
-    } else {
-        self.chouImage = newImage;
-    }
-}
+//- (void)compressionImage:(UIImage *)image andCompressionQuality:(CGFloat)quality
+//{
+//     NSData *imageData = UIImageJPEGRepresentation(image, quality);
+//     UIImage *newImage = [UIImage imageWithData:imageData];
+//
+//    if (imageData.length/1024 >= 250) {
+//        UIImage *scImage = [self scaleToSize:newImage size:CGSizeMake(newImage.size.width * XCZPublishTextPhoneViewPhoneScaleToSize, newImage.size.height * XCZPublishTextPhoneViewPhoneScaleToSize)];
+//        NSData *data = UIImageJPEGRepresentation(scImage, quality);
+//        [self compressionImage:[UIImage imageWithData:data] andCompressionQuality:quality];
+//    } else {
+//        self.chouImage = newImage;
+//    }
+//}
 
 #pragma mark 裁剪照片
 -(UIImage *)scaleToSize:(UIImage *)image size:(CGSize)size
