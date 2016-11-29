@@ -10,6 +10,8 @@
 #import "XCZConfig.h"
 #import "XCZMessageChatTabulationCell.h"
 
+#import "ChatMessageManager.h"
+
 @interface XCZMessageChatTabulationViewController()<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -120,6 +122,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XCZMessageChatTabulationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
 //    cell.numLabel.text = @"56";
+    NSString *userId = [self.rows[indexPath.row] objectForKey:@"user_id"];
+    NSInteger unreadCount = [[ChatMessageManager sharedManager] unreadCountForReceiverId:userId];
+    cell.numLabel.text = [NSString stringWithFormat:@"%ld", unreadCount];
+    
     cell.row = self.rows[indexPath.row];
     return cell;
 }
