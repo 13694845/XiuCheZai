@@ -10,8 +10,9 @@
 
 @interface XCZHomeViewController ()
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) UIScrollView *scrollView;
 
 @end
 
