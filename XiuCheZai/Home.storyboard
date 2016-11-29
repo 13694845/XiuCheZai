@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -30,6 +31,46 @@
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PrW-Vc-pZA">
                                 <rect key="frame" x="0.0" y="109" width="375" height="691"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwR-DP-5GQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="691"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuX-Ax-Ge7">
+                                                <rect key="frame" x="166" y="24" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="rmp-cQ-35u"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UtB-pm-2Zm">
+                                                <rect key="frame" x="166" y="638" width="42" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="Gos-aC-IDe"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="dwR-DP-5GQ" secondAttribute="height" multiplier="375:691" id="Fmj-l1-Oag"/>
+                                            <constraint firstItem="UtB-pm-2Zm" firstAttribute="centerX" secondItem="dwR-DP-5GQ" secondAttribute="centerX" id="Rnd-aW-xQc"/>
+                                            <constraint firstItem="WuX-Ax-Ge7" firstAttribute="top" secondItem="dwR-DP-5GQ" secondAttribute="top" constant="24" id="b4J-6f-575"/>
+                                            <constraint firstAttribute="bottom" secondItem="UtB-pm-2Zm" secondAttribute="bottom" constant="32" id="kLE-rC-b7T"/>
+                                            <constraint firstItem="WuX-Ax-Ge7" firstAttribute="centerX" secondItem="dwR-DP-5GQ" secondAttribute="centerX" id="rGR-52-4OQ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="dwR-DP-5GQ" firstAttribute="top" secondItem="PrW-Vc-pZA" secondAttribute="top" id="715-ra-GjL"/>
+                                    <constraint firstAttribute="trailing" secondItem="dwR-DP-5GQ" secondAttribute="trailing" id="EQC-9j-hqd"/>
+                                    <constraint firstAttribute="bottom" secondItem="dwR-DP-5GQ" secondAttribute="bottom" id="LT8-Ra-QXu"/>
+                                    <constraint firstItem="dwR-DP-5GQ" firstAttribute="width" secondItem="PrW-Vc-pZA" secondAttribute="width" id="Thl-O9-Jf8"/>
+                                    <constraint firstItem="dwR-DP-5GQ" firstAttribute="leading" secondItem="PrW-Vc-pZA" secondAttribute="leading" id="ULE-ju-j3C"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -46,6 +87,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
+                        <outlet property="contentView" destination="dwR-DP-5GQ" id="Fq2-IE-CDs"/>
                         <outlet property="scrollView" destination="PrW-Vc-pZA" id="kcK-e7-Y8E"/>
                         <outlet property="topView" destination="9YF-7u-8lr" id="Fpl-Vf-IiY"/>
                     </connections>
