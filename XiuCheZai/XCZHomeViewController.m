@@ -11,8 +11,10 @@
 @interface XCZHomeViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
-@property (strong, nonatomic) UIScrollView *scrollView;
+
+
 
 @end
 
@@ -25,6 +27,12 @@
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.contentSize = self.mainView.bounds.size;
      */
+    NSLog(@"scrollView : %@", NSStringFromCGRect(self.scrollView.frame));
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    NSLog(@"scrollView : %@", NSStringFromCGRect(self.scrollView.frame));
 }
 
 - (void)didReceiveMemoryWarning {
