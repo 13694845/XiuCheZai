@@ -11,6 +11,7 @@
 #import "XCZMessageChatTabulationCell.h"
 
 #import "ChatMessageManager.h"
+#import "ChatViewController.h"
 
 @interface XCZMessageChatTabulationViewController()<UITableViewDataSource, UITableViewDelegate>
 
@@ -130,7 +131,24 @@
     return cell;
 }
 
-
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *receiverInfo = self.rows[indexPath.row];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChatViewController *chatViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+    /*
+     chatViewController.receiverId = @"6493";
+     chatViewController.receiverName = @"BoBo";
+     chatViewController.receiverAvatar = @"group1/M00/00/6A/wKgCBFfD6ZyAO3zmAAgKHyYE5OE360.jpg";
+     chatViewController.isContact = @"0";
+     */
+    chatViewController.receiverId = receiverInfo[@"user_id"];
+    chatViewController.receiverName = receiverInfo[@"user_name"];
+    chatViewController.receiverAvatar = receiverInfo[@"avatar"];
+    chatViewController.isContact = @"1";
+    
+    chatViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:chatViewController animated:YES];
+}
 
 @end
