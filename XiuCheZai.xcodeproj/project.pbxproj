@@ -463,6 +463,7 @@
 		6CF1DABD1C50704B0077B468 /* tab_icon40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1DABC1C50704B0077B468 /* tab_icon40@2x.png */; };
 		6CF1DABF1C5070680077B468 /* tab_icon50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1DABE1C5070680077B468 /* tab_icon50@2x.png */; };
 		6CF784411C477397004C9CA1 /* home_icon09.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF784401C477397004C9CA1 /* home_icon09.png */; };
+		6CFBDD621DED73E100030DD5 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CFBDD611DED73E100030DD5 /* Home.storyboard */; };
 		6CFEE7191DB7ABE400676A62 /* ChatConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFEE7021DB7ABE400676A62 /* ChatConfig.m */; };
 		6CFEE71A1DB7ABE400676A62 /* ChatEmojiAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFEE7041DB7ABE400676A62 /* ChatEmojiAttachment.m */; };
 		6CFEE71B1DB7ABE400676A62 /* ChatEmojiInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFEE7061DB7ABE400676A62 /* ChatEmojiInputView.m */; };
@@ -1320,6 +1321,7 @@
 		6CF1DABC1C50704B0077B468 /* tab_icon40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon40@2x.png"; sourceTree = "<group>"; };
 		6CF1DABE1C5070680077B468 /* tab_icon50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon50@2x.png"; sourceTree = "<group>"; };
 		6CF784401C477397004C9CA1 /* home_icon09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon09.png; sourceTree = "<group>"; };
+		6CFBDD611DED73E100030DD5 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		6CFEE7011DB7ABE400676A62 /* ChatConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatConfig.h; sourceTree = "<group>"; };
 		6CFEE7021DB7ABE400676A62 /* ChatConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatConfig.m; sourceTree = "<group>"; };
 		6CFEE7031DB7ABE400676A62 /* ChatEmojiAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojiAttachment.h; sourceTree = "<group>"; };
@@ -2506,6 +2508,7 @@
 				6CABF7161C0E978B00DF3EFF /* Assets.xcassets */,
 				6CABF7181C0E978B00DF3EFF /* LaunchScreen.storyboard */,
 				6CABF71B1C0E978B00DF3EFF /* Info.plist */,
+				6CFBDD611DED73E100030DD5 /* Home.storyboard */,
 				6C1FDA851DEC05AE00D435AA /* XCZHomeViewController.h */,
 				6C1FDA861DEC05AE00D435AA /* XCZHomeViewController.m */,
 				6CABF70A1C0E978B00DF3EFF /* Supporting Files */,
@@ -2963,6 +2966,7 @@
 				6CFEE7401DB7B05D00676A62 /* camera@2x.png in Resources */,
 				6C1FDF251DED56A100D435AA /* bbs_add@2x.png in Resources */,
 				6CFEE7CB1DB9BEDD00676A62 /* movie_camera@3x.png in Resources */,
+				6CFBDD621DED73E100030DD5 /* Home.storyboard in Resources */,
 				6C1FDF371DED56A100D435AA /* bbs_circleminus@3x.png in Resources */,
 				6C2FFA451DC2E09B0086CF1D /* back@3x.png in Resources */,
 				6C1FDF5C1DED56A100D435AA /* bbs_message_white@3x.png in Resources */,
