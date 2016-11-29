@@ -26,18 +26,17 @@
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.contentSize = self.mainView.bounds.size;
      */
-    NSLog(@"scrollView : %@", NSStringFromCGRect(self.scrollView.frame));
+    // NSLog(@"scrollView : %@", NSStringFromCGRect(self.scrollView.frame));
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    NSLog(@"scrollView : %@", NSStringFromCGRect(self.scrollView.frame));
+    // NSLog(@"scrollView : %@", NSStringFromCGRect(self.scrollView.frame));
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"scrollView : %@", NSStringFromCGRect(self.scrollView.frame));
-    
+    // NSLog(@"scrollView : %@", NSStringFromCGRect(self.scrollView.frame));
 }
 
 - (void)didReceiveMemoryWarning {
