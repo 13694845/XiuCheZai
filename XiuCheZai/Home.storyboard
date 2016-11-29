@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="门店" image="门店.png" id="PK5-QY-S0V"/>
+                    <tabBarItem key="tabBarItem" title="门店" id="PK5-QY-S0V"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LUh-zo-Hbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -409,14 +409,9 @@
                             <constraint firstItem="rms-O9-jBf" firstAttribute="top" secondItem="CRc-JN-O6x" secondAttribute="bottom" id="fII-hI-fiW"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="首页" image="home.png" id="5bS-rv-2qy"/>
+                    <tabBarItem key="tabBarItem" title="首页" id="5bS-rv-2qy"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="800"/>
-                    <connections>
-                        <outlet property="mainView" destination="kup-S5-KZQ" id="zNb-nI-NzM"/>
-                        <outlet property="newsView" destination="ONP-ol-rDa" id="TcF-lK-6Qo"/>
-                        <outlet property="scrollView" destination="CRc-JN-O6x" id="rES-dK-pwA"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RpF-l0-tsF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -428,6 +423,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Wt5-8a-zPD" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Xr1-1I-jTG">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
@@ -455,7 +451,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="我的" image="me.png" id="26e-Hy-zrV"/>
+                    <tabBarItem key="tabBarItem" title="我的" id="26e-Hy-zrV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhy-ol-HHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -474,7 +470,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="发现" image="发现.png" id="7ok-61-uEp"/>
+                    <tabBarItem key="tabBarItem" title="发现" id="7ok-61-uEp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u85-Y3-bX6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -482,13 +478,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="home.png" width="22" height="22"/>
         <image name="location.png" width="14" height="18"/>
         <image name="massage.png" width="18" height="18"/>
-        <image name="me.png" width="22" height="22"/>
-        <image name="发现.png" width="22" height="22"/>
         <image name="搜索.png" width="18" height="18"/>
         <image name="组-13.png" width="87" height="18"/>
-        <image name="门店.png" width="22" height="22"/>
     </resources>
 </document>
