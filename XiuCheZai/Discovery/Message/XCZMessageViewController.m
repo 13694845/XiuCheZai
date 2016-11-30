@@ -90,7 +90,8 @@
     
     if (chatDatas && (chatDatas.count - 1)) {
         self.content = @{@"num": @(chatDatas.count - 1), @"content": [[chatDatas firstObject] objectForKey:@"user_name"]};
-        [self reloadRow:1];
+        // ***** comented *****
+        // [self reloadRow:1];
     }
 }
 
