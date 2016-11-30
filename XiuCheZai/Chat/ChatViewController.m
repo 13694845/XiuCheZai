@@ -592,6 +592,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         content = [content stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         content = [content stringByReplacingOccurrencesOfString:@"\r" withString:@""];
         content = [content stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+        content = [content stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
         
         if (!content.length) {
             [self toastWithText:@"请输入消息内容"];
