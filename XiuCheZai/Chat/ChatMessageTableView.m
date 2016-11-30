@@ -9,10 +9,10 @@
 #import "ChatMessageTableView.h"
 
 @implementation ChatMessageTableView
-
+/*
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     [self.superview endEditing:YES];
     return [super hitTest:point withEvent:event];
 }
-
+*/
 @end
