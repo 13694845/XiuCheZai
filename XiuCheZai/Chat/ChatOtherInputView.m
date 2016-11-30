@@ -14,6 +14,8 @@
 @property (strong, nonatomic) UIView *contentView;
 @property (strong, nonatomic) NSArray *buttonImages;
 
+@property (strong, nonatomic) NSArray *buttonTitles;
+
 @end
 
 @implementation ChatOtherInputView
@@ -25,6 +27,11 @@
 - (NSArray *)buttonImages {
     if (!_buttonImages) _buttonImages = @[@"camera", @"album", @"movie_camera", @"movie_pick"];
     return _buttonImages;
+}
+
+- (NSArray *)buttonTitles {
+    if (!_buttonTitles) _buttonTitles = @[@"拍照", @"相册", @"录像", @"视频库"];
+    return _buttonTitles;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -41,7 +48,7 @@
                 UIButton *button = [[UIButton alloc] init];
                 button.layer.borderWidth = 1.0;
                 button.layer.borderColor = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor;
-                button.layer.cornerRadius = 4.0;
+                button.layer.cornerRadius = 6.0;
                 button.frame = CGRectMake((BUTTON_WIDTH + imagePadding * 2) * j + imagePadding, (BUTTON_WIDTH + imagePadding * 2) * i + imagePadding, BUTTON_WIDTH, BUTTON_HEIGHT);
                 [button addTarget:self action:@selector(selectButton:) forControlEvents:UIControlEventTouchUpInside];
                 button.tag = j + i * NUMBER_OF_COLUMNS;
@@ -49,6 +56,18 @@
                 imageView.frame = CGRectMake((button.frame.size.width - 22.0) / 2, (button.frame.size.height - 22.0) / 2, 22.0, 22.0);
                 [button addSubview:imageView];
                 [self.contentView addSubview:button];
+                
+                UIButton *titleButton = [[UIButton alloc] init];
+                CGRect titleRect = button.frame;
+                titleRect.origin.y = titleRect.origin.y + button.bounds.size.height + 4.0;
+                titleRect.size.height = 20.0;
+                titleButton.frame = titleRect;
+                titleButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+                [titleButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+                [titleButton setTitle:self.buttonTitles[j + i * NUMBER_OF_COLUMNS] forState:UIControlStateNormal];
+                button.tag = j + i * NUMBER_OF_COLUMNS;
+                [titleButton addTarget:self action:@selector(selectButton:) forControlEvents:UIControlEventTouchUpInside];
+                [self.contentView addSubview:titleButton];
             }
         }
         self.scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
