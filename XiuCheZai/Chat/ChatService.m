@@ -95,10 +95,11 @@
     [self loginWithSenderId:self.senderId];
 }
 
+// [self performSelector:@selector(reconnect) withObject:nil afterDelay:10.0];
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
     NSLog(@"socketDidDisconnect : %@ %ld", self.host, (long)self.port);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"XCZChatServiceDidDisconnect" object:nil userInfo:nil];
-    [self performSelector:@selector(reconnect) withObject:nil afterDelay:10.0];
+    [self performSelector:@selector(reconnect) withObject:nil afterDelay:3.0];
 }
 
 - (void)reconnect {
