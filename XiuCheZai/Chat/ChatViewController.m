@@ -871,7 +871,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)toastWithText:(NSString *)text hideAfterDelay:(float)delay {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.alpha = 0.5;
+    hud.alpha = 0.7;
     hud.mode = MBProgressHUDModeText;
     hud.labelText = text;
     hud.yOffset = -100.0;
@@ -880,11 +880,11 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
 
 - (void)toastWithText:(NSString *)text {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.alpha = 0.5;
+    hud.alpha = 0.7;
     hud.mode = MBProgressHUDModeText;
     hud.labelText = text;
     hud.yOffset = -100.0;
-    [hud hide:YES afterDelay:2.0];
+    [hud hide:YES afterDelay:1.0];
 }
 
 - (void)goBack:(id)sender {
