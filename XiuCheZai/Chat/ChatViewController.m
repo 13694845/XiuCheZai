@@ -748,6 +748,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         default: break;
     }
     [self presentViewController:imagePickerController animated:YES completion:nil];
+    self.inputViewType = InputViewTypeKeyboard;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
