@@ -18,6 +18,10 @@
 
 @interface Double12HomeViewController ()<UITextFieldDelegate, XCZShareChannelPickerViewDelegate>
 
+
+@property (weak, nonatomic) IBOutlet UIView *backView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *backViewTop;
+
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *takeAwardButton;
 @property (strong, nonatomic) UIButton *backBtn;
@@ -162,20 +166,6 @@
     } else {
         [self requestLoginDetection];
     }
-    
-    
-    CGRect backBtnRect = self.backBtn.frame;
-    backBtnRect.origin.y = 20;
-    CGRect shareBtnRect = self.shareBtn.frame;
-    shareBtnRect.origin.y = 20;
-    CGRect frame = self.view.frame;
-    frame.origin.y = 0;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.view.frame = frame;
-        self.backBtn.frame = backBtnRect;
-        self.shareBtn.frame = shareBtnRect;
-    } completion:^(BOOL finished) {
-    }];
 }
 
 - (void)backBtnDidClick
@@ -214,17 +204,12 @@
     if(begin.size.height>0 && (begin.origin.y-end.origin.y>0)){
         CGRect keyboardFrame = [notification.userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
         if ((self.view.bounds.size.height - CGRectGetMaxY(self.takeAwardButton.frame)) < keyboardFrame.size.height) {
-            self.detaHeight = keyboardFrame.size.height - (self.view.bounds.size.height - CGRectGetMaxY(self.takeAwardButton.frame));
-            CGRect backBtnRect = self.backBtn.frame;
-            backBtnRect.origin.y += self.detaHeight;
-            CGRect shareBtnRect = self.shareBtn.frame;
-            shareBtnRect.origin.y += self.detaHeight;
-            CGRect viewFrame = self.view.frame;
+            self.detaHeight = keyboardFrame.size.height - (self.backView.bounds.size.height - CGRectGetMaxY(self.takeAwardButton.frame));
+            CGRect viewFrame = self.backView.frame;
             viewFrame.origin.y = -self.detaHeight;
             [UIView animateWithDuration:0.3 animations:^{
-                self.view.frame = viewFrame;
-                self.backBtn.frame = backBtnRect;
-                self.shareBtn.frame = shareBtnRect;
+                self.backView.frame = viewFrame;
+                [self.backViewTop setConstant:-self.detaHeight];
             }];
         }
     }
@@ -232,16 +217,11 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    CGRect backBtnRect = self.backBtn.frame;
-    backBtnRect.origin.y -= self.detaHeight;
-    CGRect shareBtnRect = self.shareBtn.frame;
-    shareBtnRect.origin.y -= self.detaHeight;
-    CGRect frame = self.view.frame;
+    CGRect frame = self.backView.frame;
     frame.origin.y = 0;
     [UIView animateWithDuration:0.3 animations:^{
-        self.view.frame = frame;
-        self.backBtn.frame = backBtnRect;
-        self.shareBtn.frame = shareBtnRect;
+        self.backView.frame = frame;
+        self.backViewTop.constant = 0;
     } completion:^(BOOL finished) {
         self.passwordTextField.text = self.passwordTextField.text.length ? self.passwordTextField.text : @"输入口令";
     }];

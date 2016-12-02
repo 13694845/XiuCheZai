@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,89 +22,96 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello Double12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="we1-dC-uVd">
-                                <rect key="frame" x="129" y="323" width="116" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="double12_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZBS-Cn-Ohh">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o99-5G-2Ov">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="活动规则： 1. 转发活动贴到朋友圈并截图给微信服务号获得动态口令； 2. 每个账户仅限领取一次红包； 3. 红包数量有限，越早参与活动，获得概率越大； 4. 获得活动红包后，可在我的-我的卡包-我的红包中查看。" translatesAutoresizingMaskIntoConstraints="NO" id="eJq-L2-Bn0">
-                                <rect key="frame" x="16" y="423" width="343" height="236"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="输入口令" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z8I-cf-ES0">
-                                <rect key="frame" x="32" y="272" width="311" height="58"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="double12_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZBS-Cn-Ohh">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="double12_awardtop.png" translatesAutoresizingMaskIntoConstraints="NO" id="0wd-Ix-DUk">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="0wd-Ix-DUk" secondAttribute="height" multiplier="125:73" id="EGh-Rm-oVj"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="活动规则： 1. 转发活动贴到朋友圈并截图给微信服务号获得动态口令； 2. 每个账户仅限领取一次红包； 3. 红包数量有限，越早参与活动，获得概率越大； 4. 获得活动红包后，可在我的-我的卡包-我的红包中查看。" translatesAutoresizingMaskIntoConstraints="NO" id="eJq-L2-Bn0">
+                                        <rect key="frame" x="16" y="435" width="343" height="232"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="输入口令" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z8I-cf-ES0">
+                                        <rect key="frame" x="32" y="276" width="311" height="58"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="58" id="DFp-hO-4OH"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="不知道红包口令？去修车仔微信公众号找找吧！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="0vW-yj-aGJ">
+                                        <rect key="frame" x="32" y="243" width="311" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="17" id="Arw-rY-Mpf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="1" green="0.54117647058823526" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFD-Zn-y9o">
+                                        <rect key="frame" x="32" y="358" width="311" height="45"/>
+                                        <color key="backgroundColor" red="0.99607843137254903" green="0.81960784313725488" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="KzG-Zp-ikW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="领取红包">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="takeAward:" destination="dCF-4x-NOu" eventType="touchUpInside" id="acw-U9-qDB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="DFp-hO-4OH"/>
+                                    <constraint firstAttribute="trailing" secondItem="xFD-Zn-y9o" secondAttribute="trailing" constant="32" id="024-8E-Gah"/>
+                                    <constraint firstItem="xFD-Zn-y9o" firstAttribute="leading" secondItem="o99-5G-2Ov" secondAttribute="leading" constant="32" id="1Fy-nF-1gN"/>
+                                    <constraint firstItem="ZBS-Cn-Ohh" firstAttribute="top" secondItem="o99-5G-2Ov" secondAttribute="top" id="3S7-cy-ZOf"/>
+                                    <constraint firstItem="z8I-cf-ES0" firstAttribute="top" secondItem="0vW-yj-aGJ" secondAttribute="bottom" constant="16" id="75i-XV-3SX"/>
+                                    <constraint firstItem="ZBS-Cn-Ohh" firstAttribute="leading" secondItem="o99-5G-2Ov" secondAttribute="leading" id="9Ux-RV-AcU"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZBS-Cn-Ohh" secondAttribute="bottom" id="HQq-Tj-yrA"/>
+                                    <constraint firstItem="0vW-yj-aGJ" firstAttribute="top" secondItem="0wd-Ix-DUk" secondAttribute="bottom" constant="24" id="KG7-tC-pW1"/>
+                                    <constraint firstItem="xFD-Zn-y9o" firstAttribute="top" secondItem="z8I-cf-ES0" secondAttribute="bottom" constant="24" id="LZo-7P-rXa"/>
+                                    <constraint firstItem="z8I-cf-ES0" firstAttribute="leading" secondItem="o99-5G-2Ov" secondAttribute="leading" constant="32" id="Lwo-IB-jpe"/>
+                                    <constraint firstItem="eJq-L2-Bn0" firstAttribute="top" secondItem="xFD-Zn-y9o" secondAttribute="bottom" constant="32" id="OAO-wX-rEN"/>
+                                    <constraint firstAttribute="trailing" secondItem="0wd-Ix-DUk" secondAttribute="trailing" id="UJC-OT-Ygp"/>
+                                    <constraint firstItem="0wd-Ix-DUk" firstAttribute="top" secondItem="o99-5G-2Ov" secondAttribute="top" id="aVH-jK-x9O"/>
+                                    <constraint firstItem="0vW-yj-aGJ" firstAttribute="leading" secondItem="o99-5G-2Ov" secondAttribute="leading" constant="32" id="bkq-cm-VSE"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZBS-Cn-Ohh" secondAttribute="trailing" id="duR-4U-32w"/>
+                                    <constraint firstItem="eJq-L2-Bn0" firstAttribute="leading" secondItem="o99-5G-2Ov" secondAttribute="leading" constant="16" id="jL5-Gr-8By"/>
+                                    <constraint firstAttribute="trailing" secondItem="z8I-cf-ES0" secondAttribute="trailing" constant="32" id="jlo-3S-sbs"/>
+                                    <constraint firstItem="0wd-Ix-DUk" firstAttribute="leading" secondItem="o99-5G-2Ov" secondAttribute="leading" id="jzx-AQ-t99"/>
+                                    <constraint firstAttribute="bottom" secondItem="eJq-L2-Bn0" secondAttribute="bottom" id="m2Y-2B-Txt"/>
+                                    <constraint firstAttribute="trailing" secondItem="0vW-yj-aGJ" secondAttribute="trailing" constant="32" id="qBz-5c-pTA"/>
+                                    <constraint firstAttribute="trailing" secondItem="eJq-L2-Bn0" secondAttribute="trailing" constant="16" id="xle-N6-KYz"/>
                                 </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="不知道红包口令？去修车仔微信公众号找找吧！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="0vW-yj-aGJ">
-                                <rect key="frame" x="32" y="239" width="311" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="17" id="Arw-rY-Mpf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="1" green="0.54117647058823526" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="double12_awardtop.png" translatesAutoresizingMaskIntoConstraints="NO" id="0wd-Ix-DUk">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="0wd-Ix-DUk" secondAttribute="height" multiplier="125:73" id="EGh-Rm-oVj"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFD-Zn-y9o">
-                                <rect key="frame" x="32" y="346" width="311" height="45"/>
-                                <color key="backgroundColor" red="0.99607843137254903" green="0.81960784313725488" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="KzG-Zp-ikW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="领取红包">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="takeAward:" destination="dCF-4x-NOu" eventType="touchUpInside" id="acw-U9-qDB"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xFD-Zn-y9o" firstAttribute="leading" secondItem="p70-pt-xZU" secondAttribute="leadingMargin" constant="16" id="0qh-dR-i1J"/>
-                            <constraint firstItem="nzY-NC-cTr" firstAttribute="top" secondItem="ZBS-Cn-Ohh" secondAttribute="bottom" id="5mn-Et-k6X"/>
-                            <constraint firstAttribute="trailing" secondItem="0wd-Ix-DUk" secondAttribute="trailing" id="6KL-ej-imM"/>
-                            <constraint firstItem="0wd-Ix-DUk" firstAttribute="top" secondItem="p70-pt-xZU" secondAttribute="top" id="Ffe-Nr-h73"/>
-                            <constraint firstItem="0wd-Ix-DUk" firstAttribute="leading" secondItem="p70-pt-xZU" secondAttribute="leading" id="Gdo-GS-OKf"/>
-                            <constraint firstItem="z8I-cf-ES0" firstAttribute="top" secondItem="0vW-yj-aGJ" secondAttribute="bottom" constant="16" id="HqA-xA-mLc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="xFD-Zn-y9o" secondAttribute="trailing" constant="16" id="M2c-fu-ovz"/>
-                            <constraint firstItem="eJq-L2-Bn0" firstAttribute="leading" secondItem="p70-pt-xZU" secondAttribute="leadingMargin" id="OqT-xb-NRX"/>
-                            <constraint firstItem="ZBS-Cn-Ohh" firstAttribute="leading" secondItem="p70-pt-xZU" secondAttribute="leading" id="Q8a-nB-9kb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="z8I-cf-ES0" secondAttribute="trailing" constant="16" id="WIw-ad-V0N"/>
-                            <constraint firstItem="z8I-cf-ES0" firstAttribute="leading" secondItem="p70-pt-xZU" secondAttribute="leadingMargin" constant="16" id="iwa-yi-dPB"/>
-                            <constraint firstAttribute="trailing" secondItem="ZBS-Cn-Ohh" secondAttribute="trailing" id="jex-Do-Iee"/>
-                            <constraint firstItem="eJq-L2-Bn0" firstAttribute="top" secondItem="xFD-Zn-y9o" secondAttribute="bottom" constant="32" id="jlP-77-lyW"/>
-                            <constraint firstItem="nzY-NC-cTr" firstAttribute="top" secondItem="eJq-L2-Bn0" secondAttribute="bottom" constant="8" id="pFN-fh-uiD"/>
-                            <constraint firstItem="xFD-Zn-y9o" firstAttribute="top" secondItem="z8I-cf-ES0" secondAttribute="bottom" constant="16" id="pho-nJ-GSB"/>
-                            <constraint firstItem="0vW-yj-aGJ" firstAttribute="top" secondItem="0wd-Ix-DUk" secondAttribute="bottom" constant="20" id="rAx-aO-97N"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0vW-yj-aGJ" secondAttribute="trailing" constant="16" id="tau-KQ-ARz"/>
-                            <constraint firstItem="0vW-yj-aGJ" firstAttribute="leading" secondItem="p70-pt-xZU" secondAttribute="leadingMargin" constant="16" id="um5-h3-XCY"/>
-                            <constraint firstItem="ZBS-Cn-Ohh" firstAttribute="top" secondItem="p70-pt-xZU" secondAttribute="top" id="yd8-Sr-Wvp"/>
-                            <constraint firstItem="eJq-L2-Bn0" firstAttribute="trailing" secondItem="p70-pt-xZU" secondAttribute="trailingMargin" id="ziA-Yt-fcx"/>
+                            <constraint firstItem="o99-5G-2Ov" firstAttribute="top" secondItem="p70-pt-xZU" secondAttribute="top" id="2ZX-v5-Qag"/>
+                            <constraint firstItem="nzY-NC-cTr" firstAttribute="top" secondItem="o99-5G-2Ov" secondAttribute="bottom" id="GaQ-gy-ppd"/>
+                            <constraint firstItem="o99-5G-2Ov" firstAttribute="leading" secondItem="p70-pt-xZU" secondAttribute="leading" id="aOl-XR-S6p"/>
+                            <constraint firstAttribute="trailing" secondItem="o99-5G-2Ov" secondAttribute="trailing" id="hHv-ue-SHH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hOv-d5-Hft"/>
                     <connections>
+                        <outlet property="backView" destination="o99-5G-2Ov" id="TQ1-Iq-Y2r"/>
+                        <outlet property="backViewTop" destination="2ZX-v5-Qag" id="CVt-2o-c26"/>
                         <outlet property="passwordTextField" destination="z8I-cf-ES0" id="5aj-Rt-8fW"/>
                         <outlet property="takeAwardButton" destination="xFD-Zn-y9o" id="RJV-WV-CjW"/>
                     </connections>
