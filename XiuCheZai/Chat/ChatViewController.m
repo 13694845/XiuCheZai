@@ -122,6 +122,7 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
         [_recordVoiceButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_recordVoiceButton addTarget:self action:@selector(startRecord:) forControlEvents:UIControlEventTouchDown];
         [_recordVoiceButton addTarget:self action:@selector(stopRecord:) forControlEvents:UIControlEventTouchUpInside];
+        [_recordVoiceButton addTarget:self action:@selector(cancelRecord:) forControlEvents:UIControlEventTouchUpOutside];
     }
     return _recordVoiceButton;
 }
@@ -655,6 +656,12 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     if ([VoiceConverter ConvertWavToAmr:wavPath amrSavePath:amrPath]) {}
     NSData *amrData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:amrPath]];
     [self uploadAmrWithAmrData:amrData amrLength:recordLength];
+}
+
+- (void)cancelRecord:(UIButton *)sender {
+    NSLog(@"cancelRecord");
+    [self.audioRecorder stop];
+    [sender setTitle:@"按住 说话" forState:UIControlStateNormal];
 }
 
 - (void)uploadAmrWithAmrData:(NSData *)amrData amrLength:(NSTimeInterval)amrlength {
