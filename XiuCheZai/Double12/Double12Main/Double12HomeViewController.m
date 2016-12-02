@@ -139,7 +139,7 @@
     UILabel *backLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(backImageView.frame) + 8, 16, self.backBtn.bounds.size.width - CGRectGetMaxX(backImageView.frame) + 8, 12)];
     backLabel.text = @"返回首页";
     backLabel.textColor = [UIColor whiteColor];
-    backLabel.font = [UIFont systemFontOfSize:12];
+    backLabel.font = [UIFont systemFontOfSize:14];
     [self.backBtn addSubview:backLabel];
     [self.view addSubview:self.backBtn];
     
@@ -204,7 +204,7 @@
     if(begin.size.height>0 && (begin.origin.y-end.origin.y>0)){
         CGRect keyboardFrame = [notification.userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
         if ((self.view.bounds.size.height - CGRectGetMaxY(self.takeAwardButton.frame)) < keyboardFrame.size.height) {
-            self.detaHeight = keyboardFrame.size.height - (self.backView.bounds.size.height - CGRectGetMaxY(self.takeAwardButton.frame));
+            self.detaHeight = keyboardFrame.size.height - (self.backView.bounds.size.height - CGRectGetMaxY(self.takeAwardButton.frame)) + 20.0;
             CGRect viewFrame = self.backView.frame;
             viewFrame.origin.y = -self.detaHeight;
             [UIView animateWithDuration:0.3 animations:^{

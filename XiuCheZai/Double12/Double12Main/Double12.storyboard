@@ -35,7 +35,7 @@
                                         </constraints>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="活动规则： 1. 转发活动贴到朋友圈并截图给微信服务号获得动态口令； 2. 每个账户仅限领取一次红包； 3. 红包数量有限，越早参与活动，获得概率越大； 4. 获得活动红包后，可在我的-我的卡包-我的红包中查看。" translatesAutoresizingMaskIntoConstraints="NO" id="eJq-L2-Bn0">
-                                        <rect key="frame" x="16" y="435" width="343" height="232"/>
+                                        <rect key="frame" x="16" y="447" width="343" height="220"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
@@ -61,7 +61,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFD-Zn-y9o">
-                                        <rect key="frame" x="32" y="358" width="311" height="45"/>
+                                        <rect key="frame" x="32" y="370" width="311" height="45"/>
                                         <color key="backgroundColor" red="0.99607843137254903" green="0.81960784313725488" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="KzG-Zp-ikW"/>
@@ -84,7 +84,7 @@
                                     <constraint firstItem="ZBS-Cn-Ohh" firstAttribute="leading" secondItem="o99-5G-2Ov" secondAttribute="leading" id="9Ux-RV-AcU"/>
                                     <constraint firstAttribute="bottom" secondItem="ZBS-Cn-Ohh" secondAttribute="bottom" id="HQq-Tj-yrA"/>
                                     <constraint firstItem="0vW-yj-aGJ" firstAttribute="top" secondItem="0wd-Ix-DUk" secondAttribute="bottom" constant="24" id="KG7-tC-pW1"/>
-                                    <constraint firstItem="xFD-Zn-y9o" firstAttribute="top" secondItem="z8I-cf-ES0" secondAttribute="bottom" constant="24" id="LZo-7P-rXa"/>
+                                    <constraint firstItem="xFD-Zn-y9o" firstAttribute="top" secondItem="z8I-cf-ES0" secondAttribute="bottom" constant="36" id="LZo-7P-rXa"/>
                                     <constraint firstItem="z8I-cf-ES0" firstAttribute="leading" secondItem="o99-5G-2Ov" secondAttribute="leading" constant="32" id="Lwo-IB-jpe"/>
                                     <constraint firstItem="eJq-L2-Bn0" firstAttribute="top" secondItem="xFD-Zn-y9o" secondAttribute="bottom" constant="32" id="OAO-wX-rEN"/>
                                     <constraint firstAttribute="trailing" secondItem="0wd-Ix-DUk" secondAttribute="trailing" id="UJC-OT-Ygp"/>
