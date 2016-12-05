@@ -468,6 +468,11 @@
 		6CFBDDB71DF13AFF00030DD5 /* Double12AwardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBDDAA1DF13AFF00030DD5 /* Double12AwardViewController.m */; };
 		6CFBDDB81DF13AFF00030DD5 /* Double12HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBDDAC1DF13AFF00030DD5 /* Double12HomeViewController.m */; };
 		6CFBDDB91DF13AFF00030DD5 /* XCZDouble12WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFBDDAE1DF13AFF00030DD5 /* XCZDouble12WebViewController.m */; };
+		6CFBDDBF1DF4F32100030DD5 /* voice_state1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFBDDBA1DF4F32100030DD5 /* voice_state1.png */; };
+		6CFBDDC01DF4F32100030DD5 /* voice_state2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFBDDBB1DF4F32100030DD5 /* voice_state2.png */; };
+		6CFBDDC11DF4F32100030DD5 /* voice_state3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFBDDBC1DF4F32100030DD5 /* voice_state3.png */; };
+		6CFBDDC21DF4F32100030DD5 /* voice_state4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFBDDBD1DF4F32100030DD5 /* voice_state4.png */; };
+		6CFBDDC31DF4F32100030DD5 /* voice_state5.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CFBDDBE1DF4F32100030DD5 /* voice_state5.png */; };
 		6CFEE7191DB7ABE400676A62 /* ChatConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFEE7021DB7ABE400676A62 /* ChatConfig.m */; };
 		6CFEE71A1DB7ABE400676A62 /* ChatEmojiAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFEE7041DB7ABE400676A62 /* ChatEmojiAttachment.m */; };
 		6CFEE71B1DB7ABE400676A62 /* ChatEmojiInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CFEE7061DB7ABE400676A62 /* ChatEmojiInputView.m */; };
@@ -1332,6 +1337,11 @@
 		6CFBDDAC1DF13AFF00030DD5 /* Double12HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Double12HomeViewController.m; sourceTree = "<group>"; };
 		6CFBDDAD1DF13AFF00030DD5 /* XCZDouble12WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCZDouble12WebViewController.h; sourceTree = "<group>"; };
 		6CFBDDAE1DF13AFF00030DD5 /* XCZDouble12WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCZDouble12WebViewController.m; sourceTree = "<group>"; };
+		6CFBDDBA1DF4F32100030DD5 /* voice_state1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_state1.png; sourceTree = "<group>"; };
+		6CFBDDBB1DF4F32100030DD5 /* voice_state2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_state2.png; sourceTree = "<group>"; };
+		6CFBDDBC1DF4F32100030DD5 /* voice_state3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_state3.png; sourceTree = "<group>"; };
+		6CFBDDBD1DF4F32100030DD5 /* voice_state4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_state4.png; sourceTree = "<group>"; };
+		6CFBDDBE1DF4F32100030DD5 /* voice_state5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_state5.png; sourceTree = "<group>"; };
 		6CFEE7011DB7ABE400676A62 /* ChatConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatConfig.h; sourceTree = "<group>"; };
 		6CFEE7021DB7ABE400676A62 /* ChatConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatConfig.m; sourceTree = "<group>"; };
 		6CFEE7031DB7ABE400676A62 /* ChatEmojiAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatEmojiAttachment.h; sourceTree = "<group>"; };
@@ -2639,6 +2649,11 @@
 		6CFEE7351DB7B01F00676A62 /* ChatImages */ = {
 			isa = PBXGroup;
 			children = (
+				6CFBDDBA1DF4F32100030DD5 /* voice_state1.png */,
+				6CFBDDBB1DF4F32100030DD5 /* voice_state2.png */,
+				6CFBDDBC1DF4F32100030DD5 /* voice_state3.png */,
+				6CFBDDBD1DF4F32100030DD5 /* voice_state4.png */,
+				6CFBDDBE1DF4F32100030DD5 /* voice_state5.png */,
 				6CFEE7BE1DB85E1000676A62 /* avatar_xcz@2x.png */,
 				6CFEE7BF1DB85E1000676A62 /* avatar_xcz@3x.png */,
 				6CFEE73A1DB7B04A00676A62 /* mic@2x.png */,
@@ -2890,6 +2905,7 @@
 				6C1FDF3B1DED56A100D435AA /* bbs_collection_yellow@3x.png in Resources */,
 				6C1FDFA51DED56A100D435AA /* bbs_xiuchezhaiIcon@2x.png in Resources */,
 				6C1FDF661DED56A100D435AA /* bbs_myfinding_systeminformation@3x.png in Resources */,
+				6CFBDDC01DF4F32100030DD5 /* voice_state2.png in Resources */,
 				6CFEE72F1DB7AEFD00676A62 /* banner05.jpg in Resources */,
 				6C1FDF361DED56A100D435AA /* bbs_circleminus@2x.png in Resources */,
 				6C1FDFA31DED56A100D435AA /* bbs_xinlangshare@2x.png in Resources */,
@@ -2971,6 +2987,7 @@
 				6C1FDF6C1DED56A100D435AA /* bbs_newsDefault@3x.jpg in Resources */,
 				6CFEE79D1DB7B1F100676A62 /* d_mb.png in Resources */,
 				6C5C5EFE1C86DA66008CDD3C /* home_icon10.png in Resources */,
+				6CFBDDC21DF4F32100030DD5 /* voice_state4.png in Resources */,
 				6C8B104F1CC4D087003CF8F5 /* menu_icon02.jpg in Resources */,
 				6C1FDF341DED56A100D435AA /* bbs_circleAdd_green@2x.png in Resources */,
 				6C1FDF5A1DED56A100D435AA /* bbs_message@3x.png in Resources */,
@@ -3025,6 +3042,7 @@
 				6CFEE7A11DB7B1F100676A62 /* d_numa.png in Resources */,
 				6C1FDF751DED56A100D435AA /* bbs_praise_white@2x.png in Resources */,
 				6C1FDFB81DED56A100D435AA /* Town.json in Resources */,
+				6CFBDDBF1DF4F32100030DD5 /* voice_state1.png in Resources */,
 				6CE4003E1C322077007F6D03 /* menu_back.png in Resources */,
 				6C1FDF731DED56A100D435AA /* bbs_praise_black@2x.png in Resources */,
 				6C91C2C81C9A331D004C0CB4 /* tab_icon21@2x.png in Resources */,
@@ -3107,6 +3125,7 @@
 				6CFEE7CD1DB9BEDD00676A62 /* movie_pick@3x.png in Resources */,
 				6CFEE7D11DB9BEDD00676A62 /* movie_sender@3x.png in Resources */,
 				6C3E4E081C96664300268B81 /* home_floatcar.png in Resources */,
+				6CFBDDC31DF4F32100030DD5 /* voice_state5.png in Resources */,
 				6C7CE9171CD89ACF00617964 /* home_scanner.png in Resources */,
 				6CFEE72B1DB7AEFD00676A62 /* banner01.jpg in Resources */,
 				6CFBDDB51DF13AFF00030DD5 /* Double12.storyboard in Resources */,
@@ -3119,6 +3138,7 @@
 				6CFEE7B91DB7B21B00676A62 /* Emoji.json in Resources */,
 				6CFEE7AC1DB7B1F100676A62 /* d_travel.png in Resources */,
 				6C1365BB1C24F6C300B217DD /* home_icon03.png in Resources */,
+				6CFBDDC11DF4F32100030DD5 /* voice_state3.png in Resources */,
 				6CFEE78B1DB7B1F100676A62 /* d_bizui.png in Resources */,
 				6CFEE7C01DB85E1000676A62 /* avatar_xcz@2x.png in Resources */,
 				6C8B10501CC4D087003CF8F5 /* menu_icon03.jpg in Resources */,
