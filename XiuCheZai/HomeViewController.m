@@ -515,18 +515,9 @@
 }
 
 - (void)bannerView:(BannerView *)bannerView didSelectBanner:(NSDictionary *)bannerInfo {
-    /*
+    // **********
     NSString *URLString = bannerInfo[kBannerURLKey];
     if ([URLString containsString:@"/ad/dubele12/index.html"]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Double12" bundle:nil];
-        UIViewController *double12HomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"Double12HomeViewController"];
-        double12HomeViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:double12HomeViewController animated:YES];
-        return;
-    }
-    */
-    NSString *URLString = bannerInfo[kBannerURLKey];
-    if ([URLString containsString:@"/ad/dubele/index.html"]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Double12" bundle:nil];
         UIViewController *double12HomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"Double12HomeViewController"];
         double12HomeViewController.hidesBottomBarWhenPushed = YES;
