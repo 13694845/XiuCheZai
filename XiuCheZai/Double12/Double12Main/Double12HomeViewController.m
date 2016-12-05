@@ -21,9 +21,10 @@
 
 @property (weak, nonatomic) IBOutlet UIView *backView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *backViewTop;
-
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *takeAwardButton;
+
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (strong, nonatomic) UIButton *backBtn;
 @property (strong, nonatomic) UIButton *shareBtn;
 @property (assign, nonatomic) CGFloat detaHeight;
@@ -131,6 +132,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tabBarController.tabBar.translucent = NO;
     self.view.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:1.0];
+    self.textView.selectable = NO;
     
     self.backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 100, 44)];
     UIImageView *backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(11, 16, 7, 12)];
@@ -309,10 +311,26 @@
             return;
         } else {
             if ([[responseObject objectForKey:@"data"] isKindOfClass:[NSArray class]]) {
+                NSDictionary *dict2688 = [NSDictionary dictionary];
+                NSDictionary *dict2684 = [NSDictionary dictionary];
+                for (NSDictionary *dict in [responseObject objectForKey:@"data"]) {
+                    if ([[dict objectForKey:@"taskId"]  isEqualToString:@"2688"]) {
+                        if ([[dict objectForKey:@"rows"] count]) {
+                            dict2688 = [dict objectForKey:@"rows"];
+                        }
+                    }
+                    if ([[dict objectForKey:@"taskId"] isEqualToString:@"2684"]) {
+                        if ([[dict objectForKey:@"rows"] count]) {
+                            dict2684 = dict;
+                        }
+                    }
+                }
                 Double12AwardViewController *awardVC = [self.storyboard instantiateViewControllerWithIdentifier:@"Double12AwardViewController"];
                 awardVC.password = self.passwordTextField.text;
                 awardVC.type = Double12AwardViewControllerHasRecord;
-                awardVC.records = [responseObject objectForKey:@"data"];
+                if ([[dict2684 objectForKey:@"rows"] count]) {
+                   awardVC.records = [dict2684 objectForKey:@"rows"];
+                }
                 [self.navigationController pushViewController:awardVC animated:YES];
             } else {
                 NSDictionary *dataDict = [responseObject objectForKey:@"data"];
@@ -357,12 +375,20 @@
 
 - (void)shareChannelPickerView:(XCZShareChannelPickerView *)shareChannelPickerView iconViewDidClick:(XCZShareChannelIconView *)iconView
 {
+    NSString *title = [self.shareDict objectForKey:@"share_title"];
+    NSString *description = [self.shareDict objectForKey:@"share_content"];
+    NSString *share_url = [self.shareDict objectForKey:@"share_url"];
+
+    title = [title stringByReplacingOccurrencesOfString:@"###get_money###" withString:@""];
+    description = [description stringByReplacingOccurrencesOfString:@"####get_money####" withString:@""];
+    share_url = [description stringByReplacingOccurrencesOfString:@"####get_money####" withString:@""];
+    
     WXMediaMessage *mediaMessage = [WXMediaMessage message];
-    mediaMessage.title = [self.shareDict objectForKey:@"share_title"];
-    mediaMessage.description = [self.shareDict objectForKey:@"share_content"];
+    mediaMessage.title = title;
+    mediaMessage.description = description;
     [mediaMessage setThumbImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[self.shareDict objectForKey:@"share_img"]]]]];
     WXWebpageObject *webpageObject = [WXWebpageObject object];
-    webpageObject.webpageUrl = [self.shareDict objectForKey:@"share_url"];
+    webpageObject.webpageUrl = share_url;
     mediaMessage.mediaObject = webpageObject;
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];

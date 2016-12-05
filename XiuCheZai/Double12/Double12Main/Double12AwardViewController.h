@@ -21,9 +21,9 @@ typedef NS_ENUM(NSUInteger, Double12AwardViewControllerType) {
 
 @interface Double12AwardViewController : UIViewController
 
+@property (strong, nonatomic) NSDictionary *infoDict;
 @property (nonatomic, copy)NSArray *records;
 @property (assign, nonatomic) Double12AwardViewControllerType type;
 @property (copy, nonatomic) NSString *password;
-
 
 @end

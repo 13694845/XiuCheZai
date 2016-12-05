@@ -108,7 +108,7 @@
     _info = info;
     
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], info[@"avatar"]]] placeholderImage:[UIImage imageNamed:@"bbs_xiuchezhaiIcon"]];
-    self.nameLabel.text = info[@"valid_mobile"];
+    self.nameLabel.text = info[@"login_name"];
 }
 
 - (void)setXRecords:(NSMutableArray *)xRecords
@@ -193,7 +193,7 @@
     UILabel *backLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(backImageView.frame) + 8, 16, backBtn.bounds.size.width - CGRectGetMaxX(backImageView.frame) + 8, 12)];
     backLabel.text = @"返回";
     backLabel.textColor = [UIColor whiteColor];
-    backLabel.font = [UIFont systemFontOfSize:12];
+    backLabel.font = [UIFont systemFontOfSize:14];
     [backBtn addSubview:backLabel];
     [self.view addSubview:backBtn];
     
@@ -406,6 +406,7 @@
     
     [self.manager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        NSLog(@"responseObjectresponseObject:%@", responseObject);
 //      responseObject = @{
 //            @"error" : @"201",
 //            @"msg": @"成功",
@@ -445,24 +446,46 @@
 //                     }
 //                     ]
 //            };
-        if ([[[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"result"] intValue] == 1) { // 已抢到红包
-            NSArray *records = [[[responseObject objectForKey:@"data"] lastObject] objectForKey:@"rows"];
-            if (self.currentPage == 1) {
-                [self abortBottomImageView:records]; // 退出abortBottomImageView
-            } else {
-                if (!records.count) {
-                    self.tableFooterLabel.text = @"没有更多了";
-                    self.tableFooterLabel.userInteractionEnabled = NO;
-                } else {
-                    self.xRecords = [[self.xRecords arrayByAddingObjectsFromArray:records] mutableCopy];
+        if ([responseObject[@"error"] intValue] == 201) {
+            if ([[[[responseObject objectForKey:@"data"] firstObject] objectForKey:@"result"] intValue] == 1) { // 已抢到红包
+                
+                NSDictionary *dict2688 = [NSDictionary dictionary];
+                NSDictionary *dict2684 = [NSDictionary dictionary];
+                for (NSDictionary *dict in [responseObject objectForKey:@"data"]) {
+                    
+                    if ([[dict objectForKey:@"taskId"] integerValue] == 2688) {
+                        if ([[dict objectForKey:@"rows"] count]) {
+                            dict2688 = [dict objectForKey:@"rows"];
+                        }
+                    }
+                    if ([[dict objectForKey:@"taskId"] integerValue] == 2684) {
+                        if ([[dict objectForKey:@"rows"] count]) {
+                            dict2684 = dict;
+                        }
+                    }
                 }
+            
+                NSArray *records = [dict2684 objectForKey:@"rows"];
+                if (self.currentPage == 1) {
+                    [self abortBottomImageView:records]; // 退出abortBottomImageView
+                } else {
+                    if (!records.count) {
+                        self.tableFooterLabel.text = @"没有更多了";
+                        self.tableFooterLabel.userInteractionEnabled = NO;
+                    } else {
+                        self.xRecords = [[self.xRecords arrayByAddingObjectsFromArray:records] mutableCopy];
+                    }
+                }
+            } else {
+                self.tableFooterLabel.text = @"没有更多了";
+                self.tableFooterLabel.userInteractionEnabled = NO;
+                [self setupQwLabel];
             }
         } else {
             self.tableFooterLabel.text = @"没有更多了";
             self.tableFooterLabel.userInteractionEnabled = NO;
-            [self setupQwLabel];
         }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@", error);
     }];
 }
@@ -629,12 +652,21 @@
 
 - (void)shareChannelPickerView:(XCZShareChannelPickerView *)shareChannelPickerView iconViewDidClick:(XCZShareChannelIconView *)iconView
 {
+    NSString *title = [self.shareDict objectForKey:@"share_title"];
+    NSString *description = [self.shareDict objectForKey:@"share_content"];
+    NSString *share_url = [self.shareDict objectForKey:@"share_url"];
+    //    title = @"###阿克苏的贺卡收到###";
+    //    description = @"###dfggfds收到反馈和挥洒分开后撒伕欢快的洒分开还是大哥好看的方式###";
+    NSString *priceLabelStr = [NSString stringWithFormat:@"%@", self.priceLabel.text];
+    title = [title stringByReplacingOccurrencesOfString:@"###get_money###" withString:priceLabelStr];
+    description = [description stringByReplacingOccurrencesOfString:@"###get_money###" withString:priceLabelStr];
+    share_url = [description stringByReplacingOccurrencesOfString:@"####get_money####" withString:priceLabelStr];
     WXMediaMessage *mediaMessage = [WXMediaMessage message];
-    mediaMessage.title = [self.shareDict objectForKey:@"share_title"];
-    mediaMessage.description = [self.shareDict objectForKey:@"share_content"];
+    mediaMessage.title = title;
+    mediaMessage.description = description;
     [mediaMessage setThumbImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[self.shareDict objectForKey:@"share_img"]]]]];
     WXWebpageObject *webpageObject = [WXWebpageObject object];
-    webpageObject.webpageUrl = [self.shareDict objectForKey:@"share_url"];
+    webpageObject.webpageUrl = share_url;
     mediaMessage.mediaObject = webpageObject;
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];

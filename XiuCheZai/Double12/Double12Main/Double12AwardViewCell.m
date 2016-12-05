@@ -7,6 +7,8 @@
 //
 
 #import "Double12AwardViewCell.h"
+#import "UIImageView+WebCache.h"
+#import "XCZConfig.h"
 
 @interface Double12AwardViewCell()
 
@@ -63,9 +65,9 @@
 - (void)setRow:(NSDictionary *)row
 {
     _row = row;
-    
+ 
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], row[@"avatar"]]] placeholderImage:[UIImage imageNamed:@"bbs_xiuchezhaiIcon"]];
     self.nameLabel.text = [row objectForKey:@"login_name"];
-    
     double priceDouble = [[row objectForKey:@"get_money"] doubleValue] / 100.0;
     self.priceLabel.text = [NSString stringWithFormat:@"%.2f%@", priceDouble, @"元"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
