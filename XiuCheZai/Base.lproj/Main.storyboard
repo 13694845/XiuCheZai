@@ -2015,6 +2015,7 @@
                     <size key="freeformSize" width="375" height="780"/>
                     <connections>
                         <outlet property="cityLabel" destination="pcu-hm-KHb" id="iB3-Rx-vha"/>
+                        <outlet property="forTestImageView" destination="D9a-pb-jlD" id="OJ8-Dm-ehX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D76-K9-AYU" userLabel="First Responder" sceneMemberID="firstResponder"/>

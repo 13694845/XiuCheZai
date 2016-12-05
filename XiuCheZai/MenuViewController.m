@@ -15,6 +15,7 @@
 @interface MenuViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *forTestImageView;
 
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 
@@ -54,6 +55,22 @@
         NSString *district = responseObject[@"district"];
         self.cityLabel.text = [NSString stringWithFormat:@"%@", district ? : @""];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+    
+    // **************
+    self.forTestImageView.userInteractionEnabled = YES;
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(doTest:)];
+    longPressGestureRecognizer.minimumPressDuration = 1.0;
+    [self.forTestImageView addGestureRecognizer:longPressGestureRecognizer];
+}
+
+- (void)doTest:(UILongPressGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Double12" bundle:nil];
+        UIViewController *double12HomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"Double12HomeViewController"];
+        double12HomeViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:double12HomeViewController animated:YES];
+        [self close:nil];
+    }
 }
 
 - (IBAction)toMenu01:(id)sender {
