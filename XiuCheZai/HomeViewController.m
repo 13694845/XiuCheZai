@@ -40,6 +40,8 @@
 @property (copy, nonatomic) NSArray *banners;
 @property (copy, nonatomic) NSArray *buttons;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *iconButtons;
+
+
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *textButtons;
 @property (copy, nonatomic) NSString *reminderText;
 @property (copy, nonatomic) NSArray *recommenders;

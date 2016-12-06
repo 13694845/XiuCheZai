@@ -496,9 +496,6 @@
                                                             <constraint firstAttribute="width" secondItem="ohf-79-Ogr" secondAttribute="height" multiplier="1:1" id="yRa-Ed-Hoe"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon10.png"/>
-                                                        <connections>
-                                                            <action selector="toBuyInsurance:" destination="Q34-hB-W0h" eventType="touchUpInside" id="Ex1-LP-Qej"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rm-bn-W8z">
                                                         <rect key="frame" x="116" y="98" width="50" height="50"/>
@@ -506,9 +503,6 @@
                                                             <constraint firstAttribute="width" secondItem="1rm-bn-W8z" secondAttribute="height" multiplier="1:1" id="nH0-zI-pPu"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon18.png"/>
-                                                        <connections>
-                                                            <action selector="toVideoMusic:" destination="Q34-hB-W0h" eventType="touchUpInside" id="bK9-mg-ls5"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4YP-g9-qwL">
                                                         <rect key="frame" x="210" y="98" width="50" height="50"/>
@@ -516,9 +510,6 @@
                                                             <constraint firstAttribute="width" secondItem="4YP-g9-qwL" secondAttribute="height" multiplier="1:1" id="LFe-E9-9mx"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon09.png"/>
-                                                        <connections>
-                                                            <action selector="toAppointMOT:" destination="Q34-hB-W0h" eventType="touchUpInside" id="eE1-vR-ZVr"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNZ-jC-Hng">
                                                         <rect key="frame" x="304" y="98" width="50" height="50"/>
@@ -526,9 +517,6 @@
                                                             <constraint firstAttribute="width" secondItem="dNZ-jC-Hng" secondAttribute="height" multiplier="1:1" id="wRb-yh-aMN"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon19.png"/>
-                                                        <connections>
-                                                            <action selector="toA14:" destination="Q34-hB-W0h" eventType="touchUpInside" id="uXl-bH-G7O"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZr-EP-fMI">
                                                         <rect key="frame" x="12" y="153" width="70" height="17"/>
@@ -540,9 +528,6 @@
                                                         <state key="normal" title="买车险">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toBuyInsurance:" destination="Q34-hB-W0h" eventType="touchUpInside" id="nRL-KE-Ozw"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afv-Wa-qyT">
                                                         <rect key="frame" x="106" y="153" width="70" height="17"/>
@@ -554,9 +539,6 @@
                                                         <state key="normal" title="到店检测">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toVideoMusic:" destination="Q34-hB-W0h" eventType="touchUpInside" id="cx0-xx-QlE"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Zj-ZN-V6S">
                                                         <rect key="frame" x="207" y="153" width="56" height="17"/>
@@ -568,9 +550,6 @@
                                                         <state key="normal" title="预约年检">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toAppointMOT:" destination="Q34-hB-W0h" eventType="touchUpInside" id="sNt-ls-5OP"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC3-JO-MeL">
                                                         <rect key="frame" x="294" y="153" width="70" height="17"/>
@@ -582,9 +561,6 @@
                                                         <state key="normal" title="顺路赚">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toA14:" destination="Q34-hB-W0h" eventType="touchUpInside" id="dgJ-Ze-pbd"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1190,6 +1166,14 @@
                         <outletCollection property="textButtons" destination="wXy-LJ-iPD" id="3k7-LF-96g"/>
                         <outletCollection property="textButtons" destination="fbv-sw-HJ3" id="AEa-QC-9eU"/>
                         <outletCollection property="textButtons" destination="rfd-Ce-JRJ" id="eZb-tB-jot"/>
+                        <outletCollection property="iconButtons" destination="ohf-79-Ogr" id="j3y-VP-N2e"/>
+                        <outletCollection property="iconButtons" destination="1rm-bn-W8z" id="yAJ-2a-f4I"/>
+                        <outletCollection property="iconButtons" destination="4YP-g9-qwL" id="uQK-H1-dQQ"/>
+                        <outletCollection property="iconButtons" destination="dNZ-jC-Hng" id="O2c-LU-L7Y"/>
+                        <outletCollection property="textButtons" destination="YZr-EP-fMI" id="M9d-0l-qsE"/>
+                        <outletCollection property="textButtons" destination="afv-Wa-qyT" id="T63-9Y-XWo"/>
+                        <outletCollection property="textButtons" destination="1Zj-ZN-V6S" id="i7u-5x-OdD"/>
+                        <outletCollection property="textButtons" destination="iC3-JO-MeL" id="7fr-48-BhA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pWh-y4-gTL" userLabel="First Responder" sceneMemberID="firstResponder"/>
