@@ -38,6 +38,9 @@
 
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (copy, nonatomic) NSArray *banners;
+
+
+
 @property (copy, nonatomic) NSString *reminderText;
 @property (copy, nonatomic) NSArray *recommenders;
 
@@ -124,6 +127,24 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+    
+    
+    
+    // *****************
+    URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LunBoAction.do"];
+    parameters = @{@"page_id":@"14", @"ad_id":@"1"};
+    [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *banners = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
+        banners = [[banners reverseObjectEnumerator] allObjects];
+        if (![self.banners isEqualToArray:banners]) {
+            self.banners = banners;
+            [self.bannerView reloadData];
+            [[NSUserDefaults standardUserDefaults] setObject:banners forKey:@"banners"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+    
+    
     
     URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/XiaoLaBaAction.do"];
     parameters = nil;
