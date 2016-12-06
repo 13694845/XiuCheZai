@@ -144,7 +144,9 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         [self refreshButtons];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self refreshButtonsOffline];
+    }];
     
     URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/XiaoLaBaAction.do"];
     parameters = nil;
@@ -182,6 +184,32 @@
 }
 
 - (void)refreshButtons {
+    NSString *const kBannerImageKey = @"img_src";
+    NSString *const kBannerTitleKey = @"ad_title";
+    
+    for (UIButton *iconButton in self.iconButtons) {
+        [iconButton setBackgroundImage:nil forState:UIControlStateNormal];
+        [iconButton removeTarget:self action:@selector(toLaunchWebView:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    for (UIButton *textButton in self.textButtons) {
+        [textButton setTitle:nil forState:UIControlStateNormal];
+        [textButton removeTarget:self action:@selector(toLaunchWebView:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    for (int i = 0; i < self.buttons.count; i++) {
+        UIButton *iconButton = self.iconButtons[i];
+        iconButton.tag = i;
+        [iconButton sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [Config imgBaseURL], [self.buttons[i] objectForKey:kBannerImageKey]]] forState:UIControlStateNormal];
+        [iconButton addTarget:self action:@selector(toLaunchWebView:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *textButton = self.textButtons[i];
+        textButton.tag = i;
+        [textButton setTitle:[self.buttons[i] objectForKey:kBannerTitleKey] forState:UIControlStateNormal];
+        [textButton addTarget:self action:@selector(toLaunchWebView:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+
+- (void)refreshButtonsOffline {
     NSString *const kBannerImageKey = @"img_src";
     NSString *const kBannerTitleKey = @"ad_title";
     
