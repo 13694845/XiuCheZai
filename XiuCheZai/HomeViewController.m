@@ -41,7 +41,6 @@
 @property (copy, nonatomic) NSArray *buttons;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *iconButtons;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *textButtons;
-
 @property (copy, nonatomic) NSString *reminderText;
 @property (copy, nonatomic) NSArray *recommenders;
 
@@ -184,11 +183,21 @@
 }
 
 - (void)refreshButtons {
+    NSString *const kBannerImageKey = @"img_src";
+    NSString *const kBannerTitleKey = @"ad_title";
+    // NSString *const kBannerURLKey = @"link";
+    
     for (int i = 0; i < self.buttons.count; i++) {
         UIButton *iconButton = self.iconButtons[i];
         iconButton.tag = i;
         [iconButton sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", [Config imgBaseURL], [self.buttons[i] objectForKey:kBannerImageKey]]] forState:UIControlStateNormal];
         [iconButton addTarget:self action:@selector(toLaunchWebView:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *textButton = self.textButtons[i];
+        textButton.tag = i;
+        [textButton setTitle:[self.buttons[i] objectForKey:kBannerTitleKey] forState:UIControlStateNormal];
+        [textButton addTarget:self action:@selector(toLaunchWebView:) forControlEvents:UIControlEventTouchUpInside];
+        
     }
 }
 

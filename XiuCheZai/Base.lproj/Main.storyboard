@@ -382,9 +382,6 @@
                                                             <constraint firstAttribute="width" secondItem="61b-gX-hHr" secondAttribute="height" multiplier="1:1" id="bsV-N1-hhJ"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon01.png"/>
-                                                        <connections>
-                                                            <action selector="toWholeMaintain:" destination="Q34-hB-W0h" eventType="touchUpInside" id="rIM-G3-eYg"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbS-ga-jfi">
                                                         <rect key="frame" x="116" y="14" width="50" height="50"/>
@@ -392,9 +389,6 @@
                                                             <constraint firstAttribute="width" secondItem="rbS-ga-jfi" secondAttribute="height" multiplier="1:1" id="Ylx-EH-0rB"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon02.png"/>
-                                                        <connections>
-                                                            <action selector="toPartMaintain:" destination="Q34-hB-W0h" eventType="touchUpInside" id="u8h-de-s6i"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X4i-J0-jre">
                                                         <rect key="frame" x="210" y="14" width="50" height="50"/>
@@ -402,9 +396,6 @@
                                                             <constraint firstAttribute="width" secondItem="X4i-J0-jre" secondAttribute="height" multiplier="1:1" id="iIC-1k-TJp"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon03.png"/>
-                                                        <connections>
-                                                            <action selector="toReplaceTire:" destination="Q34-hB-W0h" eventType="touchUpInside" id="9LP-7D-3bE"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r81-f6-L7E">
                                                         <rect key="frame" x="304" y="14" width="50" height="50"/>
@@ -412,9 +403,6 @@
                                                             <constraint firstAttribute="width" secondItem="r81-f6-L7E" secondAttribute="height" multiplier="1:1" id="Ae8-je-vJl"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon20.png"/>
-                                                        <connections>
-                                                            <action selector="toMeirong:" destination="Q34-hB-W0h" eventType="touchUpInside" id="bfx-Lm-tZS"/>
-                                                        </connections>
                                                     </button>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ma5-sV-MnN">
                                                         <rect key="frame" x="0.0" y="14" width="14" height="50"/>
@@ -452,18 +440,15 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srv-m7-Yhw">
-                                                        <rect key="frame" x="26" y="69" width="42" height="17"/>
+                                                        <rect key="frame" x="12" y="69" width="70" height="17"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="17" id="Ldl-yf-yY4"/>
-                                                            <constraint firstAttribute="width" constant="42" id="Yik-ys-dMx"/>
+                                                            <constraint firstAttribute="width" constant="70" id="Yik-ys-dMx"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <state key="normal" title="大保养">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toWholeMaintain:" destination="Q34-hB-W0h" eventType="touchUpInside" id="ScH-vy-DuR"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXy-LJ-iPD">
                                                         <rect key="frame" x="120" y="69" width="42" height="17"/>
@@ -475,9 +460,6 @@
                                                         <state key="normal" title="小保养">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toPartMaintain:" destination="Q34-hB-W0h" eventType="touchUpInside" id="KNL-Y7-Crd"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbv-sw-HJ3">
                                                         <rect key="frame" x="214" y="69" width="42" height="17"/>
@@ -489,9 +471,6 @@
                                                         <state key="normal" title="换轮胎">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toReplaceTire:" destination="Q34-hB-W0h" eventType="touchUpInside" id="CKh-6s-ZKf"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rfd-Ce-JRJ">
                                                         <rect key="frame" x="294" y="69" width="70" height="17"/>
@@ -503,9 +482,6 @@
                                                         <state key="normal" title="美容镀膜">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toMeirong:" destination="Q34-hB-W0h" eventType="touchUpInside" id="kIU-VQ-hsi"/>
-                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U1Q-tQ-45P">
                                                         <rect key="frame" x="0.0" y="86" width="375" height="10"/>
