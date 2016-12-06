@@ -660,7 +660,7 @@
     NSString *priceLabelStr = [NSString stringWithFormat:@"%@", self.priceLabel.text];
     title = [title stringByReplacingOccurrencesOfString:@"###get_money###" withString:priceLabelStr];
     description = [description stringByReplacingOccurrencesOfString:@"###get_money###" withString:priceLabelStr];
-    share_url = [description stringByReplacingOccurrencesOfString:@"####get_money####" withString:priceLabelStr];
+    share_url = [share_url stringByReplacingOccurrencesOfString:@"####get_money####" withString:priceLabelStr];
     WXMediaMessage *mediaMessage = [WXMediaMessage message];
     mediaMessage.title = title;
     mediaMessage.description = description;

@@ -381,7 +381,7 @@
 
     title = [title stringByReplacingOccurrencesOfString:@"###get_money###" withString:@""];
     description = [description stringByReplacingOccurrencesOfString:@"####get_money####" withString:@""];
-    share_url = [description stringByReplacingOccurrencesOfString:@"####get_money####" withString:@""];
+    share_url = [share_url stringByReplacingOccurrencesOfString:@"####get_money####" withString:@""];
     
     WXMediaMessage *mediaMessage = [WXMediaMessage message];
     mediaMessage.title = title;
