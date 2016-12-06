@@ -86,6 +86,8 @@
     self.topView.backgroundColor = [UIColor colorWithRed:196.0/255.0 green:0/255.0 blue:1.0/255.0 alpha:0.0];
     for (UIView *view in self.bannerView.subviews) [view removeFromSuperview];
     for (UIView *view in self.reminderView.subviews) [view removeFromSuperview];
+    for (UIButton *iconButton in self.iconButtons) [iconButton setBackgroundImage:nil forState:UIControlStateNormal];
+    for (UIButton *textButton in self.textButtons) [textButton setTitle:nil forState:UIControlStateNormal];
     
     self.bannerView.dataSource = self;
     self.bannerView.delegate = self;
