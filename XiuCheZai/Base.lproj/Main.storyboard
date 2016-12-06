@@ -1206,6 +1206,14 @@
                         <outlet property="reminderView" destination="wB2-wa-ntf" id="mUW-o2-GYp"/>
                         <outlet property="scrollView" destination="ps6-Ri-PUg" id="ftN-Gj-Ltb"/>
                         <outlet property="topView" destination="K95-5q-ZXx" id="KwP-Or-y9n"/>
+                        <outletCollection property="iconButtons" destination="61b-gX-hHr" id="QAE-wd-7tS"/>
+                        <outletCollection property="iconButtons" destination="rbS-ga-jfi" id="LOo-RO-tsC"/>
+                        <outletCollection property="iconButtons" destination="X4i-J0-jre" id="qKf-2B-GMX"/>
+                        <outletCollection property="iconButtons" destination="r81-f6-L7E" id="pwf-qJ-fF3"/>
+                        <outletCollection property="textButtons" destination="Srv-m7-Yhw" id="9EC-3H-Te5"/>
+                        <outletCollection property="textButtons" destination="wXy-LJ-iPD" id="3k7-LF-96g"/>
+                        <outletCollection property="textButtons" destination="fbv-sw-HJ3" id="AEa-QC-9eU"/>
+                        <outletCollection property="textButtons" destination="rfd-Ce-JRJ" id="eZb-tB-jot"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pWh-y4-gTL" userLabel="First Responder" sceneMemberID="firstResponder"/>
