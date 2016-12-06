@@ -185,7 +185,6 @@
 - (void)refreshButtons {
     NSString *const kBannerImageKey = @"img_src";
     NSString *const kBannerTitleKey = @"ad_title";
-    // NSString *const kBannerURLKey = @"link";
     
     for (int i = 0; i < self.buttons.count; i++) {
         UIButton *iconButton = self.iconButtons[i];
@@ -197,11 +196,12 @@
         textButton.tag = i;
         [textButton setTitle:[self.buttons[i] objectForKey:kBannerTitleKey] forState:UIControlStateNormal];
         [textButton addTarget:self action:@selector(toLaunchWebView:) forControlEvents:UIControlEventTouchUpInside];
-        
     }
 }
 
 - (void)toLaunchWebView:(UIButton *)sender {
+    NSString *const kBannerURLKey = @"link";
+    
     if ([self.buttons[sender.tag] objectForKey:kBannerURLKey])
         [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], [self.buttons[sender.tag] objectForKey:kBannerURLKey]]];
 }
