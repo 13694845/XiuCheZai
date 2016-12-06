@@ -98,7 +98,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="活动规则： 1. 转发活动贴到朋友圈并截图给微信服务号获得动态口令； 2. 每个账户仅限领取一次红包； 3. 红包数量有限，越早参与活动，获得概率越大；" translatesAutoresizingMaskIntoConstraints="NO" id="eJq-L2-Bn0">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="活动规则： 1. 点击右上角转发按钮，将活动转发至微信朋友圈并截图给修车仔微信服务号，获得红包动态口令； 2. 每个账户仅限领取一次红包； 3. 红包数量有限，越早参与活动，获得红包概率越大； 4. 免责声明：本次活动与苹果公司无关。" translatesAutoresizingMaskIntoConstraints="NO" id="eJq-L2-Bn0">
                                         <rect key="frame" x="16" y="468" width="343" height="199"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

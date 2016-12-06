@@ -85,6 +85,7 @@
     for (UIView *view in self.reminderView.subviews) [view removeFromSuperview];
     for (UIButton *iconButton in self.iconButtons) [iconButton setBackgroundImage:nil forState:UIControlStateNormal];
     for (UIButton *textButton in self.textButtons) [textButton setTitle:nil forState:UIControlStateNormal];
+    [self refreshButtons];
     
     self.bannerView.dataSource = self;
     self.bannerView.delegate = self;
@@ -140,13 +141,11 @@
         NSArray *buttons = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
         if (![self.buttons isEqualToArray:buttons]) {
             self.buttons = buttons;
+            [self refreshButtons];
             [[NSUserDefaults standardUserDefaults] setObject:buttons forKey:@"buttons"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
-        [self refreshButtons];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [self refreshButtons];
-    }];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
     
     URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/XiaoLaBaAction.do"];
     parameters = nil;
