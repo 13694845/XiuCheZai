@@ -38,12 +38,9 @@
 
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (copy, nonatomic) NSArray *banners;
-
-
 @property (copy, nonatomic) NSArray *buttons;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *iconButtons;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *textButtons;
-
 
 @property (copy, nonatomic) NSString *reminderText;
 @property (copy, nonatomic) NSArray *recommenders;
@@ -64,6 +61,11 @@
 - (NSArray *)banners {
     if (!_banners) _banners = [[NSUserDefaults standardUserDefaults] objectForKey:@"banners"];
     return _banners;
+}
+
+- (NSArray *)buttons {
+    if (!_buttons) _buttons = [[NSUserDefaults standardUserDefaults] objectForKey:@"buttons"];
+    return _buttons;
 }
 
 - (NSString *)reminderText {
@@ -132,18 +134,19 @@
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
     
-    // *****************
     URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/LunBoAction.do"];
     parameters = @{@"page_id":@"14", @"ad_id":@"1"};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSArray *buttons = [[responseObject objectForKey:@"data"] objectForKey:@"detail"];
         if (![self.buttons isEqualToArray:buttons]) {
             self.buttons = buttons;
-            [self refreshButtons];
             [[NSUserDefaults standardUserDefaults] setObject:buttons forKey:@"buttons"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
+        [self refreshButtons];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self refreshButtons];
+    }];
     
     URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/XiaoLaBaAction.do"];
     parameters = nil;
