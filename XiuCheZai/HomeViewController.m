@@ -210,6 +210,15 @@
 - (void)toLaunchWebView:(UIButton *)sender {
     NSString *const kBannerURLKey = @"link";
     
+    NSString *URLString = [self.buttons[sender.tag] objectForKey:kBannerURLKey];
+    if ([URLString containsString:@"/ad/dubele12/index.html"]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Double12" bundle:nil];
+        UIViewController *double12HomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"Double12HomeViewController"];
+        double12HomeViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:double12HomeViewController animated:YES];
+        return;
+    }
+    
     if ([self.buttons[sender.tag] objectForKey:kBannerURLKey])
         [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], [self.buttons[sender.tag] objectForKey:kBannerURLKey]]];
 }
