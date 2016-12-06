@@ -17,7 +17,6 @@
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
-
 #import "ChatViewController.h"
 
 @import AVFoundation;
@@ -40,8 +39,6 @@
 @property (copy, nonatomic) NSArray *banners;
 @property (copy, nonatomic) NSArray *buttons;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *iconButtons;
-
-
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *textButtons;
 @property (copy, nonatomic) NSString *reminderText;
 @property (copy, nonatomic) NSArray *recommenders;
@@ -147,9 +144,7 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         [self refreshButtons];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [self refreshButtons];
-    }];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
     
     URLString = [NSString stringWithFormat:@"%@%@", [Config baseURL], @"/Action/XiaoLaBaAction.do"];
     parameters = nil;
@@ -189,6 +184,15 @@
 - (void)refreshButtons {
     NSString *const kBannerImageKey = @"img_src";
     NSString *const kBannerTitleKey = @"ad_title";
+    
+    for (UIButton *iconButton in self.iconButtons) {
+        [iconButton setBackgroundImage:nil forState:UIControlStateNormal];
+        [iconButton removeTarget:self action:@selector(toLaunchWebView:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    for (UIButton *textButton in self.textButtons) {
+        [textButton setTitle:nil forState:UIControlStateNormal];
+        [textButton removeTarget:self action:@selector(toLaunchWebView:) forControlEvents:UIControlEventTouchUpInside];
+    }
     
     for (int i = 0; i < self.buttons.count; i++) {
         UIButton *iconButton = self.iconButtons[i];
