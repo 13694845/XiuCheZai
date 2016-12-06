@@ -78,9 +78,6 @@
                                                             <constraint firstAttribute="width" secondItem="YN8-xJ-tLz" secondAttribute="height" multiplier="1:1" id="dOe-c6-4Zh"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon11.png"/>
-                                                        <connections>
-                                                            <action selector="toDrivingRecorder:" destination="Q34-hB-W0h" eventType="touchUpInside" id="l3j-an-V24"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LqB-RD-ZpU">
                                                         <rect key="frame" x="116" y="14" width="50" height="50"/>
@@ -88,9 +85,6 @@
                                                             <constraint firstAttribute="width" secondItem="LqB-RD-ZpU" secondAttribute="height" multiplier="1:1" id="9SY-0s-JcC"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon13.png"/>
-                                                        <connections>
-                                                            <action selector="toInterior:" destination="Q34-hB-W0h" eventType="touchUpInside" id="ML7-54-kPE"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1vg-E9-Pe7">
                                                         <rect key="frame" x="210" y="14" width="50" height="50"/>
@@ -98,9 +92,6 @@
                                                             <constraint firstAttribute="width" secondItem="1vg-E9-Pe7" secondAttribute="height" multiplier="1:1" id="HLh-pJ-PbB"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon14.png"/>
-                                                        <connections>
-                                                            <action selector="toBrakeBlock:" destination="Q34-hB-W0h" eventType="touchUpInside" id="wvt-lN-Cd7"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDn-6U-buP">
                                                         <rect key="frame" x="304" y="14" width="50" height="50"/>
@@ -108,9 +99,6 @@
                                                             <constraint firstAttribute="width" secondItem="vDn-6U-buP" secondAttribute="height" multiplier="1:1" id="0Qc-ON-HZd"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon15.png"/>
-                                                        <connections>
-                                                            <action selector="toACFilter:" destination="Q34-hB-W0h" eventType="touchUpInside" id="AVX-Uu-4FA"/>
-                                                        </connections>
                                                     </button>
                                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fkE-q4-xAR">
                                                         <rect key="frame" x="0.0" y="14" width="14" height="50"/>
@@ -157,9 +145,6 @@
                                                         <state key="normal" title="行车记录仪">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toDrivingRecorder:" destination="Q34-hB-W0h" eventType="touchUpInside" id="GMJ-3A-fD6"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0h-ao-RdJ">
                                                         <rect key="frame" x="106" y="69" width="70" height="17"/>
@@ -171,9 +156,6 @@
                                                         <state key="normal" title="内饰用品">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toInterior:" destination="Q34-hB-W0h" eventType="touchUpInside" id="4oj-8Z-6Kj"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFo-De-7ZD">
                                                         <rect key="frame" x="200" y="69" width="70" height="17"/>
@@ -185,9 +167,6 @@
                                                         <state key="normal" title="刹车片">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toBrakeBlock:" destination="Q34-hB-W0h" eventType="touchUpInside" id="Jab-SK-TwE"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cb-dv-Lvg">
                                                         <rect key="frame" x="294" y="69" width="70" height="17"/>
@@ -199,9 +178,6 @@
                                                         <state key="normal" title="空调滤芯">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toACFilter:" destination="Q34-hB-W0h" eventType="touchUpInside" id="EBJ-xQ-tdR"/>
-                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GyR-7m-E3U">
                                                         <rect key="frame" x="0.0" y="86" width="375" height="10"/>
@@ -216,9 +192,6 @@
                                                             <constraint firstAttribute="width" secondItem="hyG-AL-joL" secondAttribute="height" multiplier="1:1" id="mRG-2q-LaR"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon16.png"/>
-                                                        <connections>
-                                                            <action selector="toSparkPlug:" destination="Q34-hB-W0h" eventType="touchUpInside" id="f8r-sR-JRd"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sue-Mo-qqJ">
                                                         <rect key="frame" x="116" y="98" width="50" height="50"/>
@@ -226,9 +199,6 @@
                                                             <constraint firstAttribute="width" secondItem="sue-Mo-qqJ" secondAttribute="height" multiplier="1:1" id="Svw-D2-zb5"/>
                                                         </constraints>
                                                         <state key="normal" backgroundImage="home_icon17.png"/>
-                                                        <connections>
-                                                            <action selector="toB21:" destination="Q34-hB-W0h" eventType="touchUpInside" id="2Ny-2d-uWQ"/>
-                                                        </connections>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucb-g7-ulJ">
                                                         <rect key="frame" x="210" y="98" width="50" height="50"/>
@@ -252,9 +222,6 @@
                                                         <state key="normal" title="火花塞">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toSparkPlug:" destination="Q34-hB-W0h" eventType="touchUpInside" id="6SI-Si-GwQ"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddY-hl-ylq">
                                                         <rect key="frame" x="106" y="153" width="70" height="17"/>
@@ -266,9 +233,6 @@
                                                         <state key="normal" title="影音导航">
                                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <connections>
-                                                            <action selector="toB21:" destination="Q34-hB-W0h" eventType="touchUpInside" id="uwh-wb-CcD"/>
-                                                        </connections>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2P3-v9-g49">
                                                         <rect key="frame" x="207" y="153" width="56" height="17"/>
@@ -1174,6 +1138,22 @@
                         <outletCollection property="textButtons" destination="afv-Wa-qyT" id="T63-9Y-XWo"/>
                         <outletCollection property="textButtons" destination="1Zj-ZN-V6S" id="i7u-5x-OdD"/>
                         <outletCollection property="textButtons" destination="iC3-JO-MeL" id="7fr-48-BhA"/>
+                        <outletCollection property="iconButtons" destination="YN8-xJ-tLz" id="ztB-uu-b3k"/>
+                        <outletCollection property="iconButtons" destination="LqB-RD-ZpU" id="dqg-tx-RuG"/>
+                        <outletCollection property="iconButtons" destination="1vg-E9-Pe7" id="bUb-9f-ZJi"/>
+                        <outletCollection property="iconButtons" destination="vDn-6U-buP" id="ufH-Vw-brM"/>
+                        <outletCollection property="iconButtons" destination="hyG-AL-joL" id="KMS-Jy-Nqa"/>
+                        <outletCollection property="iconButtons" destination="sue-Mo-qqJ" id="IYF-PG-x0K"/>
+                        <outletCollection property="iconButtons" destination="ucb-g7-ulJ" id="PBv-fA-Hv3"/>
+                        <outletCollection property="iconButtons" destination="hBE-ue-NLZ" id="mW4-y1-8sC"/>
+                        <outletCollection property="textButtons" destination="Ht5-dz-PDu" id="0Jx-fM-UJz"/>
+                        <outletCollection property="textButtons" destination="x0h-ao-RdJ" id="EEA-ms-B1m"/>
+                        <outletCollection property="textButtons" destination="rFo-De-7ZD" id="cdS-Co-1gw"/>
+                        <outletCollection property="textButtons" destination="7Cb-dv-Lvg" id="dPh-B4-Op6"/>
+                        <outletCollection property="textButtons" destination="E4b-Im-WdG" id="wBB-VQ-UhD"/>
+                        <outletCollection property="textButtons" destination="ddY-hl-ylq" id="ExW-Ns-Ejy"/>
+                        <outletCollection property="textButtons" destination="2P3-v9-g49" id="ysO-J0-rAm"/>
+                        <outletCollection property="textButtons" destination="f8e-qj-JQH" id="uAC-7v-NMI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pWh-y4-gTL" userLabel="First Responder" sceneMemberID="firstResponder"/>
