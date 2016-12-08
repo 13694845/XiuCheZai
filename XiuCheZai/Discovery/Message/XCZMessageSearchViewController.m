@@ -222,7 +222,7 @@
     NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/CateAction.do"];
     NSDictionary *parameters = @{@"type":@"0"};
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"msgmsgmsg:%@", responseObject[@"msg"]);
+        // NSLog(@"msgmsgmsg:%@", responseObject[@"msg"]);
         NSString *msg = responseObject[@"msg"];
         if ([msg containsString:@"未登录"]) {
         } else { // 已登录
