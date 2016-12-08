@@ -233,7 +233,8 @@
         NSArray *cars = [[[responseObject objectForKey:@"data"] lastObject] objectForKey:@"rows"];
         for (NSDictionary *car in cars) {
             if ([car[@"car_id"] isEqualToString:defaultCarId]) {
-                NSString *brandIcon = [NSString stringWithFormat:@"http://m.8673h.com/images/brand/%@.png", car[@"brand_id"]];
+                // NSString *brandIcon = [NSString stringWithFormat:@"http://m.8673h.com/images/brand/%@.png", car[@"brand_id"]];
+                NSString *brandIcon = [NSString stringWithFormat:@"%@/images/brand/%@.png", [Config baseURL], car[@"brand_id"]];
                 [self.myCarButton sd_setBackgroundImageWithURL:[NSURL URLWithString:brandIcon] forState:UIControlStateNormal];
                 return;
             }
