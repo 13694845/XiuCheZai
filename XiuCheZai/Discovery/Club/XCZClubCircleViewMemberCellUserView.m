@@ -64,11 +64,7 @@
 - (void)setupAttr
 {
     NSString *avatar = _row[@"avatar"];
-    if ([avatar containsString:@"http"]) {
-        avatar = _row[@"avatar"];
-    } else {
-        avatar = [NSString stringWithFormat:@"%@%@", [XCZConfig imgBaseURL], _row[@"avatar"]];
-    }
+    avatar = [NSString stringWithFormat:@"%@/%@", [XCZConfig imgBaseURL], _row[@"avatar"]];
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:[UIImage imageNamed:@"bbs_xiuchezhaiIcon"]];
     NSString *nameLabelText;
     if (!_row[@"nick"] || [_row[@"nick"] isEqualToString:@""] || [_row[@"nick"] isEqual:[NSNull null]]) {
