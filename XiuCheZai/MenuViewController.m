@@ -65,11 +65,14 @@
 
 - (void)doTest:(UILongPressGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan) {
+        /*
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Double12" bundle:nil];
         UIViewController *double12HomeViewController = [storyboard instantiateViewControllerWithIdentifier:@"Double12HomeViewController"];
         double12HomeViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:double12HomeViewController animated:YES];
         [self close:nil];
+         */
+        [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/buyCar/shoppingCar/index.html"]];
     }
 }
 
