@@ -14,11 +14,11 @@
 
 @implementation Config
 
-static NSString *const kAppVersion = @"1.9.8";
+static NSString *const kAppVersion = @"1.9.9";
 static NSString *const kVersion = @"1.6.0";
-static NSString *const kWebBaseURL = @"http://m.8673h.com";
-static NSString *const kApiBaseURL = @"http://m.8673h.com";
-static NSString *const kImgBaseURL = @"http://img.8673h.com";
+static NSString *const kWebBaseURL = @"https://m.8673h.com";
+static NSString *const kApiBaseURL = @"https://m.8673h.com";
+static NSString *const kImgBaseURL = @"https://img.8673h.com";
 
 static NSString *const kTestBaseURL = @"http://192.168.2.4:8080";
 static NSString *const kTestImgBaseURL = @"http://192.168.2.4:8888";
@@ -33,7 +33,7 @@ static NSString *const kDomainBaseURL = @"http://a.zj-qsh.com";
 }
 
 + (NSString *)baseURL {
-    return kTestBaseURL;
+    return kWebBaseURL;
 }
 
 + (NSString *)webBaseURL {
@@ -45,7 +45,7 @@ static NSString *const kDomainBaseURL = @"http://a.zj-qsh.com";
 }
 
 + (NSString *)imgBaseURL {
-    return kTestImgBaseURL;
+    return kImgBaseURL;
 }
 
 + (NSString *)textImgBaseURL {
