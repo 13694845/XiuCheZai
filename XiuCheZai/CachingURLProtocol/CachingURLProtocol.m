@@ -24,7 +24,7 @@ static NSString *const kCachingURLHeader = @"CachingURLHeader";
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request {
     if (![request valueForHTTPHeaderField:kCachingURLHeader]) {
-        NSArray *cachingPathExtension = @[@"png", @"jpg", @"JPG"];
+        NSArray *cachingPathExtension = @[@"png", @"jpg", @"JPG", @"jpeg"];
         if ([cachingPathExtension containsObject:request.URL.pathExtension]) {
             return YES;
         }
@@ -35,6 +35,11 @@ static NSString *const kCachingURLHeader = @"CachingURLHeader";
 
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request {
     // ****************
+    if ([request.URL.host isEqualToString:@"m.8673h.com"]) {
+        NSString *URLString = request.URL.description;
+        URLString = [URLString stringByReplacingOccurrencesOfString:@"http://" withString:@"https://"];
+        request = [NSURLRequest requestWithURL:[NSURL URLWithString:URLString]];
+    }
     if ([request.URL.host isEqualToString:@"img.8673h.com"]) {
         NSString *URLString = request.URL.description;
         URLString = [URLString stringByReplacingOccurrencesOfString:@"http://" withString:@"https://"];
