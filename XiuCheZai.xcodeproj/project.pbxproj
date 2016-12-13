@@ -3598,6 +3598,10 @@
 					"$(SRCROOT)/XiuCheZai",
 					"$(PROJECT_DIR)/XiuCheZai/VoiceConvert/lib",
 				);
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.8673h.XiuCheZai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3628,6 +3632,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/XiuCheZai",
 					"$(PROJECT_DIR)/XiuCheZai/VoiceConvert/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.8673h.XiuCheZai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
