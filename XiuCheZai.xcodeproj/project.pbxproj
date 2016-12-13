@@ -935,7 +935,6 @@
 		6CF1DABC1C50704B0077B468 /* tab_icon40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon40@2x.png"; sourceTree = "<group>"; };
 		6CF1DABE1C5070680077B468 /* tab_icon50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_icon50@2x.png"; sourceTree = "<group>"; };
 		6CF784401C477397004C9CA1 /* home_icon09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_icon09.png; sourceTree = "<group>"; };
-		6CF94FCA1DFF9E3F00473388 /* WechatAuthSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		6CFBDD611DED73E100030DD5 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		6CFBDDBA1DF4F32100030DD5 /* voice_state1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_state1.png; sourceTree = "<group>"; };
 		6CFBDDBB1DF4F32100030DD5 /* voice_state2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_state2.png; sourceTree = "<group>"; };
@@ -1628,7 +1627,6 @@
 			children = (
 				6C8EC27E1C1E910700BCABB5 /* WXApi.h */,
 				6C8EC27F1C1E910700BCABB5 /* WXApiObject.h */,
-				6CF94FCA1DFF9E3F00473388 /* WechatAuthSDK.h */,
 			);
 			name = Wxpay;
 			sourceTree = "<group>";
