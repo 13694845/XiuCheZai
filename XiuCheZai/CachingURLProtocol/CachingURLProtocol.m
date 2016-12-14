@@ -23,32 +23,28 @@ static NSString *const kCachingURLHeader = @"CachingURLHeader";
 @implementation CachingURLProtocol
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request {
-    /*
     if (![request valueForHTTPHeaderField:kCachingURLHeader]) {
         NSArray *cachingPathExtension = @[@"png", @"jpg", @"JPG", @"jpeg"];
         if ([cachingPathExtension containsObject:request.URL.pathExtension]) {
             return YES;
         }
     }
-     */
-    NSLog(@"URL not cached : %@", request.URL);
+    // NSLog(@"URL not cached : %@", request.URL);
     return NO;
 }
 
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request {
     // ****************
-    /*
     if ([request.URL.host isEqualToString:@"m.8673h.com"] && [request.URL.description hasPrefix:@"http://"]) {
         NSString *URLString = request.URL.description;
         URLString = [URLString stringByReplacingOccurrencesOfString:@"http://" withString:@"https://"];
         request = [NSURLRequest requestWithURL:[NSURL URLWithString:URLString]];
     }
-    if ([request.URL.host isEqualToString:@"img.8673h.com"]) {
+    if ([request.URL.host isEqualToString:@"img.8673h.com"] && [request.URL.description hasPrefix:@"http://"]) {
         NSString *URLString = request.URL.description;
         URLString = [URLString stringByReplacingOccurrencesOfString:@"http://" withString:@"https://"];
         request = [NSURLRequest requestWithURL:[NSURL URLWithString:URLString]];
     }
-     */
     return request;
 }
 
