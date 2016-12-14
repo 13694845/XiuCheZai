@@ -76,7 +76,7 @@
     [self.pictureView sd_setImageWithURL:[NSURL URLWithString:goods_img] placeholderImage:[UIImage imageNamed:@"bbs_pro_pic.jpg"]];
     self.contentLabel.text = goods_remark[@"name"];
     self.numLabel.text = [NSString stringWithFormat:@"共%@件", goods_remark[@"num"]];
-    self.priceLabel.text = [NSString stringWithFormat:@"￥%@", goods_remark[@"amount"]];
+    self.priceLabel.text = ([[goods_remark objectForKey:@"amount"] doubleValue] >= 10000) ? [NSString stringWithFormat:@"￥%.2f万", [[goods_remark objectForKey:@"amount"] doubleValue]/10000] : [NSString stringWithFormat:@"￥%@", goods_remark[@"amount"]];
 }
 
 

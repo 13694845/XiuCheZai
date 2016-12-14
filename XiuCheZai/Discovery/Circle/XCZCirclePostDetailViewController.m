@@ -89,21 +89,41 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (((NSString *)self.rows[indexPath.row][@"goods_id"]).length < 8) {
-        [MBProgressHUD ZHMShowError:@"产品不存在"];
-    } else {
-        [self goProductDetails:self.rows[indexPath.row][@"goods_id"]];
+    switch ([self.rows[indexPath.row][@"biz_clazz"] intValue]) {
+        case 1: // 单件商品
+            [self goProductDetails:self.rows[indexPath.row][@"goods_id"]];
+            break;
+        case 2: // 工时单
+            [MBProgressHUD ZHMShowError:@"此单为工时单"];
+            break;
+        case 3: // 活动单
+            [MBProgressHUD ZHMShowError:@"此单为活动单"];
+            break;
+        case 4: // 车款详情
+            [self jumpToCarDetails:self.rows[indexPath.row][@"id"]];
+            break;
+            
+        default:
+            break;
     }
-    
 }
 
 - (void)goProductDetails:(NSString *)goods_id
 {
-    NSLog(@"goods_idgoods_id:%@", goods_id);
+//    NSLog(@"goods_idgoods_id:%@", goods_id);
         NSString *overUrlStrPin = [NSString stringWithFormat:@"/detail/index.html?goodsId=%@", goods_id];
         NSString *overUrlStr = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], overUrlStrPin];
-    
         [self launchOuterWebViewWithURLString:overUrlStr];
+}
+
+/**
+ *  跳转到车款详情
+ */
+- (void)jumpToCarDetails:(NSString *)car_conf_id
+{
+    NSString *overUrlStrPin = [NSString stringWithFormat:@"/buyCar/carDetail/index.html?car_conf_id=%@", car_conf_id];
+    NSString *overUrlStr = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], overUrlStrPin];
+    [self launchOuterWebViewWithURLString:overUrlStr];
 }
 
 - (void)launchOuterWebViewWithURLString:(NSString *)urlString {

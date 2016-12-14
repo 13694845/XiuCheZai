@@ -132,7 +132,7 @@
             [self.danziImageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:nil];
             self.danziTitleLabel.text = goods_remark[@"name"];
             self.danziNumLabel.text = [NSString stringWithFormat:@"共%@件", goods_remark[@"num"]];
-            self.danziPriceLabel.text = [NSString stringWithFormat:@"￥%@", goods_remark[@"amount"]];
+            self.danziPriceLabel.text = ([[goods_remark objectForKey:@"amount"] doubleValue] >= 10000) ? [NSString stringWithFormat:@"￥%.2f万", [[goods_remark objectForKey:@"amount"] doubleValue]/10000] : [NSString stringWithFormat:@"￥%@", goods_remark[@"amount"]];
             
             NSMutableArray *imageArray = [NSMutableArray array];
             imageArray = [self changeImage:row[@"share_image"] andImageArray:imageArray];

@@ -857,11 +857,6 @@
     }
 }
 
-- (void)showDateAdmiredCommentsView
-{
-    
-}
-
 - (void)setupAdmiredView
 {
     int admiredPersonsCount = [[self.praiseNumDict objectForKey:@"num"] intValue];
@@ -1050,6 +1045,16 @@
     }
 }
 
+/**
+ *  跳转到车款详情
+ */
+- (void)jumpToCarDetails:(NSString *)car_conf_id
+{
+    NSString *overUrlStrPin = [NSString stringWithFormat:@"/buyCar/carDetail/index.html?car_conf_id=%@", car_conf_id];
+    NSString *overUrlStr = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], overUrlStrPin];
+    [self launchOuterWebViewWithURLString:overUrlStr];
+}
+
 - (void)launchWebViewWithURLString:(NSString *)urlString {
     XCZPersonWebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZPersonWebViewController"];
     webViewController.url = [NSURL URLWithString:urlString];
@@ -1148,19 +1153,59 @@
 
 - (void)goodsViewDidClick:(UIGestureRecognizer *)grz
 {
-    if ([self.artDict[@"goods_clazz"] integerValue]) { // 非整单
-        [self goProductDetails];
-    } else { // 整单
-        if ([self.goods_remark[@"num"] integerValue] <= 1) {
-            [self goProductDetails];
-        } else {
-            NSLog(@"跳到了这里:%@", self.artDict);
-            XCZCirclePostDetailViewController *postDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCirclePostDetailViewController"];
-            postDetailVC.post_id = self.artDict[@"post_id"];
-            postDetailVC.goods_id = self.goods_remark[@"id"];
-            [self.navigationController pushViewController:postDetailVC animated:YES];
+    switch ([self.artDict[@"goods_clazz"] intValue]) {
+        case 0: // 整单
+        {
+            NSString *URLString = [NSString stringWithFormat:@"%@%@", [XCZConfig baseURL], @"/Action/PostDetailAction.do"];
+            NSDictionary *parameters = @{@"type": @"4", @"post_id": self.artDict[@"post_id"], @"goods_id": self.goods_remark[@"id"]};
+            [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+                if ([[responseObject objectForKey:@"data"] count]) {
+                    XCZCirclePostDetailViewController *postDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCirclePostDetailViewController"];
+                    postDetailVC.post_id = self.artDict[@"post_id"];
+                    postDetailVC.goods_id = self.goods_remark[@"id"];
+                    [self.navigationController pushViewController:postDetailVC animated:YES];
+                } else {
+                    [MBProgressHUD ZHMShowError:@"无此单详情"];
+                }
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {}];
         }
+            break;
+        case 1: // 单件商品(单号为16位时跳到商品详情)
+        {
+            if ([self.goods_remark[@"id"] length] == 16) {
+                [self goProductDetails];
+            }
+        }
+            break;
+        case 2: // 工时(不跳)
+        {
+            [MBProgressHUD ZHMShowError:@"此单为工时单"];
+        }
+            break;
+        case 3: // 活动(不跳)
+        {
+            [MBProgressHUD ZHMShowError:@"此单为活动单"];
+        }
+            break;
+        case 4: // 晒车(跳到车款详情)
+        {
+            [self jumpToCarDetails:self.goods_remark[@"id"]];
+        }
+            break;
+            
+        default:
+            break;
     }
+    
+//    if ([self.artDict[@"goods_clazz"] integerValue]) { // 非整单
+//        [self goProductDetails];
+//        NSLog(@"goods_resId:%@", self.goods_remark[@"id"]);
+//    } else { // 整单
+//        XCZCirclePostDetailViewController *postDetailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"XCZCirclePostDetailViewController"];
+//        postDetailVC.post_id = self.artDict[@"post_id"];
+//        postDetailVC.goods_id = self.goods_remark[@"id"];
+//        [self.navigationController pushViewController:postDetailVC animated:YES];
+//    }
 }
 
 #pragma mark - 跳转控制器
