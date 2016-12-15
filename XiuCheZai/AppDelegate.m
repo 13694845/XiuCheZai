@@ -53,7 +53,7 @@
         case kCLAuthorizationStatusDenied: break;
         default: break;
     }
-    // [self.chatService start];
+    [self.chatService start];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
