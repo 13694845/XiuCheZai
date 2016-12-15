@@ -429,7 +429,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     imgView.layer.masksToBounds = YES;
     imgView.layer.cornerRadius = 8.0;
      */
-    [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
+    // [imgView sd_setImageWithURL:[NSURL URLWithString:message.content]];
+    [imgView sd_setImageWithURL:[NSURL URLWithString:[message.content stringByReplacingOccurrencesOfString:@"http://img.8673h.com" withString:@"https://img.8673h.com"]]];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     imgView.frame = CGRectMake(BUBBLE_TEXT_PADDING, BUBBLE_TEXT_PADDING, imageRect.size.width, imageRect.size.height);
     [bubbleImageView addSubview:imgView];
@@ -449,9 +450,10 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ImageViewerViewController *imageViewerViewController = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewerViewController"];
-    imageViewerViewController.imageURL = message.content;
+    // imageViewerViewController.imageURL = message.content;
+    imageViewerViewController.imageURL = [message.content stringByReplacingOccurrencesOfString:@"http://img.8673h.com" withString:@"https://img.8673h.com"];
     [self presentViewController:imageViewerViewController animated:NO completion:^{}];
-
+    
     /*
     ChatMessage *message = self.rows[sender.tag];
     // UIView *imageViewerView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -525,7 +527,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     ChatMessage *message = self.rows[sender.tag];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *mp4Path = [documentsPath stringByAppendingPathComponent:@"temp.mp4"];
-    NSData *mp4Data = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
+    // NSData *mp4Data = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
+    NSData *mp4Data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[message.content stringByReplacingOccurrencesOfString:@"http://img.8673h.com" withString:@"https://img.8673h.com"]]];
     [mp4Data writeToFile:mp4Path atomically:YES];
     
     MPMoviePlayerViewController *moviePlayerViewController =[[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:mp4Path]];
@@ -571,7 +574,8 @@ typedef NS_ENUM(NSUInteger, InputViewType) {
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *amrPath = [documentsPath stringByAppendingPathComponent:@"temp.amr"];
     NSString *wavPath = [documentsPath stringByAppendingPathComponent:@"new.wav"];
-    NSData *amrData = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
+    // NSData *amrData = [NSData dataWithContentsOfURL:[NSURL URLWithString:message.content]];
+    NSData *amrData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[message.content stringByReplacingOccurrencesOfString:@"http://img.8673h.com" withString:@"https://img.8673h.com"]]];
     [amrData writeToFile:amrPath atomically:YES];
     if ([VoiceConverter ConvertAmrToWav:amrPath wavSavePath:wavPath]) {}
     
