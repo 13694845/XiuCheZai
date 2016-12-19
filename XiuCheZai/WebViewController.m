@@ -127,11 +127,17 @@
         self.backOffset++;
         return YES;
     }
+    if ([request.URL.description containsString:@"/trustpay/U2CFrontResultServlet.action"]) {
+        [self tapBackButton:nil];
+        [self goBack];
+        return NO;
+    }
+    
     if ([request.URL.host isEqualToString:@"mobile.abchina.com"]) {
         self.showBack = YES;
         return YES;
     }
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/trustpay/B2CPayResultServlet.action?payId="]]) {
+    if ([request.URL.description containsString:@"/trustpay/B2CPayResultServlet.action?payId="]) {
         [self goBack];
         return NO;
     }
@@ -141,12 +147,6 @@
         return YES;
     }
     
-    /*
-    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/massage/communicate.jsp?bid="]]) {
-        [self chatWithReceiverId:@""];
-        return NO;
-    }
-     */
     return YES;
 }
 
