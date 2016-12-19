@@ -131,6 +131,11 @@
         self.showBack = YES;
         return YES;
     }
+    if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/trustpay/B2CPayResultServlet.action?payId="]]) {
+        [self goBack];
+        return NO;
+    }
+    
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
         sleep(0.5);
         return YES;
