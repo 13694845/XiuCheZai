@@ -23,13 +23,13 @@ static NSString *const kCachingURLHeader = @"CachingURLHeader";
 @implementation CachingURLProtocol
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request {
+    // NSLog(@"request.URL : %@", request.URL);
     if (![request valueForHTTPHeaderField:kCachingURLHeader]) {
         NSArray *cachingPathExtension = @[@"png", @"jpg", @"JPG", @"jpeg"];
         if ([cachingPathExtension containsObject:request.URL.pathExtension]) {
             return YES;
         }
     }
-    // NSLog(@"request.URL : %@", request.URL);
     return NO;
 }
 
