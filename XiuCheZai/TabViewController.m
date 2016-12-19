@@ -90,10 +90,22 @@
         self.backOffset++;
         return YES;
     }
+    if ([request.URL.description containsString:@"/trustpay/U2CFrontResultServlet.action"]) {
+        self.backOffset++;
+        [self tapBackButton:nil];
+        return NO;
+    }
+    
     if ([request.URL.host isEqualToString:@"mobile.abchina.com"]) {
         self.showBack = YES;
         return YES;
     }
+    if ([request.URL.description containsString:@"/trustpay/B2CPayResultServlet.action?payId="]) {
+        self.backOffset++;
+        [self tapBackButton:nil];
+        return NO;
+    }
+    
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
         sleep(0.5);
         return YES;
