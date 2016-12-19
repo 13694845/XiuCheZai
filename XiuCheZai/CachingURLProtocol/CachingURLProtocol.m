@@ -39,13 +39,11 @@ static NSString *const kCachingURLHeader = @"CachingURLHeader";
         URLString = [URLString stringByReplacingOccurrencesOfString:@"http://" withString:@"https://"];
         request = [NSURLRequest requestWithURL:[NSURL URLWithString:URLString]];
     }
-    /*
     if ([request.URL.host isEqualToString:@"img.8673h.com"] && [request.URL.description hasPrefix:@"http://"]) {
         NSString *URLString = request.URL.description;
         URLString = [URLString stringByReplacingOccurrencesOfString:@"http://" withString:@"https://"];
         request = [NSURLRequest requestWithURL:[NSURL URLWithString:URLString]];
     }
-     */
     return request;
 }
 
