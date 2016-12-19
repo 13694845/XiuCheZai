@@ -138,7 +138,8 @@
         return YES;
     }
     if ([request.URL.description containsString:@"/trustpay/B2CPayResultServlet.action?payId="]) {
-        [self goBack];
+        self.backOffset++;
+        [self tapBackButton:nil];
         return NO;
     }
     
