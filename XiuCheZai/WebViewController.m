@@ -222,6 +222,9 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    // ***********
+    if (self.backButton) [self.backButton removeFromSuperview];
+    self.showBack = NO;
     if (error.code != -999) {
         [self.webView stopLoading];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[[NSBundle mainBundle] URLForResource:@"error" withExtension:@"html"]]];
