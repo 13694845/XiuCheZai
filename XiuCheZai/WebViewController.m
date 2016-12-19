@@ -129,7 +129,7 @@
     }
     if ([request.URL.description containsString:@"/trustpay/U2CFrontResultServlet.action"]) {
         [self tapBackButton:nil];
-        [self goBack];
+        // [self goBack];
         return NO;
     }
     
