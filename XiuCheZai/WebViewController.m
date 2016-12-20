@@ -144,7 +144,7 @@
     }
     
     if ([request.URL.description containsString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/m-center/my_car/index.html"]]) {
-        sleep(0.5);
+        sleep(2.0);
         return YES;
     }
     
