@@ -94,15 +94,9 @@
     self.recommenderCollectionView.dataSource = self;
     self.recommenderCollectionView.delegate = self;
     
-    
     [self reportDeviceId];
-    
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[Config baseURL]]];
-    // NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-    for (NSHTTPCookie *cookie in cookies) {
-        NSLog(@"cookie: %@", cookie);
-    }
-    
+    for (NSHTTPCookie *cookie in cookies) NSLog(@"cookie: %@", cookie);
     
     [self updateVersion];
 }
@@ -121,7 +115,6 @@
     [self.manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if ([[responseObject objectForKey:@"statu"] isEqualToString:@"0"]) {
             [self.myCarButton setTitle:nil forState:UIControlStateNormal];
-            // [self.myCarButton setBackgroundImage:[UIImage imageNamed:@"home_mycar_box.png"] forState:UIControlStateNormal];
             [self.myCarButton removeTarget:self action:@selector(toLogin:) forControlEvents:UIControlEventTouchUpInside];
             [self.myCarButton addTarget:self action:@selector(toMyCar:) forControlEvents:UIControlEventTouchUpInside];
             [self defaultCarIcon];
@@ -244,7 +237,6 @@
         NSArray *cars = [[[responseObject objectForKey:@"data"] lastObject] objectForKey:@"rows"];
         for (NSDictionary *car in cars) {
             if ([car[@"car_id"] isEqualToString:defaultCarId]) {
-                // NSString *brandIcon = [NSString stringWithFormat:@"http://m.8673h.com/images/brand/%@.png", car[@"brand_id"]];
                 NSString *brandIcon = [NSString stringWithFormat:@"%@/images/brand/%@.png", [Config baseURL], car[@"brand_id"]];
                 [self.myCarButton sd_setBackgroundImageWithURL:[NSURL URLWithString:brandIcon] forState:UIControlStateNormal];
                 return;
@@ -290,24 +282,22 @@
     return 0;
 }
 
-
 - (void)reportDeviceId {
+    NSString *const kDomain = @"192.168.2.4";
+    
     NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     NSLog(@"deviceId: %@", deviceId);
     if (deviceId) {
         NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
         [cookieProperties setObject:@"device_id" forKey:NSHTTPCookieName];
         [cookieProperties setObject:deviceId forKey:NSHTTPCookieValue];
-        [cookieProperties setObject:@"192.168.2.4" forKey:NSHTTPCookieDomain];
-        //[cookieProperties setObject:@"192.168.2.4" forKey:NSHTTPCookieOriginURL];
+        [cookieProperties setObject:kDomain forKey:NSHTTPCookieDomain];
         [cookieProperties setObject:@"/" forKey:NSHTTPCookiePath];
         [cookieProperties setObject:@"0" forKey:NSHTTPCookieVersion];
         [cookieProperties setObject:[NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 365] forKey:NSHTTPCookieExpires];
-        
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:[NSHTTPCookie cookieWithProperties:cookieProperties]];
     }
 }
-
 
 - (void)viewWillLayoutSubviews {
     CGSize size = self.contentView.bounds.size;
@@ -527,16 +517,6 @@
 
 - (IBAction)toWholeMaintain:(id)sender {
     [self launchWebViewWithURLString:[NSString stringWithFormat:@"%@%@", [Config baseURL], @"/maintenance/index.html"]];
-    
-    /*
-    ChatViewController *chatViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-    chatViewController.receiverId = @"3432";
-    chatViewController.receiverName = @"BoBo";
-    chatViewController.receiverAvatar = @"group1/M00/00/6A/wKgCBFfD6ZyAO3zmAAgKHyYE5OE360.jpg";
-    chatViewController.isContact = @"1";
-    chatViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:chatViewController animated:YES];
-     */
 }
 
 - (IBAction)toPartMaintain:(id)sender {
@@ -616,7 +596,6 @@
 }
 
 - (void)bannerView:(BannerView *)bannerView didSelectBanner:(NSDictionary *)bannerInfo {
-    // **********
     NSString *URLString = bannerInfo[kBannerURLKey];
     if ([URLString containsString:@"/ad/dubele12/index.html"]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Double12" bundle:nil];
