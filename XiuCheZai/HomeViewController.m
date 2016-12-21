@@ -95,13 +95,14 @@
     self.recommenderCollectionView.delegate = self;
     
     
+    [self reportDeviceId];
+    
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[Config baseURL]]];
+    // NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
     for (NSHTTPCookie *cookie in cookies) {
         NSLog(@"cookie: %@", cookie);
     }
     
-    
-    [self reportDeviceId];
     
     [self updateVersion];
 }
@@ -289,12 +290,24 @@
     return 0;
 }
 
+
 - (void)reportDeviceId {
     NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     NSLog(@"deviceId: %@", deviceId);
-
-
+    if (deviceId) {
+        NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
+        [cookieProperties setObject:@"device_id" forKey:NSHTTPCookieName];
+        [cookieProperties setObject:deviceId forKey:NSHTTPCookieValue];
+        [cookieProperties setObject:@"192.168.2.4" forKey:NSHTTPCookieDomain];
+        //[cookieProperties setObject:@"192.168.2.4" forKey:NSHTTPCookieOriginURL];
+        [cookieProperties setObject:@"/" forKey:NSHTTPCookiePath];
+        [cookieProperties setObject:@"0" forKey:NSHTTPCookieVersion];
+        [cookieProperties setObject:[NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 365] forKey:NSHTTPCookieExpires];
+        
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:[NSHTTPCookie cookieWithProperties:cookieProperties]];
+    }
 }
+
 
 - (void)viewWillLayoutSubviews {
     CGSize size = self.contentView.bounds.size;
