@@ -18,6 +18,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
 #import "ChatViewController.h"
+#import <AdSupport/AdSupport.h>
 
 @import AVFoundation;
 
@@ -92,6 +93,15 @@
     self.reminderView.dataSource = self;
     self.recommenderCollectionView.dataSource = self;
     self.recommenderCollectionView.delegate = self;
+    
+    
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[Config baseURL]]];
+    for (NSHTTPCookie *cookie in cookies) {
+        NSLog(@"cookie: %@", cookie);
+    }
+    
+    
+    [self reportDeviceId];
     
     [self updateVersion];
 }
@@ -277,6 +287,13 @@
         if (a != b) return a - b;
     }
     return 0;
+}
+
+- (void)reportDeviceId {
+    NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    NSLog(@"deviceId: %@", deviceId);
+
+
 }
 
 - (void)viewWillLayoutSubviews {
