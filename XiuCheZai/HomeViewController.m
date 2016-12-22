@@ -283,7 +283,7 @@
 }
 
 - (void)reportDeviceId {
-    NSString *const kDomain = @"192.168.2.4";
+    NSString *const kDomain = @"m.8673h.com";
     
     NSString *deviceId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     NSLog(@"deviceId: %@", deviceId);
